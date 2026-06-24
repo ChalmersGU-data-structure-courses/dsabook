@@ -78,13 +78,13 @@ The traversal algorithm can be translated into pseudocode like this:
     traverse(start):
         visited = new empty set of vertices
         result = new empty set of edges
-        agenda = [(null,start)]    // We do not specify which ADT we use for the agenda
+        agenda = [(null,start)]   // We do not specify which ADT we use for the agenda
         while agenda is not empty:
             (a,b) = agenda.remove()
-            if b not in visited:
-                add b to visited    // Visiting the vertex b for the first time
+            if not visited.contains(b):
+                visited.add(b)    // Visiting the vertex b for the first time
                 for (b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
-                    if c not in visited:
+                    if not visited.contains(c):
                         agenda.add((b0,c))
         return result
 
@@ -98,18 +98,18 @@ similar to how one can implement DFS for trees (see @sec:trees:traversal).
 
 The edges selected and the order in which vertices are visited depend on the order in which `outgoingEdges` produces edges.
 Let us assume that `outgoingEdges` gives edges in albethical order of their destination,
-meaning that $\texttt{outgoingEdges}(A)$ returns $[(A\rightarrow B), (A\rightarrow D), (A\rightarrow E)]$.
+meaning that $\texttt{outgoingEdges}(A)$ returns $[A\rightarrow B, A\rightarrow D, A\rightarrow E]$.
 Then the vertices would be visited in this order: $[A,E,F,C,B,D]$.
 This is far from obvious, so let us walk through the steps of depth-first traversing the graph:
 
-edge                visited              agenda at end of iteration
-------------------  -------------------  -----------------------------------------------------------------------------------------------------
-$?\rightarrow A$    $\{A\}$              $[(A\rightarrow B), (A\rightarrow D), (A\rightarrow E)]$
-$A\rightarrow E$    $\{A,E\}$            $[(A\rightarrow B), (A\rightarrow D), (E\rightarrow B), (E\rightarrow F)]$
-$E\rightarrow F$    $\{A,E,F\}$          $[(A\rightarrow B), (A\rightarrow D), (E\rightarrow B), (F\rightarrow B), (F\rightarrow C)]$
-$F\rightarrow C$    $\{A,E,F,C\}$        $[(A\rightarrow B), (A\rightarrow D), (E\rightarrow B), (F\rightarrow B)]$
-$F\rightarrow B$    $\{A,E,F,C,B\}$      $[(A\rightarrow B), (A\rightarrow D), (E\rightarrow B)]$
-$A\rightarrow D$    $\{A,E,F,C,B,D\}$    $[(A\rightarrow B)]$
+edge                      visited              agenda at end of iteration
+------------------------  -------------------  -----------------------------------------------------------------------------------------------------
+${\,?\,}\rightarrow A$    $\{A\}$              $[A\rightarrow B, A\rightarrow D, A\rightarrow E]$
+$A\rightarrow E$          $\{A,E\}$            $[A\rightarrow B, A\rightarrow D, E\rightarrow B, E\rightarrow F]$
+$E\rightarrow F$          $\{A,E,F\}$          $[A\rightarrow B, A\rightarrow D, E\rightarrow B, F\rightarrow B, F\rightarrow C]$
+$F\rightarrow C$          $\{A,E,F,C\}$        $[A\rightarrow B, A\rightarrow D, E\rightarrow B, F\rightarrow B]$
+$F\rightarrow B$          $\{A,E,F,C,B\}$      $[A\rightarrow B, A\rightarrow D, E\rightarrow B]$
+$A\rightarrow D$          $\{A,E,F,C,B,D\}$    $[A\rightarrow B]$
 
 
 Keep in mind how a stack operates:
@@ -151,29 +151,30 @@ We leave the recursive DFS implementation as an exercise to the reader.
 
 By changing the data type of the agenda from a stack to a *queue*, we get an even more useful algorithm.
 The only change is the type of the agenda, the rest is exactly the same.
-Again, let us look at the execution of BFS from the starting vertex $A$, both in @fig:GraphTraversal3 and in tabular form:
+Again, let us look at the execution of BFS from vertex $A$:
 
-edge                visited              agenda at end of iteration
-------------------  -------------------  -----------------------------------------------------------------------------------------------------
-$?\rightarrow A$    $\{A\}$              $[(A\rightarrow B), (A\rightarrow D), (A\rightarrow E)]$
-$A\rightarrow B$    $\{A,B\}$            $[(A\rightarrow D), (A\rightarrow E), (B\rightarrow E), (B\rightarrow F)]$
-$A\rightarrow D$    $\{A,B,D\}$          $[(A\rightarrow E), (B\rightarrow E), (B\rightarrow F)]$
-$A\rightarrow E$    $\{A,B,D,E\}$        $[(B\rightarrow E), (B\rightarrow F), (E\rightarrow F)]$
-$B\rightarrow F$    $\{A,B,D,E,F\}$      $[(E\rightarrow F), (F\rightarrow C)]$
-$F\rightarrow C$    $\{A,B,D,E,F,C\}$    $[]$
+edge                      visited              agenda at end of iteration
+------------------------  -------------------  -----------------------------------------------------------------------------------------------------
+${\,?\,}\rightarrow A$    $\{A\}$              $[A\rightarrow B, A\rightarrow D, A\rightarrow E]$
+$A\rightarrow B$          $\{A,B\}$            $[A\rightarrow D, A\rightarrow E, B\rightarrow E, B\rightarrow F]$
+$A\rightarrow D$          $\{A,B,D\}$          $[A\rightarrow E, B\rightarrow E, B\rightarrow F]$
+$A\rightarrow E$          $\{A,B,D,E\}$        $[B\rightarrow E, B\rightarrow F, E\rightarrow F]$
+$B\rightarrow F$          $\{A,B,D,E,F\}$      $[E\rightarrow F, F\rightarrow C]$
+$F\rightarrow C$          $\{A,B,D,E,F,C\}$    $[]$
 
-
-![Steps of a breadth-first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
-The right part shows the result as a tree.
-The algorithm can be described as: select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex.
-](images/Graphs-traversal3.svg){width=90% #fig:GraphTraversal3}
 
 You may notice the following pattern:
 The algorithm starts by visiting all vertices directly adjecent to $A$, then the vertices adjacent to those vertices, etc.
 This is not only for this graph, but for every graph, and regardless of the order in which edges are presented by `outgoingEdges`.
 Consider: After visiting $A$, its immediate neighbors will all be in the agenda and visited before anything else (because the agenda is a queue now).
 After all those are visited, the agenda will have all the vertices that are two steps away from $A$, and after all those, three steps.
+The different steps are visualised in @fig:GraphTraversal3.
 Breadth-first order will always visit vertices in order of their minimal distance from the starting vertex.
+
+![Steps of a breadth-first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
+The right part shows the result as a tree.
+The algorithm can be described as: select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex.
+](images/Graphs-traversal3.svg){width=90% #fig:GraphTraversal3}
 
 This further means that the tree produced will not only contain a path from $A$ to $C$,
 but that path is guaranteed to be the *shortest possible* one.

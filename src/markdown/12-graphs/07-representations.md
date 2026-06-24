@@ -13,7 +13,7 @@ Adjacency matrix
 
 ![A small directed graph, and its representation as an adjacency map and adjacency matrix.](images/Graphs-representations.svg){width=90% #fig:GraphRepresentations1}
 
-Figure @fig:GraphRepresentations1 illustrates the two representations.
+@Fig:GraphRepresentations1 illustrates the two representations.
 The adjecency list representation is simple and very useful.
 The `outgoingEdges` function we have been using in our graph algorithms corresponds to a lookup
 in the map, which can make the operation very efficient.
@@ -32,7 +32,7 @@ The adjacency list is the most common for implementing generic sparse graphs.
 There are plenty of optimisations possible for these representations.
 For instance, storing the source vertex in every edge is a bit redundant.
 For an unweighted graph, a compact adjacency map would just need
-$A \rightarrow {B,C}$ to say vertex $A$ has edges to $B$ and $C$.
+to associate $A$ with $[B,C]$, saying that vertex $A$ has edges to $B$ and $C$.
 That is, unweighted graphs can be represented by a simple map from vertices to their adjacent vertices.
 
 <!--

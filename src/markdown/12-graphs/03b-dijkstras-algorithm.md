@@ -61,14 +61,14 @@ A simple implementaion of Dijkstra's would look like this:
 As with DFS and BFS before, we can also analyze the agenda at each step of the algorithm.
 Again, we assume that we only add edges that lead to unvisited vertices, and we only show the steps that pass the visitation check:
 
-edge                     visited              agenda at end of iteration
------------------------  -------------------  -----------------------------------------------------------------------------------------------------
-$(0, ?\rightarrow A)$    $\{A\}$              $[(2, A\rightarrow D), (4, A\rightarrow B), (6, A\rightarrow E)]$
-$(2, A\rightarrow D)$    $\{A,D\}$            $[(4, A\rightarrow B), (5, D\rightarrow E), (6, A\rightarrow E)]$
-$(4, A\rightarrow B)$    $\{A,D,B\}$          $[(5, D\rightarrow E), (6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C)]$
-$(5, D\rightarrow E)$    $\{A,D,B,E\}$        $[(6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C), (8, E\rightarrow F)]$
-$(7, B\rightarrow F)$    $\{A,D,B,E,F\}$      $[(8, B\rightarrow C), (8, E\rightarrow F), (10, F\rightarrow C)]$
-$(8, B\rightarrow C)$    $\{A,D,B,E,F,C\}$    $[(8, E\rightarrow F), (10, F\rightarrow C)]$
+edge                           visited              agenda at end of iteration
+-----------------------------  -------------------  -----------------------------------------------------------------------------------------------------
+$(0, {\,?\,}\rightarrow A)$    $\{A\}$              $[(2, A\rightarrow D), (4, A\rightarrow B), (6, A\rightarrow E)]$
+$(2, A\rightarrow D)$          $\{A,D\}$            $[(4, A\rightarrow B), (5, D\rightarrow E), (6, A\rightarrow E)]$
+$(4, A\rightarrow B)$          $\{A,D,B\}$          $[(5, D\rightarrow E), (6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C)]$
+$(5, D\rightarrow E)$          $\{A,D,B,E\}$        $[(6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C), (8, E\rightarrow F)]$
+$(7, B\rightarrow F)$          $\{A,D,B,E,F\}$      $[(8, B\rightarrow C), (8, E\rightarrow F), (10, F\rightarrow C)]$
+$(8, B\rightarrow C)$          $\{A,D,B,E,F,C\}$    $[(8, E\rightarrow F), (10, F\rightarrow C)]$
 
 
 ### Extracting the shortest-path tree
@@ -105,7 +105,7 @@ and for this purpose a parent-pointer tree works perfectly.
 ### Optimising Dijkstra's algorithm
 
 There are several optimisations to Dijkstra's, involving keeping the agenda smaller.
-Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1.
+Consider when we visit $F$ in the example in @fig:GraphDijkstra1.
 We have already found a path of cost $8$ to $C$ ($A\rightarrow B\rightarrow C$),
 yet we add an inferior path to the agenda ($A\rightarrow B\rightarrow F\rightarrow C$ at cost $10$).
 When we eventually process that path, it will be discarded by the visitation check.

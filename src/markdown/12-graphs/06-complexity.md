@@ -4,8 +4,8 @@
 Graph algorithms have potential to be very inefficient if designed carelessly.
 Consider this naive approach to the shortest path problem from vertex $a$ to $b$:
 Try every possible path between $a$ and $a$, and keep the shortest one.
-Since a (simple) path is a sequence $[a\rightarrow x\rightarrow\cdots\rightarrow b]$,
-every permutation of the nodes forms a potential path (in a complete graph).
+Since a (simple) path is a sequence of edges $a\rightarrow\cdots\rightarrow b$,
+every permutation of the vertices forms a potential path (in a complete graph).
 Even a conservative worst case estimate gives us $O(V!)$ such permutations for a graph with $V$ vertices.
 This makes the algorithm too slow for any practical application.
 
@@ -72,8 +72,8 @@ Adding to and removing from a binary heap is logarithmic in its size,
 and the size of the agenda is at most $E$.
 This gives a total time of $O(E\log(E))$ for these algorithms, which is the same as $O(E\log(V)$).
 
-For Kruskal's algorithm, using *union-find* to detect cycles, the time is dominated by sorting the edges by weight,
-which is $O(E\log(E))$ for an efficient sorting algorithm, giving the algorithm the same time complexity as Prim's algorithm.
+For Kruskal's algorithm, if we use *union-find* to detect cycles, the time will be dominated by sorting the edges by weight.
+This is $O(E\log(E))$ for an efficient sorting algorithm, giving the algorithm the same time complexity as Prim's algorithm.
 
 ::: example
 #### Example: Airlines connecting $N$ airports

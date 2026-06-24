@@ -28,8 +28,8 @@ In @fig:GraphExamples, the right graph is weighted.
 
 #### Paths
 
-A *path* is a sequence of edges which joins a sequence of vertices,
-$a_1\rightarrow a_1\rightarrow a_2\rightarrow\cdots\rightarrow a_n$.
+A *path* is a sequence of edges, $e_1, e_2, \ldots, e_n$, which joins a sequence of vertices,
+$a_0\rightarrow a_1\rightarrow a_2\rightarrow\cdots\rightarrow a_n$.
 Usually this refers to a *simple path*, meaning a path with no repeated vertices
 (since graphs can have cycles, general paths can be infinitely long).
 
@@ -45,7 +45,7 @@ and if the graph is directed we call it *strongly connected*.
 
 A *cycle* is a path that starts and ends in the same vertex.
 An *acyclic* graph is a graph that doesn't have any cycles, and a common special case is
-a *directed acyclic graph* (DAG) for which there are many special algorithms.
+a *directed acyclic graph* (DAG) for which there are many specialised algorithms.
 
 #### Trees and subgraphs
 
@@ -69,7 +69,7 @@ The *outdegree* of vertex $A$ in the right graph is 2 while the *indegree* is 1.
 
 #### Sparse and dense graphs
 
-We can roughly categorise graphs by the number of expected edges they have:
+We can roughly categorise graphs by the number of edges in relation to the size of the graph:
 
 - In a *sparse* graph the number of edges are small, something like $E \in O(V)$,
   and the average degree is close to constant.
