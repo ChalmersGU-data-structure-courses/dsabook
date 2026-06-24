@@ -80,7 +80,7 @@ Here is a rough estimate of the workload of the system:
 - Modifying an edge (tram connections with scheduled departures): Maybe several times per day if it includes delays and such.
 - Finding the shortest route between two stations: Thousands of times per minutes during rush hour.
 
-Clearly, the third bullet point is where we should put effort into optimizing performance.
+Clearly, the third bullet point is where we should put effort into optimising performance.
 For this reason we will hold off on defining the technical aspects of creating graphs,
 and look at a simple definition that includes only what we expect of any graph:
 

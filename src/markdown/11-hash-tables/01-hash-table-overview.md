@@ -5,8 +5,8 @@ This section provides an overview of hash tables, glossing over many technical d
 We will be building up to hash tables in three steps:
 
 - Maps where keys are small integers (arrays).
-- Generalizing to maps where keys are arbitrary integers (compression and collision handling).
-- Generalizing further to maps where keys are objects (hashing).
+- Generalising to maps where keys are arbitrary integers (compression and collision handling).
+- Generalising further to maps where keys are objects (hashing).
 
 ### Maps where keys are small integers
 
