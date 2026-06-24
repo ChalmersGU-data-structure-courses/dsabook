@@ -10,7 +10,7 @@ text for specified keywords (and then the separate problem of ranking
 these by relevance).
 Directly combing through billions of webpages on the Internet is not a realistic
 procedure for a search that needs to finish in microseconds. Instead, search engines
-employ sophisitcated data structures to efficiently access the information.
+employ sophisticated data structures to efficiently access the information.
 
 A key concept for *search indexes*. Let's consider a simpler version of this problem:
 A collection of songs by different artists, and we want to search it
@@ -33,7 +33,7 @@ city A to city B.
 Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
 are connected by edges (potential railroad tracks or train departures).
 Specifically, finding the smallest rail network is a *minimal spanning tree* problem (see @sec:graphs:MSTs)
-and travell planning is a *shortest path* problem (see @sec:graphs:shortest-path).
+and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
 
 #### Example: Simulating particles
 

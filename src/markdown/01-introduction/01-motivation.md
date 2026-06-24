@@ -22,7 +22,7 @@ and algorithms are used to design efficient data structures.
 
 A university course on data structures and algorithms is essential to anyone
 who intends to do any substantial programming in their line of work.
-Often, chosing the right data structure for a task is half the battle
+Often, choosing the right data structure for a task is half the battle
 of solving it, and conversely using the wrong data structure is an easy way
 to end up with an inefficient or error-prone mess.
 Hopefully, by the time you have read this book you can look back at your earlier
@@ -44,7 +44,6 @@ and it is not certain that it takes 10,000 times longer to solve a 10,000 times 
 it depends on the algorithm.
 (The specific example of searching in a list is discussed in more detail in @sec:intro:binary-search.)
 
-<!-- This should be a new section since its not about motivation anymore. -->
 
 ## Core concepts
 
@@ -56,13 +55,13 @@ Data structures
     Examples of data structures are *arrays* and *linked lists*.
 
 Abstract data types
-:   An abstract data type (ADT) decribes the *capabilities* of a data structure.
+:   An abstract data type (ADT) describes the *capabilities* of a data structure.
     In other words, what operations can we use on a given data structure?
     Are there different data structures that have the same capabilities?
     We use ADTs to categorise the different use cases. Examples of ADTs that
     you may be familiar with are *lists*, *sets* and *maps*.
     Slightly simplified using programming terms: An ADT is an interface, and
-    a datastructure is the full implementation with all the technical details.
+    a data structure is the full implementation with all the technical details.
 
 
 Algorithms

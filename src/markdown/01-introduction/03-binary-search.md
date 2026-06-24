@@ -39,7 +39,7 @@ The *worst case* is that we are searching for a book that is not in the shelf at
 
 In the worst case, doubling the size of the bookshelf will double the search time.
 Thus, in linear search there is (suitably) a linear relationship between the size
-of the bookshelf and the search time. We say linear seach is a *linear time* algorithm.
+of the bookshelf and the search time. We say linear search is a *linear time* algorithm.
 
 ### Binary search {#intro:binary-search}
 
@@ -56,7 +56,7 @@ and it is a very common choice for a first algorithm to teach students, so you m
 For the example of a book shelf alphabetically from left to right, binary search would be described as such:
 - Start by comparing the middle book in the shelf to the one we are looking for.
     - if the middle book is the one we are looking for, our search is done!
-    - if we are searching for an alpabetically earlier book, search the left half of the shelf.
+    - if we are searching for an alphabetically earlier book, search the left half of the shelf.
     - otherwise search in right half.
 - Repeat this procedure for the left or right half, comparing to middle book of that half, and so on.
 
@@ -100,7 +100,7 @@ in computer memory. The operation of excluding elements from the interval needs 
  making a new smaller array is too slow. Instead we define the interval by the lower and
 upper indexes it includes, so $(10,24)$ would represent the interval from
 index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
-when needed). Searching the lower half just means changeing the interval to $(10,16)$,
+when needed). Searching the lower half just means altering the interval to $(10,16)$,
 and the upper half $(18,24)$.
 Here is an implementation of binary search that does not only say if the key is in the array,
 but also at which index it resides (or null if it is absent):
@@ -129,7 +129,7 @@ In this particular implementation we use inclusive indexes, both $start$ and $en
 Another common option is to have $start$ be inclusive, and $end$ exclusive
 (so the starting interval is $(0,array.length)$).
 Yet another option is to have a start index and a size of the interval.
-Each variation would do slighly different calculations,
+Each variation would do slightly different calculations,
 but require the same fundamental building operations:
 Finding the middle element, and excluding the upper/lower half of the interval.
 
@@ -171,7 +171,7 @@ making it tens of millions times faster than a linear search.
 
 This example highlights a crucial insight about algorithms:
 Buying a computer that is twice as fast will reduce the time consumption of your task by half.
-Switching programming language to C from Python might yield a similar speedup.
+Switching programming language to C from Python might yield a similar speed-up.
 Both of those are nice, but switching from a linear time algorithm to a logarithmic one
 can reduce runtime by a factor of millions, reducing runtime from years to seconds.
 

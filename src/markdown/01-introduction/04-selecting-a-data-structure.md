@@ -28,7 +28,7 @@ that for example uses less memory.
 
 The main idea with this three-step approach is that we analyse the *data* and what we want to do with the data.
 When we have done this it becomes easier to decide the representation of the data,
-and after that we can start developing the algoithms.
+and after that we can start developing the algorithms.
 
 When analysing your problem and the data, the following three questions can help you deciding which data structure to use.
 
@@ -50,6 +50,6 @@ the situation is drastically different. Inserting a value into a sorted
 array is a time consuming operation, so a different data structure is needed.
 
 No data structure is inherently best for all tasks.
-Every data structure in this book has practical applications where they
-are the most suitable.
+Every data structure presented in this book has practical applications where they
+are the most suitable choice.
 
