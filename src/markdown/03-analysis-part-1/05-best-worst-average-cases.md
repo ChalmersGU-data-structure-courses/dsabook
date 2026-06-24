@@ -3,7 +3,7 @@
 
 ::: TODO
 - Prio 2: shorten text on Average case
-- Prio 3: examples (e.g., Quicksort, Insertion sort)
+- Prio 3: examples (for example, Quicksort, Insertion sort)
 :::
 
 We can talk about the *best-case*, or the *worst-case*, or even the *average-case* complexity of an algorithm. But in practice we almost always only use the worst-case complexity: the best case is pretty useless (we should always prepare for the worst), and the average case is difficult to reason about.

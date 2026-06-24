@@ -9,7 +9,7 @@
 How many cities with more than 100,000 people lie within 200 kilometres of Paris, France?
 How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
 How much more CO~2~ will be emitted if I travel by plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the train?
-How can I see if a text contains plagiarism, i.e., if it copied some parts from another existing text?
+How can I see if a text contains plagiarism, that is, if it copied some parts from another existing text?
 
 Gathering the necessary information is not sufficient to answer questions like these,
 the information must be organised to allow efficient access and analysis.

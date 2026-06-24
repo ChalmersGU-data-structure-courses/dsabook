@@ -414,7 +414,7 @@ array which is larger than we need.
 #### Important note about Python lists
 - **refer to the chapter on prerequisites**
 
-Python doesn't have arrays -- i.e., fixed size constant-time access arrays
+Python doesn't have arrays -- fixed size constant-time access arrays
 like C, Java and most other languages have.
 
 Instead, Python has *lists*, and they are actually precisely the kind of

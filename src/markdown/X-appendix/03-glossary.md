@@ -1060,7 +1060,7 @@ For example, a typical database record.
 ### composition
 
 Relationships between classes based on usage rather than
-[inheritance](#inherit){.term}, i.e. a
+[inheritance](#inherit){.term}, a
 **HAS-A** relationship. For example, some code in class 'A' has a
 [reference]{.term} to some other class
 'B'.
@@ -5689,7 +5689,7 @@ algorithm, the growth rate of its [complexity]{.term}.
 In practice, we are looking for the best possible
 upper bound that has a simple mathematical expression. For example,
 we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of
-the algorithm to say that the complexity is quadratic, i.e. the
+the algorithm to say that the complexity is quadratic, that is, the
 asymptoptic complexity of the algorithm has as upper bound the
 growth rate given by squaring.
 

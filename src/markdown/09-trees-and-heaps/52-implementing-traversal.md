@@ -27,8 +27,8 @@ Then we can remove the lines for inorder and postorder, and we get the following
 
 Function `preorder` first checks that the tree is not empty (if it is,
 then the traversal is done and `preorder` simply returns). Otherwise,
-`preorder` makes a call to `visit`, which processes the root node (i.e.,
-prints the value or performs whatever computation as required by the
+`preorder` makes a call to `visit`, which processes the root node
+(that is, prints the value or performs whatever computation as required by the
 application). Function `preorder` is then called recursively on the left
 subtree, which will visit all nodes in that subtree. Finally, `preorder`
 is called on the right subtree, visiting all nodes in the right subtree.

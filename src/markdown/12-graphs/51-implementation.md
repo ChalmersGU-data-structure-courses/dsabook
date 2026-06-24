@@ -115,7 +115,7 @@ you can use strings or anything else.
 
 Its main data structure is a map from vertices to sets of edges.
 Exactly which kind of map or set we use can depend on our needs,
-but it can e.g. be any of the ones we have discussed earlier in the book.
+but it can, for example, be any of the ones we have discussed earlier in the book.
 
 One specific implementation that is particularly suited for an adjacency list
 [separate chaining]{.term} hash map, backed with a set implemented as a
@@ -145,7 +145,7 @@ The implementations of the API operations are quite straightforward, as can be s
 ### Alternative approaches
 
 ::: TODO
-- e.g., vertices are integers starting from 0?
+- for example, vertices are integers starting from 0?
 - not allowing the graph to change?
 - making it possible to delete vertices/edges?
 - undirected graphs

@@ -116,7 +116,7 @@ A sequence of atomic operations, such as performing 10 assignments, is still con
 But what if we have a sequence of non-atomic operations?
 
 For example, suppose that we have the three operations $p_1\in O(f_1)$, $p_2\in O(f_2)$, and $p_3\in O(f_3)$.
-The complexity of the sequence $\langle p_1; p_2; p_3\rangle$ will then be sum of the parts, i.e.:
+The complexity of the sequence $\langle p_1; p_2; p_3\rangle$ will then be sum of the parts, that is:
 
 $$
 \langle p_1; p_2; p_3\rangle \in O(f_1) + O(f_2) + O(f_3) = O(\max(f_1, f_2, f_3))

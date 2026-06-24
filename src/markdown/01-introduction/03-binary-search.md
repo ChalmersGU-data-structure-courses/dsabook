@@ -216,8 +216,8 @@ Another variation is returning the position of the greatest value less than the 
 <!--
 ### Even faster searching
 
-- e.g. library search / interpolation search
-- e.g. searching for numbers: use an array
+- for example library search / interpolation search
+- for example searching for numbers: use an array
 - use a hash function -> see the hashing chapter
 :::
 -->

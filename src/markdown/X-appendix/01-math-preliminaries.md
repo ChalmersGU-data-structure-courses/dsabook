@@ -23,9 +23,9 @@ In this case, $P$'s members are 7, 11, and 42, and the base type is integer.
 
 The following table shows the symbols commonly used to express sets and their relationships.
 
------------------------------------  -------------------------------------------------------------------------------
+-----------------------------------  ----------------------------------------------------------------------------------
 $\{1, 4\}$                           A set composed of the members 1 and 4
-$\{x ~|~ x \text{ is prime}\}$       A set definition using a set comprehension (e.g., the set of all primes)
+$\{x ~|~ x \text{ is prime}\}$       A set definition using a set comprehension (for instance, the set of all primes)
 $x\in P$                             $x$ is a member of $P$
 $x\notin P$                          $x$ is not a member of set $P$
 $\emptyset$                          The null or empty set
@@ -37,7 +37,7 @@ $P\cap Q$                            Intersection: all elements appearing in bot
 $P-Q$                                Difference: all elements of $P$ *not* in $Q$
 $P\times Q$                          (Cartesian) product: all possible pairs $(x,y)$ with $x\in P$ and $y\in Q$
 $2^P$ or $\mathcal{P}(P)$            Powerset: all possible subsets of $P$
------------------------------------  -------------------------------------------------------------------------------
+-----------------------------------  ----------------------------------------------------------------------------------
 
 ::: TODO
 - (Peter) I think the examples below are unnecessary: the students should know all this.
@@ -96,7 +96,7 @@ Note that sequence $[3, 5, 4, 4]$ is distinct from sequence $[3, 4, 5, 4]$, and 
 
 ### Relations
 
-A binary [relation]{.term} $R$ over set $S$ is a set of ordered pairs from $S$, i.e., $R\subseteq S\times S$.
+A binary [relation]{.term} $R$ over set $S$ is a set of ordered pairs from $S$, that is, $R\subseteq S\times S$.
 As an example of a relation, if $S$ is $\{a, b, c\}$, then
 
 $$
@@ -318,8 +318,8 @@ Logic Notation:
 
 :  We will occasionally make use of the notation of symbolic logic.
 
-     - $A \Rightarrow B$ means "if $A$ then $B$" -- i.e., that $A$ implies $B$.
-     - $A \Leftrightarrow B$ means "$A$ if and only if $B$" -- i.e., that $A$ and $B$ are equivalent.
+     - $A \Rightarrow B$ means "if $A$ then $B$" -- that is, that $A$ implies $B$.
+     - $A \Leftrightarrow B$ means "$A$ if and only if $B$" --  if ich , that $A$ and $B$ are equivalent.
      - $A \vee B$ means "$A$ or $B$" -- the disjunction of $A$ and $B$.
      - $A \wedge B$ means "$A$ and $B$" -- the conjunction of $A$ and $B$.
      - $\neg A$ means "not $A$" -- the negation of $A$.

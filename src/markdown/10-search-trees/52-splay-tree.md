@@ -50,7 +50,7 @@ These access functions tend to make the tree more balanced,
 but an individual access will not necessarily result in a more balanced
 tree.
 
-Whenever a node $S$ is accessed (e.g., when $S$ is inserted, deleted, or
+Whenever a node $S$ is accessed (that is, when $S$ is inserted, deleted, or
 is the goal of a search), the splay tree performs a process called
 [splaying]{.term}. Splaying moves $S$ to the
 root of the BST. When $S$ is being deleted, splaying moves the parent of
@@ -84,7 +84,7 @@ to maintain the BST property, but the contents of these subtrees remains
 unchanged. (a) The original tree with $P$ as the parent. (b) The tree
 after a rotation takes place. Performing a single rotation a second time
 will return the tree to its original shape. Equivalently, if (b) is the
-initial configuration of the tree (i.e., $S$ is at the root and $P$ is
+initial configuration of the tree (that is, $S$ is at the root and $P$ is
 its right child), then (a) shows the result of a single rotation to
 splay $P$ to the root.
 ](images/SingRot.png){width=60% #fig:SingProm}

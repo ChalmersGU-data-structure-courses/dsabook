@@ -59,7 +59,7 @@ Key-based sorting
     For example, sorting a list of towns by population, or sorting a list of persons by their age.
 
 Note that if we sort according to a *key*, it doesn't have to be explicitly stored in the object, but can instead be calculated on demand.
-E.g., if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
+For example, if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
 <!-- NICSMA: END -->
 This is usually done by a [comparator]{.term} (in Java), or by a [key function](https://docs.python.org/3/howto/sorting.html#key-functions) (in Python).
 

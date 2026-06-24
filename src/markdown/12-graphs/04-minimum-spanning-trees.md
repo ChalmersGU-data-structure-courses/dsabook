@@ -51,7 +51,7 @@ The MST contains no cycles. If a proposed MST did have a cycle, a
 cheaper MST could be had by removing any one of the edges in the cycle.
 Thus, the MST is a free tree with $|\mathbf{V}| - 1$ edges. The name
 "minimum-cost spanning tree" comes from the fact that the required set
-of edges forms a tree, it spans the vertices (i.e., it connects them
+of edges forms a tree, it spans the vertices (That is, it connects them
 together), and it has minimum cost.
 @Fig:GraphMST shows the MST for an example graph.
 

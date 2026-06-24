@@ -35,7 +35,7 @@ Seven tasks have dependencies as shown by the directed graph.
 
 A topological sort may be found by performing a [depth-first search]{.term} (DFS) on the graph.
 When a vertex is visited, no action is taken
-(i.e., function *preVisit* from @sec:graphs:DFS does nothing).
+(that is, function *preVisit* from @sec:graphs:DFS does nothing).
 When the recursion pops back to that vertex, function *postVisit* adds the vertex to a stack.
 In the end, the stack is returned to the caller.
 
@@ -77,14 +77,14 @@ Here is another example.
 We can also implement topological sort using a *queue* instead of recursion, as follows.
 
 First visit all edges, counting the number of edges that lead to each
-vertex (i.e., count the number of prerequisites for each vertex). All
+vertex (that is, count the number of prerequisites for each vertex). All
 vertices with no prerequisites are placed on the queue. We then begin
 processing the queue. When vertex $v$ is taken off of the queue, it is
 added to a list containing the topological order, and all neighbours of
 $v$ (that is, all vertices that have $v$ as a prerequisite) have their
 counts decremented by one. Place on the queue any neighbour whose count
 becomes zero. If the queue becomes empty without having added all
-vertices to the final list, then the graph contains a cycle (i.e., there
+vertices to the final list, then the graph contains a cycle (that is, there
 is no possible ordering for the tasks that does not violate some
 prerequisite). The order in which the vertices are added to the final
 list is the correct one, so if traverse the final list we will get the

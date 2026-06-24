@@ -3,7 +3,7 @@
 ## Examples of algorithm analysis {#analysis-1:examples}
 
 ::: TODO
-- Prio 2: add some "real" examples, i.e., more complex ones
+- Prio 2: add some "real" examples, that is, more complex ones
 :::
 
 Here are some examples of how to analyse the big-$O$ complexity of algorithms.
@@ -131,7 +131,7 @@ $$
 $$
 
 So the cost of this double loop is $O(n \log(n))$.
-Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
+Note that the summation variable $i$ is the logarithm of the loop variable $k$, that is, $k = 2^i$.
 
 Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear,
 so we multiply them to $O(n \log(n))$.

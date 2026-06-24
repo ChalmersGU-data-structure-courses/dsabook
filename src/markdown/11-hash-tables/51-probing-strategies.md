@@ -165,7 +165,7 @@ function is some quadratic function
 $\mathbf{p}(k, i) = c_1 i^2 + c_{2}i + c_3$ for some choice of constants
 $c_1$, $c_2$, and $c_3$.
 
-The simplest variation is $\mathbf{p}(k, i) = i^2$ (i.e., $c_1 = 1$,
+The simplest variation is $\mathbf{p}(k, i) = i^2$ (that is, $c_1 = 1$,
 $c_2 = 0$, and $c_3 = 0$). Then the $i$ th value in the probe sequence
 would be $(\mathbf{h}(k) + i^2) \bmod m$.
 

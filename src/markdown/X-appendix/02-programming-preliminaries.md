@@ -104,7 +104,7 @@ We use two kind of loops, `while` and `for`:
 - in some cases we can `break` out of a loop inside its body
 
 Often we want to iterate over integers, and then it's important to know if the end point is included or not.
-We will use `i..j` to describe the increasing seqeunce from `i` to `j` (i.e., `0..10` is the sequence $0, 1, \ldots, 9, 10$).
+We will use `i..j` to describe the increasing seqeunce from `i` to `j` (that is, `0..10` is the sequence $0, 1, \ldots, 9, 10$).
 Here is an example of a nested `for` loop:
 
     for i in 0 .. n-1:
@@ -219,11 +219,12 @@ This means that using slices is quite slow.
 
 Therefore we will not use array slices in this book.
 Instead we can use a pair of array indices `i`, `j` to refer to a specific slice of the array.
-This is, e.g., done already in @sec:intro:binary-search where we introduce the *binary search* algorithm.
+This is, for example, done already in @sec:intro:binary-search where we introduce the *binary search* algorithm.
 
 #### Strings
 
-A string is an immutable sequence of characters, meaning that once defined (e.g., `str = "data"`), it cannot be modified.
+A string is an immutable sequence of characters, meaning that once defined
+(for instance, `str = "data"`), it cannot be modified.
 In this sense, strings behave like values, similar to integers or boolean values.
 While you can access individual characters using indexing, you cannot change them.
 Any modification, such as concatenation or replacement, results in the creation of a new string rather than altering the original one.
@@ -266,7 +267,7 @@ On the other hand, the following data types are mutable:
 - Compound data types (see below)
 
 ::: TODO
-add some examples of mutable/immutable (e.g., arrays vs strings)
+add some examples of mutable/immutable (for example, arrays vs strings)
 :::
 
 ### Functions
@@ -390,7 +391,8 @@ We trust that you are competent programmers and can deduce yourself how to imple
 
 #### Extending datatypes
 
-We can *extend* a datatype by adding more variables, e.g., here a definition of *doubly-linked list nodes* (see @sec:sequences:deques):
+We can *extend* a datatype by adding more variables, for example,
+here a definition of *doubly-linked list nodes* (see @sec:sequences:deques):
 
     datatype DoubleNode extends ListNode:
         ...
@@ -469,11 +471,13 @@ So you do *not* have to know about these things to follow the algorithms in this
 
 Multiple inheritance
 
-: Being able to extend multiple classes or interfaces is useful for defining e.g. user interfaces, but it is not something we will use in this book.
+: Being able to extend multiple classes or interfaces is useful for defining for example user interfaces,
+  but it is not something we will use in this book.
 
 Static methods, class variables, etc.
 
-: This is useful for not cluttering up the global namespace, so very useful when you write larger programs. But it is not needed for describing algorithms and data structures.
+: This is useful for not cluttering up the global namespace, so very useful when you write larger programs.
+  But it is not needed for describing algorithms and data structures.
 
 Referencing super classes
 

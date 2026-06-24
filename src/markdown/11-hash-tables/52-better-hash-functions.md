@@ -87,7 +87,7 @@ the result, giving a value in the range 0 to $2^{r}-1$. This works well
 because most or all bits of the key value contribute to the result. For
 example, consider records whose keys are 4-digit numbers in base 10, as
 shown in @fig:MidSquare.
-The goal is to hash these key values to a table of size 100 (i.e., a
+The goal is to hash these key values to a table of size 100 (that is, a
 range of 0 to 99). This range is equivalent to two digits in base 10.
 That is, $r = 2$. If the input is the number 4567, squaring yields an
 8-digit number, 20857489. The middle two digits of this result are 57.
@@ -150,7 +150,7 @@ to 900 can possibly be the home slot for some key value, and the values
 are not evenly distributed even within those slots.
 
 Another problem is that the order of the characters in the string has no
-effect on the result. E.g., all permutations of the string "*ABCDEFG*"
+effect on the result. For example, all permutations of the string "*ABCDEFG*"
 will result in the same hash value.
 
 ::: dsvis

@@ -24,7 +24,7 @@ algorithm maintains the relative order of records with equal keys.
 :::::::::: question ::::::::::
 A disadvantage of Heapsort is:
 
-- [x] It is not stable (i.e., records with
+- [x] It is not stable (that is, records with
 equal keys might not remain in the same order after sorting)
 - [ ] It needs a lot of auxilliary storage
 - [ ] Its average case running time is $O(n^2)$
