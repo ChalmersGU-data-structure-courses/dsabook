@@ -2,8 +2,7 @@
 ## Problems, algorithms, and programs {#analysis-1:problems-and-algorithms}
 
 ::: TODO
-- Prio 2: Flatten subsections?
-- Prio 2: Shorten the text
+- Prio 2: Shorten the text a bit more?
 :::
 
 Problems, algorithms, and computer programs are distinct but related concepts
@@ -21,8 +20,7 @@ Descriptions of problems often include:
   positive integers.
 * Postconditions on the output, like the result of sorting being a sorted permutation
   of the input.
-* Additional capabilities, such as the elements of an array being comparable,
-  or
+* Additional capabilities, such as the elements of an array being comparable.
 * Performance requirements, like taking at most linear time or using constant memory.
 
 A major branch of research on algorithms involves classifying problems into
