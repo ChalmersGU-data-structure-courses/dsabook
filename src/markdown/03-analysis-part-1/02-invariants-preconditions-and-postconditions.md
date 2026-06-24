@@ -38,7 +38,7 @@ They could for example be a relation that holds between some internal variables,
 ::: example
 #### Example: Binary search
 
-In @sec:intro:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
+In @sec:intro:searching we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
 A precondition is of course that the array is sorted, but this is so obvious that we don't have to spell it out.
 
 More interesting is to look into the algorithm itself.

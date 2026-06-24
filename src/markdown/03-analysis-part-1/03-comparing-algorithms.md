@@ -121,7 +121,7 @@ Note that both the input size $n$, as well as the resource usage $T(n)$ and $S(
 ::: example
 #### Example: Linear search
 
-Recall the linear search algorithm from @sec:#intro:searching,
+Recall the linear search algorithm from @sec:intro:searching,
 it searches for a given value in an array.
 The size of the input is the size of the array -- let's call it $n$.
 The algorithm looks at each array value in turn, comparing with the given value.

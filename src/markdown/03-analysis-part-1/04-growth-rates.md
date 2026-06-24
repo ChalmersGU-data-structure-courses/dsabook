@@ -59,7 +59,7 @@ Constant factors never affect the relative improvement gained by working longer 
 
 The first equation denotes a *logarithmic* growth rate, $T(n) = 2\cdot\log_2(n)$.
 It could for example be the time to find a book in your sorted bookshelf using binary search
-(recall @sec:intro:binary-search).
+(recall @sec:intro:searching).
 In this case we search 32 books in one millisecond.
 But in 10 ms we can search in $10^{15}$ books,
 and in 100 ms we can search a library with more books than there are atoms in the universe.

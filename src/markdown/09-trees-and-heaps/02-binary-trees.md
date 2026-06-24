@@ -111,8 +111,8 @@ The bottom level is filled from the left side.
 Neither property implies the other.
 A perfect binary tree satisfies both properties.
 In the figure, tree (a) is full but not complete, while tree (b) is complete but not full.
-A [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
-A [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
+A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete binary tree, while
+a [Huffman coding tree]{.term} is an example of a full binary tree.
 
 ::: {#fig:full_complete_bintrees}
 ![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/Trees-full-perfect-complete.svg){width=100%}

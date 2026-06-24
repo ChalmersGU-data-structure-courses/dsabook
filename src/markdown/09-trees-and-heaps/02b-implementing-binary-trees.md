@@ -1,5 +1,5 @@
 
-### Implementing binary trees
+### Implementing binary trees {#trees:implementing-binary-trees}
 
 ::: TODO
 - Prio 1: merge with previous section?

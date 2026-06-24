@@ -219,7 +219,7 @@ This means that using slices is quite slow.
 
 Therefore we will not use array slices in this book.
 Instead we can use a pair of array indices `i`, `j` to refer to a specific slice of the array.
-This is, for example, done already in @sec:intro:binary-search where we introduce the *binary search* algorithm.
+This is, for example, done already in @sec:intro:searching where we introduce the *binary search* algorithm.
 
 #### Strings
 

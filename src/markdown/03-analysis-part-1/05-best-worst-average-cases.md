@@ -50,7 +50,7 @@ that every possible array is equally probable, or in other words, that the possi
 More about that below.
 
 ::: dsvis
-Here is an example where we reason about the Sequential search algorithm from @sec:intro:sequential-search.
+Here is an example where we reason about the *linear search* algorithm from @sec:intro:searching.
 
 ``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```
