@@ -1,12 +1,10 @@
-::: TODO
-- Prio 2: Add short reflections for all our data structures and algorithms, e.g. who invented it, when, and why
-:::
 
 # Introduction {#intro}
 
 ::: TODO
 - Prio 1: Extend this introduction just a little
 - Prio 1: "How to read this book", starred sections are online, etc
+- Prio 2: Add short reflections for all our data structures and algorithms, e.g. who invented it, when, and why
 :::
 
 :::::: latex

@@ -2,67 +2,56 @@
 ## Abstract data types {#intro:abstract-data-types}
 
 An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
-This is done by describing what operations that can be performed on it, and how these operations should behave.
+This is done by specifying what operations that can be performed on it, and how these operations should behave.
 Note that an ADT does not dictate *how* the operations should be implemented, and multiple implementations are often possible.
-<!-- The operations offered by an ADT is often called its *application programming interface* (API),
-and is similar to an interface or a protocol in an object-oriented language. -->
 By hiding the implementation details from the user, it is possible to change the underlying representation or an algorithm,
 without changing the API of the abstract data type.
-
-<!-- OPENDSA: START -->
-The concept of an ADT can help us to focus on key issues even in non-computing applications.
-
-::: example
-#### Example: Cars
-
-When operating a car, the primary activities are steering, accelerating,
-and braking. On nearly all passenger cars, you steer by turning the
-steering wheel, accelerate by pushing the gas pedal, and brake by
-pushing the brake pedal. This design for cars can be viewed as an ADT
-with operations "steer", "accelerate", and "brake". Two cars might
-implement these operations in radically different ways, say with
-different types of engine, or front- versus rear-wheel drive. Yet, most
-drivers can operate many different cars because the ADT presents a
-uniform method of operation that does not require the driver to
-understand the specifics of any particular engine or drive design. These
-differences are deliberately hidden.
-:::
+Using abstraction to handle complexity is a core principle throughout computer science.
 
 
-### Abstract data types as metaphors
+In a wide sense, any kind of software interface can be called an ADT.
+In this book, it is mainly about operations on different collections,
+like lists and sets. An operation would be something like `contains(x)`
+that determines if a value $x$ is in the collection.
+Generally, a specific data structure (like an array) can have three
+relations to such an operation in an ADT:
 
-The concept of an ADT is one instance of an important principle that must be understood by any successful computer scientist: managing complexity through abstraction.
-A central theme of computer science is complexity and techniques for handling it.
-Humans deal with complexity by assigning a label to an assembly of objects or concepts and then manipulating the label in place of the assembly.
-Cognitive psychologists call such a label a *metaphor*.
-A particular label might be related to other pieces of information or other labels.
-This collection can in turn be given a label, forming a hierarchy of concepts and labels.
-This hierarchy of labels allows us to focus on important issues while ignoring unnecessary details.
+* The operation can be implemented efficiently.
+* The operation can be implemented, but it would be so inefficient compared to
+  alternative data structures that using it indicates a bad design choice.
+* The operation cannot be implemented at all.
 
-::: example
-#### Example: Computers, hard drives, and CPUs
+Consider these three operations for collections of values:
 
-We apply the label "hard drive" to a collection of hardware that
-manipulates data on a particular type of storage device, and we apply
-the label "CPU" to the hardware that controls execution of computer
-instructions. These and other labels are gathered together under the
-label "computer". Because even the smallest home computers today have
-millions of components, some form of abstraction is necessary to
-comprehend how a computer operates.
-:::
+`get(i)`
+:   returns the value on position i of this collection.
 
-Consider how you might go about the process of designing a complex
-computer program that implements and manipulates an ADT. The ADT is
-implemented in one part of the program by a particular data structure.
-While designing those parts of the program that use the ADT, you can
-think in terms of operations on the data type without concern for the
-data structure's implementation. Without this ability to simplify your
-thinking about a complex program, you would have no hope of
-understanding or implementing it.
+`set(i, x)`
+:   sets the value of position i of this collection to x, overwriting the previous value.
 
-<!-- OPENDSA: END -->
+`contains(x)`
+:   answers true if and only if this collection contains x.
 
-### The core abstract data types
+The operations form a little ADT for sequences, collections where elements have positions.
+Consider these operations on the similar data structures of *arrays* and *ordered arrays*
+(an array with an ordering invariant: elements are and must remain sorted in ascending order).
+Can the operations be implemented on both data structures,
+and how efficient can they be made?
+
+Both arrays and ordered arrays can implement `get` efficiently,
+it is simply array indexing.
+A general array can implement `set`, but the operation does not make
+sense for an ordered array.
+Calling `set(0,4)` on the ordered array $[1,2,3]$ cannot give $[4,2,3]$,
+since that breaks the ordering invariant.
+If `set` shuffle things around around to $[2,3,4]$, it does not comply
+with the description of `set` and `get`. After running `set(0,4)` we would expect `get(0)` to give $4$, not $2$.
+
+The `contains` operation can be implemented on both arrays and ordered arrays,
+but we would expect it to run much faster on the ordered array since
+binary search is possible.
+
+#### The core abstract data types
 
 Most of abstract data types are some sort of *collections*, that is, structures that store elements.
 The ADTs we discuss in this book can be categorised in the following groups.

@@ -10,7 +10,7 @@ and how to find the data we are interested in.
 One way of storing a collection of objects is to put them in an array.
 So, assuming that we have an array of objects, how can we find a certain object in this array?
 
-### Linear search {#intro:linear-search}
+#### Linear search {#intro:linear-search}
 
 Suppose we are searching for a particular book in a bookshelf.
 If the shelf is not in any particular order, our only option is to
@@ -41,15 +41,16 @@ In the worst case, doubling the size of the bookshelf will double the search tim
 Thus, in linear search there is (suitably) a linear relationship between the size
 of the bookshelf and the search time. We say linear search is a *linear time* algorithm.
 
-### Binary search {#intro:binary-search}
+#### Binary search {#intro:binary-search}
 
 No library puts their books randomly in shelves, because linear search is too slow.
 Instead, books are sorted in the shelves, for example alphabetically by author name
 then by title.
 Most people can intuitively use this order to search the whole bookshelf
-by looking at only a small fraction of the books. We implicitly make deductions like
-"since there are no books between Orwell and Owen, then there are no books by Osborne"
-and "since this book is by Plato, all books by Homer must be earlier in the shelf".
+by looking at only a small fraction of the books. When browsing the books we
+implicitly make deductions like
+"there are no books between Orwell and Owen, so there are no books by Osborne"
+and "this book is by Plato, so all books by Homer must be earlier in the shelf".
 The formalised algorithm that operates on these deductions is called [binary search]{.term},
 and it is a very common choice for a first algorithm to teach students, so you may have seen it before.
 
@@ -90,7 +91,7 @@ Repeat the following until *key* has been found, or the interval is empty:
 1. Compare *key* with the middle element of the interval.
 2. If *key* is equal, return true, the key is in the array.
 3. Exclude the middle element and all elements before or after it from the interval,
-   depending on if the key is lesser or greater than the middle element.
+   depending on if the key is greater or lesser than the middle element.
 
 If the interval ends up empty, return false, the key is not in the array.
 :::
@@ -179,7 +180,7 @@ can reduce runtime by a factor of millions, reducing runtime from years to secon
 
 Apart from introducing our first two algorithms (linear search and binary search),
 this section introduces a data structure: The sorted array.
-This data structure differers from from arbitrary arrays in what operations it supports,
+This data structure differs from from general arrays in what operations it supports,
 more than just the a ability to search quickly.
 
 Returning to the analogy of the bookshelf: If we have an unordered bookshelf,
@@ -189,7 +190,7 @@ We can also switch the order of two books if we please.
 
 If we have an ordered bookshelf, and want to keep using binary search on it,
 adding a new book requires careful consideration.
-There is only a single valid position for the new book to be placed,
+There is a single valid position for the new book to be placed,
 and we cannot swap existing books around.
 
 This touches on the subject of *invariants*, properties that must always hold on a data structure.

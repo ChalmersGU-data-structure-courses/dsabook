@@ -34,15 +34,15 @@ where the algorithm is modeled as a *recurrence relation*.
 ```
 :::
 
-Sequential search looks at every element in the array in the worst case, so its complexity is $O(n)$.
-This means that as $n$ grows, the $O(n)$ running time for sequential search
+Linear search looks at every element in the array in the worst case, so its complexity is $O(n)$.
+This means that as $n$ grows, the $O(n)$ running time for linear search
 <!-- OPENDSA: START -->
 quickly becomes much greater than the $O(\log(n))$ running time for binary search.
-Taken in isolation, binary search appears to be much more efficient than sequential search.
+Taken in isolation, binary search appears to be much more efficient than linear search.
 This is despite the fact that the constant factor for binary search is greater
-than that for sequential search, because the calculation for the next
+than that for linear search, because the calculation for the next
 search position in binary search is more expensive than just
-incrementing the current position, as sequential search does.
+incrementing the current position, as linear search does.
 <!-- OPENDSA: END -->
 
 However, binary search comes with a precondition:
@@ -51,7 +51,7 @@ The sorting algorithms we have seen so far are all quadratic, $O(n^2)$,
 but there are faster ones with complexity $O(n\log(n))$, as you will see [Chapter @sec:sorting-2].
 So there's a tradeoff here -- to be able to search the array efficiently we need to keep it sorted.
 
-Sequential search is not much of a problem if it is something we only have to do just a handful of times,
+Linear search is not much of a problem if it is something we only have to do just a handful of times,
 but if we plan to search repeatedly in our array it is definitely worth the work to sort it once and for all.
 
 However, keeping an array sorted can be very costly if want to be able to insert and delete elements.

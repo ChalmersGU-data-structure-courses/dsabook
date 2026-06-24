@@ -119,15 +119,15 @@ If we are interested in the space usage we sometimes write $S(n)$.
 Note that both the input size $n$, as well as the resource usage $T(n)$ and $S(n)$, are always non-negative.
 
 ::: example
-#### Example: Sequential search
+#### Example: Linear search
 
-Recall the sequential search algorithm from @sec:intro:sequential-search,
+Recall the linear search algorithm from @sec:#intro:searching,
 it searches for a given value in an array.
 The size of the input is the size of the array -- let's call it $n$.
 The algorithm looks at each array value in turn, comparing with the given value.
 If the value is found it returns the position, otherwise it continues until the end of the array.
 
-    sequentialSearch(arr, val):
+    linearSearch(arr, val):
         for i in 0 .. arr.size - 1:   // For each element in arr,
             if arr[i] == val:         //     if we found it
                 return i              //         return this position.
@@ -152,9 +152,8 @@ $$
 T(n) = c\cdot n
 $$
 
-Therefore the running time of the sequential search is proportional to the size of the input.
-This is called a *linear* running time
-(and therefore the algorithm is sometimes called *linear search*).
+Therefore the running time of the linear search is proportional to the size of the input.
+This is called a *linear* running time.
 :::
 
 ::: example
