@@ -115,6 +115,13 @@ adversary never gives an answer that conflicts with any previous
 answer, it is permitted to do whatever necessary to make the
 algorithm require as much cost as possible.
 
+### algebraic data type
+
+An algebraic data type (ADT) is a composite data type built from two fundamental constructions: sum and product.
+A sum type represents a choice among several distinct alternatives, while a product type combines multiple values into a single structure.
+Each alternative may carry its own associated data.
+Values of algebraic data types are typically processed using pattern matching.
+
 ### algorithm
 
 A method or a process followed to solve a

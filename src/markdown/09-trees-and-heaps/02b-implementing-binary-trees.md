@@ -132,59 +132,34 @@ It stores a reference to the root node, initially `null`, and can also maintain 
         root: Node = null
         size: Int = 0
 
-### Differentiating between internal nodes and leaves
+### Modelling different kinds of tree nodes
 
-<!-- OPENDSA: START -->
-An important decision in the design of a pointer-based node
-implementation is whether the same class definition will be used for
-[leaves](#leaf-node){.term} and
-[internal nodes](#internal-node){.term}. Using
-the same class for both will simplify the implementation, but might be
-an inefficient use of space. Some applications require data values only
-for the leaves. Other applications require one type of value for the
-leaves and another for the internal nodes. Examples include
-the [Huffman coding tree]{.term} (see @sec:huffman-coding),
-[the [binary trie]{.term}, the [PR Quadtree]{.term},]{.online}
-and the [expression tree]{.term} illustrated by @fig:expression_tree below.
-By definition, only
-internal nodes have non-empty children. If we use the same node
-implementation for both internal and leaf nodes, then both must store
-the child pointers. But it seems wasteful to store child pointers in the
-leaf nodes. Thus, there are many reasons why it can save space to have
-separate implementations for internal and leaf nodes.
-<!-- OPENDSA: END -->
+An important design question for a pointer-based tree representation is whether [leaves](#leaf-node){.term} and [internal nodes](#internal-node){.term} should use the same node type.
+For simple binary trees, a single node type is often sufficient.
+However, in many applications the two kinds of nodes play different roles, and it is then clearer to represent them differently.
+Some applications store data only in the leaves, while others store one kind of information in the leaves and another in the internal nodes.
+Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-coding), the [binary trie]{.term}, the [PR Quadtree]{.term}, and]{.online} the [expression tree]{.term} illustrated by @fig:expression_tree below.
 
 ::: {#fig:expression_tree}
-![An expression tree for the expression 4x(2x + a) - c.](images/Trees-expression-tree.svg){width=60%}
+![](images/Trees-expression-tree.svg){width=70%}
 
 An example of an expression tree for $4x(2x + a) - c$
 :::
 
-<!-- OPENDSA: START -->
-As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by @fig:expression_tree.
-The expression tree
-represents an algebraic expression composed of binary operators such as
-addition, subtraction, multiplication, and division. Internal nodes
-store operators, while the leaves store operands.
-The tree of the figure represents the
-expression $4x(2x + a) - c$. The storage requirements for a leaf in an
-expression tree are quite different from those of an internal node.
-Internal nodes store one of a small set of operators, so internal nodes
-could store a small code identifying the operator such as a single byte
-for the operator's character symbol. In contrast, leaves store variable
-names or numbers, which is considerably larger in order to handle the
-wider range of possible values. At the same time, leaf nodes need not
-store child pointers.
+This is part of a broader idea.
+A binary tree is a restricted form of tree in which each node has at most two subtrees.
+In more general tree structures, nodes may have different numbers of subtrees, and different kinds of nodes may serve different structural roles.
+Thus, distinguishing between node types is not peculiar to binary trees, but a natural way to model trees more faithfully.
 
-[Object-oriented languages](#object-oriented-programming-paradigm){.term}
-allow us to differentiate leaf from internal nodes through
-the use of a [class hierarchy]{.term}. A [base class]{.term} provides a general
-definition for an object, and a [subclass]{.term} modifies the base class to add more detail.
-<!-- OPENDSA: END -->
-We will not discuss further how to implement different kind of tree nodes
-more in this book, but will just assume that all nodes are of the same class.
+As an example of a tree that stores different information at the leaf and internal nodes, consider the expression tree illustrated by @fig:expression_tree.
+An expression tree represents an algebraic expression composed of binary operators such as addition, subtraction, multiplication, and division.
+Its internal nodes store operators, while its leaves store operands like numbers and variables.
+The tree in the figure represents the expression $4x(2x + a) - c$.
+Since operators and operands are conceptually different kinds of information, it is natural to represent them using different node types.
+Once we make that distinction, the corresponding node representations may also differ in the fields they store.
 
-::: TODO
-- Add information about data types and functional languages
-:::
+[Object-oriented languages](#object-oriented-programming-paradigm){.term} allow us to distinguish between leaves and internal nodes through a [class hierarchy]{.term}.
+A [base class]{.term} provides the general definition of a tree node, while [subclasses]{.term} refine that definition for leaves and internal nodes.
+In functional languages, the same distinction is often expressed using [algebraic data types]{.term}, where a node is defined to be one of several cases.
+For example, a tree might be either a leaf carrying a value or an internal node carrying a value together with its subtrees.
+We will not discuss these implementation variations further in this book, but will usually assume that all nodes belong to the same class unless the distinction matters.
