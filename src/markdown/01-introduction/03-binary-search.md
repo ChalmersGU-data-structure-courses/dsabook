@@ -50,7 +50,7 @@ Most people can intuitively use this order to search the whole bookshelf
 by looking at only a small fraction of the books. We implicitly make deductions like
 "since there are no books between Orwell and Owen, then there are no books by Osborne"
 and "since this book is by Plato, all books by Homer must be earlier in the shelf".
-The formalized algorithm that operates on these deductions is called [binary search]{.term},
+The formalised algorithm that operates on these deductions is called [binary search]{.term},
 and it is a very common choice for a first algorithm to teach students, so you may have seen it before.
 
 For the example of a book shelf alphabetically from left to right, binary search would be described as such:

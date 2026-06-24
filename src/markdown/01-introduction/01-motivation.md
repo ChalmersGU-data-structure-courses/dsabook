@@ -33,7 +33,7 @@ Apart from using the right data structure for the job, analysing an algorithm is
 another essential skill. If two algorithms solve the same problem, which one is better?
 Will the performance of your program scale to thousands of users?
 Which part of a piece of code is going to use all the processing power
-(and is thus the only part worth optimizing)?
+(and is thus the only part worth optimising)?
 
 Suppose you have an algorithm for finding someone in a list of names.
 Let us say that it is very fast when searching among 1000 names, for example your social media friends.

@@ -54,7 +54,7 @@ Again, we assume that we only add edges that lead to unvisited vertices, and we 
 
 
 
-### Optimizing Dijkstra's algorithm
+### Optimising Dijkstra's algorithm
 
 There are several optimisations to Dijkstra's, involving keeping the agenda smaller.
 Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1.
