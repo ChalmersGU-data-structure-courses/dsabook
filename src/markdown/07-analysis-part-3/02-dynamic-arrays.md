@@ -5,7 +5,7 @@ Dynamic is a data structure that behaves just like a normal array, but where siz
 A dynamic array has a underlying *backing array* which is a normal fixed-size array.
 When the backing array becomes full it resizes to a larger fixed-size array.
 
-In section @sec:sequences:dynamic-arrays we alreay showed that the key insight is to not increase the size by a constant,
+In @sec:sequences:dynamic-arrays we alreay showed that the key insight is to not increase the size by a constant,
 but instead *multiply* with some factor.
 If we do this, then the amortised complexity of appending an element to the array is constant, $O(1)$.
 In this section we will use the accounting method to show the same thing.

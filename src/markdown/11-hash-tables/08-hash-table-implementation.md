@@ -5,7 +5,7 @@ While seperate chaining is a bit easier in principle,
 linear probing is arguably easier to implement because
 it does not require implementing operations on linked lists.
 Below is a very simple implementation of a linear probing hash set,
-where we leave out the problem of resizing (see section @sec:hash-tables:resizing).
+where we leave out the problem of resizing (see @sec:hash-tables:resizing).
 
     datatype LinearProbingSet implements Set:
         arr = new Array()  // An array of values, indexed by hashcode and linear probing
