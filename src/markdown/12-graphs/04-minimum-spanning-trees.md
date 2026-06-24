@@ -7,24 +7,27 @@
 
 <!-- START NOTES -->
 
-A *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph. This of course assumes that the graph is connected, otherwise it is not possible. The notion of a tree used here is slightly different from the one used previously in the book.
-The tree is actually just an undirected subgraph with no cycles, it does not have a designated root, but *lifting* the subgraph by any particular vertex creates a standard tree as we have seen before.
-
-**Fact**. The number of edges in a spanning tree is exactly $V-1$.
+As explained in @sec:graphs:definitions, a *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph.
+**Interesting fact**: The number of edges in a spanning tree is exactly $V-1$.
 (Why is this? Try to convince yourself about it.)
 
-If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible. A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs. This example graph has two possible MSTs, each with a combined weight of $25$:
+If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible.
+A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs.
+@Fig:ExampleMSTs shows a graph with two possible MSTs, each with a combined weight of $25$.
 
-![](images/Graphs-TwoMSTs.png)
+![Two MSTs for the same graph](images/Graphs-TwoMSTs.png){width=90% #fig:ExampleMSTs}
 
-The MST is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST -- for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
+The minimum spanning tree is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST --
+for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
 
 Note that an MST is different from a Shortest Path Tree (as produced by Dijkstra's algorithm).
-If our graph is a set of islands and the edges represent possible bridges between them, weighted by length of the bridge, then Dijkstra's gives lets us optimise bridges to have as short total distance from a designated starting node.
+If our graph is a set of islands and the edges represent possible bridges between them, weighted by length of the bridge,
+then Dijkstra's gives lets us optimise bridges to have as short total distance from a designated starting node.
 The MST instead shows the shortest possible total length of bridges required to connect all islands.
 Both these are useful for different applications, and it is important to understand the difference.
 
-In this book you will learn two algorithms for finding the MST of a graph: Prim's algorithm is another example of a graph traversal, whereas Kruskal's algorithm is a different kind of algorithm.
+In this book you will learn two algorithms for finding the MST of a graph:
+Prim's algorithm is another example of a graph traversal, whereas Kruskal's algorithm is a different kind of algorithm.
 
 <!-- END NOTES -->
 <!--

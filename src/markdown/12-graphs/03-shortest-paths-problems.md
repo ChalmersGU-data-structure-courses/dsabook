@@ -8,8 +8,6 @@
 - Prio 2: use cases
 :::
 
-<!-- START NOTES -->
-
 Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph, but if we want to do something like finding the
 fastest car route through a city we need to generalise to finding shortest paths in *weighted* graphs.
 Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
@@ -23,13 +21,16 @@ Just as for BFS there may be several shortest paths -- that is, different paths 
 
 ![On the left is an undirected weighted graph, and on the right two different SPTs for $A$ and $F$ respecitvely, shown both in the graph and in standard tree notation.](images/Graphs-SPTs.svg){width=90% #fig:GraphSPTs}
 
-As we saw with DFS for unweighted graphs, the algorithm does not only find a path from one vertex to another, but from one vertex to all others.
-This is called the *single-source* shortest path problem. The solution is the *shortest path tree* (SPT). Figure @fig:GraphSPTs shows two shortest path trees in an example graph.
+As we saw earlier, the generic graph traversal algorithm does not only find a path from one vertex to another, but from one vertex to all others.
+This is called the *single-source* shortest path problem.
+The solution is the *shortest path tree* (SPT).
 
-The trees show us things like `[A,D,E]` being the shortest path from $A$ to $E$ with a cost of $5$, and `[F,E,D]` being the shortest from $F$ to $D$. Neither of the trees help us figure out the shortest paths from $B$ to $E$, to do that we would need to construct an SPT for $B$.
+@Fig:GraphSPTs shows two shortest path trees in an example graph.
+They show for example that $A\rightarrow D\rightarrow E$ is a shortest path from $A$ to $E$ with a cost of $5$,
+and that $F\rightarrow E\rightarrow D$ is another from $F$ to $D$.
+Neither of the trees help us figure out the shortest path from $B$ to $E$,
+to do that we would need to construct an SPT for $B$.
 
-
-<!-- END NOTES -->
 <!--
 ---------------
 

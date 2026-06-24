@@ -6,26 +6,43 @@
 :::
 
 
-Dijkstra's algorithm is perhaps the most well-known graph algorithm of all. It solves the single source shortest path problem for weighted graphs with non-negative weights. That is:
+Dijkstra's algorithm is perhaps the most well-known graph algorithm of all --
+it solves the single source shortest path problem for weighted graphs.
+Note that the algorithm only work for graphs with *non-negative* weights.
+For most applications this is not a problem, for instance if the weights signify time or distance,
+there will not be any negative weights (unless we have a time machine).
 
-- The graphs can be directed or undirected.
-- Every edge has a number called its weight. The cost of a path is the sum of the weights of the edges.
-- The algorithm does not work in the presence of negative weights. For many applications this is not a problem, for instance if the weights signify time or distance, there would not be negative values.
-- The algorithm constructs a shortest path tree, finding the shortest (lowest cost) path from a starting vertex to all other vertices.
-
-The algorithm follows the same pattern as BFS and DFS: Keep an agenda of edges from visited to unvisited vertices.
-For BFS, the agenda is a stack.
-For DFS, the agenda is a queue.
+The algorithm is an instance of the same generic traversal algorithm as in the previous section,
+where we keep an agenda of edges from visited to unvisited vertices.
+For DFS, the agenda is a stack.
+For BFS, the agenda is a queue.
 For Dijkstra's algorithm, we use a min-priority queue, prioritised by the cost of the path formed from the starting vertex.
 
 This requires a little extra book-keeping since the agenda does not simply contain edges, it contains edges with priority values.
-Figure @fig:GraphDijkstra1 illustrates this. Note e.g. how in the second step the agenda contains two options for visiting $E$,
-either directly from $A$ at a cost of $6$ or using the path `[A,D,E]` at a cost of $2+3=5$.
+@Fig:GraphDijkstra1 illustrates this.
+Note for example how in the second step the agenda contains two options for visiting $E$:
 
-![Steps of Dijkstra's algorithm, starting in $A$. Visited vertices are annotated with the cost of their shortest path, and edges in the agenda with their cost on the form $c+w$ where $c$ is the cost to the origin vertex and $w$ the cost of the edge. The right part shows the resulting SPT.](images/Graphs-dijkstra1.svg){width=90% #fig:GraphDijkstra1}
+- Either directly from $A$ at a cost of $6$:
+  this means that the agenda contains the edge $A\rightarrow E$ with priority value 6.
+- Or via the path $A\rightarrow D\rightarrow E$ at a cost of $2+3=5$:
+  therefore the agenda contains the edge $D\rightarrow E$ with priority value 5.
 
-To convince ourselves that this works, consider this: In the first step, it always selects the shortest edge $(A,X)$ from the starting vertex $A$ to some other vertex $X$ (in our example, $X=D$). We know there is no shorter path from $A$ to $X$, because any other path would start with a longer edge from $A$. The subsequent steps work similarly: We select the shortest path leading out of the set of visited vertices. Because any other path would start with a longer path from the set of visited vertices, we know that the path we use is a shortest path.
+Note that in the second option, the priority value is different from the edge cost,
+because the priority is the *total* cost of the path from $A$, while the edge cost is just the final step.
 
+![Steps of Dijkstra's algorithm, starting in $A$.
+Visited vertices are annotated with the cost of their shortest path,
+and edges in the agenda with their cost on the form $c+w$ where $c$ is the cost to the origin vertex and $w$ the cost of the edge.
+The right part shows the resulting SPT.
+](images/Graphs-dijkstra1.svg){width=90% #fig:GraphDijkstra1}
+
+To convince ourselves that Dijktra's algorithm works, consider this:
+In the first step, it always selects the shortest edge $(s,x)$ from the starting vertex $s$ to some other vertex $x$ (in our example, $x=D$).
+We know there is no shorter path from $s$ to $x$, because any other path would start with a longer edge from $s$.
+The subsequent steps work similarly: We select the shortest path leading out of the set of visited vertices.
+Because any other path would start with a longer path from the set of visited vertices, we know that the path we use is a shortest path.
+
+<!--
 A simple implementaion of Dijkstra's would look like this:
 
     dijkstra(start: Vertex):
@@ -39,76 +56,92 @@ A simple implementaion of Dijkstra's would look like this:
             // cost is the cost of the shortest path to the vertex
             for (weight,from1, to1):Edge in outgoingEdges(to):
                 agenda.add( (cost+weight, from1, to1) )
+ -->
 
 As with DFS and BFS before, we can also analyze the agenda at each step of the algorithm.
 Again, we assume that we only add edges that lead to unvisited vertices, and we only show the steps that pass the visitation check:
 
- (cost, from, to)  visited        agenda at end of iteration
- ----------------  -------------  -------------------------------
- (0,null,A)        [A]            [(2,A,D) (4,A,B) (6,A,E)]
- (2,A,D)           [A,D]          [(4,A,B) (5,D,E) (6,A,E)]
- (4,A,B)           [A,D,B]        [(5,D,E) (6,A,E) (7,B,F) (8,B,C)]
- (5,D,E)           [A,D,B,E]      [(6,A,E) (7,B,F) (8,B,C) (8,E,F)]
- (7,B,F)           [A,D,B,E,F]    [(8,B,C) (8,E,F) (10,F,C)]
- (8,B,C)           [A,D,B,E,F,C]  [(8,E,F) (10,E,F)]
+edge                     visited              agenda at end of iteration
+-----------------------  -------------------  -----------------------------------------------------------------------------------------------------
+$(0, ?\rightarrow A)$    $\{A\}$              $[(2, A\rightarrow D), (4, A\rightarrow B), (6, A\rightarrow E)]$
+$(2, A\rightarrow D)$    $\{A,D\}$            $[(4, A\rightarrow B), (5, D\rightarrow E), (6, A\rightarrow E)]$
+$(4, A\rightarrow B)$    $\{A,D,B\}$          $[(5, D\rightarrow E), (6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C)]$
+$(5, D\rightarrow E)$    $\{A,D,B,E\}$        $[(6, A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C), (8, E\rightarrow F)]$
+$(7, B\rightarrow F)$    $\{A,D,B,E,F\}$      $[(8, B\rightarrow C), (8, E\rightarrow F), (10, F\rightarrow C)]$
+$(8, B\rightarrow C)$    $\{A,D,B,E,F,C\}$    $[(8, E\rightarrow F), (10, F\rightarrow C)]$
 
+
+### Extracting the shortest-path tree
+
+Our generic graph traversal algorithm adds the traversed edges to a result set,
+and these edges together constitute a *tree*.
+For Dijkstra's algorithm this is the shortest-path tree from the starting vertex.
+
+However, a set of edges is not a very good data structure if we want to extract shortest paths from it.
+Is there a better way to store this SPT?
+A standard tree implementation where nodes point to their children does not support an efficient operation for adding a new edge,
+and it will not help us find the path to a specific node after we have finished the algorithm.
+Instead we want a tree where nodes point to their parent, a *parent-pointer tree*.
+We introduced them in @sec:trees:disjoint-sets, and they also fit very well for representing the SPT.
+A parent-pointer tree makes it easy to extend the tree with a new leaf by just attaching a new node to an existing node.
+Here is a simple datatype that works just fine:
+
+    datatype ParentTreeNode:
+        vertex: Vertex
+        parent: ParentTreeNode
+
+But wait, this is just a linked list, and lists are not trees, right?
+In fact this is not an error, but if you look at a tree from the leaves,
+then each path from a leaf to the root is essentially a linked list.
+It becomes a tree because several nodes will share the same parent,
+but there is no way to know this because you cannot see which nodes as shared or not.
+
+So the downside with this representation is that we cannot work with the tree as a whole,
+but we can only view it as a collection of back-pointing paths to the starting vertex.
+Fortunately, we are usually only interested in extracting the path to a specific vertex,
+and for this purpose a parent-pointer tree works perfectly.
 
 
 ### Optimising Dijkstra's algorithm
 
 There are several optimisations to Dijkstra's, involving keeping the agenda smaller.
 Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1.
-We have already found a path of cost $8$ to $C$ (`[A,B,C]`), yet we add an inferior
-path to the agenda (`[A,B,F,C]` at cost $10$). When we eventually process that path,
-it will be discarded by the visitation check.
-We could avoid this by adding a map from vertices to costs, that efficiently give us the
-best cost found so far for a vertex, and only add paths that improve the cost.
+We have already found a path of cost $8$ to $C$ ($A\rightarrow B\rightarrow C$),
+yet we add an inferior path to the agenda ($A\rightarrow B\rightarrow F\rightarrow C$ at cost $10$).
+When we eventually process that path, it will be discarded by the visitation check.
+We could avoid this by replacing the visitation set by a map from vertices to costs,
+that efficiently gives us the best cost found so far for a vertex, and only add paths that improve the cost.
+
+Here is an implementation in pseudocode of this optimisation, which also builds a parent-pointer tree.
+Note that we use a helper function that returns a default value of $\infty$ for the visitation map.
+
+    dijkstra(start):
+        visited = new map from vertices to costs
+        result = new map from Vertex to ParentTreeNode
+        agenda = new min-priority queue ordered by total path cost
+        agenda.add(0, (null,start))
+        while agenda is not empty:
+            cost, (a,b) = agenda.removeMin()  // 'cost' is the total cost from 'start' to b
+            if cost < getdefault(visited, b):
+                // Update the best cost for b, and point it to its parent in the SPT:
+                visited.put(b, cost)
+                result.put(b, new ParentTreeNode(b, result.get(a)))
+                for (weight,b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
+                    if cost + weight < getdefault(visited, c):
+                        agenda.add(cost + weight, (b0,c))
+        return result
+
+    // If the vertex is not visited, we return the largest possible number (let's call it "infinity"):
+    getdefault(visited, a):
+        if a in visited: return visited.get(a), else return infinity
+
 
 Going one step further, we can observe that there should never be two edges to the same vertex in the agenda.
-When we find a better option for reaching a vertex, we should replace the old entry in the agenda with the improved one.
-This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex
-(so we can eliminate the visitation check after `removeMin`).
-
-    dijkstra(start: Vertex):
-        visited = new empty set of vertices
-        agenda = new updateable priority queue with to-vertices as keys
-        agenda.setPriority(A, (0, null,A) )
-        while agenda is not empty:
-            (cost, from, to) = agenda.removeMin()
-            visited.add(to)
-            for (weight,from1, to1):Edge in outgoingEdges(to):
-                if visited.contains(to1):
-                    continue
-                if cost+weight < agenda.getPriority(to1)
-                    agenda.setPriority(to1, (cost+weight, from1, to1) )
-
-### Extracting the SPT
-
-In all the traversal algorithms seen so far, we do not show how to extract the resulting tree.
-A standard tree implementation where nodes point to their children does not support an efficient enough add operation,
-and it will not help us find the path to specific nodes.
-Instead we want a tree where nodes point to their parent, with the root pointing to `null`.
-This makes it easy to extend the tree with a new leaf by just attaching a new node to an existing node.
-It also means every node in the tree is essentially a linked list leading back to the root node.
-Here is an implementation of Dijkstra's algorithm that returns a map from vertices to their shortest path.
-
-
-    datatype ParentTreeNode:
-        vertex: Vertex
-        parent: ParentTreeNode
-
-    dijkstra(start: Vertex):
-        visited = new empty set of vertices
-        agenda = [(0, null, start)]
-        result = new map from Vertex to ParentTreeNode
-        while agenda is not empty:
-            (cost, from, to) = agenda.removeMin()
-            if visited.contains(to):
-                continue   // Skip to the next item on the agenda
-            result.put(to, new ParentTreeNode(to, result.get(from))
-            for (weight,from1, to1):Edge in outgoingEdges(to):
-                agenda.add( (cost+weight, from1, to1) )
-        return result
+When we find a better option for reaching a vertex, we should *replace* the old entry in the agenda with the improved one.
+This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex.
+To to do this we need to have a priority queue where we can update the priorities of existing elements.
+We briefly discussed *updateable priority queues* in @sec:heaps:change-priority,
+and leave as an exercise for the reader to implement Dijkstra's algorithm using this idea.
 
 <!-- START NOTES -->
 
