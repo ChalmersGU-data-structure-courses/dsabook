@@ -6,149 +6,115 @@
 - Prio 2: Shorten the text
 :::
 
-<!-- OPENDSA: START -->
-Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
-These are three distinct concepts.
-<!-- OPENDSA: END -->
+Problems, algorithms, and computer programs are distinct but related concepts
+in software development.
+An algorithm solve a problem, and programs implements an algorithm.
 
-### Problems
+#### Problems
 
-<!-- OPENDSA: START -->
-As your intuition would suggest, a [problem]{.term} is a task to be performed. It is best thought of in terms
-of inputs and matching outputs. A problem definition should not include
-any constraints on *how* the problem is to be solved. The solution
-method should be developed only after the problem is precisely defined
-and thoroughly understood. However, a problem definition should include
-constraints on the resources that may be consumed by any acceptable
-solution. For any problem to be solved by a computer, there are always
-such constraints, whether stated or implied. For example, any computer
-program may use only the main memory and disk space available, and it
-must run in a "reasonable" amount of time.
-<!-- OPENDSA: END -->
+We can study problems separately from any specific algorithms that solve them.
+We can look at the problem of sorting an array and know that for the input
+[3,1,2], the output of any algorithm solving the problem should be [1,2,3].
+Descriptions of problems often include:
 
-You have already encountered two fundamental computational problems:
+* Preconditions on the input, such as an array being sorted or containing only
+  positive integers.
+* Postconditions on the output, like the result of sorting being a sorted permutation
+  of the input.
+* Additional capabilities, such as the elements of an array being comparable,
+  or
+* Performance requirements, like taking at most linear time or using constant memory.
 
-Searching in an array
-:   The input is an array and an element, and the output can for example be an array index.
-    (@Sec:intro:searching)
+A major branch of research on algorithms involves classifying problems into
+different categories, such as "problems that cannot be solved in linear time"
+or "problems where a solution can be verified in linear time".
 
-Sorting an array
-:   The input is an array, and the output is an array containing exactly the same elements but in increasing order.
-    ([Chapter @sec:sorting-1])
+We have already encountered two fundamental computational problems: Searching in an array (@Sec:intro:searching)
+and Sorting an array ([Chapter @sec:sorting-1]).
 
-Note that the input to a problem often includes things that we normally don't view as input.
-For example, for the problem of finding the fastest route between two cities (see @sec:graphs:shortest-path),
-it is obvious that we need to know the two cities and the road network.
-But if we want to calculate the travel time accurately, we also need information about what vehicle we will use,
-and perhaps even the weather conditions.
-So these should also be inputs to the problem.
+More precisely we have seen two separate but closely related array searching problems:
+The problem of searching an arbitrary array (solved by the linear search algorithm)
+and searching in an ordered array (solved by the binary search algorithm).
+The two problems differ in two ways:
 
-### Algorithms
+1. The problem solved by binary search has a stricter precondition on the input,
+   the array needs to be sorted.
+2. The problem solved by binary search requires values to be three-way-comparable,
+   that is we need to be able to determine for any pair $x$ and $y$ if $x<y$, $x=y$, or $x>y$
+   (mathematically we would call this a total pre-order).
+   Linear search only requires that values can be compared for equality.
+
+The sorting problem can also subdivided into several problems,
+the in-place version requires the output array and the input array to
+be one and the same (with values rearranged). It also has a limit on
+memory usage as part of the problem formulation, and an algorithm is
+only considered a solution if it meets the requirement.
+
+There are many other versions of sorting problems, for instance the problem
+of sorting integers is subtly different than the problem of sorting strings
+because we can do arithmetic on integers, which can allow faster algorithms.
+The problem where the only assumption is that values can be three-way-compared is called
+comparison sort.
+
+#### Algorithms
 
 An [algorithm]{.term} is a method or a process followed to solve a problem.
 There are usually many different algorithms that solves a given problem.
-For example, for the important problem of sorting there are over a dozen commonly used algorithms!
+For example, for the important problem of comparison sorting there are over
+a dozen commonly used algorithms!
 (Some of them are discussed in [Chapters @sec:sorting-1;@sec:sorting-2].)
 
 An algorithm can be viewed as an implementation of a [function]{.term} in the mathematical sense.
 But note that there are usually several ways of implementing the same functions
 -- and each of those give rise to a different algorithm.
 
-<!-- OPENDSA: START -->
-The advantage of knowing several solutions to a problem is that
-solution **A** might be more efficient than solution **B**
-for a specific variation of the problem,
-or for a specific class of inputs to the problem,
-while solution **B** might be more efficient than **A** for another variation or class of inputs.
-For example, one sorting algorithm might be the best for sorting a small collection of integers,
-a second might be the best for sorting a large collection of general objects, and
-a third might be the best for sorting a collection of variable-length strings.
+Since the concept of an algorithm does not have a precise technical definition,
+there is some leeway for the level of details required when specifying them.
+There is no clear line when something crosses from being a vague idea to an actual
+algorithm, but there are some things we expect of an algorithm:
 
-Something can only be called an algorithm if it has all of the following properties:
-<!-- OPENDSA: END -->
+1.  It must *correct*, solving the problem by producing the correct output for every valid inputs,
+    using only the resources allowed by the problem.
+    There is no leeway for this one!
 
-1.  <!-- OPENDSA: START -->
-    It must be *correct*.
-    In other words, it must implement the desired function, converting each input a correct output.
-    Note that every algorithm implements some function, because every algorithm maps every input to some output
-    (even if that output is a program crash).
-    At issue here is whether a given algorithm implements the *intended* function.
-    <!-- OPENDSA: END -->
+2.  It should be *unambiguous*. Small parts of the algorithm description can rely on the reader
+    picking up the meaning from context, but generally it is bad if two readers end up with
+    different understanding of how the algorithm works due to ambiguous language.
 
-2.  <!-- OPENDSA: START -->
-    It is composed of a series of *concrete steps*.
-    Concrete means that the action described by that step is completely understood
-    -- and doable -- by the person or machine that performs the algorithm.
-    Each step must also be doable in a finite amount of time.
-    Thus, the algorithm gives us a "recipe" for solving the problem by performing a series of steps,
-    where each such step is within our capacity to perform.
-    The ability to perform a step can depend on who or what is intended to execute the recipe.
-    For example, the steps of a cookie recipe in a cookbook might be considered sufficiently concrete for instructing a human cook,
-    but not for programming an automated cookie-making factory.
-    <!-- OPENDSA: END -->
+3.  It must consist of *mechanical steps*. Each individual step of the algorithm should be simple
+    enough to be performed by a machine incapable of thought. Ideally, a person who knows nothing
+    about the specific problem being solved should still be able to perform the steps of the algorithm
+    and get a correct result.
 
-3.  There must be *no ambiguity* about which step is performed next.
-    Typically, the next step follows directly from the algorithm's description.
-    This doesn't exclude selection mechanisms, such as **if** statements,
-    as long as the selection is unambiguous at the moment the decision is made.
-    Note that a random choice (such as acting on a coin flip) is unambiguous in this sense,
-    because when we have tossed the coin we know what decision we will make.
+In addition to these, there are pedagogical expectations on algorithm descriptions that are even more
+difficult to quantify. For instance, using well established technical terms correctly is important.
+Constantly inventing new technical terms makes algorithm descriptions difficult for another expert to read,
+even if those terms are explained thoroughly. Ultimately, an algorithm description is best if a
+competent programmer can easily use it to implement it as a computer program.
 
-4.  <!-- OPENDSA: START -->
-    It must be composed of a *finite* number of steps.
-    If the description for the algorithm were made up of an infinite number of steps,
-    we could never hope to write it down, nor implement it as a computer program.
-    <!-- OPENDSA: END -->
-    To be able to specify complex algorithms in finite space,
-    our algorithm description language (including English, Swedish and "pseudocode")
-    must have some way of performing repeated actions in the form of loops or recursion.
-
-5.  It must *terminate* for the intended input.
-    In other words, it may not go into an infinite loop.
-
-### Programs
+#### Programs
 
 A computer [program]{.term} is an implementation of an algorithm in some programming language.
-<!-- Algorithms are often presented in terms of programs, but this can be misleading
--- it can be difficult to see what is actually part of the algorithm and what is some specific peculiarity of that implementation.
- -->
-Note that there are infinitely many programs that implement the same algorithm.
-For example, if you rename a variable you get a new program, but that doesn't change the algorithm.
+Unlike abstract descriptions of algorithms, computer programs are unambiguous and mechanical by default.
+The downside is that high level of technical detail tends to obscure the important parts of the algorithm.
+For a simple algorithm like linear search, executable code in any well known programming language is fine
+as an explanation, but for more complicated algorithms the difference between an algorithm description
+and an implementation can be hundreds of lines of code.
+Pseudocode, as frequently used by this book, offers a nice compromise between the
+precision of a programming language and the flexibility of natural language (English).
+
+There are infinitely many programs that implement the same algorithm.
+Renaming a variable gives you a new program, but that doesn't change the algorithm.
 Sometimes you can change the order between two unrelated statements,
 or even change the order in which a loop iterates over an array,
 without changing the underlying algorithm.
 
-<!-- By definition, an algorithm must provide sufficient detail that it can be converted into a program when needed. -->
-
-The distinction between the terms "algorithm" and "program" is not always clear.
-For example, Selection sort is an algorithm which we described very abstractly using plain English in @sec:sorting-1:overview,
-but we also showed pseudocode in @sec:sorting-1:selection-sort.
-Which one of these is the best description of the actual *algorithm*, and not a specific program?
-The abstract English description is closer to the "ideal" Selection sort algorithm,
-but it is also more prone to misunderstandings and unintended ambiguities.
-The pseudocode version is somewhere in between the algorithm and an actual implementation
--- many of our algorithms will be presented in pseudocode like this,
-hoping that it will bridge the gap between the abstract algorithm and concrete implementations.
-
-<!-- OPENDSA: START -->
-The requirement that an algorithm must terminate means that not all computer programs implement an algorithm.
-Your operating system is one such program, as are most programs that interact with a user.
-However, you can think of the various tasks for an operating system
-(each with associated inputs and outputs) as individual problems,
-each one solved by a specific algorithm that terminates once its output is produced.
-<!-- OPENDSA: END -->
-
-In this book we try to describe algorithms and not programs,
-keeping them as abstract as possible, in pseudocode or plain English.
-We assume that you, the reader, is competent enough to be able to translate our descriptions and pseudocode into working programs in your favourite language.
-
-<!-- OPENDSA: START -->
-To summarise:
-A [problem]{.term} is a task to be performed, that maps inputs to matching outputs.
-An [algorithm]{.term} is a recipe for solving a problem whose steps are concrete and unambiguous.
-Algorithms must be correct, of finite length, and must terminate for all inputs.
-A [program]{.term} is an instantiation of an algorithm in a programming language.
-<!-- OPENDSA: END -->
+Not every computer program implements an algorithm.
+One requirement on an algorithm is that it terminates for an input.
+Most applications do not, for instance a web browser does not process an
+input and then terminate, it only terminates when the user closes it.
+The code of a web browser will however contain several functions that implement
+different algorithms.
 
 ::: TODO
 - Prio 3: this visualisation is really ugly
