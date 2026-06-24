@@ -7,7 +7,7 @@ For open addressing, things are more complicated.
 
 Recall that the invariant of a linear probing hash table
 is that there are no null values between
-the ideal position of a key ($h(\mathit{key})\mod N$)) and its
+the ideal position of a key ($h(\mathit{key})\bmod N$)) and its
 actual position. Introducing a null value in the middle of a
 cluster might cause lookups to fail for the keys in the
 remainder of the cluster.
@@ -16,7 +16,7 @@ Look at the table in @fig:LinProbe1. Depending on what
 the hash value of $E$ is, replacing $D$ with a blank cell might
 cause a lookup of $E$ to fail, since lookups terminate when
 reaching an empty cell. Moving $E$ to cell 4 would solve the problem
-if $h(E)\mod 13 = 4$, but break the hash table if $h(E)\mod 13 = 5$.
+if $h(E)\bmod 13 = 4$, but break the hash table if $h(E)\bmod 13 = 5$.
 We will look at two ways of handling deletion in open addressing:
 
 * Re-hashing the rest of the cluster. If we are removing $A$ in

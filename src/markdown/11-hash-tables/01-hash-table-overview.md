@@ -47,7 +47,7 @@ If our keys are arbitrary integers, a simple array would use too much memory.
 Instead we will use a small array, and *compress* numbers to valid indices.
 For instance if our array is size 100, and we want to perform `put(19934,"A")`
 (mapping the key 19934 to the string "A") we can use the last two digits of the number (34).
-More generally, we can use $k\mod N$ as our compressed index,
+More generally, we can use $k\bmod N$ as our compressed index,
 where $k$ is our key and $N$ is the size of the array.
 This is called *modular compression* (from modulo arithmetic). Depending on
 the programming language, you may need to do additional computation to ensure
@@ -80,7 +80,7 @@ object keys.
 ### Maps where keys are objects
 
 Suppose we want to create a map where keys are email addresses and values are names,
-using a hash table. We can not calculate $\text{``alice@example.com''}\mod N$
+using a hash table. We can not calculate $\text{``alice@example.com''}\bmod N$
 because an email is a string, not a number.
 We need to first reduce the string to an integer.
 This is exactly what a *hash function* does:
@@ -122,7 +122,7 @@ outline an algorithm for performing a hash table *lookup* given a key value.
 To lookup a key $k$ in a hash table of size $N$:
 
 1. Turn the key into a large integer using a *hash function*: $h(k)$.
-2. Use *modular compression* to turn the large integer into an array index: $h(k)\mod N$.
+2. Use *modular compression* to turn the large integer into an array index: $h(k)\bmod N$.
 3. Resolve collisons using *separate chaining* or *open addressing*.
 :::
 
