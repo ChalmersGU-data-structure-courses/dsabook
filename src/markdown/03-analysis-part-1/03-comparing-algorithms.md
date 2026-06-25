@@ -224,7 +224,7 @@ This is proportional to $n^2$, and we call this a *quadratic* running time.
 Note how much detail is simplified away by using complexity classes.
 We do not differentiate between $n^2$ and $1/2 \cdot n^2$.
 There is no "triangular" complexity class.
-One could half-jokingly say that asymptotically, a triangle is a square.
+One could say that asymptotically, a triangle is a square.
 This may seem like a weakness of $O$-notation, but it is a fact the
 strength that makes it such a useful tool for comparing algorithms.
 To convince yourself of this, consider this: runtime is only interesting
