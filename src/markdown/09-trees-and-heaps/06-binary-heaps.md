@@ -307,7 +307,7 @@ To insert the value $v$ into a heap:
 Note that the heap is shown as a tree, but you should keep in mind that it is actually stored as an array.
 
 ::: {#fig:HeapAdd10}
-:::: dsvis
+:::: online
 ``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js" name="Heap insert Slideshow"}
 ```
 ::::
@@ -403,7 +403,7 @@ To remove the highest-priority element, that is, the root of the heap:
 from the final heap in @fig:HeapAdd10.
 
 ::: {#fig:HeapRemove10}
-:::: dsvis
+:::: online
 ``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js" name="Remove Max Slideshow"}
 ```
 ::::
