@@ -175,7 +175,7 @@ Implementing a queue is a little more tricky.
 It is still easy to remove elements -- we can simply reuse the pop operation.
 But now we do not want to add elements to the front, but instead at the very end.
 The only way to do that in a linked stack is to traverse all nodes until we find the end,
-and this is of course very slow if we have 1000s of elements.
+and this is of course very slow if we have very many elements.
 
 The solution is to add an extra pointer to the "controller", which points to the back of the list.
 When it comes to queues we also use a different terminology than for stacks
@@ -231,6 +231,7 @@ otherwise it will point to a non-existing element.
         queue.size -= 1
         return removed.value
 
+<!-- TODO AG: this only works for a non-empty queue, either mention or update code -->
 
 ::: dsvis
 Here we show how to dequeue an element from a linked queue.
@@ -250,7 +251,7 @@ But how about enqueueing?
 Now we want to add the new node to the rear instead of in the front.
 The important thing to remember is that the "old" rear has to be updated too.
 So we first have to point the current rear to the new node,
-and then we can rassign the rear to the new node.
+and then we can reassign the rear to the new node.
 
     enqueue(queue, value):
         newRear = new Node(value, null)
