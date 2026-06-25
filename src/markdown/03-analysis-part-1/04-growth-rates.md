@@ -18,7 +18,7 @@ and notice it takes one hours to sort the books in one shelf.
 
 The sorting algorithms from [Chapter @sec:sorting-1]
 all have a running time proportional to $n^2$ where $n$ is the number of books.
-Using our new $O$-noation, the algorithms are $O(n^2)$ time.
+Using our new $O$-notation, the algorithms are $O(n^2)$ time.
 This means that if you double the size of the input, the running time will quadruple.
 And if you multiply the input size by 100, the running time will be $100^2 = 10,000$ times longer.
 So, it will take 10,000 hours for you to sort all your books.
