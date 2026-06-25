@@ -1,6 +1,6 @@
 :::::: online
 
-## Implementing general trees {#trees:general-trees}
+## Implementing general trees {#trees:implementing-general-trees}
 
 ::: TODO
 - Prio 2: rewrite text, include:
