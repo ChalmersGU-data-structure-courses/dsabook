@@ -41,8 +41,6 @@ The Mergesort pseudocode in @sec:sorting-2:mergesort can be used with linked lis
         enqueue all remaining elements of half1 and half2 to answer
         return answer
 
-::::::
-
 
 ### Implementing recursion
 
@@ -200,3 +198,4 @@ operations executed by the recursive version. However, these operations
 must be placed on the stack in reverse order, so that they will be
 popped off in the correct order.
 
+::::::
