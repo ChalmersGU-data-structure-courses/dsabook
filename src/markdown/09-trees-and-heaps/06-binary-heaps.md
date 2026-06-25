@@ -10,11 +10,10 @@
 The [binary heap]{.term} is a data structure that can be used to implement an efficient priority queue.
 It is organised as a tree that satisfies the heap property and has an additional invariant: it must also be a [complete binary tree]{.term}.
 
-Recall that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
+Recall from @sec:trees:full-perfect-complete that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
 As a result, a complete binary tree with $n$ nodes has exactly one possible shape.
-Because of this structure, the height $h$ of the tree satisfies: $2^h \le n \le 2^{h+1} - 1$, which implies that the height is $O(\log n)$.
-Complete binary trees are therefore balanced, and any operation that takes time proportional to the height of the tree runs in $O(\log n)$ time.
-
+Because of this structure, the height $h$ of the tree satisfies: $2^h \le n < 2^{h+1}$, which implies that $h\in O(\log n)$.
+Complete binary trees are therefore balanced, and any operation that linear in the height of the tree runs in $O(\log n)$ time.
 Using a complete tree has several advantages:
 
 * It ensures that the tree remains balanced after adding an element to the tree.
@@ -23,7 +22,8 @@ Using a complete tree has several advantages:
 
 ### Representing complete binary trees as arrays
 
-Since a complete binary tree has exactly one possible shape for a given number of nodes, we can take advantage of this structure and store it -- perhaps surprisingly -- directly in an array.
+Since a complete binary tree has exactly one possible shape for a given number of nodes,
+we can take advantage of this structure and store it directly in an array.
 Unlike other binary tree representations, we do not need explicit pointers to parent or child nodes.
 This leads to a simple and compact implementation of [complete binary trees]{.term}.
 Instead of pointers, the positions of a node's parent and children can be determined using simple index calculations.
@@ -76,7 +76,7 @@ Complete binary tree node numbering.
 An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
 If the tree is traversed in *breadth-fist order* (see @sec:trees:traversal), the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
 In other words, the nodes of the tree are stored in the array level by level, with each level appearing consecutively.
-As an example, the binary heap shown in @fig:HeapTreeExample can be stored in an array as shown in @fig:HeapArrayExample.
+An example binary heap is shown in @fig:HeapTreeExample, together with its array representation.
 
 ::: {#fig:HeapTreeExample}
 :::: online
@@ -99,28 +99,6 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
-::::
-
-:::: latex
-```
-                        ________ 8 ________
-                       /                   \
-                    17                       12
-                 /      \                 /      \
-              33         [28]          43          15
-             /  \        /  \         /
-           34    87    75    34     47
-```
-::::
-
-An example binary heap, where a smaller value indicates a higher priority.
-The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "34".
-:::
-
-
-
-::: {#fig:HeapArrayExample}
-:::: online
 ```jsav-figure
 var av = NewAV();
 AddCSS(`.jsavpointerarea {border: none; background-color: transparent}`);
@@ -139,43 +117,31 @@ av.recorded();
 
 :::: latex
 ```
-            parent           NODE               leftchild  rightchild
-               ↓              ↓                        ↓    ↓
-        [  8 | 17 | 12 | 33 | 28 | 43 | 15 | 34 | 87 | 75 | 34 | 47 ]
+                        ________ 8 ________
+                       /                   \
+                    17                       12
+                 /      \                 /      \
+              33         [28]          43          15
+             /  \        /  \         /
+           34    87    75    34     47
+
+     parent           NODE                    left  right
+        ↓              ↓                        ↓    ↓
+ [  8 | 17 | 12 | 33 | 28 | 43 | 15 | 34 | 87 | 75 | 34 | 47 ]
 ```
 ::::
 
-Array representation of the example heap in @fig:HeapTreeExample.
-The highlighted node "28" is highlighted here too, and the parent, and left and right children are indicated.
+An example binary heap together with its array representation.
+Smaller values indicate higher priority.
+The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "34".
 :::
-
-<!-- TODO: convert this into a JSAV figure
-::: latex
-\begin{center}
-\scalebox{0.8}{
-\begin{tikzpicture}
-    % Draw array boxes
-    \foreach \i/\val in {0/A, 1/L, 2/G, 3/O, 4/R, 5/I} {
-        \draw (\i*1.5, 0) rectangle ++(1.5, 1);
-        \node at (\i*1.5 + 0.75, 0.5) {\val};
-        \node[below=3pt] at (\i*1.5 + 0.75, 0) {\i};
-    }
-    \draw[->] (1*1.5 + 0.75, 1) to[out=60, in=120] node[below] {left} (3*1.5 + 0.75, 1);
-    \draw[->] (1*1.5 + 0.75, 1) to[out=70, in=110] node[above] {right} (4*1.5 + 0.75, 1);
-    \draw[->] (1*1.5 + 0.75, 1) to[out=120, in=60] node[above] {parent} (0*1.5 + 0.75, 1);
-\end{tikzpicture}
-}
-\end{center}
-::: -->
-
-<!-- ![Array representation of the example heap](images/ArrayHeap.png){width=40% #fig:HeapArrayExample} -->
 
 You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
 
 \begin{align*}
-\text{parent}(i) &= \left\lfloor \frac{i - 1}{2} \right\rfloor  & (\text{if} & i \neq 0)   \\
-\text{left}(i)   &= 2i + 1                                      & (\text{if} & 2i + 1 < n) \\
-\text{right}(i)  &= 2i + 2                                      & (\text{if} & 2i + 2 < n)
+\text{parent}(i) &= \left\lfloor \frac{i - 1}{2} \right\rfloor  & (\text{if~ } & i > 0)   \\
+\text{left}(i)   &= 2i + 1                                      & (\text{if~ } & 2i + 1 < n) \\
+\text{right}(i)  &= 2i + 2                                      & (\text{if~ } & 2i + 2 < n)
 \end{align*}
 
 For example, the left child of node at position 4 (which contains the value 28) is at
@@ -337,134 +303,42 @@ To insert the value $v$ into a heap:
     - If $v$ has higher priority, swap it with the parent.
 :::
 
-Let us illustrate this using the heap from @fig:HeapTreeExample.
-If we insert the value 10, we must first place it at the next free position, so that the tree remains complete.
-For clarity, we show the heap as a tree, but you should keep in mind that it is actually stored as an array.
+@Fig:HeapAdd10 illustrates how the algorithm works for inserting the value 10 into the heap from @fig:HeapTreeExample.
+Note that the heap is shown as a tree, but you should keep in mind that it is actually stored as an array.
 
-::: {#fig:HeapInsert10Step1}
-:::: online
-```jsav-figure
-let av = NewAV();
-let bt = av.ds.binarytree({nodegap: 25});
-let rt = bt.root("8");
-rt.left("17");
-rt.right("12");
-rt.left().left("33");
-rt.left().right("28");
-rt.right().left("43");
-rt.right().right("15");
-rt.left().left().left("34");
-rt.left().left().right("87");
-rt.left().right().left("75");
-rt.left().right().right("47");
-rt.right().left().left("47");
-rt.right().left().right("10").highlight();
-bt.layout();
-av.displayInit();
-av.recorded();
-```
-::::
-
-:::: latex
-```
-                        ________ 8 ________
-                       /                   \
-                    17                       12
-                 /      \                 /      \
-              33          28           43          15
-             /  \        /  \         /  \
-           34    87    75    34     47   [10]
-```
-::::
-
-After inserting 10, we place it at the next free position, shown here as the right child of 43.
-:::
-
-::: {#fig:HeapInsert10Step2}
-:::: online
-```jsav-figure
-let av = NewAV();
-let bt = av.ds.binarytree({nodegap: 25});
-let rt = bt.root("8");
-rt.left("17");
-rt.right("12");
-rt.left().left("33");
-rt.left().right("28");
-rt.right().left("10").highlight();
-rt.right().right("15");
-rt.left().left().left("34");
-rt.left().left().right("87");
-rt.left().right().left("75");
-rt.left().right().right("47");
-rt.right().left().left("47");
-rt.right().left().right("43");
-bt.layout();
-av.displayInit();
-av.recorded();
-```
-::::
-
-:::: latex
-```
-                        ________ 8 ________
-                       /                   \
-                    17                       12
-                 /      \                 /      \
-              33          28          [10]         15
-             /  \        /  \         /  \
-           34    87    75    34     47    43
-```
-::::
-
-Since 10 is smaller than its parent 43, the two elements swap positions.
-:::
-
-::: {#fig:HeapInsert10Step3}
-:::: online
-```jsav-figure
-let av = NewAV();
-let bt = av.ds.binarytree({nodegap: 25});
-let rt = bt.root("8");
-rt.left("17");
-rt.right("10").highlight();
-rt.left().left("33");
-rt.left().right("28");
-rt.right().left("12");
-rt.right().right("15");
-rt.left().left().left("34");
-rt.left().left().right("87");
-rt.left().right().left("75");
-rt.left().right().right("47");
-rt.right().left().left("47");
-rt.right().left().right("43");
-bt.layout();
-av.displayInit();
-av.recorded();
-```
-::::
-
-:::: latex
-```
-                        ________ 8 ________
-                       /                   \
-                    17                      [10]
-                 /      \                 /      \
-              33          28           12          15
-             /  \        /  \         /  \
-           34    87    75    34     47    43
-```
-::::
-
-The value 10 is still smaller than its new parent 12, so we swap once more.
-Now 10 has parent 8, which is smaller, so the insertion is complete.
-:::
-
-::: dsvis
-Here is a visual explanation of insertion into a *max*-heap.
-
+::: {#fig:HeapAdd10}
+:::: dsvis
 ``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js" name="Heap insert Slideshow"}
 ```
+::::
+
+:::: latex
+```
+(a)      _____ 8 _____               (b)      _____ 8 _____
+        /             \                      /             \
+      17               12                  17               12
+    /    \           /    \              /    \           /    \
+  33      28       43      15          33      28      [10]     15
+ /  \    /  \     /  \                /  \    /  \     /  \
+34  87  75  34   47 [10]             34  87  75  34   47  43
+
+                (c)      _____ 8 _____
+                        /             \
+                      17              [10]
+                    /    \           /    \
+                  33      28       12      15
+                 /  \    /  \     /  \
+                34  87  75  34   47  43
+```
+::::
+
+Inserting 10 into the example heap in @fig:HeapTreeExample.
+(a) After inserting 10, we place it at the next free position, shown here as the right child of 43.
+(b) Since 10 is smaller than its parent 43, the two elements swap positions.
+(c) The value 10 is still smaller than its new parent 12, so we swap once more.
+Now 10 has parent 8, which is smaller, so the heap property is restored.
 :::
+
 
 The algorithm above can be translated to pseudocode quite straightforwardly:
 
@@ -474,12 +348,6 @@ The algorithm above can be translated to pseudocode quite straightforwardly:
         while pos > 0 and heap[pos] < heap[parent(pos)]:
             swap(heap, pos, parent(pos))   // Swap the element with its parent.
             pos = parent(pos)              // Move up one level in the tree.
-
-<!--
-One common mistake is to start at the root and work yourself downwards through the heap.
-However, this approach does not work because the heap must maintain the shape of a complete binary tree.
-If we do not want to break the completeness property there is only one place where we can add an element, namely at the end of the dynamic array.
- -->
 
 Since a heap is a complete binary tree, its height is as small as possible for the number of nodes it contains.
 A heap with $n$ nodes therefore has height $O(\log(n))$.
@@ -530,11 +398,51 @@ To remove the highest-priority element, that is, the root of the heap:
     - If the child has higher priority, swap them.
 :::
 
-::: dsvis
-Here is a visual explanation of removing from a *max*-heap.
 
+@Fig:HeapRemove10 illustrates how the algorithm works for removing the highest-priority value
+from the final heap in @fig:HeapAdd10.
+
+::: {#fig:HeapRemove10}
+:::: dsvis
 ``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js" name="Remove Max Slideshow"}
 ```
+::::
+
+:::: latex
+```
+(a)      ___ [43] ___               (b)      ____ 10 ____
+        /            \                      /            \
+      17              10                  17             [43]
+    /    \          /    \              /    \          /    \
+  33      28      12      15          33      28      12      15
+ /  \    /  \    /  \                /  \    /  \    /
+34  87  75  34  47  [X]             34  87  75  34  47
+
+                (c)      ____ 10 ____
+                        /            \
+                      17              12
+                    /    \          /    \
+                  33      28     [43]     15
+                 /  \    /  \    /
+                34  87  75  34  47
+```
+::::
+
+Removing the highest-priority element from the final heap in @fig:HeapAdd10.
+(a) We remove the last heap element, 43, and replace the root with it.
+(b) The smallest child, 10, is smaller than 43, so we swap it with the parent.
+(c) The smallest child, 12, is smaller than 43, so we swap it with the parent.
+Now 43 only has larger children, so the heap property is restored.
+:::
+
+::: note
+One common mistake is to forget to replace the root with the last heap element,
+and instead try to replace the root with its smallest child.
+(And then replace the hole of the smallest child with *its* smallest child, and so on.)
+This approach *does not work* because the heap must maintain the shape of a complete binary tree.
+For example, if we use this idea to remove the minimum element from the final heap in @fig:HeapRemove10,
+we would end up with 12 as the root, and 15 as its right child.
+But 15 would not have any right child, and we no longer have a complete tree.
 :::
 
 The complexity of this algorithm is logarithmic, $O(\log(n))$, of the same reason as adding an element:
@@ -568,7 +476,6 @@ If there are no children it returns null, so that the while loop above can stop.
         else:                                        // The right child has higher priority.
             return right(pos)
 
-<!-- AG: should we add an example again? probably not -->
 
 ::: dsvis
 #### Exercise: Delete from a min-heap

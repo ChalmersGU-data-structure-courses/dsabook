@@ -5,9 +5,9 @@
 - Prio 2: add an example figure (with 2-3 example heaps)
 :::
 
-A _heap_ provides a natural and efficient implementation of the priority queue introduced at the beginning of this chapter.
-Elements (or jobs) can be inserted into the heap using their priority as the ordering key, and the operation `removeMin` can be used whenever the next highest-priority element should be processed.
-Priority queues, and therefore heaps, are widely used in algorithms, particularly in graph problems such as finding the [shortest path]{.term} and computing a [minimum spanning tree]{.term}.
+A _heap_ provides a natural and efficient implementation of the priority queue introduced in @sec:ADTs:priority-queues.
+Elements (also called "tasks" or "jobs") can be inserted into the heap using their priority as the ordering key, and the operation `removeMin` can be used whenever the next highest-priority element should be processed.
+Priority queues, and therefore heaps, are widely used in algorithms, in particular in graph problems such as finding the [shortest path]{.term} and computing a [minimum spanning tree]{.term} (see [Chapter @sec:graphs]).
 
 <!-- Trees are also used for prioritising jobs
 (using binary heaps, see @sec:heaps:binary-heaps), and
@@ -17,13 +17,13 @@ data compression algorithms (using Huffman coding). -->
 To implement priority queues efficiently, we use a data structure called a [heap]{.term}.
 The central idea is to organise the data so that the element with the highest priority is always located at the root of the structure.
 A heap stores elements in a tree structure, but not every tree qualifies as a heap.
-The tree must satisfy a specific invariant known as the heap property.
-In general, a heap is a tree that satisfies the following rule:
+The tree must satisfy a specific invariant known as the heap property:
+<!-- In general, a heap is a tree that satisfies the following rule: -->
 
 ::: example
 #### The heap property
 
-Every node in the tree has at least as high priority as all of its children.
+Every node in a heap has at least as high priority as all of its children.
 :::
 
 This property guarantees that the element with the highest priority is always located at the root of the tree.
