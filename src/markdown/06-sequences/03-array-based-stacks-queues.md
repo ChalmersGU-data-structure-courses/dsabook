@@ -32,7 +32,7 @@ When the stack is created it should be empty, and therefore the initial stack si
 <!-- OPENDSA: START -->
 The important design decision to be made is which end of the array should represent the top of the stack.
 <!-- OPENDSA: END -->
-It might be tempting to let the top be the first element in the array, i.e., the element at position 0.
+It might be tempting to let the top be the first element in the array, that is, the element at position 0.
 However, this is inefficient:
 whenever we want to push to or pop from the stack,
 we would have to shift all elements in the array one position to the left or to the right.

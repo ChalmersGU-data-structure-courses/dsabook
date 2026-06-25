@@ -3,7 +3,7 @@
 
 ::: TODO
 - Prio 2: shorten text on Average case
-- Prio 3: examples (e.g., Quicksort, Insertion sort)
+- Prio 3: examples (for example, Quicksort, Insertion sort)
 :::
 
 We can talk about the *best-case*, or the *worst-case*, or even the *average-case* complexity of an algorithm. But in practice we almost always only use the worst-case complexity: the best case is pretty useless (we should always prepare for the worst), and the average case is difficult to reason about.
@@ -50,7 +50,7 @@ that every possible array is equally probable, or in other words, that the possi
 More about that below.
 
 ::: dsvis
-Here is an example where we reason about the Sequential search algorithm from @sec:intro:sequential-search.
+Here is an example where we reason about the *linear search* algorithm from @sec:intro:searching.
 
 ``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```

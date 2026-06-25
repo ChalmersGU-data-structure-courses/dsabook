@@ -3,18 +3,21 @@
 
 There are two main ways of implementing graphs:
 
-- *Adjacency list*: a map from vertices to its outgoing edges -- this can be a BST, a hash table, or some other map data structure. If the vertices are exactly the numbers $0, 1, \ldots, n-1$, the map can be a simple array (where the value of a vertex is the index in the array).
+Adjacency list
+:	A map from vertices to a list of its outgoing edges -- this can be a BST, a hash table, or some other map data structure.
+	If the vertices are exactly the numbers $0, 1, \ldots, n-1$, the map can be a simple array (where the value of a vertex is the index in the array).
 
-- *Adjacency matrix*: a 2-dimensional matrix where the rows and columns denote vertices (assuming that the vertices are the numbers $0, 1, \ldots, n-1$). A specific cell then denotes the edge from its column vertex to its row vertex -- we can for example store the *weight* of the edge in the cell.
+Adjacency matrix
+: 	A 2-dimensional matrix where the rows and columns denote vertices (assuming that the vertices are the numbers $0, 1, \ldots, n-1$).
+	A specific cell then denotes the edge from its column vertex to its row vertex -- we can for example store the *weight* of the edge in the cell.
 
 ![A small directed graph, and its representation as an adjacency map and adjacency matrix.](images/Graphs-representations.svg){width=90% #fig:GraphRepresentations1}
 
-Figure @fig:GraphRepresentations1 illustrates the two representations.
-The adjecency map representation is simple and very useful.
+@Fig:GraphRepresentations1 illustrates the two representations.
+The adjecency list representation is simple and very useful.
 The `outgoingEdges` function we have been using in our graph algorithms corresponds to a lookup
 in the map, which can make the operation very efficient.
-
-A few things to note about adjacency matrix representation:
+There are some things we can note about the adjacency matrix representation:
 
 - For an *undirected* graph, the matrix would be mirrored across the diagonal.
 - For a sparse matrix, you end up with lots of empty cells.
@@ -22,15 +25,15 @@ A few things to note about adjacency matrix representation:
   (you need to iterate through a column of the matrix and find all non-empty cells).
 - If the graph was not weighted, its unclear what would be in the matrix, presumably just a boolean value.
 
-Adjacency matrices are very handy for weighted graphs that are *complete* or nearly complete,
+Adjacency matrices are very handy for weighted graphs that are *dense*,
 providing a compact and fast implementation.
 The adjacency list is the most common for implementing generic sparse graphs.
 
 There are plenty of optimisations possible for these representations.
 For instance, storing the source vertex in every edge is a bit redundant.
 For an unweighted graph, a compact adjacency map would just need
-$A \rightarrow {B,C}$ to say vertex $A$ has edges to $B$ and $C$.
-That is, the whole graph is just a map from vertices to their adjacent vertices.
+to associate $A$ with $[B,C]$, saying that vertex $A$ has edges to $B$ and $C$.
+That is, unweighted graphs can be represented by a simple map from vertices to their adjacent vertices.
 
 <!--
 There is no commonly agreed-upon ADT for graphs, but here we will only assume the following operations:

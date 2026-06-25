@@ -586,7 +586,7 @@ If there are no children it returns null, so that the while loop above can stop.
 :::
 -->
 
-### Changing the priority of elements
+### Changing the priority of elements {#heaps:change-priority}
 
 In some applications, the priority of an element may change over time, or we may need to remove an element other than the root.
 To support such operations efficiently, we must know the position of the element in the heap.

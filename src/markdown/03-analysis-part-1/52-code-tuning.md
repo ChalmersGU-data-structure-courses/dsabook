@@ -38,7 +38,7 @@ If you are biased, this is certain to be reflected in the timings.
 
 The most common pitfall when comparing two programs is that one is more optimised than the other.
 If the running times for two programs differ by a constant factor regardless of input size
-(i.e., their growth rates are the same), if might simply be the case that one is more optimised.
+(that is, their growth rates are the same), if might simply be the case that one is more optimised.
 Be suspicious of empirical comparisons in this situation.
 
 ### Simulation

@@ -106,7 +106,7 @@ Assume that each node value takes a constant amount of space. An example
 would be if the node value is a positive integer and `null` is indicated
 by the value zero. From the [Full Binary Tree Theorem]{.term},
 we know that the size of the node list will be about twice
-the number of nodes (i.e., the overhead fraction is 1/2). The extra
+the number of nodes (that is, the overhead fraction is 1/2). The extra
 space is required by the `null` pointers. We should be able to store the
 node list more compactly. However, any sequential implementation must
 recognise when a leaf node has been reached, that is, a leaf node

@@ -37,7 +37,7 @@ The operation is implemented in the straightforward by simply repeating a single
 
 What is the time complexity of this new operation?
 Since we're repeating the constant-time *pop* operation $k$ times, we get a time complexity of $O(k)$.
-And the worst case of this is when $k$ is as large as possible, i.e., the stack size $n$.
+And the worst case of this is when $k$ is as large as possible, that is, the stack size $n$.
 So the worst-case complexity for *multipop* is linear in the stack size, $O(n)$.
 
 This is quite correct, the worst-case complexity of a single call is linear.

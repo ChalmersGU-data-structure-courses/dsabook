@@ -96,7 +96,7 @@ You will find that it mimics a pre-order recursive procedure.
 Note that moving `process(n)` below the add operations has no impact on the order in which nodes are processed.
 Implementing inorder or postorder traversals using stack is possible, but much more complicated.
 
-By modifying the data structure from a stack to a FIFO queue (and switching the order in which children are added),
+By modifying the data structure from a stack to a *queue* (and switching the order in which children are added),
 we get a new traversal order. Try to figure out the pattern for this one:
 
     BFS(root):

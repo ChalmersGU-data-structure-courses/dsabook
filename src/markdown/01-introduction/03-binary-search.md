@@ -10,7 +10,7 @@ and how to find the data we are interested in.
 One way of storing a collection of objects is to put them in an array.
 So, assuming that we have an array of objects, how can we find a certain object in this array?
 
-#### Linear search {#intro:linear-search}
+#### Linear search
 
 Suppose we are searching for a particular book in a bookshelf.
 If the shelf is not in any particular order, our only option is to
@@ -41,7 +41,7 @@ In the worst case, doubling the size of the bookshelf will double the search tim
 Thus, in linear search there is (suitably) a linear relationship between the size
 of the bookshelf and the search time. We say linear search is a *linear time* algorithm.
 
-#### Binary search {#intro:binary-search}
+#### Binary search
 
 No library puts their books randomly in shelves, because linear search is too slow.
 Instead, books are sorted in the shelves, for example alphabetically by author name
@@ -216,8 +216,8 @@ Another variation is returning the position of the greatest value less than the 
 <!--
 ### Even faster searching
 
-- e.g. library search / interpolation search
-- e.g. searching for numbers: use an array
+- for example library search / interpolation search
+- for example searching for numbers: use an array
 - use a hash function -> see the hashing chapter
 :::
 -->

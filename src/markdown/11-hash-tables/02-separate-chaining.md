@@ -5,7 +5,7 @@ Separate chaining solves the problem of *collisions* in hash tables.
 That is: when two distinct keys $x$ and $y$
 hash to the same position in the internal array.
 Or in mathematical notation,
-$x$ and $y$ has a collision if $h(x)\mod N = h(y)\mod N$,
+$x$ and $y$ has a collision if $h(x)\bmod N = h(y)\bmod N$,
 where $h$ is the hash function and $N$ is the table size.
 Note that this can happen in two ways:
 either $x$ and $y$ have the same hash value ($h(x)=h(y)$) and will always collide,
@@ -46,9 +46,9 @@ This may be because both have the same hash value, or
 more frequently because their hash values were compressed into the same index.
 What we know about the entries on index 5 is the following:
 
-$$ h(\text{``alice@example.com''})\mod 13 = h(\text{``bob@example.com''})\mod 13 = 5 $$
+$$ h(\text{``alice@example.com''})\bmod 13 = h(\text{``bob@example.com''})\bmod 13 = 5 $$
 
-Performing a lookup of any key that compresses to index 5, that is when $h(x)\mod 13=5$,
+Performing a lookup of any key that compresses to index 5, that is when $h(x)\bmod 13=5$,
 will require a linear search by key in the linked list with Alice and Bob in it.
 Note that a lookup is required even for `put` operations: we need to ensure that a key is not
 already present before we add an entry to the linked list.

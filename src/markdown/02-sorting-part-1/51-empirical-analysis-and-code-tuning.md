@@ -110,7 +110,7 @@ swap even if the current element is already in its correct location.
 For example, if the smallest element is already
 leftmost in the array, then `selectionSort` will still call `swap`
 with the two position parameters being the same.
-I.e., it will call `swap(arr,i,i)`, which has no effect whatsoever, except wasting some time.
+That is, it will call `swap(arr,i,i)`, which has no effect whatsoever, except wasting some time.
 Thus, the total number of swaps done by Selection
 sort is always $n-1$ in the best, average and worst cases. It might seem
 like a good idea to test if the positions are the same before calling

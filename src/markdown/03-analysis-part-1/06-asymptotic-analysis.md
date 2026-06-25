@@ -99,7 +99,7 @@ The most important abstraction is to describe the runtime of an algorithm
 as a mathematical function from the input size to a number.
 We actually don't care how we encode the input size,
 as long as it is proportional to the actual size of the input.
-So we can, e.g., use the number of cells in an array as input,
+So we can, for example, use the number of cells in an array as input,
 instead of trying to figure out the exact memory usage of the array.
 And in the same way, we don't care about the unit of measure for the result
 -- it can be actual runtime, in seconds, minutes or hours,
@@ -116,7 +116,7 @@ is related to the quadratic function $g(n) = n^2$ in some way.
 
 So, how can we relate functions using orders of growth?
 We do this by saying that one function is a *bound* of another function.
-E.g., when we say that an algorithm **A** is quadratic,
+For instance, when we say that an algorithm **A** is quadratic,
 we actually mean that the function $n^2$ is an upper bound of **A**.
 
 Upper bound

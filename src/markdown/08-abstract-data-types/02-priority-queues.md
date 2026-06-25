@@ -113,7 +113,7 @@ a priority queue that holds the *100 highest-value transactions* only.
 Whenever a new transaction comes in, we need to update the priority
 queue accordingly:
 
-1.  If the priority queue has fewer than 100 transactions (i.e. there
+1.  If the priority queue has fewer than 100 transactions (that is, there
     have been fewer than 100 transactions so far today), then add the
     new transaction to the priority queue.
 2.  Otherwise, if the new transaction is *greater in value than the

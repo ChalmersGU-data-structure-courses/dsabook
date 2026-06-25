@@ -2,7 +2,7 @@
 # Algorithm analysis, part 1 {#analysis-1}
 
 ::: TODO
-- Prio 1: also write about correctness, e.g. invariants
+- Prio 1: also write about correctness, for example invariants
 - Prio 1: is the bullet list fine?
 :::
 

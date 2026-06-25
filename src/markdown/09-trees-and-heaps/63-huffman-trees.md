@@ -95,7 +95,7 @@ tree called the [Huffman tree]{.term}. Each leaf of
 the Huffman tree corresponds to a letter, and we define the weight of
 the leaf node to be the weight (frequency) of its associated letter.
 
-Here is a possible implementation of Huffman trees, where the type `T` can e.g. be letters:
+Here is a possible implementation of Huffman trees, where the type `T` can for example be letters:
 
     datatype HuffmanTree:
         weight: Int
@@ -105,7 +105,7 @@ Here is a possible implementation of Huffman trees, where the type `T` can e.g. 
 
 Note that this is not the only possible implementation.
 As mentioned above, Huffman trees are *complete*, meaning that every node either has two children or none.
-And, it's only nodes without children (i.e., leaves) that have an associated element.
+And, it's only nodes without children (that is, leaves) that have an associated element.
 So, an alternative implementation would be to divide nodes into internal nodes and leaves.
 
 ### Building Huffman trees

@@ -15,7 +15,7 @@ similar to circular queues that we discussed in @sec:sequences:array-queues,
 so the index after $N-1$ is 0.
 
 To perform a lookup of value $x$, we do a linear search from index
-$h(x)\mod N$ until we either find the key we are looking for,
+$h(x)\bmod N$ until we either find the key we are looking for,
 or find an empty table cell.
 
 ::: example
@@ -33,10 +33,10 @@ For simplicity, we implement a set instead of a map here, so there are only keys
 
 
 The three elements $A$, $B$, and $C$ are adjacent in the (circular) array, forming what is called a cluster.
-Consider what we know about the compressed hashes $h(x)\mod 13$ for these elements.
+Consider what we know about the compressed hashes $h(x)\bmod 13$ for these elements.
 It is possible there are no collisions at all, if the compressed hashes for $A$, $B$, and $C$ are 12, 0, and 1 respectively.
 Its also possible the compressed hashes are all 12, or some combination such as $A$ and $C$ being 12 but B being 0.
-Can $h(B)\mod 13$ be 1?
+Can $h(B)\bmod 13$ be 1?
 No, that would violate the invariant, and a lookup for $B$ would fail after looking for $B$ on index 1 and then reaching the empty cell on index 2.
 
 A question you should be asking yourself is: What happens when the table is full?

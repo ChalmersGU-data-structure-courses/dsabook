@@ -9,7 +9,7 @@
 How many cities with more than 100,000 people lie within 200 kilometres of Paris, France?
 How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
 How much more CO~2~ will be emitted if I travel by plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the train?
-How can I see if a text contains plagiarism, i.e., if it copied some parts from another existing text?
+How can I see if a text contains plagiarism, that is, if it copied some parts from another existing text?
 
 Gathering the necessary information is not sufficient to answer questions like these,
 the information must be organised to allow efficient access and analysis.
@@ -41,7 +41,7 @@ That problem is 10,000 times larger, is it still feasible to do it using your ol
 These questions can be answered by algorithm analysis,
 and it is not certain that it takes 10,000 times longer to solve a 10,000 times larger problem --
 it depends on the algorithm.
-(The specific example of searching in a list is discussed in more detail in @sec:intro:binary-search.)
+(The specific example of searching in a list is discussed in more detail in @sec:intro:searching.)
 
 
 ## Core concepts
