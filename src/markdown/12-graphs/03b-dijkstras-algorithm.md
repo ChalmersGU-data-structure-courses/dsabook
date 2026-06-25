@@ -90,14 +90,8 @@ Here is a simple datatype that works just fine:
         vertex: Vertex
         parent: ParentTreeNode
 
-But wait, this is just a linked list, and lists are not trees, right?
-In fact this is not an error, but if you look at a tree from the leaves,
-then each path from a leaf to the root is essentially a linked list.
-It becomes a tree because several nodes will share the same parent,
-but there is no way to know this because you cannot see which nodes as shared or not.
-
-So the downside with this representation is that we cannot work with the tree as a whole,
-but we can only view it as a collection of back-pointing paths to the starting vertex.
+The downside with a parent-pointer tree is that
+we can only view it as a collection of paths back to the starting vertex.
 Fortunately, we are usually only interested in extracting the path to a specific vertex,
 and for this purpose a parent-pointer tree works perfectly.
 

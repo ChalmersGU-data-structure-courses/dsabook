@@ -57,17 +57,14 @@ but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^3
 This complexity is if we store the MST as a set, but it is possible to do much better.
 
 There is a much better data structure for storing the MST -- the *disjoint-set* (also called union-find).
-This data structure was briefly touched upon in @sec:trees:disjoint-sets.
-For now, the only thing we need to know about the disjoint-set now is that it supports the operations we needs efficiently, in *almost* constant time.
-To be precise, the complexity of the operations is $O(\log*(n))$, which is an extremely slow-growing function:
-it's so slow that $\log*(n) \leq 5$ for all $n \leq 2^{65536}$. So, $\log*(n)$ is constant for *all practical purposes*.
+This data structure was discussed in @sec:trees:disjoint-sets,
+and it supports exactly the operations we need efficiently, in *almost* constant time:
+to take the *union* of to sets, and to *find* which set a vertex belongs to.
 
-Therefore, if we use a disjoint-set to store the MST, Kruskal's algorithm is $O(E \log*(E))$ -- which in practice is the same as $O(E)$.
+Therefore, if we use a disjoint-set to store the MST, Kruskal's algorithm is $O(E\alpha(E))$ -- which in practice is the same as $O(E)$.
 But first we have to sort the edges, which anyway takes $O(E \log(E))$ time, which is then the total complexity.
 But note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$,
 the total complexity of Kruskal's algorithm can be written as $O(E \log(V))$.
-More information about the disjoint-set can be found in @sec:trees:disjoint-sets if you are interested.
-(It's a quite cool data structure, well worth the read:)
 
 
 <!-- END NOTES -->

@@ -32,7 +32,7 @@ Object-oriented languages commonly express this distinction through a class hier
 Functional languages often use algebraic data types, defining a tree as one of several possible node variants.
 In this book, however, we usually assume that all nodes belong to the same class unless the distinction is important.
 
-### General trees
+### General trees {#trees:general-trees}
 
 A [general tree]{.term} is a tree in which a node may have any number of children.
 Such trees are also called [multiway trees]{.term} or [rose trees]{.term}.
@@ -46,7 +46,7 @@ We can represent such general trees as follows:
         children: List of Tree of T = []  // List of subtrees
         size: Int
 
-### Traversing a general tree
+### Traversing a general tree {#trees:general-traversal}
 
 We have seen the three traditional tree traversals for binary trees: [preorder]{.term}, [postorder]{.term}, and [inorder]{.term}.
 For general trees, preorder and postorder extend naturally from the binary-tree case.
