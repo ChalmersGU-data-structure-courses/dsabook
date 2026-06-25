@@ -26,7 +26,7 @@ a more mathematically correct intuition is
 "time functions that do not grow faster than linear" (which includes
 for instance binary search: a logarithmic function does not grow faster than a linear one).
 
-The reason for this deceiving you in [Chapter @sec:analysis-1] is that, while it is
+The reason for deceiving you in [Chapter @sec:analysis-1] is that, while it is
 technically a true statement that Binary search is $O(n)$, any computer scientist hearing you say that
 would correct you and point out that it is in fact $O(\log(n))$ (which is also true, and
 more precise). We tend to use $O$-notation as if it were a tight bound, rather than an upper bound.
