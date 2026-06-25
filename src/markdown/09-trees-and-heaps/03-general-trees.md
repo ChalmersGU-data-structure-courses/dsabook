@@ -1,4 +1,4 @@
-## Tree representations
+## Tree representations {#trees:representations}
 
 A binary tree is a special case of a more general tree in which each node has at most two children.
 Many applications, however, require trees with an arbitrary number of children or with different kinds of nodes serving different roles.
@@ -14,7 +14,7 @@ Some tree structures store data only in the leaves, while others store one kind 
 Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-coding), the [binary trie]{.term}, the [PR Quadtree]{.term}, and]{.online} the [expression tree]{.term} illustrated by @fig:expression_tree below.
 
 ::: {#fig:expression_tree}
-![](images/Trees-expression-tree.svg){width=70%}
+![](images/Trees-expression-tree.svg){width=35%}
 
 An example of an expression tree for $4x(2x + a) - c$
 :::

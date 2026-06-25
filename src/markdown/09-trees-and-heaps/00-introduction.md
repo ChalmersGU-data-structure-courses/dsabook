@@ -9,8 +9,17 @@ This lets us represent _hierarchical_ relationships, and it also helps when we w
 
 Trees appear in many settings.
 We can use them to represent mathematical expressions and the syntax of computer programs.
-We can also use them to model file systems, where folders contain files and other folders.
-Later in this chapter we will see another important use: [heaps]{.term}, which organise data so that we can quickly find and remove the element with highest priority.
+We can use them to model file systems, where folders contain files and other folders.
+Trees can also be used as data structures,
+such as [heaps]{.term}, for implementing priority queues (@sec:heaps),
+and [search trees]{.term}, for implementing sets and maps ([Chapter @sec:search-trees]).
+
+This chapter begins with the basic ideas and terminology for trees.
+We then discuss binary trees (@sec:trees:binary-trees),
+how to represent trees in general (@sec:trees:representations),
+and show an example of a simple data structure for [disjoint sets]{.term} (@sec:trees:disjoint-sets).
+After that we turn to heaps for priority queues (@sec:heaps), including [binary heaps]{.term} (@sec:heaps:binary-heaps),
+and other [meldable heaps]{.term} (@sec:heaps:meldable-heaps).
 
 #### Tree terminology
 
@@ -19,12 +28,11 @@ Later in this chapter we will see another important use: [heaps]{.term}, which o
 A tree consists of [nodes]{.term} connected by parent-child relationships.
 The topmost node is the [root]{.term}.
 If a node is directly below another node, then it is a [child]{.term} of that node, and the node above it is its [parent]{.term}.
-In @fig:TreeTerminology, `A` is the root, and `B` and `C` are children of `A`.
+In @fig:TreeTerminology, $A$ is the root, and $B$ and $C$ are children of $A$.
 
 Every node in a tree is also the root of a *subtree*.
-For example, `B` is a child of `A`, but it is also the root of the subtree containing `B`, `D`, and `E`.
+For example, $B$ is a child of $A$, but it is also the root of the subtree containing $B$, $D$, and $E$.
 So, depending on context, a node name can refer either to the node itself or to the subtree rooted at that node.
-
 Two simple rules define the shape of a tree:
 
 - Every node except the root has exactly one parent.
@@ -70,19 +78,11 @@ Instead, trees form a family of related structures.
 
 #### Why heaps belong here
 
-A [priority queue]{.term} stores elements together with priorities, so that we can always access or remove the highest-priority element first.
+A [priority queue]{.term} stores elements together with priorities,
+so that we can always access or remove the highest-priority element first.
 A heap is a tree-based way to implement such a priority queue efficiently.
 
 The key idea is that the most important element is kept at the root.
 This does not mean that the entire structure is sorted.
 Instead, heaps maintain a local ordering rule between parents and children.
 That rule is strong enough to keep the highest-priority element at the root, while still allowing updates to be efficient.
-
-This chapter begins with the basic ideas and terminology for trees.
-We then discuss binary trees (@sec:trees:binary-trees), tree traversals (@sec:trees:traversal), and approaches to implementing tree nodes (@sec:trees:implementing-binary-trees).
-After that we turn to heaps for priority queues (@sec:heaps), including binary heaps (@sec:heaps:binary-heaps).
-The chapter concludes with further case studies and with trees that have more, or fewer, than two children (@sec:trees:general-trees).
-
-::: TODO
-The paragraph above refers to an online section, @sec:trees:general-trees
-:::

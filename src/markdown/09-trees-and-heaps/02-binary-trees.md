@@ -27,18 +27,18 @@ Binary trees are often described as trees in which each node has at most two chi
 While this is correct, it can obscure an important detail: if a node has only one child, it matters whether that child is on the left or on the right.
 For this reason, it is often clearer to think of every node as having both a left subtree and a right subtree, with either subtree allowed to be empty. This idea is illustrated below.
 
-![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExampleNulls.svg){width=80% #fig:example_bintree}
+![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExampleNulls.svg){width=65% #fig:example_bintree}
 
 The two drawings represent the same binary tree.
 In the left-hand drawing, the black dots make the empty subtrees explicit.
 
 A node whose left and right subtrees are both empty is called a _leaf node_.
 Nodes that are not leaves are called _internal nodes_, or sometimes _branches_.
-In the figure above, the nodes containing `D`, `G`, `H`, and `I` are leaf nodes.
+In the figure above, the nodes containing $D$, $G$, $H$, and $I$ are leaf nodes.
 
 We will use the binary tree in @fig:example_bintree as a running example throughout this chapter. Before continuing, take a moment to study it and consider the following questions:
 Which nodes are leaf nodes?
-What is the path from node `A` to node `H`?
+What is the path from node $A$ to node $H$?
 These questions will help you become familiar with the terminology and structure of binary trees.
 
 <!--
@@ -93,7 +93,7 @@ Here is a visual explanation of the same idea.
 
 -->
 
-### Full, perfect, and complete binary trees
+### Full, perfect, and complete binary trees {#trees:full-perfect-complete}
 
 Several restricted forms of binary tree are sufficiently important to warrant special names.
 In a [full binary tree](#full-tree){.term}, every node is either a leaf node or an internal node with exactly two non-empty children.
@@ -111,7 +111,7 @@ A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete
 a [Huffman coding tree]{.term} is an example of a full binary tree.
 
 ::: {#fig:full_complete_bintrees}
-![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/Trees-full-perfect-complete.svg){width=100%}
+![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/Trees-full-perfect-complete.svg){width=80%}
 
 Examples of restricted binary tree shapes:
 (a) is full but not complete,
@@ -400,13 +400,15 @@ All of these are easily implemented using a simple recursive algorithm, here for
 
 For our example tree (@fig:example_bintree), they will print the following:
 
-- *preorder*:  A B D C E G F H I
-- *inorder*:   B D A G E C H F I
-- *postorder*: D B G E H I F C A
+-------------  -----------------------------------
+*preorder*     $A ~ B ~ D ~ C ~ E ~ G ~ F ~ H ~ I$
+*inorder*      $B ~ D ~ A ~ G ~ E ~ C ~ H ~ F ~ I$
+*postorder*    $D ~ B ~ G ~ E ~ H ~ I ~ F ~ C ~ A$
+-------------  -----------------------------------
 
 It may not be immediately obvious that the procedures above produce this order, but this can be checked by tracing them on paper.
-For example, in `postorder(A)`, the code makes it clear that `A` is printed last.
-More generally, postorder always prints both children before the parent, so an ordering that prints `C` before either `E` or `F` is not postorder.
+For example, in `postorder(A)`, the code makes it clear that $A$ is printed last.
+More generally, postorder always prints both children before the parent, so an ordering that prints $C$ before either $E$ or $F$ is not postorder.
 
 Each traversal order is useful in different situations.
 For example, a preorder traversal is appropriate for the file system tree in @fig:TreeExamples, because it can print each folder before the files and subfolders it contains.
@@ -473,7 +475,7 @@ Try to figure out the pattern for this one:
             agenda.add(n.right)
 
 It will process the nodes level by level, left to right.
-That is it will first process the root, then all the children of the root, then all the children of those nodes et cetera. 
+That is it will first process the root, then all the children of the root, then all the children of those nodes et cetera.
 For @fig:example_bintree, it processes A,B,C,D,E,F,G,H,I in that order.
 This traversal order is called a Breadth-First Search (BFS) as opposed to the stack-based Depth-First Search (DFS).
 The naming is due to the tendency of DFS to process nodes that are deep in the tree early, whereas BFS always visits all closest nodes first.
