@@ -1,28 +1,61 @@
 
 ## Best, worst, and average cases {#analysis-1:complexity-cases}
 
-::: TODO
-- Prio 2: shorten text on Average case
-- Prio 3: examples (for example, Quicksort, Insertion sort)
-:::
+For some algorithms, the running time is always determined by the input size $n$,
+for others the exact content of an array or a variable may change the running time drastically.
+A simple example is Linear search. We know that in the worst case it does $n$ comparisons for
+an array of size n, but if we are searching for the particular value at the very start of the array,
+it only requires a single comparison.
 
-We can talk about the *best-case*, or the *worst-case*, or even the *average-case* complexity of an algorithm. But in practice we almost always only use the worst-case complexity: the best case is pretty useless (we should always prepare for the worst), and the average case is difficult to reason about.
+So far, we have only studied the worst case complexity of algorithms.
+When we say that Linear search is $O(n)$, we only consider the slowest possible
+input of size $n$. We can also analyse the *best-case*, and *average-case* complexity of an algorithm.
 
-- The best case is quite useless -- we should always prepare for the worst.
-- The average case is difficult to reason about -- for example we need to know what distribution the input has, and this is difficult.
-- The worst case is what we usually analyse -- it is much easier to calculate than the average case, and it gives valuable information about what might happen if we are unlucky.
+- Worst case is the default, if nothing else is specified.
+- Best case has very limited value, but if two algorithms have the same worst case complexity,
+  a better best-case for either algorithm is worth noting.
+- The average case can be difficult to determine -- since it requires assumptions on the distribution of input values.
 
-The worst case is particularly important if you cannot guarantee that the data is not contaminated -- for example by a malicious hacker.
-
-The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a really really efficient algorithm.
-
-
-
-
-For some algorithms, the running time is always determined by the input size $n$.
+For many algorithms, the worst- and best-case complexity are one and the same.
 Consider for example Selection sort (@sec:sorting-1:selection-sort):
 the total number of times the body of the inner loop will be executed is $n+\cdots+2+1=n(n+1)/2$.
-So the running time only depends on the size $n$, regardless of how the array looks like.
+So the running time only depends on the size $n$, regardless of the content of the array.
+The best case of Selection sort is $O(n^2)$, same as the worst case.
+
+For Insertion sort (@sec:sorting-1:insertion-sort), the situation is different.
+The outer `for`-loop always iterates the same number of times,
+but the inner `while`-loop only runs until it finds the correct position of the inserted element.
+This means that the execution time of insertion sort can differ widely.
+The best case for Insertion sort is if the input is already sorted, in which
+case the runtime is $O(n)$. This is an unusually interesting best case,
+since it naturally occurs quite frequently in some applications.
+
+If we run Insertion sort many times on many randomly selected arrays of size $n$,
+we could expect the `while`-loop on average to go halfway through the array before
+finding the correct insertion index.
+So, in the *average case* Insertion sort runs for half as many iterations as the worst case.
+However, this definition of the average case depends on an important assumption:
+that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed!
+
+#### The value of pessimistic estimates
+
+The advantage to analysing primarily the worst case is
+that the algorithm is guaranteed to perform at least that
+well. This is especially important for real-time applications where occasional delays are unacceptable,
+such as an application for monitoring an air traffic control system.
+and for programs that accept data from untrusted sources,
+such as an online database system.
+
+Using the worst case is also important if the data may have been contaminated -- for example by a malicious hacker. Even if the worst case is statistically unlikely to happen repeatedly by accident,
+someone can deliberately or accidentally construct a large data set that consistently hits the worst case.
+
+The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a very efficient algorithm. Sorting lists that are already
+sorted may sound silly, but consider an application where one process occasionally sorts an array
+(perhaps to display it to a user), and another occasionally makes changes to specific values.
+If the expected number of changes made between sorting runs is close to zero,
+then Insertion sort is perhaps the best possible algorithm.
+
+
 
 ::: dsvis
 Consider the problem of finding the factorial of $n$.
@@ -31,23 +64,6 @@ Consider the problem of finding the factorial of $n$.
 ```
 :::
 
-For most algorithms however, different inputs of a given size require different amounts of time.
-For example, consider Insertion sort (@sec:sorting-1:insertion-sort):
-the outer `for`-loop always iterates the same number of times,
-but the inner `while`-loop only runs until it finds the correct place for the element to insert.
-So there is a wide range of possible running times for the algorithm, which is different from Selection sort.
-
-- If the array is already sorted, then each element is in its correct place and the `while`-loop will not iterate at all.
-  This is the *best case*, because it is not possible for a while loop to run faster than that.
-- If the array is reversely sorted, then each element has to move as far as possible, to the very first position in the array.
-  This is the *worst case*, because the `while`-loop runs for as many iterations as it possibly can.
-
-If we run Insertion sort many times on many different arrays of size $n$,
-we could expect the `while`-loop on average to go halfway through the array before finding the correct insertion index.
-So, in the *average case* Insertion sort runs for half as many iterations as the worst case.
-However, this definition of the average case depends on an important assumption:
-that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed!
-More about that below.
 
 ::: dsvis
 Here is an example where we reason about the *linear search* algorithm from @sec:intro:searching.
@@ -56,40 +72,12 @@ Here is an example where we reason about the *linear search* algorithm from @sec
 ```
 :::
 
-<!-- OPENDSA: START -->
-When analysing an algorithm, should we study the best, worst, or average
-case? Normally we are not interested in the best case, because this
-might happen only rarely and generally is too optimistic for a fair
-characterisation of the algorithm's running time. In other words,
-analysis based on the best case is not likely to be representative of
-the behaviour of the algorithm. However, there are rare instances where a
-best-case analysis is useful -- in particular, when the best case has
-high probability of occurring.
-For example, if we know that the array we want to sort is *almost sorted*,
-we can take advantage of the best-case running time of Insertion sort.
 
-How about the worst case? The advantage to analysing the worst case is
-that you know for certain that the algorithm must perform at least that
-well. This is especially important for real-time applications, such as
-for the computers that monitor an air traffic control system,
-and for programs that accept data from untrusted sources,
-such as an online database system.
 
-For other applications -- in particular when we wish to aggregate the
-cost of running the program many times on many different inputs --
-worst-case analysis might not be a representative measure of the
-algorithm's performance. Often we prefer to know the average-case
-running time. This means that we would like to know the *typical*
-behaviour of the algorithm on inputs of size $n$.
-<!-- OPENDSA: END -->
+#### The problem with average case {#analysis-1:average-case-problem}
 
-### The problem with average case {#analysis-1:average-case-problem}
-
-<!-- OPENDSA: START -->
-Unfortunately, average-case analysis is not always possible.
-Average-case analysis first requires that we understand how the actual inputs to the program
-(and their costs) are distributed with respect to the set of all possible inputs to the program.
-<!-- OPENDSA: END -->
+Average-case analysis requires a deep understanding of the specific application
+that the algorithm is used in, and it is easy to accidentally make false assumptions.
 For example, it was stated previously
 that Insertion sort on average runs for half the number of iterations as the worst case.
 This is only true if every possible array is equally likely as input.
@@ -97,21 +85,24 @@ This assumption is usually *not* correct for most applications where we need to 
 For example, if the input to the array consist of book authors,
 then the vast majority of arrays will never ever appear.
 
+This dependency on the specific application runs contrary to the goal of algorithm
+analysis, which is to study and compare algorithms themselves, independent from their
+specific applications. Consider Linear search again. It is faster when searching for an element
+appearing in the array (particularly if it appears early on), but finding a general answer
+to the question "how likely is a random element to appear in an array of size n" is
+entirely impossible.
+
+This problem is not just limited to sorting and searching.
 How the data is distributed has a significant effect on
 almost all data structures and algorithms, such as those based on
-[hashing]{.term} and [binary search trees]{.term}.
-<!-- OPENDSA: START -->
-Incorrect assumptions about data distribution can have
-disastrous consequences on a program's space or time performance.
-Unusual data distributions can also be used to advantage, such as is
-done by [self-organising lists]{.term} and [splay trees]{.term}.
-<!-- OPENDSA: END -->
+[hashing]{.term} and [binary search trees]{.term}. Incorrect assumptions
+about the distribution can be extremely detrimental to performance.
 
 Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
 For example, all kinds of databases that are publicly available are a risk.
 Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
 If there is just a tiny risk of a worst-case scenario, this opens up for *denial-of-service attacks* on your system.
 
-In summary, for real-time applications and for applications that are openly available, we should always prefer a worst-case analysis of an algorithm.
+In summary, for real-time applications and for applications that handle data from untrusted sources,
+we should always prefer a worst-case analysis of an algorithm.
 In other cases we usually desire an average-case analysis, but then we need to know enough about how the input is distributed.
-However, this is often difficult to calculate, so in most cases we must anyway resort to worst-case analysis.
