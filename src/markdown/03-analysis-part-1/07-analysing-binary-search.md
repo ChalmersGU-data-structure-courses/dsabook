@@ -1,4 +1,4 @@
-
+<!--
 ## Case study: Analysing binary search {#analysis-1:binary-search}
 
 ::: TODO
@@ -37,14 +37,16 @@ where the algorithm is modeled as a *recurrence relation*.
 Linear search looks at every element in the array in the worst case, so its complexity is $O(n)$.
 This means that as $n$ grows, the $O(n)$ running time for linear search
 <!-- OPENDSA: START -->
+<!--
 quickly becomes much greater than the $O(\log(n))$ running time for binary search.
 Taken in isolation, binary search appears to be much more efficient than linear search.
 This is despite the fact that the constant factor for binary search is greater
 than that for linear search, because the calculation for the next
 search position in binary search is more expensive than just
 incrementing the current position, as linear search does.
+-->
 <!-- OPENDSA: END -->
-
+<!--
 However, binary search comes with a precondition:
 The array must be sorted, and sorting an array is a time-consuming operation
 The sorting algorithms we have seen so far are all quadratic, $O(n^2)$,
@@ -60,3 +62,4 @@ So, if we want to maintain a searchable collection which changes over time, a so
 But an unsorted array isn't a good choice either
 -- instead we should use smarter data structures such as [search trees]{.term} ([Chapter @sec:search-trees])
 or [hash tables]{.term} ([Chapter @sec:hash-tables]).
+-->

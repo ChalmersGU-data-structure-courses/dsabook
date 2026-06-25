@@ -1,14 +1,13 @@
 
+<!--
 ## Asymptotic analysis {#analysis-1:asymptotic-analysis}
 
 ::: TODO
-- Prio 1: shorten text?
-- Prio 1: flatten subsection
+- Reintroduce some of this stuff earlier on?
 :::
+->>
 
-::: latex
-@Fig:growthGraphs gives two views of a graph illustrating the growth rates for six equations.
-:::
+<!--
 
 ::: online
 @Fig:growthGraphs gives two views of a graph illustrating the growth rates for six equations.
@@ -49,9 +48,15 @@ plt2.set_title('Zoomed in')
 ```
 :::
 
+::: latex
+@Fig:growthGraphs gives two views of a graph illustrating the growth rates for six equations.
+:::
+-->
+
 <!-- OPENDSA: START -->
-Despite the smaller constant for the quadratic curve labeled $n^2/10$ in the figure
-above, it crosses the linear curve $n/2$ at the relatively small value of $n = 5$.
+<!--
+Despite the smaller constant for the quadratic curve labeled $n^2/10$ in the figure,
+it crosses the linear curve $n/2$ at the relatively small value of $n = 5$.
 What if we double the value of the constant in front of the linear equation?
 As shown in the graph, $n$ is surpassed by $n^2/10$ as soon as $n = 10$.
 The additional factor of two for the linear growth rate does not matter much.
@@ -89,9 +94,10 @@ running time or other resource needs of an algorithm. This
 simplification usually helps you understand the behaviour of your
 algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.
+-->
 <!-- OPENDSA: END -->
 
-
+<!--
 ### Orders of growth
 
 To be able to discuss orders of growth for algorithms we need to do some abstractions.
@@ -127,3 +133,4 @@ Upper bound
 The upper bound is by far the most common notion we use,
 but there are also the *lower* and the *tight* bounds.
 They will be discussed later in @sec:analysis-2:other-bounds.
+-->
