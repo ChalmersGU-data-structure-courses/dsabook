@@ -76,7 +76,7 @@ Being aware of this algorithm can help debug a developer debug a broken implemen
 finding potential optimisations (are there other operations that would preserve this invariant?).
 
 Another excellent pair of examples of loop invariants are in Insertion Sort and Selection sort
-from Chapter [Chapter @sec:sorting-1]. Have a look at those algorithms and try to formulate
+from [Chapter @sec:sorting-1]. Have a look at those algorithms and try to formulate
 a loop invariant for each of them.
 
 * Insertion sort loops through all the elements in the array and "inserts them backwards" into
