@@ -8,14 +8,11 @@ If your program needs to store a small number of things
 <!-- OPENDSA: END -->
 More sophisticated data structures such as [search trees](#search-tree){.term} or [hash tables]{.term}
 only become necessary when you have to organise and search through a large number of things.
-<!-- OPENDSA: START -->
-Many algorithms do not require any form of search, and
-they do not require that an ordering be placed on the objects being stored.
-Some algorithms require that actions be performed in a strict chronological order,
-processing objects in the order that they arrived,
-or perhaps processing objects in the reverse of the order that they arrived.
-For all these situations, a simple list structure is appropriate.
-<!-- OPENDSA: END -->
+Many algorithms do not require any form of search.
+They also do not require the stored objects to be kept in any particular order.
+Some algorithms instead require us to process objects in strict chronological order,
+either in the order they arrived or in the reverse order.
+In these situations, a simple list structure is appropriate.
 
 Previously in the book we have discussed *algorithms* (mainly for searching and sorting),
 but now we will introduce *data structures*.
@@ -28,8 +25,7 @@ A programmer who needs to use a stack or a queue in the application they are dev
 should be able to use either of a linked list or a dynamic array.
 This is similar to the problem of sorting, where any of the algorithms we presented in
 [Chapter @sec:sorting-1] and [Chapter @sec:sorting-2] can be used for sorting an array.
-And just as for the sorting problem, one might want to choose a specific data structure
-because its performance characteristics fits best with the application one has in mind.
+And just as for the sorting problem, we might want to choose a specific data structure because its performance characteristics fit best with the application we have in mind.
 
 Stacks and queues are both examples of sequences, or *lists*.
 When we discuss list data structures, we use some common terminology.
