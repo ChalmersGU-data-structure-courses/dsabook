@@ -1,5 +1,9 @@
 
-## Recurrence relations {#analysis-3:recurrences}
+## Deriving the Master theorem {#analysis-3:deriving-master-theorem}
+
+::: TODO
+- Prio 2: rewrite this, now we repeat a lot of text from 7.3
+:::
 
 In the previous chapters we have encountered three recursive algorithms:
 Binary search, Mergesort and Quicksort.
@@ -43,18 +47,18 @@ Therefore we will in the future not print the base case unless necessary.
 We want to know which complexity class $T(n)$ belongs to, or in other words,
 we want to find a closed-form solution to the recursive equation.
 <!-- OPENDSA: START -->
-One approach is to *expand* the recurrence by replacing any occurrences of $T$
+One approach is to expand the recurrence by replacing any occurrences of $T$
 on the right-hand side with its definition.
 <!-- OPENDSA: END -->
 Assuming that both the base case and the work done in each iteration is bounded by some constant $c$,
 we can infer that the recursive factorial function is linear, $O(n)$:
 
 \begin{align*}
-T(n) &~=~   c + T(n-1)
-      ~=~   c + (c + T(n-2))
-\\   &~=~   \underbrace{c + (c + (c + (c + (\cdots + c))))}_{n \text{ constant-time terms}}
-      ~=~   n\cdot c
-     ~\in~  O(n)
+T(n)&= c + T(n-1) \\
+    &= c + (c + T(n-2)) \\
+    &= c + (c + (c + T(n-3))) \\
+    &= \underbrace{c + (c + (c + (c + (\cdots + c))))}_{n \text{ terms}} \\
+    &= n\cdot c  \in  O(n)
 \end{align*}
 
 ::: dsvis
@@ -69,10 +73,11 @@ That is, if the recurrence is $T(n) = T(n-1) + O(n)$.
 Assuming that the linear time work is $cn\in O(n)$, we can expand the recurrence like this:
 
 \begin{align*}
-T(n) &~=~   cn + T(n-1)
-      ~=~   cn + (c(n-1) + T(n-2))
-\\   &~=~   c\cdot(\underbrace{n + ((n-1) + ((n-2) + (\cdots + 1)))}_{n \text{ linear-time terms}})
-     ~\in~  O(n^2)
+T(n)&= cn + T(n-1) \\
+    &= cn + (c(n-1) + T(n-2)) \\
+    &= cn + (c(n-1) + (c(n-2) + T(n-3))) \\
+    &= c\cdot(\underbrace{n + ((n-1) + ((n-2) + ((n-3) + (\cdots + 1))))}_{n \text{ terms}}) \\
+    &= c\cdot\sum^n i  =  c\cdot \frac{n(n+1)}{2}  \in  O(n^2)
 \end{align*}
 
 ::: dsvis
@@ -90,11 +95,12 @@ This recurrence is expanded as follows,
 where $m = \log_2(n)$ is the number of recursive levels until we reach the base case:
 
 \begin{align*}
-T(n) &~=~   T(n/2) + c
-      ~=~   (T(n/4) + c) + c
-      ~=~   ((T(n/8) + c) + c) + c
-\\   &~=~   \underbrace{(((\cdots(c + c)\cdots) + c) + c) + c}_{m \text{ constant-time terms}}
-     ~\in~  O(\log(n))
+T(n)&= T(n/2) + c
+    =  (T(n/4) + c) + c
+    =  ((T(n/8) + c) + c) + c
+\\  &= ((\cdots(T(1) + c)\cdots) + c) + c
+    =  \underbrace{((\cdots(c + c)\cdots) + c) + c}_{m \text{ terms}}
+\\  &=  c\cdot m  =  c\cdot\log_2(n)  \in  O(\log(n))
 \end{align*}
 
 Finally, Mergesort calls itself twice with the argument halved, and then performs a linear-time merge.
@@ -102,13 +108,12 @@ This can be modeled by the recurrence $T(n) = 2\cdot T(n/2) + O(n)$.
 By expanding the recurrence we can deduce the linearithmic complexity, $O(n\log(n))$:
 
 \begin{align*}
-T(n) &~=~   2 \cdot T(n/2) + c\cdot n
-      ~=~   2 \cdot (2 \cdot T(n/4) + c\cdot n/2) + c\cdot n
-\\   &~=~   2 \cdot (2 \cdot (\cdots (2 \cdot T(1) + c\cdot n/2^m) \cdots) + c\cdot n/2) + c\cdot n
-\\   &~=~   2^m c  +  \underbrace{2^{m-1} c\cdot n / 2^{m-1}  +  2^{m-2} c\cdot n / 2^{m-2}  +
-                              \cdots  +  2 c\cdot n / 2  +  c\cdot n}_{m \text{ linear-time terms}}
-\\   &~=~   c\cdot n + c\cdot n\cdot\log_2(n)
-     ~\in~  O(n \log(n))
+T(n) &=  2 \cdot T(n/2) + c\cdot n  =  2 \cdot (2 \cdot T(n/4) + c\cdot n/2) + c\cdot n
+\\   &=  2 \cdot (2 \cdot (2 \cdot T(n/8) + c\cdot n/4) + c\cdot n/2) + c\cdot n
+\\   &=  2 \cdot (2 \cdot (\cdots (2 \cdot T(1) + c\cdot n/2^m) \cdots) + c\cdot n/2) + c\cdot n
+\\   &=  2^m c  +  2^{m-1} c\cdot n / 2^{m-1}  +  2^{m-2} c\cdot n / 2^{m-2}  +  \cdots  +  2^2 c\cdot n / 2^2  +  2 c\cdot n / 2  +  c\cdot n
+\\   &=  2^m c  +  \sum^m c\cdot n  =  2^{\log_2(n)} c  +  \sum^{\log_2(n)} c\cdot n  =  c\cdot n + c\cdot n\cdot\log_2(n)
+\\   &=  c \cdot n \cdot (1 + \log_2(n))  \in  O(n \log(n))
 \end{align*}
 
 
@@ -122,7 +127,7 @@ Here is a more complicated example.
 So, is there some kind of general formula for how to solve recurrence relations?
 
 
-### The Master theorem {#analysis-3:master-theorem}
+### The Master theorem
 
 There is a general way to solve so called *divide-and-conquer* recurrence relations.
 These have the form $T(n) = a\cdot T(n/b) + c\cdot n^k$,
@@ -131,16 +136,27 @@ This recurrence describes a problem of size $n$ divided into $a$ subproblems of 
 while $c\cdot n^k$ is the extra work needed to split the input or combine the partial solutions.
 Both binary search and Mergesort are examples of divide-and-conquer algorithms that fit this form.
 
-To solve a divide-and-conquer recurrence, we do the same as we did before, expand it until we reach the base case.
-The recursion stops when we reach $T(1)$, which is after $m=\log_b(n)$ levels.
-This is a bit tedious and we won't show it here, but after a while we get to the following sum,
-where $r = b^k/a$:
+To solve a divide-and-conquer recurrence, we do the same as we did before
+-- expand it until we reach the base case:
 
 \begin{align*}
-T(n) &~=~   c \cdot a^m \cdot (\underbrace{1  +  \tfrac{b^{k}}{a}  +  \tfrac{b^{2k}}{a^3}  +
-                                    \tfrac{b^{2k}}{a^3}  +  \cdots  +  \tfrac{b^{mk}}{a^m}}_{m \text{ terms}})
-\\   &~=~   c \cdot a^m \cdot \sum^m (\tfrac{b^k}{a})^i
-      ~=~   c \cdot a^m \cdot \sum^m r^i
+T(n) &=  a \cdot T(n/b) + c \cdot n^k  =  a \cdot (a \cdot T(n/b^2) + c \cdot (n/b)^k) + c \cdot n^k
+\\   &=  a \cdot (a \cdot (a \cdot T(n/b^3) + c \cdot (n/b^2)^k) + c \cdot (n/b)^k) + c \cdot n^k
+\\   &=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot T(1) + c \cdot (n/b^{m-1})^k) + c \cdot (n/b^{m-2})^k) \cdots) + c \cdot (n/b)^k) + c \cdot n^k
+\end{align*}
+
+The recursion stops when we reach $T(1)$, which is after $m$ levels, where $n = b^m$.
+Now let's replace $n$ with $b^m$ and $T(1)$ with $c$, and then expand the parentheses:
+
+\begin{align*}
+\cdots &=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot c + c \cdot (b^m/b^{m-1})^k) + c \cdot (b^m/b^{m-2})^k) \cdots) + c \cdot (b^m/b)^k) + c \cdot b^{mk}
+\\     &=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot c + c \cdot b^{1k}) + c \cdot b^{2k}) \cdots) + c \cdot b^{(m-1)k}) + c \cdot b^{mk}
+\\     &=  a^m c \cdot b^{0k}  +  a^{m-1} c \cdot b^{1k}  +  a^{m-2} c \cdot b^{2k}  +  \cdots  +  a^1 c \cdot b^{(m-1)k}  +  a^0 c \cdot b^{mk}
+\\     &=  c \cdot (a^m b^{0k}  +  a^{m-1} b^{1k}  +  a^{m-2} b^{2k}  +  \cdots  +  a^1 b^{(m-1)k}  +  a^0 b^{mk})
+\\     &=  c \cdot a^m \cdot (b^{0k} / a^0  +  b^{1k} / a^1 +  b^{2k} / a^2  +  \cdots  +  b^{(m-1)k} / a^{(m-1)}  +  b^{mk} / a^m)
+\\     &=  c \cdot a^m \cdot \sum^m (b^k/a)^i
+\\     &=  c \cdot a^m \cdot \sum^m r^i,
+           \text{ where } r = b^k / a  \text{ and }  m = \log_b(n)
 \end{align*}
 
 
@@ -161,27 +177,27 @@ $r < 1$ (the subproblems dominate)
 
 $r = 1$ (they are comparable)
 
-:   The sum collapses to $\sum^m 1 \in O(m) = O(\log(n))$.
+:   The sum collapses to $\sum^m r^i = \sum^m 1 \in O(m) = O(\log(n))$.
     Furthermore, $a = b^k$, and so $k = \log_b(a)$.
     Therefore $a^m = n^{\log_b(a)} = n^k$, and we get $T(n) \in O(n^k \log(n))$.
 
 $r > 1$ (the extra work dominates)
 
-:   Now it is a well-known summation with value $(r^{m+1} - 1) / (r - 1) \in O(r^m)$.
-    And since $b^m = n$, we get $T(n) \in O(a^m r^m)$ = $O(a^m (b^k/a)^m)$ = $O(b^{km}) = O(n^k)$.
+:   Now the sum becomes $\sum^m r^i = (r^{m+1} - 1) / (r - 1) \in O(r^m)$.
+    Since $b^m = n$, we get $T(n) \in O(a^m r^m)$ = $O(a^m (b^k/a)^m)$ = $O(b^{km}) = O(n^k)$.
 
 We can summarise the above derivation as the following theorem.
 
 ::: topic
 #### The master theorem
 
-For any recurrence relation $T(n)$, of the form $T(n) = a\cdot T(n/b) + O(n^k)$,
+For any recurrence relation of the form $T(n) = a\cdot T(n/b) + O(n^k)$,
 exactly one the following holds:
 
 $$
 T(n) \in
 \left\{ \begin{array}{ll}
-    O(n^d)         &  \text{if } a > b^k, ~ \text{where } d=\log_b(a)\\
+    O(n^d)         &  \text{if } a > b^k, ~ (\text{where } d=\log_b(a))\\
     O(n^k \log(n)) &  \text{if } a = b^k \\
     O(n^k)         &  \text{if } a < b^k
 \end{array} \right.
@@ -196,8 +212,8 @@ Here are some example recurrence relations that can be solved by the Master theo
 
 Binary search
 :   $T(n) = T(n/2) + O(1)$.
-    Here $a = 1$, $b = 2$ and $k = 0$, and $a = b^k$ so we get the second case:
-    $T(n) \in O(n^k \log(n))$ = $O(\log(n))$.
+    Here $a = 1$, $b = 2$ and $k = 0$, and since $a = b^k$ we get the second case,
+    so $T(n) \in O(n^k \log(n))$ = $O(\log(n))$.
 
 Mergesort
 :   $T(n) = 2\cdot T(n/2) + O(n)$.
@@ -222,32 +238,28 @@ Quadratic extra work
 How do we multiply numbers? If they are small enough they are handled efficiently by the processor,
 but what if the numbers are large with thousands of digits each?
 Let's say we want to multiply two numbers $x$ and $y$, having $2m$ digits each.
-We can turn this into a divide-and-conquer problem by splitting the numbers into halves:^[
-    The reason why we write $2^m$ is that we assume that the numbers are stored in binary form.
-    If they had been represented as decimal numbers we would write $10^m$ instead.
-]
+We can turn this into a divide-and-conquer problem by splitting the numbers into halves:
 
 \begin{align*}
-x  &=  x_1 \cdot 2^m + x_0  &
+x  &=  x_1 \cdot 2^m + x_0  \\
 y  &=  y_1 \cdot 2^m + y_0
 \end{align*}
 
-Note that multiplying by $2^m$ is an efficient operation because it is just a shift of digit positions.
-Therefore we can ignore every such digit shift, and only count "normal" multiplications and additions.
-Now we can expand $x\cdot y$:
+The reason why we write $2^m$ is that we assume that the numbers are stored in binary form
+ -- if they had been represented as decimal numbers we would write $10^m$ instead.
+Now:
 
 \begin{align*}
-(x_1 \cdot 2^m + x_0) \cdot (y_1 \cdot 2^m + y_0)
-    &=  x_1 y_1 \cdot 2^{2m}  +  (x_1 y_0 + x_0 y_1) \cdot 2^m  +  x_0 y_0
+x \cdot y &=  (x_1 \cdot 2^m + x_0) \cdot (y_1 \cdot 2^m + y_0)
+\\        &=  x_1 y_1 \cdot 2^{2m}  +  (x_1 y_0 + x_0 y_1) \cdot 2^m  +  x_0 y_0
 \end{align*}
 
-Thus, the recursive implementation of $x \cdot y$ consists of four multiplications of numbers half the size,
-plus some additions, which are $O(n)$ in the number of digits.
+Note that multiplying by $2^m$ is an efficient operation because it is just a shift of digit positions.
+Therefore the recursive implementation of $x \cdot y$ consists of four multiplications of numbers half the size,
+plus some additions, which are linear in the number of digits.
 So we get the following recurrence relation for the complexity of $x \cdot y$:
 
-\begin{align*}
-T(n)  &=  4 \cdot T(n/2) + O(n)
-\end{align*}
+$$ T(n)  =  4 \cdot T(n/2) + O(n) $$
 
 From the Master theorem we see that $a = 4$, $b = 2$ and $k = 1$, and $a > b^k$.
 The theorem then tells us that $T(n) \in O(n^{\log_2(4)}) = O(n^2)$, so this is a quadratic algorithm, as expected.
@@ -256,48 +268,40 @@ Can this be improved upon?
 Yes, and to see this we first write the computation on the form
 $x \cdot y  =  z_2 \cdot 2^{2m} + z_1 \cdot 2^m + z_0$, where:
 
-\begin{align*}
-z_0  &=  x_0 y_0  &  z_1  &=  x_1 y_0 + x_0 y_1  &  z_2  &=  x_1 y_1
-\end{align*}
+$$ z_0  =  x_0 y_0, \quad  z_1  =  x_1 y_0 + x_0 y_1, \quad  z_2  =  x_1 y_1 $$
 
 Now we can be smart!
 $z_0$ and $z_2$ use only one multiplication each, while $z_1$ uses two.
 Let's introduce a new variable $z_3$, which uses only one multiplication:
 
-\begin{align*}
-z_3  &=  (x_0 + x_1) (y_0 + y_1)
-\end{align*}
+$$ z_3 = (x_0 + x_1) (y_0 + y_1) $$
 
 $z_1$ can now be formulated in terms of $z_0$, $z_2$ and $z_3$:
 
 \begin{align*}
 z_1 &=  x_1 y_0 + x_0 y_1
-    =  (x_0 + x_1) (y_0 + y_1) - x_1 y_1 - x_0 y_0
-    =  z_3 - z_2 - z_0
+\\  &=  (x_0 + x_1) (y_0 + y_1) - x_1 y_1 - x_0 y_0
+\\  &=  z_3 - z_2 - z_0
 \end{align*}
 
 This means that $x \cdot y$ can be calculated from $z_0$, $z_2$ and $z_3$, like this:
 
-\begin{align*}
-x \cdot y  &=  z_2 \cdot 2^{2m}  +  (z_3 - z_2 - z_0) \cdot 2^m  +  z_0
-\end{align*}
+$$ x \cdot y  =  z_2 \cdot 2^{2m}  +  (z_3 - z_2 - z_0) \cdot 2^m  +  z_0 $$
 
-Formulated like this, we only use *three* multiplications instead of four, plus some linear-time work.
+Formulated like this, we only use three multiplications instead of four, plus some linear-time work.
 This gives the following recurrence relation:
 
-\begin{align*}
-T(n)  &=  3 \cdot T(n/2) + O(n)
-\end{align*}
-
+$$ T(n)  =  3 \cdot T(n/2) + O(n) $$
 
 The Master theorem now tells us that $T(n) \in O(n^{\log_2(3)}) \approx O(n^{1.6})$,
-so this is a sub-quadratic algorithm that still has a complexity higher than linearithmic.^[
-    The first who noticed this algorithm was Anatoly Karatsuba in 1960
-    and therefore it is called *Karatsuba multiplication*.
-]
+so this is a sub-quadratic algorithm that still has a complexity higher than linearithmic.
 Note that even though this is asymptotically faster than the naive algorithm,
 it comes with high constant factors (we use many more additions than the naive version does).
 Therefore it is only worthwhile to use this algorithm for very large numbers, having 100 digits or more.
+
+The first who noticed this algorithm was Anatoly Karatsuba in 1960 and therefore it is called
+*[Karatsuba multiplication](https://en.wikipedia.org/wiki/Karatsuba_algorithm)*.
+
 
 
 <!--
