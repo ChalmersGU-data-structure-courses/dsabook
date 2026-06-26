@@ -2385,7 +2385,7 @@ explicit tree structure. To add a new value to a heap, or to remove
 the extreme value (the max value in a max-heap or min value in a
 min-heap) and update the heap, takes $O(\log(n))$ time in the
 [worst case]{.term}. However, if given all
-of the values in an unordered array, the values can be re-arranged
+of the values in an unsorted array, the values can be re-arranged
 to form a heap in only $O(n)$ time. Due to its space and time
 efficiency, the heap is a popular choice for implementing a
 [priority queue]{.term}.

@@ -43,7 +43,7 @@ performance benefit of having it as a precondition, and the cost
 of maintaining it as a postcondition.
 
 Sometimes an invariant can be strengthened or weakened to alter
-this trade-off. Consider again the case of an ordered array.
+this trade-off. Consider again the case of a sorted array.
 If the only reason we have the invariant is to find the least
 value in the array, perhaps it could be weakened from
 "the elements are in increasing order" to

@@ -80,12 +80,12 @@ cases we have the answer we were looking for.
 This process of reducing a problem to a smaller instance of the same problem
 is a key concept in algorithm design.
 We can easily generalise the algorithm from searching book cases to searching
-in an ordered array of elements.
+in a sorted array of elements.
 
 ::: algorithm
 #### Algorithm: Binary search
 
-To find out if a *key* is in a given ordered array,
+To find out if a *key* is in a given sorted array,
 start with an interval including the whole array.
 Repeat the following until *key* has been found, or the interval is empty:
 

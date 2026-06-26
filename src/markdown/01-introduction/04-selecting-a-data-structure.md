@@ -11,7 +11,7 @@ If we ignore the problem analysis, the risk is that we apply a data structure th
 just because it is familiar to us and we have used it before.
 A very common example of this is using a list data structure (like a dynamic array)
 where a set data structure (like a hash set) would be more suitable.
-Another common example is using an ordered array where a heap would suffice.
+Another common example is using a sorted array where a heap would suffice.
 Each of these data structures and the operations they efficiently support are explained in this book.
 The result of making the wrong choice is usually a slow program,
 or a program that uses too much memory, or both.

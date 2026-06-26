@@ -33,24 +33,24 @@ Consider these three operations for collections of values:
 :   answers true if and only if $c$ contains $x$.
 
 The operations form a little ADT for *sequences*, collections where elements have positions.
-Consider these operations on the similar data structures of *arrays* and *ordered arrays*
+Consider these operations on the similar data structures of *arrays* and *sorted arrays*
 (an array with an ordering invariant: elements are and must remain sorted in increasing order).
 Can the operations be implemented on both data structures,
 and how efficient can they be made?
 
 `get`
-:   Both arrays and ordered arrays can implement `get` efficiently, it is simply array indexing.
+:   Both arrays and sorted arrays can implement `get` efficiently, it is simply array indexing.
 
 `set`
-:   A general array can implement `set`, but the operation does not make sense for an ordered array.
-    Calling `set(0,4)` on the ordered array $[1,2,3]$ cannot give $[4,2,3]$,
+:   A general array can implement `set`, but the operation does not make sense for a sorted array.
+    Calling `set(0,4)` on the sorted array $[1,2,3]$ cannot give $[4,2,3]$,
     since that breaks the ordering invariant.
     If `set` shuffles things around around to $[2,3,4]$, it does not comply with the description of `set` and `get`.
     After running `set(0,4)` we would expect `get(0)` to give $4$, not $2$.
 
 `contains`
 :   This operation can be implemented on both data structures,
-    but it will be much faster on an ordered array, since we can use binary search.
+    but it will be much faster on a sorted array, since we can use binary search.
 
 
 #### The core abstract data types
