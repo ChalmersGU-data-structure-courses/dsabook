@@ -55,6 +55,7 @@ The formalised algorithm that operates on these deductions is called [binary sea
 and it is a very common choice for a first algorithm to teach students, so you may have seen it before.
 
 For the example of a book shelf alphabetically from left to right, binary search would be described as such:
+
 - Start by comparing the middle book in the shelf to the one we are looking for.
     - if the middle book is the one we are looking for, our search is done!
     - if we are searching for an alphabetically earlier book, search the left half of the shelf.
@@ -120,15 +121,16 @@ but also at which index it resides (or null if it is absent):
                 return mid             //         We found the search key!
         return null                    // The value is not in the array.
 
-An important technical detail here is that `mid = (start + end) / 2`
+An important technical detail here is that $\mathit{mid} = (\mathit{start} + \mathit{end}) / 2$
 is understood to use integer division, so $(6+11)/2$ is $8$, not $8.5$.
 Consider how this implementation deals with corner cases, for instance when the
-search area has a single element ($start=end$). Or when it has two elements.
-Does it calculate $mid$ correctly and yield correct result in these cases?
+search area has a single element (when $\mathit{start}=\mathit{end}$). Or when it has two elements.
+Does it calculate $\mathit{mid}$ correctly and yield correct result in these cases?
 
-In this particular implementation we use inclusive indexes, both $start$ and $end$ are inside the area.
-Another common option is to have $start$ be inclusive, and $end$ exclusive
-(so the starting interval is $(0,array.length)$).
+In this particular implementation we use inclusive indexes,
+both $\mathit{start}$ and $\mathit{end}$ are inside the area.
+Another common option is to have $\mathit{start}$ be inclusive, and $\mathit{end}$ exclusive
+(so the starting interval is $(0,\mathit{arr.size})$).
 Yet another option is to have a start index and a size of the interval.
 Each variation would do slightly different calculations,
 but require the same fundamental building operations:

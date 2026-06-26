@@ -20,7 +20,7 @@ Combining songs by the same artist could make searching for artists faster, but 
 not help us search for a title.
 Instead we can create two separate indexes: One with all songs ordered alphabetically by
 artist, and the second ordered by song title. Then anyone who knows the alphabet can quickly
-find any song or artist using a variant of the binary search algorithm (see @intro:searching).
+find any song or artist using a variant of the binary search algorithm (see @sec:intro:searching).
 
 
 #### Example: Travel by train

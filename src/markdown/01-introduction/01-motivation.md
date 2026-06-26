@@ -1,5 +1,5 @@
 
-## Motivation {#intro:motivation}
+## Motivation and core concepts {#intro:motivation}
 
 ::: TODO
 - Prio 3: update the 1st paragraph with more up-to-date examples
@@ -44,38 +44,38 @@ it depends on the algorithm.
 (The specific example of searching in a list is discussed in more detail in @sec:intro:searching.)
 
 
-## Core concepts
-
-The subjects in this book mostly fall into one of four categories:
+The subjects in this book fall into one of four categories:
 
 Data structures
 :   A data structure describes how we can *organise* our data so that it can be retrieved and updated efficiently.
     We explain the fundamental ideas of various data structures, and present the most common implementations.
-    Examples of data structures are *arrays* and *linked lists*.
+    Examples of data structures that you may be familiar with are
+    *arrays*, *linked lists*, *search trees* and *hash tables*.
 
 Abstract data types
 :   An abstract data type (ADT) describes the *capabilities* of a data structure.
     In other words, what operations can we use on a given data structure?
     Are there different data structures that have the same capabilities?
-    We use ADTs to categorise the different use cases. Examples of ADTs that
-    you may be familiar with are *lists*, *sets* and *maps*.
+    We use ADTs to categorise the different use cases. Examples of ADTs include
+    *lists*, *queues*, *sets* and *maps*.
     Slightly simplified using programming terms: An ADT is an interface, and
     a data structure is the full implementation with all the technical details.
 
-
 Algorithms
-:   An algorithm describes how to implement the tasks that we want to perform on data structures,
+:   An algorithm is a process for solving a specific problem,
+    taking an input and producing a correct output.
+    This can include operations on data structures,
     such as querying, iterating or updating them.
-    We explain the underlying ideas and how they can be utilised in implementations that operate on data structures.
+    We explain how algorithms are described, and how they are implemented as programs.
 
 Analysis
-:   The main purpose of analysing data structures and algorithms is to know how *effective* they are.
+:   The main purpose of analysing data structures and algorithms is to know how *efficient* they are.
     We focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
-    where we mathematically can derive how an algorithm behaves when the size of the data grows.
+    where we mathematically can derive how an algorithm behaves when the size of the input grows.
 
 We also show how to describe algorithms and data structures to others,
-using well-established technical terms and structure,
-such as pseudo-code and memory diagrams.
+using well-established technical terms and structures,
+such as pseudo-code and diagrams.
 We abstract away from technical details of a particular programming language,
 and focus on explaining the underlying ideas of a data structure or algorithm.
 We aim to provide you, the reader, with the means to code a good implementation in

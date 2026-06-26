@@ -10,46 +10,48 @@ Using abstraction to handle complexity is a core principle throughout computer s
 
 
 In a wide sense, any kind of software interface can be called an ADT.
-In this book, it is mainly about operations on different collections,
-like lists and sets. An operation would be something like `contains(x)`
+In this book we use ADTs mainly for specifying operations on collections such as lists or sets.
+An operation would be something like `contains(x)`
 that determines if a value $x$ is in the collection.
-Generally, a specific data structure (like an array) can have three
-relations to such an operation in an ADT:
+Generally, a specific data structure (like an array) can
+relate to an operation in an ADT in three different ways:
 
-* The operation can be implemented efficiently.
+* The operation can be implemented efficiently for the data structure.
 * The operation can be implemented, but it would be so inefficient compared to
   alternative data structures that using it indicates a bad design choice.
-* The operation cannot be implemented at all.
+* The operation cannot be implemented at all for the data structure.
 
 Consider these three operations for collections of values:
 
-`get(i)`
-:   returns the value on position i of this collection.
+`get(c,i)`
+:   returns the value on position $i$ of the collection $c$.
 
-`set(i, x)`
-:   sets the value of position i of this collection to x, overwriting the previous value.
+`set(c,i,x)`
+:   sets the value of position $i$ to $x$, overwriting the previous value.
 
-`contains(x)`
-:   answers true if and only if this collection contains x.
+`contains(c,x)`
+:   answers true if and only if $c$ contains $x$.
 
-The operations form a little ADT for sequences, collections where elements have positions.
+The operations form a little ADT for *sequences*, collections where elements have positions.
 Consider these operations on the similar data structures of *arrays* and *ordered arrays*
 (an array with an ordering invariant: elements are and must remain sorted in ascending order).
 Can the operations be implemented on both data structures,
 and how efficient can they be made?
 
-Both arrays and ordered arrays can implement `get` efficiently,
-it is simply array indexing.
-A general array can implement `set`, but the operation does not make
-sense for an ordered array.
-Calling `set(0,4)` on the ordered array $[1,2,3]$ cannot give $[4,2,3]$,
-since that breaks the ordering invariant.
-If `set` shuffle things around around to $[2,3,4]$, it does not comply
-with the description of `set` and `get`. After running `set(0,4)` we would expect `get(0)` to give $4$, not $2$.
+`get`
+:   Both arrays and ordered arrays can implement `get` efficiently, it is simply array indexing.
 
-The `contains` operation can be implemented on both arrays and ordered arrays,
-but we would expect it to run much faster on the ordered array since
-binary search is possible.
+`set`
+:   A general array can implement `set`, but the operation does not make sense for an ordered array.
+    Calling `set(0,4)` on the ordered array $[1,2,3]$ cannot give $[4,2,3]$,
+    since that breaks the ordering invariant.
+    If `set` shuffles things around around to $[2,3,4]$, it does not comply with the description of `set` and `get`.
+    After running `set(0,4)` we would expect `get(0)` to give $4$, not $2$.
+
+`contains`
+:   This operation can be implemented on both data structures,
+    but it will be much faster on an ordered array, since we can use binary search.
+
 
 #### The core abstract data types
 
@@ -65,12 +67,12 @@ Priority queues
 :   A priority queue is also a kind of sequence, but it differs in that the order depends on the *priority* of an element.
     Priority queues often have different use cases than sequences,
     and they are implemented using special data structures, so we put them in a separate category.
-    Priority queues are discussed in more detail in [Chapter @sec:heaps].
+    Priority queues are discussed in more detail in [Chapter @sec:trees].
 
 Sets
 :   A set is an unordered collection of elements, where an element can only occur once.
     Sets have no inherent order, but instead they are tailor-made for adding, removing and finding elements fast.
-    Implementations for sets and maps are discussed in [Chapters @sec:search-trees;@sec:hash-tables].
+    Implementations for sets and maps are discussed in [Chapters @sec:search-trees;Chapters @sec:hash-tables].
 
 Maps
 :   A map (or *dictionary*) is often implemented using the same data structures as sets,
