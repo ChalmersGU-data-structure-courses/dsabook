@@ -75,7 +75,7 @@ Analysis
 
 We also show how to describe algorithms and data structures to others,
 using well-established technical terms and structures,
-such as pseudo-code and diagrams.
+such as pseudocode and diagrams.
 We abstract away from technical details of a particular programming language,
 and focus on explaining the underlying ideas of a data structure or algorithm.
 We aim to provide you, the reader, with the means to code a good implementation in

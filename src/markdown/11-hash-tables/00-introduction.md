@@ -6,7 +6,7 @@
 - Decide what to do about the level 3 subsections
 - References for: Sets and maps, Linked lists, avl-trees...
 - Internal references to later sections from overview. SepChain->complexity.
-- Decide where to introduce pseudo-code
+- Decide where to introduce pseudocode
 - Terminology: Index/position, cell/position/whatever, entry (for (K,V) pairs), ...
 :::
 
