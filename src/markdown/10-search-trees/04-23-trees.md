@@ -113,7 +113,7 @@ and then *promote* the middle value to the parent.
 Here is how it can look like when we insert $c$ into a leaf 3-node consisting of $a$ and $b$.
 The resulting leaf node becomes too big, so we split and promote the middle value:
 
-![](images/TwoThree-InsertSplit.png)
+![](images/TwoThree-InsertSplit.png){width=60%}
 
 Promoting a value means that we insert it into the parent node.
 If the parent is a 2-node, then we just change it to a 3-node and we are done.
@@ -121,7 +121,7 @@ But if the parent is a 3-node, we are back in the same situation as before:
 we get a 4-node that we need to split, and then we promote *its* middle value to its parent.
 Like this:
 
-![](images/TwoThree-InsertSplitMiddle.png)
+![](images/TwoThree-InsertSplitMiddle.png){width=80%}
 
 
 ::: dsvis
@@ -180,7 +180,7 @@ There are three main cases to consider:
 To solve case 2 we first try to "steal" a value from a sibling.
 This works if any sibling is a 3-node: then we can rotate over the parent that lies between the nodes, like this:
 
-![](images/TwoThree-DeleteSteal.png)
+![](images/TwoThree-DeleteSteal.png){width=80%}
 
 If neither sibling is a 3-node, we cannot steal anything.
 In this situation we can instead *merge* our empty node with a sibling and the parent that lies between.
@@ -188,7 +188,7 @@ This is the opposite of splitting.
 When we merge we create a new 3-node with the sibling value and the parent value.
 The parent value is therefore *demoted* to its child, and the rank of the parent node is decreased by one:
 
-![](images/TwoThree-DeleteMerge.png)
+![](images/TwoThree-DeleteMerge.png){width=80%}
 
 In this example we were lucky -- the parent was a 3-node so it will become a 2-node and we are done.
 However, if the parent had been a 2-node, then it would become a 1-node after merging,
@@ -227,7 +227,7 @@ Therefore, this kind of trees are called *red-black trees*.
 The key insight is that any 2-3-4 tree can be converted to a corresponding red-black tree.
 The conversion looks like this, for any 2-, 3- or 4-node:
 
-![](images/TwoThree-Redblack-vs-234.png)
+![](images/TwoThree-Redblack-vs-234.png){width=80%}
 
 All the special cases for insertion and deletion in a 2-3-4 tree can be translated into rules for the red-black tree.
 The advantage is that we do not need a complicated node structure,

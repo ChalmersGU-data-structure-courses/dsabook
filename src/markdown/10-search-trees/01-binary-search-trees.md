@@ -20,16 +20,15 @@ The only thing that differentiates a BST from a normal binary tree is this invar
 As explained in @sec:analysis-1:invariants,
 an invariant is a condition that the BST *always* must satisfy.
 
+![Four example BSTs, both representing the same set of values.](images/BST-ExampleVariants.png){width=100% #fig:BST-example}
+
 This means that the example tree from @sec:trees:binary-trees is not a BST, because it violates the invariant,
-but @fig:BST-example shows two correct BSTs.
-
-![Two example BSTs, both representing the same set of values.](images/BST-Example.png){#fig:BST-example}
-
-Note that both these trees represent the same set of values,
+but @fig:BST-example shows four correct BSTs.
+Note that all these trees represent the same set of values,
 which means that if we use them to implement a *set*,
 then they should be indistinguishable for the program that makes use of them.
-However, there is one important difference between the two trees:
-the left one is much more *balanced* than the right one,
+However, there is one important difference between the four trees:
+the middle ones are much more *balanced* than the other two,
 and this has consequences for the efficiency of the basic operations.
 
 ### Implementing BST sets and maps
@@ -227,12 +226,15 @@ The next question is, how do we find the largest value in a tree?
 This is easy, we just go as far to the right as possible -- then we will end up in the largest element.
 (And similar for the smallest value -- we go as far to the left as possible.)
 
+![
+    Deleting the root (C) from the tree in (a) results in either of the two trees in (b).
+](images/BST-ExampleDeleteRoot.png){width=100% #fig:ExampleDeletedRoot}
+
+
 ::: example
 #### Example: Deleting from a BST
 
-Suppose we want to delete the value X from the following tree:
-
-![](images/BST-Example.png)
+Suppose we want to delete the value C from @fig:ExampleDeletedRoot(a).
 
 - First we find the C node, and the node with the largest value in the left subtree, which is the B node.
 - We delete the B node, which means that we have to redirect the right child of its parent X to Y.
@@ -244,11 +246,8 @@ Alternatively, if we instead decide to replace with the smallest element in the 
 - We delete the D node, which means that we have delete the right child of its parent X.
 - Finally we replace the value in the C node with D.
 
-In the end we will get one of the following two BSTs:
-
-![](images/BST-ExampleDeleteRoot.png)
-
-Notice that both of these trees are different representations of exactly the same set!
+In the end we will get one of the two BSTs in @fig:ExampleDeletedRoot(b).
+Notice that both of these trees are different representations of exactly the same set.
 :::
 
 Now we are ready to formalise deletion into an algorithm.
@@ -330,8 +329,8 @@ The height in turn depends on the tree structure:
 
 -   If the tree is *balanced*, meaning that all leaves are approximately on the same level,
     then the height is logarithmic in the number of nodes, and then searching is $O(\log(n))$.
-    The left tree in @fig:BST-example is an example of a balanced tree.
--   But if the tree us *unbalanced*, for example as the extremely right-leaning tree in @fig:BST-example,
+    The middle trees in @fig:BST-example are examples of balanced trees.
+-   But if the tree us *unbalanced*, for example as the extremely left- and right-leaning trees in @fig:BST-example,
     then the height is the same as the number of nodes, and search becomes linear $O(n)$.
 
 If we add values to a BST in sorted order (reversely sorted), then we get an extremely unbalanced tree.

@@ -30,7 +30,7 @@ $$ -1\leq\text{bf}(t)\leq 1 \text{ for all tree nodes } t $$
 When we draw AVL trees we usually write the balance factor beside each node.
 Here are two balanced AVL trees representing the same set {A,B,C,D,E,F,G}:
 
-![](images/AVL-Balanced.png)
+![](images/AVL-Balanced.png){width=60%}
 
 Now we have to ensure that we restore the balance whenever a tree node becomes unbalanced,
 and we do that by using *tree rotations*.
@@ -57,14 +57,14 @@ or any other ancestor all the way up to the root.
 For example, if we want to add H to the previous trees, then they will look like follows,
 where the balance factors that are changed are shown in red:
 
-![](images/AVL-Unbalanced.png)
+![](images/AVL-Unbalanced.png){width=60%}
 
 Notice that the left tree is still AVL balanced, so we do not have to do anything further.
 But in the right tree, the gradparent F have become unbalanced.
 The F node is *right-heavy*, and we can solve this imbalance by rotating it to the left.
 In this case it is enough with a *single* rotation:
 
-![](images/AVL-LeftRotate1.png)
+![](images/AVL-LeftRotate1.png){width=60%}
 
 #### Single rotations
 
@@ -72,14 +72,14 @@ The example above was when the unbalanced node had a *right-right imbalance*.
 This means that not only the node itself is right-heavy, but its child is too.
 When a node is right-right unbalanced, it has the general structure to the left:
 
-![](images/AVL-LeftRotate2.png)
+![](images/AVL-LeftRotate2.png){width=80%}
 
 And after a single left rotation, it will look like the structure on the right.
 As you can see, suddenly the imbalance disappears.
 
 But there is another possibility that can be solved in the same way, if the subtree $t_2$ is as high as $t_3$:
 
-![](images/AVL-LeftRotate3.png)
+![](images/AVL-LeftRotate3.png){width=80%}
 
 Before the rotation, the $x$ node had a balance factor of $+2$, but afterwards it has $-1$.
 This is not a perfect balanced tree, but it is AVL balanced.
@@ -90,7 +90,7 @@ There is a third right-heavy case --
 when the *right-left* grandchild ($t_2$) is higher than the *right-right* ($t_3$).
 If we perform a single rotation over X we do not win anything:
 
-![](images/AVL-WrongDoubleRotate.png)
+![](images/AVL-WrongDoubleRotate.png){width=80%}
 
 Now we transformed the right-left imbalance into a left-right imbalance, which is equally bad.
 
@@ -98,7 +98,7 @@ The solution is to perform a *double rotation*.
 That is, first we transform the right-left case into a right-right case, by a right rotation over Y.
 After this we can rotate left over X:
 
-![](images/AVL-DoubleRotate.png)
+![](images/AVL-DoubleRotate.png){width=100%}
 
 And now all nodes are AVL balanced!
 The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
