@@ -34,8 +34,8 @@ Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
-    for i = 0 to 2:
-        for j = 0 to n-1:
+    for i in 0 .. 2:
+        for j in 0 .. n-1:
             sum += 1
 
 - [x] $O(n)$
@@ -61,7 +61,7 @@ Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
-    for i = 0 to n*n-1:
+    for i in 0 .. n*n-1:
         sum += 1
 
 - [x] $O(n^2)$
@@ -85,8 +85,8 @@ Assume that all variables are integers.
 Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
-    for i = 0 to n-2:
-        for j = i+1 to n-1:
+    for i in 0 .. n-2:
+        for j in i+1 .. n-1:
             tmp = AA[i][j]
             AA[i][j] = AA[j][i]
             AA[j][i] = tmp
@@ -114,7 +114,7 @@ Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
-    for i = 1 to n:
+    for i in 1 .. n:
         j = 1
         while j <= n:
             sum += 1
@@ -146,7 +146,7 @@ Assume that all variables are integers.
     sum = 0
     i = 1
     while i <= n:
-        for j = 1 to n:
+        for j in 1 .. n:
             sum += 1
         i = i * 2
 
@@ -176,8 +176,8 @@ Assume that array `arr` contains $n$ values, "random" takes constant time,
 and "sort" takes $n \log(n)$ time.
 
     sum = 0
-    for i = 0 to n-1:
-        for j = 0 to n-1:
+    for i in 0 .. n-1:
+        for j in 0 .. n-1:
             arr[j] = random(n)
         sort(arr)
 
@@ -206,7 +206,7 @@ Assume that all variables are integers.
 Assume array `arr` contains a random permutation of the values from 0 to $n-1$.
 
     sum = 0
-    for i = 0 to n-1:
+    for i in 0 .. n-1:
         j = 0
         while arr[j] != i:
             sum += 1
@@ -236,7 +236,7 @@ Assume that all variables are integers.
 
     sum = 0
     if EVEN(n):
-        for i = 0 to n-1:
+        for i in 0 .. n-1:
             sum += 1
     else:
         sum += n

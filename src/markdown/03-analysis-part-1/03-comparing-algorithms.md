@@ -10,17 +10,17 @@
 If two algorithms that solve the same problem, how do you compare their performance?
 One way is to do an [empirical analysis]{.term}:
 Implement the both algorithms and test  them on various inputs, and measure the runtime.
-This can be time consuming for developer, and there are plenty of pitfalls.
-The measured runtime depends, apart from the algorithm itself on:
+This can be time consuming for the developer, and there are plenty of pitfalls.
+Apart from the efficiency of the algorithm itself, the measured runtime can depend on:
 
-* Details of the hardware you are running on.
-* How optimized the code for the specific implementations are.
-* How you construct the inputs.
-* The size of your chosen inputs.
-* The version and configuration of the compiler you are using.
-* What other processes your computer is running.
-* The charge level of your laptop battery or operating system power settings.
-* Hundreds of other difficult-to-predict factors.
+* details of the hardware you are running on,
+* how optimized the code for the specific implementations are,
+* how you construct the inputs,
+* the size of your chosen inputs,
+* the version and configuration of the compiler you are using,
+* what other processes your computer is running,
+* the condition of your laptop battery, and
+* hundreds of other difficult-to-predict factors.
 
 Even if you manage to solve all these issues and compare two algorithms,
 when someone else designs a third algorithm, they will not be able to reproduce your
@@ -37,12 +37,13 @@ We do this by classifying algorithms into *complexity classes*.
 We have already been doing this in earlier chapters,
 when saying that Binary search is logarithmic time,
 Linear search is linear time, and various sorting algorithms are quadratic time.
-This is generalised by big-$O$ notation (pronounced "big oh notation" or "ordo notation"),
+This is generalised by the big-$O$ notation (pronounced "big oh notation" or "ordo notation"),
 using a mathematical expression for each complexity class:
-we say Binary search is $O(\log(n))$, Linear Search is $O(n)$
-and Insertion Sort is $O(n^2)$. This formula cannot be used to calculate the time
+we say Binary search is $O(\log(n))$, Linear search is $O(n)$
+and Selection and Insertion sort are $O(n^2)$.
+A big-$O$ formula cannot be used to calculate the time
 it takes to sort a list in seconds, but it describes perfectly how
-execution time increases (in the worst case) when the input size grows.
+execution time increases when the input size grows.
 
 With a bit of practice, determining the complexity class of an algorithm or
 a program is quick and easy.
@@ -57,31 +58,37 @@ not be understood as the exact number 1, but as any constant value independent o
 This will make more sense after we introduce the formal definition of big-$O$ notation,
 but for now any part of an algorithm where the execution time does not depend on input
 size is considered constant time, $O(1)$. Swapping two elements in an array is a good
-example of a tiny algorithm that is $O(1)$, it takes the same amount of time to swap
+example of a tiny operation that is $O(1)$ -- it takes the same amount of time to swap
 two elements in a huge array as it does in a tiny array.
 
 #### What are we measuring?
 
-Generally, complexity can be used to measure us of various
+In general, complexity can be used to measure us of various
 *computational resources* of an algorithm.
 By far the most common resource is running time. When we say
 Insertion sort is $O(n^2)$, we mean its execution time will grow
-quadratically with the size of the input. We can also measure
-memory use. This is called *space complexity* as opposed to *time complexity*.
+quadratically with the size of the input. But we can also measure
+memory use: this is called *space complexity* as opposed to *time complexity*.
 
 Using space complexity, we can give a more precise meaning to the concept of in-place
-sorting (@sec:sorting-1:overview). An algorithm that is not in-place will have memory complexity $O(n)$, the
-memory usage grows linearly with input size. If we double the input size, memory usage
-will also double. An in-place algorithm typically has memory complexity $O(1)$, meaning
-that memory usage is independent of the size of the input (but there are plenty of
-algorithms that are considered in-place that have $O(\log(n))$ memory complexity).
+sorting (@sec:sorting-1:in-place-sorting).
+An in-place algorithm typically has space complexity $O(1)$,
+meaning that their memory usage is independent of the size of the input.[^
+    Strictly speaking, resursive algorithms never use constant memory,
+    because every resursive call uses up a little memory for book-keeping.
+    Therefore one often excludes the book-keeping memory when talking about in-place recursive algorithms.
+]
+A sorting algorithm that is *not* in-place has to allocate memory for the resulting array:
+so its memory usage grows linearly with the size of the input.
+Therefore it has *linear* space complexity, $O(n)$:
+if we double the input size, memory usage will also double.
 
-Lots of algorithms have $O(1)$ space complexity, for instance both binary search and
-Linear search (as defined in this book) do. This can be determined relatively easily
-by looking at the source code, the only memory allocated is for a few local variables containing
-indexes or pointers to values, regardless of how large the input array is.
-Space complexity can be much harder to determine for other algorithms, especially recursive ones,
-where each recursive call to a function tends to use a bit om memory until it terminates.
+Both linear and binary search have $O(1)$ space complexity.
+This can be determined easily by just looking at the source code:
+the only memory allocated is for a few local variables, regardless of how large the input array is.
+But it can be much harder to infer the space complexity of other algorithms, especially recursive ones.
+Each recursive call tends to allocate more memory, but the size of the allocated memory
+can depend on how deeply nested the recursion is.
 
 #### Quantitative properties of the input
 
@@ -92,7 +99,7 @@ This is typical for algorithm involving a data structure, the input size of an o
 is the current number of elements contained in the structure.
 
 Sometimes the input is a single number, and the behaviour of the algorithm depends on how large that number is.
-One example is Euclid's algorithm for finding the GCD (greatest common divisor) of two integers:
+One example is Euclid's algorithm for finding the *greatest common divisor* of two integers:
 the runtime of the algorithm is proportional to the logarithm of the largest integer.
 Another example is various algorithms for determining if a number is a prime number.
 Usually such algorithms are used on very large numbers, so the input size $n$ is chosen to be
@@ -120,18 +127,18 @@ Adding or comparing two numbers are examples of basic operations in most program
 as are assigning a variable or retrieving an array value at a given position.
 But summing the all values in an array of size $n$ is not $O(1)$, because the time depends on the size of the array.
 Creating a new array of size $10$ is $O(1)$, but creating a new array of size $n$ is $O(n)$, at least
-if the array content is initialised to a default value
-(in some languages you can allocate memory without initializing the content).
+if the content is cleared after the array is created (which is done by almost all programming languages).
 
-Suppose we are performing binary search on a large sorted array of email addresses (stored as strings).
+Suppose we run binary search on a large sorted array of email addresses (stored as strings).
 The input size $n$ is the length of the array, and the algorithm does a number of comparisons on emails.
 Generally speaking, comparing two strings is linear time in the length of the shortest string
 (in the worst case it needs to compare all characters), so should each comparison be considered $O(n)$?
 The answer is that it should not. Recall that $n$ is the number of email addresses, saying that
 each individual comparison is $O(n)$ would mean that when we double the number of email addresses
 the time for a single comparison would double. In this example, we can consider comparisons of strings
-to be $O(1)$, because the time it takes to compare two emails is independent of our chosen input size.
+to be $O(1)$, because we can assume that the strings are never longer than, say, 100 characters.
 
+<!--
 ::: example
 #### Example: Linear search
 
@@ -154,10 +161,11 @@ regardless of the values of $n$, so it is a basic operation.
 
 There are also some hidden basic operations.
 Advancing the loop means increasing the counter $i$ by one, an arithmetic operation and a memory write,
-each taking constant time. There is also some initialization of the variables $arr$ and $val$, and
+each taking constant time. There is also some initialization of the variables *arr* and *val*, and
 performing a single return from the function, all of these are constant time,
 and they are only performed once each.
 :::
+-->
 
 ::: example
 #### Example: Calculating the median-of-three
@@ -198,11 +206,11 @@ Recall the Bubble sort algorithm from @sec:sorting-1:bubble-sort:
                 if arr[j-1] > arr[j]:
                     swap(arr, j-1, j)
 
-In addition to the initialization of variable and advancing the loops as before,
+In addition to the initialization of the variable and advancing the loops as before,
 there are two basic operations:
 the `if`-clause comparison and the `swap` operation.
 
-Technically, the `swap` operation does several basic operation, but the total
+Technically, the `swap` operation does several basic operations, but the total
 time to perform a fixed number of constant time operations is still a constant.
 This highlights an important aspect of big-$O$: It does not matter if we perform
 one, two, or three constant time operations, the total time is still $O(1)$, since it
@@ -210,24 +218,23 @@ is independent from the input size $n$. In fact we could look at the whole if-st
 and conclude that comparing and swapping if needed is a $O(1)$, considering the whole
 body of the loop a single constant time operation.
 
-The outer `i` loop runs $n$ times,
-and for each iteration the inner `j` runs at most $n$ times.
+The outer $i$ loop runs $n$ times,
+and for each iteration the inner $j$ loop runs at most $n$ times.
 To be more precise, the inner loop first runs $n$ times,
 then $n-1$ times, then $n-2$ times, and so on.
 The total number of comparisons is therefore
 $n+(n-1)+(n-2)+\cdots+1$, which can be simplified to $n(n+1)/2$.
-This is approximately $1/2\cdot n^2$, meaning that
-the running time is $T(n) \approx c_3/2 \cdot n^2$.
-This is proportional to $n^2$, and we call this a *quadratic* running time.
+This is approximately $\frac{1}{2} n^2$, meaning that
+the running time is $T(n) \approx \frac{c_3}{2} n^2$.
+This is proportional to $n^2$, and we call this a *quadratic* running time, $O(n^2)$
 :::
 
 Note how much detail is simplified away by using complexity classes.
-We do not differentiate between $n^2$ and $1/2 \cdot n^2$.
+We do not differentiate between $n^2$ and $\frac{1}{2}n^2$.
 There is no "triangular" complexity class.
-One could say that asymptotically, a triangle is a square.
-This may seem like a weakness of big-$O$, but it is a fact the
-strength that makes it such a useful tool for comparing algorithms.
+This may seem like a weakness of big-$O$, but it is a fact
+a strength that makes it such a useful tool for comparing algorithms.
 To convince yourself of this, consider this: runtime is only interesting
-for large $n$. All algorithms are fast for small inputs.
-Even if an algorithm is $1/100 \cdot n^2$, it is still much slower than
+for very large $n$. All algorithms are fast for small inputs.
+Even if an algorithm is $\frac{1}{100}n^2$, it is still much slower than
 any $O(n)$ algorithm, for any $n$ that we care about.

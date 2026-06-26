@@ -21,14 +21,14 @@ By "easily" we mean that there are some rules of thumb that covers almost all pr
 We have only seen a few examples of complexity classes so far, notably $O(1)$, $O(\log(n))$,
 $O(n)$, and $O(n^2)$. There are however infinitely many complexity classes.
 Any distinct exponent of $n$ is a separate class, cubic complexity, O($n^3$), is different
-from quadratic, $O(n^2)$ and both are different from $O(n^{2.5})$ (that does not have a convenient name).
+from quadratic, $O(n^2)$ and both are different from $O(n^{2.5})$.
 We can also combine complexity classes by multiplying them, and get things like $O(n^2 \log(n))$
 
 This does not mean every expression is a separate complexity class.
 Notably, something like $O(3n)$ is not a separate class from $O(n)$.
 Writing $O(3n)$ is not mathematically incorrect, but if you ever find yourself
 describing the runtime of an algorithm to be $O(3n)$, you are doing something wrong.
-Essentially, $O(n)$ is the simplified form of $O(3n)$. The simplification rule is that
+Essentially, $O(n)$ is the canonical form of $O(3n)$. The simplification rule is that
 $O(kx)=O(x)$ for any constant $k$, so things like $4n^2$ can be simplified the same way.
 This follows directly from the intuition that big-$O$ captures growth rate.
 
@@ -36,22 +36,21 @@ Perhaps more surprisingly, $O(n + \log(n))$ is also the same as $O(n)$.
 This makes more sense when you consider that $n + \log(n)<2n$ for large $n$,
 and that $O(2n)=O(n)$. The general simplification rule is that for addition,
 only the *dominant term* is relevant.
-Intuitively: for two expressions $x$ and $y$, $O(x+y)=O(max(x,y))$.
+Intuitively: for two expressions $x$ and $y$, $O(x+y)=O(\max(x,y))$.
 This is slightly oversimplified, since for concrete examples like $O(10n+n^2)$,
 the maximum depends on the value of $n$. We will return to a formal definition,
-but for now we are satisfied that $n^2$ term is dominant for large $n$.
-
-
-Two interesting observations from these simplification rules:
+but for now we are satisfied that the $n^2$ term is dominant for large $n$.
+Here are two interesting observations from these simplification rules:
 
 - Any polynomial with degree $k$ with positive coefficients,
-  $O(a_k n^k + a_{k-1} n^{k-1} + \dots + a_1 n + a_0)$ is simplified to $O(n^k)$.
+  $O(a_k n^k + a_{k-1} n^{k-1} + \dots + a_1 n + a_0)$,
+  is simplified to $O(n^k)$.
   The coefficients are removed because they are constant factors, and we only keep the dominant term.
 - A fully simplified $O$-expression for an algorithm with a single size parameter $n$ will never be an addition.
 
 These simplification rules are supremely useful, because they correspond directly to
 programming language operations. Performing operations in sequence corresponds to addition,
-and loops correspond to multiplication.
+and loops correspond to multiplication:
 
 - If a program performs an $O(n)$ operation, an $O(n^2)$ operation and another
   $O(n)$ operation in sequence, the total runtime is the sum $O(n+n^2+n)$,
@@ -66,10 +65,11 @@ We can use the upper bound to define an ordering between complexity classes,
 which makes finding the dominant term easier.
 There are infinitely many complexity classes, but here are a few common ones:
 
-$$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < O(2^n) $$
+$$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(2^n) $$
 
-Note that we have excluded many many classes, for example $O(\log(n)^2)$ and $O(\sqrt{n})$.
-You can try to figure out where in the hierarchy they should be placed.
+Note that we have excluded many many classes, for example
+$O(\log(n)^2)$, $O(n^2\log(n))$ and $O(\sqrt{n})$.
+Try to figure out where in the hierarchy they should be placed.
 
 
 #### Analysing code fragments {#analysis-1:analysing-code-fragments}
@@ -78,10 +78,9 @@ Looking at a piece of code, and immediately determining its complexity class
 is a very useful skill for any programmer.
 It gives a good idea of the scalability of the code, and which
 parts it is useful to optimise. If a function performs an $O(2^n)$ operation
-and an $n \log(n)$ operation, spending any time optimising the latter is a
-complete waste of time. The $n \log(n)$ operation will be a fraction of a
-percent of the total runtime, and making it faster will reduce only ever reduce
-runtime by a fraction of that.
+and an $O(n\log(n))$ operation, spending any time optimising the latter is a
+complete waste of time. The $O(n\log(n))$ operation will be a fraction of a
+percent of the total runtime, and making it faster will not have any noticeable impact.
 
 When we want to analyse the complexity of code fragments, the following three
 rules of thumb will get us very far:
@@ -93,8 +92,8 @@ rules of thumb will get us very far:
   where $O(f_i)$ is the complexity of $p_i$.
 
 - An **iteration**, $\langle\text{for } x \in A: p\rangle$,
-  has the complexity $n\cdot O(n\cdot f)$,
-  where $n=|A|$ and $O(f)$ is the complexity of the loop body $p$.
+  has the complexity $O(n\cdot f)$,
+  where $n$ is the size of $A$ and $O(f)$ is the complexity of the loop body $p$.
 
 It is important to remember to simplify the resulting expression, and never
 write things like $O(2n+1)$ (which is $O(n)$).
@@ -111,7 +110,7 @@ If you are unsure if something is an atomic operation, just ask yourself
 
 The complexity of performing a function call like `insertionSort(arr)`
 is just the complexity of the called function, in the case of Insertion sort
-it would be $O(n^2)$ where $n$ is the size of $arr$.
+it would be $O(n^2)$ where $n$ is the size of `arr`.
 
 A tricky case would be if the function parameter is not the input of the algorithm we analyse.
 If somewhere inside an algorithm we do `insertionSort([a,b,c])` (sorting three values),
@@ -139,35 +138,37 @@ Clearly, this is constant time, not exponential, since the condition is always f
 Ultimately, this comes down to having a good understanding of what the worst case is.
 Consider this example, that runs an expensive operation for all prime numbers between $0$ and $n$:
 
-    for i from 0 to n:
-        if is_prime(i):
+    for i in 0 .. n:
+        if isPrime(i):
             expensiveOperation()
 
 The worst case is that all numbers are prime numbers, but that is not how prime number works.
 This particular example would require serious mathematics to give a good estimate of how often
-the `if`-statement can be true for a given n. This goes to show
+the `if`-statement can be true for a given $n$.
 
 
 #### For-each-loops
 
 What if we perform some operation $p$ for each element in an array $A$, what is the complexity?
-It depends on the size of the array, and the complexity of $p$. Note that $p$ can be a complex operation, for example a loop itself. Consider this code snippet:
+It depends on the size of the array, and the complexity of $p$.
+Note that $p$ can be a complex operation, for example a loop itself.
+Consider this code snippet:
 
     sum = 0
-    for a in arr:
-        for b in arr:
+    for each a in arr:
+        for each b in arr:
             sum += a*b
 
-The statement `sum += a*b` performs a multiplication, and addition and a variable assignment,
+The statement `sum+=a*b` performs a multiplication, an addition and a variable assignment,
 all of which are atomic operations, so the statement is $O(1)$.
-If $arr$ has $n$ elements, the inner for loop does $O(n)$
+If `arr` has $n$ elements, the inner loop does $O(n)$
 iterations for each iteration of the outer loop, which in turn does $O(n)$ iterations.
 That makes the whole runtime $O(n \cdot n \cdot 1)$, which simplifies to $O(n^2)$.
 
 *Don't be fooled by loops*!
-Not all loops runs $n$ iterations, for example our array $arr$ could very well consist of $n^2$ elements,
+Not all loops runs $n$ iterations, for example our array `arr` could very well consist of $n^2$ elements,
 or not depend on $n$ at all.
-If $arr$ had $n^2$ elements, then the complexity is of the example would be $n^2 \cdot n^2 \cdot 1$,
+If `arr` had $n^2$ elements, then the complexity is of the example would be $n^2 \cdot n^2 \cdot 1$,
 which simplifies to $O(n^4)$.
 
 #### While-loops
@@ -191,7 +192,7 @@ In general, even determining if a `while`-loop terminates can be a genuinely har
 
 #### A general approach
 
-There is a completely fool proof method of determining complexity of any piece of code:
+There is a completely foolproof method of determining complexity of any piece of code:
 Look at each line of code and answer:
 
 - How many times is the line executed (if it is inside a loop)?
@@ -206,15 +207,15 @@ Look at this example code snippet, taking an array of size $n$, and doing someth
 To determine the complexity, we do not even need to understand what the function does,
 every piece of executable code has a complexity, even code that does not work.
 In the example, we have annotated each line of code with a comment on the form:
-`number of executions*complexity=total time`.
+*number of executions · complexity = total time*.
 
     hasDouble(arr):
-        result = false                      // O(1)*O(1)=O(1)
-        for x in A:                         // runs O(n) iterations
-            double = x*2                    // O(n)*O(1)=O(n)
-            if linearSearch(A, double):     // O(n)*O(n)=O(n^2)
-                result = true               // O(n)*O(1)=O(n)
-        return result                       // O(1)*O(1)=O(1)
+        result = false                   // O(1) · O(1) = O(1)
+        for each x in A:                 // runs O(n) iterations
+            double = x*2                     // O(n) · O(1) = O(n)
+            if linearSearch(A, double):      // O(n) · O(n) = O(n^2)
+                result = true                // O(n) · O(1) = O(n)
+        return result                    // O(1) · O(1) = O(1)
 
 The only remaining work is looking at all the comments and seeing that $O(n^2)$ is the dominant term.
 The function is $O(n^2)$. There are some potential pitfalls here.
@@ -223,11 +224,11 @@ The function is $O(n^2)$. There are some potential pitfalls here.
 But if the line `double=x*2` is changed to `double=arr[0]`, that makes `linearSearch`
 $O(1)$ in this context, and the whole function would be $O(n)$.
 
-- The comment `result = true` only runs `O(n)` times if we assume that the
+- The statement `result=true` only runs $O(n)$ times if we assume that the
 Linear search can return true often enough.
 Determining if this is possible would require a more careful analysis,
 where we actually construct a worst case. Luckily, that does not matter since
-the function will be `O(n^2)` even if the search always returns false.
+the function will be $O(n^2)$ even if the search always returns false.
 See if you can come up with a case where the search succeeds $O(n)$ times
 (hint: it does not have to be true all the time, being true $n-1$ or $n/2$
 is still $O(n)$).
@@ -242,7 +243,7 @@ of the algorithm.
     binarySearch(arr, key):
         start = 0
         size = arr.size
-        while size>0:
+        while size > 0:
             mid = start + size/2
             if arr[mid] == key:
                 return mid
@@ -254,8 +255,8 @@ of the algorithm.
 
 Every individual operation is atomic, so the only question is how many time the loop runs.
 Ignoring `size=size-1` (which we can do if we assume the condition is always false),
-this is a clean example of a loop that starts with $size=n$,
-then cuts $size$ in half (using integer division) until it
+this is a clean example of a loop that starts with `size` = $n$,
+then cuts `size` in half (using integer division) until it
 reaches 0. All such loops run $O(\log(n))$ iterations, so every individual
 line inside the loop has a total runtime of $O(\log(n))$,
 which is thus the runtime of the whole function.

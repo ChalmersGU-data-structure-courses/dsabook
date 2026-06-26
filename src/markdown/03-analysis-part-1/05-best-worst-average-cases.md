@@ -30,16 +30,17 @@ The best case for Insertion sort is if the input is already sorted, in which
 case the runtime is $O(n)$. This is an unusually interesting best case,
 since it naturally occurs quite frequently in some applications.
 
-If we run Insertion sort many times on many randomly selected arrays of size $n$,
+If we run Insertion sort many times on many randomly generated arrays of size $n$,
 we could expect the `while`-loop on average to go halfway through the array before
 finding the correct insertion index.
 So, in the *average case* Insertion sort runs for half as many iterations as the worst case.
 However, this definition of the average case depends on an important assumption:
-that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed!
+that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed.
+This is very rarely the case.
 
 #### Constructing a best or worst case
 
-How does the best case for Linear search look?
+How does the best case for linear search look?
 A common mistake is to say that the best case for a linear search
 is that the array is empty. This is a fundamental misunderstanding
 of what worst case and best case mean.
@@ -48,18 +49,17 @@ When we say linear search is best case $O(1)$ we mean that for
 terminates in constant time.
 
 For linear search to be best case $O(1)$, we must be able to construct
-a best case input of, for instance, input size 100. The input size of
-`linearSearch(arr, x)` is the length of the array `arr`.
+a best case input for any size, for instance 100. The input size of
+`linearSearch(arr,x)` is the length of the array `arr`.
 Clearly the best case for size 100 cannot be that `arr` is empty, because there are
-no empty arrays of length 100. The best case of `linearSearch(arr, x)` is
-an array where `arr[0]==x`. This best case is easy to construct for any size.
+no empty arrays of length 100.
+Instead, the best case of `linearSearch(arr,x)` is an array where `arr[0]==x`,
+and this is easy to construct for any size.
 
-When we say the worst case
-of Linear Search $O(n)$, we mean that for every size $n$
-there is a worst case input value for which the algorithm takes
-linear time. One such worst case for `linearSearch(arr, x)`
-is that `x` does not occur in `arr`, another is that in
-only occurs in the last position of `arr`.
+When we say the worst case of linear Search is $O(n)$, we mean that for every size $n$
+there is a worst case input value for which the algorithm takes linear time.
+One such worst case for `linearSearch(arr,x)` is that `x` does not occur in `arr`,
+another is that it only occurs in the last position of `arr`.
 
 #### The value of pessimistic estimates
 
@@ -76,7 +76,7 @@ someone can deliberately or accidentally construct a large data set that consist
 The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a very efficient algorithm. Sorting lists that are already
 sorted may sound silly, but consider an application where one process occasionally sorts an array
 (perhaps to display it to a user), and another occasionally makes changes to specific values.
-If the expected number of changes made between sorting runs is close to zero,
+If the expected number of changes made between sorting runs is very small,
 then Insertion sort is perhaps the best possible algorithm.
 
 
@@ -113,7 +113,7 @@ This dependency on the specific application runs contrary to the goal of algorit
 analysis, which is to study and compare algorithms themselves, independent from their
 specific applications. Consider Linear search again. It is faster when searching for an element
 appearing in the array (particularly if it appears early on), but finding a general answer
-to the question "how likely is a random element to appear in an array of size n" is
+to the question "how likely is a random element to appear in an array of size $n$" is
 entirely impossible.
 
 This problem is not just limited to sorting and searching.

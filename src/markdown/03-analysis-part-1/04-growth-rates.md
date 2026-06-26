@@ -6,13 +6,13 @@ Now you want to sort all your books so that you can search for them quickly (usi
 You use one of the sorting algorithms from [Chapter @sec:sorting-1]
 and notice it takes one hours to sort the books in one shelf.
 
-- How long time will it take to sort all 10000 books?
+- How long time will it take to sort all 10,000 books?
 - If you buy a sorting robot that is 100 times faster than you are,
   will you finish sorting books in one hour?
 
 The sorting algorithms from [Chapter @sec:sorting-1]
 all have a running time proportional to $n^2$ where $n$ is the number of books.
-Using our new big-$O$ notation, the algorithms are $O(n^2)$ time.
+Using our new big-$O$ notation, the algorithms have $O(n^2)$ time complexity.
 This means that if you double the size of the input, the running time will quadruple.
 If you multiply the input size by 100, the running time will be $100^2 = 10,000$ times longer.
 So, it will take 10,000 hours for you to sort all the books,
@@ -37,7 +37,6 @@ But as a thought experiment we can assume something like $T(n)=3n+5$
 for an algorithm, using some unit of time, and use that to determine
 how large problems can be solved in a given timeframe.
 @Tbl:problem-size-speedup shows this for some example time functions.
-In the table, every operation is assumed to take $0.1$ ms.
 
 Time function ($T(n)$)     1 ms        10 ms        100 ms       1 second
 -----------------------  ------  -----------  ------------  -------------
@@ -49,7 +48,7 @@ $n^2/10$                   $10$         $31$         $100$          $316$
 $2^n/20$                    $7$         $11$          $14$           $17$
 
 : Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
-  for different various time functions.
+  for different various time functions. We assume that every operation takes $0.1$ ms.
   {#tbl:problem-size-speedup}
 
 This table illustrates many important points.
@@ -97,26 +96,25 @@ than an algorithmic speed-up, going from a slow to a faster complexity class.
 #### Plotting and tabulating growth rates
 
 Another way of comparing different growth rates is to draw a graph.
-@Fig:growthGraphs plots the six growth rate equations from above.
-
-![
-    Illustration of growth rates for different time functions.
-    The right view shows the lower-left portion of the left view.
-    The horizontal axis represents input size.
-    The vertical axis can represent time, space, or any other measure of computational cost.
-](images/growth_rates_graph.svg){#fig:growthGraphs}
-
-As you can see from the figure, the difference between a linear algorithm
+@Fig:growthGraphs plots the six growth rate equations from @tbl:problem-size-speedup earlier.
+As you can see from the graph, the difference between a linear algorithm
 with cost $T(n) = n$ and a quadratic algorithm with cost $T(n) = n^2/10$
 becomes tremendous as $n$ grows.
 From $n > 10$ the quadratic algorithm becomes slower than the linear,
 and this difference increases as $n$ grows.
 This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
 
+![
+    Illustration of growth rates for the same time functions as in @tbl:problem-size-speedup.
+    The right view shows the lower-left portion of the left view.
+    The horizontal axis represents input size.
+    The vertical axis can represent time, space, or any other measure of computational cost.
+](images/growth_rates_graph.svg){#fig:growthGraphs}
+
 The graph also shows that the equation $T(n) = n\log_2(n)/4$
 grows somewhat more quickly than the linear equations,
 but not nearly so quickly as the quadratic equation.
-In fact, $n^a$ always grows faster than bot $\log(n)^b$ and $\log(n^b)$, for all constants $a,b>1$.
+In fact, $n^a$ always grows faster than both $\log(n)^b$ and $\log(n^b)$, for all constants $a,b>1$.
 We also see that exponential algorithms are prohibitively expensive for even modest values of $n$.
 Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
 
