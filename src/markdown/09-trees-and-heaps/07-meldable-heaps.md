@@ -51,7 +51,7 @@ If either of the heaps is empty (*null*), return the other heap.
 Otherwise:
 
 -   Let $h_1$ be the heap with the highest priority, and $h_2$ be the other.
-    This means that $h_1.\text{root}<h_2.\text{root}$.
+    This means that $h_1.\text{value}<h_2.\text{value}$.
 -   If $h_1.\text{left}$ has lower height than $h_1.\text{right}$,
     let $h_1.\text{left} = \mathit{meld}(h_1.\text{left}, h_2)$.
 -   Otherwise,
