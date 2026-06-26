@@ -71,7 +71,7 @@ But if the tree is unbalanced, this means that there is some path to a leaf that
 Therefore, the shortest branch in a tree is always at most *logarithmic* in the size, $O(\log(n))$.
 
 In conclusion, the complexity of *meld* is logarithmic in the size of the resulting heap, $O(\log(n))$.
-This is way lot better than the linear complexity of binary heaps!
+This is much better than the linear complexity of binary heaps!
 
 One interesting thing with meldable heaps is that they behave fundamentally different from binary heaps.
 The trick here is to *not* strive for a balanced tree, but rather the opposite:
