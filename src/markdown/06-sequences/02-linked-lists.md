@@ -67,7 +67,7 @@ Implementing a stack as a linked list is quite simple.
 Elements are inserted and removed only from the head of the list,
 so the only information we need is a pointer to the *top* of the stack.
 
-    datatype LinkedStack implements Stack:
+    datatype LinkedStack:
         top = null   // Pointer to the top node of the stack
         size = 0     // Size of the stack
 
@@ -209,7 +209,7 @@ Linked queue -- introduction.
 ```
 :::
 
-    datatype LinkedQueue implements Queue:
+    datatype LinkedQueue:
         front = null   // Pointer to the front node
         rear = null    // Pointer to the rear node
         size = 0       // Size of the queue
@@ -231,7 +231,7 @@ otherwise it will point to a non-existing element.
         queue.size -= 1
         return removed.value
 
-<!-- TODO AG: this only works for a non-empty queue, either mention or update code -->
+Note that this code assumes that the queue is non-empty.
 
 ::: dsvis
 Here we show how to dequeue an element from a linked queue.
@@ -279,4 +279,3 @@ Here is a proficiency exercise about enqueuing to linked queues.
 ```{.jsav-embedded src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"}
 ```
 :::
-

@@ -22,7 +22,7 @@ But in this section we will for now assume that we have a fixed maximum number o
 An array-based stack uses an internal array as underlying storage, and this array has a predefined size.
 In this example the underlying array has an internal size of 100:
 
-    datatype ArrayStack implements Stack:
+    datatype ArrayStack:
         arr = new Array(100)   // Internal array containing the stack elements
         size = 0               // The size of the stack
 
@@ -264,7 +264,7 @@ Our choice here is to keep an explicit count of the number of elements, in a var
 because this will make the code more similar to our other implementations.
 <!-- OPENDSA: END -->
 
-    datatype ArrayQueue implements Queue:
+    datatype ArrayQueue:
         array = new Array(100)    // Internal array containing the queue elements.
         size = 0                  // The size of the queue.
         front = 0                 // Index of the front element.
