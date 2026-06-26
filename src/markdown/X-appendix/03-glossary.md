@@ -935,7 +935,7 @@ The concept that two objects can be compared to determine if they
 are equal or not, or to determine which one is greater than the
 other. In set notation, elements $x$ and $y$ of a set are comparable
 under a given relation $R$ if either $xRy$ or $yRx$. To be reliably
-compared for a greater/lesser relationship, the values being
+compared for a greater/smaller relationship, the values being
 compared must belong to a [total order]{.term}.
 In programming, the property of a data type such that
 two elements of the type can be compared to determine if they are
@@ -3623,7 +3623,7 @@ A from of [key-space decomposition]{.term}
 where the [key space]{.term} is determined
 by the actual values of keys that are found. For example, a
 [BST]{.term} stores a key value in its root,
-and all other values in the tree with lesser value are in the left
+and all other values in the tree with smaller value are in the left
 [subtree]{.term}. Thus, the root value has
 split (or decomposed) the key space for that key based on its value
 into left and right parts. An object-space decomposition is in
@@ -3870,7 +3870,7 @@ locations must store two or more of the objects.
 ### pivot
 
 In [Quicksort]{.term}, the value that is
-used to split the list into sublists, one with lesser values than
+used to split the list into sublists, one with smaller values than
 the pivot, the other with greater values than the pivot.
 
 ### platter

@@ -51,7 +51,7 @@ How long time do these algorithms take, if we have $n$ books?
 - Therefore we can say that both algorithms are *quadratic* in the number of books
 
 
-### In-place sorting
+### In-place sorting {#sorting-1:in-place-sorting}
 
 One problem with both algorithms are that they use a lot of extra space -- the floor.
 For a computer this means that the input is one array (the floor), and the output is another (the bookshelf).

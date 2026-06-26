@@ -48,7 +48,7 @@ element?
 
 :::::::::: question ::::::::::
 In a max-heap containing $n$
-elements, what is the position of the element with the least value?
+elements, what is the position of the element with the smallest value?
 
 - [x] Possibly in any leaf node
 - [ ] $n-1$

@@ -83,7 +83,7 @@ The traversal algorithm can be translated into pseudocode like this:
             (a,b) = agenda.remove()
             if not visited.contains(b):
                 visited.add(b)    // Visiting the vertex b for the first time
-                for (b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
+                for each (b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
                     if not visited.contains(c):
                         agenda.add((b0,c))
         return result

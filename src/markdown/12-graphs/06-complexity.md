@@ -33,7 +33,7 @@ All our graph traversal algorithms (DFS, BFS, Dijkstra's, Prim's) are on the for
             if visited.contains(to):
                 continue
             Do something to collect the result
-            for e:Edge in outgoingEdges(to):
+            for each e in outgoingEdges(to):
                 add an item to the agenda
  -->
 

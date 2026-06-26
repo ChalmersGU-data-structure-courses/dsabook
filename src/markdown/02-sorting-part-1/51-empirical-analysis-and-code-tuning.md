@@ -127,7 +127,7 @@ So removing one single swap is not worth it.
 
 Finally, we try to speed up Insertion sort. Recall that Insertion
 sort repeatedly moves an element toward the beginning of the sorted part
-of the list until it encounters a key with lesser value. In the original
+of the list until it encounters a key with smaller value. In the original
 code, this is done with a series of swap operations. There is a better
 alternative than continuously swapping the element to the left until a
 smaller value is found. This is to move the current element to a

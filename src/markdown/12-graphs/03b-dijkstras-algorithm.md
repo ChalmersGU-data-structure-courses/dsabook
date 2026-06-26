@@ -120,7 +120,7 @@ Note that we use a helper function that returns a default value of $\infty$ for 
                 // Update the best cost for b, and point it to its parent in the SPT:
                 visited.put(b, cost)
                 result.put(b, new ParentTreeNode(b, result.get(a)))
-                for (weight,b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
+                for each (weight,b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
                     if cost + weight < getdefault(visited, c):
                         agenda.add(cost + weight, (b0,c))
         return result

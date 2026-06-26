@@ -76,7 +76,7 @@ $0\ldots n-1$: then we can use the vertices as indices in the adjacency matrix.
 
         constructor(vertexCount):
             edgeMatrix = new Array(size)
-            for i = 0 .. size-1:
+            for i in 0 .. size-1:
                 edgeMatrix[i] = new Array(size)
 
         vertices():

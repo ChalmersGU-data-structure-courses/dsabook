@@ -92,7 +92,7 @@ Repeat the following until *key* has been found, or the interval is empty:
 1. Compare *key* with the middle element of the interval.
 2. If *key* is equal, return true, the key is in the array.
 3. Exclude the middle element and all elements before or after it from the interval,
-   depending on if the key is greater or lesser than the middle element.
+   depending on if the key is greater or smaller than the middle element.
 
 If the interval ends up empty, return false, the key is not in the array.
 :::
@@ -140,7 +140,7 @@ Finding the middle element, and excluding the upper/lower half of the interval.
 
 There are many variations of binary search. If the array had books sorted by number
 of pages, we could use it to find books of a desired length, or even all books in
-a precise range of pages. Consider what would happen if the array was not ordered
+a precise range of pages. Consider what would happen if the array was not sorted
 properly, can you construct a small example where the algorithm would go wrong?
 Also consider, could binary search be used to determine if an array
 contains a prime number?

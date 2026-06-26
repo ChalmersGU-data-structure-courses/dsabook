@@ -136,7 +136,7 @@ the one being inserted.
         // Track end of level:
         update = new Array(skiplist.level + 1)
         x = skiplist.head                   // Start at header node
-        for i = skiplist.level downto 0:    // Find insert position
+        for i in skiplist.level .. 1, 0:    // Find insert position
             while x.forward[i] is not null and key > x.forward[i].key:
                 x = x.forward[i]
             update[i] = x     // Track end at level i
@@ -146,7 +146,7 @@ the one being inserted.
         else:
             // Otherwise, create a new node and insert it into place:
             y = new SkipNode(key, value, newLevel)
-            for i = 0 to newLevel:  // Splice into list
+            for i in 0 .. newLevel:  // Splice into list
                 y.forward[i] = update[i].forward[i]  // Who y points to
                 update[i].forward[i] = y  // Who points to y
             size += 1
@@ -154,7 +154,7 @@ the one being inserted.
     adjustHead(skiplist, newLevel):
         temp = skiplist.head
         skiplist.head = new SkipNode(null, null, newLevel)
-        for i = 0 to skiplist.level:
+        for i in 0 .. skiplist.level:
             skiplist.head.forward[i] = temp.forward[i]
         skiplist.level = newLevel
 

@@ -5,7 +5,7 @@
 
 ::: TODO
 - we use indent based blocks, and don't use curly braces to denote blocks
-- for x = 1 to 10 -- is 10 included or not?
+- for x in 1 .. 10 -- is 10 included or not?
 :::
 
 This section explains the pseudocode that we will use throughout the book.

@@ -87,7 +87,7 @@ Internal nodes must store between two and four children.
 B+ tree insertion is similar to B-tree insertion.
 First, the leaf $L$ that should contain the record is found.
 If $L$ is not full, then the new record is added, and no other B+ tree nodes are affected.
-If $L$ is already full, split it in two (dividing the records evenly among the two nodes) and promote a copy of the least-valued key in the newly formed right node.
+If $L$ is already full, split it in two (dividing the records evenly among the two nodes) and promote a copy of the smallest-valued key in the newly formed right node.
 As with the 2-3 tree, promotion might cause the parent to split in turn, perhaps eventually leading to splitting the root and causing the B+ tree to gain a new level.
 B+ tree insertion keeps all leaf nodes at equal depth.
 The following figure illustrates the insertion process through several examples.
