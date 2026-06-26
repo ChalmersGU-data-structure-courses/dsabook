@@ -66,7 +66,7 @@ Algorithms
     taking an input and producing a correct output.
     This can include operations on data structures,
     such as querying, iterating or updating them.
-    We explain how algorithms are described, and how they are implemented as programs.
+    We describe algorithms using natural language, explain how to analyze them, and how to implement them as programs.
 
 Analysis
 :   The main purpose of analysing data structures and algorithms is to know how *efficient* they are.
@@ -78,7 +78,7 @@ using well-established technical terms and structures,
 such as pseudocode and diagrams.
 We abstract away from technical details of a particular programming language,
 and focus on explaining the underlying ideas of a data structure or algorithm.
-We aim to provide you, the reader, with the means to code a good implementation in
+We aim to provide you, the reader, with the means to write a good implementation in
 your favourite programming language.
 
 

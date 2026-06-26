@@ -8,20 +8,16 @@ Here we list some real-world examples where data structures and algorithms are c
 Internet Search engines solve the problem of searching vast quantities of
 text for specified keywords (and then the separate problem of ranking
 these by relevance).
-Directly combing through billions of webpages on the Internet is not a realistic
-procedure for a search that needs to finish in microseconds. Instead, search engines
-employ sophisticated data structures to efficiently access the information.
+Directly searching through billions of webpages on the Internet is not a realistic procedure for a query that needs to finish in microseconds.
+Instead, search engines employ sophisticated data structures to efficiently access the information.
 
-A key concept for *search indexes*. Let's consider a simpler version of this problem:
-A collection of songs by different artists, and we want to search it
-either by artist or song title. If the collection is just
-a list, with new songs being added to the end of it, both these searches would be slow.
-Combining songs by the same artist could make searching for artists faster, but would
-not help us search for a title.
-Instead we can create two separate indexes: One with all songs ordered alphabetically by
-artist, and the second ordered by song title. Then anyone who knows the alphabet can quickly
-find any song or artist using a variant of the binary search algorithm (see @sec:intro:searching).
-
+A key idea behind *search indexes* is to organise the same collection in different ways depending on how we want to search it.
+Consider a simpler version of this problem.
+Suppose we have a collection of songs by different artists, and we want to search either by artist or by song title.
+If the collection is just a list, with new songs added at the end, both kinds of search will be slow.
+Grouping songs by artist could make artist searches faster, but it would not help us search by title.
+Instead, we can create two separate indexes: one in which all songs are ordered alphabetically by artist, and another in which they are ordered by title.
+Then anyone who knows the alphabet can quickly find a song or an artist using a variant of the binary search algorithm (see @sec:intro:searching).
 
 #### Example: Travel by train
 
