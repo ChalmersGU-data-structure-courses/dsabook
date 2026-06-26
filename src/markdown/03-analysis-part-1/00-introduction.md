@@ -27,9 +27,9 @@ We have already shown algorithms having logarithmic, linear, and quadratic time.
 This chapter expands this notion into a more general understanding of
 *complexity classes*.
 
-We introduce $O$-notation, the universally adopted industry standard
+We introduce big-$O$ notation, the universally adopted industry standard
 for communicating and reasoning about performance,
 not just for data structures but for programming in general.
 In this chapter we aim to give an incomplete,
-but practically applicable understanding of $O$-notation and complexity,
+but practically applicable understanding of big-$O$ and complexity,
 that we further expand in subsequent chapters.

@@ -22,7 +22,7 @@ cost function, the upper and lower bound for that cost function are
 always the same. Thus, the distinction between an upper and a lower
 bound is only worthwhile when you have incomplete knowledge about the
 thing being measured.
-We can use the $\Theta$-notation to indicate that there is no
+We can use the $\Theta$ notation to indicate that there is no
 meaningful difference between what we know about the growth rates of the
 upper and lower bound (which is usually the case for simple algorithms).
 <!-- OPENDSA: END -->

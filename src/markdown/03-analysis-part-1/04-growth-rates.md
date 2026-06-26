@@ -12,7 +12,7 @@ and notice it takes one hours to sort the books in one shelf.
 
 The sorting algorithms from [Chapter @sec:sorting-1]
 all have a running time proportional to $n^2$ where $n$ is the number of books.
-Using our new $O$-notation, the algorithms are $O(n^2)$ time.
+Using our new big-$O$ notation, the algorithms are $O(n^2)$ time.
 This means that if you double the size of the input, the running time will quadruple.
 If you multiply the input size by 100, the running time will be $100^2 = 10,000$ times longer.
 So, it will take 10,000 hours for you to sort all the books,
@@ -78,7 +78,7 @@ improves almost like the linear one, but not quite.
 Its growth rate is sometimes called *linearithmic* or *log-linear*,
 and it is a common growth rate for many algorithms shown later on in this book
 (for example the Mergesort algorithm in @sec:sorting-2:mergesort).
-In $O$-notation, this is the complexity class $O(n \log n)$.
+In big-$O$ notation, this is the complexity class $O(n \log n)$.
 
 Note that something special happens in the case of the *exponential* algorithm, $T(n) = 2^n/20$.
 It can only be used to solve very small problems,

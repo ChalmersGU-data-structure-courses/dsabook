@@ -2,10 +2,10 @@
 # Algorithm analysis, part 2 {#analysis-2}
 
 In [Chapter @sec:analysis-1] we introduced the idea of algorithmic analysis,
-and explained $O$-notation without providing a formal definition.
+and explained big-$O$ notation without providing a formal definition.
 Now that you understand everything about sorting algorithms, we can go into more depth with our analysis tools.
 
-So far we have understood $O$-notation as complexity classes of algorithms,
+So far we have understood big-$O$ as complexity classes of algorithms,
 we say things like Linear search is $O(n)$ to describe the computational
 complexity of Linear search.
 This is perfectly reasonable for everyday algorithmic analysis,
@@ -29,7 +29,7 @@ for instance binary search: a logarithmic function does not grow faster than a l
 The reason for deceiving you in [Chapter @sec:analysis-1] is that, while it is
 technically a true statement that Binary search is $O(n)$, any computer scientist hearing you say that
 would correct you and point out that it is in fact $O(\log(n))$ (which is also true, and
-more precise). We tend to use $O$-notation as if it were a tight bound, rather than an upper bound.
+more precise). We tend to use big-$O$ as if it were a tight bound, rather than an upper bound.
 
 There is a separate notation for tight bounds ($\Theta$, pronounced "big theta"),
 and one for lower bounds ($\Omega$, "big omega"), but these

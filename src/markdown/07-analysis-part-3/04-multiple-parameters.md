@@ -20,7 +20,7 @@ Assume that $n$ grows large, and we want to include every person in Sweden (whic
 Then the matrix will have around $(10^7)^2 = 10^{14}$ cells.
 Instead of storing a $n\times n$ matrix, we can store an array of size $n$ with pointers to lists of numbers.
 Now, if array cell $j$ points to a list containing $i$, then person $j$ is a friend of person $i$.
-What is the total size of this data structure alltogether, in $O$-notation?
+What is the total size of this data structure alltogether, in big-$O$ notation?
 
 This depends on how many friends people have, but let's say that every person has $m$ friends on average.
 We don't know what $m$ is, but we can be quite certain that it is a lot smaller than $n$.

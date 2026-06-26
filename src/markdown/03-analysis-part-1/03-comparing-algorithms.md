@@ -54,7 +54,7 @@ is when two algorithms are in the same complexity class.
 
 A very important complexity class i $O(1)$, constant complexity. The $1$ here should
 not be understood as the exact number 1, but as any constant value independent of $n$.
-This will make more sense after we introduce the formal definition of $O$-notation,
+This will make more sense after we introduce the formal definition of big-$O$ notation,
 but for now any part of an algorithm where the execution time does not depend on input
 size is considered constant time, $O(1)$. Swapping two elements in an array is a good
 example of a tiny algorithm that is $O(1)$, it takes the same amount of time to swap
@@ -104,7 +104,7 @@ $n$ and $m$ are the sizes of the two arrays. An algorithm for a matrix operation
 have the number of rows and columns as separate input sizes, or just the total number of
 elements in the matrix, depending on the level of detail needed to compare two algorithms.
 
-The important takeaway here is that when $O$-notation is used,
+The important takeaway here is that when big-$O$ notation is used,
 it is essential to keep in mind what the input size $n$ is.
 
 #### Constant time operations
@@ -204,7 +204,7 @@ the `if`-clause comparison and the `swap` operation.
 
 Technically, the `swap` operation does several basic operation, but the total
 time to perform a fixed number of constant time operations is still a constant.
-This highlights an important aspect of $O$-notation: It does not matter if we perform
+This highlights an important aspect of big-$O$: It does not matter if we perform
 one, two, or three constant time operations, the total time is still $O(1)$, since it
 is independent from the input size $n$. In fact we could look at the whole if-statement
 and conclude that comparing and swapping if needed is a $O(1)$, considering the whole
@@ -225,7 +225,7 @@ Note how much detail is simplified away by using complexity classes.
 We do not differentiate between $n^2$ and $1/2 \cdot n^2$.
 There is no "triangular" complexity class.
 One could say that asymptotically, a triangle is a square.
-This may seem like a weakness of $O$-notation, but it is a fact the
+This may seem like a weakness of big-$O$, but it is a fact the
 strength that makes it such a useful tool for comparing algorithms.
 To convince yourself of this, consider this: runtime is only interesting
 for large $n$. All algorithms are fast for small inputs.

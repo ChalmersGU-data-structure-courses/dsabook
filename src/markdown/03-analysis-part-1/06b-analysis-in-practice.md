@@ -5,10 +5,10 @@
 - Prio 1: mention that O is an upper bound
 :::
 
-We have not yet shown a formal definition of $O$-notation, and there will not
+We have not yet shown a formal definition of big-$O$, and there will not
 be one in this chapter. The reason for this is that the formal definition
 is much easier to digest after seeing the practical use of it.
-For now, we think of $O$-notation as dividing algorithms into complexity classes.
+For now, we think of big-$O$ as dividing algorithms into complexity classes.
 If doubling the size of the input to an algorithm doubles the runtime
 (with some rounding applied), then that algorithm is $O(n)$.
 
@@ -30,7 +30,7 @@ Writing $O(3n)$ is not mathematically incorrect, but if you ever find yourself
 describing the runtime of an algorithm to be $O(3n)$, you are doing something wrong.
 Essentially, $O(n)$ is the simplified form of $O(3n)$. The simplification rule is that
 $O(kx)=O(x)$ for any constant $k$, so things like $4n^2$ can be simplified the same way.
-This follows directly from the intuition that $O$-notation captures growth rate.
+This follows directly from the intuition that big-$O$ captures growth rate.
 
 Perhaps more surprisingly, $O(n + \log(n))$ is also the same as $O(n)$.
 This makes more sense when you consider that $n + \log(n)<2n$ for large $n$,
