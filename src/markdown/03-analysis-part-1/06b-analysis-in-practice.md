@@ -241,7 +241,7 @@ of the algorithm.
 
     binarySearch(arr, key):
         start = 0
-        size = arr.length
+        size = arr.size
         while size>0:
             mid = start + size/2
             if arr[mid] == key:
