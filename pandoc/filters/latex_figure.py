@@ -11,7 +11,6 @@ import panflute as pf
 from panflute_helper import run_filter
 
 RENDERED_IMAGES_DIR = Path('rendered-images')
-RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 LATEX_FIGURE_TEMPLATE = r"""
 \documentclass{standalone}
@@ -57,6 +56,7 @@ def latex_figure(elem, doc):
 
 
 def render_latex_figure(code, identifier, attributes, caption=None):
+    RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     if 'src' in attributes:
         latex_file = Path(attributes['src'])
         base = RENDERED_IMAGES_DIR / latex_file.with_suffix('').name

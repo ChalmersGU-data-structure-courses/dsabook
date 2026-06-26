@@ -7,7 +7,8 @@ CHAPTER :=
 # Directories
 SRC       := src
 LIB       := lib
-RSC       := resources
+RESOURCES := resources
+IMGDIR    := $(RESOURCES)/images
 MARKDOWN  := $(SRC)/markdown
 TEMP      := _temp
 BUILD     := build
@@ -19,9 +20,13 @@ GENERATED := rendered-images plots
 GLOSSARY  := $(MARKDOWN)/X-appendix/03-glossary.md
 MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDOWN)/*/00-*.md) $(wildcard $(MARKDOWN)/*.md))
 
+# Auto-generated images
+SRC_IMAGES := $(wildcard $(IMGDIR)/*.py)
+GEN_IMAGES := $(SRC_IMAGES:%.py=%.svg)
+
 # Tools
 PYTHON    := python3
-PANDOC    := pandoc --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
+PANDOC    := pandoc --resource-path=$(RESOURCES) --data-dir=pandoc --defaults=dsabook.yaml
 HTMLTEST  := htmltest
 
 default: install
@@ -31,9 +36,14 @@ all: install check-links
 clean:
 	@echo
 	@echo "# Cleaning..."
-	@rm -rf $(TEMP) $(BUILD) $(GENERATED)
+	@rm -rf $(TEMP) $(BUILD) $(GENERATED) $(GEN_IMAGES)
 
-preprocess: clean
+$(IMGDIR)/%.svg: $(IMGDIR)/%.py
+	python $<
+
+render: clean $(GEN_IMAGES)
+
+preprocess: render
 	@mkdir -p $(TEMP)
 	@echo
 	@echo "# Preprocessing..."
@@ -57,7 +67,7 @@ install: postprocess
 	@cp    $(SRC)/index.html     $(BUILD)/ || true
 	@cp -r $(SRC)/interactive    $(BUILD)/ || true
 	@cp -r $(SRC)/khan-exercises $(BUILD)/ || true
-	@cp -r $(RSC)/*              $(BUILD)/ || true
+	@cp -r $(RESOURCES)/*              $(BUILD)/ || true
 	@cp -r $(LIB)                $(BUILD)/ || true
 
 deploy: install

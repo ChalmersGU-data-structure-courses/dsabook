@@ -13,8 +13,7 @@ Conversion to HTML is done by the
 
 First you need to install the following dependencies:
 
-- To build the HTML files you need the [Pandoc library](https://pandoc.org/),
-  [pandoc-plot](https://laurentrdc.github.io/pandoc-plot/), and
+- To build the HTML files you need the [Pandoc library](https://pandoc.org/), and
   [panflute](https://scorreia.com/software/panflute/).
 
 - [GNU Make](https://www.gnu.org/software/make/) is necessary to build the website.
