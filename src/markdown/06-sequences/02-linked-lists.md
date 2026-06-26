@@ -101,8 +101,8 @@ AV.recorded();
 
 Now, so how do we implement the stack operations on this linked list?
 This is quite straightforward:
-to *push* something we have to create a new wrapper node and put it at the top,
-and to *pop* we delete the current topmost wrapper node.
+to *push* something we have to create a new node and put it at the top,
+and to *pop* we delete the current topmost node.
 
 -   To *push* a value, we first create a new *Node* object wrapping the value.
     Then we can point the node to the current *top* node,
