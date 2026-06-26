@@ -37,9 +37,9 @@ But a common choice is to let the *smaller* element have priority --
 and then we have a *minimum priority queue*
 
     interface MinPriorityQueue of T extends Collection:
-        add(elem: T)      // Adds an element to the priority queue.
-        removeMin() -> T  // Removes and returns the minimum element.
-        getMin() -> T     // Returns the minimum element without removing it.
+        add(minPQ, elem: T)      // Adds an element to the priority queue.
+        removeMin(minPQ) -> T    // Removes and returns the minimum element.
+        getMin(minPQ) -> T       // Returns the minimum element without removing it.
 
 Alternatively we might want the larger value have priority,
 and then we have a *maximum priority queue*.
@@ -67,11 +67,11 @@ Here is an implementation of this algorithm in code:
 <!-- NICSMA: END -->
 
     pqSort(arr):
-        pq = new PriorityQueue()
+        pq = new MinPriorityQueue()
         for each item in arr:
-            pq.add(item)
+            add(pq, item)
         for i in 0 .. arr.size-1:
-            arr[i] = pq.removeMin()
+            arr[i] = removeMin(pq)
 
 <!-- NICSMA: START -->
 What is the time complexity of this algorithm?

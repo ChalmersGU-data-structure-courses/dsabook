@@ -33,9 +33,9 @@ One way to solve this problem would be to use a normal set of city populations.
 Then we could find the answer to our query by making a sequence of calls to `contains`:
 <!-- NICSMA: END -->
 
-- `contains(5000)` -- is there a town with population 5,000?
-- `contains(5001)` -- is there a town with population 5,001?
-- `contains(5002)` -- is there a town with population 5,002?
+- `contains(set, 5000)` -- is there a town with population 5,000?
+- `contains(set, 5001)` -- is there a town with population 5,001?
+- `contains(set, 5002)` -- is there a town with population 5,002?
 - etc.
 
 <!-- NICSMA: START -->
@@ -91,7 +91,7 @@ Now consider the second range query in the example above:
 One way to solve this problem would be to use a *multimap* (see @sec:ADTs:multimaps).
 The key would be a population number, and the values would be all towns having that population.
 Then we could find the required towns by making a sequence of calls
-`get(5,000)`, `get(5,001)`, ..., until `get(10,000)`.
+`get(map, 5000)`, `get(map, 5001)`, ..., until `get(map, 10000)`.
 
 But just as for the range queries for sets, this is not feasible.
 Instead we introduce an interface for *sorted maps*.
@@ -108,14 +108,14 @@ Here is a possible interface for sorted maps, which extends the normal map inter
 Note the similarity to the interface for sorted sets.
 
     interface SortedMap of K to V extends Map:
-        firstKey() -> K              // Returns the first (smallest) key.
-        lastKey() -> K               // Returns the last (largest) key.
-        floorKey(key: K) -> K        // Returns the closest key ≤ k, or nothing if there is no key.
-        ceilingKey(key: K) -> K      // Returns the closest key ≤ k, or nothing if there is no key.
-        lowerKey(key: K) -> K        // Returns the closest key < k, or nothing if there is no such element.
-        higherKey(key: K) -> K       // Returns the closest key > k, or nothing if there is no such element.
-        keysBetween(key1: K, key2: K) -> Collection of K
-                                     // Returns all keys k such that k1 ≤ k ≤ k2.
+        firstKey(map) -> K                // Returns the first (smallest) key.
+        lastKey(map) -> K                 // Returns the last (largest) key.
+        floorKey(map, key: K) -> K        // Returns the closest key ≤ k, or nothing if there is no key.
+        ceilingKey(map, key: K) -> K      // Returns the closest key ≤ k, or nothing if there is no key.
+        lowerKey(map, key: K) -> K        // Returns the closest key < k, or nothing if there is no such element.
+        higherKey(map, key: K) -> K       // Returns the closest key > k, or nothing if there is no such element.
+        keysBetween(map, key1: K, key2: K) -> Collection of K
+                                          // Returns all keys k such that k1 ≤ k ≤ k2.
 -->
 
 ::: example
@@ -133,9 +133,9 @@ and then through all the cities for that population:
 
     findBetween(lower: Int, upper: Int) -> Set of City:
         result = new Set()
-        for each population in cityPopulations.keysBetween(lower, upper):
-            for each city in cityPopulations.get(population):
-                result.add(city)
+        for each population in keysBetween(cityPopulations, lower, upper):
+            for each city in get(cityPopulations, population):
+                add(result, city)
         return result
 
 :::

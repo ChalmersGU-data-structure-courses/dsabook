@@ -50,9 +50,9 @@ if we try to add an item that is already present, nothing happens, and the set i
 We can specify a minimal interface for sets like this:
 
     interface Set of K extends Collection:
-        add(key: K)               // Adds the key to the set.
-        remove(key: K)            // Removes the key from the set, if it is there.
-        contains(key: K) -> Bool  // Returns true if the key is in the set.
+        add(set, key: K)               // Adds the key to the set.
+        remove(set, key: K)            // Removes the key from the set, if it is there.
+        contains(set, key: K) -> Bool  // Returns true if the key is in the set.
 
 ::: example
 #### Example: Spell-checking
@@ -88,10 +88,10 @@ On the other hand, a map *can* contain duplicate *values*: two keys can map to t
 Here is a possible minimal interface for maps:
 
     interface Map of K to V extends Collection of K:
-        put(key: K, value: V)     // Sets the value of the given key.
-        get(key: K) -> V          // Returns the value associated with the given key.
-        remove(key: K)            // Removes the value associated with the given key.
-        contains(key: K) -> Bool  // Returns true if the key has an associated value.
+        put(map, key: K, value: V)     // Sets the value of the given key.
+        get(map, key: K) -> V          // Returns the value associated with the given key.
+        remove(map, key: K)            // Removes the value associated with the given key.
+        contains(map, key: K) -> Bool  // Returns true if the key has an associated value.
 
 Note that maps depend on two different types, the keys `K` and the values `V`.
 These types can be the same or different, depending on the needs of your application.
@@ -112,8 +112,8 @@ For example, the information record could be structured like this:
         price: Number
         expires: Date
 
-Now, to put an item `p` in the database we simply call `database.put(p.ean, p)`,
-and to find the item with barcode `code` we call `database.get(code)`.
+Now, to put an item `p` in the database we simply call `put(database, p.ean, p)`,
+and to find the item with barcode `code` we call `get(database, code)`.
 :::
 
 ### Multimaps {#ADTs:multimaps}
@@ -132,22 +132,28 @@ The idea is to use a *map*, whose value type is a *set* of the actual values tha
     datatype Multimap of K to V:
         mmap: Map of K to (Set of V)
 
-To add a value to a multimap, we also need to provide its key,
-and then we can call `mmap.get(key).add(value)`.
-(But note that we also have to handle the case where the key is not in the underlying map yet.)
-Other possible operations can be to remove a value (with an associated key),
+To add a value to a multimap `mm`, we specify a key and value just as with a regular map:
+
+    put(mm, key, value):
+        set = get(mm.mmap, key)       // Fetch the set associated with key
+        if set is null:               // There is no set associated with key
+            set = new Set()           // Needs to use a specific set implementation
+            put(mm.mmap, key, set)    // Associate key with the currently empty set
+        add(set, value)               // Add value to the set associated with key
+
+Other possible operations can be used to remove a value (with an associated key),
 and to iterate over all values for a given key.
 
 Note that we do not have to `put` the updated set back into the internal map.
-This is because complex data structures are *mutable*:
-when we update a set it is modified *in-place* -- so it still pointed to by the internal map.
+Complex data structures are *mutable*:
+when we update a set using `add` it is modified *in-place* -- so it is still pointed to by the internal map.
 
 ::: example
 #### Example: Search engine
 
-The final example from above is a good use case of a multimap, the *search engine*.
+The *search engine* example is a good use case of a multimap.
 First we have to build the database, which is a multimap where the key is a word,
-and the values are all document ids containing that word.
+and the values are all document id numbers containing that word.
 Now, searching for a word just means looking it up in the multimap,
 which is the same as calling `get` on the underlying map.
 

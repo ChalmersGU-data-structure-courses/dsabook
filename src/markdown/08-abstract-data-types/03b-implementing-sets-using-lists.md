@@ -1,7 +1,7 @@
 
 ### Implementing sets and maps using linked lists
 
-A simple way to implement a set is to use a *linked list*.
+A simple (but inefficient) data structure to implement a set is a *linked list*.
 Recall from @sec:sequences:linked-stacks that
 a linked list consists of nodes pointing to their successors:
 
@@ -25,7 +25,7 @@ av.recorded();
 To search for an element we just iterate through all nodes and compare with the value we are looking for.
 To add an element we can simply insert it at the head of the list.
 But before we do that we have to search for it to check that it is not already in the list,
-because the set cannot have duplicate elements.
+because a set does not allow duplicate elements.
 
 To remove an element we search for it to get its node,
 and then we repoint the preceding node to the node following it, like this:

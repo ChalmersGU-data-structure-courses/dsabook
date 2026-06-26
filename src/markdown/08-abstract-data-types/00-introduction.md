@@ -10,7 +10,7 @@ If we want to *use* these data structures in a program,
 we are usually not interested in exactly how they are implemented, as long as they work as they should.
 For example, suppose we are making a telephone switchboard system that should be able to handle many calls at the same time.
 If all agents are busy, then the caller should be put on hold --
-and probably we want to follow the principle "first-come-first-serve", so we want to use a *queue* for this.
+and probably we want to follow the principle "first-come-first-served", so we want to use a *queue* for this.
 But we are not interested if this queue is implemented using a dynamic array or a linked list,
 so we want to hide away this implementation-specific information.
 
@@ -24,9 +24,9 @@ and is similar to an *interface* or a *protocol* in an object-oriented language.
 A classic example is the *stack* ADT, which supports the following operations:
 
     interface Stack of T:
-        push(x: t)          // Pushes x on the top of the stack
-        pop() -> T          // Pops the top element off the stack and returns it
-        isEmpty() -> Bool   // Tells if the stack is empty or not
+        push(stack, x: T)        // Pushes x on the top of the stack
+        pop(stack) -> T          // Pops the top element off the stack and returns it
+        isEmpty(stack) -> Bool   // Tells if the stack is empty or not
 
 As discussed in [Chapter @sec:sequences], a stack can be implemented using either a dynamic array or a linked list.
 Using the terminology from object-oriented programming,
@@ -39,8 +39,8 @@ For the example of stacks, here are some common auxiliary operations:
 
     interface Stack of T:
         (...)
-        size() -> Int   // Returns the number of elements on the stack
-        peek() -> T     // Returns the top element, but does not remove it
+        size(stack) -> Int   // Returns the number of elements on the stack
+        peek(stack) -> T     // Returns the top element, but does not remove it
 
 
 Although different implementations of an abstract data type offer the same operations,

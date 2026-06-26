@@ -21,7 +21,7 @@ This is similar to how we implement a stack as a dynamic array in reverse order.
 
 If we instead use a linked list, it should be sorted in normal order
 so that the smallest element is at the front of the list.
-When we add an alement to this linked list, we have to traverse the list from
+When we add an element to this linked list, we have to traverse the list from
 the head until we find the right location, and then we can squeeze in the new element.
 But to be able to insert the new element we also have to remember the previous node while traversing:
 
