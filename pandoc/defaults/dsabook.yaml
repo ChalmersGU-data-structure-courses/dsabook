@@ -48,6 +48,12 @@ title-prefix: DSABook
 reader: markdown
 # pandoc --from=markdown --list-extensions
 
+figure-caption-position: below
+# Specify whether figure captions go above or below figures (default is below). This option only affects HTML, LaTeX, Docx, ODT, and Typst output.
+
+table-caption-position: below
+# Specify whether table captions go above or below tables (default is above). This option only affects HTML, LaTeX, Docx, ODT, and Typst output.
+
 number-sections: true
 # Number section headings in LaTeX, ConTeXt, HTML, Docx, ms, or EPUB output.
 # By default, sections are not numbered. Sections with class unnumbered will never be numbered,
