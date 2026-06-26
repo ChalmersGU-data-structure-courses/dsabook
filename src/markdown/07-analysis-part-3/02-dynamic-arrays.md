@@ -22,13 +22,13 @@ When we append to the array, there are two possibilities:
   increase the *size* variable of the dynamic array.
   Let us assume that this "fast" append takes 1 unit of time.
 
-- Now and then the backing array becomes full and we have to resize,
-  and for now we assume that we simply *double* the size.
-  If the size of the full backing array is $n$, we will create a new backing array of size $2n$,
-  and then copy all $n$ elements over from the old to the new array.
-  The main cost is to copy the elements, so a "slow" append costs $n$ time units.
+- Now and then the backing array becomes full and we have to resize.
+  For now we assume that we simply *double* the size.
+  We replace the full backing array with a new backing array of size $2n$,
+  and copy all $n$ elements from the old array to the new one.
+  The main cost is from copying the elements, so a "slow" append costs $n$ time units.
 
-To pay for the slow appends, we pretend that the every fast append will cost 3 time units instead of one.
+To pay for the slow appends, we pretend that every fast append costs 3 time units instead of one.
 One unit is used for the actual time it takes, and the additional 2 units are saved in our account.
 So, after performing $n$ fast appends our account contains $2n$ time units.
 

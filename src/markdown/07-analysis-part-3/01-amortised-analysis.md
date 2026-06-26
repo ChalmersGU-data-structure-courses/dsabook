@@ -7,17 +7,24 @@
 - Prio 2: consider making the last subsection a section (Different types of average analysis)
 :::
 
-<!-- OPENDSA: START -->
-This section presents the concept of
-[amortised analysis]{.term}, which is the
-analysis for a series of operations taken as a whole. In particular,
-amortised analysis allows us to deal with the situation where the
-worst-case cost for $n$ operations is less than $n$ times the worst-case
-cost of any one operation. Rather than focusing on the individual cost
-of each operation independently and summing them, amortised analysis
-looks at the cost of the entire series and "charges" each individual
-operation with a share of the total cost.
-<!-- OPENDSA: END -->
+Complexity analysis as we have seen it dictates that if an algorithm
+with that is worst case $O(n)$ is executed $n$ times in a row,
+the total cost will be $O(n \cdot n)=O(n^2)$.
+There are however situations where the worst case of a single operation
+is $O(n)$, but the total cost of $n$ operations is also $O(n)$,
+or $O(n \log(n))$. The reason is that while individual operations
+take $O(n)$ time, that happens rarely enough that the average
+cost of the $n$ operations is $O(1)$ or $O(\log(n) respectively)$.
+
+Note that the average here is very different from the average case of
+algorithms like QuickSort (@sec:sorting-2:quicksort).
+There is no randomness involved, and no assumptions about
+the input distribution. Average just means the the total cost of
+all $n$ operations divided by $n$.
+
+It is called *amortised* because of the idea that an expensive operation
+causes a debt, which is then spread out over many subsequent cheap operations
+until the debt is paid off.
 
 The standard example for amortised analysis is dynamic arrays which were introduced in @sec:sequences:dynamic-arrays.
 In that section we gave an informal argument why it is important to grow the array in the right way.
@@ -32,65 +39,60 @@ But before that we will explain the concepts and give some other examples.
 #### Example: Multipop on stacks
 
 Assume that we want to add a new operation *multipop* on stacks,
-where *multipop*($k$) will pop the $k$ topmost elements off the stack.
-The operation is implemented in the straightforward by simply repeating a single *pop* operation *k* times.
+where `multipop(stack, k)` will pop the $k$ topmost elements off the stack.
+The operation is implemented in the straightforward way of repeating a
+standard $O(1)$ *pop* operation *k* times.
 
-What is the time complexity of this new operation?
+What is the time complexity of this new operation in terms of the size $n$ of the stack?
 Since we're repeating the constant-time *pop* operation $k$ times, we get a time complexity of $O(k)$.
 And the worst case of this is when $k$ is as large as possible, that is, the stack size $n$.
 So the worst-case complexity for *multipop* is linear in the stack size, $O(n)$.
+This is quite correct, the worst case complexity of a single call is linear.
 
-This is quite correct, the worst-case complexity of a single call is linear.
-But what is the complexity of executing a large number of stack operations in sequence?
+What is the complexity of executing a large number of *multipop* operations in sequence?
+Let's say that we start with a stack of size $n$, and perform some
+sequence of $n$ *multipop* operations.
+Using our analysis above blindly, the worst case total time of this procedure is
+$n \cdot O(n) = O(n^2)$. But how would that worst case look?
 
-Let's say that we start from an empty stack and execute
-a sequence of $n$ *push* operations and $n$ *multipop* operations.
-Using our analysis above, the whole sequence of $2n$ operations will have worst-case complexity
-$n\cdot O(1) + n\cdot O(n) = O(n+n^2) = O(n^2)$.
-Since we performed $2n$ operations, we get an average complexity per operation of $O(n^2)/2n = O(n)$.
-<!-- OPENDSA: START -->
-But this analysis is unreasonably pessimistic
--- clearly it is not really possible to pop $n$ elements each time *multipop* is called.
-<!-- OPENDSA: END -->
+If we try construct this worst case for say $n=10$ we run into problems.
+Recall that the worst case for a single call `multipop(stack, k)` assumed
+that $k=n$, that is it removes all the elements of the stack.
+The $O(n^2)$ worst case implicitly assumes that we first remove all elements,
+then remove just as many more and keep removing more and more elements from
+an empty stack!
 
 We can reason like this instead:
-$n$ elements are pushed to the stack, and each of these elements can only be popped once.
-The sum of costs for all calls to *multipop* can never be more than
-the total number of elements that has been pushed on the stack, which is $n$.
-This means that the total complexity of our $n$ calls to *multipop* must be in $O(n)$,
-just as for as the $n$ calls to *push*, and $O(n) + O(n) = O(n)$.
+$n$ elements are on the stack, and each of these elements can only be popped once.
+The sum of costs for all calls to *multipop* can never exceed
+the total number of elements on the stack, which is $n$.
+This means that the total complexity of our $n$ calls to *multipop* must be in $O(n)$.
 
 Therefore the average worst-case complexity *per operation* must be $O(n)/n = O(1)$.
-That is, the *amortised* worst-case complexity is constant, $O(1)$.
+That is, the *amortised* worst-case complexity of *multipop* is constant, $O(1)$.
 :::
 
 In the *multipop* example we got two different complexities for the *multipop* operation:
 first we found that it is linear in the stack size, $O(n)$,
 but when averaging over a sequence of operations we found that it is constant, $O(1)$.
-So, which complexity is the right one?
-
-Actually, both are correct.
-The worst-case complexity for a single call to *multipop* is linear in the worst case,
+Both these seemingly contradicting results are correct.
+The worst case complexity for a single call to *multipop* is linear,
 but the *amortised* complexity is constant.
-This means that when executing *multipop* many many times, it will behave as it is constant time:
-some individual calls might take longer time, but this is balanced out by other calls that are fast.
-
 
 ### The accounting method {#analysis-3:accounting-method}
 
-In the example we used a very hand-waving, informal argument,
+In the *multipop* example we used an informal argument,
 but the underlying idea is the concept of an *account*.
 The basic idea with the *accounting method* is that whenever we perform a cheap operation
 we "pay" some extra time that we save in an account.
 The saved time can then be used to pay when we encounter an expensive operation.
-If we can show that our account will never run out of savings,
+If we can show that our account will be balanced, and never run out of savings,
 then we have proved the amortised complexity of our operation.
 
 In other words, every time we perform a fast operation,
-we pretend that it is slower than it actually is.
+we pretend that it is slower than it actually is, but only by a constant factor.
 This additional time that we (pretend to) spend is added to our account.
 Then when there is a slow operation, we can use the saved time to "pay for" the slow operation.
-
 
 ::: example
 #### Example: Multipop, revisited
@@ -101,13 +103,16 @@ But let us pretend that each *push* costs 2 time units instead of one.
 That is, each *push* will save one time unit in our account,
 and after pushing $m$ elements onto the stack we have $m$ units saved.
 
-If we run *multipop*($k$), it will cost $k$ time units, but now we can use the units from our account.
-The account will be reduced by $k$, but at the same time the size of the stack will be reduced by $k$.
-So after running *multipop*, the stack will contain $m-k$ elements, and our account will have $m-k$ units.
-Since the stack can never be empty, our account will never be empty either.
+This means we can use every *push* to pay for a *pop*. Since it is impossible to do
+more total *pop* operations than *push* operations, *pop* operations are
+always paid for by a *push*, and essentially free. Since *multipop* is just a
+repetition of $k$ *pop* operations, it is also paid for by *push*.
 
-In the end, the amortised cost of *push* is 2 units, and the amortised cost of *multipop* is 0 units.
-Both are constant values, so the amortised cost of both *push* and *multipop* are constant, $O(1)$.
+So not only is a sequence of $n$ *multipop* operations $O(n)$,
+but starting from an empty stack, any valid sequence of $n$
+mixed *push*, *pop* and *multipop* operations is total $O(n)$.
+This claim is quite brittle though: If we add a *multipush* operation to the mix,
+the claim no longer holds.
 :::
 
 
@@ -209,22 +214,28 @@ Average-case complexity
 :   can be used when an algorithm behaves well for most "well-behaved" input,
     but there are some few extreme inputs that make the algorithm behave bad.
     The typical example is Quicksort, which has quadratic worst-case complexity,
-    but usually behaves linearithmic (unless there is some evil hacker that tries to break it).
+    but usually behaves linearithmic (unless there is some evil hacker that
+    contaminates the input).
     The main difficulty with average-case complexity is to decide what is the average case.
 
 Amortised complexity
 :   is used for operations that are supposed to be used many times on the same data structure,
     such as changing, adding or deleting elements.
-    If the operation most of the time behaves well, but once in a while can take time,
-    then we use amortisation to infer what the complexity is for executing a sequence of operations.
-    The prototypical case is dynamic arrays.
+    If the operation most of the time behaves well, but more expensive operations occur in a predictable
+    and limited extent, we can use amortisation to determine the total complexity
+    for executing a sequence of operations. The prototypical case is dynamic arrays.
+    Note that there is no randomness involved for amortised operations,
+    there is no risk of repeatedly encountering expensive operations due to bad luck or contaminated
+    data.
 
 Expected complexity
-:   is used when the algorithm uses randomisation.
-    Standard worst-case analysis can only reason about
-    the extremely unlikely worst case of a random dice roll,
-    but expected complexity can reason about how the algorithm is expected to behave.
-    One example is again Quicksort:
-    if we use a random pivot we get *expected* linearithmic complexity,
-    which is much better than the quadratic complexity of non-random Quicksort.
+:   is used when the algorithm itself uses randomisation,
+    as opposed to the input values being randomly distributed.
+    One example is again from Quicksort, but this time about the pivot
+    being randomly selected by the algorithm itself:
+    Using a random pivot we get *expected* linearithmic complexity.
+    This is slightly different from average-case, in that the randomness
+    is controlled by the algorithm, so a bad outcome cannot be
+    provoked repeatedly by external factors.
+
 
