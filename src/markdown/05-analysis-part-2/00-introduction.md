@@ -49,6 +49,12 @@ Tight bound
 
 : $f\in\Theta(g)$ **if and only if** both functions grow at the same rate
 
+These concepts are often confused with best case and worst case
+(@sec:analysis-1:complexity-cases). A lower bound does not mean
+a best case. We first decide to analyse best, average or worst case
+(usually worst case), then for each of those we can determine an
+upper, lower, or tight bound.
+
 In this chapter we give formal definitions of these concepts and show how to
 use them to analyse the computational complexity of most algorithms,
 both for sorting and the data structures we introduce in subsequent chapters.

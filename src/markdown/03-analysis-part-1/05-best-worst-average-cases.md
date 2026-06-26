@@ -37,9 +37,33 @@ So, in the *average case* Insertion sort runs for half as many iterations as the
 However, this definition of the average case depends on an important assumption:
 that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed!
 
+#### Constructing a best or worst case
+
+How does the best case for Linear search look?
+A common mistake is to say that the best case for a linear search
+is that the array is empty. This is a fundamental misunderstanding
+of what worst case and best case mean.
+When we say linear search is best case $O(1)$ we mean that for
+*every* input size $n$, there is a value for which the algorithm
+terminates in constant time.
+
+For linear search to be best case $O(1)$, we must be able to construct
+a best case input of, for instance, input size 100. The input size of
+`linearSearch(arr, x)` is the length of the array `arr`.
+Clearly the best case for size 100 cannot be that `arr` is empty, because there are
+no empty arrays of length 100. The best case of `linearSearch(arr, x)` is
+an array where `arr[0]==x`. This best case is easy to construct for any size.
+
+When we say the worst case
+of Linear Search $O(n)$, we mean that for every size $n$
+there is a worst case input value for which the algorithm takes
+linear time. One such worst case for `linearSearch(arr, x)`
+is that `x` does not occur in `arr`, another is that in
+only occurs in the last position of `arr`.
+
 #### The value of pessimistic estimates
 
-The advantage to analysing primarily the worst case is
+The main advantage to analysing the worst case is
 that the algorithm is guaranteed to perform at least that
 well. This is especially important for real-time applications where occasional delays are unacceptable,
 such as an application for monitoring an air traffic control system.
