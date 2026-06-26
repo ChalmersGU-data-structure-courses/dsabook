@@ -8,40 +8,34 @@
 - Prio 3: discuss different definitions and how they differ (only in separate online section)
 :::
 
-::: TODO
-This example refers to an online example, @sec:analysis-3:space-complexity
-:::
+Imagine that we want to keep track of friendships between $n$ people.
+We can do this with a 2-dimensional array of size $n \times n$ (a matrix).
+Each row of the matrix represents the friends of an individual, with the columns indicating who has that individual as a friend.
+For example, if person $j$ is a friend of person $i$, then we place a mark in column $j$ of row $i$ in the array.
+Likewise, we should also place a mark in column $i$ of row $j$ if we assume that friendship works both ways.
+For $n$ people, the total size of the matrix is in $O(n^2)$.
 
-<!-- OPENDSA: START -->
-Sometimes the proper analysis for an algorithm requires multiple
-parameters to describe the cost. To illustrate the concept,
-<!-- OPENDSA: END -->
-recall the example about friendship links from @sec:analysis-3:space-complexity.
-We argued that it was better to store the links as an array of lists,
-than to use an $n\times n$ matrix to store who is friend with who.
-We concluded that if we use the former representation the space usage is linear, $O(n)$,
-in the number of people and not quadratic.
-But to be able to draw this conclusion we have to assume that
-the number of friends that any person has is bounded by a constant.
+But is this the best representation of friendship links?
+Assume that $n$ grows large, and we want to include every person in Sweden (which has around 10 million people).
+Then the matrix will have around $(10^7)^2 = 10^{14}$ cells.
+Instead of storing a $n\times n$ matrix, we can store an array of size $n$ with pointers to lists of numbers.
+Now, if array cell $j$ points to a list containing $i$, then person $j$ is a friend of person $i$.
+What is the total size of this data structure alltogether, in $O$-notation?
 
-But what if we want to be more precise than that?
-What if we know that no person has more than $m$ friends?
-So we know that we have $n$ people, and they have at most $m$ friends each.
-What is the space complexity of storing the friendships as an $n\times n$ matrix,
-compared to storing them as an array of lists?
-The size of the matrix does not depend on the number of links at all
--- it only depends on the number of people, so it is $O(n^2)$.
-But the size of the array of lists both depend on the number of people (which is the size of the array),
-and the number of friends (which is bounded by $m$).
-So the space usage of the array of lists representation is $O(n\cdot m)$,
+This depends on how many friends people have, but let's say that every person has $m$ friends on average.
+We don't know what $m$ is, but we can be quite certain that it is a lot smaller than $n$.
+So, what can we say about the space complexity of this new data structure?
+One the one hand, the array contains $n$ elements so the size is $O(n)$,
+but on the other hand, each list uses on average $O(m)$ memory.
+
+We can of course assume that $m$ is bounded, for example that it is at most 100 --
+then we can say that $m$ is constant and then we get $O(n)$ for the whole data structure.
+But this is cheating, because we cannot know how $m$ changes when $n$ grows.
+The big-$O$ notation can used for multiple parameters at the same time,
+so we can write the space complexity of the new array-of-lists representation as $O(n\times m)$
 because it is linear in both $n$ and $m$.
 
-Friendship links is an example of a *graph*, and you will learn a lot more about them in [Chapter @sec:graphs].
-
-::: example
-#### Example: Testing if two people are friends
-
-What is the time complexity of testing if two given persons are friends with each other?
+Now, what is the time complexity of testing if two given persons are friends with each other?
 That depends on the representation.
 
 Matrix representation
@@ -51,9 +45,9 @@ Matrix representation
     look up persons $a$ and $b$ and find their indices $i$ and $j$ (so that $a=P[i]$ and $b=P[j]$).
     If this array is sorted we can use binary search.
 
-    Now, to test if $a$ and $b$ are friends, we have to find their indices $i$ and $j$ and then just test $F[i,j]$.
+    To test if $a$ and $b$ are friends, we have to find their indices $i$ and $j$ and then just lookup $F[i,j]$.
     Finding the indices is logarithmic in the number of people, and testing is constant.
-    So the complexity is $O(\log(n))$, regardless of the average number of friends.
+    So the complexity is $O(\log(n))$, which is indepedent of the number of friends per person, $m$.
 
 Array of lists
 
@@ -61,10 +55,10 @@ Array of lists
     We still need the array $P$ for looking up the index of a person.
 
     To test if $a$ and $b$ are friends, we find the index $i$ of person $a$, which is logarithmic in $n$.
-    Then we traverse the list $F'[i]$ and compare each element with $b$,
-    and this is linear in the number of friends per person, $m$.
+    Then we do a linear search for $b$ in the list $F'[i]$,
+    which we all know is linear in the number of friends per person, $m$.
     So the complexity of testing friendship is $O(m\cdot\log(n))$.
-:::
+
 
 ::: example
 #### Example: Pixel values in a picture
@@ -92,7 +86,6 @@ follows.
 <!-- OPENDSA: START -->
 In this example, `count` is an array of size $c$ that stores the number of pixels for each colour value.
 The function `value` returns the colour value for a pixel $i$.
-
 The time for the first `for`-loop (which initialises `count`) is linear in the number of colours, $O(c)$.
 The time for the second loop (which determines the number of pixels with each colour) is $O(p)$.
 The time for the final line, the call to `sort`, depends on the cost of the sorting algorithm used.
@@ -109,6 +102,5 @@ On the other hand, a high-definition image can have $2^16$ values for red, green
 Even it has a very high resolution of say $100,000\times 50,000$ (that is, $p\approx (2^16)^2$),
 then $c$ will still be much larger than $p$.
 So for a high-resolution, high-definition image, the time for sorting, $O(c\log c)$ will dominate.
-
 Therefore, neither variable should be ignored in the complexity analysis of the algorithm.
 :::
