@@ -1,56 +1,35 @@
 
 # Algorithm analysis, part 1 {#analysis-1}
 
-::: TODO
-- Prio 1: also write about correctness, for example invariants
-- Prio 1: is the bullet list fine?
-:::
+This chapter has two main parts:
+How to best communicate algorithms,
+and an how to compare performance of algorithm.
 
-<!-- OPENDSA: START -->
-How long will a program take when I run it on a dataset ten times as
-large? If a particular program is slow, is it badly implemented or is it
-solving a hard problem? What order of improvement can I expect if I
-switch to a better algorithm? Questions like these ask us to consider
-the difficulty of a problem and the efficiency of approaches to solving it.
-This chapter introduces the motivation, basic notation, and fundamental
-techniques of algorithm analysis. We focus on a methodology known as
-[asymptotic algorithm analysis]{.term}, or simply asymptotic analysis.
+We have already touched on both these topics.
+You have seen several algorithms described,
+and some of the tools used for doing so:
+pseudocode, examples, and text descriptions.
+In this chapter we expand on how problems relate to algorithms,
+and how algorithms relate to programs, and how to use these
+technical terms to communicate algorithms.
 
-Asymptotic analysis estimates the resource consumption of an algorithm,
-called its [complexity]{.term}. Here, resource
-consumption can mean runtime, memory use, API calls, or any other
-measure. Instead of computing this resource consumption exactly,
-asymptotic analysis is only interested in its
-[growth rate]{.term} (also called
-order of growth). The growth rate is
-what determines the resource consumption for large inputs. Thankfully,
-growth rate expressions are relatively easy to compare. This allows us
-to decide which of two algorithms is better at solving the same problem.
-Asymptotic analysis also gives algorithm designers a tool for estimating
-whether a proposed solution is likely to meet the resource constraints
-for a problem before they implement an actual program.
+We look closer at the important concept of *invariants*,
+and how they can be used both for explaining an algorithm or data structure,
+as a tool for developing new data structures, and to prove the correctness
+of algorithms.
 
-After reading this chapter, you should understand:
+Perhaps most importantly, this chapter introduces the vast subject of
+*computational complexity*, and *asymptotic analysis*.
+Complexity provides a method of comparing the performance of
+algorithms without running any benchmarks,
+and to determine how well an algorithm scales to larger input values.
+We have already shown algorithms having logarithmic, linear, and quadratic time.
+This chapter expands this notion into a more general understanding of
+*complexity classes*.
 
--   The concept of [complexity]{.term} of an
-    algorithm, the resource usage of an algorithm as a function of an
-    input parameter. Different kinds of complexity such as
-    [worst-case]{.term} and
-    [average-case]{.term}.
--   The concept of [growth rate]{.term} or
-    [order of growth]{.term} of a (mathematical)
-    function. How to compute and compare growth rates of functions.
-    Notations such as [big-$O$](#big-o-notation){.term} to describe upper and lower bounds of growth rates.
--   The [asymptotic complexity]{.term} of an
-    algorithm, which is the growth rate of its complexity. Sometimes,
-    this is just called the growth rate of the algorithm.
--   The difference between the asymptotic complexity of an
-    [algorithm]{.term} (or program) and that of
-    a [problem]{.term}. The latter is the best
-    asymptotic complexity over all algorithms that solve the problem.
-
-The chapter concludes with a brief discussion of the practical
-difficulties encountered when empirically measuring the cost of a
-program, and some principles for code tuning to improve program
-efficiency.
-<!-- OPENDSA: END -->
+We introduce $O$-notation, the universally adopted industry standard
+for communicating and reasoning about performance,
+not just for data structures but for programming in general.
+In this chapter we aim to give an incomplete,
+but practically applicable understanding of $O$-notation and complexity,
+that we further expand in subsequent chapters.
