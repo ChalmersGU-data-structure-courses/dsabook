@@ -21,7 +21,7 @@ Then anyone who knows the alphabet can quickly find a song or an artist using a 
 
 #### Example: Travel by train
 
-The railroad is expanding to the frontier cities!
+The railroad is expanding to the new cities!
 Engineers want to build as little total rail length as possible, but still connect all cities.
 After the railway is constructed, travellers wants to find the fastest way of getting from
 city A to city B.
