@@ -1,7 +1,7 @@
 
 # Algorithm analysis, part 2 {#analysis-2}
 
-In [Chapter @sec:analysis-1] we introduced the ideas behind algorithmic analysis,
+In [Chapter @sec:analysis-1] we introduced the idea of algorithmic analysis,
 and explained $O$-notation without providing a formal definition.
 Now that you understand everything about sorting algorithms, we can go into more depth with our analysis tools.
 
@@ -39,16 +39,16 @@ Informally:
 
 Upper bound
 
-: $f\in O(g)$ **if and only if** $f$ grows at least as fast as $g$
+: $f\in O(g)$ **if and only if** $f$ grows at most as fast as $g$
 
 Lower bound
 
-: $f\in\Omega(g)$ **if and only if** $f$ grows at most as fast as $g$
+: $f\in\Omega(g)$ **if and only if** $f$ grows at least as fast as $g$
 
 Tight bound
 
 : $f\in\Theta(g)$ **if and only if** both functions grow at the same rate
 
-In this chapter we will give formal definitions of these concepts and show how to
+In this chapter we give formal definitions of these concepts and show how to
 use them to analyse the computational complexity of most algorithms,
-both for sorting and the data structures we will introduce later.
+both for sorting and the data structures we introduce in subsequent chapters.

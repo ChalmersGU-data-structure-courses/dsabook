@@ -5,17 +5,18 @@
 - Prio 1: more running text, less formula - now it looks scattered
 :::
 
-<!-- OPENDSA: START -->
-Several terms are used to describe the running-time equation for an algorithm.
-<!-- OPENDSA: END -->
-The most common term is the [upper bound]{.term} of the growth rate of a function.
+On an abstract level, every algorithm has a time function $T(n)$ that
+perfectly calculates the running time of that algorithm for a worst case
+value of size $n$. Determining this function exactly is neither realistically
+possible, or desirable. Instead we determine some properties of $T$,
+most commonly establishing an [upper bound]{.term} of its growth rate.
 The upper bound is denoted by the big-$O$ notation,
-where $f\in O(g)$ is pronounced "$g$ is an upper bound of $f$".
+where $f\in O(g)$, where $g$ is an upper bound of $f$.
 This tells us that the function $f$ will not grow faster than the function $g$.
 But what does this mean?
 
 If $g$ is an upper bound of $f$, that is $f\in O(g)$,
-then this means that $f(n) \leq g(n)$ in *the long run*.
+then $f(n) \leq g(n)$ in *the long run*.
 That is, whenever $n$ becomes sufficiently large, $f(n)$ must not outgrow $g(n)$.
 
 But this is not all there is to it -- we also want to abstract away from constant factors.
@@ -32,22 +33,22 @@ Upper bound
 
 If this is the case we say that $g$ is an *upper bound* of $f$.
 
-It is irrelevant what the values $k$ and $n_0$ are in the end
+The exact values used for $k$ and $n_0$ are irrelevant
 -- as long as you can find *any* values so that the inequality holds, you have found an upper bound.
 They could be in the order of millions,
 but for most common algorithms the constants $k$ and $n_0$ can be quite small.
 
-Some authors write $f=O(g)$ for the upper bound, but we use set membership, $f \in O(g)$.
+Many authors write $f=O(g)$ for the upper bound, but we use set membership, $f \in O(g)$.
 This is because we view $O(g)$ as the set of all functions $f$ for which the definition holds.
 And this means that for example
 $O(x^2)$, $O(5x^2)$, and $O(5x^2-7x+100\log_2(x)+10^9)$, all describe the same set.
-However, we will always use the most compact way of describing this set, in this case $O(x^2)$.
+However, we will always use the simplified form of this set, in this case $O(x^2)$.
 
 ::: note
 The definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
 This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
-But this is not a real restriction for the purposes of algorithm analysis,
-because there are no algorithms that becomes faster when the input size grows.
+This is not a real restriction for the purposes of algorithm analysis,
+since no realistic algorithms becomes faster when the input size grows.
 In the very best case, the runtime of an algorithm can be independent of the input size,
 but this is also monotonically increasing.
 The mathematical definition that allows any non-monotonic functions is slightly more complicated,
@@ -164,7 +165,7 @@ Thus, we will always say that binary search is in $O(\log(n))$.
 
 ### Simplifying rules
 
-Using the definition the simplifying rules from @sec:analysis-1:simplification-rules are quite straightforward to prove:
+Using the definition the simplifying rules from @sec:analysis-1:simplification-rules are quite straightforward to prove. We can also prove that as a mathematical relation, $f\in O(g)$ is *transitive*.
 
      Rule              Simplification
 ---  ----------------  -------------------------------------------------------------------

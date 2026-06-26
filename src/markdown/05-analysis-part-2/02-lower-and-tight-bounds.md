@@ -200,8 +200,8 @@ $O(f) > O(g)$         $f\in\omega(g)$
 
 ### Asymptotic equivalence
 
-This is an even stricter notion than the tight bound,
-meaning that if two functions $f$ and $g$ are asymptotically equivalent then $f\in\Theta(g)$.
+Asymptotic equivalence is an even stricter notion than the tight bound,
+meaning that if two functions $f$ and $g$ are asymptotically equivalent, then $f\in\Theta(g)$.
 
 Asymptotic equivalence
 
@@ -215,7 +215,7 @@ $$ f(n) = 5 n^2 - 7 n + 100 \log_2(n) + 10^9 $$
 is asymptotically equal to $5n^2$ when $n \rightarrow \infty$,
 or in other words, $f(n) \sim 5n^2$.
 This notion can be used to compare different algorithms within the same complexity class,
-but the problem is that it iseven more difficult to reason about than the tight bound.
+but it is even more difficult to reason about than the tight bound.
 
 Interestingly, asymptotic equivalence has an alternative definition in terms of the strict lower bound:
 $f \sim g$ if and only if $(f-g) \in o(g)$.
