@@ -446,7 +446,7 @@ Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left 
 Some programming languages have poor support for recursion.
 It is possible to traverse a tree iteratively (using a loop) with a stack data structure.
 We call the stack our *agenda*, consider it a to-do list containing nodes that we need to process.
-Here is a some pseudocode that is structurally very similar to our recursive iterations, but instead of making recursive calls we add child nodes to the agenda and loop:
+Here is pseudocode that is structurally very similar to our recursive iterations, but instead of making recursive calls we add child nodes to the agenda and loop:
 
     dfs(root):    // dfs is for Depth-First Search
         agenda = new Stack of Node
