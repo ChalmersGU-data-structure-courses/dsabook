@@ -17,13 +17,6 @@ Priority queues
     But to make them efficient we have to use more advanced data structures,
     so they will be discussed later in the book, in [Chapter @sec:trees].
 
-Double-ended queues
-:   A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.
-    This means that we can add and remove elements both from the front and the rear
-    (but not anywhere in the middle).
-    Deques can be implemented in a similar way to stacks and queues, either as dynamic arrays or linked lists.
-    However, to be able to implement all operations, the linked list must be a *double-linked list*.
-
 Double-linked lists
 :   Nodes in a double-linked list point both *forwards* and *backwards*.
     This means that we can iterate the list in both directions.
@@ -41,4 +34,11 @@ General lists
     for example, if we use dynamic arrays, it takes linear time to insert or delete an element in the middle of the list.
     On the other hand, a double-linked list can insert and delete elements very efficiently,
     but it takes linear time to locate the *position* of the element.
+
+Double-ended queues
+:   A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.
+    This means that we can add and remove elements both from the front and the rear
+    (but not anywhere in the middle).
+    Deques can be implemented in a similar way to stacks and queues, either as dynamic arrays or linked lists.
+    However, to be able to implement all operations, the linked list must be a *double-linked list*.
 

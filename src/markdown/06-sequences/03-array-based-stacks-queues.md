@@ -30,7 +30,7 @@ Note that 100 is the internal *capacity* of the stack, it is not the actual size
 When the stack is created it should be empty, and therefore the initial stack size is 0.
 
 <!-- OPENDSA: START -->
-The important design decision to be made is which end of the array should represent the top of the stack.
+An important design decision is which end of the array should represent the top of the stack.
 <!-- OPENDSA: END -->
 It might be tempting to let the top be the first element in the array, that is, the element at position 0.
 However, this is inefficient:
@@ -60,6 +60,8 @@ Therefore, to push a value onto the stack, we assign `arr[size]` and then increa
         stack.arr[stack.size] = value
         stack.size += 1
 
+Here we ignore the possibility that the stack is full.
+
 ::: dsvis
 Here we show how to push to an array-based stack.
 
@@ -87,6 +89,7 @@ After that we can clear the old top cell in the array and return the result.
 Note that it is important that we clear the old top value (by assigning the cell to *null*).
 Otherwise the old value will still be referred to by the internal array,
 and then the automatic garbage collection cannot remove the object.
+In addition, we assume that the stack is non-empty.
 
 ::: dsvis
 Here we show how to pop from an array-based stack.
@@ -240,7 +243,7 @@ Circular array queue.
 
 There remains one more subtle problem to the array-based queue implementation.
 How can we recognise when the queue is empty or full?
-If the array has size $n$, then it can store queues of size $0$ to $n$ --
+If the array has size $n$, then it can store queues of size $0$ to $n$,
 therefore it can store $n+1$ different queue lengths.
 But both when the queue is empty (size $0$) and when it is full (size $n$),
 the *front* variable is one larger than *rear*.
@@ -294,7 +297,7 @@ When enqueueing, we increase the *rear* pointer (modulo the size of the internal
 When dequeueing, we increase the *front* pointer (modulo the size of the internal array).
 <!-- OPENDSA: END -->
 Just as for array-based stacks, we have to clear the array cell that was dequeued,
-because otherwise it will never be garbage collecter.
+because otherwise it will never be garbage collected.
 
     dequeue(queue):
         result = queue.arr[queue.front]
@@ -303,6 +306,7 @@ because otherwise it will never be garbage collecter.
         queue.size -= 1
         return result
 
+Again, we ignore the possibility that the internal array is full or that the queue is empty.
 
 ::: dsvis
 Array-based queue practice exercises.
@@ -313,4 +317,3 @@ Array-based queue practice exercises.
 ```{.jsav-embedded src="ChalmersGU/AqueueDequeuePRO.html" type="ka" name="Array-based Queue Dequeue Exercise"}
 ```
 :::
-

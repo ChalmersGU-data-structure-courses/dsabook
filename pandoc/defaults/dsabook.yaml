@@ -39,7 +39,6 @@ variables:
 
 filters:
   - panflute
-  - pandoc-plot
   - pandoc-crossref
 
 

@@ -8,9 +8,6 @@ import hashlib
 import panflute as pf
 from panflute_helper import run_filter
 
-RENDERED_IMAGES_DIR = Path('rendered-images')
-RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-
 
 TEMPLATES = {}
 
