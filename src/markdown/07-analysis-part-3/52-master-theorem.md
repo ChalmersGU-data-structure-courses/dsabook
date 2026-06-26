@@ -1,3 +1,4 @@
+:::::: online
 
 ## Deriving the Master theorem {#analysis-3:deriving-master-theorem}
 
@@ -377,3 +378,4 @@ $\mathcal{H}_{n+1} \in O(\log(n))$, so the final solution is
 $O(n \log(n))$.
 -->
 
+::::::
