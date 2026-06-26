@@ -49,7 +49,7 @@ Afterwards we can forget about the old array because it will not be used anymore
     resize(stack, capacity):
         oldArr = stack.arr               // Remember the old internal array
         stack.arr = new Array(capacity)  // Create a new internal array
-        for i in 0 .. stack.size-1:
+        for i in 0 .. oldArr.size-1:
             stack.arr[i] = oldArr[i]     // Copy over all elements to the new array
 
 Note that resizing the internal array is a *slow* operation,
@@ -222,7 +222,7 @@ This means that they have to grow more often but on the other hand they do not u
 
 ### Resizing an array-based queue
 
-When we resize the internal array, we cannot keep the positions of the elements.
+When we resize the internal array of our array-based queue implementation, we cannot keep the positions of the elements.
 If the queue is wrapped around (that is, if *rear* < *front*)
 then we might end up in a large gap in the middle of the queue.
 For example, the following queue consists of 7 elements,
@@ -241,31 +241,18 @@ But now we have to be a little careful when copying over the elements to the new
 
 ![](images/CircularQueue3.png)
 
-Instead we reset the *front* and *rear* pointers so that we copy
-the first queue element to position 0 of the new array,
-the second to position 1, and so on.
-This will lead to the following resized array:
+We could create a new array in `resize` and copy the existing elements, but then we would have to handle the wraparound carefully.
+Since `enqueue` and `dequeue` already take care of that, a simple implementation of `resize` is to create a new `ArrayQueue`, then dequeue all elements from the old queue and enqueue them into the new one:
+
+    resize(old, capacity):
+        queue = new ArrayQueue(capacity)
+        while old.size is not 0:
+            queue.enqueue(dequeue(old))
+        old = queue 
+
+This will lead to the following internal array of the new queue:
 
 ![](images/CircularQueue4.png)
-
-Apart from this detail, that we have to reset the pointers,
-the implementation of resizing is similar to the one for stacks:
-
-    resize(queue, capacity):
-        oldArr = queue.arr
-        queue.arr = new Array(capacity)
-        for pos in 0 .. queue.size-1:
-            oldPos = (pos + front) mod queue.arr.size
-            queue.arr[pos] = oldArr[oldPos]
-        queue.front = 0
-        queue.rear = queue.size - 1
-
-Note that there are several ways to copy the elements, we do not have to reset *front* to zero.
-We can also keep *front* at its original position, but then the *rear* pointer will have to be updated.
-Here is how the example array could look like in this case after resizing:
-
-![](images/CircularQueue5.png)
-
 
 ### Shrinking the internal array {#sequences:shrink-array}
 
@@ -318,4 +305,3 @@ Dynamic arrays -- deletion.
 ``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css" name="Dynamic Array-based List Deletion Slideshow"}
 ```
 :::
-
