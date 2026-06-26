@@ -9,7 +9,7 @@
 
 Mergesort uses a very simple approach for splitting the array, but spends almost all its time in the merging step.
 But there is also another problem with merging: it is difficult to efficiently implement in-place,
-so Mergesort have to use an additional array which will use some memory.
+so Mergesort has to use an additional array which will use some memory.
 So is there a different divide-and-conquer strategy that is easier to make in-place?
 
 *Quicksort* uses another approach: it spends more of the time in splitting the array in parts,
@@ -86,6 +86,8 @@ To partition an array interval:
 :::
 
 
+<!-- TODO: The figures need to be updated to the names lower and upper -->
+
 Here is a step-by-step example of partitioning.
 
 1.  First we select a pivot element:
@@ -120,7 +122,7 @@ This is different from Mergesort where we need to allocate space for a temporary
 After the partitioning is finished we know the following:
 
 -   The pivot is in its final position in the sorted array, so it will never have to be touched again.
--   The left part is not sorted, but all the elements in the left part should be somewhere in there.
+-   The left part is not sorted, but all the elements smaller than the pivot are present.
     This means that we can recursively sort the left part.
 -   The same for the right part.
 

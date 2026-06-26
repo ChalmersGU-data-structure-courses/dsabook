@@ -8,11 +8,7 @@
 - Prio 2: invariants
 :::
 
-A divide-and-conquer algorithm does the following things:
-(1) divides the problem into smaller problems,
-(2) solves each of the smaller problems separately, and
-(3) combines their solutions into a final solution.
-This fits very well into the general problem of sorting an array:
+A divide-and-conquer algorithm fits very well into the general problem of sorting an array:
 break the array into pieces, sort each piece, and combine the sorted pieces.
 The problem is how to break the array into pieces, and how to combine them afterwards.
 The idea behind *Mergesort* is to simply split the array in half.
@@ -31,12 +27,11 @@ To sort an array using Mergesort:
 Hopefully you noticed that a very important part is missing from the algorithm above.
 The way it is described, it will continue calling the recursive step 2 endlessly,
 so we need a way to stop it all -- a *base case*.
-The standard base case for all divide-and-concquer sorting algorithms is a *singleton* array
--- an array with only one element, which is of course already sorted.
+The standard base case for divide-and-conquer sorting algorithms is an empty array or a singleton array containing just one element, since such arrays are already sorted.
 
 Now we only have to know how to split and merge.
 Splitting is really easy: just divide the array in half.
-The problem is how to implement merging.
+what remains is how to implement merging.
 
 ::: dsvis
 Here is a visualisation that illustrates how Mergesort works.
@@ -65,6 +60,9 @@ Now we repeat the following until one of the halves is empty:
 
 Finally we can append the remaining elements in the nonempty half to the end of the result array.
 :::
+
+The `merge` function relies on the two halves already being sorted; this is a precondition of the function.
+Its postcondition is that the merged result is also sorted.
 
 ::: dsvis
 Here is a visualisation for the merge operation.
@@ -134,7 +132,7 @@ Recall that Selection and Insertion sort are quadratic, $O(n^2)$,
 because they use two nested for loops, each of them linear.
 
 The analysis is actually not trivial because Mergesort is a recursive algorithm,
-and reasoning about recursion is very difficult in general.
+and reasoning about recursion is difficult in general.
 However, we can visualise how Mergesort works in a way that will make the complexity clearer.
 
 #### If the size is a power of two
@@ -233,7 +231,7 @@ we just have to keep track of the pointers to the two sorted halves.
 
     // Merge the sorted array intervals start .. mid-1 and mid .. end
     merge(arr, start, mid, end):
-        temp = new Array
+        temp = new Array(arr.size)
         j = start; k = mid                 // Pointers to the sorted halves
         for i in start .. end:             // Pointer to the temporary array
             if j < mid and (k > end or arr[j] <= arr[k]):
@@ -269,7 +267,7 @@ The only thing we would have to do is to add an extra argument to `mergeSort` an
 Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
 
     mergeSort(arr):
-        temp = new Array of size arr.size
+        temp = new Array(arr.size)
         mergeSort(arr, temp, 0, arr.size-1)
 
 #### Using a backoff algorithm
@@ -325,8 +323,11 @@ For example, it is what Python uses as its standard sorting algorithm.
 There is a lot more that can be said about run-based Mergesort.
 One thing that has a big effect on the efficiency is in which order we choose to merge the runs
 -- we want the runs to be as equal as possible in size.
+
+:::: online
 There are many different strategies to do this,
 and the following blog post gives a good introduction if you are interested:
 
 > https://www.wild-inter.net/publications/munro-wild-2018
+::::
 
