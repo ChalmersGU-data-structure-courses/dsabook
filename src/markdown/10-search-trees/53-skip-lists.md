@@ -202,7 +202,7 @@ to be the same.
 In practice, the skip list will probably have better performance than a
 BST storing the same data. The BST can have bad performance caused by
 the order in which data are inserted. For example, if $n$ nodes are
-inserted into a BST in ascending order of their key values, then the BST
+inserted into a BST in increasing order of their key values, then the BST
 will look like a linked list with the deepest node at depth $n-1$. If
 the data inserted over the life of the BST could be randomly ordered,
 then the probability distribution for the cost of the insert and search

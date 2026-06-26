@@ -233,7 +233,7 @@ Recall that tree traversals visit every node exactly once, in some
 specified order such as preorder, inorder, or postorder. Multiple tree
 traversals exist because various applications require the nodes to be
 visited in a particular order. For example, to print a BST's nodes in
-ascending order requires an inorder traversal as opposed to some other
+increasing order requires an inorder traversal as opposed to some other
 traversal. Standard graph traversal orders also exist. Each is
 appropriate for solving certain problems. For example, many problems in
 artificial intelligence programming are modeled using graphs. The

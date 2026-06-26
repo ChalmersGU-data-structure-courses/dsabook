@@ -147,7 +147,7 @@ earlier (many of which would require sorting all of the array first).
 One situation where we are able to take advantage of this concept is in
 the implementation of
 [Kruskal's algorithm]{.term} for [minimum spanning trees]{.term}.
-That algorithm requires that edges be visited in ascending
+That algorithm requires that edges be visited in increasing
 order (so, use a min-heap), but this process stops as soon as the MST is
 complete. Thus, only a relatively small fraction of the edges need be
 sorted.

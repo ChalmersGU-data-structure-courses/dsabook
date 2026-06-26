@@ -5007,7 +5007,7 @@ visit the solutions.
 
 A [list]{.term} where the records stored in
 the list are arranged so that their [key]{.term}
-values are in ascending order. If the list uses an
+values are in increasing order. If the list uses an
 [array-based list]{.term} implementation,
 then it can use [binary search]{.term} for a
 cost of $O(\log(n))$. But both insertion and deletion will be
