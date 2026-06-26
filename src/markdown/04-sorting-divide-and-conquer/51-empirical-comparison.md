@@ -56,8 +56,8 @@ The various sorting algorithms are shown for random integer arrays of sizes bein
 The final two columns of each
 table show the performance for the algorithms on inputs of size 100,000
 (400,000 for the Java tests)
-where the numbers are in ascending (sorted) and descending (reverse
-sorted) order, respectively. These columns demonstrate best-case
+where the numbers are in increasing and decreasing order, respectively.
+These columns demonstrate best-case
 performance for some algorithms and worst-case performance for others.
 They also show that for some algorithms, the order of input has little
 effect.

@@ -61,7 +61,7 @@ We can use a priority queue to make an efficient sorting algorithm.
 To sort a list of items:
 
 -   First create an empty priority queue, and add all the items to it.
--   Then repeatedly find and remove the smallest item. The items will come out in ascending order.
+-   Then repeatedly find and remove the smallest item. The items will come out in increasing order.
 
 Here is an implementation of this algorithm in code:
 <!-- NICSMA: END -->

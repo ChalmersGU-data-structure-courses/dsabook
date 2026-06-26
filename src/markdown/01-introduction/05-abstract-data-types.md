@@ -34,7 +34,7 @@ Consider these three operations for collections of values:
 
 The operations form a little ADT for *sequences*, collections where elements have positions.
 Consider these operations on the similar data structures of *arrays* and *ordered arrays*
-(an array with an ordering invariant: elements are and must remain sorted in ascending order).
+(an array with an ordering invariant: elements are and must remain sorted in increasing order).
 Can the operations be implemented on both data structures,
 and how efficient can they be made?
 

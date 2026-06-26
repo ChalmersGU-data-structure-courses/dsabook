@@ -13,7 +13,7 @@ Remarkably often when designing a data structure, deciding the invariant is the 
 and once it is decided the rest of the work is trivial.
 
 Take the example of a collection of values. If we decide to store them in an array
-with an ordering invariant (the array must always be sorted in ascending order),
+with an ordering invariant (the array must always be sorted in increasing order),
 the algorithms for most operations become obvious.
 Adding a new element can only be done in one way: Find the position where
 the value can be, and put the value there. If we want an operation to find
@@ -46,7 +46,7 @@ Sometimes an invariant can be strengthened or weakened to alter
 this trade-off. Consider again the case of an ordered array.
 If the only reason we have the invariant is to find the least
 value in the array, perhaps it could be weakened from
-"the elements are in ascending order" to
+"the elements are in increasing order" to
 "the first element is always the least element", allowing all
 values except the first to appear in any order.
 Consider how this would affect the performance of for example an
