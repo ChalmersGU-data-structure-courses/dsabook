@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Summary questions
+### Quiz: Summary questions about sequences
 
 Here are some general practice questions about various data structures in this chapter.
 

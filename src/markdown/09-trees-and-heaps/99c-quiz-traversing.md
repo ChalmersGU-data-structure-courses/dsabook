@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Binary tree traversals
+### Quiz: Binary tree traversals
 
 
 :::::::::: question ::::::::::

@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Exchange sort
+### Quiz: Exchange sort
 
 
 :::::::::: question ::::::::::

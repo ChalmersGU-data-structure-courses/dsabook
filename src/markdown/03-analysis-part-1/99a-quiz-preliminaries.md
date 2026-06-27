@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Introduction
+### Quiz: Introduction to algorithm analysis
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

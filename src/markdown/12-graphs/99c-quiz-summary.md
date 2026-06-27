@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Summary questions
+### Quiz: Graph summary questions
 
 
 ![A concept map for the term "graph"](images/GraphCM.png){width=60%}

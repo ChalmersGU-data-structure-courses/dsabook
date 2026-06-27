@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Upper bounds
+### Quiz: Big-$O$ notation
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

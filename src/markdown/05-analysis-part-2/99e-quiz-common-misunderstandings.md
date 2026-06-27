@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Common misunderstandings
+### Quiz: Common misunderstandings
 
 
 :::::::::: question ::::::::::

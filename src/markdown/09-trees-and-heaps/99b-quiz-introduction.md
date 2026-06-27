@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Example binary tree
+### Quiz: Example binary tree
 
 Here's an example binary tree:
 

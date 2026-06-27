@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Insertion sort
+### Quiz: Insertion sort
 
 
 :::::::::: question ::::::::::

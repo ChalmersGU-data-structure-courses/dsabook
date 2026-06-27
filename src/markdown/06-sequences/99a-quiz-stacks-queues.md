@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Stacks and queues
+### Quiz: Stacks and queues
 
 Here are some general practice questions about stacks and queues.
 

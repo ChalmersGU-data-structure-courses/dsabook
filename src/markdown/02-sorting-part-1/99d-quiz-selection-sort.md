@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Selection sort
+### Quiz: Selection sort
 
 Here are some review questions to check how well you understand Selection sort.
 

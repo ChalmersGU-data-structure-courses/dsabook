@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Graph space requirements
+### Quiz: Space requirements for graphs
 
 
 *Warning*! Read the conditions for the problems in this set very carefully!
