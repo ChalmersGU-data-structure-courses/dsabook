@@ -98,7 +98,7 @@ Here is an example where we reason about the *linear search* algorithm from @sec
 
 
 
-#### The problem with average case {#analysis-1:average-case-problem}
+#### The problem with average case
 
 Average-case analysis requires a deep understanding of the specific application
 that the algorithm is used in, and it is easy to accidentally make false assumptions.

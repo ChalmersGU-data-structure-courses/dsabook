@@ -449,7 +449,7 @@ Quicksort's average-case behaviour falls somewhere between the extremes of worst
 Average-case analysis considers the cost for all possible arrangements of input,
 <!-- OPENDSA: END -->
 and calculates the average cost, weighted by how the data is distributed.
-As we already discussed in @sec:analysis-1:average-case-problem,
+As we already discussed in @sec:analysis-1:complexity-cases,
 the average case is extremely difficult to reason about,
 because real-world data does not usually have an even distribution.
 

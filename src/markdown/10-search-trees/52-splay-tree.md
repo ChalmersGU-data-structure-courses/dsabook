@@ -70,10 +70,8 @@ A [single rotation]{.term} is performed only if
 $S$ is a child of the root node. The single rotation is illustrated by
 @fig:SingProm. It basically
 switches $S$ with its parent in a way that retains the BST property.
-While this figure is
-slightly different from @fig:AVLsingle,
-in fact the splay tree single rotation is identical to the
-AVL tree single rotation.
+The splay tree single rotation is in fact identical to
+a normal single rotation as described in @sec:search-trees:rotations.
 
 ![Splay tree single rotation. This rotation takes place only when the node
 being splayed is a child of the root. Here, node $S$ is promoted to the
@@ -95,31 +93,34 @@ rotation. Double rotations involve $S$, its parent (call it $P$), and
 $S$ 's grandparent (call it $G$). The effect of a double rotation is to
 move $S$ up two levels in the tree.
 
-ZigZag
-:   The first double rotation is called a *zigzag rotation*.
-    It takes place when either of the following two conditions are met:
+#### ZigZag
 
-    (1) $S$ is the left child of $P$, and $P$ is the right child of $G$.
-    (2) $S$ is the right child of $P$, and $P$ is the left child of $G$.
+The first double rotation is called a *zigzag rotation*.
+It takes place when either of the following two conditions are met:
 
-    In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a zigzag.
-    The zigzag rotation is illustrated by @fig:ZigZag.
+(1) $S$ is the left child of $P$, and $P$ is the right child of $G$.
+(2) $S$ is the right child of $P$, and $P$ is the left child of $G$.
 
-ZigZig
-:   The other double rotation is known as a [zigzig]{.term} rotation.
-    It takes place when either of the following two conditions are met:
-
-    (1) $S$ is the left child of $P$, which is in turn the left child of $G$.
-    (2) $S$ is the right child of $P$, which is in turn the right child of $G$.
-
-    Thus, a zigzig rotation takes place in those situations where a zigzag rotation is not appropriate.
-    The zigzig rotation is illustrated by @fig:ZigZig.
+In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a zigzag.
+The zigzag rotation is illustrated by @fig:ZigZag,
+but it is in fact is identical to the normal double rotation discussed in @sec:search-trees:rotations.
 
 ![Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzag formation. (b) The tree after the rotation takes place. The
 positions of subtrees $A$, $B$, $C$, and $D$ are altered as appropriate
 to maintain the BST property.
 ](images/ZigZag.png){width=60% #fig:ZigZag}
+
+#### ZigZig
+
+The other double rotation is known as a [zigzig]{.term} rotation.
+It takes place when either of the following two conditions are met:
+
+(1) $S$ is the left child of $P$, which is in turn the left child of $G$.
+(2) $S$ is the right child of $P$, which is in turn the right child of $G$.
+
+Thus, a zigzig rotation takes place in those situations where a zigzag rotation is not appropriate.
+The zigzig rotation is illustrated by @fig:ZigZig.
 
 ![Splay tree zigzig rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzig formation. (b) The tree after the rotation takes place. The
@@ -130,7 +131,6 @@ to maintain the BST property.
 Note that zigzag rotations tend to make the tree more balanced, because
 they bring subtrees $B$ and $C$ up one level while moving subtree $D$
 down one level. The result is often a reduction of the tree's height by one.
-While @fig:ZigZag appears somewhat different from @fig:AVLdouble, in fact the zigzag rotation is identical to the AVL tree double rotation.
 Zigzig promotions and single rotations do not typically reduce the
 height of the tree; they merely bring the newly accessed record toward
 the root.
