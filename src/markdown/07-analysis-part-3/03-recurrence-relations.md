@@ -138,7 +138,7 @@ where $r = b^k/a$:
 
 \begin{align*}
 T(n) &~=~   c \cdot a^m \cdot (\underbrace{1  +  \tfrac{b^{k}}{a}  +  \tfrac{b^{2k}}{a^3}  +
-                                    \tfrac{b^{2k}}{a^3}  +  \cdots  +  \tfrac{b^{mk}}{a^m}}_{m \text{ terms}})
+                                    \tfrac{b^{2k}}{a^2}  +  \cdots  +  \tfrac{b^{mk}}{a^m}}_{m \text{ terms}})
 \\   &~=~   c \cdot a^m \cdot \sum^m (\tfrac{b^k}{a})^i
       ~=~   c \cdot a^m \cdot \sum^m r^i
 \end{align*}
