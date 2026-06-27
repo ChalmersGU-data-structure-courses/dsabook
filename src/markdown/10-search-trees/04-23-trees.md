@@ -29,11 +29,9 @@ For every 3-node with values $a$ and $b$:
 - all values in the right subtree are *larger* than $b$.
 :::
 
-<!-- OPENDSA: START -->
 Here is an example of a 2-3 tree.
 In this tree, the root is a 3-node: it has two values (18 and 32) and three children.
 The left child of the root is a 2-node containing the key 12.
-<!-- OPENDSA: END -->
 
 ::: {#fig:TTexample}
 :::: online

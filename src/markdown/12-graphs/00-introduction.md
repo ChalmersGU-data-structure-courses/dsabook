@@ -32,10 +32,8 @@ small sampling of what graphs can be used to model:
     Vertices are objects and edges are references or pointers.
 
 The next section covers basic graph terminology, and
-<!-- OPENDSA: START -->
 the rest of the chapter covers core graph algorithms
 including [traversal]{.term}, [shortest path]{.term} algorithms, and
-<!-- OPENDSA: END -->
 [minimum spanning tree]{.term} algorithms,
 as well as common representations and implementations of graphs.
 

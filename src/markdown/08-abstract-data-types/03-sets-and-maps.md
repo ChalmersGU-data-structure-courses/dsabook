@@ -152,9 +152,11 @@ when we update a set using `add` it is modified *in-place* -- so it is still poi
 #### Example: Search engine
 
 The *search engine* example is a good use case of a multimap.
+<!-- NICSMA: START -->
 First we have to build the database, which is a multimap where the key is a word,
 and the values are all document id numbers containing that word.
 Now, searching for a word just means looking it up in the multimap,
+<!-- NICSMA: END -->
 which is the same as calling `get` on the underlying map.
 
 <!-- But how do we build this database?

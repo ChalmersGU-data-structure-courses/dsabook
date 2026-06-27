@@ -119,7 +119,9 @@ We also see that exponential algorithms are prohibitively expensive for even mod
 Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
 
 Finally, @tbl:growth-rates shows the difference between the growth rates when $n$ becomes larger and larger.
+<!-- OPENDSA: START -->
 Once again, we see that the growth rate has a tremendous effect on the resources consumed by an algorithm.
+<!-- OPENDSA: END -->
 
 
 Growth rate              $n=10$               $100$              $1,000$          $10^4$       $10^5$

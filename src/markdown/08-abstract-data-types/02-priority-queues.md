@@ -76,10 +76,10 @@ Here is an implementation of this algorithm in code:
 <!-- NICSMA: START -->
 What is the time complexity of this algorithm?
 Well, for an input list of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$ times.
+<!-- NICSMA: END -->
 In @sec:heaps:binary-heaps we will introduce *binary heaps* where both operations take logarithmic time, $O(\log(n))$.
 Therefore, if we use binary heaps, the total runtime of our sorting algorithm is $O(n \log(n))$ --
 as efficient as any of the sorting algorithms we have seen so far!
-<!-- NICSMA: END -->
 :::
 
 <!--

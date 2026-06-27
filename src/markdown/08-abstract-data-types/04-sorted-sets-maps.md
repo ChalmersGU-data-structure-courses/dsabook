@@ -4,8 +4,10 @@
 One task that sets or maps cannot solve are *range queries*, such as this example:
 
 Between $x$ and $y$
-:   Given a list of all Swedish towns and their populations,
+:   <!-- NICSMA: START -->
+    Given a list of all Swedish towns and their populations,
     are there any towns whose population is between 5,000 and 10,000?
+    <!-- NICSMA: END -->
     And if so, which are these towns?
 
 This example consists of two different questions:
@@ -88,10 +90,12 @@ Note that it *extends* the `Set` interface, so it has all the methods that norma
 Now consider the second range query in the example above:
 "find the towns whose population is between 5,000 and 10,000".
 
+<!-- NICSMA: START -->
 One way to solve this problem would be to use a *multimap* (see @sec:ADTs:multimaps).
 The key would be a population number, and the values would be all towns having that population.
 Then we could find the required towns by making a sequence of calls
 `get(map, 5000)`, `get(map, 5001)`, ..., until `get(map, 10000)`.
+<!-- NICSMA: END -->
 
 But just as for the range queries for sets, this is not feasible.
 Instead we introduce an interface for *sorted maps*.
@@ -121,8 +125,10 @@ Note the similarity to the interface for sorted sets.
 ::: example
 #### Example: Small Swedish towns
 
+<!-- NICSMA: START -->
 Here is how to use a *sorted map* to find all Swedish towns having between 5,000 and 10,000 population.
 As there may be towns that have the same population, we need a *sorted multimap*,
+<!-- NICSMA: END -->
 where the key is the population and the value is a *set* of towns:
 
     cityPopulations: SortedMap of Int to (Set of City)

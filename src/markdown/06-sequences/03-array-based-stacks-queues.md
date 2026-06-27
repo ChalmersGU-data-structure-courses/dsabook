@@ -29,9 +29,7 @@ In this example the underlying array has an internal size of 100:
 Note that 100 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.
 
-<!-- OPENDSA: START -->
 An important design decision is which end of the array should represent the top of the stack.
-<!-- OPENDSA: END -->
 It might be tempting to let the top be the first element in the array, that is, the element at position 0.
 However, this is inefficient:
 whenever we want to push to or pop from the stack,
@@ -263,9 +261,9 @@ that is, to use a special *size* variable.
 Another solution is to set *front* and *rear* to some unused number (such as $-1$) whenever the queue becomes empty.
 <!-- OPENDSA: START -->
 Which of these solutions to adopt is purely a matter of the implementor's taste in such affairs.
+<!-- OPENDSA: END -->
 Our choice here is to keep an explicit count of the number of elements, in a variable *size*,
 because this will make the code more similar to our other implementations.
-<!-- OPENDSA: END -->
 
     datatype ArrayQueue:
         array = new Array(100)    // Internal array containing the queue elements.
@@ -284,18 +282,14 @@ we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
 
 #### Enqueueing and dequeueing
 
-<!-- OPENDSA: START -->
 When enqueueing, we increase the *rear* pointer (modulo the size of the internal array).
-<!-- OPENDSA: END -->
 
     enqueue(queue, x):
         queue.rear = nextPosition(queue, queue.rear)  // Circular increment
         queue.arr[queue.rear] = x
         queue.size += 1
 
-<!-- OPENDSA: START -->
 When dequeueing, we increase the *front* pointer (modulo the size of the internal array).
-<!-- OPENDSA: END -->
 Just as for array-based stacks, we have to clear the array cell that was dequeued,
 because otherwise it will never be garbage collected.
 

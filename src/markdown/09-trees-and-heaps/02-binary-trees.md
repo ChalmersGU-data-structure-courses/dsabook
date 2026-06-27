@@ -95,12 +95,16 @@ Here is a visual explanation of the same idea.
 
 ### Full, perfect, and complete binary trees {#trees:full-perfect-complete}
 
+<!-- OPENDSA: START -->
 Several restricted forms of binary tree are sufficiently important to warrant special names.
+<!-- OPENDSA: END -->
 In a [full binary tree](#full-tree){.term}, every node is either a leaf node or an internal node with exactly two non-empty children.
 A [perfect binary tree]{.term} is a full binary tree in which all leaves are at the same level.
 Equivalently, every level of a perfect binary tree is completely full.
+<!-- OPENDSA: START -->
 A [complete binary tree]{.term} has a shape obtained by starting at the root and filling the tree level by level from left to right.
 In a complete binary tree of height $d$, all levels except possibly level $d$ are completely full.
+<!-- OPENDSA: END -->
 The bottom level is filled from the left side.
 
 @Fig:full_complete_bintrees below illustrates the differences between full and complete binary trees.
@@ -255,7 +259,9 @@ Two different binary trees:
 We continue and examine a way to implement nodes for a binary tree.
 By definition, each node has two children, although either or both may be empty.
 A node also typically stores a value, with the type depending on the application.
+<!-- OPENDSA: START -->
 The most common implementation therefore includes a value field and pointers to the two children.
+<!-- OPENDSA: END -->
 
 Here is a simple implementation for binary tree nodes, which can store one single element in each node.
 
@@ -348,7 +354,9 @@ The empty cells are null values.
 -->
 We can easily extend the Node type for different applications, for example by storing additional data in each node.
 It is sometimes convenient to add a pointer to the node’s parent, making it easy to move upward in the tree.
+<!-- OPENDSA: START -->
 This is somewhat analogous to adding a link to the previous node in a doubly linked list.
+<!-- OPENDSA: END -->
 In practice, however, a parent pointer is rarely necessary and increases the space overhead of the tree.
 The problem is not only the extra space.
 More importantly, reliance on parent pointers often reflects a poor understanding of recursion and can lead to weaker designs.

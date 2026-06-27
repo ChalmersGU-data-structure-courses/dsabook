@@ -19,8 +19,10 @@ Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-codin
 An example of an expression tree for $4x(2x + a) - c$
 :::
 
+<!-- OPENDSA: START -->
 An expression tree represents an algebraic expression built from binary operators such as addition, subtraction, multiplication, and division.
 Its internal nodes store operators, while its leaves store operands such as numbers and variables.
+<!-- OPENDSA: END -->
 Since operators and operands are conceptually different kinds of information, it is natural to represent them using different node types.
 These node types may also have different fields, reflecting the information they need to store.
 

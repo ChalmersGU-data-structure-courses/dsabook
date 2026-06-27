@@ -48,8 +48,10 @@ If necessary, the clear, recursive solution can later be modified to yield a fas
 #### Example: The Fibonacci sequence
 
 Here is an example of a function that is naturally written using recursion.
+<!-- OPENDSA: START -->
 The Fibonacci sequence is the series of numbers: 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Any number in the sequence is found by adding up the two numbers before it,
+<!-- OPENDSA: END -->
 and the first two numbers in the sequence are both 1.
 Mathematically, the $n$th Fibonacci number is calculated recursively like this,
 where the first row is the *recursive case*, and the second row defines the two *base cases*:

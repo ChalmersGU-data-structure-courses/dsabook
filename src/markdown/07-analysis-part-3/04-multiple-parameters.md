@@ -8,12 +8,14 @@
 - Prio 3: discuss different definitions and how they differ (only in separate online section)
 :::
 
+<!-- OPENDSA: START -->
 Imagine that we want to keep track of friendships between $n$ people.
 We can do this with a 2-dimensional array of size $n \times n$ (a matrix).
 Each row of the matrix represents the friends of an individual, with the columns indicating who has that individual as a friend.
 For example, if person $j$ is a friend of person $i$, then we place a mark in column $j$ of row $i$ in the array.
 Likewise, we should also place a mark in column $i$ of row $j$ if we assume that friendship works both ways.
 For $n$ people, the total size of the matrix is in $O(n^2)$.
+<!-- OPENDSA: END -->
 
 But is this the best representation of friendship links?
 Assume that $n$ grows large, and we want to include every person in Sweden (which has around 10 million people).

@@ -266,11 +266,9 @@ After each iteration of the `while`-loop, the following invariants always hold:
 
 ### Selecting a pivot
 
-<!-- OPENDSA: START -->
 Perhaps the most important choice in implementing Quicksort is how to choose the pivot.
 Choosing a bad pivot can result in all elements of the array ending up in the same partition,
 in which case Quicksort ends up taking quadratic time.
-<!-- OPENDSA: END -->
 
 The best is to select the *median* value (that is, not the average and not the middle value).
 This will make the two partitions the same size and we will get the best performance.
@@ -287,11 +285,9 @@ Instead we have to use some approximation.
 Choosing the *first* or the *last* element of the array interval is a very simple strategy, but it is also bad.
 If the input array is sorted, then the first element of the interval
 will also be the smallest (and the last will be the largest).
-<!-- OPENDSA: START -->
 Hence all elements of the array will end up in one of the partitions.
 Worse, exactly the same thing will happen in all the recursive calls to Quicksort.
 Hence the partitioning will be as bad as possible, and Quicksort will end up taking quadratic time.
-<!-- OPENDSA: END -->
 
 The take-first or take-last strategy is also bad if the input is *almost* sorted,
 because the partitions will be very uneven in size and this is not good for Quicksort.
@@ -309,7 +305,6 @@ Even better is to look at a sample of the elements and pick the median of those.
 By far the most common is to take the median of the first, middle and last elements.
 This strategy is called *median-of-three*.
 
-<!-- OPENDSA: START -->
 For example, given the array [3, 1, 4, 1, 5, 9, 2],
 we pick out the elements 3 (first position), 1 (middle position) and 2 (last position).
 The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
@@ -317,7 +312,6 @@ The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
 Median-of-three is not guaranteed to pick a good pivot:
 there are cases where it partitions the input array badly.
 However, these bad cases do not seem to occur in practice, so
-<!-- OPENDSA: END -->
 median-of-three is used by many real-world Quicksort implementations.
 
 #### Non-well-behaved input
@@ -512,10 +506,8 @@ This happens as a natural by-product of the divide and conquer approach.
 A simple improvement is to replace Quicksort with a faster sort for smaller array intervals.
 <!-- OPENDSA: END -->
 This is a very common improvement, and usually one uses Insertion sort as the backoff algorithm.
-<!-- OPENDSA: START -->
 Now, at what size should we switch to Insertion sort?
 The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
-<!-- OPENDSA: END -->
 Note that in @sec:sorting-2:mergesort-optimisations we discussed exactly the same improvement for Mergesort.
 
 
