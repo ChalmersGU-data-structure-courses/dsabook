@@ -29,7 +29,18 @@ PYTHON    := python3
 PANDOC    := pandoc --resource-path=$(RESOURCES) --data-dir=pandoc --defaults=dsabook.yaml
 HTMLTEST  := htmltest
 
-default: install
+help:
+	@echo "make all = install + check-links"
+	@echo "make deploy = install + deploy to 'docs' directory"
+	@echo "make check-links = check that no HTML links are dead"
+	@echo "make install = postprocess + install in 'build' directory"
+	@echo "make postprocess = pandoc + postprocess the generated HTML files"
+	@echo "make pandoc = preprocess + run Pandoc (generate HTML from Markdown)"
+	@echo "make preprocess = render + preprocess Markdown files"
+	@echo "make render = generate images"
+	@echo "make server = run local HTTP server on http://localhost:8000/"
+	@echo "make clean = remove temporary files and rendered images"
+
 
 all: install check-links
 
@@ -41,15 +52,17 @@ clean:
 $(IMGDIR)/%.svg: $(IMGDIR)/%.py
 	python $<
 
-render: clean $(GEN_IMAGES)
+render: $(GEN_IMAGES)
 
 preprocess: render
+	@rm -rf $(TEMP)
 	@mkdir -p $(TEMP)
 	@echo
 	@echo "# Preprocessing..."
 	@time $(PYTHON) scripts/preprocess.py $(TEMP) $(GLOSSARY) $(MD_FILES)
 
 pandoc: preprocess
+	@rm -rf $(BUILD)
 	@mkdir -p $(BUILD)
 	@echo
 	@echo "# Running pandoc..."
@@ -67,7 +80,7 @@ install: postprocess
 	@cp    $(SRC)/index.html     $(BUILD)/ || true
 	@cp -r $(SRC)/interactive    $(BUILD)/ || true
 	@cp -r $(SRC)/khan-exercises $(BUILD)/ || true
-	@cp -r $(RESOURCES)/*              $(BUILD)/ || true
+	@cp -r $(RESOURCES)/*        $(BUILD)/ || true
 	@cp -r $(LIB)                $(BUILD)/ || true
 
 deploy: install
