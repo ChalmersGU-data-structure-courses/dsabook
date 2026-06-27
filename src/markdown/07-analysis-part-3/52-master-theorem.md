@@ -1,6 +1,6 @@
 :::::: online
 
-## Deriving the Master theorem {#analysis-3:deriving-master-theorem}
+## Deriving the Master theorem* {#analysis-3:deriving-master-theorem}
 
 ::: TODO
 - Prio 2: rewrite this, now we repeat a lot of text from 7.3

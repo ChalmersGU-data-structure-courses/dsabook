@@ -1,7 +1,12 @@
 
 :::::: online
 
-## Glossary
+## Glossary* {#appendix:glossary}
+
+::: TODO
+- Remove unused terms
+- Correct the other ones
+:::
 
 ::: glossary
 

@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: Lower bounds for sorting {#lower-bounds-for-sorting}
+## Case study: Lower bounds for sorting* {#lower-bounds-for-sorting}
 
 By now you have seen many analyses for algorithms.
 These analyses generally define the worst-case upper bounds.

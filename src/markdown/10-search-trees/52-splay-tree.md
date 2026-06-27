@@ -1,6 +1,6 @@
 :::::: online
 
-## Splay trees {#search-trees:splay-trees}
+## Splay trees* {#search-trees:splay-trees}
 
 ::: TODO
 - Prio 1: invariants

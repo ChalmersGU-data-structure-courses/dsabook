@@ -1,6 +1,6 @@
 :::::: online
 
-## Implementing tree traversal {#trees:implementing-traversal}
+## Implementing tree traversal* {#trees:implementing-traversal}
 
 A traversal routine is naturally written as a recursive function.
 The initial call to the traversal function passes in a pointer to the root node of the tree.

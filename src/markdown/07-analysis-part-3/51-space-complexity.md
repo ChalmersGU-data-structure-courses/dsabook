@@ -1,6 +1,6 @@
 :::::: online
 
-## Space complexity {#analysis-3:space-complexity}
+## Space complexity* {#analysis-3:space-complexity}
 
 ::: TODO
 - Prio 1: Shorten the examples, in particular Friendship links

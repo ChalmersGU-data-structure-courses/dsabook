@@ -1,7 +1,7 @@
 
 :::::: online
 
-## Empirical analysis and code tuning {#sorting-1:empirical-analysis}
+## Empirical analysis and code tuning* {#sorting-1:empirical-analysis}
 
 ::: TODO
 - Prio 3: are the other simple optimisations?

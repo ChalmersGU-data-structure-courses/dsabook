@@ -1,7 +1,7 @@
 
 :::::: online
 
-## Mathematical preliminaries
+## Mathematical preliminaries* {#appendix:math-preliminaries}
 
 This section presents the mathematical preliminaries assumed to be familiar to the reader.
 It serves as a review and reference, allowing you to revisit relevant sections when encountering unfamiliar notation or mathematical techniques in later chapters.

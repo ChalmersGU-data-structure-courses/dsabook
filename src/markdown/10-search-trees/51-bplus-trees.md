@@ -1,6 +1,6 @@
 :::::: online
 
-## More about B+ trees {#search-trees:Bplus-trees}
+## B+ trees in more detail* {#search-trees:Bplus-trees}
 
 If we want to be able to search in a collection of records that will never change, then a [linear index]{.term} is a very simple and efficient data structure.
 This is simply a sorted array of search keys with pointers to the actual records.

@@ -1,10 +1,6 @@
 :::::: online
 
-## Other kinds of sequences {#sequences:other-sequences}
-
-::: TODO
-- Prio 1: move online things to separate section
-:::
+## Other kinds of sequences* {#sequences:other-sequences}
 
 Stacks and queues are very simple abstract datatypes, and also very commonly used.
 Many many algorithms make use of some kind of "agenda",

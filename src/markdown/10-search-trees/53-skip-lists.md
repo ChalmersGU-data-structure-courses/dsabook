@@ -1,6 +1,6 @@
 :::::: online
 
-## Skip lists {#search-trees:skiplists}
+## Skip lists* {#search-trees:skiplists}
 
 ::: TODO
 - Prio 1: invariants

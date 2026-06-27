@@ -1,7 +1,11 @@
 
 :::::: online
 
-## Bibliography
+## Bibliography* {#appendix:bibliography}
+
+::: TODO
+Update this list (is it even needed?)
+:::
 
 ::: glossary
 

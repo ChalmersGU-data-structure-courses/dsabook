@@ -1,6 +1,6 @@
 :::::: online
 
-## Different probing strategies {#hash-tables:probing-strategies}
+## Different probing strategies* {#hash-tables:probing-strategies}
 
 ::: TODO
 - Prio 3: examples, tests

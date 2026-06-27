@@ -1,6 +1,6 @@
 :::::: online
 
-## Empirical comparison of sorting algorithms {#sorting-2:empirical-comparison}
+## Empirical comparison of sorting algorithms* {#sorting-2:empirical-comparison}
 
 ::: TODO
 - Prio 3: redo the tests, better

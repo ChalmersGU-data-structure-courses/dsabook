@@ -1,6 +1,6 @@
 :::::: online
 
-## Examples of algorithm analysis {#analysis-1:examples}
+## Examples of algorithm analysis* {#analysis-1:examples}
 
 ::: TODO
 - Prio 2: add some "real" examples, that is, more complex ones

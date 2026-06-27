@@ -1,7 +1,7 @@
 
 :::::: online
 
-## Programming preliminaries
+## Programming preliminaries* {#appendix:programming-preliminaries}
 
 ::: TODO
 - we use indent based blocks, and don't use curly braces to denote blocks

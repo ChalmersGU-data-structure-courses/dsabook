@@ -1,7 +1,7 @@
 
 :::::: online
 
-# Appendices {#appendices}
+# Appendices* {#appendices}
 
 ::: TODO
 - Prio 2: are the lists actually the ones we want to emphasise?

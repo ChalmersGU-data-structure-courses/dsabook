@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: In-place heapsort {#heaps:heapsort}
+## Case study: In-place heapsort* {#heaps:heapsort}
 
 ::: TODO
 - Prio 2: properties (stability, in-place)

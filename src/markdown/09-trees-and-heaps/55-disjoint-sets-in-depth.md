@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: Disjoint sets in depth {#trees:disjoint-sets-in-depth}
+## Case study: Disjoint sets in depth* {#trees:disjoint-sets-in-depth}
 
 ::: TODO
 - Prio 1: update text and code, refer to 04-disjoint-sets

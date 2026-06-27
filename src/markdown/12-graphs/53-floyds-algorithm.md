@@ -1,6 +1,6 @@
 :::::: online
 
-## All-pairs shortest paths: Floyd's algorithm {#graphs:floyds-algorithm}
+## Floyd's algorithm: All-pairs shortest paths* {#graphs:floyds-algorithm}
 
 ::: TODO
 - Prio 3: use cases

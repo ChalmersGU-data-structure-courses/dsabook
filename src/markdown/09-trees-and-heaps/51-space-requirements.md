@@ -1,6 +1,6 @@
 :::::: online
 
-## Space requirements {#trees:space-requirements}
+## Space requirements* {#trees:space-requirements}
 
 In this subsection we present techniques for calculating the amount of [overhead]{.term} required by a [binary tree]{.term}, based on its node implementation.
 

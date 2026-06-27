@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: Huffman coding {#heaps:huffman-coding}
+## Case study: Huffman coding* {#heaps:huffman-coding}
 
 ::: TODO
 - Prio 2: make the text shorter (this is just an example anyway)

@@ -1,6 +1,6 @@
 :::::: online
 
-## Implementing graphs {#graphs:implementation}
+## Implementing graphs* {#graphs:implementation}
 
 ::: TODO
 - Prio 2: simplify code

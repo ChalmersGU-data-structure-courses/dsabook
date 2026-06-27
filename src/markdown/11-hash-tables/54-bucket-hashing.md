@@ -1,6 +1,6 @@
 :::::: online
 
-## Bucket hashing {#hash-tables:bucket-hashing}
+## Bucket hashing* {#hash-tables:bucket-hashing}
 
 One implementation for open addressing groups hash table slots into
 [buckets]{.term}. The $M$ slots of the
