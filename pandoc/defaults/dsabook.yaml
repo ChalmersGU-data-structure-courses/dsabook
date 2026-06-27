@@ -107,10 +107,8 @@ toc-depth: 3
 
 
 html-math-method:
-  method: mathml
-  # method: MathJax
-  # method: katex
-# Convert TeX math to MathML, MathJax, or KaTeX.
+  method: katex
+# Possible values: mathjax, mathml, webtex, katex, gladtex, plain
 
 section-divs: true
 # Wrap sections in <section> tags, and attach identifiers to the enclosing <section> rather than the heading itself.
