@@ -1,8 +1,10 @@
 :::::: online
 
-## Comparison with standard libraries {#ADTs:standard-libraries}
+## Comparison with the Java API* {#ADTs:standard-libraries}
 
-### The standard Java API
+::: TODO
+- Add a similar comparison with the Python standard library
+:::
 
 The standard Java API can be found here (this is Java SE 11):
 <https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/package-summary.html>. Here is a quick comparison
@@ -56,8 +58,5 @@ Set, SortedSet, Map, SortedMap:
 Graph:
 
 :   There is no interface (or class) for graphs in the standard Java API.
-
-
-### The Python standard library
 
 ::::::
