@@ -60,7 +60,7 @@ Key-based sorting
 Note that if we sort according to a *key*, it doesn't have to be explicitly stored in the object, but can instead be calculated on demand.
 For example, if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
 <!-- NICSMA: END -->
-This is usually done by a [comparator]{.term} (in Java), or by a [key function](https://docs.python.org/3/howto/sorting.html#key-functions) (in Python).
+This is usually done by a [comparator]{.term} (in Java), or by a [key function]{.term} (in Python).
 
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
