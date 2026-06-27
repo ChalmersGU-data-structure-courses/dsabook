@@ -10,9 +10,30 @@ HtmlIDs: dict[str, list[str]] = {}
 def main(*infiles: str|Path):
     """Postprocess each of the infiles"""
     infiles = tuple(Path(inf) for inf in infiles)
+    fix_online_header_numbering(*infiles)
     fix_references(*infiles)
     move_links_to_header(*infiles)
     fix_toc(*infiles)
+
+
+###############################################################################
+## Fix online <h2> headers so that the numbering becomes 3.7*
+
+def fix_online_header_numbering(*infiles: Path):
+    for inf in infiles:
+        with open(inf) as IN:
+            contents = IN.read()
+        contents = AsteriskMatch.sub(
+            lambda m: f"{m[1]}{m[2]}*{m[3]}{m[4]}",
+            contents,
+        )
+        with open(inf, "w") as OUT:
+            print(contents, file=OUT)
+
+AsteriskMatch = re.compile(
+    r'''(<span \s class="(?:header|toc)-section-number">) ([^<>]+?) (</span>) ([^<>*]+) \*''',
+    flags = re.VERBOSE,
+)
 
 
 ###############################################################################
