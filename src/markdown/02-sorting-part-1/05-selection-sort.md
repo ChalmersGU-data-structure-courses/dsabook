@@ -54,7 +54,14 @@ The algorithm above can be implemented as follows in pseudocode:
                     minIndex = j             //             Remember the smaller index
             swap(arr, i, minIndex)           //     Put the smallest value into place
 
-Any algorithm can be written in slightly different ways.
+![Two subsequent steps of Selection sort. In each step, a value is placed in its correct position.](images/BasicSorting-SelectionSort1.svg){width=100% #fig:SelectionSort1}
+
+@fig:SelectionSort1 illustrates two steps of this algorithm. Note how the initial part of the array,
+below index $i$, is sorted. Also, the largest value before $i$ is smaller than all subsequent values.
+Because we always select the smallest remaining value for the next position, both these properties
+are preserved at each step, and the end result is that the whole array is sorted.
+
+Like any algorithm, Selection sort can be implemented in several slightly different ways.
 For example, we could have written Selection sort to
 find the largest element and put it at the end of the array, then the next smallest, and so on.
 That version of Selection sort would behave very similar to our Bubble sort implementation,
@@ -62,6 +69,7 @@ That version of Selection sort would behave very similar to our Bubble sort impl
 except that rather than repeatedly swapping adjacent values to get the next-largest element into place,
 it instead remembers the position of the element to be selected and does one swap at the end.
 <!-- OPENDSA: END -->
+
 
 :::::::: online
 #### Selection sort visualisation

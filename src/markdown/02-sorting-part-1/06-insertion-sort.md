@@ -45,6 +45,15 @@ The algorithm above can be implemented as follows in pseudocode:
                 j -= 1
 
 
+@fig:InsertionSort1 illustrates two steps of the algorithm.
+Note how all values before $i$ are sorted at all times, but unlike Selection sort,
+they are not necessarily in their final positions.
+
+
+![Two subsequent steps of Insertion sort. In each step, a value is inserted backwards into the sorted initial segment.](images/BasicSorting-InsertionSort1.svg){width=100% #fig:InsertionSort1}
+
+
+
 :::::::: online
 #### Insertion sort visualisation
 
