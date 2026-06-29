@@ -43,37 +43,36 @@ of the bookshelf and the search time. We say linear search is a *linear time* al
 
 #### Binary search
 
-No library puts their books randomly in shelves, because linear search is too slow.
+No library keeps books in random order, because linear search is too slow.
 Instead, books are sorted in the shelves, for example alphabetically by author name
-then by title.
-Most people can intuitively use this order to search the whole bookshelf
+and title.
+Most people can intuitively use this order to search a bookshelf
 by looking at only a small fraction of the books. When browsing the books we
 implicitly make deductions like
 "there are no books between Orwell and Owen, so there are no books by Osborne"
 and "this book is by Plato, so all books by Homer must be earlier in the shelf".
-The formalised algorithm that operates on these deductions is called [binary search]{.term},
-and it is a very common choice for a first algorithm to teach students, so you may have seen it before.
+The formalised algorithm that uses these deductions is called [binary search]{.term}.
+It is a very common choice for a first algorithm to teach students, so you may have seen it before.
+For the example of a book shelf sorted alphabetically from left to right, binary search would be described as such:
 
-For the example of a book shelf alphabetically from left to right, binary search would be described as such:
-
-- Start by comparing the middle book in the shelf to the one we are looking for.
+- Compare the middle book in the shelf to the one we are looking for.
     - if the middle book is the one we are looking for, our search is done!
-    - if we are searching for an alphabetically earlier book, search the left half of the shelf.
-    - otherwise search in right half.
-- Repeat this procedure for the left or right half, comparing to middle book of that half, and so on.
+    - if we are searching for an alphabetically earlier book, search the left half of the shelf,
+      otherwise search in the right half.
+- Repeat this procedure for the left or right half, comparing to the middle book of that half, and so on.
 
 This procedure will end in one of two cases: We find the book we are looking for,
 or we end up searching an empty part of the bookshelf, and know that the book is not in the shelf.
 
 To make the description of this algorithm more precise, introduce the concept of a *search interval*.
 Initially our search interval is the entire bookshelf,
-and with each comparison we reduce the search interval to just the left or right half of the middle
+and with each comparison we reduce the search interval to just the left or right side of the middle
 element.
-For instance we can go from the problem of searching among 51 books to the problem of searching
-25 books, by a single comparison with the middle one of the 51 books and excluding either half from
-the search interval.
-This is further reduced to searching among 12 books with another comparison. At that point we need to decide what
-we mean by the middle of 12 books, but at most we should have to search among 6 books in the next step.
+For instance, we can go from the problem of searching among 51 books to the problem of searching
+25 books, by a single comparison with the middle book, and excluding either half from
+the interval.
+This is further reduced to searching among 12 books with another comparison. We need to decide what
+we mean by the middle of 12 books, but we should have to search among at most 6 books in the next step.
 Ultimately we end up either finding the book we are looking for, or searching among 0 books, and in both
 cases we have the answer we were looking for.
 
@@ -91,7 +90,7 @@ Repeat the following until *key* has been found, or the interval is empty:
 
 1. Compare *key* with the middle element of the interval.
 2. If *key* is equal, return true, the key is in the array.
-3. Exclude the middle element and all elements before or after it from the interval,
+3. Exclude the middle element and all elements either before or after it,
    depending on if the key is greater or smaller than the middle element.
 
 If the interval ends up empty, return false, the key is not in the array.
@@ -100,7 +99,7 @@ If the interval ends up empty, return false, the key is not in the array.
 To turn this algorithm into actual code, we need to decide how to represent the search interval
 in computer memory. The operation of excluding elements from the interval needs to be fast --
  making a new smaller array is too slow. Instead we define the interval by the lower and
-upper indexes it includes, so $(10,24)$ would represent the interval from
+upper indices it includes, so $(10,24)$ would represent the interval from
 index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
 when needed). Searching the lower half just means altering the interval to $(10,16)$,
 and the upper half $(18,24)$.
@@ -127,7 +126,8 @@ Consider how this implementation deals with corner cases, for instance when the
 search area has a single element (when $\mathit{start}=\mathit{end}$). Or when it has two elements.
 Does it calculate $\mathit{mid}$ correctly and yield correct result in these cases?
 
-In this particular implementation we use inclusive indexes,
+
+In this particular implementation we use inclusive indices,
 both $\mathit{start}$ and $\mathit{end}$ are inside the area.
 Another common option is to have $\mathit{start}$ be inclusive, and $\mathit{end}$ exclusive
 (so the starting interval is $(0,\mathit{arr.size})$).
@@ -135,7 +135,9 @@ Yet another option is to have a start index and a size of the interval.
 Each variation would do slightly different calculations,
 but require the same fundamental building operations:
 Finding the middle element, and excluding the upper/lower half of the interval.
+@fig:BinSearch1 illustrates an example search of a small array.
 
+![Steps of Binary search for the value D in a sorted array of length 9, revealing elements as they are compared to D. After three comparisons, the search interval is empty, D is not in the array.](images/Intro-binarySearch1.svg){width=80% #fig:BinSearch1}
 
 
 There are many variations of binary search. If the array had books sorted by number
