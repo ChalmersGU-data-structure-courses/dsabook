@@ -63,6 +63,18 @@ Finally we can append the remaining elements in the nonempty half to the end of 
 
 The `merge` function relies on the two halves already being sorted; this is a precondition of the function.
 Its postcondition is that the merged result is also sorted.
+@Fig:mergesort-split-merge shows how Morgesort sorts an example array with $n=11$ elements.
+Sometimes we cannot split evenly, so the array sizes in each level can differ by $\pm 1$.
+Note that each level consists of at most $n$ elements, and that the number of levels are *logarithmic* in $n$.
+
+![
+    Mergesorting an array of $n=11$ elements.
+    To the left we see all levels of splitting, and to the right is the merging.
+    There are $k=\lceil\log_2(n)\rceil$ levels, and each level consists of at most $n$ elements.
+    Note that this is not an accurate description of how recursion works!
+    For instance, it will mergesort the subarray [A,L,G,O,R,I] completely, *before* it starts splitting [T,H,M,I,C].
+](images/Sorting-MergesortSplitMerge.svg){#fig:mergesort-split-merge}
+
 
 ::: dsvis
 Here is a visualisation for the merge operation.
@@ -100,9 +112,9 @@ which is both is more complex and less efficient as the algorithm above.
 If you recall our categorisation of sorting algorithms from @sec:sorting-1:terminology,
 we are now ready to categorise Mergesort:
 
-- In-place: *no*, as we already mentioned it is very costly to make merging in-place.
-- Stable: *yes*, two equal elements will never swap places (if we implement merging correctly).
-- Adaptive: *no*, the algorithm runs the same number of steps regardless of how the array is sorted from the start.
+- *Not in-place*: as we already mentioned this is too costly.
+- *Stable*: two equal elements will never swap places (if we implement merging correctly).
+- *Not adaptive*: the algorithm runs the same number of steps regardless of how the array is sorted from the start.
 
 #### Insertion sort as a variant of Mergesort
 
@@ -142,21 +154,14 @@ In the first recursive call it will split this array into two with $2^{k-1}$ ele
 Both of these will be split into two arrays each, so $2\times 2 = 4$ arrays of size $2^{k-2}$.
 And these will in turn be split into $2\times 2\times 2=2^3$ arrays of size $2^{k-3}$,
 until in the end we have $2^k$ arrays with only one element.
-Here is a picture of how the splitting goes:
-
-![](images/MergesortSplit.png)
-
-Note that each of these levels contain exactly $n = 2^k$ elements -- the size of each level is the same!
 
 Now, when we have reached the base case, we can start merging the smaller arrays.
 First each pair of the $2^k$ singleton arrays are merged into two-element arrays.
 Then each pair of these $2^{k-1}$ two-element arrays are merged into 4-element arrays.
 Then each pair of these $2^{k-2}$ 4-element arrays are merged, and so on.
-In the end we will merge two arrays of size $2^{k-1}$ into the final sorted array, like this:
+In the end we will merge two arrays of size $2^{k-1}$ into the final sorted array.
 
-![](images/MergesortMerge.png)
-
-Just as for splitting we note that each level contains exactly $n = 2^k$ elements.
+Note that each of these levels contain exactly $n = 2^k$ elements -- the size of each level is the same!
 So how does this relate to complexity?
 
 -   First we recall that merging is more expensive than splitting, so it is enough to only analyse the merging steps.
@@ -172,12 +177,8 @@ So how does this relate to complexity?
 But wait, does this mean that Mergesort is exponential?
 No, definitely not!
 Recall that $k$ is not the size of the original array -- the size $n$ is $2^k$,
-so we get the following final complexity in the size of the array (because $O(k) = O(\log_2(n)) = O(\log(n))$):
-
-$$ O(n \log(n)) $$
-
-If you look at the picture above, you see that each level has $n$ elements and there are $\log(n)$ levels,
-and the final complexity is just each row times the number of levels.
+and therefore $O(k) = O(\log_2(n)) = O(\log(n))$.
+So we get the following final complexity in the size of the array: $O(n\log(n))$
 
 The linearithmic complexity of Mergesort is much much faster than the algorithms from [Chapter @sec:sorting-1],
 which are all quadratic, $O(n^2)$.
@@ -202,6 +203,10 @@ But this can be simplified to $O(n\log(n))$, because we can ignore constant fact
 
 And since sorting arrays of size $\frac{n}{2}$ and $n$ both have the same complexity,
 then that must be true for all array sizes in between, $\frac{n}{2}<n'<n$.
+
+@Fig:mergesort-split-merge shows an example where we sort an array with $n=11$ elements.
+Note that the last level is $k=4$, and $2^{k-1}<11<2^k$.
+Also note that not all levels are completely full with $n$ elements, but this does not change the overall complexity.
 
 
 ### Implementing Mergesort {#sorting-2:mergesort-implementation}
