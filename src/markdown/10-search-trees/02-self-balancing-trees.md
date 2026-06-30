@@ -28,12 +28,14 @@ for example, @fig:rebalanceBST shows that we might need to reorganise the tree c
 
 <!-- OPENDSA: START -->
 
-![An attempt to re-balance a BST after insertion can be expensive. (a) A
-BST with six nodes in the shape of a complete binary tree. (b) A node
-with value 1 is inserted into the BST of (a). To maintain both the
-complete binary tree shape and the BST property, a major reorganisation
-of the tree is required.
-](images/BSTBal.png){width=60% #fig:rebalanceBST}
+![
+    An attempt to re-balance a BST after insertion can be expensive.
+    To the left is a BST with six nodes in the shape of a complete binary tree.
+    We insert the value A and get an left-unbalanced tree.
+    If we want to keep the tree as balanced as possible,
+    we need to do a major reorganisation, which is very costly.
+    Note that all nodes have moved around in the final tree to the right.
+](images/SearchTrees-BST-PerfectRebalance.svg){width=100% #fig:rebalanceBST}
 
 <!-- OPENDSA: END -->
 
