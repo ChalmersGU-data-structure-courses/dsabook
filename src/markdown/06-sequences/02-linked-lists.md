@@ -18,27 +18,16 @@ And the main "controller" of the list can only see the first person in the line.
 This means that there is no easy way of knowing the total number of people,
 if the controller needs that information it has to keep track of the size itself.
 
-The following figure shows a linked list with three values $a$, $b$ and $c$,
-where each value is encaspulated in a *list node*.
+@Fig:linked-list-intro shows two different representationso of
+a linked list with four values, where each value is encaspulated in a *list node*.
 Each node contains a link to the next node in the list.
 Notice that the rightmost node does not have any outgoing link.
 
-::: online
-```jsav-figure
-var av = NewAV();
-var l = av.ds.list({nodegap: 30});
-l.addFirst("a").addFirst("b").addFirst("c");
-l.layout();
-av.displayInit();
-av.recorded();
-```
-:::
+![
+    A linked list with four values.
+    The right figure is a simplified representation of the same list.
+](images/Sequences-LinkedListIntro.svg){width=80% #fig:linked-list-intro}
 
-::: latex
-```
-            [ a |-]--> [  b |-]--> [ c |X]
-```
-:::
 
 List nodes are distinct objects, as opposed to cells in an array.
 Therefore we declare a list node as a "wrapper" around a *value*,
@@ -75,27 +64,11 @@ Note that we also added a variable *size* storing the number of elements.
 This is in theory unnecessary, but without it the only way of knowing the size
 would be to iterate through the whole stack which takes time.
 
-Here is a visual representation for a linked stack.
+@Fig:linked-stack-queue shows a visual representation for a linked stack.
 
-::: online
-```jsav-figure
-var AV = NewAV();
-var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
-l.addFirst(15).addFirst(12).addFirst(8).addFirst(23).addFirst(20);
-l.layout();
-AV.pointer("top", l.get(0));
-AV.displayInit();
-AV.recorded();
-```
-:::
-
-::: latex
-```
-     top
-      ↓
-    [ 20 |-]--> [ 23 |-]--> [ 8 |-]--> [ 12 |-]--> [ 15 |X]
-```
-:::
+![
+    Visual representations of linked stacks (left figure) and queues (right figure).
+](images/Sequences-LinkedStackQueue.svg){width=90% #fig:linked-stack-queue}
 
 #### Pushing and popping
 
@@ -141,6 +114,7 @@ Here is a proficiency exercise about pushing to linked stacks.
 :::
 
 Popping is also straightforward from the description above, as long as we remember to decrease the size of the size.
+The left part of @fig:pop-stack-enqueue-queue shows how this is done visually.
 
     pop(stack):
         removed = stack.top
@@ -153,6 +127,12 @@ If we use a language that has automatic garbage collection (which most high-leve
 then it will realise that there is nothing that points to the old top anymore,
 and so the garbage collector will automatically remove the old top.
 For low-level languages such as C, we need to tell the system to release the memory used by the old top node.
+
+![
+    Popping a linked stack (left), and enqueueing an element in a linked queue (right).
+    Grey links and boxes are deleted, and dashed ones are added by the operation.
+](images/Sequences-LinkedPopDequeue.svg){width=100% #fig:pop-stack-enqueue-queue}
+
 
 ::: dsvis
 Here we show how to pop from a linked stack.
@@ -181,33 +161,7 @@ The solution is to add an extra pointer to the "controller", which points to the
 When it comes to queues we also use a different terminology than for stacks
 -- so the first element is called the *front* (instead of "top"),
 and the last element is called the *rear* (instead of "bottom").
-
-::: latex
-```
-    front                               rear
-      ↓                                  ↓
-    [ 42 |-]--> [ 5 |-]--> [ 10 |-]--> [ 25 |X]
-```
-<!--
-```jsav-figure
-var AV = NewAV();
-var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
-l.addFirst(25).addFirst(10).addFirst(5).addFirst(40);
-l.layout();
-AV.pointer("front", l.get(0), {left:-15});
-AV.pointer("rear", l.get(3), {anchor:"right top", myAnchor:"left bottom", left:-15});
-AV.displayInit();
-AV.recorded();
-```
--->
-:::
-
-::: dsvis
-Linked queue -- introduction.
-
-``` {.jsav-animation src="ChalmersGU/LinkedQueue-Intro-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Queue Intro"}
-```
-:::
+@Fig:linked-stack-queue shows how this can look like.
 
     datatype LinkedQueue:
         front = null   // Pointer to the front node
@@ -265,6 +219,7 @@ and then we can reassign the rear to the new node.
 Note that we have to treat the empty queue specially:
 we cannot reassign the current rear (because there is no currect rear yet),
 but instead we have to update both the *front* and the *rear* to the new node.
+The right part of @fig:pop-stack-enqueue-queue shows a visual representation of enqueueing in a non-empty queue.
 
 ::: dsvis
 Here we show how to enqueue an element to a linked queue.

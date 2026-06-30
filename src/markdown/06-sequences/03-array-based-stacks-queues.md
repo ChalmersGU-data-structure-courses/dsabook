@@ -46,6 +46,15 @@ A much better solution is to have the top be the *last element*,
 that is, the element at position $n-1$ (if $n$ is the size of the stack).
 Then we do not have to shift around a lot of elements,
 but instead we can move the stack pointer to the left or the right.
+@Fig:array-stack shows two ways of viewing the same array-based stack with four elements.
+
+![
+    Two ways to visualise the same array-based stack.
+    The stack has size 4, but the array has a capacity of 8 elements.
+    The left picture is more accurate to how it is stored in memory,
+    but the right one is more compact and is how we normally depict it.
+](images/Sequences-ArrayStack.svg){#fig:array-stack width=100%}
+
 
 #### Pushing and popping
 
@@ -119,40 +128,7 @@ at the same time, then the free space in the middle of the array will be
 exhausted quickly.
 <!-- OPENDSA: END -->
 
-:::: online
-```jsav-figure
-var AV = NewAV();
-var leftMarg = 180;
-var topMarg = 40;
-AV.g.rect(leftMarg, topMarg, 500, 31);
-AV.g.line(leftMarg + 31, topMarg, leftMarg + 31, topMarg + 31);
-AV.g.line(leftMarg + 31 * 2, topMarg, leftMarg + 31 * 2, topMarg + 31);
-for (var i = 0; i < 4; i++) {
-AV.g.line(leftMarg + 376 + 31 * i, topMarg,
-            leftMarg + 376 + 31 * i, topMarg + 31);
-}
-AV.label("top1", {left: leftMarg + 20, top: topMarg - 55});
-AV.g.line(leftMarg + 30, topMarg - 20, leftMarg + 45, topMarg - 2,
-        {"arrow-end": "classic-wide-long", "stroke-width": 2});
-AV.label("top2", {left: leftMarg + 376 + 20, top: topMarg - 55});
-AV.g.line(leftMarg + 376 + 30, topMarg - 20, leftMarg + 376 + 15, topMarg - 2,
-        {"arrow-end": "classic-wide-long", "stroke-width": 2});
-AV.g.line(leftMarg + 82, topMarg + 16, leftMarg + 82 + 35, topMarg + 16,
-        {"stroke-width": 2, "arrow-end": "block-wide-long"});
-AV.g.line(leftMarg + 356, topMarg + 16, leftMarg + 356 - 35, topMarg + 16,
-        {"stroke-width": 2, "arrow-end": "block-wide-long"});
-AV.displayInit();
-AV.recorded();
-```
-::::
-
-:::: latex
-```
-         top1                                     top2
-          ↓                                        ↓
-    [   |   |   --->                       <---   |   |   |   |   ]
-```
-::::
+![](images/Sequences-ArrayDoubleStack.svg){width=80%}
 :::
 
 
@@ -225,12 +201,16 @@ If the *front* pointer points somewhere in the middle of the array there is plen
 And when we have dequeued a lot of elements, *front* will reach the end of the array
 -- so we treat it in the same way and let it wrap around too.
 
-Here is an example of a circular queue with 7 elements, stored inside an array with a capacity of 12.
-The element that was added most recently is "T", which is what the *rear* points to,
-and *front* points to "A", which is the one that has waited the longest.
-When we want to enqueue a new element, it will be assigned to the empty cell at index 3.
+@Fig:array-queue shows two versions storing exactly the same 4-element queue.
+The element that was added most recently is "*dogs*", which is what the *rear* points to,
+and *front* points to "*every*", which is the one that has waited the longest.
+When we want to enqueue a new element, it will be assigned to the empty cell after *rear*.
 
-![](images/CircularQueue1.png)
+![
+    Two possible ways of storing the same 4-element queue in an array with capacity 8.
+    The leftmost version is what we get after enqueuing the elements directly into a new empty queue.
+    The version to the right can occur if we have enqueued and dequeued a lot of elements.
+](images/Sequences-ArrayQueue.svg){#fig:array-queue}
 
 ::: dsvis
 Circular array queue.
@@ -266,18 +246,10 @@ Our choice here is to keep an explicit count of the number of elements, in a var
 because this will make the code more similar to our other implementations.
 
     datatype ArrayQueue:
-        array = new Array(100)    // Internal array containing the queue elements.
-        size = 0                  // The size of the queue.
-        front = 0                 // Index of the front element.
-        rear = -1                 // Index of the rear element.
-
-We also add a helper function `nextPosition` which will come in handy, both for enqueueing and dequeueing.
-This is easily implemented through use of the *modulus* operator:
-instead of just using $i+1$ for the next position,
-we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
-
-    nextPosition(queue, i):
-        return (i + 1) mod queue.arr.size
+        arr = new Array(100)    // Internal array containing the queue elements.
+        size = 0                // The size of the queue.
+        front = 0               // Index of the front element.
+        rear = -1               // Index of the rear element.
 
 
 #### Enqueueing and dequeueing
@@ -285,7 +257,7 @@ we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
 When enqueueing, we increase the *rear* pointer (modulo the size of the internal array).
 
     enqueue(queue, x):
-        queue.rear = nextPosition(queue, queue.rear)  // Circular increment
+        queue.rear = (queue.rear + 1) mod queue.arr.size  // Circular increment
         queue.arr[queue.rear] = x
         queue.size += 1
 
@@ -296,7 +268,7 @@ because otherwise it will never be garbage collected.
     dequeue(queue):
         result = queue.arr[queue.front]
         queue.arr[queue.front] = null    // For garbage collection
-        queue.front = nextPosition(queue, queue.front)  // Circular increment
+        queue.front = (queue.front + 1) mod queue.arr.size  // Circular increment
         queue.size -= 1
         return result
 

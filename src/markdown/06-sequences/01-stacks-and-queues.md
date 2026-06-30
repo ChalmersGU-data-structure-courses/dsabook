@@ -43,12 +43,14 @@ For example, the `remove()` operation behaves differently:
 
 Also note that the name of the operation do not really matter,
 they can have completely arbitrary names, but still be the same operation.
-Here are some common names:
+@Tbl:sequences:common-names shows some common names.
 
-|              | Stack             | Queue
-|:-------------|:------------------|:--------------------------
+|              | Stack                   | Queue
+|:-------------|:------------------------|:-------------------------------
 | **Adding**   | push, insert, add, addFirst | enqueue, offer, insert, add, addLast, append |
 | **Removing** | pop, delete, deleteFirst, remove, removeFirst | dequeue, poll, delete, deleteFirst, remove, removeFirst |
+
+: Some common names for the add and remove operations for stacks and queues {#tbl:sequences:common-names}
 
 Do not be fooled by different names!
 The important thing is their semantics, and a queue is a queue regardless if the operation is called *dequeue*, *poll* or *remove*.

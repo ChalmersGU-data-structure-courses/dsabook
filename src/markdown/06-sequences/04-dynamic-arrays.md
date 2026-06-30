@@ -52,6 +52,14 @@ Afterwards we can forget about the old array because it will not be used anymore
         for i in 0 .. oldArr.size-1:
             stack.arr[i] = oldArr[i]     // Copy over all elements to the new array
 
+![
+    Resizing an array-based stack, increasing the capacity from 8 to 16.
+    Before resizing, *size* points to after the last cell in the array,
+    indicating that the array is full.
+    We have to create a new array with the larger capacity and copy over all elements.
+](images/Sequences-ArrayStackResize.svg){#fig:array-stack-resize}
+
+@Fig:array-stack-resize shows how resizing works.
 Note that resizing the internal array is a *slow* operation,
 it has to iterate through all elements in the list and copy each one.
 This is of course linear in the number of elements, $O(n)$.
@@ -128,7 +136,6 @@ When will `resize` be called, and how many elements get copied each time?
 `resize`($400$)            copying    $200$      elements
 `resize`($800$)            copying    $400$      elements
  . . .
-`resize`($409,600$)        copying   $204,800$   elements
 `resize`($819,200$)        copying   $409,600$   elements
 `resize`($1,638,400$)      copying   $819,200$   elements
 -----------------------  --------- ------------- ---------
@@ -139,7 +146,7 @@ but as it gets bigger, it gets resized less and less often.
 We can read off how many elements get copied:
 <!-- NICSMA: END -->
 
-$$ 100 + 200 + \cdots + 409,600 + 819,200 = 1,638,300 $$
+$$ 100 + 200 + 400 + \cdots + 409,600 + 819,200 = 1,638,300 $$
 
 Compare this with the previous version where we increased the capacity with 100 elements every time:
 then we needed to copy 20 billion elements, but now we only need to copy 1.6 million.
@@ -225,34 +232,45 @@ This means that they have to grow more often but on the other hand they do not u
 When we resize the internal array of our array-based queue implementation, we cannot keep the positions of the elements.
 If the queue is wrapped around (that is, if *rear* < *front*)
 then we might end up in a large gap in the middle of the queue.
-For example, the following queue consists of 7 elements,
-where T was the element most recently added and A is the one that has waited the longest:
+For example, if we enqueue the four words "*but*", "*not*", "*if*", and "*they*" to the leftmost queue in @fig:array-queue-full,
+we get the queue to the right in the same figure.
+The word "*every*" has waited the longest and "*they*" is the most recent word.
 
-![](images/CircularQueue1.png)
-
-Now, let us say we enqueue five more elements, then we get this situation:
-
-![](images/CircularQueue2.png)
+![
+    An example circular queue that gets full.
+    If we enqueue four elements to the queue on the left we get the full queue to the right.
+](images/Sequences-ArrayQueueFull.svg){#fig:array-queue-full}
 
 What happens if we want to enqueue yet another element?
 We have to resize the array, and we do this like before by doubling the size.
 But now we have to be a little careful when copying over the elements to the new array
 -- we cannot just copy the elements to the same positions, because then we would end up in this situation:
 
-![](images/CircularQueue3.png)
+::: center
+![](images/Sequences-ArrayQueueBadResize.svg){width=80%}
+:::
 
-We could create a new array in `resize` and copy the existing elements, but then we would have to handle the wraparound carefully.
-Since `enqueue` and `dequeue` already take care of that, a simple implementation of `resize` is to create a new `ArrayQueue`, then dequeue all elements from the old queue and enqueue them into the new one:
+Instead we reset the *front* and *rear* pointers so that we copy
+the first queue element to position 0 of the new array,
+the second to position 1, and so on.
+The process and the resulting queue is shown in @Fig:array-queue-resize.
 
-    resize(old, capacity):
-        queue = new ArrayQueue(capacity)
-        while old.size is not 0:
-            queue.enqueue(dequeue(old))
-        old = queue 
+![
+    Resizing an array-based queue.
+    We need to copy the element starting from the *front* pointer, not from index 0.
+](images/Sequences-ArrayQueueResize.svg){#fig:array-queue-resize}
 
-This will lead to the following internal array of the new queue:
+Apart from this detail, that we have to reset the pointers,
+the implementation of resizing is similar to the one for stacks:
 
-![](images/CircularQueue4.png)
+    resize(queue, capacity):
+        oldArr = queue.arr
+        queue.arr = new Array(capacity)
+        for i in 0 .. queue.size-1:
+            queue.arr[i] = oldArr[(queue.front + i) mod oldArr.size]
+        queue.front = 0
+        queue.rear = queue.size - 1
+
 
 ### Shrinking the internal array {#sequences:shrink-array}
 
