@@ -114,21 +114,8 @@ av.displayInit();
 av.recorded();
 ```
 ::::
-
 :::: latex
-```
-                        ________ 8 ________
-                       /                   \
-                    17                       12
-                 /      \                 /      \
-              33         [28]          43          15
-             /  \        /  \         /
-           34    87    75    34     47
-
-     parent           NODE                    left  right
-        ↓              ↓                        ↓    ↓
- [  8 | 17 | 12 | 33 | 28 | 43 | 15 | 34 | 87 | 75 | 34 | 47 ]
-```
+![](images/tikz/binary-heap.pdf){width=90%}
 ::::
 
 An example binary heap together with its array representation.
