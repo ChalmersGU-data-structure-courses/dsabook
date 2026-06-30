@@ -109,7 +109,7 @@ This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
     The right view shows the lower-left portion of the left view.
     The horizontal axis represents input size.
     The vertical axis can represent time, space, or any other measure of computational cost.
-](images/growth_rates_graph.svg){#fig:growthGraphs}
+](images/growth_rates_graph.svg){#fig:growthGraphs width=100%}
 
 The graph also shows that the equation $T(n) = n\log_2(n)/4$
 grows somewhat more quickly than the linear equations,
