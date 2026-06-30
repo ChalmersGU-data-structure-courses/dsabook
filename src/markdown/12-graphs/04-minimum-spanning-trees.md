@@ -13,9 +13,13 @@ As explained in @sec:graphs:definitions, a *spanning tree* of an undirected grap
 
 If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible.
 A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs.
-@Fig:ExampleMSTs shows a graph with two possible MSTs, each with a combined weight of $25$.
+@Fig:ExampleMSTs shows a graph and two possible MSTs for it, each with a combined weight of $20$.
+You may not immediately recognize the two MSTs as trees, since there is no root element
+and no clear parent/child relationships between nodes.
+If you "lift" either MST by any node, assigning it as the root,
+you will get a tree as the ones we have seen in earlier chapters.
 
-![Two MSTs for the same graph](images/Graphs-TwoMSTs.png){width=90% #fig:ExampleMSTs}
+![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/Graphs-MSTs.svg){width=100% #fig:ExampleMSTs}
 
 The minimum spanning tree is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST --
 for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
