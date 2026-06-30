@@ -45,6 +45,8 @@ to it, such as how to represent the tombstones.
 In most programming languages you would use null values to represent an
 empty table cell, but then we need a distinct non-value to represent a tombstone.
 
+![Resizing a linear probing hash table in the presence of lazy deletion. Tombstones of deleted entries (marked X) are not transferred. After the resize, the load factor is $1/2$.](images/Hashing-LazyResize.svg){width=60% #fig:LazyResize}
+
 ### Shrinking tables
 
 With our hash tables supporting removal of elements, we may want to set a lower
@@ -58,3 +60,8 @@ and never let it exceed $0.75$ or fall below $0.25$.
 Each resize would set the size of the table to double the current number of
 elements (to a minimum of $1$), ensuring that the load factor is
 always $0.5$ immediately after a resize.
+@fig:LazyResize shows a resize operation performed on a linear probing hash table.
+The resize ends up shrinking the array, since the new size is based on the number
+of actual values, ignoring tombstones.
+
+
