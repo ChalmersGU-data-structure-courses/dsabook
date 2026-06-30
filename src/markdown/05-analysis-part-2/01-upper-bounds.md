@@ -163,7 +163,7 @@ the tightest (lowest) possible upper bound.
 Thus, we will always say that binary search is in $O(\log(n))$.
 
 
-### Simplifying rules
+### Simplifying rules {#analysis-2:simplifying-rules}
 
 Using the definition the simplifying rules from @sec:analysis-1:simplification-rules are quite straightforward to prove. We can also prove that as a mathematical relation, $f\in O(g)$ is *transitive*.
 
@@ -189,6 +189,35 @@ Using these rules we can easily determine the asymptotic growth rate for many al
   the total cost is the cost of $p$ times the number of iterations: $O(n\cdot f)$.
 - Rule (2) also says that if you repeat a statement $p$ a *constant* number of times,
   you can treat it as you only execute $p$ once.
+
+
+::: example
+#### Example: Non-quadratic nested loops
+
+Not all loops are strictly linear in $n$. Here is an example:
+
+    sum = 0
+    k = 1
+    while k <= n:          // Do O(log(n)) times
+        for j in 1 .. n:   // Do O(n) times
+            sum += 1       // O(1) operation
+        k = k * 2          // O(1) operation
+
+The inner loop is easy, it is a linear loop.
+And since the inner loop body, `sum+=1`, is constant, we get linear complexity for the `for`-loop.
+How many times does the outer `while`-loop run?
+In each iteration the $k$ variable is doubled, so in essence,
+the loop iterates over the values $k=1, 2, 4, 8, \ldots$, until it reaches $k>n$.
+In other words, the outer loop will iterate approximately $\log_2(n)$ times.
+
+Now we can use the simplification rules.
+The inner `for`loop is linear, $O(n)$, and the statement after that is constant time.
+Simplification rule (3) says that we only need to care about the most expensive of the two,
+so we can say that the whole `while` loop body is linear, $O(n)$.
+The outer `while` loop runs $O(\log(n))$ times,
+so simplification rule (4) tells us that we can multiply the complexities.
+Therefore the complexity of the `while`-loop is linear *times* logarithmic, or $O(n\log(N))$.
+::::
 
 
 ### Recursive functions
@@ -231,21 +260,17 @@ So, is there something wrong with the rules?
 No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
 Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O(n\log(n))$.
 
-::: TODO
-This example refers to an online example, @sec:sorting-2:empirical-comparison
-:::
-
 :::: example
 #### Example: A nested loop with linear complexity
 
-Recall the non-quadratic nested loop in @sec:sorting-2:empirical-comparison.
+Recall the non-quadratic nested loop in @sec:analysis-2:simplifying-rules.
 If we just change the inner `for`-loop a little bit we get
 the following nested loop, which has a nontrivial complexity:
 
     sum = 0
     k = 1
     while k <= n:          // Do log(n) times.
-        for j in 1 .. k:   // Do k times.
+        for j in 1 .. k:   // Do k times. Note! The previous example looped to n.
             sum += 1
         k = k * 2
 
