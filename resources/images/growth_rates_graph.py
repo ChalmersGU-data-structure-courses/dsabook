@@ -45,4 +45,4 @@ plt2.set_title('Zoomed in')
 
 fname = Path(sys.argv[0]).with_suffix('.svg')
 print(fname)
-plt.savefig(fname, format='svg', transparent=True)
+plt.savefig(fname, format='svg', bbox_inches='tight', transparent=True)
