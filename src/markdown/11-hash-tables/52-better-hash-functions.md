@@ -76,7 +76,7 @@ distribution, some of these slices associated with any given slot are
 near the tails, and some are near the center. Thus, each table slot is
 equally likely (roughly) to get a key value.
 
-![A comparison of binning vs. modulus as a hash function](images/HashNormalGrey.png){width=100% #fig:HashNormal}
+![A comparison of binning vs. modulus as a hash function](images/HashNormal.png){width=100% #fig:HashNormal}
 
 ### The mid-square method
 
