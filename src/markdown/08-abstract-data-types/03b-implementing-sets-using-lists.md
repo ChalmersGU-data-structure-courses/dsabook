@@ -17,9 +17,14 @@ av.recorded();
 :::
 
 ::: latex
-```
-[  |-]--> [   |-]--> [  |X]
-```
+
+::: center
+![](images/ADTs-LinkedListSet1.svg){width=50%}
+:::
+
+This list represents the set $\{A,B,C\}$. Note that we do not have an ordering invariant here, values can appear in any order in the list, so the lists $[C,B,A]$ and $[A,C,B]$ also represent the set $\{A,B,C\}$.
+The only invariant is that values are distinct, so the list $[A,A,B,C]$ is not a valid representation of a set.
+
 :::
 
 To search for an element we just iterate through all nodes and compare with the value we are looking for.
@@ -28,16 +33,12 @@ But before we do that we have to search for it to check that it is not already i
 because a set does not allow duplicate elements.
 
 To remove an element we search for it to get its node,
-and then we repoint the preceding node to the node following it, like this:
+and then we repoint the preceding node to the node following it, like this to remove
+element $B$:
 
-```
-... --> [ a |-]--> [ key |-]--> [ b |-]--> ...
-
-to
-
-... --> [ a |-]---------------> [ b |-]--> ...
-                   [ key | ]
-```
+::: center
+![](images/ADTs-LinkedListSet2.svg){width=50%}
+:::
 
 Conceptually this is not difficult, but the code becomes a little complicated
 because we have to keep track of the preceding node:
