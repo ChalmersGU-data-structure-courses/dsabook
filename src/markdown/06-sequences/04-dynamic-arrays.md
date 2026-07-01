@@ -59,6 +59,8 @@ Afterwards we can forget about the old array because it will not be used anymore
     We have to create a new array with the larger capacity and copy over all elements.
 ](images/Sequences-ArrayStackResize.svg){#fig:array-stack-resize}
 
+\newpage
+
 @Fig:array-stack-resize shows how resizing works.
 Note that resizing the internal array is a *slow* operation,
 it has to iterate through all elements in the list and copy each one.

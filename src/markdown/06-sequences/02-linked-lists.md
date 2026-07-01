@@ -33,6 +33,8 @@ List nodes are distinct objects, as opposed to cells in an array.
 Therefore we declare a list node as a "wrapper" around a *value*,
 that also contains a pointer to the *next* node in the list:
 
+\newpage
+
     datatype Node:
         next = null  // Pointer to the next node in the list
         value        // Value for this node
@@ -176,6 +178,7 @@ but we have to remember to update the *rear* pointer when necessary.
 That is, if the queue becomes empty after we remove the *front* node,
 we have to remember to also delete the rear pointer,
 otherwise it will point to a non-existing element.
+(Note that the following code assumes that the queue is non-empty.)
 
     dequeue(queue):
         removed = queue.front
@@ -185,7 +188,6 @@ otherwise it will point to a non-existing element.
         queue.size -= 1
         return removed.value
 
-Note that this code assumes that the queue is non-empty.
 
 ::: dsvis
 Here we show how to dequeue an element from a linked queue.

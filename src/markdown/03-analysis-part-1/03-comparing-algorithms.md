@@ -13,6 +13,8 @@ Implement the both algorithms and test  them on various inputs, and measure the 
 This can be time consuming for the developer, and there are plenty of pitfalls.
 Apart from the efficiency of the algorithm itself, the measured runtime can depend on:
 
+\newpage
+
 * details of the hardware you are running on,
 * how optimized the code for the specific implementations are,
 * how you construct the inputs,

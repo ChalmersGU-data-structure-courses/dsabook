@@ -85,6 +85,8 @@ percent of the total runtime, and making it faster will not have any noticeable 
 When we want to analyse the complexity of code fragments, the following three
 rules of thumb will get us very far:
 
+\newpage
+
 - An **atomic operation** is always $O(1)$.
 
 - A **sequence**, $\langle p_1;p_2;p_3\rangle$,

@@ -103,6 +103,8 @@ So how many comparisons are done by Bubble sort?
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
+\newpage
+
 - The outer loop is iterated $n-1$ times in total.
 - In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 

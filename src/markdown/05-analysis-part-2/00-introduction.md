@@ -35,7 +35,7 @@ There is a separate notation for tight bounds ($\Theta$, pronounced "big theta")
 and one for lower bounds ($\Omega$, "big omega"), but these
 are not as frequently used as "big O".
 
-Informally:
+\newpage
 
 Upper bound
 

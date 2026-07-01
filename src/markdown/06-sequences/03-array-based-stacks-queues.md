@@ -161,6 +161,8 @@ This means that we relax the requirement that the queue must occupy the start of
 The queue simply consists of all elements between the *front* and the *rear* cells.
 Now enqueueing and dequeueing becomes rather similar to each other:
 
+\enlargethispage{\baselineskip}
+
 - To *enqueue* an element, we increase the *rear* pointer.
 - To *dequeue* an element, we instead increase the *front* pointer.
 
