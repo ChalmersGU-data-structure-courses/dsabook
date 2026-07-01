@@ -29,30 +29,16 @@ For every 3-node with values $a$ and $b$:
 - all values in the right subtree are *larger* than $b$.
 :::
 
-Here is an example of a 2-3 tree.
+@Fig:23-example shows an example of a 2-3 tree.
 In this tree, the root is a 3-node: it has two values (18 and 32) and three children.
 The left child of the root is a 2-node containing the key 12.
+Because 2-3 trees have two kinds of nodes, we can have a much stricter balance invariant than AVL trees.
 
-::: {#fig:TTexample}
-:::: online
-```jsav-figure {src="Indexing/twoThreedgmCON.js" scripts="Indexing/twoThreeTreeCON.js" links="Indexing/twoThreeTreeCON.css"}
-```
-::::
+![
+   An example 2-3 tree consisting of six 2-nodes and five 3-nodes, with a total of 16 elements.
+   Note that all leaves are on the same level.
+](images/SearchTrees-23-Example.svg){width=65% #fig:23-example}
 
-:::: latex
-```
-                _________________ [ 18 | 32 ] _________________
-               /                       |                       \
-        [ 12 ]                    [ 23 | 30 ]                    [ 48 ]
-       /      \                 /      |     \                  /      \
-   [ 10 ]    [ 15 ]    [ 20 | 21 ]   [ 24 ]   [ 31 ]    [ 45 | 47 ]    [ 50 | 52 ]
-```
-::::
-
-An example of a 2-3 tree.
-:::
-
-Because 2-3 trees have two kinds of nodes, we can have a much stricter balance invariant than AVL trees:
 
 ::: example
 #### Invariant: 2-3 tree balance
@@ -108,18 +94,23 @@ where should the third value go?
 The solution is to put the low and high values in one 2-node each,
 and then *promote* the middle value to the parent.
 
-Here is how it can look like when we insert $c$ into a leaf 3-node consisting of $a$ and $b$.
-The resulting leaf node becomes too big, so we split and promote the middle value:
+@Fig:23-insert-leaf shows how it can look like when we insert $c$ into a leaf 3-node consisting of $a$ and $b$.
+The resulting leaf node becomes too big, so we split and promote the middle value ($b$).
 
-![](images/TwoThree-InsertSplit.png){width=60%}
+![
+   Inserting the value $c$ into a leaf 3-node results in a 4-node,
+   which we have to split and then promote the middle value.
+](images/SearchTrees-23-InsertLeaf.svg){width=80% #fig:23-insert-leaf}
 
 Promoting a value means that we insert it into the parent node.
 If the parent is a 2-node, then we just change it to a 3-node and we are done.
 But if the parent is a 3-node, we are back in the same situation as before:
 we get a 4-node that we need to split, and then we promote *its* middle value to its parent.
-Like this:
+This is shown in @fig:23-insert-promote.
 
-![](images/TwoThree-InsertSplitMiddle.png){width=80%}
+![
+   If we promote a value into a 3-node, we have to split and promote again.
+](images/SearchTrees-23-InsertPromote.svg){width=100% #fig:23-insert-promote}
 
 
 ::: dsvis
@@ -176,19 +167,26 @@ There are three main cases to consider:
    This turns this case into case 1 or 2.
 
 To solve case 2 we first try to "steal" a value from a sibling.
-This works if any sibling is a 3-node: then we can rotate over the parent that lies between the nodes, like this:
+This works if any sibling is a 3-node: then we can rotate over the parent that lies between the nodes,
+as shown in @fig:23-delete-steal.
 
-![](images/TwoThree-DeleteSteal.png){width=80%}
+![
+   When deleting from a 2-node: if there is a 3-node sibling, we can steal from it.
+](images/SearchTrees-23-DeleteSteal.svg){width=80% #fig:23-delete-steal}
 
 If neither sibling is a 3-node, we cannot steal anything.
 In this situation we can instead *merge* our empty node with a sibling and the parent that lies between.
 This is the opposite of splitting.
 When we merge we create a new 3-node with the sibling value and the parent value.
-The parent value is therefore *demoted* to its child, and the rank of the parent node is decreased by one:
+The parent value is therefore *demoted* to its child, and the rank of the parent node is decreased by one.
 
-![](images/TwoThree-DeleteMerge.png){width=80%}
+![
+   If there is no 3-node sibling, we *demote* the parent and merge with a 2-node sibling.
+   The parent loses one element, and maybe the stealing/merging has to continue upwards in the tree.
+](images/SearchTrees-23-DeleteMerge.svg){width=80% #fig:23-delete-merge}
 
-In this example we were lucky -- the parent was a 3-node so it will become a 2-node and we are done.
+Demoting and merging is shown in @fig:23-delete-merge.
+In this example we are lucky -- the parent is a 3-node so it will become a 2-node and we are done.
 However, if the parent had been a 2-node, then it would become a 1-node after merging,
 and so the stealing/merging will continue upwards in the tree.
 
@@ -222,11 +220,12 @@ as normal BSTs where each node has an additional binary feature.
 This feature is called the "colour", and a node can be either "black" or "red".
 Therefore, this kind of trees are called *red-black trees*.
 
+![
+   How to transform a 2-, 3-, and 4-node into a corresponding red-black subtree.
+](images/SearchTrees-23-RedBlack.svg){width=100% #fig:23-redblack-tree}
+
 The key insight is that any 2-3-4 tree can be converted to a corresponding red-black tree.
-The conversion looks like this, for any 2-, 3- or 4-node:
-
-![](images/TwoThree-Redblack-vs-234.png){width=80%}
-
+@Fig:23-redblack-tree shows how the conversion looks like, for any 2-, 3- or 4-node.
 All the special cases for insertion and deletion in a 2-3-4 tree can be translated into rules for the red-black tree.
 The advantage is that we do not need a complicated node structure,
 but can use our our standard BST nodes (augmented with a colour).
@@ -241,6 +240,7 @@ but on the other hand deleting elements is slightly more efficient than for AVL 
 There is even a translation from 2-3 trees into a subclass of red-black trees,
 the so called *left-leaning* red-black trees (or right-leaning, which are equivalent).
 
+<!--
 ::: {#fig:BTexample}
 :::: online
 ```jsav-figure {src="Indexing/BTreedgmCON.js" scripts="Indexing/BTreeCON.js" links="Indexing/BTreeCON.css"}
@@ -259,7 +259,7 @@ the so called *left-leaning* red-black trees (or right-leaning, which are equiva
 
 An example 2-3-4 tree -- each node contains up to three keys, and internal nodes have up to four children.
 :::
-
+-->
 
 ### B-trees {#search-trees:B-trees}
 
