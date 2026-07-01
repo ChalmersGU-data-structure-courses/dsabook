@@ -240,26 +240,6 @@ but on the other hand deleting elements is slightly more efficient than for AVL 
 There is even a translation from 2-3 trees into a subclass of red-black trees,
 the so called *left-leaning* red-black trees (or right-leaning, which are equivalent).
 
-<!--
-::: {#fig:BTexample}
-:::: online
-```jsav-figure {src="Indexing/BTreedgmCON.js" scripts="Indexing/BTreeCON.js" links="Indexing/BTreeCON.css"}
-```
-::::
-
-:::: latex
-```
-                           _________ [ 24 ] _________
-                          /                          \
-               [ 15 | 20 ]                            [ 33 | 45 | 48 ]
-              /     |     \                         /      |    |      \
-   [ 10 | 12 ]    [ 18 ]   [ 21 | 23 ]   [ 30 | 30 ]   [ 38 ]  [ 47 ]   [ 50 | 52 | 60 ]
-```
-::::
-
-An example 2-3-4 tree -- each node contains up to three keys, and internal nodes have up to four children.
-:::
--->
 
 ### B-trees {#search-trees:B-trees}
 
@@ -291,10 +271,16 @@ In addition, all leaves are on the same level, or in other words, the tree is pe
 The second requirement is the reason why 2-3 trees cannot have 1-nodes -- because $1 < 3/2$.
 On the other hand, a B-tree of order 4 (that is, a 2-3-4 tree) can have nodes with 2, 3 or 4 children.
 B-trees of order 5 can only have 3-, 4- and 5-nodes, and so on.
+@Fig:BTree-example shows an example B-tree of order 5.
 
 Note that the requirement that all leaves are on the same level,
 is *not* enough to guarantee that the height of a B-tree is logarithmic in the number of elements.
 We also need the second requirement, which says that nodes are not too small.
+
+![
+   An example B-tree of order 5, containing 62 different elements.
+   Note that there are only 3-, 4- and 5-nodes in the tree.
+](images/BTreeExample.png){#fig:BTree-example}
 
 #### Insertion into and deleting from a B-tree
 
