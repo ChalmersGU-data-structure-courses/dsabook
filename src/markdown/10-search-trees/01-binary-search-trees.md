@@ -230,13 +230,13 @@ This is easy, we just go as far to the right as possible -- then we will end up 
 
 ![
     Deleting the root (C) from the leftmost tree results in either of the two trees to the right.
-](images/SearchTrees-BST-DeleteRoot.svg){width=100% #fig:ExampleDeletedRoot}
+](images/SearchTrees-BST-DeleteRoot.svg){width=100% #fig:BST-example-deleted-root}
 
 
 ::: example
 #### Example: Deleting from a BST
 
-Suppose we want to delete the value C from the leftmost tree in @fig:ExampleDeletedRoot.
+Suppose we want to delete the value C from the leftmost tree in @fig:BST-example-deleted-root.
 
 - First we find the C node, and the node with the largest value in the left subtree, which is the B node.
 - We delete the B node, which means that we have to redirect the right child of its parent X to Y.
@@ -248,7 +248,7 @@ Alternatively, if we instead decide to replace with the smallest element in the 
 - We delete the D node, which means that we have delete the right child of its parent X.
 - Finally we replace the value in the C node with D.
 
-In the end we will get one of the two BSTs to the right in @fig:ExampleDeletedRoot.
+In the end we will get one of the two BSTs to the right in @fig:BST-example-deleted-root.
 Notice that both of these trees are different representations of exactly the same set.
 :::
 
