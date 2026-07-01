@@ -85,7 +85,7 @@ will return the tree to its original shape. Equivalently, if (b) is the
 initial configuration of the tree (that is, $S$ is at the root and $P$ is
 its right child), then (a) shows the result of a single rotation to
 splay $P$ to the root.
-](images/SingRot.png){width=60% #fig:SingProm}
+](images/SearchTrees-AVL-LeftRotate-1.svg){width=60% #fig:SingProm}
 
 
 Unlike the AVL tree, the splay tree requires two types of double
