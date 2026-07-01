@@ -24,7 +24,7 @@ Therefore we need to come up with a good balancing invariant, and some method fo
 Unfortunately, we cannot use the most obvious invariant -- that the tree must be completely balanced
 (or in other words, that the tree must be *complete*).
 The reason for this is that it costs too much to maintain this invariant,
-for example, @fig:rebalanceBST shows that we might need to reorganise the tree completely after each insertion.
+for example, @fig:BST-rebalance shows that we might need to reorganise the tree completely after each insertion.
 
 <!-- OPENDSA: START -->
 
@@ -35,7 +35,7 @@ for example, @fig:rebalanceBST shows that we might need to reorganise the tree c
     If we want to keep the tree as balanced as possible,
     we need to do a major reorganisation, which is very costly.
     Note that all nodes have moved around in the final tree to the right.
-](images/SearchTrees-BST-PerfectRebalance.svg){width=100% #fig:rebalanceBST}
+](images/SearchTrees-BST-PerfectRebalance.svg){width=100% #fig:BST-rebalance}
 
 <!-- OPENDSA: END -->
 
@@ -96,12 +96,12 @@ When doing this, $z$ -- the previous left child of $y$ -- has to reattach itself
 ![
     Left-rotating over the node $x$.
     The previous right child, $y$, now becomes the parent,
-    and its left child $z$ has to reattach ittself as a child of $x$.
-](images/SearchTrees-AVL-LeftRotate-1.svg){width=65% #fig:bst-left-rotate}
+    and its left child $z$ has to reattach itself as a child of $x$.
+](images/SearchTrees-AVL-LeftRotate-1.svg){width=65% #fig:BST-left-rotate}
 
 If the right-right child $w$ was the "heaviest" of the subtrees,
 then this left-rotation should have made the subtree a little more balanced than before.
-The rotation is shown in @fig:bst-left-rotate.
+The rotation is shown in @fig:BST-left-rotate.
 
 *Note*:
 When you want to implement rotation, you have to remember to update the parent node too.
@@ -117,14 +117,14 @@ This means that we first make a single right rotation of the right child $y$,
 followed by a left rotation of the parent $x$.
 The first right rotation over the $y$ child transforms it into a right-right case,
 and then we can continue with a normal left rotation like above.
-As you can see in @fig:bst-double-rotate, the effect of a double rotation is that
+As you can see in @fig:BST-double-rotate, the effect of a double rotation is that
 the right-left grandchild $z$ moves two levels up to become the new parent.
 
 ![
     A right-left-rotation.
     First we right-rotate over the child $y$, and then left-rotate over the parent $x$.
     The effect is that the grandchild $z$ now becomes the parent of both $x$ and $y$.
-](images/SearchTrees-AVL-RightLeftRotate-1.svg){width=100% #fig:bst-double-rotate}
+](images/SearchTrees-AVL-RightLeftRotate-1.svg){width=100% #fig:BST-double-rotate}
 
 
 #### Implementing rotations
