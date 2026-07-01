@@ -33,8 +33,8 @@ The nodes are numbered level by level, starting at the root and proceeding from 
 The root node is assigned index 0, its left child index 1, its right child index 2, and so on.
 This systematic numbering ensures that a node's position in the array directly corresponds to its logical position in the tree.
 As a result, the indices of a node's parent and children can be computed easily using simple arithmetic.
-@Fig:example_complete_bintree illustrates this scheme with a complete binary tree containing 12 nodes.
 
+<!--
 ::: {#fig:example_complete_bintree}
 :::: online
 ```jsav-figure
@@ -72,6 +72,7 @@ av.recorded();
 
 Complete binary tree node numbering.
 :::
+-->
 
 An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
 If the tree is traversed in *breadth-fist order* (see @sec:trees:traversal), the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
