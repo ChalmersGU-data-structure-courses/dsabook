@@ -8,7 +8,7 @@
 :::
 
 :::::: latex
-\booklink{Preliminaries}{sec:appendices}
+\booklink{Preliminaries}{13.1}
 ::::::
 
 This book assumes that you are already familiar with mathematics and programming, corresponding to a semester of university studies.
