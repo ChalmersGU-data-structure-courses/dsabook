@@ -81,15 +81,7 @@ we want our heaps to be as unbalanced as possible -- the more unbalanced, the fa
 
 ::: {#fig:MeldableHeapExample}
 :::: latex
-```
-  (a)     16                     (b)    16
-        /    \                        /    \
-      31      29                    65      29
-     /  \    /  \                     \       \
-    48  65  74  52                     74      31
-                                              /  \
-                                             52  48
-```
+![](images/tikz/meldable-heap.pdf){width=90%}
 ::::
 
 How (a) a binary heap and (b) a meldable heap looks like after
