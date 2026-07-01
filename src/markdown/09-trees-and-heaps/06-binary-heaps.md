@@ -301,7 +301,7 @@ Note that the heap is shown as a tree, but you should keep in mind that it is ac
 ::::
 
 :::: latex
-![](images/tikz/binary-heap-add.pdf){width=90%}
+![](images/tikz/binary-heap-add.pdf){width=99%}
 ::::
 
 Inserting 10 into the example heap in @fig:HeapTreeExample.
