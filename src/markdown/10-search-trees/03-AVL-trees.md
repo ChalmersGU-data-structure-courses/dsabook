@@ -28,12 +28,14 @@ Using this notation, the invariant can be formulated like this:
 $$ -1\leq\text{bf}(t)\leq 1 \text{ for all tree nodes } t $$
 
 When we draw AVL trees we usually write the balance factor beside each node.
-Here are two balanced AVL trees representing the same set {A,B,C,D,E,F,G}:
+@Fig:AVL-examples shows two balanced AVL trees representing the same set {A,B,C,D,E,F,G}.
 
-![](images/AVL-Balanced.png){width=60%}
+![
+    Two balanced AVL trees representing the same set of elements.
+](images/SearchTrees-AVL-Examples.svg){width=60% #fig:AVL-examples}
 
 Now we have to ensure that we restore the balance whenever a tree node becomes unbalanced,
-and we do that by using *tree rotations*.
+and we do that by using the *tree rotations* from @sec:search-trees:rotations.
 The tree can become unbalanced in two cases -- when *inserting* and when *deleting* values.
 
 ### Implementing AVL nodes
@@ -54,53 +56,61 @@ To insert a value into an AVL tree we first treat it as a standard binary search
 The value will therefore be added as a new leaf node somewhere in the tree.
 But this might break the balance invariant of the parent node, or the parent's parent,
 or any other ancestor all the way up to the root.
-For example, if we want to add H to the previous trees, then they will look like follows,
-where the balance factors that are changed are shown in red:
+For example, if we want to add H to the example trees in @fig:AVL-examples,
+then they will look like in @fig:AVL-add-rotate, where the balance factors that are changed are marked in bold.
 
-![](images/AVL-Unbalanced.png){width=60%}
+![
+    Inserting H into the trees from @fig:AVL-examples.
+    The affected nodes and their balances are marked in bold.
+    The right tree becomes unbalanced, so we have to left-rotate over the node F.
+](images/SearchTrees-AVL-ExamplesAddRotate.svg){width=100% #fig:AVL-add-rotate}
 
 Notice that the left tree is still AVL balanced, so we do not have to do anything further.
-But in the right tree, the gradparent F have become unbalanced.
+But in the right tree, the grandparent F have become unbalanced.
 The F node is *right-heavy*, and we can solve this imbalance by rotating it to the left.
-In this case it is enough with a *single* rotation:
-
-![](images/AVL-LeftRotate1.png){width=60%}
+In this case it is enough with a *single* rotation.
 
 #### Single rotations
 
 The example above was when the unbalanced node had a *right-right imbalance*.
 This means that not only the node itself is right-heavy, but its child is too.
-When a node is right-right unbalanced, it has the general structure to the left:
+When a node is right-right unbalanced, it has the general structure
+as shown in @fig:AVL-left-rotate.
+This means that the middle subtree $t_2$ cannot be higher than the rightmost subtree $t_3$.
+And since the grandparent $x$ has balance $+2$, there are only two options:
+either $t_3$ has height one more than $t_2$, or they have the same height.
+After performing a single left-rotation, $t_3$ has moved up one level and the left subtree $t_1$ has moved down one level.
+The final subtree is now AVL-balanced, because no node has a balance factor outside of $\{-1,0,+1\}$.
 
-![](images/AVL-LeftRotate2.png){width=80%}
+![
+    A single left-rotation solve a right-right imbalance.
+    The left subtree $t_1$ moves down one level, and the right subtree $t_3$ moves up,
+    and the result is that the final tree becomes a little more balanced.
+](images/SearchTrees-AVL-LeftRotate-2.svg){width=80% #fig:AVL-left-rotate}
 
-And after a single left rotation, it will look like the structure on the right.
-As you can see, suddenly the imbalance disappears.
-
-But there is another possibility that can be solved in the same way, if the subtree $t_2$ is as high as $t_3$:
-
-![](images/AVL-LeftRotate3.png){width=80%}
-
-Before the rotation, the $x$ node had a balance factor of $+2$, but afterwards it has $-1$.
-This is not a perfect balanced tree, but it is AVL balanced.
+Notice the difference with @fig:BST-rebalance, where we needed to reorganise the tree completely after adding one element.
+We managed this because the AVL invariant is *relaxed*, it does not require that the tree is perfectly balanced.
 
 #### Double rotations
 
-There is a third right-heavy case --
+There is another right-heavy case --
 when the *right-left* grandchild ($t_2$) is higher than the *right-right* ($t_3$).
-If we perform a single rotation over X we do not win anything:
-
-![](images/AVL-WrongDoubleRotate.png){width=80%}
-
-Now we transformed the right-left imbalance into a left-right imbalance, which is equally bad.
+If we perform a single rotation over $x$ we do not win anything:
+the height of $t_2$ will turn the new tree into a *left-right* imbalance instead,
+which is just a mirror case of what we started from.
 
 The solution is to perform a *double rotation*.
-That is, first we transform the right-left case into a right-right case, by a right rotation over Y.
-After this we can rotate left over X:
+That is, first we transform the right-left case into a right-right case, by a right rotation over $y$.
+After this we can rotate left over $x$.
+The whole double rotation is shown in @fig:AVL-double-rotate,
+and afterwards all nodes are AVL balanced!
 
-![](images/AVL-DoubleRotate.png){width=100%}
+![
+    To solve a right-left imbalance we need to do a double rotation.
+    First right-rotate over the child $y$, and left-rotate over the parent $x$.
+    Notice how the resulting tree is much more balanced.
+](images/SearchTrees-AVL-RightLeftRotate-2.svg){width=100% #fig:AVL-double-rotate}
 
-And now all nodes are AVL balanced!
 The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
 performing *right* rotations.
 
