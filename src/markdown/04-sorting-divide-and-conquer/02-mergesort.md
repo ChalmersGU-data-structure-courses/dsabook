@@ -170,7 +170,7 @@ So how does this relate to complexity?
     so when both pointers have reached the end, we have executed $m+m$ iterations.
     So merging is linear, $O(m)$.
 -   In each level $r$ we merge $2^r$ arrays, each of size $2^{k-r}$.
-    So the total complexity of merging one full level is $O(2^r \cdot 2^{k-r})$.
+    So the total complexity of merging one level is $O(2^r \cdot 2^{k-r})$.
     And since $2^r \cdot 2^{k-r} = 2^k$, we get $O(2^k)$.
 -   We have in total $k$ levels, so in the end we get the final complexity $O(k \cdot 2^k)$.
 
@@ -230,8 +230,7 @@ The main function for sorting an interval can now be written like this:
         merge(arr, start, mid, end)      // Merge the two sorted halves
 
 The initial call would be `mergeSort(arr,0,arr.size-1)`, which sorts the whole array.
-
-Merging the sorted array intervals are quite straightforward from the description,
+Merging the sorted array intervals is straightforward,
 we just have to keep track of the pointers to the two sorted halves.
 
     // Merge the sorted array intervals start .. mid-1 and mid .. end
