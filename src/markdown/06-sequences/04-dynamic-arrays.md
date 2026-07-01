@@ -63,12 +63,12 @@ Afterwards we can forget about the old array because it will not be used anymore
 Note that resizing the internal array is a *slow* operation,
 it has to iterate through all elements in the list and copy each one.
 This is of course linear in the number of elements, $O(n)$.
-(Modern processors have special instructions for copying chunks of memory, which are a lot faster than our code above
--- but even their optimised hardware instructions are linear in the number of elements.)
+(Processors have special hardware instructions for copying chunks of memory, which are a lot faster than a simple loop
+-- but even those are linear in the number of elements.)
 
 This means that we do not want to resize the array too often, so the question is how often do we want to resize?
 Or in other words, how large should the new internal array be -- what should be its capacity?
-How about increasing the capacity with 100 elements, every time the array behomes full:
+How about increasing the capacity with 100 elements, every time the array becomes full:
 
     push(stack, value):
         if stack.size == stack.arr.size:   // If the internal array is full,
@@ -92,7 +92,7 @@ Every 100'th time the internal array becomes full and we need to resize it, so w
 `resize`($n$)         copying  $n-100$  elements
 ------------------  --------- --------- ---------
 
-In total, we will execute the copying statement the following number of times:
+In total, we execute the copying statement the following number of times:
 
 $$
 100 + 200 + \cdots + (n-200) + (n-100) = 100 \cdot \sum_1^{n/100} i

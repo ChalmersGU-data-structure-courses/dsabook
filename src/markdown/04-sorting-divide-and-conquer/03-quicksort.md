@@ -185,6 +185,10 @@ Note that we do not include the pivot itself in the intervals of the recursive c
 This is because we know that after partitioning the pivot is in its final correct position, $p$.
 Now it should be straightforward to give the pseudocode for the main Quicksort function:
 
+```{=latex}
+\begin{minipage}{\linewidth}
+```
+
     // Sort the array interval start...end
     quickSort(arr, start, end):
         if start >= end:                       // Base case: Interval length is ≤ 1.
@@ -194,7 +198,12 @@ Now it should be straightforward to give the pseudocode for the main Quicksort f
         quickSort(arr, start, p-1)             // Quicksort the lower partition.
         quickSort(arr, p+1, end)               // Quicksort the upper partition.
 
+```{=latex}
+\end{minipage}
+\medskip
+```
 <!-- OPENDSA: START -->
+`\noindent`{=latex}
 The partitioning will return the final position of the pivot,
 which is the correct position of the pivot in the final, sorted array.
 By doing so, we guarantee that at least one value (the pivot) will not be included in the recursive calls.
