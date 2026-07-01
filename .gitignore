@@ -13,6 +13,7 @@ _private*
 .#*
 temp
 tmp
+_temp
 
 # MacOS-specific files
 .DS_Store
@@ -37,4 +38,8 @@ __pycache__/
 *.cb
 *.cb2
 .*.lb
+*.fdb_latexmk
+*.synctex.gz
 
+# Generated images
+/resources/images/growth_rates_graph.svg

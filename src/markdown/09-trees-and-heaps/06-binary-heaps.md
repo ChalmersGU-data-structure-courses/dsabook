@@ -301,23 +301,7 @@ Note that the heap is shown as a tree, but you should keep in mind that it is ac
 ::::
 
 :::: latex
-```
-(a)      _____ 8 _____               (b)      _____ 8 _____
-        /             \                      /             \
-      17               12                  17               12
-    /    \           /    \              /    \           /    \
-  33      28       43      15          33      28      [10]     15
- /  \    /  \     /  \                /  \    /  \     /  \
-34  87  75  34   47 [10]             34  87  75  34   47  43
-
-                (c)      _____ 8 _____
-                        /             \
-                      17              [10]
-                    /    \           /    \
-                  33      28       12      15
-                 /  \    /  \     /  \
-                34  87  75  34   47  43
-```
+![](images/tikz/binary-heap-add.pdf){width=90%}
 ::::
 
 Inserting 10 into the example heap in @fig:HeapTreeExample.
