@@ -381,23 +381,7 @@ from the final heap in @fig:HeapAdd10.
 ::::
 
 :::: latex
-```
-(a)      ___ [43] ___               (b)      ____ 10 ____
-        /            \                      /            \
-      17              10                  17             [43]
-    /    \          /    \              /    \          /    \
-  33      28      12      15          33      28      12      15
- /  \    /  \    /  \                /  \    /  \    /
-34  87  75  34  47  [X]             34  87  75  34  47
-
-                (c)      ____ 10 ____
-                        /            \
-                      17              12
-                    /    \          /    \
-                  33      28     [43]     15
-                 /  \    /  \    /
-                34  87  75  34  47
-```
+![](images/tikz/binary-heap-del.pdf){width=99%}
 ::::
 
 Removing the highest-priority element from the final heap in @fig:HeapAdd10.
