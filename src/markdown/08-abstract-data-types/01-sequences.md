@@ -6,7 +6,7 @@ In this chapter you will encounter stacks and queues, and more general lists,
 and in later chapters will we introduce sets and maps.
 The only thing we will require from a collection is that it supports two basic operations:
 
-- it must know its own *size*, that is, the number of elements in the collection, and
+- it must know its own *size*, that is, the number of elements in the collection,
 - it is possible to *iterate* over the elements.
 
 For convenience we often iterate the elements using a `for`-loop, like this:

@@ -48,7 +48,7 @@ because these can be implemented using binary search.
 Unfortunately, modifying the data structure is still slow.
 If we want to add an item to a sorted array, we have to keep the array sorted --
 and that means we need to *insert* the new item at the right place in the array,
-using the insertion algorithm from Insertion Sort (@sec:sorting-1:insertion-sort).
+using the insertion algorithm from Insertion sort (@sec:sorting-1:insertion-sort).
 This takes linear time in the worst case.
 Similarly, to remove an item without creating a hole in the array,
 we need to shift a bunch of elements in the array, and this also takes linear time.

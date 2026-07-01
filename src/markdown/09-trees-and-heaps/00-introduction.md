@@ -39,7 +39,6 @@ Two simple rules define the shape of a tree:
 - There are no cycles, so a node cannot be its own ancestor.
 
 Together, these rules give us a hierarchical structure with a unique path from the root to every other node.
-
 Some common tree terms are:
 
 - A tree is *empty* if it has no nodes.

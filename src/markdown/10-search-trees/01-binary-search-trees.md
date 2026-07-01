@@ -19,11 +19,6 @@ For every node with value $v$:
 The only thing that differentiates a BST from a normal binary tree is this invariant.
 As explained in @sec:analysis-1:invariants,
 an invariant is a condition that the BST *always* must satisfy.
-
-![
-    Four example BSTs, all representing the same set of values.
-](images/SearchTrees-BST-FourExamples.svg){width=100% #fig:BST-example}
-
 This means that the example tree from @sec:trees:binary-trees is not a BST, because it violates the invariant,
 but @fig:BST-example shows four correct BSTs.
 Note that all these trees represent the same set of values,
@@ -32,6 +27,10 @@ then they should be indistinguishable for the program that makes use of them.
 However, there is one important difference between the four trees:
 the middle ones are much more *balanced* than the other two,
 and this has consequences for the efficiency of the basic operations.
+
+![
+    Four example BSTs, all representing the same set of values.
+](images/SearchTrees-BST-FourExamples.svg){width=100% #fig:BST-example}
 
 ### Implementing BST sets and maps
 
@@ -260,8 +259,8 @@ If we want to delete the value $x$ in a BST, we first find the node that has tha
 There are three possibilities for that node:
 
 - If it is a leaf node, we can just delete it -- meaning, deleting the corresponding child pointer of its parent.
-- If the node has exactly one child, we redirect its parent to the child.
-- If it is an inner node, we find the largest node $y$ in the left subtree, and then:
+- If the node has exactly one child, redirect its parent to the child.
+- If it is an inner node, find the largest node $y$ in the left subtree, and:
     - Update the value of the $x$ node to the value of the $y$ node.
     - Delete the $y$ node from the left subtree.
 :::
@@ -277,7 +276,7 @@ First we need a helper function for finding the largest value from a subtree:
             node = node.right
         return node.value
 
-Now we are ready to implement the main recursive function that deletes a value from a subtree:
+Finally, here is the main recursive function that deletes a value from a subtree:
 
     removeHelper(node, value) -> BSTNode:
         if node is null:
@@ -292,8 +291,8 @@ Now we are ready to implement the main recursive function that deletes a value f
             node = node.left    // Replace the node with its only child.
         else if node only has a right child:
             node = node.right   // Replace the node with its only child.
-        else:  // Now we know that this is an inner node
-            node.value = findLargest(node.left)              // Find the largest value in the left subnode,
+        else:   // Now we know that this is an inner node
+            node.value = findLargest(node.left)      // Find the largest value in the left subnode,
             node.left = removeHelper(node.left, node.value)  // and delete this value.
         return node
 

@@ -186,16 +186,11 @@ Theta           $f(n) \in \Theta(g(n))$    $k_1\cdot g(n) \leq |f(n)| \leq k_2\c
 Big-Omega       $f(n) \in \Omega(g(n))$    $f(n) \geq k\cdot g(n)$
 Little-Omega    $f(n) \in \omega(g(n))$    $f(n) > k\cdot g(n)$
 
-
-All these different bounds correspond to comparison operators between complexity classes:
-
-Comparison            Complexity class
-------------------    -------------------
-$O(f) < O(g)$         $f\in o(g)$
-$O(f) \leq O(g)$      $f\in O(g)$
-$O(f) = O(g)$         $f\in\Theta(g)$
-$O(f) \geq O(g)$      $f\in\Omega(g)$
-$O(f) > O(g)$         $f\in\omega(g)$
+`\noindent`{=latex}
+All these different bounds correspond to comparison operators between complexity classes.
+For example, $O(f)\in O(g)$ means the same thing as $f\in O(g)$,
+$O(f) = O(g)$ means the same as $f\in\Theta(g)$,
+$O(f) > O(g)$ means the same as $f\in\omega(g)$, and so on.
 
 
 ### Asymptotic equivalence

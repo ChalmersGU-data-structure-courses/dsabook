@@ -44,6 +44,8 @@ For example, the `remove()` operation behaves differently:
 Also note that the name of the operation do not really matter,
 they can have completely arbitrary names, but still be the same operation.
 @Tbl:sequences:common-names shows some common names.
+Do not be fooled by different names!
+The important thing is their semantics, and a queue is a queue regardless if the operation is called *dequeue*, *poll* or *remove*.
 
 |              | Stack                   | Queue
 |:-------------|:------------------------|:-------------------------------
@@ -51,9 +53,6 @@ they can have completely arbitrary names, but still be the same operation.
 | **Removing** | pop, delete, deleteFirst, remove, removeFirst | dequeue, poll, delete, deleteFirst, remove, removeFirst |
 
 : Some common names for the add and remove operations for stacks and queues {#tbl:sequences:common-names}
-
-Do not be fooled by different names!
-The important thing is their semantics, and a queue is a queue regardless if the operation is called *dequeue*, *poll* or *remove*.
 
 In this book we will use the names *push* and *pop* for stacks, and *enqueue* and *dequeue* for queues, respectively.
 The reason for this is to reduce ambiguity when talking about the data structures,

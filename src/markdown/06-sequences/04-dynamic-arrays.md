@@ -92,6 +92,7 @@ Every 100'th time the internal array becomes full and we need to resize it, so w
 `resize`($n$)         copying  $n-100$  elements
 ------------------  --------- --------- ---------
 
+`\noindent`{=latex}
 In total, we execute the copying statement the following number of times:
 
 $$
@@ -141,6 +142,7 @@ When will `resize` be called, and how many elements get copied each time?
 -----------------------  --------- ------------- ---------
 
 <!-- NICSMA: START -->
+`\noindent`{=latex}
 You can see that the array gets resized a whole lot at the beginning --
 but as it gets bigger, it gets resized less and less often.
 We can read off how many elements get copied:
@@ -198,20 +200,17 @@ In fact, it still works out fine - the program takes linear time to run.
 To see this, you can use the same argument as above, but instead of using the formula
 $2^0+2^1+...+2^k = 2^{k+1}$,
 you have to use the formula for a general
-[geometric progression](https://en.wikipedia.org/wiki/Geometric_progression).
+[geometric progression]{.term}.
 What you get is an overhead of *three elements copied per element added*.
 
 In fact, multiplying the array size by *any constant* works,
 because the same geometric progression reasoning applies.
 We can calculate the exact performance overhead of growing the array by any given factor:
 
-::: example
-#### Theorem: Growing by a factor
-
-If we grow the array by a factor of $k > 1$ when resizing it,
-then the overhead is at most $\frac{k}{k-1}$ elements copied per element added to the dynamic array.
-For example, when growing by 20% (k = 1.2), the overhead is 6 elements copied per add.
-:::
+Growing by a factor
+:   If we grow the array by a factor of $k > 1$ when resizing it,
+    then the overhead is at most $\frac{k}{k-1}$ elements copied per element added to the dynamic array.
+    For example, when growing by 20% (k = 1.2), the overhead is 6 elements copied per add.
 
 In short, when resizing a dynamic array list,
 we should **multiply the array size by a constant**.
@@ -251,17 +250,7 @@ But now we have to be a little careful when copying over the elements to the new
 :::
 
 Instead we reset the *front* and *rear* pointers so that we copy
-the first queue element to position 0 of the new array,
-the second to position 1, and so on.
-The process and the resulting queue is shown in @Fig:array-queue-resize.
-
-![
-    Resizing an array-based queue.
-    We need to copy the element starting from the *front* pointer, not from index 0.
-](images/Sequences-ArrayQueueResize.svg){#fig:array-queue-resize}
-
-Apart from this detail, that we have to reset the pointers,
-the implementation of resizing is similar to the one for stacks:
+the first queue element to position 0 of the new array, the second to position 1, and so on:
 
     resize(queue, capacity):
         oldArr = queue.arr
@@ -270,6 +259,15 @@ the implementation of resizing is similar to the one for stacks:
             queue.arr[i] = oldArr[(queue.front + i) mod oldArr.size]
         queue.front = 0
         queue.rear = queue.size - 1
+
+Note that, apart from the detail that we have to reset the pointers,
+the implementation of resizing is similar to the one for stacks.
+The process and the resulting queue is shown in @Fig:array-queue-resize.
+
+![
+    Resizing an array-based queue.
+    We need to copy the element starting from the *front* pointer, not from index 0.
+](images/Sequences-ArrayQueueResize.svg){#fig:array-queue-resize}
 
 
 ### Shrinking the internal array {#sequences:shrink-array}

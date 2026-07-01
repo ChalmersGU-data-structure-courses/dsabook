@@ -116,7 +116,7 @@ av.recorded();
 ```
 ::::
 :::: latex
-![](images/tikz/binary-heap.pdf){width=90%}
+![](images/tikz/binary-heap.pdf){width=80%}
 ::::
 
 An example binary heap together with its array representation.
@@ -127,9 +127,9 @@ The node containing the value "28" is highlighted, its parent has the value "17"
 You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
 
 \begin{align*}
-\text{parent}(i) &= \left\lfloor \frac{i - 1}{2} \right\rfloor  & (\text{if~ } & i > 0)   \\
-\text{left}(i)   &= 2i + 1                                      & (\text{if~ } & 2i + 1 < n) \\
-\text{right}(i)  &= 2i + 2                                      & (\text{if~ } & 2i + 2 < n)
+\text{parent}(i) &= \lfloor (i - 1)/2 \rfloor  & (\text{if~ } & i > 0)   \\
+\text{left}(i)   &= 2i + 1                     & (\text{if~ } & 2i + 1 < n) \\
+\text{right}(i)  &= 2i + 2                     & (\text{if~ } & 2i + 2 < n)
 \end{align*}
 
 For example, the left child of node at position 4 (which contains the value 28) is at
@@ -391,15 +391,15 @@ Removing the highest-priority element from the final heap in @fig:HeapAdd10.
 Now 43 only has larger children, so the heap property is restored.
 :::
 
-::: note
+`\bigskip\noindent`{=latex}
+***Note***:
 One common mistake is to forget to replace the root with the last heap element,
 and instead try to replace the root with its smallest child.
-(And then replace the hole of the smallest child with *its* smallest child, and so on.)
+(And then "bubble down" the hole of that child.)
 This approach *does not work* because the heap must maintain the shape of a complete binary tree.
 For example, if we use this idea to remove the minimum element from the final heap in @fig:HeapRemove10,
 we would end up with 12 as the root, and 15 as its right child.
 But 15 would not have any right child, and we no longer have a complete tree.
-:::
 
 The complexity of this algorithm is logarithmic, $O(\log(n))$, of the same reason as adding an element:
 Since the tree is complete, there are a logarithmic number of levels,
@@ -421,6 +421,8 @@ Here is pseudocode for removing the highest-priority element:
 
 We use a helper function to identify the smallest child of a node.
 If there are no children it returns null, so that the while loop above can stop.
+
+\newpage
 
     smallestChild(heap, pos):
         if left(pos) >= heap.size:                   // We are at a leaf.

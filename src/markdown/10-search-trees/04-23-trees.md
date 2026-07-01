@@ -312,7 +312,6 @@ How many values can we store in such a B-tree if it has order $100$?
 - so we get $100^3$ leaves, each with up to $99$ values
 
 This gives $99 + 99 \cdot 100 + 99 \cdot 100^2 + 99 \cdot 100^3$ = $99 \cdot (1 + 100 + 100^2 + 100^3)$ = 100 million.
-
 Therefore, a B-tree of order 100 and height 4 can store up to 100 million elements.
 This is usually enough for most file systems and databases.
 

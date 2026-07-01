@@ -76,7 +76,7 @@ Being aware of this invariant can help a developer to debug a broken implementat
 ("am I sure that every operation I make preserves the invariant?"), and to
 find potential optimisations ("are there other operations that would preserve this invariant?").
 
-Another excellent pair of examples of loop invariants are in Insertion Sort and Selection sort
+Another excellent pair of examples of loop invariants are in Insertion sort and Selection sort
 from [Chapter @sec:sorting-1]. Have a look at those algorithms and try to formulate
 a loop invariant for each of them.
 

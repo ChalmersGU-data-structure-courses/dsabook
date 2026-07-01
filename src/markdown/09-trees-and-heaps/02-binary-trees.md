@@ -401,19 +401,34 @@ All of these are easily implemented using a simple recursive algorithm, here for
 
     preorder(n):           inorder(n):            postorder(n):
         if n is null:          if n is null:          if n is null:
-            return                    return                    return
+            return                 return                 return
         print(n.value)         inorder(n.left)        postorder(n.left)
         preorder(n.left)       print(n.value)         postorder(n.right)
         preorder(n.right)      inorder(n.right)       print(n.value)
 
-For our example tree (@fig:example_bintree), they will print the following:
+For our example tree (@fig:example_bintree), they will print the nodes in the following order:
 
--------------  -----------------------------------
-*preorder*     $A ~ B ~ D ~ C ~ E ~ G ~ F ~ H ~ I$
-*inorder*      $B ~ D ~ A ~ G ~ E ~ C ~ H ~ F ~ I$
-*postorder*    $D ~ B ~ G ~ E ~ H ~ I ~ F ~ C ~ A$
--------------  -----------------------------------
+::: online
 
+    *preorder*               *inorder*             *postorder*
+--------------------  ---------------------  ---------------------
+  A B D C E G F H I     B D A G E C H F I      D B G E H I F C A
+--------------------  ---------------------  ---------------------
+
+:::
+
+```{=latex}
+%% We want the table to be more compact in print, so the code below will fit on the same page.
+\medskip
+{\centering
+\begin{tabular}{ccc}
+\emph{preorder}      &    \emph{inorder}        &    \emph{postorder}  \\\hline
+A B D C E G F H I  ~ & ~   B D A G E C H F I  ~ & ~  D B G E H I F C A \medskip
+\end{tabular}\par
+}
+```
+
+`\noindent`{=latex}
 It may not be immediately obvious that the procedures above produce this order, but this can be checked by tracing them on paper.
 For example, in `postorder(A)`, the code makes it clear that $A$ is printed last.
 More generally, postorder always prints both children before the parent, so an ordering that prints $C$ before either $E$ or $F$ is not postorder.

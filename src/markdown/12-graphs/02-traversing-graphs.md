@@ -27,19 +27,6 @@ Most of the algorithms described in this chapter use three data structures: an *
 
 ![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$, and these edges form the final result set.](images/Graphs-traversal1.svg){width=80% #fig:GraphTraversal1}
 
-@fig:GraphTraversal1 illustrates how a graph traversal can unfold.
-It shows a useful trick when trying to understand graph traversal algorithms on pen and paper:
-Circle the visited vertices, and the edges you cross will be the important parts of the agenda.
-
-The result of the traversal is a set of directed edges.
-Importantly, these edges do *not* form a single path -- instead they form a *spanning tree* of all paths reachable from the starting vertex.
-You can see the resulting spanning tree in the lower right of @fig:GraphTraversal1,
-the selected edges form a tree with $A$ as the root.
-
-Note that the algorithm does not specify in which order we select vertices.
-In particular, it does not necessarily select a vertex adjacent to the previous vertex we visited,
-but rather skip around to vertices that are adjacent to *some* visited vertex.
-
 ::: algorithm
 #### Algorithm: Generic graph traversal
 To traverse a graph from a starting vertex $s$,
@@ -53,6 +40,19 @@ then repeat the following until the agenda is empty:
     - Add $b$ to *visited*, and the edge to the *result*
     - Add all outgoing edges of $b$ **that do not end in a visited vertex**, to the *agenda*
 :::
+
+@fig:GraphTraversal1 illustrates how a graph traversal can unfold.
+It shows a useful trick when trying to understand graph traversal algorithms on pen and paper:
+Circle the visited vertices, and the edges you cross will be the important parts of the agenda.
+
+The result of the traversal is a set of directed edges.
+Importantly, these edges do *not* form a single path -- instead they form a *spanning tree* of all paths reachable from the starting vertex.
+You can see the resulting spanning tree in the lower right of @fig:GraphTraversal1,
+the selected edges form a tree with $A$ as the root.
+
+Note that the algorithm does not specify in which order we select vertices.
+In particular, it does not necessarily select a vertex adjacent to the previous vertex we visited,
+but rather skip around to vertices that are adjacent to *some* visited vertex.
 
 There are some things to note about this very abstract algorithm:
 
@@ -111,7 +111,7 @@ $F\rightarrow C$          $\{A,E,F,C\}$        $[A\rightarrow B, A\rightarrow D,
 $F\rightarrow B$          $\{A,E,F,C,B\}$      $[A\rightarrow B, A\rightarrow D, E\rightarrow B]$
 $A\rightarrow D$          $\{A,E,F,C,B,D\}$    $[A\rightarrow B]$
 
-
+`\noindent`{=latex}
 Keep in mind how a stack operates:
 Because $E$ is the last edge in $\texttt{outgoingEdges}(A)$,
 it will be pushed last and be on top of the agenda after visiting $A$.
@@ -162,7 +162,7 @@ $A\rightarrow E$          $\{A,B,D,E\}$        $[B\rightarrow E, B\rightarrow F,
 $B\rightarrow F$          $\{A,B,D,E,F\}$      $[E\rightarrow F, F\rightarrow C]$
 $F\rightarrow C$          $\{A,B,D,E,F,C\}$    $[]$
 
-
+`\noindent`{=latex}
 You may notice the following pattern:
 The algorithm starts by visiting all vertices directly adjecent to $A$, then the vertices adjacent to those vertices, etc.
 This is not only for this graph, but for every graph, and regardless of the order in which edges are presented by `outgoingEdges`.

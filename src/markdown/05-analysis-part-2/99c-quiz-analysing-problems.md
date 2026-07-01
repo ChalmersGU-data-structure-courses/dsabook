@@ -186,8 +186,8 @@ problem faster.
 - [x] False
 
 ::: hints
-- Does Radix Sort compare?
-- While Radix Sort does not directly compare the keys of two
+- Does Radix sort compare?
+- While Radix sort does not directly compare the keys of two
 records against each other, it does do a comparison for each
 digit of each key.
 :::
@@ -273,7 +273,7 @@ Which of the following is NOT relevant to the sorting problem lower bounds proof
 - The proof uses decision trees to model sorting algorithms.
 - The number of permutations affects the size of the decision tree.
 - Given a tree of a certain size, we can compute its minimum depth.
-- The cost of Bubble Sort does not affect the cost of other sorts.
+- The cost of Bubble sort does not affect the cost of other sorts.
 :::
 ::::::::::::::::::::::::::::::
 

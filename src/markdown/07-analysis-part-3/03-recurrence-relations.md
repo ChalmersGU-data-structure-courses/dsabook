@@ -33,11 +33,11 @@ and this gives the following recurrence:
 
 \begin{align*}
 T(n) &= T(n-1) + O(1), \text{ when } n>1 \\
-T(0) = T(1) &= O(1)
+T(0) &= T(1) = O(1)
 \end{align*}
 
-Note that we can always assume that the base case is constant time, $O(1)$
--- otherwise the non-constant cost can be "baked into" the recursive case.
+Note that we can always assume that the base case is constant time, $O(1)$:
+otherwise the non-constant cost can be "baked into" the recursive case.
 Therefore we will in the future not print the base case unless necessary.
 
 We want to know which complexity class $T(n)$ belongs to, or in other words,

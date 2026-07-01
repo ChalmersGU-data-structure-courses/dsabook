@@ -92,28 +92,35 @@ Here is a step-by-step example of partitioning.
 
 1.  First we select a pivot element:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-1.svg)
 
 2.  Swap the pivot with the first element, and initialise the *lower* and *upper* pointers:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-2.svg)
 
 
 3.  Partition the rest of the array. Move the pointers towards each other:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-3.svg)
 
+    `\noindent`{=latex}
     Whenever the *lower* element is larger than the pivot,
     and the *upper* element is smaller than the pivot, swap them:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-4.svg)
 
 4.  Finally, swap the pivot with the element at the *upper* pointer:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-5.svg)
 
 5.  Return the new position of the pivot:
 
+    `\noindent`{=latex}
     ![](images/Sorting-QuicksortPartition-6.svg)
 
 Note that the partitioning is done completely in-place.
@@ -221,9 +228,9 @@ The informal algorithm in @sec:sorting-2:partitioning can be implemented as pseu
         low = start + 1; high = end      // initialise the lower and upper pointers.
         while low <= high:               // Continue until the pointers pass each other.
             if arr[low] < pivot:
-                low += 1                 // Increase the lower pointer if its element is smaller than the pivot.
+                low += 1                 // Increase lower pointer if smaller than the pivot.
             else if arr[high] > pivot:
-                high -= 1                // Decrease the upper pointer if its element is larger than the pivot.
+                high -= 1                // Decrease upper pointer if larger than the pivot.
             else:
                 swap(arr, low, high)     // Otherwise, swap the elements, and
                 low += 1                 // move both pointers towards each other.
@@ -551,11 +558,11 @@ and then the pseudocode will become like this:
         low = start + 1; high = end  // initialise the lower and upper pointers.
         repeat:
             while low <= high and arr[low] < pivot:
-                low += 1             // Increase the lower pointer as long as its element is smaller than the pivot.
+                low += 1             // Increase lower pointer as long as it's smaller than the pivot.
             while low <= high and arr[high] > pivot:
-                high -= 1            // Increase the upper pointer as long as its element is larger than the pivot.
+                high -= 1            // Increase upper pointer as long as it's larger than the pivot.
             if low > high:
-                break                // Break out of the loop when the pointers have passed each other.
+                break                // Break out of loop when the pointers have passed each other.
             swap(arr, low, high)     // Otherwise, swap the elements, and
             low += 1                 // move both pointers towards each other.
             high -= 1
@@ -585,7 +592,7 @@ In Lomuto's partitioning scheme we start by putting the pivot at the *end* of th
         low = start                   // initialise the lower pointer.
         for high in start .. end-1:   // Iterate the upper pointer over the entire interval.
             if arr[high] <= pivot:
-                swap(arr, low, high)  // Swap the lower and upper elements if the upper is smaller than the pivot,
+                swap(arr, low, high)  // Swap lower and upper elements if upper is smaller than pivot,
                 low += 1              // and increase the lower pointer.
         swap(arr, end, low)           // Finally, swap the pivot into place, and
         return low                    // return the new position of the pivot.

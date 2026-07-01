@@ -180,6 +180,7 @@ Using the definition the simplifying rules from @sec:analysis-1:simplification-r
 (4) alternatively, $O(g) \cdot O(g') = O(g\cdot g')$)
  -->
 
+`\noindent`{=latex}
 Using these rules we can easily determine the asymptotic growth rate for many algorithms.
 
 - Rule (2) says that any constant-time operation is $O(1)$.

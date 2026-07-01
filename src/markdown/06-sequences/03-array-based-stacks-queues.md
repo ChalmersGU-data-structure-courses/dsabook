@@ -62,12 +62,11 @@ In an array-based stack we do not need a separate pointer to the *top*,
 because it is the same as the *size* variable (minus 1).
 That is, the *size* points to the index of the next free array cell.
 Therefore, to push a value onto the stack, we assign `arr[size]` and then increase the size.
+(Note that for now we ignore the possibility that the stack is full.)
 
     push(stack, value):
         stack.arr[stack.size] = value
         stack.size += 1
-
-Here we ignore the possibility that the stack is full.
 
 ::: dsvis
 Here we show how to push to an array-based stack.
@@ -118,9 +117,10 @@ Here is a proficiency exercise about popping from array-based stacks.
 
 <!-- OPENDSA: START -->
 If you need to use two stacks at the same time, you can take advantage
-of the one-way growth of the array-based stack by using a single array
-to store two stacks. One stack grows inward from each end, hopefully leading to less wasted space.
-However, this only works well when the space requirements of the two stacks are
+of the one-way growth of a stack by using a single array
+to store two stacks that grow toward each other from each end,
+hopefully leading to less wasted space.
+However, this only works well when the space requirements of the stacks are
 inversely correlated. In other words, ideally when one stack grows, the
 other will shrink. This is particularly effective when elements are
 taken from one stack and given to the other. If instead both stacks grow
@@ -143,7 +143,7 @@ A simple conversion of the array-based stack is not efficient:
     then we can easily enqueue new elements by simply moving the front pointer.
     But then the rear will be the first array element,
     and if we want to dequeue it we have to shift all the remaining elements to the left in the array.
-    This is time-consuming and dequeueing therefore becomes linear, $O(n)$.
+    This is time-consuming and dequeueing becomes linear, $O(n)$.
 
 -   If we instead let the front be the first array element, dequeueing becomes easy.
     But then we will instead have to shift all elements to be able to enqueue, again giving complexity $O(n)$.

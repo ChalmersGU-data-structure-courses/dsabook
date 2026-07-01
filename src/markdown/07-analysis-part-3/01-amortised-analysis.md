@@ -205,6 +205,7 @@ Amortised complexity           ...a sequence of calls to the operation
 Expected complexity            ...random choices made by the operation
 -----------------------------  ---------------------------------------------
 
+`\noindent`{=latex}
 All three types are orthogonal to each other, which means that
 we can talk about "amortised average-case complexity" or "expected amortised complexity",
 or even "expected amortised average-case complexity".
