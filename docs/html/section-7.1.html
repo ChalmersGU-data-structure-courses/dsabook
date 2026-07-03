@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Space bounds</title>
+  <title>DSABook – Amortised analysis</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,396 +100,316 @@
 <nav class="sitenav">
 <div>
 <a href="section-7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3: Advanced theory</a>
+<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3</a>
 </div>
 <div>
-<a href="section-7.2.html" accesskey="n" rel="next">Amortised analysis</a>
+<a href="section-7.2.html" accesskey="n" rel="next">Case study: Analysing dynamic arrays</a>
 <a href="section-7.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:space-bounds" class="level2" data-number="7.1">
+<section id="sec:analysis-3:amortisation" class="level2"
+data-number="7.1">
 <h2 data-number="7.1"><span class="header-section-number">7.1</span>
-Space bounds</h2>
-<p>Besides time, space is the other computing resource that is commonly
-of concern to programmers. Just as computers have become much faster
-over the years, they have also received greater allotments of memory.
-Even so, the amount of available disk space or main memory can be
-significant constraints for algorithm designers.</p>
-<p>The analysis techniques used to measure space requirements are
-similar to those used to measure time requirements. However, while time
-requirements are normally measured for an algorithm that manipulates a
-particular data structure, space requirements are normally determined
-for the data structure itself. The concepts of asymptotic analysis for
-growth rates on input size apply completely to measuring space
-requirements.</p>
-<section id="sec:space-complexity-of-data-structures" class="level3"
+Amortised analysis</h2>
+<p>Complexity analysis as we have seen it dictates that if an algorithm
+with that is worst case <span class="math inline">O(n)</span> is
+executed <span class="math inline">n</span> times in a row, the total
+cost will be <span class="math inline">O(n \cdot n)=O(n^2)</span>. There
+are however situations where the worst case of a single operation is
+<span class="math inline">O(n)</span>, but the total cost of <span
+class="math inline">n</span> operations is also <span
+class="math inline">O(n)</span>, or <span class="math inline">O(n
+\log(n))</span>. The reason is that while individual operations take
+<span class="math inline">O(n)</span> time, that happens rarely enough
+that the average cost of the <span class="math inline">n</span>
+operations is <span class="math inline">O(1)</span> or <span
+class="math inline">O(\log(n) respectively)</span>.</p>
+<p>Note that the average here is very different from the average case of
+algorithms like QuickSort (<a
+href="section-4.3.html#sec:sorting-2:quicksort">Section 4.3</a>). There
+is no randomness involved, and no assumptions about the input
+distribution. Average just means the the total cost of all <span
+class="math inline">n</span> operations divided by <span
+class="math inline">n</span>.</p>
+<p>It is called <em>amortised</em> because of the idea that an expensive
+operation causes a debt, which is then spread out over many subsequent
+cheap operations until the debt is paid off.</p>
+<p>The standard example for amortised analysis is dynamic arrays which
+were introduced in <a
+href="section-6.4.html#sec:sequences:dynamic-arrays">Section 6.4</a>. In
+that section we gave an informal argument why it is important to grow
+the array in the right way. If we do it by doubling the array size, we
+get <em>amortised</em> constant time for all basic operations, but if we
+do it in the wrong way we get linear time operations in the worst
+case.</p>
+<p>Dynamic arrays are such an important example for amortised analysis
+that we will devote the whole of next section to them. But before that
+we will explain the concepts and give some other examples.</p>
+<section id="sec:example-multipop-on-stacks"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Multipop on stacks</h4>
+<p>Assume that we want to add a new operation <em>multipop</em> on
+stacks, where <code>multipop(stack, k)</code> will pop the <span
+class="math inline">k</span> topmost elements off the stack. The
+operation is implemented in the straightforward way of repeating a
+standard <span class="math inline">O(1)</span> <em>pop</em> operation
+<em>k</em> times.</p>
+<p>What is the time complexity of this new operation in terms of the
+size <span class="math inline">n</span> of the stack? Since we’re
+repeating the constant-time <em>pop</em> operation <span
+class="math inline">k</span> times, we get a time complexity of <span
+class="math inline">O(k)</span>. And the worst case of this is when
+<span class="math inline">k</span> is as large as possible, that is, the
+stack size <span class="math inline">n</span>. So the worst-case
+complexity for <em>multipop</em> is linear in the stack size, <span
+class="math inline">O(n)</span>. This is quite correct, the worst case
+complexity of a single call is linear.</p>
+<p>What is the complexity of executing a large number of
+<em>multipop</em> operations in sequence? Let’s say that we start with a
+stack of size <span class="math inline">n</span>, and perform some
+sequence of <span class="math inline">n</span> <em>multipop</em>
+operations. Using our analysis above blindly, the worst case total time
+of this procedure is <span class="math inline">n \cdot O(n) =
+O(n^2)</span>. But how would that worst case look?</p>
+<p>If we try construct this worst case for say <span
+class="math inline">n=10</span> we run into problems. Recall that the
+worst case for a single call <code>multipop(stack, k)</code> assumed
+that <span class="math inline">k=n</span>, that is it removes all the
+elements of the stack. The <span class="math inline">O(n^2)</span> worst
+case implicitly assumes that we first remove all elements, then remove
+just as many more and keep removing more and more elements from an empty
+stack!</p>
+<p>We can reason like this instead: <span class="math inline">n</span>
+elements are on the stack, and each of these elements can only be popped
+once. The sum of costs for all calls to <em>multipop</em> can never
+exceed the total number of elements on the stack, which is <span
+class="math inline">n</span>. This means that the total complexity of
+our <span class="math inline">n</span> calls to <em>multipop</em> must
+be in <span class="math inline">O(n)</span>.</p>
+<p>Therefore the average worst-case complexity <em>per operation</em>
+must be <span class="math inline">O(n)/n = O(1)</span>. That is, the
+<em>amortised</em> worst-case complexity of <em>multipop</em> is
+constant, <span class="math inline">O(1)</span>.</p>
+</section>
+<p>In the <em>multipop</em> example we got two different complexities
+for the <em>multipop</em> operation: first we found that it is linear in
+the stack size, <span class="math inline">O(n)</span>, but when
+averaging over a sequence of operations we found that it is constant,
+<span class="math inline">O(1)</span>. Both these seemingly
+contradicting results are correct. The worst case complexity for a
+single call to <em>multipop</em> is linear, but the <em>amortised</em>
+complexity is constant.</p>
+<section id="sec:analysis-3:accounting-method" class="level3"
 data-number="7.1.1">
 <h3 data-number="7.1.1"><span class="header-section-number">7.1.1</span>
-Space complexity of data structures</h3>
-<p>Time complexity helps us to abstract away from hardware-specific
-details, constant factors and lower-order terms, so that we can focus on
-what has the most impact for large inputs. In the same way we want to
-abstract away from the actual memory usage in bytes, and instead focus
-on how the memory used by a data structure depends on the data size.</p>
-<section id="sec:example-arrays-and-linked-lists"
+The accounting method</h3>
+<p>In the <em>multipop</em> example we used an informal argument, but
+the underlying idea is the concept of an <em>account</em>. The basic
+idea with the <em>accounting method</em> is that whenever we perform a
+cheap operation we “pay” some extra time that we save in an account. The
+saved time can then be used to pay when we encounter an expensive
+operation. If we can show that our account will be balanced, and never
+run out of savings, then we have proved the amortised complexity of our
+operation.</p>
+<p>In other words, every time we perform a fast operation, we pretend
+that it is slower than it actually is, but only by a constant factor.
+This additional time that we (pretend to) spend is added to our account.
+Then when there is a slow operation, we can use the saved time to “pay
+for” the slow operation.</p>
+<section id="sec:example-multipop-revisited"
 class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Arrays and linked lists</h4>
-<p>What are the space requirements for an array of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-integers? If each integer requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-bytes, then the array requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">kn</annotation></semantics></math>
-bytes, which is in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
-<p>What are the space requirements for a linked list of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-integers? Each linked node requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-bytes for the integer, plus (say)
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-additional bytes for the pointer to the next node. Therefore the linked
-list requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>k</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">2kn</annotation></semantics></math>
-bytes, which is also in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<h4 class="unnumbered">Example: Multipop, revisited</h4>
+<p>The <em>multipop</em> operation is a very good example of how the
+accounting method can be applied. Assume that the basic operations
+<em>push</em> and <em>pop</em> takes 1 time unit each. But let us
+pretend that each <em>push</em> costs 2 time units instead of one. That
+is, each <em>push</em> will save one time unit in our account, and after
+pushing <span class="math inline">m</span> elements onto the stack we
+have <span class="math inline">m</span> units saved.</p>
+<p>This means we can use every <em>push</em> to pay for a <em>pop</em>.
+Since it is impossible to do more total <em>pop</em> operations than
+<em>push</em> operations, <em>pop</em> operations are always paid for by
+a <em>push</em>, and essentially free. Since <em>multipop</em> is just a
+repetition of <span class="math inline">k</span> <em>pop</em>
+operations, it is also paid for by <em>push</em>.</p>
+<p>So not only is a sequence of <span class="math inline">n</span>
+<em>multipop</em> operations <span class="math inline">O(n)</span>, but
+starting from an empty stack, any valid sequence of <span
+class="math inline">n</span> mixed <em>push</em>, <em>pop</em> and
+<em>multipop</em> operations is total <span
+class="math inline">O(n)</span>. This claim is quite brittle though: If
+we add a <em>multipush</em> operation to the mix, the claim no longer
+holds.</p>
 </section>
-<p>A data structure’s primary purpose is to store data in a way that
-allows efficient access to those data. To provide efficient access, it
-may be necessary to store additional information about where the data
-are within the data structure. For example, each node of a linked list
-must store a pointer to the next value on the list. All such information
-stored in addition to the actual data values is referred to as <a
-href="section-14.html#overhead" class="term"
-title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.
-Ideally, overhead should be kept to a minimum while allowing maximum
-access. The need to maintain a balance between these opposing goals is
-what makes the study of data structures so interesting.</p>
-<div class="online">
-<section id="sec:example-integers" class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Integers</h4>
-<p>How much memory does an integer use? This might sound like a stupid
-question – don’t we usually just assume that integers use a fixed size,
-such as 32 bits or 64 bits?</p>
-<p>Yes and no – most programming languages have fixed-size integers, and
-then their space usage is constant,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
-But fixed-size integers are actually just an approximation of integers.
-A 64-bit integer can only store values in the range
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>63</mn></msup></mrow><annotation encoding="application/x-tex">-2^{63}</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>63</mn></msup><annotation encoding="application/x-tex">2^{63}</annotation></semantics></math>,
-and although this is enough for most purposes there are cases when we
-need to calculate integers of arbitrary size. Most modern languages have
-a special datatype for arbitrary-size integers (e.g., Javascript has
-BigInt and Java has BigInteger), while languages such as Python even has
-arbitrary-size integers as the default numeric type.</p>
-<p>So, how much memory does in arbitrary-size integer use? Normally they
-need a number of bytes that is proportional to the number of bits in the
-binary representation. The space usage is therefore
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the length of the binary representation.</p>
-<p>But what is the space usage in terms of the integer itself? This
-boils down to the question how many bits are there in the binary
-representation of a number. Since you can store
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
-different integers in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-bits, we need a logarithmic number of bits to store an arbitrary
-integer. Therefore the space usage of an integer is logarithmic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-to store an integer
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
 </section>
-<p>And finally a more complex example, about friendship:</p>
-<section id="sec:example-friendship-links"
-class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Friendship links</h4>
-<p>Imagine that we want to keep track of friendships between
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-people. We can do this with a 2-dimensional array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
-(a matrix). Each row of the matrix represents the friends of an
-individual, with the columns indicating who has that individual as a
-friend. For example, if person
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-is a friend of person
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
-then we place a mark in column
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-of row
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-in the array. Likewise, we should also place a mark in column
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-of row
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-if we assume that friendship works both ways. For
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-people, the total size of the matrix is in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.</p>
-<p>But is this the best representation of friendship links? Assume that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-grows large, and we want to include every person in Sweden (which has
-around
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>M</mi></mrow><annotation encoding="application/x-tex">10M</annotation></semantics></math>
-people). Then the matrix will have around
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msup><mn>10</mn><mn>7</mn></msup><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>=</mo><msup><mn>10</mn><mn>14</mn></msup></mrow><annotation encoding="application/x-tex">(10^7)^2 = 10^{14}</annotation></semantics></math>
-cells. How many friends will an average person have? This varies of
-course, but it’s extremely unlikely that they have more than say 100
-friends. So the total number of friendship links should be at most
-around
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>M</mi><mo>×</mo><mn>100</mn><mo>=</mo><msup><mn>10</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10M\times 100 = 10^9</annotation></semantics></math>,
-which is several orders of magnitudes less than the size of the matrix.
-So is there a better representation?</p>
-<p>Instead of storing a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n\times n</annotation></semantics></math>
-matrix, we can store an array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-with pointers to lists of numbers. Now, if array cell
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-points to a list containing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
-then person
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math> is
-a friend of person
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
-How many friends does a person have, on average? Of course we cannot
-know that, but it sounds reasonable that the average number of friends
-does not depend on the size of the dataset. That it doesn’t depend on
-the size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is just another way of saying that it is bounded by some constant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
-Now, our array of friendship lists will consist of one array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-lists of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-(on average). So, the average space usage will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi><mo>⋅</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) + n\cdot O(k) = O(n) + O(n) = O(n)</annotation></semantics></math>.
-With this new representation we could reduce the space complexity from
-quadratic
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
-to linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
-</section>
-<p>This last example discussed two possible implementations of
-<em>graphs</em>, and we will discuss this further in <a
-href="section-13.html#sec:graphs">Chapter 13</a>.</p>
-</div>
-</section>
-<section id="sec:space-complexity-of-algorithms" class="level3"
+<section id="sec:analysis-3:potential-method" class="level3"
 data-number="7.1.2">
 <h3 data-number="7.1.2"><span class="header-section-number">7.1.2</span>
-Space complexity of algorithms</h3>
-<p>We are not only interested in knowing how much memory a data
-structure will use, but also what the space complexity of an
-<em>algorithm</em> is. When we analyse space usage of algorithms, we are
-usually only interested in the <em>additional</em> space that the
-algorithm uses during execution.</p>
-<p>Let’s say that an algorithm is <em>in-place</em> if it only uses
-constant additional space,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
-For example, Insertion sort is in-place, because it only allocates a
-constant number of variables to complete.</p>
-<section id="sec:example-mergesort" class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Mergesort</h4>
-<p>How much additional space does Mergesort use? Mergesort is a
-divide-and-conquer algorithm that calls itself recursively, halving the
-size of the problem in each call. The step that uses additional memory
-is the merging process, where we have to allocate a new array that we
-can fill with the merged values.</p>
-<p>In the first level we have to allocate one array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
-In the second level we allocate two arrays, each of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>.
-In the third level we allocate
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>2</mn></msup><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">2^2 = 4</annotation></semantics></math>
-arrays, each of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><msup><mn>2</mn><mn>2</mn></msup><mo>=</mo><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/2^2 = n/4</annotation></semantics></math>.
-Continuing down we see that in level
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-we allocate
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
-arrays, each of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">n/2^k</annotation></semantics></math>.</p>
-<p>As you can see, each level uses up an additional
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-space, because
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup><mo>⋅</mo><mi>n</mi><mi>/</mi><msup><mn>2</mn><mi>k</mi></msup><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2^k \cdot n/2^k = n</annotation></semantics></math>.
-And, since we already know that Mergesort continues for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
-levels, we get an additional space usage of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</p>
-<p>But it is possible to improve the space usage of Mergesort. Instead
-of allocating new arrays at each level, we can create one single
-additional array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-and then use only that auxilliary array. To make this work we have to
-change the implementation somewhat, and this can be done in several
-ways. The most common solution is called bottom-up Mergesort, and it has
-an additional space usage of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+The potential method</h3>
+<p>The accounting method is simple and intuitive to use, in particular
+if we want to prove that an operation has <em>constant</em> amortised
+complexity. If we want to prove other amortised complexities (such as
+logarithmic or linear), the <em>potential method</em> is usually better
+suited.</p>
+<p>In this method we have to define a <em>potential function</em>, <span
+class="math inline">\Phi(S)</span>, that maps the current state of our
+data structure into a numeric value. The only requirements on the
+potential function are that</p>
+<ul>
+<li>it has to be non-negative, <span class="math inline">\Phi(S) \geq
+0</span>, and</li>
+<li>the potential of the starting state must be zero, <span
+class="math inline">\Phi(S_0) = 0</span>.</li>
+</ul>
+<p>Now, the amortised cost for a single operation <span
+class="math inline">p</span> that transforms a state <span
+class="math inline">S</span> to the new state <span
+class="math inline">S&#39;</span>, is simply the actual cost of <span
+class="math inline">p</span>, plus the change in potential:</p>
+<p><span class="math display"> T_{\text{amortised}} = T_{\text{actual}}
++ \Phi(S&#39;) - \Phi(S) </span></p>
+<p>The main difficulty with the potential method is to come up with a
+good potential function. If it is too small, it will map some states to
+negative values, which breaks the requirements. If it is too big, it
+will overestimate the amortised cost, and will not show an improvement
+to the actual cost.</p>
+<section id="sec:example-incrementing-a-binary-counter"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Incrementing a binary counter</h4>
+<p>As an example of the potential method, consider the process of
+incrementing a binary counter. We want to show that this operation
+(<em>increment</em>) takes amortised constant time in the size of the
+counter. Since the counter is stored as a binary number, we say that the
+size of the counter is the number of bits it uses. The
+<em>increment</em> operation can be implemented like this:</p>
+<ul>
+<li>Iterate over the bits in the counter, starting from the lowest-order
+bit (the rightmost bit):
+<ul>
+<li>Flip each 1-bit to a 0, until the first 0-bit is encountered.</li>
+<li>Then flip this 0-bit to 1 and return.</li>
+</ul></li>
+</ul>
+<p>For example, to increment the number 175 (bitstring
+<code>10101111</code>), we flip the four rightmost 1’s to 0, and then
+the next 0-bit to 1. This results in the bitstring
+<code>10110000</code>, which is the number 176.</p>
+<p>The worst case example is when the counter consists of only 1’s, such
+as the number 255 (bitstring <code>11111111</code>). In this case the
+complexity of <em>increment</em> is linear, <span
+class="math inline">O(n)</span>, in the number of bits <span
+class="math inline">n</span>. So what is the amortised complexity of
+<em>increment</em>?</p>
+<p>Let us define the potential function as <span
+class="math inline">\Phi(c) =</span> “the number of bits equal to 1”;
+this is also known as the <em>hamming weight</em> of the counter <span
+class="math inline">c</span>. Assume that the counter ends in <span
+class="math inline">k</span> 1-bits, and we call <em>increment</em>.
+This will flip <span class="math inline">k</span> bits from 1 to 0, and
+one bit from 0 to 1. So the actual cost is <span
+class="math inline">T_{\text{actual}} = k+1</span> bit flips. At the
+same time the potential will decrease by <span
+class="math inline">k-1</span>, because <span
+class="math inline">k</span> bits we changed to 0 and one to 1.
+Therefore the amortised cost of one <em>increment</em> is:</p>
+<p><span class="math display"> T_{\text{amortised}} = T_{\text{actual}}
+- (k-1) = (k+1)-(k-1) = 2 \in O(1) </span></p>
+<p>As you can see, the calculations become very easy as long as we have
+a good potential function. The difficulty is to realise that we should
+use the hamming weight.</p>
 </section>
-<div class="online">
-<p>So, Mergesort is not an in-place algorithm because it uses at least
-linear additional space. But what about Quicksort, didn’t we say that it
-is in-place?</p>
-<section id="sec:example-quicksort" class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Quicksort</h4>
-<p>How much additional space does Quicksort use? Just as Mergesort,
-Quicksort is also a divide-and-conquer algorithm, but in this case we
-cannot be certain that it halves the problem size in each call. We have
-already showed that Quicksort is quadratic
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
-in the worst case (if we are unlucky with the pivot selection).</p>
-<p>Now, Quicksort is a recursive algorithm, and whenever we make a
-recursive call the system has to allocate some memory for storing
-information on what to do when returning from the recursion. This is
-done by pushing some memory block (of constant size) onto the <em>call
-stack</em>. But when Quicksort is unlucky and gets quadratic behaviour,
-it will use a linear number of recursion levels. Therefore the
-additional memory usage for Quicksort is linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-so it is not in-place.</p>
-<p>But let’s assume that we have a good pivot selection algorithm (and
-well-behaved input), so that we get the normal
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
-behaviour. Quicksort will still allocate memory on the call stack for
-the recursive calls, and just as Mergesort we will never get fewer than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-recursive levels. Therefore the additional memory usage for Quicksort
-will be at least logarithmic
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-in the worst case.</p>
 </section>
-<p>The Quicksort example shows that perhaps we were too strict when we
-defined what an <em>in-place</em> algorithm is. A more realistic
-definition is to say that an algorithm is in-place if it never uses more
-than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-additional space.</p>
-</div>
-</section>
-<section id="sec:space-time-tradeoff" class="level3"
+<section id="sec:when-not-to-use-amortisation" class="level3"
 data-number="7.1.3">
 <h3 data-number="7.1.3"><span class="header-section-number">7.1.3</span>
-Space/time tradeoff</h3>
-<p>One important aspect of algorithm design is referred to as the <a
-href="section-14.html#space-time-tradeoff" class="term"
-title="Many programs can be designed to either speed processing at the cost of additional storage, or reduce storage at the cost of additional processing time.">space/time
-tradeoff</a> principle. The space/time tradeoff principle says that one
-can often achieve a reduction in time if one is willing to sacrifice
-space or vice versa. Many programs can be modified to reduce storage
-requirements by “packing” or encoding information. “Unpacking” or
-decoding the information requires additional time. Thus, the resulting
-program uses less space but runs slower. Conversely, many programs can
-be modified to pre-store results or reorganise information to allow
-faster running time at the expense of greater storage requirements.
-Typically, such changes in time and space are both by a constant
-factor.</p>
-<div class="online">
-<p>A classic example of a space/time tradeoff is the <a
-href="section-14.html#lookup-table" class="term"
-title="A table of pre-calculated values, used to speed up processing time when the values are going to be viewed many times. The costs to this approach are the space required for the table and the time required to compute the table. This is an example of a space/time tradeoff.">lookup
-table</a>. A lookup table pre-stores the value of a function that would
-otherwise be computed each time it is needed. For example, 12! is the
-greatest value for the factorial function that can be stored in a 32-bit
-<code>int</code> variable. If you are writing a program that often
-computes factorials, it is likely to be much more time efficient to
-simply pre-compute and store the 12 values in a table. Whenever the
-program needs the value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
-it can simply check the lookup table. (If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">n &gt; 12</annotation></semantics></math>,
-the value is too large to store as an <code>int</code> variable anyway.)
-Compared to the time required to compute factorials, it may be well
-worth the small amount of additional space needed to store the lookup
-table.</p>
-<p>Lookup tables can also store approximations for an expensive function
-such as sine or cosine. If you compute this function only for exact
-degrees or are willing to approximate the answer with the value for the
-nearest degree, then a lookup table storing the computation for exact
-degrees can be used instead of repeatedly computing the sine function.
-Note that initially building the lookup table requires a certain amount
-of time. Your application must use the lookup table often enough to make
-this initialisation worthwhile.</p>
-<section id="sec:example-binsort" class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Binsort</h4>
-<p>Another example of the space/time tradeoff is typical of what a
-programmer might encounter when trying to optimise space. Here is a
-simple code fragment for sorting an array of integers. We assume that
-this is a special case where there are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-integers whose values are a permutation of the integers from 0 to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
-This is an example of a <a href="section-14.html#binsort" class="term"
-title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">binsort</a>.
-Binsort assigns each value to an array position corresponding to its
-value.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>newArr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    newArr[arr[i]] <span class="op">=</span> arr[i]</span></code></pre></div>
-<p>This is efficient and requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-time. However, it also requires two arrays of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-so the additional space usage is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
-<p>Next is a code fragment that places the permutation in order but does
-so within the same array (thus it is an example of an <em>in-place</em>
-sort).</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> arr[i] <span class="op">!=</span> i:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        swap(arr, i, arr[i])  <span class="co">// Swap element arr[i] with arr[arr[i]]</span></span></code></pre></div>
-<p>The function <code>swap(arr,i,j)</code> exchanges elements
-<code>i</code> and <code>j</code> in array <code>arr</code>. It may not
-be obvious that the second code fragment actually sorts the array. To
-see that this does work, notice that each pass through the
-<code>for</code> loop will at least move the integer with value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-to its correct position in the array, and that during this iteration,
-the value of <code>arr[i]</code> must be greater than or equal to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
-A total of at most
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-<code>swap</code> operations take place, because an integer cannot be
-moved out of its correct position once it has been placed there, and
-each swap operation places at least one integer in its correct position.
-Thus, this code fragment has cost
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-just as the first fragment. However, it requires more time to run than
-the first code fragment. On an ordinary computer the second version
-takes nearly twice as long to run as the first, but it only needs
-constant additional space (for the <code>i</code> variable).</p>
+When not to use amortisation</h3>
+<p>In most cases amortised complexity is what we are interested in, but
+there are some rare cases where it is not the best choice.</p>
+<p>If we are implementing a very time-critical system, where we must
+guarantee that an operation never ever takes more than (for example)
+0.001 microseconds. An amortised data structure such as a dynamic array
+can never give this guarantee, because now and then the operation might
+take too long time. In these cases we should choose data structures that
+are not amortised.</p>
 </section>
-<p>A second principle for the relationship between a program’s space and
-time requirements applies to programs that process information <a
-href="section-14.html#file-processing" class="term"
-title="The domain with computer science that deals with processing data stored on a disk drive (in a file), or more broadly, dealing with data stored on any peripheral storage device. Two fundamental properties make dealing with data on a peripheral device different from dealing with data in main memory: (1) Reading/writing data on a peripheral storage device is far slower than reading/writing data to main memory (for example, a typical disk drive is about a million times slower than RAM). (2) All I/O to a peripheral device is typically in terms of a block of data (for example, nearly all disk drives do all I/O in terms of blocks of 512 bytes).">stored
-on disk</a>. Strangely enough, the disk-based space/time tradeoff
-principle is almost the reverse of the space/time tradeoff principle for
-programs using main memory.</p>
-<p>The <a href="section-14.html#disk-based-space-time-tradeoff"
-class="term"
-title="In contrast to the standard space/time tradeoff, this principle states that the smaller you can make your disk storage requirements, the faster your program will run. This is because the time to read information from disk is enormous compared to computation time, so almost any amount of additional computation needed to unpack the data is going to be less than the disk-reading time saved by reducing the storage requirements.">disk-based
-space/time tradeoff</a> principle states that the smaller you can make
-your disk storage requirements, the faster your program will run. This
-is because the time to read information from disk is enormous compared
-to computation time, so almost any amount of additional computation
-needed to unpack the data is going to be less than the disk-reading time
-saved by reducing the storage requirements. Naturally this principle
-does not hold true in all cases, but it is good to keep in mind when
-designing programs that process information stored on disk.</p>
-</div>
+<section id="sec:analysis-3:different-average-analysis" class="level3"
+data-number="7.1.4">
+<h3 data-number="7.1.4"><span class="header-section-number">7.1.4</span>
+Different types of average analysis</h3>
+<p>In <a
+href="section-3.5.html#sec:analysis-1:complexity-cases">Section 3.5</a>
+we discussed <em>average-case</em> complexity, and in this section we
+discussed <em>amortised</em> complexity. The two notions are quite
+different, but have one thing in common: they try to reason about how an
+algorithm behaves <em>on average</em>. There is also a third kind of
+asymptotic complexity that does some kind of averaging,
+<em>expected</em> complexity.</p>
+<p>These three concepts are different from each other, because they
+average over different things. If we want to analyse the complexity of
+an operation, this is what the three types average over:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Type of complexity</th>
+<th style="text-align: left;">Average over…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Average-case complexity</td>
+<td style="text-align: left;">…all possible inputs to the operation</td>
+</tr>
+<tr>
+<td style="text-align: left;">Amortised complexity</td>
+<td style="text-align: left;">…a sequence of calls to the operation</td>
+</tr>
+<tr>
+<td style="text-align: left;">Expected complexity</td>
+<td style="text-align: left;">…random choices made by the operation</td>
+</tr>
+</tbody>
+</table>
+<p> All three types are orthogonal to each other, which means that we
+can talk about “amortised average-case complexity” or “expected
+amortised complexity”, or even “expected amortised average-case
+complexity”. (And we can add “asymptotic” too: “asymptotic expected
+amortised average-case complexity”…)</p>
+<dl>
+<dt>Average-case complexity</dt>
+<dd>
+can be used when an algorithm behaves well for most “well-behaved”
+input, but there are some few extreme inputs that make the algorithm
+behave bad. The typical example is Quicksort, which has quadratic
+worst-case complexity, but usually behaves linearithmic (unless there is
+some evil hacker that contaminates the input). The main difficulty with
+average-case complexity is to decide what is the average case.
+</dd>
+<dt>Amortised complexity</dt>
+<dd>
+is used for operations that are supposed to be used many times on the
+same data structure, such as changing, adding or deleting elements. If
+the operation most of the time behaves well, but more expensive
+operations occur in a predictable and limited extent, we can use
+amortisation to determine the total complexity for executing a sequence
+of operations. The prototypical case is dynamic arrays. Note that there
+is no randomness involved for amortised operations, there is no risk of
+repeatedly encountering expensive operations due to bad luck or
+contaminated data.
+</dd>
+<dt>Expected complexity</dt>
+<dd>
+is used when the algorithm itself uses randomisation, as opposed to the
+input values being randomly distributed. One example is again from
+Quicksort, but this time about the pivot being randomly selected by the
+algorithm itself: Using a random pivot we get <em>expected</em>
+linearithmic complexity. This is slightly different from average-case,
+in that the randomness is controlled by the algorithm, so a bad outcome
+cannot be provoked repeatedly by external factors.
+</dd>
+</dl>
 </section>
 </section>
 </main>
@@ -479,10 +418,10 @@ designing programs that process information stored on disk.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3: Advanced theory</a>
+<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3</a>
 </div>
 <div class="navlink">
-<a href="section-7.2.html" accesskey="n" rel="next">Amortised analysis</a>
+<a href="section-7.2.html" accesskey="n" rel="next">Case study: Analysing dynamic arrays</a>
 <a href="section-7.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -490,5 +429,6 @@ designing programs that process information stored on disk.</p>
 
 </body>
 </html>
+
 
 

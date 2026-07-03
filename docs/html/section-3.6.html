@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Insertion sort</title>
+  <title>DSABook – Asymptotic analysis in practice</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/InsertionSort.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,259 +100,352 @@
 <nav class="sitenav">
 <div>
 <a href="section-3.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-3.5.html" accesskey="p" rel="previous">Selection sort</a>
+<a href="section-3.5.html" accesskey="p" rel="previous">Best, worst, and average cases</a>
 </div>
 <div>
-<a href="section-3.7.html" accesskey="n" rel="next">Summary analysis of basic sorting algorithms</a>
+<a href="section-3.7.html" accesskey="n" rel="next">Examples of algorithm analysis*</a>
 <a href="section-3.7.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:insertion-sort" class="level2" data-number="3.6">
+<section id="sec:analysis-1:simplification-rules" class="level2"
+data-number="3.6">
 <h2 data-number="3.6"><span class="header-section-number">3.6</span>
-Insertion sort</h2>
-<p>Consider again the problem of sorting a pile of books. Another
-intuitive approach might be to pick up the two topmost books in the pile
-and put them in order in the bookshelf. Then you take another book from
-the pile and put it in the bookshelf, in the correct position with
-respect to the first two, and so on. As you take each book, you would
-add it in the bookshelf in the correct position to always keep the shelf
-sorted. This simple approach is the inspiration for our third sorting
-algorithm, called <a href="section-14.html#insertion-sort" class="term"
-title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
-sort</a>.</p>
-<p>Just as for Selection sort, the description above is not in-place.
-But just as for Selection sort, it’s relatively easy to turn it into an
-in-place algorithm, by remembering an invisible separator between the
-sorted books (on the left) and the still-unsorted books (on the
-right).</p>
-<p>Insertion sort iterates through a list of elements. For each
-iteration, the current element is inserted in turn at the correct
-position within a sorted list composed of those elements already
-processed. Here is an implementation.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(arr):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span> .. n<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> arr[j] <span class="op">&lt;</span> arr[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            swap(arr, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
-<p>The input is an array named <code>arr</code> that stores
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements.</p>
-<section id="sec:insertion-sort-visualisation"
-class="level4 unnumbered online">
-<h4 class="unnumbered">Insertion sort visualisation</h4>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here we see the first few iterations of Insertion sort.</p>
-</summary>
-
-<div id="insertionsortCON" class="ssAV" data-short-name="insertionsortCON" data-long-name="Insertion Sort Slideshow" alt="Insertion Sort Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Sorting/insertionsortCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("insertionsortCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#insertionsortCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>This continues on with each element in turn. Call the current element
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
-Insertion sort will move it to the left so long as it is smaller than
-element immediately preceding it. As an element is less than or equal to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
-is encountered, <code>insertionSort</code> is done with that element
-because all elements to its left in the array must be smaller.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>The following visualisation shows the complete Insertion sort. You
-can input your own data if you like.</p>
-</summary>
-
-<div id="insertionsortAV" class="embedContainer">
-<iframe id="insertionsortAV_iframe" aria-label="insertionsortAV" src="../interactive/Sorting/insertionsortAV.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Now try for yourself to see if you understand how Insertion sort
-works.</p>
-</summary>
-
-<div id="InssortPRO" class="embedContainer">
-<iframe id="InssortPRO_iframe" aria-label="InssortPRO" src="../interactive/Sorting/InssortPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-</section>
-<section id="sec:insertion-sort-analysis" class="level3"
-data-number="3.6.1">
-<h3 data-number="3.6.1"><span class="header-section-number">3.6.1</span>
-Insertion sort analysis</h3>
-<p>Just as for the previous sorting algorithms, we have a nested for
-loop, where the inner loop depends on the loop variable of the outer
-loop.</p>
+Asymptotic analysis in practice</h2>
+<p>We have not yet shown a formal definition of big-<span
+class="math inline">O</span>, and there will not be one in this chapter.
+The reason for this is that the formal definition is much easier to
+digest after seeing the practical use of it. For now, we think of
+big-<span class="math inline">O</span> as dividing algorithms into
+complexity classes. If doubling the size of the input to an algorithm
+doubles the runtime (with some rounding applied), then that algorithm is
+<span class="math inline">O(n)</span>.</p>
+<p>There are many advantages with the big-<span
+class="math inline">O</span> notation. It allows us to analyse complex
+algorithms easily and to get a grasp of how efficient they are on very
+big inputs. By “easily” we mean that there are some rules of thumb that
+covers almost all practical cases – you almost never need to resort to
+the formal definitions of asymptotic analysis.</p>
+<p>We have only seen a few examples of complexity classes so far,
+notably <span class="math inline">O(1)</span>, <span
+class="math inline">O(\log(n))</span>, <span
+class="math inline">O(n)</span>, and <span
+class="math inline">O(n^2)</span>. There are however infinitely many
+complexity classes. Any distinct exponent of <span
+class="math inline">n</span> is a separate class, cubic complexity,
+O(<span class="math inline">n^3</span>), is different from quadratic,
+<span class="math inline">O(n^2)</span> and both are different from
+<span class="math inline">O(n^{2.5})</span>. We can also combine
+complexity classes by multiplying them, and get things like <span
+class="math inline">O(n^2 \log(n))</span></p>
+<p>This does not mean every expression is a separate complexity class.
+Notably, something like <span class="math inline">O(3n)</span> is not a
+separate class from <span class="math inline">O(n)</span>. Writing <span
+class="math inline">O(3n)</span> is not mathematically incorrect, but if
+you ever find yourself describing the runtime of an algorithm to be
+<span class="math inline">O(3n)</span>, you are doing something wrong.
+Essentially, <span class="math inline">O(n)</span> is the canonical form
+of <span class="math inline">O(3n)</span>. The simplification rule is
+that <span class="math inline">O(kx)=O(x)</span> for any constant <span
+class="math inline">k</span>, so things like <span
+class="math inline">4n^2</span> can be simplified the same way. This
+follows directly from the intuition that big-<span
+class="math inline">O</span> captures growth rate.</p>
+<p>Perhaps more surprisingly, <span class="math inline">O(n +
+\log(n))</span> is also the same as <span
+class="math inline">O(n)</span>. This makes more sense when you consider
+that <span class="math inline">n + \log(n)&lt;2n</span> for large <span
+class="math inline">n</span>, and that <span
+class="math inline">O(2n)=O(n)</span>. The general simplification rule
+is that for addition, only the <em>dominant term</em> is relevant.
+Intuitively: for two expressions <span class="math inline">x</span> and
+<span class="math inline">y</span>, <span
+class="math inline">O(x+y)=O(\max(x,y))</span>. This is slightly
+oversimplified, since for concrete examples like <span
+class="math inline">O(10n+n^2)</span>, the maximum depends on the value
+of <span class="math inline">n</span>. We will return to a formal
+definition, but for now we are satisfied that the <span
+class="math inline">n^2</span> term is dominant for large <span
+class="math inline">n</span>. Here are two interesting observations from
+these simplification rules:</p>
 <ul>
-<li>The outer loop is iterated
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-times in total.</li>
-<li>The inner loop is harder to analyse since it depends on how many
-elements in positions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0,\ldots,i-1</annotation></semantics></math>
-are smaller than the element in position
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
-<ul>
-<li>in the absolute worst case, we always have to move the element to
-the front of the list, so the number of comparisons will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math></li>
-<li>in the best case, the element is already in place, and then we only
-need one comparison</li>
-</ul></li>
+<li>Any polynomial with degree <span class="math inline">k</span> with
+positive coefficients, <span class="math inline">O(a_k n^k + a_{k-1}
+n^{k-1} + \dots + a_1 n + a_0)</span>, is simplified to <span
+class="math inline">O(n^k)</span>. The coefficients are removed because
+they are constant factors, and we only keep the dominant term.</li>
+<li>A fully simplified <span class="math inline">O</span>-expression for
+an algorithm with a single size parameter <span
+class="math inline">n</span> will never be an addition.</li>
 </ul>
-<p>Therefore, the worst case complexity of Insertion sort is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mn>0</mn><mi>n</mi></msubsup><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum_0^n i</annotation></semantics></math>,
-which is quadratic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
-In the best case – when the list is already sorted – the complexity is
-instead linear,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-because we only have to do one comparison per iteration.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is an explanation of the worst case cost of Insertion sort.</p>
-</summary>
+<p>These simplification rules are supremely useful, because they
+correspond directly to programming language operations. Performing
+operations in sequence corresponds to addition, and loops correspond to
+multiplication:</p>
+<ul>
+<li>If a program performs an <span class="math inline">O(n)</span>
+operation, an <span class="math inline">O(n^2)</span> operation and
+another <span class="math inline">O(n)</span> operation in sequence, the
+total runtime is the sum <span class="math inline">O(n+n^2+n)</span>,
+which simplifies to <span class="math inline">O(n^2)</span>.</li>
+<li>If a loop runs <span class="math inline">O(n)</span> times, and each
+iteration does first a <span class="math inline">\log(n)</span>
+operation then a <span class="math inline">O(1)</span> operation, the
+total runtime is <span class="math inline">O(n \times
+(\log(n)+1))</span>, which simplifies (with a tiny bit of algebra) to
+<span class="math inline">O(n \log(n))</span>.</li>
+</ul>
+<section id="sec:analysis-1:complexity-classes"
+class="level4 unnumbered">
+<h4 class="unnumbered">Complexity classes</h4>
+<p>We can use the upper bound to define an ordering between complexity
+classes, which makes finding the dominant term easier. There are
+infinitely many complexity classes, but here are a few common ones:</p>
+<p><span class="math display"> O(1) &lt; O(\log(n)) &lt; O(n) &lt; O(n
+\log(n)) &lt; O(n^2) &lt; O(2^n) </span></p>
+<p>Note that we have excluded many many classes, for example <span
+class="math inline">O(\log(n)^2)</span>, <span
+class="math inline">O(n^2\log(n))</span> and <span
+class="math inline">O(\sqrt{n})</span>. Try to figure out where in the
+hierarchy they should be placed.</p>
+</section>
+<section id="sec:analysis-1:analysing-code-fragments"
+class="level4 unnumbered">
+<h4 class="unnumbered">Analysing code fragments</h4>
+<p>Looking at a piece of code, and immediately determining its
+complexity class is a very useful skill for any programmer. It gives a
+good idea of the scalability of the code, and which parts it is useful
+to optimise. If a function performs an <span
+class="math inline">O(2^n)</span> operation and an <span
+class="math inline">O(n\log(n))</span> operation, spending any time
+optimising the latter is a complete waste of time. The <span
+class="math inline">O(n\log(n))</span> operation will be a fraction of a
+percent of the total runtime, and making it faster will not have any
+noticeable impact.</p>
+<p>When we want to analyse the complexity of code fragments, the
+following three rules of thumb will get us very far:</p>
 
-<div id="InsertionSortWorstCaseCON" class="ssAV" data-short-name="InsertionSortWorstCaseCON" data-long-name="Insertion Sort Worst Case Slideshow" alt="Insertion Sort Worst Case Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortWorstCaseCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("InsertionSortWorstCaseCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortWorstCaseCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>And here is an explanation of the cost of the best case.</p>
-</summary>
-
-<div id="InsertionSortBestCaseCON" class="ssAV" data-short-name="InsertionSortBestCaseCON" data-long-name="Insertion Sort Best Case Slideshow" alt="Insertion Sort Best Case Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortBestCaseCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("InsertionSortBestCaseCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortBestCaseCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>And here is the average case cost.</p>
-</summary>
-
-<div id="InsertionSortAverageCaseCON" class="ssAV" data-short-name="InsertionSortAverageCaseCON" data-long-name="Insertion Sort Average Case Slideshow" alt="Insertion Sort Average Case Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("InsertionSortAverageCaseCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortAverageCaseCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>While the best case is significantly faster than the average and
-worst cases, the average and worst cases are usually more reliable
-indicators of the “typical” running time. However, there are situations
-where we can expect the input to be in sorted or nearly sorted order.
-One example is when an already sorted list is slightly disordered by a
-small number of additions to the list; restoring sorted order using
-Insertion sort might be a good idea if we know that the disordering is
-slight. And even when the input is not perfectly sorted, Insertion
-sort’s cost goes up in proportion to the number of inversions. So a
-“nearly sorted” list will always be cheap to sort with Insertion sort.
-An example of an algorithm that take advantage of Insertion sort’s
-near-best-case running time is <a href="section-14.html#shellsort"
-class="term"
-title="A sort that relies on the best-case cost of Insertion sort to improve over $O(n^2)$ worst case cost.">Shellsort</a>.</p>
-<p>Counting comparisons or swaps yields similar results. Each time
-through the inner <code>for</code> loop yields both a comparison and a
-swap, except the last (i.e., the comparison that fails the inner
-<code>for</code> loop’s test), which has no swap. Thus, the number of
-swaps for the entire sort operation is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-less than the number of comparisons. This is 0 in the best case, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
-in the average and worst cases.</p>
-<p>Later we will see algorithms whose growth rate is much better than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
-Thus for larger arrays, Insertion sort will not be so good a performer
-as other algorithms. So Insertion sort is not the best sorting algorithm
-to use in most situations. But there are special situations where it is
-ideal. We already know that Insertion sort works great when the input is
-sorted or nearly so. Another good time to use Insertion sort is when the
-array is very small, since Insertion sort is so simple. The algorithms
-that have better asymptotic growth rates tend to be more complicated,
-which leads to larger constant factors in their running time. That means
-they typically need fewer comparisons for larger arrays, but they cost
-more per comparison. This observation might not seem that helpful, since
-even an algorithm with high cost per comparison will be fast on small
-input sizes. But there are times when we might need to do many, many
-sorts on very small arrays. You should spend some time right now trying
-to think of a situation where you will need to sort many small arrays.
-Actually, it happens a lot.</p>
+<ul>
+<li><p>An <strong>atomic operation</strong> is always <span
+class="math inline">O(1)</span>.</p></li>
+<li><p>A <strong>sequence</strong>, <span class="math inline">\langle
+p_1;p_2;p_3\rangle</span>, has the complexity <span
+class="math inline">O(\max(f_1,f_2,f_3))</span>, where <span
+class="math inline">O(f_i)</span> is the complexity of <span
+class="math inline">p_i</span>.</p></li>
+<li><p>An <strong>iteration</strong>, <span
+class="math inline">\langle\text{for } x \in A: p\rangle</span>, has the
+complexity <span class="math inline">O(n\cdot f)</span>, where <span
+class="math inline">n</span> is the size of <span
+class="math inline">A</span> and <span class="math inline">O(f)</span>
+is the complexity of the loop body <span
+class="math inline">p</span>.</p></li>
+</ul>
+<p>It is important to remember to simplify the resulting expression, and
+never write things like <span class="math inline">O(2n+1)</span> (which
+is <span class="math inline">O(n)</span>).</p>
+</section>
+<section id="sec:atomic-operations" class="level4 unnumbered">
+<h4 class="unnumbered">Atomic operations</h4>
+<p>Atomic operations are things like assigning a variable, looking up
+the value of an array index, or printing something. Not all atomic
+operations take the same time to execute, but we can assume that they do
+not depend on the input size of the algorithm, making them <span
+class="math inline">O(1)</span>. If you are unsure if something is an
+atomic operation, just ask yourself “would this take longer time for a
+larger input to the algorithm?”.</p>
+</section>
+<section id="sec:function-calls" class="level4 unnumbered">
+<h4 class="unnumbered">Function calls</h4>
+<p>The complexity of performing a function call like
+<code>insertionSort(arr)</code> is just the complexity of the called
+function, in the case of Insertion sort it would be <span
+class="math inline">O(n^2)</span> where <span
+class="math inline">n</span> is the size of <code>arr</code>.</p>
+<p>A tricky case would be if the function parameter is not the input of
+the algorithm we analyse. If somewhere inside an algorithm we do
+<code>insertionSort([a,b,c])</code> (sorting three values), that call is
+not <span class="math inline">O(n^2)</span>, it is <span
+class="math inline">O(3^2)</span>, which simplifies to <span
+class="math inline">O(1)</span>.</p>
+</section>
+<section id="sec:if-statements" class="level4 unnumbered">
+<h4 class="unnumbered">If-statements</h4>
+<p>The cost of an <code>if</code>-statement is in the worst case the
+greater of the costs for the <code>then</code> and <code>else</code>
+branches, so we can treat <code>if</code>-statements just as sequences.
+We just have to remember that we also have to look at the boolean test
+itself – it might call a function that takes some time to run, and then
+we have to include that too.</p>
+<p>For example, AVL trees (<a
+href="section-10.3.html#sec:search-trees:AVL-trees">Section 10.3</a>)
+can be used to store sets of elements, and to search in an AVL tree is
+logarithmic in the number of elements, <span
+class="math inline">O(\log(n))</span>. If we have an
+<code>if</code>-statement where we test if an AVL tree contains a
+certain element, then the test itself is logarithmic and we must not
+forget that.</p>
+<p>Note that this rule of thumb does not always apply. Consider this
+silly example, assuming <code>veryExpensiveOperation</code> takes <span
+class="math inline">O(2^n)</span> time:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="dv">1</span><span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    veryExpensiveOperation()</span></code></pre></div>
+<p>Clearly, this is constant time, not exponential, since the condition
+is always false. Ultimately, this comes down to having a good
+understanding of what the worst case is. Consider this example, that
+runs an expensive operation for all prime numbers between <span
+class="math inline">0</span> and <span class="math inline">n</span>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> isPrime(i):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        expensiveOperation()</span></code></pre></div>
+<p>The worst case is that all numbers are prime numbers, but that is not
+how prime number works. This particular example would require serious
+mathematics to give a good estimate of how often the
+<code>if</code>-statement can be true for a given <span
+class="math inline">n</span>.</p>
+</section>
+<section id="sec:for-each-loops" class="level4 unnumbered">
+<h4 class="unnumbered">For-each-loops</h4>
+<p>What if we perform some operation <span class="math inline">p</span>
+for each element in an array <span class="math inline">A</span>, what is
+the complexity? It depends on the size of the array, and the complexity
+of <span class="math inline">p</span>. Note that <span
+class="math inline">p</span> can be a complex operation, for example a
+loop itself. Consider this code snippet:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">each</span> a <span class="kw">in</span> arr:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> b <span class="kw">in</span> arr:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">+=</span> a<span class="op">*</span>b</span></code></pre></div>
+<p>The statement <code>sum+=a*b</code> performs a multiplication, an
+addition and a variable assignment, all of which are atomic operations,
+so the statement is <span class="math inline">O(1)</span>. If
+<code>arr</code> has <span class="math inline">n</span> elements, the
+inner loop does <span class="math inline">O(n)</span> iterations for
+each iteration of the outer loop, which in turn does <span
+class="math inline">O(n)</span> iterations. That makes the whole runtime
+<span class="math inline">O(n \cdot n \cdot 1)</span>, which simplifies
+to <span class="math inline">O(n^2)</span>.</p>
+<p><em>Don’t be fooled by loops</em>! Not all loops runs <span
+class="math inline">n</span> iterations, for example our array
+<code>arr</code> could very well consist of <span
+class="math inline">n^2</span> elements, or not depend on <span
+class="math inline">n</span> at all. If <code>arr</code> had <span
+class="math inline">n^2</span> elements, then the complexity is of the
+example would be <span class="math inline">n^2 \cdot n^2 \cdot 1</span>,
+which simplifies to <span class="math inline">O(n^4)</span>.</p>
+</section>
+<section id="sec:while-loops" class="level4 unnumbered">
+<h4 class="unnumbered">While-loops</h4>
+<p>Other kinds of loops, such as <code>while</code>-loops, are treated
+in a similar way. We calculate how many times the loop will iterate and
+then multiply with the complexity of the loop body. But it can be more
+or less difficult to know how many times it will iterate: we have to
+look at the variables that are referred by the loop condition and then
+analyse how these variables change in each iteration.</p>
+<p>For example, the pseudocode for Insertion sort (<a
+href="section-2.6.html#sec:sorting-1:insertion-sort">Section 2.6</a>)
+contains a <code>while</code>-loop which says that <span
+class="math inline">j\geq 0</span>. So to know how many times the loop
+will iterate, we have to know how <span class="math inline">j</span> is
+initialised and how it changes in each iteration. The starting value is
+<span class="math inline">j=i</span>, and it is decreased by 1 in each
+iteration. So the <code>while</code>-loop will iterate <span
+class="math inline">i</span> times in the worst case.</p>
+<p>Just like <code>if</code>-statements, <code>while</code>-loops are
+often very simple to analyse but sometimes quite devious. In general,
+even determining if a <code>while</code>-loop terminates can be a
+genuinely hard problem to solve.</p>
+</section>
+<section id="sec:a-general-approach" class="level4 unnumbered">
+<h4 class="unnumbered">A general approach</h4>
+<p>There is a completely foolproof method of determining complexity of
+any piece of code: Look at each line of code and answer:</p>
+<ul>
+<li>How many times is the line executed (if it is inside a loop)?</li>
+<li>What is the (average) complexity of running it?</li>
+</ul>
+<p>Then, just multiply the two numbers for each line, sum up the
+expressions for all lines of code, and simplify. I practice, the last
+step just means circling the line that has the worst complexity. Of
+course, the caveat of this method is that sometimes one or both of the
+questions above are non-trivial to answer. Still, for very many
+programs, this method works beautifully.</p>
+<p>Look at this example code snippet, taking an array of size <span
+class="math inline">n</span>, and doing something. To determine the
+complexity, we do not even need to understand what the function does,
+every piece of executable code has a complexity, even code that does not
+work. In the example, we have annotated each line of code with a comment
+on the form: <em>number of executions · complexity = total
+time</em>.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hasDouble(arr):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="va">false</span>                   <span class="co">// O(1) · O(1) = O(1)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> x <span class="kw">in</span> A:                 <span class="co">// runs O(n) iterations</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        double <span class="op">=</span> x<span class="op">*</span><span class="dv">2</span>                     <span class="co">// O(n) · O(1) = O(n)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> linearSearch(A, double):      <span class="co">// O(n) · O(n) = O(n^2)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> <span class="va">true</span>                <span class="co">// O(n) · O(1) = O(n)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result                    <span class="co">// O(1) · O(1) = O(1)</span></span></code></pre></div>
+<p>The only remaining work is looking at all the comments and seeing
+that <span class="math inline">O(n^2)</span> is the dominant term. The
+function is <span class="math inline">O(n^2)</span>. There are some
+potential pitfalls here.</p>
+<ul>
+<li><p>The comments assume that <code>linearSearch</code> is <span
+class="math inline">O(n)</span>, which seems reasonable. But if the line
+<code>double=x*2</code> is changed to <code>double=arr[0]</code>, that
+makes <code>linearSearch</code> <span class="math inline">O(1)</span> in
+this context, and the whole function would be <span
+class="math inline">O(n)</span>.</p></li>
+<li><p>The statement <code>result=true</code> only runs <span
+class="math inline">O(n)</span> times if we assume that the Linear
+search can return true often enough. Determining if this is possible
+would require a more careful analysis, where we actually construct a
+worst case. Luckily, that does not matter since the function will be
+<span class="math inline">O(n^2)</span> even if the search always
+returns false. See if you can come up with a case where the search
+succeeds <span class="math inline">O(n)</span> times (hint: it does not
+have to be true all the time, being true <span
+class="math inline">n-1</span> or <span class="math inline">n/2</span>
+is still <span class="math inline">O(n)</span>).</p></li>
+</ul>
+</section>
+<section id="sec:binary-search-again" class="level4 unnumbered">
+<h4 class="unnumbered">Binary search, again</h4>
+<p>Let us return to the example of binary search, but pretend we don’t
+know anything about search intervals to see if the code analysis method
+works. To spice things up, this is a different and slightly obfuscated
+implementation of the algorithm.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>binarySearch(arr, key):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> arr.<span class="bu">size</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        mid <span class="op">=</span> start <span class="op">+</span> <span class="bu">size</span><span class="op">/</span><span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[mid] <span class="op">==</span> key:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> mid</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[mid] <span class="op">&lt;</span> key:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> mid<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span><span class="op">-</span><span class="dv">1</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">/</span> <span class="dv">2</span>       <span class="co">// happens at most log(n) times</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">null</span></span></code></pre></div>
+<p>Every individual operation is atomic, so the only question is how
+many time the loop runs. Ignoring <code>size=size-1</code> (which we can
+do if we assume the condition is always false), this is a clean example
+of a loop that starts with <code>size</code> = <span
+class="math inline">n</span>, then cuts <code>size</code> in half (using
+integer division) until it reaches 0. All such loops run <span
+class="math inline">O(\log(n))</span> iterations, so every individual
+line inside the loop has a total runtime of <span
+class="math inline">O(\log(n))</span>, which is thus the runtime of the
+whole function.</p>
+<p>Try applying a few algorithms earlier in the book, or to some code
+you have written before, and see if you can determine the complexity
+correctly.</p>
 </section>
 </section>
 </main>
@@ -342,10 +454,10 @@ Actually, it happens a lot.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-3.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-3.5.html" accesskey="p" rel="previous">Selection sort</a>
+<a href="section-3.5.html" accesskey="p" rel="previous">Best, worst, and average cases</a>
 </div>
 <div class="navlink">
-<a href="section-3.7.html" accesskey="n" rel="next">Summary analysis of basic sorting algorithms</a>
+<a href="section-3.7.html" accesskey="n" rel="next">Examples of algorithm analysis*</a>
 <a href="section-3.7.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -353,5 +465,6 @@ Actually, it happens a lot.</p>
 
 </body>
 </html>
+
 
 

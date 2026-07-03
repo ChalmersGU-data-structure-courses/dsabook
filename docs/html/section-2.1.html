@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Problems, algorithms, and programs</title>
+  <title>DSABook – Terminology and notation</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/ProblemAlgorithmCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,213 +100,112 @@
 <nav class="sitenav">
 <div>
 <a href="section-2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-2.html" accesskey="p" rel="previous">Algorithm analysis, part 1: Introduction</a>
+<a href="section-2.html" accesskey="p" rel="previous">Sorting, part 1</a>
 </div>
 <div>
-<a href="section-2.2.html" accesskey="n" rel="next">Invariants, preconditions, and postconditions</a>
+<a href="section-2.2.html" accesskey="n" rel="next">Comparing values</a>
 <a href="section-2.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:problems-algorithms-and-programs" class="level2"
+<section id="sec:sorting-1:terminology" class="level2"
 data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span>
-Problems, algorithms, and programs</h2>
-<p>Programmers commonly deal with <em>problems</em>,
-<em>algorithms</em>, and computer <em>programs</em>. These are three
-distinct concepts.</p>
-<section id="sec:problems" class="level3" data-number="2.1.1">
+Terminology and notation</h2>
+<p>Formally, the <em>sorting problem</em> is to arrange a list of
+elements <span class="math inline">a_1,a_2,\ldots,a_n</span> into any
+order <span class="math inline">s</span> such that <span
+class="math inline">a_{s_1}\leq a_{s_2}\leq\cdots\leq a_{s_n}</span>. In
+other words, the sorting problem is to arrange a set of elements so that
+they are in non-decreasing order.</p>
+<section id="sec:comparing-algorithms" class="level3"
+data-number="2.1.1">
 <h3 data-number="2.1.1"><span class="header-section-number">2.1.1</span>
-Problems</h3>
-<p>As your intuition would suggest, a <a href="section-14.html#problem"
-class="term"
-title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
-is a task to be performed. It is best thought of in terms of inputs and
-matching outputs. A problem definition should not include any
-constraints on <em>how</em> the problem is to be solved. The solution
-method should be developed only after the problem is precisely defined
-and thoroughly understood. However, a problem definition should include
-constraints on the resources that may be consumed by any acceptable
-solution. For any problem to be solved by a computer, there are always
-such constraints, whether stated or implied. For example, any computer
-program may use only the main memory and disk space available, and it
-must run in a “reasonable” amount of time.</p>
-<p>Problems can be viewed as functions in the mathematical sense. A <a
-href="section-14.html#function" class="term"
-title="In mathematics, a matching between inputs (the domain) and outputs (the range). In programming, a subroutine that takes input parameters and uses them to compute and return a value. In this case, it is usually considered bad practice for a function to change any global variables (doing so is called a side effect).">function</a>
-is a matching between inputs (the <a href="section-14.html#domain"
-class="term"
-title="The set of possible inputs to a function.">domain</a>) and
-outputs (the <a href="section-14.html#range" class="term"
-title="The set of possible outputs for a function.">range</a>). An input
-to a function might be a single value or a collection of information.
-The values making up an input are called the <a
-href="section-14.html#parameter" class="term"
-title="The values making up an input to a function.">parameters</a> of
-the function. A specific selection of values for the parameters is
-called an <a href="section-14.html#problem-instance" class="term"
-title="A specific selection of values for the parameters to a problem. In other words, a specific set of inputs to a problem. A given problem instance has a size under some cost model.">instance</a>
-of the problem. For example, the input parameter to a sorting function
-might be an array of integers. A particular array of integers, with a
-given size and specific values for each position in the array, would be
-an instance of the sorting problem. Different instances might generate
-the same output. However, any problem instance must always result in the
-same output every time the function is computed using that particular
-input.</p>
-<p>This concept of all problems behaving like mathematical functions
-might not match your intuition for the behaviour of computer programs.
-You might know of programs to which you can give the same input value on
-two separate occasions, and two different outputs will result. For
-example, if you type <code>date</code> to a typical Linux command line
-prompt, you will get the current date. Naturally the date will be
-different on different days, even though the same command is given.
-However, there is obviously more to the input for the date program than
-the command that you type to run the program. The date program computes
-a function. In other words, on any particular day there can only be a
-single answer returned by a properly running date program on a
-completely specified input. For all computer programs, the output is
-completely determined by the program’s full set of inputs. Even a
-“random number generator” is completely determined by its inputs
-(although some random number generating systems appear to get around
-this by accepting a random input from a physical process beyond the
-user’s control). The limits to what functions can be implemented by
-programs is part of the domain of <a
-href="section-14.html#computability" class="term"
-title="A branch of computer science that deals with the theory of solving problems through computation. More specificially, it deals with the limits to what problems (functions) are computable. An example of a famous problem that cannot in principle be solved by a computer is the halting problem.">Computability</a>.</p>
+Comparing algorithms</h3>
+<p>When comparing two sorting algorithms, the simplest approach would be
+to program both and measure their running times. This is an example of
+<em>empirical comparison</em>. However, doing fair empirical comparisons
+can be tricky because the running time for many sorting algorithms
+depends on specifics of the input values. The number of records, the
+size of the keys and the records, the allowable range of the key values,
+and the amount by which the input records are “out of order” can all
+greatly affect the relative running times for sorting algorithms.</p>
+<p>When analysing sorting algorithms, it is traditional to measure the
+cost by <em>counting the number of comparisons</em> made between keys.
+This measure is usually closely related to the actual running time for
+the algorithm and has the advantage of being machine and data-type
+independent. However, in some cases records might be so large that their
+physical movement might take a significant fraction of the total running
+time. If so, it might be appropriate to measure the cost by counting
+<em>the number of swap operations</em> performed by the algorithm.</p>
+<p>In most applications we can assume that all records and keys are of
+fixed length, and that a single comparison or a single swap operation
+requires a constant amount of time regardless of which keys are
+involved. However, some special situations “change the rules” for
+comparing sorting algorithms. For example, an application with records
+or keys having widely varying length (such as sorting a sequence of
+variable length strings) cannot expect all comparisons to cost roughly
+the same. Not only do such situations require special measures for
+analysis, they also will usually benefit from special-purpose sorting
+techniques.</p>
+<p>When analysing sorting algorithms we are most of the time interested
+in how they perform on very large arrays. But we can also have
+applications that require that a small number of records be sorted, but
+that the sort be performed frequently. An example would be an
+application that repeatedly sorts groups of five numbers. In such cases,
+the asymptotic analysis that we do for large arrays is usually of not
+much help. Instead it will be important to reduce the constant factors
+that are ignored by the analysis. Then we might very well find that the
+best algorithm can be one that performs very poorly on large arrays.</p>
+<p>Finally, some situations require that a sorting algorithm use as
+little memory as possible. We will call attention to sorting algorithms
+that require significant extra memory beyond the input array.</p>
 </section>
-<section id="sec:algorithms" class="level3" data-number="2.1.2">
+<section id="sec:terminology" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span>
-Algorithms</h3>
-<p>An <a href="section-14.html#algorithm" class="term"
-title="A method or a process followed to solve a problem.">algorithm</a>
-is a method or a process followed to solve a problem. If the problem is
-viewed as a function, then an algorithm is an implementation for the
-function that transforms an input to the corresponding output. A problem
-can be solved by many different algorithms. A given algorithm solves
-only one problem (i.e., computes a particular function). This book
-covers many problems, and for several of these problems we will see more
-than one algorithm. For the important problem of sorting there are over
-a dozen commonly used algorithms!</p>
-<p>The advantage of knowing several solutions to a problem is that
-solution
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
-might be more efficient than solution
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐁</mi><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math>
-for specific variation of the problem, or for a specific class of inputs
-to the problem, while solution
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐁</mi><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math>
-might be more efficient than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
-for another variation or class of inputs. For example, one sorting
-algorithm might be the best for sorting a small collection of integers
-(which is important if you need to do this many times). ther might be
-the best for sorting a large collection of integers. A third might be
-the best for sorting a collection of variable-length strings.</p>
-<p>By definition, something can only be called an algorithm if it has
-all of the following properties:</p>
-<ol type="1">
-<li>It must be <em>correct</em>. In other words, it must implement the
-desired function, converting each input to the correct output. Note that
-every algorithm implements some function, because every algorithm maps
-every input to some output (even if that output is a program crash). At
-issue here is whether a given algorithm implements the <em>intended</em>
-function.</li>
-<li>It is composed of a series of <em>concrete steps</em>. Concrete
-means that the action described by that step is completely understood –
-and doable – by the person or machine that must perform the algorithm.
-Each step must also be doable in a finite amount of time. Thus, the
-algorithm gives us a “recipe” for solving the problem by performing a
-series of steps, where each such step is within our capacity to perform.
-The ability to perform a step can depend on who or what is intended to
-execute the recipe. For example, the steps of a cookie recipe in a
-cookbook might be considered sufficiently concrete for instructing a
-human cook, but not for programming an automated cookie-making
-factory.</li>
-<li>There must be <em>no ambiguity</em> about which step is performed
-next. Typically, the next step follows directly from the algorithm’s
-description. When the algorithm includes selection mechanisms, such as
-<code>if</code>-statements, these allow for alternative execution paths.
-However, the choice of which path to follow must always be unambiguous
-at the moment the decision is made.</li>
-<li>It must be composed of a <em>finite</em> number of steps. If the
-description for the algorithm were made up of an infinite number of
-steps, we could never hope to write it down, nor implement it as a
-computer program. Most languages for describing algorithms (including
-English and “pseudocode”) provide some way to perform repeated actions,
-known as iteration. Examples of iteration in programming languages
-include the <code>while</code> and <code>for</code> loop constructs.
-Iteration allows for short descriptions, with the number of steps
-actually performed controlled by the input.</li>
-<li>It must <em>terminate</em> for the intended input. In other words,
-it may not go into an infinite loop.</li>
-</ol>
-</section>
-<section id="sec:programs" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3"><span class="header-section-number">2.1.3</span>
-Programs</h3>
-<p>We often think of a computer <a href="section-14.html#program"
-class="term"
-title="An instance, or concrete representation, of an algorithm in some programming language.">program</a>
-as an instance, or concrete representation, of an algorithm in some
-programming language. Algorithms are usually presented in terms of
-programs, or parts of programs. Naturally, there are many programs that
-are instances of the same algorithm, because any modern computer
-programming language can be used to implement the same collection of
-algorithms (although some programming languages can make life easier for
-the programmer). To simplify presentation, people often use the terms
-“algorithm” and “program” interchangeably, despite the fact that they
-are really separate concepts. By definition, an algorithm must provide
-sufficient detail that it can be converted into a program when
-needed.</p>
-<p>The requirement that an algorithm must terminate means that not all
-computer programs meet the technical definition of an algorithm. Your
-operating system is one such program. However, you can think of the
-various tasks for an operating system (each with associated inputs and
-outputs) as individual problems, each solved by specific algorithms
-implemented by a part of the operating system program, and each one of
-which terminates once its output is produced.</p>
-<p>In this book we will usually present algorithms and not programs. We
-assume that you as the reader is competent enough to be able to
-translate our descriptions and pseudocode into working programs in your
-favourite language.</p>
-<p>To summarise: A <a href="section-14.html#problem" class="term"
-title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
-is a function or a mapping of inputs to outputs. An <a
-href="section-14.html#algorithm" class="term"
-title="A method or a process followed to solve a problem.">algorithm</a>
-is a recipe for solving a problem whose steps are concrete and
-unambiguous. Algorithms must be correct, of finite length, and must
-terminate for all inputs. A <a href="section-14.html#program"
-class="term"
-title="An instance, or concrete representation, of an algorithm in some programming language.">program</a>
-is an instantiation of an algorithm in a programming language.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>The following slideshow should help you to visualise the
-differences.</p>
-</summary>
-
-<div id="ProblemAlgorithmCON" class="ssAV" data-short-name="ProblemAlgorithmCON" data-long-name="Problem, Algorithm, and Program definitions Slideshow" alt="Problem, Algorithm, and Program definitions Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("ProblemAlgorithmCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ProblemAlgorithmCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
+Terminology</h3>
+<p>Here are some important terminology which we can use to categorise
+different algorithms.</p>
+<dl>
+<dt>Stability</dt>
+<dd>
+Sometimes the array contains several elements that compare equal – for
+example, if we want to sort an array of books by author, it might
+contain several different books by the same author. Sometimes it is
+desirable to maintain the initial ordering between two elements that
+compare equal. A sorting algorithm is said to be <em>stable</em> if it
+does not change the relative ordering of records with identical values.
+Many, but not all, of the sorting algorithms presented in this book are
+stable, or can be made stable with minor changes.
+</dd>
+<dt>Adaptivity</dt>
+<dd>
+An <em>adaptive</em> sorting algorithm can take advantage of the
+existing order in the input. In general this means that the algorithm
+runs faster if the list is almost sorted, compared to if the list is
+completely random. The classic example of an adaptive sorting algorithm
+is Insertion sort (see <a
+href="section-2.6.html#sec:sorting-1:insertion-sort">Section 2.6</a>).
+</dd>
+<dt>In-place</dt>
+<dd>
+When the memory use of the algorithm does not grow (too much) when the
+array size grows. This means that we cannot use an additional array, and
+therefore have to modify the original array.
+</dd>
+<dd>
+An <em>in-place</em> sorting algorithm modifies the input array directly
+and does not build a new array for the sorted result. Usually one also
+requires that the algorithm does not allocate too much extra space while
+operating, where “not too much” can mean at most logarithmic extra
+memory in the size of the array. One sorting algorithm which is
+<em>not</em> in-place is Mergesort (see <a
+href="section-4.2.html#sec:sorting-2:mergesort">Section 4.2</a>), while
+most other algorithms are.
+</dd>
+</dl>
 </section>
 </section>
 </main>
@@ -296,10 +214,10 @@ differences.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-2.html" accesskey="p" rel="previous">Algorithm analysis, part 1: Introduction</a>
+<a href="section-2.html" accesskey="p" rel="previous">Sorting, part 1</a>
 </div>
 <div class="navlink">
-<a href="section-2.2.html" accesskey="n" rel="next">Invariants, preconditions, and postconditions</a>
+<a href="section-2.2.html" accesskey="n" rel="next">Comparing values</a>
 <a href="section-2.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -307,5 +225,6 @@ differences.</p>
 
 </body>
 </html>
+
 
 

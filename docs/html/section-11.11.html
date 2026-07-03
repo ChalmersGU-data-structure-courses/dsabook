@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Hash tables in standard libraries*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-11.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.10.html" accesskey="p" rel="previous">Better hash functions*</a>
+</div>
+<div>
+<a href="section-11.12.html" accesskey="n" rel="next">Bucket hashing*</a>
+<a href="section-11.12.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:hash-tables:standard-libraries" class="level2"
+data-number="11.11">
+<h2 data-number="11.11"><span class="header-section-number">11.11*</span>
+Hash tables in standard libraries</h2>
+<p>In this section we discuss how hash tables are implemented in
+different standard libraries.</p>
+<section id="sec:java-api" class="level4 unnumbered">
+<h4 class="unnumbered">Java API</h4>
+<p>Before version 1.2, Java had exactly the problem above, but in
+version 1.2 they changed the implementation. The current version of Java
+HashMap (and HashSet and Hashtable and similar) has the following
+characteristics:</p>
+<ul>
+<li>It’s a separate chaining hash table.</li>
+<li>Small buckets (&lt;8 elements) are linked lists, but larger buckets
+are red-black trees instead. This ensures <span class="math inline">O(n
+\log(n))</span> worst time complexity, but it’s linear if the data is
+well-behaved.</li>
+<li>The size of the hash table is a power of two (<span
+class="math inline">n=2^k</span>) – meaning that the resizing factor is
+2.</li>
+<li>The maximum load factor for resizing is 0.75.</li>
+</ul>
+<p>If you’re interested you can read the comment on <a
+href="https://github.com/openjdk/jdk/blob/9e831bccd2fc90681b32d1504eca753462afc6f6/src/java.base/share/classes/java/util/HashMap.java#L145-L233">lines
+125–232 in HashMap.java</a>, where some implementation details are
+explained.</p>
+</section>
+<section id="sec:python" class="level4 unnumbered">
+<h4 class="unnumbered">Python</h4>
+<p>Python uses much more modern implementations than Java, of both hash
+functions and hash tables. Python hash functions uses a combination of
+the following techniques:</p>
+<ul>
+<li>Strings are hashed using <a
+href="https://en.wikipedia.org/wiki/SipHash">SipHash</a> (see <a
+href="https://www.python.org/dev/peps/pep-0456">PEP-456</a>).</li>
+<li>Tuples are hashed using “a slightly simplified version of the <a
+href="http://cyan4973.github.io/xxHash/">xxHash non-cryptographic
+hash</a>” (see <a
+href="https://github.com/python/cpython/blob/8f24b7dbcbd83311dad510863d8cb41f0e91b464/Objects/tupleobject.c#L384-L397">lines
+384–397 in tupleobject.c</a>).</li>
+<li>In addition, Python adds randomisation: Whenever you start a new
+Python interpreter, it creates a random constant which is combined with
+the hashes. This means that every new instance will generate new hashes
+for the same strings, tuples, and other built-in objeccts.</li>
+</ul>
+<p>Python dictionaries are implemented as hash tables. Since version 3.6
+they are based on the following ideas (lecture video from PyCon
+2017):</p>
+<ul>
+<li>Raymond Hettinger: Modern Python Dictionaries – A confluence of a
+dozen great ideas, PyCon 2017: <a
+href="https://www.youtube.com/watch?v=npw4s1QTmPg"
+class="uri">https://www.youtube.com/watch?v=npw4s1QTmPg</a> (the part
+about sharing several values in one table is only used for internal use
+in the Python interpreter)</li>
+<li>And a blog post explaining the new implementation: <a
+href="https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html"
+class="uri">https://morepypy.blogspot.com/2015/01/faster-more-memory-efficient-and-more.html</a>
+(it was first implemented in PyPy, but then they ported it to “standard”
+CPython too)</li>
+</ul>
+<p>Here’s a summary of the internal implementation:</p>
+<ul>
+<li>All hash tables have a power-of-two size (<span
+class="math inline">n=2^k</span>) – meaning that the resizing factor is
+2.</li>
+<li>This means that the table index is the first (least significant)
+<span class="math inline">k</span> bits of the hash value.</li>
+<li>It’s an open adressing hash table.</li>
+<li>But it doesn’t use linear probing, instead they probe with <span
+class="math inline">+p</span> in every step, where <span
+class="math inline">p</span> depends on the higher bits in the hash
+value.</li>
+<li>It keeps the full hash value in the table (which improves the speed
+when resizing)</li>
+<li>To get better memory efficiency, it is split into (1) a size <span
+class="math inline">2^k</span> integer array with indices, and (2) a
+compact array with tuples of the form (hash,key,value). The indices in
+array(1) point to locations in array(2).</li>
+<li>This also has the effect that it can iterate over the insertion
+order of the elements.</li>
+<li>Deletion is done using tombstones.</li>
+<li>The maximum load factor for resizing is 0.66.</li>
+<li>See the source code here: <a
+href="https://github.com/python/cpython/blob/main/Objects/dictobject.c"
+class="uri">https://github.com/python/cpython/blob/main/Objects/dictobject.c</a></li>
+</ul>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-11.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.10.html" accesskey="p" rel="previous">Better hash functions*</a>
+</div>
+<div class="navlink">
+<a href="section-11.12.html" accesskey="n" rel="next">Bucket hashing*</a>
+<a href="section-11.12.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

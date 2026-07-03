@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Queues implemented as linked lists</title>
+  <title>DSABook – Dynamic arrays</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 <link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
@@ -81,215 +100,451 @@
 <nav class="sitenav">
 <div>
 <a href="section-6.3.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.3.html" accesskey="p" rel="previous">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" accesskey="p" rel="previous">Array-based sequences</a>
 </div>
 <div>
-<a href="section-6.5.html" accesskey="n" rel="next">Stacks implemented using arrays</a>
+<a href="section-6.5.html" accesskey="n" rel="next">Analysing linked lists and dynamic arrays</a>
 <a href="section-6.5.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:queues-implemented-as-linked-lists" class="level2"
+<section id="sec:sequences:dynamic-arrays" class="level2"
 data-number="6.4">
 <h2 data-number="6.4"><span class="header-section-number">6.4</span>
-Queues implemented as linked lists</h2>
-<p>The linked queue implementation is an adaptation of the linked list.
-The only thing is that we have to add a pointer to the rear node in the
-queue, to be able to add new elements efficiently.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Linked queue – introduction.</p>
-</summary>
-
-<div id="LinkedQueue-Intro-CON" class="ssAV" data-short-name="LinkedQueue-Intro-CON" data-long-name="Linked Queue Intro" alt="Linked Queue Intro" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Intro-CON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("LinkedQueue-Intro-CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Intro-CON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>So the datatype for linked queues contains three instance variables,
-including the size of the queue:</p>
+Dynamic arrays</h2>
+<p>The problem with array-based stacks and queues is that they have
+limited capacity. Recall that arrays are <em>fixed-size</em>, so we
+cannot change the size once we have initialised it. To solve this
+problem we have to make the internal array <em>dynamic</em> – meaning
+that we increase the size of the array when it becomes full. (We should
+also shrink the array to save space whenever it contains too few
+elements, more about that below in <a
+href="section-6.4.html#sec:sequences:shrink-array">Section 6.4.5</a>.)</p>
+<p>If you are used to programming in Python or Javascript, you might
+think that their lists (or “arrays” as they are called in Javascript)
+are basic and simple objects, but they are not. In fact they are
+implemented as dynamic arrays, just in the same way as we will discuss
+in this section. Other programming languages such as Java, C, etc., have
+fixed-size arrays, and this is a much more primitive data type. The main
+reason for this is that a fixed-size array always use the same amount of
+memory: the programming language can allocate space for it already when
+the array is created – and this will not have to change during the whole
+life of the array. An array is always “tight” – neighbouring elements
+will be neighbours in the computer memory too. This means that looking
+up a specific array index is really fast (constant-time in fact), since
+we can infer the memory position from the array index instantly.</p>
+<p>A Python-style list does not have a fixed length: you can add and
+remove elements without having to worry about memory allocation. But in
+all other respects it behaves just like a fixed-size array, meaning that
+normal array operations such as getting and setting values at a specific
+index are still efficient. Adding and removing elements are also
+efficient, but note that it is only efficient to append to (and remove
+from) the <em>end</em> of the array! If you try to insert elements in
+the beginning it becomes awfully slow. Compare these two very simple
+Python loops:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    front: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to front node</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    rear: Node <span class="op">=</span> <span class="va">null</span>    <span class="co">// Pointer to rear node</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>        <span class="co">// Size of queue</span></span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:enqueueing-to-a-linked-queue"
-class="level4 unnumbered">
-<h4 class="unnumbered">Enqueueing to a linked queue</h4>
-</summary>
-
-<div id="LinkedQueue-Enqueue-CON" class="ssAV" data-short-name="LinkedQueue-Enqueue-CON" data-long-name="Linked Queue Enqueue" alt="Linked Queue Enqueue" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-CON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("LinkedQueue-Enqueue-CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Enqueue-CON "+rule)}
-    
-  });
-</script>
-
-</details>
-</section>
-</div>
-<p>To enqueue a new element onto the stack, we first have to create a
-new node and set its value. But instead of inserting the node at the
-front of the queue, we add it to the rear. To do this we have to assign
-the next pointer of the current rear to the new node, and after that we
-can redirect the rear pointer. We also have to handle the special case
-when the queue is empty – then the new node will be both front and rear,
-so we have to assign the front variable too.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(elem):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        newRear <span class="op">=</span> <span class="kw">new</span> Node(elem, <span class="va">null</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            front <span class="op">=</span> newRear</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> newRear</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Linked queue – enqueue exercise.</p>
-</summary>
-
-<div id="LinkedQueue-Enqueue-PRO" class="embedContainer">
-<iframe id="LinkedQueue-Enqueue-PRO_iframe" aria-label="LinkedQueue-Enqueue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-PRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:dequeueing-from-a-linked-queue"
-class="level4 unnumbered">
-<h4 class="unnumbered">Dequeueing from a linked queue</h4>
-</summary>
-
-<div id="LinkedQueue-Dequeue-CON" class="ssAV" data-short-name="LinkedQueue-Dequeue-CON" data-long-name="Linked Queue Dequeue" alt="Linked Queue Dequeue" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-CON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("LinkedQueue-Dequeue-CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Dequeue-CON "+rule)}
-    
-  });
-</script>
-
-</details>
-</section>
-</div>
-<p>Dequeueing from a queue is actually exactly the same as popping from
-a stack, where we use the front of the queue instead of the stack top.
-There is only additional one thing we must assure – if the final queue
-becomes empty, we have to delete the rear pointer too, otherwise it will
-point to a non-existing element.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>():</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> front</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            rear <span class="op">=</span> <span class="va">null</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Linked queue – dequeue exercise.</p>
-</summary>
-
-<div id="LinkedQueue-Dequeue-PRO" class="embedContainer">
-<iframe id="LinkedQueue-Dequeue-PRO_iframe" aria-label="LinkedQueue-Dequeue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-PRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<section id="sec:case-study-sorting-a-linked-list-using-mergesort"
-class="level3" data-number="6.4.1">
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>list <span class="op">=</span> []                          list <span class="op">=</span> []</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100_000</span>):           <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100_000</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    list.<span class="bu">append</span>(k)                     list.insert(<span class="dv">0</span>, k)</span></code></pre></div>
+<p>The left loop is really fast, because the <code>append</code>
+operation adds elements to the end of the list. On the contrary, the
+right loop is slow because it inserts elements at the beginning.</p>
+<section id="sec:resizing-the-internal-array" class="level3"
+data-number="6.4.1">
 <h3 data-number="6.4.1"><span class="header-section-number">6.4.1</span>
-Case study: Sorting a linked list using Mergesort</h3>
-<p>We introduced Mergesort in <a
-href="section-4.2.html#sec:mergesort">Section 4.2</a>, and then we
-showed how to sort an array. But Mergesort can also be used to sort
-linked lists, because it does not require random access to the list
-elements. Thus, Mergesort is the method of choice when the input is in
-the form of a linked list.</p>
-<div class="online">
-<p>In fact, the only thing we need is to access the front and back of
-the linked list, which means that we can use Mergesort on linked queues.
-So, how do we implement splitting and merging?</p>
-<p>Splitting the input list into two equal halves presents some
-difficulty. Since we’re using a linked list we cannot find the middle
-easily. But we can use a little trick instead: assign elements of the
-input list alternating between the two sublists. The first element is
-assigned to the first sublist, the second element to the second sublist,
-the third to first sublist, the fourth to the second sublist, and so on.
-Or in pseudocode:</p>
+Resizing the internal array</h3>
+<p>The basic idea is to not try to resize the internal array – as we
+already mentioned it is not possible to resize it. Instead we create a
+<em>new</em> array of a larger size, and copy over the elements from the
+old array to the new. Afterwards we can forget about the old array
+because it will not be used anymore.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>resize(stack, capacity):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    oldArr <span class="op">=</span> stack.arr               <span class="co">// Remember the old internal array</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    stack.arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)  <span class="co">// Create a new internal array</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. oldArr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        stack.arr[i] <span class="op">=</span> oldArr[i]     <span class="co">// Copy over all elements to the new array</span></span></code></pre></div>
+<figure id="fig:array-stack-resize">
+<img src="images/Sequences-ArrayStackResize.svg"
+alt="Figure 6.6: Resizing an array-based stack, increasing the capacity from 8 to 16. Before resizing, size points to after the last cell in the array, indicating that the array is full. We have to create a new array with the larger capacity and copy over all elements." />
+<figcaption aria-hidden="true">Figure 6.6: Resizing an array-based
+stack, increasing the capacity from 8 to 16. Before resizing,
+<em>size</em> points to after the last cell in the array, indicating
+that the array is full. We have to create a new array with the larger
+capacity and copy over all elements.</figcaption>
+</figure>
+
+<p><a href="#fig:array-stack-resize">Figure 6.6</a> shows how resizing
+works. Note that resizing the internal array is a <em>slow</em>
+operation, it has to iterate through all elements in the list and copy
+each one. This is of course linear in the number of elements, <span
+class="math inline">O(n)</span>. (Processors have special hardware
+instructions for copying chunks of memory, which are a lot faster than a
+simple loop – but even those are linear in the number of elements.)</p>
+<p>This means that we do not want to resize the array too often, so the
+question is how often do we want to resize? Or in other words, how large
+should the new internal array be – what should be its capacity? How
+about increasing the capacity with 100 elements, every time the array
+becomes full:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(stack, value):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> stack.<span class="bu">size</span> <span class="op">==</span> stack.arr.<span class="bu">size</span>:   <span class="co">// If the internal array is full,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        capacity <span class="op">=</span> stack.<span class="bu">size</span> <span class="op">+</span> <span class="dv">100</span>    <span class="co">// increase its capacity with 100 elements</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        resize(stack, capacity)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    stack.arr[stack.<span class="bu">size</span>] <span class="op">=</span> value</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<p>Suppose that we want to push <span class="math inline">n</span>
+values to an empty stack (where <span class="math inline">n</span> is
+much larger than 100). How many times does an array element get copied
+from the internal array to the new array? (That is, how many times will
+the for-loop in <code>resize</code> be iterated?) Every 100’th time the
+internal array becomes full and we need to resize it, so we get the
+following internal resizings:</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">200</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">100</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">300</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">200</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;">. . .</td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">n-100</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">n-200</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">n</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">n-100</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+</tbody>
+</table>
+<p> In total, we execute the copying statement the following number of
+times:</p>
+<p><span class="math display">
+100 + 200 + \cdots + (n-200) + (n-100) = 100 \cdot \sum_1^{n/100} i
+= n(n-1)/50 \in O(n^2)
+</span></p>
+<p>This means that the program takes <em>quadratic</em> time, <span
+class="math inline">O(n^2)</span>, not linear! Suppose for example that
+<span class="math inline">n</span> is 1 million. Using the formula
+above, the number of times an array element gets copied is around 20
+<em>billion</em> – it copies on average 20,000 elements for every push
+to the stack. This is of course not acceptable.</p>
+<p>But what if we increase the capacity with 1,000 elements instead?
+This will unfortunately not help much – the reasoning above still holds,
+and the complexity of pushing <span class="math inline">n</span> to the
+stack will still be quadratic, <span
+class="math inline">O(n^2)</span>.</p>
+</section>
+<section id="sec:doubling-the-size" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2"><span class="header-section-number">6.4.2</span>
+Doubling the size</h3>
+<p>One way to think about the problem is this: as the array gets bigger,
+resizing it gets more expensive. So, to make up for that, when the array
+is bigger we need to grow it by <em>more</em>, so that we don’t have to
+resize as often. One way to do this is to always <em>double</em> the
+array size when it gets full. This turns out to work well!</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> split(L) <span class="op">-&gt;</span> pair <span class="kw">of</span> two lists:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    L1, L2 <span class="op">=</span> empty linked lists</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> x <span class="kw">in</span> L:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span> x <span class="kw">to</span> L1 (even iterations) <span class="kw">or</span> L2 (odd iterations)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L1, L2</span></code></pre></div>
-<p>(Note that it doesn’t matter if we add <code>x</code> to the front or
-back of <code>L1</code> and <code>L2</code>, because the lists will be
-sorted anyway.)</p>
-<p>Merging two sorted linked lists is straightforward, because we need
-only remove items from the front of the input lists and append them to
-the end of the output list. The Mergesort pseudocode in <a
-href="section-4.2.html#sec:mergesort">Section 4.2</a> can be used with
-linked lists directly.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(stack, value):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> stack.<span class="bu">size</span> <span class="op">==</span> stack.arr.<span class="bu">size</span>:   <span class="co">// If the internal array is full,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        capacity <span class="op">=</span> stack.<span class="bu">size</span> <span class="op">*</span> <span class="dv">2</span>      <span class="co">// double its capacity</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        ...</span></code></pre></div>
+<p>Suppose that we again push 1 million elements onto an empty stack. As
+before we start with a capacity of 100 elements. When will
+<code>resize</code> be called, and how many elements get copied each
+time?</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">200</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">100</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">400</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">200</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">800</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">400</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;">. . .</td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">819,200</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">409,600</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resize</code>(<span
+class="math inline">1,638,400</span>)</td>
+<td style="text-align: right;">copying</td>
+<td style="text-align: center;"><span
+class="math inline">819,200</span></td>
+<td style="text-align: left;">elements</td>
+</tr>
+</tbody>
+</table>
+<p> You can see that the array gets resized a whole lot at the beginning
+– but as it gets bigger, it gets resized less and less often. We can
+read off how many elements get copied:</p>
+<p><span class="math display"> 100 + 200 + 400 + \cdots + 409,600 +
+819,200 = 1,638,300 </span></p>
+<p>Compare this with the previous version where we increased the
+capacity with 100 elements every time: then we needed to copy 20 billion
+elements, but now we only need to copy 1.6 million.</p>
+<p>Let us now generalise to an arbitrary <span
+class="math inline">n</span>. The worst case is when the final
+<em>push</em> has to resize the array. This happens when <span
+class="math inline">n</span> is one more than a power of two times 100,
+that is, when <span class="math inline">n-1 = 100\cdot 2^k</span>. In
+that case, the final call to <code>resize</code> grows the array from
+<span class="math inline">100\cdot 2^k</span> to <span
+class="math inline">100\cdot 2^{k+1}</span>, copying <span
+class="math inline">100\cdot 2^k</span> elements. The total number of
+elements copied is therefore:</p>
+<p><span class="math display">
+100\cdot(2^0 + 2^1 + 2^2 + \cdots + 2^k)
+=  100\cdot(2^{k+1} - 1)
+=  2\cdot(100\cdot 2^k) - 100
+=  2(n-1) - 100  =  2n - 102
+</span></p>
+<p>In fact, we have just proved the following result, which holds
+regardless of what the initial capacity is.</p>
+<section id="sec:theorem-array-doubling"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Theorem: Array-doubling</h4>
+<p>When using the array-doubling strategy, pushing <span
+class="math inline">n</span> elements to a stack implemented as a
+dynamic array causes fewer than <span class="math inline">2n</span>
+elements to be copied. Or in other words, pushing an element to a stack
+causes on average 2 elements to be copied.</p>
+</section>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Dynamic arrays – addition.</p>
+</summary>
+
+<div id="DynamicArrayList-Append-CON" class="ssAV" data-short-name="DynamicArrayList-Append-CON" data-long-name="Dynamic Array-based List Addition Slideshow" alt="Dynamic Array-based List Addition Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Append-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayList-Append-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayList-Append-CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
+<section id="sec:multiplying-by-any-factor" class="level3"
+data-number="6.4.3">
+<h3 data-number="6.4.3"><span class="header-section-number">6.4.3</span>
+Multiplying by any factor</h3>
+<p>What happens if we instead grow the array by 50%? In fact, it still
+works out fine - the program takes linear time to run. To see this, you
+can use the same argument as above, but instead of using the formula
+<span class="math inline">2^0+2^1+...+2^k = 2^{k+1}</span>, you have to
+use the formula for a general <a href="#geometric-progression"
+class="term" title="">geometric progression</a>. What you get is an
+overhead of <em>three elements copied per element added</em>.</p>
+<p>In fact, multiplying the array size by <em>any constant</em> works,
+because the same geometric progression reasoning applies. We can
+calculate the exact performance overhead of growing the array by any
+given factor:</p>
+<dl>
+<dt>Growing by a factor</dt>
+<dd>
+If we grow the array by a factor of <span class="math inline">k &gt;
+1</span> when resizing it, then the overhead is at most <span
+class="math inline">\frac{k}{k-1}</span> elements copied per element
+added to the dynamic array. For example, when growing by 20% (k = 1.2),
+the overhead is 6 elements copied per add.
+</dd>
+</dl>
+<p>In short, when resizing a dynamic array list, we should
+<strong>multiply the array size by a constant</strong>. when adding many
+elements, this guarantees that we only have a constant factor of
+performance overhead due to occasional resizing. We can choose a large
+factor (such as 2) if we want fast performance, or a low factor (such as
+1.2) if we want to save memory.</p>
+<p>For example, the Java standard library has the class ArrayList which
+is a dynamic array – it grows by 50% each time (multiplies by <span
+class="math inline">\frac{3}{2}</span>). And the built-in lists in
+Python grow by as little as 12% (multiplies by <span
+class="math inline">\frac{9}{8}</span>). This means that they have to
+grow more often but on the other hand they do not use as much
+memory.</p>
+</section>
+<section id="sec:resizing-an-array-based-queue" class="level3"
+data-number="6.4.4">
+<h3 data-number="6.4.4"><span class="header-section-number">6.4.4</span>
+Resizing an array-based queue</h3>
+<p>When we resize the internal array of our array-based queue
+implementation, we cannot keep the positions of the elements. If the
+queue is wrapped around (that is, if <em>rear</em> &lt; <em>front</em>)
+then we might end up in a large gap in the middle of the queue. For
+example, if we enqueue the four words “<em>but</em>”, “<em>not</em>”,
+“<em>if</em>”, and “<em>they</em>” to the leftmost queue in <a
+href="#fig:array-queue-full">Figure 6.7</a>, we get the queue to the
+right in the same figure. The word “<em>every</em>” has waited the
+longest and “<em>they</em>” is the most recent word.</p>
+<figure id="fig:array-queue-full">
+<img src="images/Sequences-ArrayQueueFull.svg"
+alt="Figure 6.7: An example circular queue that gets full. If we enqueue four elements to the queue on the left we get the full queue to the right." />
+<figcaption aria-hidden="true">Figure 6.7: An example circular queue
+that gets full. If we enqueue four elements to the queue on the left we
+get the full queue to the right.</figcaption>
+</figure>
+<p>What happens if we want to enqueue yet another element? We have to
+resize the array, and we do this like before by doubling the size. But
+now we have to be a little careful when copying over the elements to the
+new array – we cannot just copy the elements to the same positions,
+because then we would end up in this situation:</p>
+<div class="center">
+<p><img src="images/Sequences-ArrayQueueBadResize.svg"
+style="width:80.0%" /></p>
+</div>
+<p>Instead we reset the <em>front</em> and <em>rear</em> pointers so
+that we copy the first queue element to position 0 of the new array, the
+second to position 1, and so on:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(L1, L2):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="kw">new</span> empty linked list</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">and</span> L2 are nonempty:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> L1.<span class="bu">peek</span>() <span class="op">&lt;=</span> L2.<span class="bu">peek</span>():</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">enqueue</span> L1.<span class="bu">dequeue</span>() <span class="kw">to</span> answer</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">enqueue</span> L2.<span class="bu">dequeue</span>() <span class="kw">to</span> answer</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span> <span class="kw">all</span> remaining elements <span class="kw">of</span> L1 <span class="kw">and</span> L2</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>resize(queue, capacity):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    oldArr <span class="op">=</span> queue.arr</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    queue.arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. queue.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        queue.arr[i] <span class="op">=</span> oldArr[(queue.front <span class="op">+</span> i) mod oldArr.<span class="bu">size</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    queue.front <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    queue.rear <span class="op">=</span> queue.<span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
+<p>Note that, apart from the detail that we have to reset the pointers,
+the implementation of resizing is similar to the one for stacks. The
+process and the resulting queue is shown in <a
+href="#fig:array-queue-resize">Figure 6.8</a>.</p>
+<figure id="fig:array-queue-resize">
+<img src="images/Sequences-ArrayQueueResize.svg"
+alt="Figure 6.8: Resizing an array-based queue. We need to copy the element starting from the front pointer, not from index 0." />
+<figcaption aria-hidden="true">Figure 6.8: Resizing an array-based
+queue. We need to copy the element starting from the <em>front</em>
+pointer, not from index 0.</figcaption>
+</figure>
+</section>
+<section id="sec:sequences:shrink-array" class="level3"
+data-number="6.4.5">
+<h3 data-number="6.4.5"><span class="header-section-number">6.4.5</span>
+Shrinking the internal array</h3>
+<p>But what about the size of the internal array when we pop? Assume
+that we have pushed 1 million elements to the stack, and then popped
+them all – then our internal array will still occupy (at least) 1
+million cells in memory. Is it possible to decrease the size of the
+internal array when popping?</p>
+<p>Yes, it is, but then it is very important that we don’t resize it too
+soon. Let us say that we double the size when pushing – then we cannot
+halve the size when it is half full. Why is that? Consider the following
+sequence of additions and deletions:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(<span class="st">&quot;A&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;B&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;C&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;D&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> ...</span></code></pre></div>
+<p>If we are unlucky and the array is full just before the sequence
+starts, then the first push will have to resize the array. Then when we
+pop that element, the list becomes less than half-full, and we have to
+resize again. Then the next push will resize, and the next pop will also
+resize. And so on… This will lead to a linear-time resize every time we
+push/pop, and so the final complexity will be linear (per operation) and
+not constant time. Which is not what we want.</p>
+<p>How can we alleviate this? The solution is to wait even longer until
+we shrink the internal array! For example, we can shrink the array (that
+is, halve it), when it is only 1/3 full. Note that the factors 1/3 and
+1/2 are not important, as explained earlier. The only thing that matters
+is that the minimum load factor (1/3) is <em>smaller</em> than the
+shrinking factor (1/2).</p>
+<p>In summary, to get a dynamically shrinking stack (or queue), we can
+test if it is less than 1/3 full right before the end of the
+<em>pop</em> or <em>dequeue</em> operations. And if it is, we resize the
+internal array to half its capacity. This means that the dynamic
+<em>pop</em> operation for stacks will look like this:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pop</span>(stack):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> stack.arr[stack.<span class="bu">size</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    stack.arr[stack.<span class="bu">size</span>] <span class="op">=</span> <span class="va">null</span>    <span class="co">// For garbage collection</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> stack.<span class="bu">size</span> <span class="op">&lt;</span> stack.arr.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        capacity <span class="op">=</span> stack.arr.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        resize(stack, capacity)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Dynamic arrays – deletion.</p>
+</summary>
+
+<div id="DynamicArrayList-Remove-CON" class="ssAV" data-short-name="DynamicArrayList-Remove-CON" data-long-name="Dynamic Array-based List Deletion Slideshow" alt="Dynamic Array-based List Deletion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Remove-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayList-Remove-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayList-Remove-CON "+rule)}
+    
+  });
+</script>
+
+</details>
 </div>
 </section>
 </section>
@@ -299,10 +554,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-6.3.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.3.html" accesskey="p" rel="previous">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" accesskey="p" rel="previous">Array-based sequences</a>
 </div>
 <div class="navlink">
-<a href="section-6.5.html" accesskey="n" rel="next">Stacks implemented using arrays</a>
+<a href="section-6.5.html" accesskey="n" rel="next">Analysing linked lists and dynamic arrays</a>
 <a href="section-6.5.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -310,5 +565,6 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 
 </body>
 </html>
+
 
 

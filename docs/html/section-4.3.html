@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Implementing Mergesort</title>
+  <title>DSABook – Quicksort</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,29 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/mergeImplS1CON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortPartitionAnalysisCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortWorstCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/quicksortCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -84,104 +107,810 @@
 <a href="section-4.2.html" accesskey="p" rel="previous">Mergesort</a>
 </div>
 <div>
-<a href="section-4.4.html" accesskey="n" rel="next">Quicksort</a>
+<a href="section-4.4.html" accesskey="n" rel="next">Summary of sorting algorithms</a>
 <a href="section-4.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:implementing-mergesort" class="level2"
-data-number="4.3">
+<section id="sec:sorting-2:quicksort" class="level2" data-number="4.3">
 <h2 data-number="4.3"><span class="header-section-number">4.3</span>
-Implementing Mergesort</h2>
-<p>Implementing Mergesort presents some technical difficulties. The
-pseudocode in the last section is quite vague and we have to figure out
-how to make it work for arrays.</p>
-<p>First, splitting an input array into two subarrays is easy. We don’t
-even have to copy any elements, but we can use the same idea as for
-binary search: use <code>left</code> and <code>right</code> indices to
-refer to a subarray. To split this subarray into two halves, we just
-calculate the middle index, <code>mid</code> =
-<code>(left+right)/2</code>.</p>
-<p>The main function for sorting a subarray can now be written like
-this:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Sort the subarray arr[left .. right]</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr, left, right):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&gt;=</span> right:               <span class="co">// Base case: Subarray length is ≤ 1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="bu">int</span>((left <span class="op">+</span> right) <span class="op">/</span> <span class="dv">2</span>)   <span class="co">// The midpoint is where the second half starts</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, left, mid<span class="op">-</span><span class="dv">1</span>)     <span class="co">// Mergesort first half</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, mid, right)      <span class="co">// Mergesort second half</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    merge(arr, left, mid, right)    <span class="co">// Merge the two sorted halves</span></span></code></pre></div>
-<p>The initial call would be <code>mergeSort(arr,0,arr.size-1)</code>,
-which sorts the whole array <code>arr</code>.</p>
-<p>The difficulty comes when we want to merge the two sorted subarrays.
-This cannot be done in-place (or rather, it is very very complicated to
-do it in-place). So we need an auxiliary array which we can merge the
-elements into.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Merge the sorted subarrays arr[left .. mid-1] and arr[mid .. right]</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(arr, left, mid, right):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Merge the two sublists into the auxiliary array</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    i1 <span class="op">=</span> left</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    i2 <span class="op">=</span> mid</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> left .. right:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i2 <span class="op">&gt;</span> right:               <span class="co">// Right sublist exhausted</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i1]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1 <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i1 <span class="op">&gt;</span> mid:            <span class="co">// Left sublist exhausted</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i2]</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2 <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[i1] <span class="op">&lt;=</span> arr[i2]:  <span class="co">// Get smaller value</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i1]</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1 <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i2]</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2 <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Copy the elements back from the auxiliary array</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> left .. right:</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        arr[i] <span class="op">=</span> temp[i]</span></code></pre></div>
+Quicksort</h2>
+<p>Mergesort uses a very simple approach for splitting the array, but
+spends almost all its time in the merging step. But there is also
+another problem with merging: it is difficult to efficiently implement
+in-place, so Mergesort has to use an additional array which will use
+some memory. So is there a different divide-and-conquer strategy that is
+easier to make in-place?</p>
+<p><em>Quicksort</em> uses another approach: it spends more of the time
+in splitting the array in parts, which then makes the merging step
+completely trivial. The overall algorithm is deceivingly similar to
+Mergesort:</p>
+<section id="sec:algorithm-quicksort"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Quicksort</h4>
+<p>To sort an array using Quicksort:</p>
+<ol type="1">
+<li>Partition the array into two smaller parts,</li>
+<li>then recursively sort each part,</li>
+<li>finally concatenate the two parts into the final sorted array.</li>
+</ol>
+</section>
+<p>The main difference to Mergesort is in the splitting step, called
+<em>partition</em>. The idea is that we divide the array into two parts,
+where everything in the first part is smaller than everything in the
+second part. Then Quicksort calls itself with the two subarrays (just as
+Mergesort does), so that they are both sorted. Now we have to combine
+them, but this is much easier than in Mergesort, because we already know
+that everything in the first part is smaller than everything in the
+second part – so we can just put them after each other.</p>
+<section id="sec:sorting-2:partitioning" class="level3"
+data-number="4.3.1">
+<h3 data-number="4.3.1"><span class="header-section-number">4.3.1</span>
+Partitioning</h3>
+<p>The biggest advantage of Quicksort over Mergesort is that
+partitioning can be done in-place, which merging cannot. And the main
+reason why we can partition in-place is because we can swap elements
+with each other.</p>
+<p>To partition an array interval, we first select a <em>pivot</em>
+element from the interval. This is the value that decides which will
+elements go in the lower and upper parts. Now we create two pointers
+that start at the interval ends and then move towards each other.
+Whenever they encounter two elements that are in the wrong partition,
+they swap places. Or in other words: when the <em>lower</em> element is
+larger than the pivot, and the <em>upper</em> element is smaller than
+the pivot, the two elements swap places. When the pointers pass each
+other, the array has been partitioned.</p>
+<p>There is one final detail we have to figure out before we have a
+complete algorithm: what should happen with the pivot? We know that in
+the end it must be in between the two partitions, but the problem is
+that we don’t know exactly how big the partitions will be – and
+therefore we cannot know in advance where to put the pivot. The standard
+solution is to first move the pivot out of the way – then partition the
+rest of the array, and afterwards put it back in. One good place to put
+it is at the beginning, so the first we do is to swap it there and then
+we partition the rest of the array. After the partitioning is finished
+and the pointers have passed each other, the upper pointer will point to
+the last element in the lower part. This is the final position of the
+pivot, so we can swap it into place.</p>
+<section id="sec:algorithm-quicksort-partition"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Quicksort partition</h4>
+<p>To partition an array interval:</p>
+<ol type="1">
+<li><p>First, select some pivot element from the interval.</p></li>
+<li><p>Swap the pivot with the first element in the interval, and
+initialise the lower and upper pointers to the second and last elements
+of the interval, respectively.</p></li>
+<li><p>Repeat the following until the pointers have passed each
+other:</p>
+<ol type="a">
+<li>Increase the lower pointer if its element is smaller than the
+pivot.</li>
+<li>Decrease the upper pointer if its element is larger than the
+pivot.</li>
+<li>Otherwise, swap the lower and upper elements, and move the pointers
+towards each other.</li>
+</ol></li>
+<li><p>Swap the upper element with the pivot (which is now the first
+element in the interval).</p></li>
+<li><p>Finally, Quicksort needs to know the final position of the pivot
+to be able to sort the two partitions recursively, so we have to return
+the upper pointer.</p></li>
+</ol>
+</section>
+<p>Here is a step-by-step example of partitioning.</p>
+<ol type="1">
+<li><p>First we select a pivot element:</p>
+<p> <img src="images/Sorting-QuicksortPartition-1.svg" /></p></li>
+<li><p>Swap the pivot with the first element, and initialise the
+<em>lower</em> and <em>upper</em> pointers:</p>
+<p> <img src="images/Sorting-QuicksortPartition-2.svg" /></p></li>
+<li><p>Partition the rest of the array. Move the pointers towards each
+other:</p>
+<p> <img src="images/Sorting-QuicksortPartition-3.svg" /></p>
+<p> Whenever the <em>lower</em> element is larger than the pivot, and
+the <em>upper</em> element is smaller than the pivot, swap them:</p>
+<p> <img src="images/Sorting-QuicksortPartition-4.svg" /></p></li>
+<li><p>Finally, swap the pivot with the element at the <em>upper</em>
+pointer:</p>
+<p> <img src="images/Sorting-QuicksortPartition-5.svg" /></p></li>
+<li><p>Return the new position of the pivot:</p>
+<p> <img src="images/Sorting-QuicksortPartition-6.svg" /></p></li>
+</ol>
+<p>Note that the partitioning is done completely in-place. This is
+different from Mergesort where we need to allocate space for a temporary
+array.</p>
+<p>After the partitioning is finished we know the following:</p>
+<ul>
+<li>The pivot is in its final position in the sorted array, so it will
+never have to be touched again.</li>
+<li>The left part is not sorted, but all the elements smaller than the
+pivot are present. This means that we can recursively sort the left
+part.</li>
+<li>The same for the right part.</li>
+</ul>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>Here is a visualisation for the merge step.</p>
+<p>Here is a visualisation of the partitioning algorithm. We assume that
+we select the middle element as the pivot.</p>
 </summary>
 
-<div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow" alt="Mergesort Implementation Slideshow" tabIndex="-1">
+<div id="quicksortCON" class="ssAV" data-short-name="quicksortCON" data-long-name="Quicksort Partition Slideshow" alt="Quicksort Partition Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 
-<script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCODE.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCON.js"></script>
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("mergeImplS1CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#mergeImplS1CON "+rule)}
+    function NewAV() {return new JSAV("quicksortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#quicksortCON "+rule)}
     
   });
 </script>
 
 </details>
 </div>
-<p>Notice that the merge function will create a new auxiliary array
-every time it is called. This is quite inefficient, because it takes
-some time to allocate memory for a new array, which can be destroyed
-directly when merge is finished. One simple optimisation is to create
-one single auxiliary array before the first call, and reuse this array
-in all invocations of merge. The only thing we would have to do is to
-add an extra argument to <code>mergeSort</code> and <code>merge</code>,
-for the reference to the auxiliary array. Then we can create a wrapper
-function that takes care of the initialisation, and makes the first
-recursive call:</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:quicksort-partition-proficiency-exercise"
+class="level4 unnumbered">
+<h4 class="unnumbered">Quicksort partition proficiency exercise</h4>
+</summary>
+
+<div id="QuicksortPartitPRO" class="embedContainer">
+<iframe id="QuicksortPartitPRO_iframe" aria-label="QuicksortPartitPRO" src="../interactive/Sorting/QuicksortPartitPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</section>
+</div>
+</section>
+<section id="sec:categorising-quicksort" class="level3"
+data-number="4.3.2">
+<h3 data-number="4.3.2"><span class="header-section-number">4.3.2</span>
+Categorising Quicksort</h3>
+<p>Compared to Mergesort, the partitioning process is completely
+in-place, but on the other hand we cannot be certain that the internal
+order between equal elements are preserved. This means that Quicksort is
+not a stable algorithm, and we have no guarantee for a good time
+complexity. Here is how we can categorise Quicksort according the three
+parameters from <a
+href="section-2.1.html#sec:sorting-1:terminology">Section 2.1</a>:</p>
+<ul>
+<li>In-place: <em>yes</em>, we do not have to create any intermediate
+arrays.</li>
+<li>Stable: <em>no</em>, equal elements might change order.</li>
+<li>Adaptive: <em>yes</em>, but it the complexity will never be better
+than linearithmic, <span class="math inline">O(n\log(n))</span>.</li>
+</ul>
+<section id="sec:selection-sort-as-a-variant-of-quicksort"
+class="level4 unnumbered">
+<h4 class="unnumbered">Selection sort as a variant of Quicksort</h4>
+<p>What happens if we are extremely unlucky (or stupid) with the pivot
+selection?</p>
+<p>Let us say that we always select the smallest possible pivot. This
+means that the lower partition will always be empty, and the upper
+partition will decrease by one in each step. The first time we will find
+the smallest element and put it first in the array. The second time we
+will find the second smallest element and put it after the first. Next
+time we will find the third smallest element and put it after the
+second, and so on.</p>
+<p>This is exactly how Selection sort works! So conceptually, we can
+view Selection sort as a corner case of Quicksort, where we partition
+very unevenly.</p>
+</section>
+</section>
+<section id="sec:sorting-2:quicksort-implementation" class="level3"
+data-number="4.3.3">
+<h3 data-number="4.3.3"><span class="header-section-number">4.3.3</span>
+Implementing Quicksort</h3>
+<p>Now we’re almost ready to implement Quicksort, but one small but
+important thing remains. We cannot know how big the left and right
+partitions will be, not until we have done the partitioning. So the
+partition function has to inform Quicksort how the partitions ended up –
+and we do this is to return the final position of the pivot. So here is
+the final algorithm sketch for sorting the interval <span
+class="math inline">\mathit{start}\ldots\mathit{end}</span> of a given
+array:</p>
+<ol type="1">
+<li>Select an initial index <span class="math inline">p_0</span> of the
+pivot, from the interval <span
+class="math inline">\mathit{start}\ldots\mathit{end}</span>.</li>
+<li>Partition the interval using the pivot. Assume that the pivot has
+afterwards moved to position <span class="math inline">p</span>.</li>
+<li>Sort the interval <span class="math inline">\mathit{start}\ldots
+p{-}1</span> and the interval <span
+class="math inline">p{+}1\ldots\mathit{end}</span>.</li>
+</ol>
+<p>Note that we do not include the pivot itself in the intervals of the
+recursive calls. This is because we know that after partitioning the
+pivot is in its final correct position, <span
+class="math inline">p</span>. Now it should be straightforward to give
+the pseudocode for the main Quicksort function:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Sort the array interval start...end</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>quickSort(arr, start, end):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> start <span class="op">&gt;=</span> end:                       <span class="co">// Base case: Interval length is ≤ 1.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    p0 <span class="op">=</span> findPivot(arr, start, end)        <span class="co">// Pick an initial pivot index.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> partition(arr, start, end, p0)     <span class="co">// Partition the interval and update the pivot index.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    quickSort(arr, start, p<span class="op">-</span><span class="dv">1</span>)             <span class="co">// Quicksort the lower partition.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    quickSort(arr, p<span class="op">+</span><span class="dv">1</span>, end)               <span class="co">// Quicksort the upper partition.</span></span></code></pre></div>
+<p>The partitioning will return the final position of the pivot, which
+is the correct position of the pivot in the final, sorted array. By
+doing so, we guarantee that at least one value (the pivot) will not be
+included in the recursive calls. So even if a bad pivot is selected,
+yielding a completely empty partition to one side of the pivot, the
+larger partition will still contain one less element than the input
+array.</p>
+<section id="sec:implementing-partitioning" class="level4 unnumbered">
+<h4 class="unnumbered">Implementing partitioning</h4>
+<p>The informal algorithm in <a
+href="section-4.3.html#sec:sorting-2:partitioning">Section 4.3.1</a> can
+be implemented as pseudocode like this:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>partition(arr, start, end, p) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    swap(arr, start, p)              <span class="co">// Put the pivot at the start of the interval.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> arr[start]               <span class="co">// Remember the pivot value, and</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    low <span class="op">=</span> start <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> high <span class="op">=</span> end      <span class="co">// initialise the lower and upper pointers.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> low <span class="op">&lt;=</span> high:               <span class="co">// Continue until the pointers pass each other.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[low] <span class="op">&lt;</span> pivot:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            low <span class="op">+=</span> <span class="dv">1</span>                 <span class="co">// Increase lower pointer if smaller than the pivot.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[high] <span class="op">&gt;</span> pivot:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            high <span class="op">-=</span> <span class="dv">1</span>                <span class="co">// Decrease upper pointer if larger than the pivot.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            swap(arr, low, high)     <span class="co">// Otherwise, swap the elements, and</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            low <span class="op">+=</span> <span class="dv">1</span>                 <span class="co">// move both pointers towards each other.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            high <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    swap(arr, start, high)           <span class="co">// Finally, swap the pivot into place, and</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> high                      <span class="co">// return the new position of the pivot.</span></span></code></pre></div>
+<p>You might wonder why we swap the pivot with the value at the
+<em>upper</em> pointer, why not swapping with the lower pointer? This is
+because we started by putting the pivot at the start of the interval. An
+equally good alternative partitioning algorithm would be to first swap
+the pivot with the end of the interval – but in that case we would have
+to do the final swap with the pivot with the <em>lower</em> pointer.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation for the entire Quicksort algorithm.</p>
+</summary>
+<p>This visualisation shows you how the logical decomposition caused by
+the partitioning process works. In the visualisation, the separate
+sub-partitions are separated out to match the recursion tree. In
+reality, there is only a single array involved (as you will see in the
+proficiency exercise that follows the visualisation).</p>
+
+<div id="quicksortAV" class="embedContainer">
+<iframe id="quicksortAV_iframe" aria-label="quicksortAV" src="../interactive/Sorting/quicksortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a complete proficiency exercise to see how well you
+understand Quicksort.</p>
+</summary>
+
+<div id="quicksortPRO" class="embedContainer">
+<iframe id="quicksortPRO_iframe" aria-label="quicksortPRO" src="../interactive/Sorting/quicksortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+<section id="sec:invariants-for-partitioning" class="level4 unnumbered">
+<h4 class="unnumbered">Invariants for partitioning</h4>
+<p>In <a
+href="section-3.2.html#sec:analysis-1:invariants">Section 3.2</a> we
+introduced invariants as a way of making algorithms precise and easier
+to reason about. This is very useful when implementing partitioning,
+because it can be difficult to understand the relation between the
+pointers <em>start</em>, <em>low</em>, <em>high</em>, and
+<em>end</em>.</p>
+<p><strong>Invariant</strong>: After each iteration of the
+<code>while</code>-loop, the following invariants always hold:</p>
+<ul>
+<li>everything in the interval <em>start+1…low-1</em> is smaller or
+equal to the pivot</li>
+<li>everything in the interval <em>high+1…end</em> is larger or equal to
+the pivot</li>
+</ul>
+</section>
+</section>
+<section id="sec:selecting-a-pivot" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4"><span class="header-section-number">4.3.4</span>
+Selecting a pivot</h3>
+<p>Perhaps the most important choice in implementing Quicksort is how to
+choose the pivot. Choosing a bad pivot can result in all elements of the
+array ending up in the same partition, in which case Quicksort ends up
+taking quadratic time.</p>
+<p>The best is to select the <em>median</em> value (that is, not the
+average and not the middle value). This will make the two partitions the
+same size and we will get the best performance. In this case the
+complexity analysis is exactly the same as for Mergesort, because each
+recursive step divides the interval in two halves. Therefore Quicksort
+is linearithmic, <span class="math inline">O(n \log(n))</span>,
+<strong><em>but only if</em></strong> we always select a good pivot.</p>
+<p>However, it is difficult to find the median efficiently – we do not
+want to scan the whole array before we start partitioning, because this
+takes time. Instead we have to use some approximation.</p>
+<section id="sec:first-or-last-element" class="level4 unnumbered">
+<h4 class="unnumbered">First or last element</h4>
+<p>Choosing the <em>first</em> or the <em>last</em> element of the array
+interval is a very simple strategy, but it is also bad. If the input
+array is sorted, then the first element of the interval will also be the
+smallest (and the last will be the largest). Hence all elements of the
+array will end up in one of the partitions. Worse, exactly the same
+thing will happen in all the recursive calls to Quicksort. Hence the
+partitioning will be as bad as possible, and Quicksort will end up
+taking quadratic time.</p>
+<p>The take-first or take-last strategy is also bad if the input is
+<em>almost</em> sorted, because the partitions will be very uneven in
+size and this is not good for Quicksort.</p>
+</section>
+<section id="sec:middle-element" class="level4 unnumbered">
+<h4 class="unnumbered">Middle element</h4>
+<p>A much better alternative is to pick the <em>middle</em> element of
+the interval. This makes partitioning behave very nicely sorted arrays,
+and on almost-sorted arrays. However, it is still very easy for a hacker
+to fool this strategy, so in practice, we have to use more sophisticated
+strategies.</p>
+</section>
+<section id="sec:median-of-three" class="level4 unnumbered">
+<h4 class="unnumbered">Median-of-three</h4>
+<p>Even better is to look at a sample of the elements and pick the
+median of those. By far the most common is to take the median of the
+first, middle and last elements. This strategy is called
+<em>median-of-three</em>.</p>
+<p>For example, given the array [3, 1, 4, 1, 5, 9, 2], we pick out the
+elements 3 (first position), 1 (middle position) and 2 (last position).
+The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.</p>
+<p>Median-of-three is not guaranteed to pick a good pivot: there are
+cases where it partitions the input array badly. However, these bad
+cases do not seem to occur in practice, so median-of-three is used by
+many real-world Quicksort implementations.</p>
+</section>
+<section id="sec:non-well-behaved-input" class="level4 unnumbered">
+<h4 class="unnumbered">Non-well-behaved input</h4>
+<p>However, whatever strategy we have for choosing the pivot there is a
+risk that we are unlucky. In other words, there are always arrays that
+will make the strategy select a bad pivot. This is usually not a problem
+if the data is “well-behaved” – the pivot selected by the take-middle or
+median-of-three strategy will be close to optimal, and Quicksort will be
+as the name says, quick.</p>
+<p>The problem arises as soon as you are not 100% certain where the data
+comes from. For example, if you implement a database that is connected
+to the internet, it can be exploited by a malicious hacker. If they know
+what strategy you use they can design input that will make your
+Quicksort algorithm quadratic instead of almost linear, and then bombard
+your database with such inputs which will make your server slow down to
+a halt.</p>
+</section>
+<section id="sec:random-pivot" class="level4 unnumbered">
+<h4 class="unnumbered">Random pivot</h4>
+<p>So, how can we find a good pivot that is secure to hackers? One
+simple approach is to select a <em>random</em> element from the
+interval. This makes it extremely improbable that we will always get
+poor partitionings. In fact, it is possible to prove that the
+<em>expected</em> worst-case complexity of Quicksort with random pivot
+selection is linearithmic, <span
+class="math inline">O(n\log(n))</span>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:quicksort-pivot-proficiency-exercise"
+class="level4 unnumbered">
+<h4 class="unnumbered">Quicksort pivot proficiency exercise</h4>
+</summary>
+<p>In this exercise you should select which is the pivot element, if you
+always use the middle one.</p>
+
+<div id="QuicksortPivotPRO" class="embedContainer">
+<iframe id="QuicksortPivotPRO_iframe" aria-label="QuicksortPivotPRO" src="../interactive/Sorting/QuicksortPivotPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</section>
+</div>
+</section>
+</section>
+<section id="sec:complexity-analysis-1" class="level3"
+data-number="4.3.5">
+<h3 data-number="4.3.5"><span class="header-section-number">4.3.5</span>
+Complexity analysis</h3>
+<p>To analyse Quicksort, we first analyse the functions for finding the
+pivot and partitioning an interval of length <span
+class="math inline">k</span>. All the pivot selection strategies above
+take constant time for any <span class="math inline">k</span>, so the
+total cost of partitioning is constrained by how far the lower and upper
+pointers can move towards each other.</p>
+<ul>
+<li>In each step of the <code>while</code>-loop, either <em>low</em> or
+<em>high</em> (or both) moves one step.</li>
+<li>Since the pointers always move towards each other, it will take at
+most <span class="math inline">k</span> steps until they meet.</li>
+<li>So, the running time of the partition function is <span
+class="math inline">O(k)</span>.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation illustrating the running time analysis of the
+partition function.</p>
+</summary>
+
+<div id="QuickSortPartitionAnalysisCON" class="ssAV" data-short-name="QuickSortPartitionAnalysisCON" data-long-name="Quicksort Partition Analysis Slideshow" alt="Quicksort Partition Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortPartitionAnalysisCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortPartitionAnalysisCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortPartitionAnalysisCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<section id="sec:worst-case-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Worst-case complexity</h4>
+<p>Quicksort’s worst case will occur when the pivot does a poor job of
+breaking the array, that is, when one partition becomes empty, and the
+other contains <span class="math inline">n-1</span> elements.</p>
+<ul>
+<li>The pivot partitions the array into two parts: one of size <span
+class="math inline">0</span> and the other of size <span
+class="math inline">n-1</span>. This requires <span
+class="math inline">n-1</span> units of work.</li>
+<li>In the second level, the pivot breaks it into two parts: one of size
+<span class="math inline">0</span> and the other of size <span
+class="math inline">n-2</span>. This requires <span
+class="math inline">n-2</span> units of work.</li>
+<li>In the third level, the pivot breaks it into two parts: one of size
+<span class="math inline">0</span> and the other of size <span
+class="math inline">n-3</span>. This requires <span
+class="math inline">n-3</span> units of work.</li>
+<li>And so on until the last level, where the pivot breaks a partition
+of size <span class="math inline">2</span> into two parts: one of size
+<span class="math inline">0</span> and the other of size <span
+class="math inline">1</span>. This requires a single unit of work.</li>
+</ul>
+<p>Thus, the total amount of work is determined by the summation:</p>
+<p><span class="math display">
+\sum_{i=1}^{n} i = \frac{1}{2} n (n-1) \; \in \; O(n^2)
+</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation explains the worst-case running time of
+Quicksort</p>
+</summary>
+
+<div id="QuickSortWorstCaseCON" class="ssAV" data-short-name="QuickSortWorstCaseCON" data-long-name="Quicksort Worst Case Analysis Slideshow" alt="Quicksort Worst Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortWorstCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortWorstCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortWorstCaseCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>So, the worst case running time of Quicksort is <span
+class="math inline">O(n^2)</span>. This is terrible, no better than
+Insertion or Selection sort. When will this worst case occur? Only when
+each pivot yields a bad partitioning of the array. If the pivot values
+are selected at random, then this is extremely unlikely to happen. If we
+instead always select the middle element in the interval, it is still
+unlikely to happen <em>on well-behaved data</em>. It does not take many
+good partitionings for Quicksort to work fairly well.</p>
+</section>
+<section id="sec:best-case-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Best-case complexity</h4>
+<p>In <a
+href="section-3.5.html#sec:analysis-1:complexity-cases">Section 3.5</a>
+we argued why we usually are not interested in the best-case complexity,
+but Quicksort is an exception to this. It is interesting and useful to
+analyse the best-case complexity of Quicksort, because the best case is
+so much more common than the worst case (in normal circumstances). The
+very best case occurs if we always selects the best possible pivot,
+which is the one that always partitions the array into equal-sized
+parts.</p>
+<ul>
+<li>The pivot partitions the array into two halves of size <span
+class="math inline">n/2</span> each. This requires <span
+class="math inline">O(n)</span> amount of work.</li>
+<li>For each of the two partitions, the pivot breaks it into halves of
+size <span class="math inline">n/4</span> each. This requires <span
+class="math inline">O(n)</span> amount of work.</li>
+<li>For each of the four partitions, the pivot breaks it into halves of
+size <span class="math inline">n/8</span> each. This requires <span
+class="math inline">O(n)</span> amount of work.</li>
+<li>And so on until the last level, where we reach <span
+class="math inline">n</span> partitions each of size <span
+class="math inline">1</span>. This requires <span
+class="math inline">O(n)</span> amount of work.</li>
+</ul>
+<p>Note that this is exactly the same reasoning as for Mergesort. Thus,
+for each level, all partition steps for that level do a total of <span
+class="math inline">O(n)</span> work. And if we always can find the
+perfect pivot, there will be only <span
+class="math inline">\log_2(n)</span> levels. So the best-case running
+time of Quicksort is <span class="math inline">O(n \log(n))</span>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation explains the best-case running time of
+Quicksort</p>
+</summary>
+
+<div id="QuickSortBestCaseCON" class="ssAV" data-short-name="QuickSortBestCaseCON" data-long-name="Quicksort Best Case Analysis Slideshow" alt="Quicksort Best Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortBestCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortBestCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortBestCaseCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
+<section id="sec:average-case-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Average-case complexity</h4>
+<p>Quicksort’s average-case behaviour falls somewhere between the
+extremes of worst and best case. Average-case analysis considers the
+cost for all possible arrangements of input, and calculates the average
+cost, weighted by how the data is distributed. As we already discussed
+in <a
+href="section-3.5.html#sec:analysis-1:complexity-cases">Section 3.5</a>,
+the average case is extremely difficult to reason about, because
+real-world data does not usually have an even distribution.</p>
+<p>For Quicksort it is possible to show that the number of “bad” cases
+are quickly outnumbered by the number of “good” cases, when the array
+size grows. This means that for <em>well-behaved</em> input, the
+average-case complexity of Quicksort is very likely to be closer to the
+best case than the worst case. In fact, if we select a <em>random
+pivot</em> in every step, then we can prove that the <em>expected</em>
+worst-case complexity is linearithimc, <span
+class="math inline">O(n\log(n))</span>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:inferring-the-complexity-with-a-random-pivot"
+class="level4 unnumbered">
+<h4 class="unnumbered">Inferring the complexity with a random pivot</h4>
+</summary>
+<p>If we use a random pivot, then at every step, the pivot is equally
+likely to end in any position in the array. In other words, the pivot is
+equally likely to break an array into partitions of sizes 0 and <span
+class="math inline">n-1</span>, or 1 and <span
+class="math inline">n-2</span>, and so on. Now the average-case cost
+<span class="math inline">T(n)</span> can be computed from the following
+equation:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
+\\
+T(0) = T(1) &amp;= c
+\end{align*}</span></p>
+<p>The equation above is a <em>recurrence relation</em>, and we will
+discuss those in more detail in <a
+href="section-7.3.html#sec:analysis-3:recurrences">Section 7.3</a>. This
+visualisation will help you to understand how the recurrence relation
+was formed.</p>
+
+<div id="QuickSortAverageCaseCON" class="ssAV" data-short-name="QuickSortAverageCaseCON" data-long-name="Quicksort Average Case Analysis Slideshow" alt="Quicksort Average Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortAverageCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortAverageCaseCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</section>
+</div>
+</section>
+</section>
+<section id="sec:sorting-2:quicksort-optimisations" class="level3"
+data-number="4.3.6">
+<h3 data-number="4.3.6"><span class="header-section-number">4.3.6</span>
+Variants and optimisations</h3>
+<p>In this section we discuss some variants of Quicksort, and things we
+can do to improve its efficiency.</p>
+<section id="sec:shuffle-the-array" class="level4 unnumbered">
+<h4 class="unnumbered">Shuffle the array</h4>
+<p>As we explained above, if we use a random pivot we get a good
+asymptotic behaviour, because the expected worst-case complexity will be
+<span class="math inline">O(n\log(n))</span>.</p>
+<p>One alternative to using a random pivot is to <em>shuffle</em> the
+array before sorting, that is, rearranging it in random order. This only
+has to be done once before Quicksort begins, not in every recursive
+call. The advantage to doing this is that then we can safely use the
+simplest pivot selection strategy. And if we use the take-first pivot
+strategy we do not have to swap the pivot with the first element at the
+start of every partitioning. Depending on the computer and programming
+language, this can yield a slight improvement compared to using a random
+pivot.</p>
+</section>
+<section id="sec:backing-off-to-insertion-sort"
+class="level4 unnumbered">
+<h4 class="unnumbered">Backing off to Insertion sort</h4>
+<p>A significant improvement can be gained by recognising that Quicksort
+is relatively slow when the array is small. This might not seem to be
+relevant if most of the time we sort large arrays, nor should it matter
+how long Quicksort takes in the rare instance when a small array is
+sorted because it will be fast anyway. But you should notice that
+Quicksort itself sorts many, many small arrays! This happens as a
+natural by-product of the divide and conquer approach.</p>
+<p>A simple improvement is to replace Quicksort with a faster sort for
+smaller array intervals. This is a very common improvement, and usually
+one uses Insertion sort as the backoff algorithm. Now, at what size
+should we switch to Insertion sort? The answer can only be determined by
+empirical testing, but on modern machines the answer is probably
+somewhere between 10 and 100. Note that in <a
+href="section-4.2.html#sec:sorting-2:mergesort-optimisations">Section 4.2.5</a>
+we discussed exactly the same improvement for Mergesort.</p>
+</section>
+<section id="sec:running-insertion-sort-in-a-single-final-pass"
+class="level4 unnumbered">
+<h4 class="unnumbered">Running Insertion sort in a single final
+pass</h4>
+<p>There is a variant of the optimisation above: When Quicksort
+partitions are below a certain size, do nothing! The values within that
+partition will be out of order. However, we do know that all values in
+the array to the left of the partition are smaller than all values in
+the partition. All values in the array to the right of the partition are
+greater than all values in the partition. Thus, even if Quicksort only
+gets the values to “nearly” the right locations, the array will be close
+to sorted. This is an ideal situation in which to take advantage of the
+best-case performance of Insertion sort. The final step is a single call
+to Insertion sort to process the entire array, putting the records into
+final sorted order.</p>
+</section>
+<section id="sec:alternative-partitioning-approaches"
+class="level4 unnumbered">
+<h4 class="unnumbered">Alternative partitioning approaches</h4>
+<p>There are several possible ways we can translate the informal
+partitioning algorithm into working code. For example, in our
+implementation above we move the pointers at most one step in each
+iteration of the <code>while</code>-loop. An alternative is to move the
+pointers as far as possible during each iteration, and then the
+pseudocode will become like this:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, temp, <span class="dv">0</span>, arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>partition(arr, start, end, p) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    swap(arr, start, p)          <span class="co">// Swap the pivot with the first element in the interval.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> arr[start]           <span class="co">// Remember the pivot value, and</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    low <span class="op">=</span> start <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> high <span class="op">=</span> end  <span class="co">// initialise the lower and upper pointers.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> low <span class="op">&lt;=</span> high <span class="kw">and</span> arr[low] <span class="op">&lt;</span> pivot:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            low <span class="op">+=</span> <span class="dv">1</span>             <span class="co">// Increase lower pointer as long as it&#39;s smaller than the pivot.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> low <span class="op">&lt;=</span> high <span class="kw">and</span> arr[high] <span class="op">&gt;</span> pivot:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            high <span class="op">-=</span> <span class="dv">1</span>            <span class="co">// Increase upper pointer as long as it&#39;s larger than the pivot.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> low <span class="op">&gt;</span> high:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>                <span class="co">// Break out of loop when the pointers have passed each other.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        swap(arr, low, high)     <span class="co">// Otherwise, swap the elements, and</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        low <span class="op">+=</span> <span class="dv">1</span>                 <span class="co">// move both pointers towards each other.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        high <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    swap(arr, start, high)       <span class="co">// Finally, swap the pivot into place, and</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> high                  <span class="co">// return the new position of the pivot.</span></span></code></pre></div>
+<p>This version is ever so slightly faster than the one in <a
+href="section-4.3.html#sec:sorting-2:quicksort-implementation">Section 4.3.3</a>,
+because in some cases it makes fewer comparisons. It is even possible to
+improve this one a little bit more, because we do not need test
+<code>low&lt;=high</code> in the second inner while loop (try to reason
+for yourself why that is the case).</p>
+<p>The partitioning algorithm we described previously is called
+<em>Hoare</em> partitioning (named after the computer scientist C.A.R.
+Hoare). There is another common partitioning algorithm, where both
+pointers start at the left side and move to the right – but one of them
+moves faster than the other. This algorithm is called <em>Lomuto</em>
+partitioning (named after Nico Lomuto). In this algorithm we still have
+two pointers, but both start at the beginning of the array interval and
+move upwards. Below we call them <span
+class="math inline">\mathit{low}</span> and <span
+class="math inline">\mathit{high}</span>, where <span
+class="math inline">\mathit{low}\leq\mathit{high}</span>. The invariant
+is that the elements from <span
+class="math inline">\mathit{start}</span> to <span
+class="math inline">\mathit{low}-1</span> are always less than the
+pivot, and the elements from <span
+class="math inline">\mathit{low}</span> to <span
+class="math inline">\mathit{high}</span> are greater than or equal to
+the pivot. In Lomuto’s partitioning scheme we start by putting the pivot
+at the <em>end</em> of the interval, not the beginning.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>partition(arr, start, end, p) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    swap(arr, p, end)             <span class="co">// Swap the pivot with the last element in the interval.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> arr[start]            <span class="co">// Remember the pivot value, and</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    low <span class="op">=</span> start                   <span class="co">// initialise the lower pointer.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> high <span class="kw">in</span> start .. end<span class="op">-</span><span class="dv">1</span>:   <span class="co">// Iterate the upper pointer over the entire interval.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[high] <span class="op">&lt;=</span> pivot:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            swap(arr, low, high)  <span class="co">// Swap lower and upper elements if upper is smaller than pivot,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            low <span class="op">+=</span> <span class="dv">1</span>              <span class="co">// and increase the lower pointer.</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    swap(arr, end, low)           <span class="co">// Finally, swap the pivot into place, and</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> low                    <span class="co">// return the new position of the pivot.</span></span></code></pre></div>
+<p>As you can see, Lomuto’s partitioning scheme gives very simple and
+clean implementation, but it is usually somewhat less efficient than
+Hoare’s, because it makes more swaps. It also does not work very well if
+the array contains many equal elements.</p>
+</section>
+<section id="sec:three-way-quicksort" class="level4 unnumbered">
+<h4 class="unnumbered">Three-way quicksort</h4>
+<p>If the array contains many equal elements, there is a small
+optimisation we can do to the partitioning scheme. Our current
+formulation divides the array into one lower part, then the pivot, and
+finally the upper part. If the array happens to contain many duplicates
+of the pivot, it would be useful to put all of them next to each other.
+This means that the algorithm divides the array into <em>three</em>
+parts: the lower part, the equal part, and the upper part. Our
+partitioning algorithm then has to return <em>two</em> indices, giving
+the end of the lower part and the beginning of the upper. Assuming that
+we have such an algorithm, the final Quicksort algorithm can be
+described like this:</p>
+<ol type="1">
+<li>Select an initial pivot from the interval <span
+class="math inline">\mathit{start}\ldots\mathit{end}</span>.</li>
+<li>Partition the interval using the pivot. Assume that the partitioning
+returns the positions <span class="math inline">p</span> (the end of the
+lower part) and <span class="math inline">q</span> (the start of the
+upper part).</li>
+<li>Sort the interval <span class="math inline">\mathit{start}\ldots
+p</span> and the interval <span
+class="math inline">q\ldots\mathit{end}</span>.</li>
+</ol>
+<p>Three-way partitioning is also called the <em>Dutch national flag
+problem</em>, and the most common algorithm for solving it is a
+modification the Lomuto partitioning scheme from above.</p>
+</section>
+</section>
 </section>
 </main>
 
@@ -192,7 +921,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <a href="section-4.2.html" accesskey="p" rel="previous">Mergesort</a>
 </div>
 <div class="navlink">
-<a href="section-4.4.html" accesskey="n" rel="next">Quicksort</a>
+<a href="section-4.4.html" accesskey="n" rel="next">Summary of sorting algorithms</a>
 <a href="section-4.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -200,5 +929,6 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 
 </body>
 </html>
+
 
 

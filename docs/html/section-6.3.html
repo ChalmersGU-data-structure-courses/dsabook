@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Stacks implemented as linked lists</title>
+  <title>DSABook – Array-based sequences</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,26 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/List/aqueueCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,221 +101,481 @@
 <nav class="sitenav">
 <div>
 <a href="section-6.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.2.html" accesskey="p" rel="previous">Stacks and queues</a>
+<a href="section-6.2.html" accesskey="p" rel="previous">Linked lists</a>
 </div>
 <div>
-<a href="section-6.4.html" accesskey="n" rel="next">Queues implemented as linked lists</a>
+<a href="section-6.4.html" accesskey="n" rel="next">Dynamic arrays</a>
 <a href="section-6.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:stacks-implemented-as-linked-lists" class="level2"
+<section id="sec:sequences:array-sequences" class="level2"
 data-number="6.3">
 <h2 data-number="6.3"><span class="header-section-number">6.3</span>
-Stacks implemented as linked lists</h2>
-<p>In this section we present one of the two traditional implementations
-for lists, usually called a <a href="section-14.html#linked-list"
-class="term"
-title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
-list</a>. The linked list uses <a
-href="section-14.html#dynamic-memory-allocation" class="term"
-title="A programming technique where linked objects in a data structure are created from free store as needed. When no longer needed, the object is either returned to free store or left as garbage, depending on the programming language.">dynamic
-memory allocation</a>, that is, it allocates memory for new list
-elements as needed. The following diagram illustrates the linked list
-concept. There are three <a href="section-14.html#node" class="term"
-title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>
-that are “linked” together. Each node has two boxes. The box on the
-right holds a link to the next node in the list. Notice that the
-rightmost node does not have any link coming out of this box.</p>
-
-<div id="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" class="ssAV" data-short-name="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" data-long-name="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" alt="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f "+rule)}
-    var av = NewAV();
-var l = av.ds.list({nodegap: 30});
-l.addFirst("").addFirst("").addFirst("");
-l.layout();
-av.displayInit();
-av.recorded();
-  });
-</script>
-
-<section id="sec:linked-list-nodes" class="level4 unnumbered">
-<h4 class="unnumbered">Linked list nodes</h4>
-<p>Because a list node is a distinct object (as opposed to simply a cell
-in an array), it is good practice to make a separate data type for list
-nodes. Objects of the data type <code>Node</code> contain a field
-<code>elem</code> to store the element value, and a field
-<code>next</code> to store a pointer to the next node on the list.</p>
+Array-based sequences</h2>
+<p>In the last section we showed how to implement stacks and queues
+using linked lists. But we already have a built-in data structure which
+stores elements in some kind of order – arrays. Can we use arrays to
+implement stacks and queues too?</p>
+<p>Yes, and we will show how to do that here. There is one big problem
+with using arrays – they are always <em>fixed size</em>. So if we have
+an array of size 100 we can only have a stack or queue with at most 100
+elements. This is a serious restriction, and in the next section we will
+show how to solve that – a <em>dynamic array</em> has the same features
+as a normal array, but it can change its size dynamically. But in this
+section we will for now assume that we have a fixed maximum number of
+elements.</p>
+<section id="sec:sequences:array-stacks" class="level3"
+data-number="6.3.1">
+<h3 data-number="6.3.1"><span class="header-section-number">6.3.1</span>
+Array-based stacks</h3>
+<p>An array-based stack uses an internal array as underlying storage,
+and this array has a predefined size. In this example the underlying
+array has an internal size of 100:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Node <span class="kw">of</span> T:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T          <span class="co">// Value for this node</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: Node <span class="kw">of</span> T  <span class="co">// Pointer to next node in list</span></span></code></pre></div>
-<p>The list built from such nodes is called a <a
-href="section-14.html#singly-linked-list" class="term"
-title="A linked list implementation variant where each list node contains access a pointer only to the next element in the list.">singly
-linked list</a>, or a <a href="section-14.html#one-way-list"
-class="term"
-title="A linked list implementation variant where each list node contains access a pointer only to the next element in the list.">one-way
-list</a>, because each list node has a single pointer to the next node
-on the list.</p>
-<p>In this section and the next we describe how to use linked lists to
-implement stacks and queues, and in <a
-href="section-6.9.html#sec:double-ended-queues">Section 6.9</a> and <a
-href="section-6.10.html#sec:general-lists">Section 6.10</a> we will
-discuss extensions such as double-ended queues and general lists.</p>
-</section>
-<section id="sec:linked-stacks" class="level4 unnumbered">
-<h4 class="unnumbered">Linked stacks</h4>
-<p>The linked stack implementation is quite simple. Elements are
-inserted and removed only from the head of the list. Here is a visual
-representation for a linked stack.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">100</span>)   <span class="co">// Internal array containing the stack elements</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>               <span class="co">// The size of the stack</span></span></code></pre></div>
+<p>Note that 100 is the internal <em>capacity</em> of the stack, it is
+not the actual size. When the stack is created it should be empty, and
+therefore the initial stack size is 0.</p>
+<p>An important design decision is which end of the array should
+represent the top of the stack. It might be tempting to let the top be
+the first element in the array, that is, the element at position 0.
+However, this is inefficient: whenever we want to push to or pop from
+the stack, we would have to shift all elements in the array one position
+to the left or to the right.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we discuss where the top of the stack should be stored.</p>
+</summary>
 
-<div id="img-jsav-5cc54333495449d5cc528c7a1ec3a090" class="ssAV" data-short-name="img-jsav-5cc54333495449d5cc528c7a1ec3a090" data-long-name="img-jsav-5cc54333495449d5cc528c7a1ec3a090" alt="img-jsav-5cc54333495449d5cc528c7a1ec3a090" tabIndex="-1">
+<div id="DynamicArrayStack-Top-CON" class="ssAV" data-short-name="DynamicArrayStack-Top-CON" data-long-name="Array stack top position slideshow" alt="Array stack top position slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 
-
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Top-CON.js"></script>
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-5cc54333495449d5cc528c7a1ec3a090", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-5cc54333495449d5cc528c7a1ec3a090 "+rule)}
-    var AV = NewAV();
-var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
-l.addFirst(15).addFirst(12).addFirst(8).addFirst(23).addFirst(20);
-l.layout();
-AV.pointer("top", l.get(0));
-AV.displayInit();
-AV.recorded();
+    function NewAV() {return new JSAV("DynamicArrayStack-Top-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Top-CON "+rule)}
+    
   });
 </script>
 
-<p>Our data type for linked stacks contains two instance variables, one
-pointer to the head of the stack (called the <code>top</code>), and a
-variable storing the number of elements. (This second variable is in
-theory unnecessary, but it improves the efficiency of getting the stack
-size).</p>
+</details>
+</div>
+<p>A much better solution is to have the top be the <em>last
+element</em>, that is, the element at position <span
+class="math inline">n-1</span> (if <span class="math inline">n</span> is
+the size of the stack). Then we do not have to shift around a lot of
+elements, but instead we can move the stack pointer to the left or the
+right. <a href="#fig:array-stack">Figure 6.4</a> shows two ways of
+viewing the same array-based stack with four elements.</p>
+<figure id="fig:array-stack">
+<img src="images/Sequences-ArrayStack.svg" style="width:100.0%"
+alt="Figure 6.4: Two ways to visualise the same array-based stack. The stack has size 4, but the array has a capacity of 8 elements. The left picture is more accurate to how it is stored in memory, but the right one is more compact and is how we normally depict it." />
+<figcaption aria-hidden="true">Figure 6.4: Two ways to visualise the
+same array-based stack. The stack has size 4, but the array has a
+capacity of 8 elements. The left picture is more accurate to how it is
+stored in memory, but the right one is more compact and is how we
+normally depict it.</figcaption>
+</figure>
+<section id="sec:pushing-and-popping-1" class="level4 unnumbered">
+<h4 class="unnumbered">Pushing and popping</h4>
+<p>In an array-based stack we do not need a separate pointer to the
+<em>top</em>, because it is the same as the <em>size</em> variable
+(minus 1). That is, the <em>size</em> points to the index of the next
+free array cell. Therefore, to push a value onto the stack, we assign
+<code>arr[size]</code> and then increase the size. (Note that for now we
+ignore the possibility that the stack is full.)</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    top: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to top of stack</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>      <span class="co">// Size of stack</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(stack, value):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    stack.arr[stack.<span class="bu">size</span>] <span class="op">=</span> value</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
 <div class="dsvis">
 <details open="true">
 <summary>
-<section id="sec:pushing-to-a-linked-stack" class="level4 unnumbered">
-<h4 class="unnumbered">Pushing to a linked stack</h4>
+<p>Here we show how to push to an array-based stack.</p>
 </summary>
 
-<div id="LinkedStack-Push-CON" class="ssAV" data-short-name="LinkedStack-Push-CON" data-long-name="Linked Stack Push" alt="Linked Stack Push" tabIndex="-1">
+<div id="DynamicArrayStack-Push-CON" class="ssAV" data-short-name="DynamicArrayStack-Push-CON" data-long-name="Array stack push slideshow" alt="Array stack push slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Push-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Push-CON.js"></script>
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("LinkedStack-Push-CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Push-CON "+rule)}
+    function NewAV() {return new JSAV("DynamicArrayStack-Push-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Push-CON "+rule)}
     
   });
 </script>
 
 </details>
-</section>
 </div>
-<p>To push a new element onto the stack, we first have to create a new
-node and set its value. Then we set its next pointer to the current top
-of the stack, and after that we can redirect the top to the new node. We
-also have to increase the size of the stack by one. The actions to
-create the node, set its value and pointer, and then redirect the stack
-top, can be done in one single line, like this:</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a proficiency exercise about pushing to array-based
+stacks.</p>
+</summary>
+
+<div id="DynamicArrayStack-Push-PRO" class="embedContainer">
+<iframe id="DynamicArrayStack-Push-PRO_iframe" aria-label="DynamicArrayStack-Push-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Push-PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<p>To pop an element from the stack we do the reverse of pushing: first
+we decrease the <em>size</em>, then we remember the result in a
+temporary variable. After that we can clear the old top cell in the
+array and return the result.</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(elem):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">new</span> Node(elem, top)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pop</span>(stack):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> stack.arr[stack.<span class="bu">size</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    stack.arr[stack.<span class="bu">size</span>] <span class="op">=</span> <span class="va">null</span>    <span class="co">// For garbage collection</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<p>Note that it is important that we clear the old top value (by
+assigning the cell to <em>null</em>). Otherwise the old value will still
+be referred to by the internal array, and then the automatic garbage
+collection cannot remove the object. In addition, we assume that the
+stack is non-empty.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>Linked stack – push exercise.</p>
+<p>Here we show how to pop from an array-based stack.</p>
 </summary>
 
-<div id="LstackPushPRO" class="embedContainer">
-<iframe id="LstackPushPRO_iframe" aria-label="LstackPushPRO" src="../interactive/ChalmersGU/LstackPushPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:popping-from-a-linked-stack" class="level4 unnumbered">
-<h4 class="unnumbered">Popping from a linked stack</h4>
-</summary>
-
-<div id="LinkedStack-Pop-CON" class="ssAV" data-short-name="LinkedStack-Pop-CON" data-long-name="Linked Stack Pop" alt="Linked Stack Pop" tabIndex="-1">
+<div id="DynamicArrayStack-Pop-CON" class="ssAV" data-short-name="DynamicArrayStack-Pop-CON" data-long-name="Array stack pop slideshow" alt="Array stack pop slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Pop-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-CON.js"></script>
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("LinkedStack-Pop-CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Pop-CON "+rule)}
+    function NewAV() {return new JSAV("DynamicArrayStack-Pop-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Pop-CON "+rule)}
     
   });
 </script>
 
 </details>
-</section>
 </div>
-<p>To pop the topmost element off the stack, we first have to remember a
-pointer to the current top node, because we want to return its value
-after we have updated the stack. Then we can redirect the stack top to
-the next node. After that we decrease the size and return the value of
-the removed node:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>():</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> top</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
-<p>Note that we also set the <code>next</code> pointer of the old top to
-<strong>null</strong>. This is to help the garbage collection system
-actually remove the whole node when noone is using it anymore.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>Linked stack – pop exercise.</p>
+<p>Here is a proficiency exercise about popping from array-based
+stacks.</p>
 </summary>
 
-<div id="LstackPopPRO" class="embedContainer">
-<iframe id="LstackPopPRO_iframe" aria-label="LstackPopPRO" src="../interactive/ChalmersGU/LstackPopPRO.html" width="100%" height="600" scrolling="no">
+<div id="DynamicArrayStack-Pop-PRO" class="embedContainer">
+<iframe id="DynamicArrayStack-Pop-PRO_iframe" aria-label="DynamicArrayStack-Pop-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
 
 </details>
 </div>
+</section>
+<section id="sec:example-implementing-two-stacks-using-one-array"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Implementing two stacks using one
+array</h4>
+<p>If you need to use two stacks at the same time, you can take
+advantage of the one-way growth of a stack by using a single array to
+store two stacks that grow toward each other from each end, hopefully
+leading to less wasted space. However, this only works well when the
+space requirements of the stacks are inversely correlated. In other
+words, ideally when one stack grows, the other will shrink. This is
+particularly effective when elements are taken from one stack and given
+to the other. If instead both stacks grow at the same time, then the
+free space in the middle of the array will be exhausted quickly.</p>
+<p><img src="images/Sequences-ArrayDoubleStack.svg"
+style="width:80.0%" /></p>
+</section>
+</section>
+<section id="sec:sequences:array-queues" class="level3"
+data-number="6.3.2">
+<h3 data-number="6.3.2"><span class="header-section-number">6.3.2</span>
+Array-based queues</h3>
+<p>An array-based queue is somewhat tricky to implement effectively. A
+simple conversion of the array-based stack is not efficient:</p>
+<ul>
+<li><p>If we let the queue front be the same as the stack top – that is,
+the last element in the array – then we can easily enqueue new elements
+by simply moving the front pointer. But then the rear will be the first
+array element, and if we want to dequeue it we have to shift all the
+remaining elements to the left in the array. This is time-consuming and
+dequeueing becomes linear, <span
+class="math inline">O(n)</span>.</p></li>
+<li><p>If we instead let the front be the first array element,
+dequeueing becomes easy. But then we will instead have to shift all
+elements to be able to enqueue, again giving complexity <span
+class="math inline">O(n)</span>.</p></li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Array queue – positions.</p>
+</summary>
+
+<div id="aqueueFirstCON" class="ssAV" data-short-name="aqueueFirstCON" data-long-name="Array-based Queue Positions Slideshow" alt="Array-based Queue Positions Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/List/aqueueFirstCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueFirstCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueFirstCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>The solution is to have <em>two</em> pointers, to the front and to
+the rear, and let both of them change dynamically. This means that we
+relax the requirement that the queue must occupy the start of the array.
+The queue simply consists of all elements between the <em>front</em> and
+the <em>rear</em> cells. Now enqueueing and dequeueing becomes rather
+similar to each other:</p>
+
+<ul>
+<li>To <em>enqueue</em> an element, we increase the <em>rear</em>
+pointer.</li>
+<li>To <em>dequeue</em> an element, we instead increase the
+<em>front</em> pointer.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Array queue – drifting.</p>
+</summary>
+
+<div id="aqueueDriftCON" class="ssAV" data-short-name="aqueueDriftCON" data-long-name="Array-based Queue Drift Slideshow" alt="Array-based Queue Drift Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/List/aqueueDriftCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueDriftCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueDriftCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Note that both pointers will increase, they will never decrease.
+After a while, when we have enqueued enough elements, the <em>rear</em>
+pointer will reach the end of the array, and this will happen even if we
+have dequeued all previous elements! For example, suppose that we run
+<em>enqueue</em> directly followed by a <em>dequeue</em>, and we do this
+100 times. The queue itself will never contain more than one element,
+but after repeating 100 times the <em>rear</em> pointer has reached the
+end of the array (assuming that we allocated space for 100 elements).
+The next time we enqueue an element the program will crash, because we
+try to refer to an array cell that does not exist.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Array queue – bad representation.</p>
+</summary>
+
+<div id="aqueueBadCON" class="ssAV" data-short-name="aqueueBadCON" data-long-name="Array-based Queue Bad Representation Slideshow" alt="Array-based Queue Bad Representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/List/aqueueBadCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueBadCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueBadCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<section id="sec:queues-as-circular-arrays" class="level4 unnumbered">
+<h4 class="unnumbered">Queues as circular arrays</h4>
+<p>Both enqueueing and dequeueing will increase the front and rear
+positions – the variables will never decrease. This causes the queue to
+<em>drift</em> within the array, and at some point the rear will hit the
+end of the array. We might get into a situation where the queue itself
+only occupies a few array cells, but the rear is still at the very
+end.</p>
+<p>This “drifting queue” problem can be solved by pretending that the
+array is <em>circular</em>, meaning that we can go from the last array
+cell directly to the first. If the <em>front</em> pointer points
+somewhere in the middle of the array there is plenty of space at the
+beginning – so we can “wrap around” the <em>rear</em> pointer and let it
+start from the beginning. And when we have dequeued a lot of elements,
+<em>front</em> will reach the end of the array – so we treat it in the
+same way and let it wrap around too.</p>
+<p><a href="#fig:array-queue">Figure 6.5</a> shows two versions storing
+exactly the same 4-element queue. The element that was added most
+recently is “<em>dogs</em>”, which is what the <em>rear</em> points to,
+and <em>front</em> points to “<em>every</em>”, which is the one that has
+waited the longest. When we want to enqueue a new element, it will be
+assigned to the empty cell after <em>rear</em>.</p>
+<figure id="fig:array-queue">
+<img src="images/Sequences-ArrayQueue.svg"
+alt="Figure 6.5: Two possible ways of storing the same 4-element queue in an array with capacity 8. The leftmost version is what we get after enqueuing the elements directly into a new empty queue. The version to the right can occur if we have enqueued and dequeued a lot of elements." />
+<figcaption aria-hidden="true">Figure 6.5: Two possible ways of storing
+the same 4-element queue in an array with capacity 8. The leftmost
+version is what we get after enqueuing the elements directly into a new
+empty queue. The version to the right can occur if we have enqueued and
+dequeued a lot of elements.</figcaption>
+</figure>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Circular array queue.</p>
+</summary>
+
+<div id="aqueueCircularCON" class="ssAV" data-short-name="aqueueCircularCON" data-long-name="Circular Array-based Queue Slideshow" alt="Circular Array-based Queue Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/CircularQueue.js"></script>
+<script type="text/javascript" src="../interactive/List/aqueueCircularCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueCircularCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueCircularCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>There remains one more subtle problem to the array-based queue
+implementation. How can we recognise when the queue is empty or full? If
+the array has size <span class="math inline">n</span>, then it can store
+queues of size <span class="math inline">0</span> to <span
+class="math inline">n</span>, therefore it can store <span
+class="math inline">n+1</span> different queue lengths. But both when
+the queue is empty (size <span class="math inline">0</span>) and when it
+is full (size <span class="math inline">n</span>), the <em>front</em>
+variable is one larger than <em>rear</em>. In other words, if <span
+class="math inline">\mathit{front}=\mathit{rear}+1</span>, is the queue
+empty or full?</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Circular array queue – empty.</p>
+</summary>
+
+<div id="aqueueEmptyCON" class="ssAV" data-short-name="aqueueEmptyCON" data-long-name="Empty Circular Array-based Queue Slideshow" alt="Empty Circular Array-based Queue Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/CircularQueue.js"></script>
+<script type="text/javascript" src="../interactive/List/aqueueEmptyCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueEmptyCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueEmptyCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>One obvious solution is to keep an explicit count of the number of
+elements in the queue, that is, to use a special <em>size</em> variable.
+Another solution is to set <em>front</em> and <em>rear</em> to some
+unused number (such as <span class="math inline">-1</span>) whenever the
+queue becomes empty. Which of these solutions to adopt is purely a
+matter of the implementor’s taste in such affairs. Our choice here is to
+keep an explicit count of the number of elements, in a variable
+<em>size</em>, because this will make the code more similar to our other
+implementations.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayQueue:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">100</span>)    <span class="co">// Internal array containing the queue elements.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>                <span class="co">// The size of the queue.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    front <span class="op">=</span> <span class="dv">0</span>               <span class="co">// Index of the front element.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>               <span class="co">// Index of the rear element.</span></span></code></pre></div>
+</section>
+<section id="sec:enqueueing-and-dequeueing-1" class="level4 unnumbered">
+<h4 class="unnumbered">Enqueueing and dequeueing</h4>
+<p>When enqueueing, we increase the <em>rear</em> pointer (modulo the
+size of the internal array).</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">enqueue</span>(queue, x):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    queue.rear <span class="op">=</span> (queue.rear <span class="op">+</span> <span class="dv">1</span>) mod queue.arr.<span class="bu">size</span>  <span class="co">// Circular increment</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    queue.arr[queue.rear] <span class="op">=</span> x</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    queue.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<p>When dequeueing, we increase the <em>front</em> pointer (modulo the
+size of the internal array). Just as for array-based stacks, we have to
+clear the array cell that was dequeued, because otherwise it will never
+be garbage collected.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dequeue</span>(queue):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> queue.arr[queue.front]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    queue.arr[queue.front] <span class="op">=</span> <span class="va">null</span>    <span class="co">// For garbage collection</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    queue.front <span class="op">=</span> (queue.front <span class="op">+</span> <span class="dv">1</span>) mod queue.arr.<span class="bu">size</span>  <span class="co">// Circular increment</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    queue.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<p>Again, we ignore the possibility that the internal array is full or
+that the queue is empty.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Array-based queue practice exercises.</p>
+</summary>
+
+<div id="AqueueEnqueuePRO" class="embedContainer">
+<iframe id="AqueueEnqueuePRO_iframe" aria-label="AqueueEnqueuePRO" src="../interactive/ChalmersGU/AqueueEnqueuePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+
+<div id="AqueueDequeuePRO" class="embedContainer">
+<iframe id="AqueueDequeuePRO_iframe" aria-label="AqueueDequeuePRO" src="../interactive/ChalmersGU/AqueueDequeuePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
 </section>
 </section>
 </main>
@@ -304,10 +584,10 @@ Your browser does not support iframes.
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-6.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.2.html" accesskey="p" rel="previous">Stacks and queues</a>
+<a href="section-6.2.html" accesskey="p" rel="previous">Linked lists</a>
 </div>
 <div class="navlink">
-<a href="section-6.4.html" accesskey="n" rel="next">Queues implemented as linked lists</a>
+<a href="section-6.4.html" accesskey="n" rel="next">Dynamic arrays</a>
 <a href="section-6.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -315,5 +595,6 @@ Your browser does not support iframes.
 
 </body>
 </html>
+
 
 

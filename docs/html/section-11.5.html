@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – 2-3 trees and B-trees</title>
+  <title>DSABook – Deleting entries from open addressing hash
+tables</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,11 +70,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Indexing/BPTree.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Indexing/BPTreeCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Indexing/BTreeCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Indexing/TTPTreeCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Indexing/twoThreeTreeCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -85,780 +101,93 @@
 <nav class="sitenav">
 <div>
 <a href="section-11.4.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.4.html" accesskey="p" rel="previous">Splay trees</a>
+<a href="section-11.4.html" accesskey="p" rel="previous">Resizing hash tables</a>
 </div>
 <div>
-<a href="section-11.6.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
+<a href="section-11.6.html" accesskey="n" rel="next">Quality of hash functions</a>
 <a href="section-11.6.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:trees-and-b-trees" class="level2" data-number="11.5">
+<section id="sec:hash-tables:deletion" class="level2"
+data-number="11.5">
 <h2 data-number="11.5"><span class="header-section-number">11.5</span>
-2-3 trees and B-trees</h2>
-<p>This section presents a data structure called the 2-3 tree, as well
-as its generalizations – the B-tree and the B<sup>+</sup> tree.</p>
-<section id="sec:trees-1" class="level3" data-number="11.5.1">
+Deleting entries from open addressing hash tables</h2>
+<p>In a separate chaining hash table, deletion is simple. Just perform a
+lookup, and delete an entry from a linked list. For open addressing,
+things are more complicated.</p>
+<p>Recall that the invariant of a linear probing hash table is that
+there are no null values between the ideal position of a key (<span
+class="math inline">h(\mathit{key})\bmod N</span>)) and its actual
+position. Introducing a null value in the middle of a cluster might
+cause lookups to fail for the keys in the remainder of the cluster.</p>
+<p>Look at the table in <a href="section-11.3.html#fig:LinProbe1">Figure 11.3</a>.
+Depending on what the hash value of <span class="math inline">E</span>
+is, replacing <span class="math inline">D</span> with a blank cell might
+cause a lookup of <span class="math inline">E</span> to fail, since
+lookups terminate when reaching an empty cell. Moving <span
+class="math inline">E</span> to cell 4 would solve the problem if <span
+class="math inline">h(E)\bmod 13 = 4</span>, but break the hash table if
+<span class="math inline">h(E)\bmod 13 = 5</span>. We will look at two
+ways of handling deletion in open addressing:</p>
+<ul>
+<li>Re-hashing the rest of the cluster. If we are removing <span
+class="math inline">A</span> in <a
+href="section-11.3.html#fig:LinProbe1">Figure 11.3</a>, we would delete and re-add <span
+class="math inline">B</span> and <span class="math inline">C</span> to
+the hash table to ensure the invariant holds.</li>
+<li>Lazy deletion.</li>
+</ul>
+<p>Lazy deletion means replacing the deleted value with a special token,
+sometimes called a tombstone, that indicates a value was deleted.
+Tombstones are not considered empty when performing lookups, so lookups
+succeed without any modifications.</p>
+<p>When inserting a new value, the tombstones can either be ignored or
+replaced. Replacing the tombstone requires some care. Consider what
+happens in <a href="section-11.3.html#fig:LinProbe1">Figure 11.3</a> if <span
+class="math inline">B</span> is replaced by a tombstone, and then we try
+to add <span class="math inline">C</span>. Because <span
+class="math inline">C</span> is already in the set, the operation should
+do nothing. This means that even if we decide to replace the tombstone,
+we need to search the whole cluster first.</p>
+<p>You may be concerned about the tombstones cluttering up the hash
+table, and wonder how we get rid of them. The key is that during
+resizing, the tombstones are never copied to the new table.</p>
+<p>Lazy deletion is simple in theory, but there are a plenty of
+technicalities to it, such as how to represent the tombstones. In most
+programming languages you would use null values to represent an empty
+table cell, but then we need a distinct non-value to represent a
+tombstone.</p>
+<figure id="fig:LazyResize">
+<img src="images/Hashing-LazyResize.svg" style="width:60.0%"
+alt="Figure 11.5: Resizing a linear probing hash table in the presence of lazy deletion. Tombstones of deleted entries (marked X) are not transferred. After the resize, the load factor is 1/2." />
+<figcaption aria-hidden="true">Figure 11.5: Resizing a linear probing
+hash table in the presence of lazy deletion. Tombstones of deleted
+entries (marked X) are not transferred. After the resize, the load
+factor is <span class="math inline">1/2</span>.</figcaption>
+</figure>
+<section id="sec:shrinking-tables" class="level3" data-number="11.5.1">
 <h3 data-number="11.5.1"><span
-class="header-section-number">11.5.1</span> 2-3 trees</h3>
-<p>Recall that in a binary tree, every node has one key and two
-children. In a 2-3 tree, there are instead two different kinds of nodes,
-called <em>2-nodes</em> and <em>3-nodes</em>:</p>
-<ul>
-<li>A 2-node has one key and two children, just the same as a node in a
-binary tree.</li>
-<li>A 3-node has <em>two</em> keys and <em>three</em> children.</li>
-</ul>
-<p>Here is an example of a 2-3 tree. In this tree, the root is a 3-node:
-it has two keys (18 and 32) and three children. The left child of the
-root is a 2-node containing the key 12. (In practice, nodes might
-contain key-value pairs, but the figures will show only the keys.)</p>
-<figure id="fig:TTexample">
-
-<div id="twoThreedgmCON" class="ssAV" data-short-name="twoThreedgmCON" data-long-name="twoThreedgmCON" alt="twoThreedgmCON" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/twoThreedgmCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("twoThreedgmCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#twoThreedgmCON "+rule)}
-    
-  });
-</script>
-
-<figcaption><p>Figure 11.11: An example of a 2-3 tree.</p></figcaption>
-</figure>
-<p>In order to be valid, a 2-3 tree must obey certain properties.
-Firstly, every node must obey a <em>search tree</em> property similar to
-BSTs:</p>
-<ul>
-<li>For a 2-node with key
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>:
-<ul>
-<li>All keys in the left subtree must be less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
-<li>All keys in the right subtree must be greater than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
-</ul></li>
-<li>For a 3-node with keys
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>:
-<ul>
-<li>We must have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>k</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">k_1 &lt; k_2</annotation></semantics></math>.</li>
-<li>All keys in the left subtree must be less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>.</li>
-<li>All keys in the middle subtree must be between
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.</li>
-<li>All keys in the right subtree must be greater than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.</li>
-</ul></li>
-</ul>
-<p>Secondly, all leaf nodes must be at the same level in the tree. When
-a tree obeys this property, we say that it is <a
-href="section-14.html#height-balanced" class="term"
-title="The condition the depths of each subtree in a tree are roughly the same.">height
-balanced</a>. So a 2-3 tree is always height balanced. You can check
-that the tree above is a valid 2-3 tree: It is made of 2-nodes and
-3-nodes, obeys the search tree property and is height balanced.</p>
-<p>So far, it seems that we have just taken the idea of a BST and
-complicated it by adding another type of node. Why have we done this?
-The reason is the height balance property. Height balance ensures that
-the tree has <em>logarithmic</em> height, so that search takes
-logarithmic time. But also, the algorithms for insertion and deletion in
-a 2-3 tree keep the tree height balanced (and also take logarithmic
-time). It is not possible in general to keep a BST height balanced – we
-will see that adding 3-nodes is what allows us to do so.</p>
-<section id="sec:searching-in-a-2-3-tree" class="level4 unnumbered">
-<h4 class="unnumbered">Searching in a 2-3 tree</h4>
-<p>Searching for a key in a 2-3 tree is similar to searching in a BST.
-Search begins at the root. If the root does not contain the search key
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
-then the search progresses to the only subtree that can possibly contain
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
-The key(s) stored in the root node determine which is the correct
-subtree. For example, if searching for the key 30 in the tree of <a
-href="#fig:TTexample">Figure 11.11</a>, we begin with the root node.
-Because 30 is between 18 and 33, it can only be in the middle subtree.
-Searching the middle child of the root node yields the desired record.
-If searching for 15, then the first step is again to search the root
-node. Because 15 is less than 18, the first (left) branch is taken. At
-the next level, we take the second branch to the leaf node containing
-15. If the search key were 16, then upon encountering the leaf
-containing 15 we would find that the search key is not in the tree.</p>
-</section>
-<section id="sec:inserting-into-a-2-3-tree" class="level4 unnumbered">
-<h4 class="unnumbered">Inserting into a 2-3 tree</h4>
-<p>Insertion into a 2-3 tree is similar to insertion into a BST to the
-extent that the new record is placed in the appropriate leaf node.
-Unlike BST insertion, a new child is not created to hold the record
-being inserted, that is, the 2-3 tree does not grow downward. The first
-step is to find the leaf node that would contain the record if it were
-in the tree. If this leaf node contains only one key, then the new
-record can be added to that node with no further modification to the
-tree, as illustrated in the following visualization.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Inserting into a non-full leaf node.</p>
-</summary>
-
-<div id="simpleInsertCON" class="ssAV" data-short-name="simpleInsertCON" data-long-name="2-3 Tree Insert Slideshow" alt="2-3 Tree Insert Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/simpleInsertCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("simpleInsertCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#simpleInsertCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>If we insert the new record into a leaf node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-that already contains two records, then more space must be created.
-Consider the two records of node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-and the record to be inserted without further concern for which two were
-already in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-and which is the new record. The first step is to split
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-into two nodes. Thus, a new node – call it
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
-– must be created.
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-receives the record with the least of the three keys, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
-receives the greatest of the three. The record with the middle of the
-three keys is passed up to the parent node along with a pointer to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>.
-This is called a <a href="section-14.html#promotion" class="term"
-title="In the context of certain balanced tree structures such as the 2-3 tree, a promotion takes place when an insertion causes the node to overflow. In the case of the 2-3 tree, the key with the middlemost value is sent to be stored in the parent.">promotion</a>.
-The promoted key is then inserted into the parent. If the parent
-currently contains only one record (and thus has only two children),
-then the promoted record and the pointer to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
-are simply added to the parent node. If the parent is full, then the
-split-and-promote process is repeated. Here is an example of a a simple
-promotion.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Inserting when the leaf node needs to be split.</p>
-</summary>
-
-<div id="promoteCON" class="ssAV" data-short-name="promoteCON" data-long-name="2-3 Tree Insert Promotion Slideshow" alt="2-3 Tree Insert Promotion Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/promoteCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("promoteCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#promoteCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>Here is an illustration for what happens when promotions require the
-root to split, adding a new level to the tree. Note that all leaf nodes
-continue to have equal depth.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Inserting when the root node needs to be split, adding a new tree
-level.</p>
-</summary>
-
-<div id="splitCON" class="ssAV" data-short-name="splitCON" data-long-name="2-3 Tree Insert Split Slideshow" alt="2-3 Tree Insert Split Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/splitCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("splitCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#splitCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-</section>
-<section id="sec:deleting-from-a-2-3-tree" class="level4 unnumbered">
-<h4 class="unnumbered">Deleting from a 2-3 tree</h4>
-<p>When deleting a record from the 2-3 tree, there are three cases to
-consider.</p>
-<ol type="1">
-<li>The simplest occurs when the record is to be removed from a leaf
-node containing two records. In this case, the record is simply removed,
-and no other nodes are affected.</li>
-<li>The second case occurs when the only record in a leaf node is to be
-removed.</li>
-<li>The third case occurs when a record is to be removed from an
-internal node.</li>
-</ol>
-<p>In both the second and the third cases, the deleted record is
-replaced with another that can take its place while maintaining the
-correct order, similar to removing a node from a BST. If the tree is
-sparse enough, there is no such record available that will allow all
-nodes to still maintain at least one record. In this situation, sibling
-nodes are merged together. The delete operation for the 2-3 tree is
-quite complex and will not be described further. Instead, a complete
-discussion of deletion will be postponed until the next section, where
-it can be generalized for a particular variant of the B-tree.</p>
-<p>The 2-3 tree insert and delete routines do not add new nodes at the
-bottom of the tree. Instead they cause leaf nodes to split or merge,
-possibly causing a ripple effect moving up the tree to the root. If
-necessary the root will split, causing a new root node to be created and
-making the tree one level deeper. On deletion, if the last two children
-of the root merge, then the root node is removed and the tree will lose
-a level. In either case, all leaf nodes are always at the same level.
-When all leaf nodes are at the same level, we say that a tree is <a
-href="section-14.html#height-balanced" class="term"
-title="The condition the depths of each subtree in a tree are roughly the same.">height
-balanced</a>. Because the 2-3 tree is height balanced, and every
-internal node has at least two children, we know that the maximum depth
-of the tree is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>.
-Thus, all 2-3 tree insert, find, and delete operations require
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-time.</p>
-</section>
-</section>
-<section id="sec:b-trees" class="level3" data-number="11.5.2">
-<h3 data-number="11.5.2"><span
-class="header-section-number">11.5.2</span> B-trees</h3>
-<p>B-trees are usually attributed to R. Bayer and E. McCreight who
-described the B-tree in a 1972 paper. By 1979, B-trees had replaced
-virtually all large-file access methods other than hashing. B-trees, or
-some variant of B-trees, are <em>the</em> standard file organization for
-applications requiring insertion, deletion, and key range searches. They
-are used to implement most modern file systems. B-trees address
-effectively all of the major problems encountered when implementing
-disk-based search trees:</p>
-<ol type="1">
-<li>The B-tree is shallow, in part because the tree is always height
-balanced (all leaf nodes are at the same level), and in part because the
-branching factor is quite high. So only a small number of disk blocks
-are accessed to reach a given record.</li>
-<li>Update and search operations affect only those disk blocks on the
-path from the root to the leaf node containing the query record. The
-fewer the number of disk blocks affected during an operation, the less
-disk I/O is required.</li>
-<li>B-trees keep related records (that is, records with similar key
-values) on the same disk block, which helps to minimize disk I/O on
-range searches.</li>
-<li>B-trees guarantee that every node in the tree will be full at least
-to a certain minimum percentage. This improves space efficiency while
-reducing the typical number of disk fetches necessary during a search or
-update operation.</li>
-</ol>
-<p>A B-tree of order
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-is defined to have the following shape properties:</p>
-<ul>
-<li>The root is either a leaf or has at least two children.</li>
-<li>Each internal node, except for the root, has between
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil m/2 \rceil</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-children.</li>
-<li>All leaves are at the same level in the tree, so the tree is always
-height balanced.</li>
-</ul>
-<p>The B-tree is a generalization of the 2-3 tree. Put another way, a
-2-3 tree is a B-tree of order three.</p>
-<p>Normally, the size of a node in the B-tree is chosen to fill a disk
-block, so a typical implementation of B-tree nodes allows 100 or more
-children. Thus, a B-tree node is equivalent to a disk block, and a
-“pointer” value stored in the tree is actually the number of the block
-containing the child node (usually interpreted as an offset from the
-beginning of the corresponding disk file). In a typical application, the
-B-tree’s access to the disk file will be managed using a <a
-href="section-14.html#buffer-pool" class="term"
-title="A collection of one or more buffers. The buffer pool is an example of a cache. It is stored in primary storage, and holds data that is expected to be used in the near future. When a data value is requested, the buffer pool is searched first. If the value is found in the buffer pool, then secondary storage need not be accessed. If the value is not found in the buffer pool, then it must be fetched from secondary storage. A number of traditional heuristics have been developed for deciding which data to flush from the buffer pool when new data must be stored, such as least recently used.">buffer
-pool</a> and a block-replacement scheme such as <a
-href="section-14.html#lru" class="term"
-title="Abbreviated LRU, it is a popular heuristic to use for deciding which buffer in a buffer pool to flush when data in the buffer pool must be replaced by new data being read into a cache. Analogous to the move-to-front heuristic for maintaining a self-organising list.">LRU</a>.</p>
-<p><a href="#fig:BTexample">Figure 11.12</a> shows a B-tree of order
-four. Each node contains up to three keys, and internal nodes have up to
-four children.</p>
-<figure id="fig:BTexample">
-
-<div id="BTreedgmCON" class="ssAV" data-short-name="BTreedgmCON" data-long-name="BTreedgmCON" alt="BTreedgmCON" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Indexing/BTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BTreedgmCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BTreedgmCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BTreedgmCON "+rule)}
-    
-  });
-</script>
-
-<figcaption><p>Figure 11.12: An example B-tree of order
-four.</p></figcaption>
-</figure>
-<section id="sec:searching-in-a-b-tree" class="level4 unnumbered">
-<h4 class="unnumbered">Searching in a B-tree</h4>
-<p>Searching in a B-tree is a generalization of searching in a 2-3 tree.
-It is an alternating two-step process, beginning with the root node of
-the B-tree.</p>
-<ol type="1">
-<li>Perform a binary search on the records in the current node. If a
-record with the search key is found, then return that record. If the
-current node is a leaf node and the key is not found, then report an
-unsuccessful search.</li>
-<li>Otherwise, follow the proper branch and repeat the process.</li>
-</ol>
-<p>For example, consider a search for the record with key value 47 in
-the tree of <a href="#fig:BTexample">Figure 11.12</a>. The root node is
-examined and the second (right) branch taken. After examining the node
-at level 1, the third branch is taken to the next level to arrive at the
-leaf node containing a record with key value 47.</p>
-</section>
-<section id="sec:insertion-into-a-b-tree" class="level4 unnumbered">
-<h4 class="unnumbered">Insertion into a B-tree</h4>
-<p>B-tree insertion is a generalization of 2-3 tree insertion. The first
-step is to find the leaf node that should contain the key to be
-inserted, space permitting. If there is room in this node, then insert
-the key. If there is not, then split the node into two and promote the
-middle key to the parent. If the parent becomes full, then it is split
-in turn, and its middle key promoted.</p>
-<p>Note that this insertion process is guaranteed to keep all nodes at
-least half full. For example, when we attempt to insert into a full
-internal node of a B-tree of order four, there will now be five children
-that must be dealt with. The node is split into two nodes containing two
-keys each, thus retaining the B-tree property. The middle of the five
-children is promoted to its parent.</p>
-</section>
-</section>
-<section id="sec:b-trees-1" class="level3" data-number="11.5.3">
-<h3 data-number="11.5.3"><span
-class="header-section-number">11.5.3</span> B<sup>+</sup> trees</h3>
-<p>The previous section mentioned that B-trees are universally used to
-implement large-scale disk-based systems. Actually, the B-tree as
-described in the previous section is almost never implemented. What is
-most commonly implemented is a variant of the B-tree, called the
-B<sup>+</sup> tree.</p>
-<div class="online">
-<p>If we want to be able to search in a collection of records that will
-never change, then a <a href="section-14.html#linear-index" class="term"
-title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
-index</a> is a very simple and efficient data structure. This is simply
-a sorted array of search keys with pointers to the actual records. To
-search in a linear index we can simply perform a standard binary search
-(recall <a
-href="section-1.6.html#sec:case-study-searching-in-a-list">Section 1.6</a>).</p>
-<p>The problem is how to handle insertion into and deletion from our
-database. We could try to keep the core idea of storing a sorted
-array-based list, but make it more flexible by breaking the list into
-manageable chunks that are more easily updated.</p>
-<ul>
-<li><p>How might we do that? First, we need to decide how big the chunks
-should be. Since the data are on disk, it seems reasonable to store a
-chunk that is the size of a disk block, or a small multiple of the disk
-block size. If the next record to be inserted belongs to a chunk that
-hasn’t filled its block then we can just insert it there. The fact that
-this might cause other records in that chunk to move a little bit in the
-array is not important, since this does not cause any extra disk
-accesses so long as we move data within that chunk.</p></li>
-<li><p>But what if the chunk fills up the entire block that contains it?
-We could just split it in half.</p></li>
-<li><p>What if we want to delete a record? We could just take the
-deleted record out of the chunk, but we might not want a lot of
-near-empty chunks. So we could put adjacent chunks together if they have
-only a small amount of data between them. Or we could shuffle data
-between adjacent chunks that together contain more data.</p></li>
-</ul>
-<p>The big problem would be how to find the desired chunk when
-processing a record with a given key. Perhaps some sort of tree-like
-structure could be used to locate the appropriate chunk? These ideas are
-exactly what motivate the B<sup>+</sup> tree. The B<sup>+</sup> tree is
-essentially a mechanism for managing a sorted array-based list, where
-the list is broken into chunks.</p>
-<p>The most significant difference between the B<sup>+</sup> tree and
-the BST or the standard B-tree is that the B<sup>+</sup> tree stores
-records only at the leaf nodes. Internal nodes store key values, but
-these are used solely as placeholders to guide the search. This means
-that internal nodes are significantly different in structure from leaf
-nodes. Internal nodes store keys to guide the search, associating each
-key with a pointer to a child B<sup>+</sup> tree node. Leaf nodes store
-the actual records, where the main requirement is that the leaf nodes
-store enough records to remain at least half full. The leaf nodes of a
-B<sup>+</sup> tree are normally linked together to form a <a
-href="section-14.html#doubly-linked-list" class="term"
-title="A linked list implementation variant where each list node contains access pointers to both the previous element and the next element on the list.">doubly
-linked list</a>. Thus, the entire collection of records can be traversed
-in sorted order by visiting all the leaf nodes on the linked list.</p>
-<p>Each internal node should be assumed to hold in the leftmost position
-an additional key that is less than or equal to any possible key value
-in the node’s leftmost subtree. B<sup>+</sup> tree implementations
-typically store an additional dummy record in the leftmost leaf node
-whose key value is less than any legal key value.</p>
-<p>Let’s see in some detail how the simplest B<sup>+</sup> tree works.
-This would be the “2-3<sup>+</sup> tree”, or a B<sup>+</sup> tree of
-order 3.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of building a “2-3<sup>+</sup> tree”.</p>
-</summary>
-
-<div id="TTPbuildCON" class="ssAV" data-short-name="TTPbuildCON" data-long-name="TTPbuildCON" alt="TTPbuildCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/TTPbuildCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("TTPbuildCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPbuildCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>Next, let’s see how to search.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of searching a “2-3<sup>+</sup> tree”.</p>
-</summary>
-
-<div id="TTPfindCON" class="ssAV" data-short-name="TTPfindCON" data-long-name="TTPfindCON" alt="TTPfindCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/TTPfindCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("TTPfindCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPfindCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>Finally, let’s see an example of deleting from the “2-3<sup>+</sup>
-tree”.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of deleting from a “2-3<sup>+</sup> tree”.</p>
-</summary>
-
-<div id="TTPdeleteCON" class="ssAV" data-short-name="TTPdeleteCON" data-long-name="TTPdeleteCON" alt="TTPdeleteCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/TTPdeleteCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("TTPdeleteCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPdeleteCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>Now, let’s extend these ideas to a B<sup>+</sup> tree of higher
-order.</p>
-<p>B<sup>+</sup> trees are exceptionally good for range queries. Once
-the first record in the range has been found, the rest of the records
-with keys in the range can be accessed by sequential processing of the
-remaining records in the first node, and then continuing down the linked
-list of leaf nodes as far as necessary. Search in a B<sup>+</sup> tree
-is nearly identical to search in a regular B-tree, except that the
-search must always continue to the proper leaf node. Even if the
-search-key value is found in an internal node, this is only a
-placeholder and does not provide access to the actual record. The
-following visualisation illustrates how to to this for a B<sup>+</sup>
-tree.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of search in a B<sup>+</sup> tree of order four. Internal
-nodes must store between two and four children.</p>
-</summary>
-
-<div id="BPfindCON" class="ssAV" data-short-name="BPfindCON" data-long-name="BPfindCON" alt="BPfindCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPfindCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BPfindCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPfindCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>B<sup>+</sup> tree insertion is similar to B-tree insertion. First,
-the leaf
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-that should contain the record is found. If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-is not full, then the new record is added, and no other B<sup>+</sup>
-tree nodes are affected. If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-is already full, split it in two (dividing the records evenly among the
-two nodes) and promote a copy of the least-valued key in the newly
-formed right node. As with the 2-3 tree, promotion might cause the
-parent to split in turn, perhaps eventually leading to splitting the
-root and causing the B<sup>+</sup> tree to gain a new level.
-B<sup>+</sup> tree insertion keeps all leaf nodes at equal depth. The
-following figure illustrates the insertion process through several
-examples.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of building a B<sup>+</sup> tree of order four.</p>
-</summary>
-
-<div id="BPbuildCON" class="ssAV" data-short-name="BPbuildCON" data-long-name="BPbuildCON" alt="BPbuildCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPbuildCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BPbuildCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPbuildCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>To delete a record
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
-from a B<sup>+</sup> tree, first locate the leaf
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-that contains
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
-If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-is more than half full, then we need only remove
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
-leaving
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
-still at least half full. This is demonstrated by the following
-visualisation.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of deletion in a B<sup>+</sup> tree of order four.</p>
-</summary>
-
-<div id="BPdeleteCON" class="ssAV" data-short-name="BPdeleteCON" data-long-name="BPdeleteCON" alt="BPdeleteCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPdeleteCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BPdeleteCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPdeleteCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>If deleting a record reduces the number of records in the node below
-the minimum threshold (called an <a href="section-14.html#underflow"
-class="term"
-title="The condition where the amount of data stored in an entity has dropped below some minimum threshold. For example, a node in a B-tree is required to be at least half full. If a record deletion causes the node to be less than half full, then it is in a condition of underflow, and something has to be done to correct this.">underflow</a>),
-then we must do something to keep the node sufficiently full. The first
-choice is to look at the node’s adjacent siblings to determine if they
-have a spare record that can be used to fill the gap. If so, then enough
-records are transferred from the sibling so that both nodes have about
-the same number of records. This is done so as to delay as long as
-possible the next time when a delete causes this node to underflow
-again. This process might require that the parent node has its
-placeholder key value revised to reflect the true first key value in
-each node.</p>
-<p>If neither sibling can lend a record to the under-full node (call it
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>),
-then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
-must give its records to a sibling and be removed from the tree. There
-is certainly room to do this, because the sibling is at most half full
-(remember that it had no records to contribute to the current node), and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
-has become less than half full because it is under-flowing. This merge
-process combines two subtrees of the parent, which might cause it to
-underflow in turn. If the last two children of the root merge together,
-then the tree loses a level.</p>
-<p>The B<sup>+</sup> tree requires that all nodes be at least half full
-(except for the root). Thus, the storage utilization must be at least
-50%. This is satisfactory for many implementations, but note that
-keeping nodes fuller will result both in less space required (because
-there is less empty space in the disk file) and in more efficient
-processing (fewer blocks on average will be read into memory because the
-amount of information in each block is greater). </p>
-<p>Finally, here is an example of building a B<sup>+</sup> tree of order
-five. You can compare this to the example above of building a tree of
-order four with the same records.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>An example of building a B<sup>+</sup> tree of degree 5</p>
-</summary>
-
-<div id="BPbuild5CON" class="ssAV" data-short-name="BPbuild5CON" data-long-name="BPbuild5CON" alt="BPbuild5CON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
-<script type="text/javascript" src="../interactive/Indexing/BPbuild5CON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BPbuild5CON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPbuild5CON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-</div>
-</section>
-<section id="sec:analysis-of-b-trees" class="level3"
-data-number="11.5.4">
-<h3 data-number="11.5.4"><span
-class="header-section-number">11.5.4</span> Analysis of B-trees</h3>
-<p>The asymptotic cost of search, insertion, and deletion of records
-from B-trees and B<sup>+</sup> trees is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the total number of records in the tree. However, the base of the
-logarithm is the (average) branching factor of the tree. Typical
-database applications use extremely high branching factors, perhaps 100
-or more. Thus, in practice the B-tree and its variants are extremely
-shallow.</p>
-<p>As an illustration, consider a B-tree of order 100 and leaf nodes
-that contain up to 100 records.</p>
-<ul>
-<li>B-trees with height one (that is, just a single leaf node) can have
-at most 100 records.</li>
-<li>B-trees with height two (a root internal node whose children are
-leaves) must have at least 100 records (2 leaves with 50 records each),
-and at most 10,000 records (100 leaves with 100 records each).</li>
-<li>B-trees with height three must have at least 5000 records (two
-second-level nodes with 50 children containing 50 records each), and at
-most one million records (100 second-level nodes with 100 full children
-each).</li>
-<li>B-trees with height four must have at least 250,000 records and at
-most 100 million records.</li>
-<li>Thus, it would require an <em>extremely</em> large database to
-generate a B-tree of more than height four.</li>
-</ul>
-<p>The B-tree split and insert rules guarantee that every node (except
-perhaps the root) is at least half full. So they are on average about
-3/4 full. But the internal nodes are purely overhead, since the keys
-stored there are used only by the tree to direct search, rather than
-store actual data. Does this overhead amount to a significant use of
-space? No, because once again the high fan-out rate of the tree
-structure means that the vast majority of nodes are leaf nodes. A <a
-href="section-14.html#k-ary-tree" class="term"
-title="A type of full tree where every internal node has exactly $K$ children.">k-ary
-tree</a> has approximately
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">1/k</annotation></semantics></math>
-of its nodes as internal nodes. This means that while half of a full
-binary tree’s nodes are internal nodes, in a B-tree of order 100
-probably only about
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>75</mn></mrow><annotation encoding="application/x-tex">1/75</annotation></semantics></math>
-of its nodes are internal nodes. This means that the overhead associated
-with internal nodes is very low.</p>
-<p>We can reduce the number of disk fetches required for the B-tree even
-more by using the following methods. First, the upper levels of the tree
-can be stored in main memory at all times. Because the tree branches so
-quickly, the top two levels (levels 0 and 1) require relatively little
-space. If the B-tree is only height four, then at most two disk fetches
-(internal nodes at level two and leaves at level three) are required to
-reach the pointer to any given record.</p>
+class="header-section-number">11.5.1</span> Shrinking tables</h3>
+<p>With our hash tables supporting removal of elements, we may want to
+set a lower threshold for load factor, and shrink the table down to free
+up memory. This needs to be done carefully so repeated add/remove cycles
+never cause a resize on every operation, similar to what we discussed
+for dynamic arrays in <a
+href="section-6.4.html#sec:sequences:shrink-array">Section 6.4.5</a>.</p>
+<p>One example strategy for resizing is to try to maintain the load
+factor around <span class="math inline">0.5</span>, and never let it
+exceed <span class="math inline">0.75</span> or fall below <span
+class="math inline">0.25</span>. Each resize would set the size of the
+table to double the current number of elements (to a minimum of <span
+class="math inline">1</span>), ensuring that the load factor is always
+<span class="math inline">0.5</span> immediately after a resize. <a
+href="#fig:LazyResize">Figure 11.5</a> shows a resize operation
+performed on a linear probing hash table. The resize ends up shrinking
+the array, since the new size is based on the number of actual values,
+ignoring tombstones.</p>
 </section>
 </section>
 </main>
@@ -867,10 +196,10 @@ reach the pointer to any given record.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-11.4.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.4.html" accesskey="p" rel="previous">Splay trees</a>
+<a href="section-11.4.html" accesskey="p" rel="previous">Resizing hash tables</a>
 </div>
 <div class="navlink">
-<a href="section-11.6.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
+<a href="section-11.6.html" accesskey="n" rel="next">Quality of hash functions</a>
 <a href="section-11.6.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -878,5 +207,6 @@ reach the pointer to any given record.</p>
 
 </body>
 </html>
+
 
 

@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Analysing dynamic arrays</title>
+  <title>DSABook – Recurrence relations</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,28 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/AlgAnal/DandCRecurrenceCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/ExpandRecurrenceCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/LinearRecurrencesCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/LinearRecurrencesNCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,116 +103,460 @@
 <nav class="sitenav">
 <div>
 <a href="section-7.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-7.2.html" accesskey="p" rel="previous">Amortised analysis</a>
+<a href="section-7.2.html" accesskey="p" rel="previous">Case study: Analysing dynamic arrays</a>
 </div>
 <div>
-<a href="section-7.4.html" accesskey="n" rel="next">Recurrence relations</a>
+<a href="section-7.4.html" accesskey="n" rel="next">Multiple parameters</a>
 <a href="section-7.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-analysing-dynamic-arrays" class="level2"
+<section id="sec:analysis-3:recurrences" class="level2"
 data-number="7.3">
 <h2 data-number="7.3"><span class="header-section-number">7.3</span>
-Case study: Analysing dynamic arrays</h2>
-<p>Dynamic arrays, as discussed in <a
-href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>, are a
-flexible data structure that efficiently manages collections of elements
-whose size may change over time. Unlike fixed-size arrays, dynamic
-arrays automatically resize themselves to accommodate additional
-elements, making them especially useful when the total number of
-elements is not known in advance.</p>
-<p>In this case study, we will analyse the time and memory complexity of
-dynamic arrays, with a particular focus on the operation of adding an
-element. This operation is central to understanding dynamic arrays
-because:</p>
-<ul>
-<li>Retrieving an element by index is identical to regular arrays and
-operates in constant time.</li>
-<li>Removing an element involves similar considerations as inserting,
-particularly regarding shifting elements, so we will not cover it
-separately here.</li>
-</ul>
-<section id="sec:complexity-of-adding-an-element-to-a-dynamic-array"
-class="level4 unnumbered">
-<h4 class="unnumbered">Complexity of adding an element to a dynamic
-array</h4>
-<p>Let us first consider adding an element at the end of a dynamic
-array. In most cases, this operation is efficient, as it simply places
-the new element in the next available position in the internal array and
-takes constant time. However, when the array is full, it must resize
-itself to accommodate the new element. This resizing involves allocating
-a new array, typically twice the size of the original, copying all
-existing elements to this new array, and then inserting the new element.
-This step is more expensive and takes linear time in the number of
-elements. The amortised time complexity of appending arises from this
-pattern: although individual operations may occasionally be costly, the
-overall cost of performing many appends remains low, averaging out to
-constant time per operation.</p>
-<p>To illustrate this, consider a dynamic array that starts with a
-capacity of 1. When you append the first element, it fits perfectly. The
-next time you append, the array is full, so it resizes to a capacity of
-2, copying the existing element. The next append fills this new
-capacity, leading to another resize to 4, and so on. Each time the array
-resizes, it doubles its capacity and copies all existing elements to the
-new array. This means that the number of elements copied during a resize
-operation grows as follows:</p>
-<ul>
-<li>1 element copied when resizing from 1 to 2,</li>
-<li>2 elements copied when resizing from 2 to 4,</li>
-<li>4 elements copied when resizing from 4 to 8,</li>
-<li>and so on.</li>
-</ul>
-<p>The total number of elements copied during all these resizes can be
-summed up as follows:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>+</mo><mi>…</mi><mo>+</mo><mi>n</mi><mo>=</mo><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
-1 + 2 + 4 + \ldots + n = 2n - 1
-</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the final size of the array. This means that the total cost of
-copying elements during all resizes is proportional to the final size of
-the array
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
-So, while a single append operation may take linear time due to
-resizing, the average time per append operation across many appends is
-<em>constant</em>. This is because the expensive operations (the
-resizes) are infrequent compared to the many inexpensive appends that do
-not require resizing. Thus, the <em>amortised time complexity</em> for
-appending an element to a dynamic array is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>,
-meaning that on average, each append operation takes constant time.</p>
-<p>The above analysis assumes that we add an element at the end of the
-dynamic array. If we consider adding an element at the beginning or in
-the middle of the array, the situation changes significantly. In these
-cases, the dynamic array must shift existing elements to make space for
-the new element. This shifting operation takes linear time in the number
-of elements, as each element must be moved one position to the right.
-Therefore, inserting an element at the beginning or in the middle of a
-dynamic array has a time complexity of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the number of elements in the array. This is an important point to
-consider when choosing a data structure for a specific use case.</p>
+Recurrence relations</h2>
+<p>In the previous chapters we have encountered three recursive
+algorithms: Binary search, Mergesort and Quicksort. When analysing these
+algorithms we reasoned about the number of recursion levels, and how
+much computation they do per level:</p>
+<dl>
+<dt>Number of levels</dt>
+<dd>
+Binary search and Mergesort use a logarithmic number of levels, <span
+class="math inline">O(\log(n))</span>, while Quicksort in the worst case
+uses a linear number of levels, <span class="math inline">O(n)</span>.
+</dd>
+<dt>Work per level</dt>
+<dd>
+Binary search does a constant amount of work in each recursive call,
+<span class="math inline">O(1)</span>, while Mergesort and Quicksort
+both do linear work, <span class="math inline">O(n)</span>. Mergesort
+does its main work in the merging phase, while Quicksort does it when
+partitioning.
+</dd>
+</dl>
+<p>The final worst case complexity is simply the product of these two
+factors, so that binary search becomes logarithmic, <span
+class="math inline">O(\log(n))</span>, Mergesort linearithmic, <span
+class="math inline">O(n\log(n))</span>, and Quicksort quadratic, <span
+class="math inline">O(n^2)</span>. There is nothing wrong with the
+reasoning we did for these algorithms, but it is quite ad-hoc: it
+doesn’t provide much help if we want to analyse a new recursive
+algorithm.</p>
+<p>A <em>recurrence relation</em> is an equation that defines a function
+in terms of smaller instances of itself, or in other words, by calling
+itself with smaller arguments. This can be used to model the time
+complexity of a recursive algorithm.</p>
+<section id="sec:expanding-recurrences" class="level3"
+data-number="7.3.1">
+<h3 data-number="7.3.1"><span class="header-section-number">7.3.1</span>
+Expanding recurrences</h3>
+<p>A very simple recurrence is for the recursive version of the
+factorial function. The factorial is defined as <span
+class="math inline">n! = n\cdot(n-1)!</span> (with the base case <span
+class="math inline">0!=1!=1</span>), and this gives the following
+recurrence:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;= T(n-1) + O(1), \text{ when } n&gt;1 \\
+T(0) &amp;= T(1) = O(1)
+\end{align*}</span></p>
+<p>Note that we can always assume that the base case is constant time,
+<span class="math inline">O(1)</span>: otherwise the non-constant cost
+can be “baked into” the recursive case. Therefore we will in the future
+not print the base case unless necessary.</p>
+<p>We want to know which complexity class <span
+class="math inline">T(n)</span> belongs to, or in other words, we want
+to find a closed-form solution to the recursive equation. One approach
+is to <em>expand</em> the recurrence by replacing any occurrences of
+<span class="math inline">T</span> on the right-hand side with its
+definition. Assuming that both the base case and the work done in each
+iteration is bounded by some constant <span
+class="math inline">c</span>, we can infer that the recursive factorial
+function is linear, <span class="math inline">O(n)</span>:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;~=~   c + T(n-1)
+      ~=~   c + (c + T(n-2))
+\\   &amp;~=~   \underbrace{c + (c + (c + (c + (\cdots + c))))}_{n
+\text{ constant-time terms}}
+      ~=~   n\cdot c
+     ~\in~  O(n)
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an interactive explanation of this recurrence relation.</p>
+</summary>
+
+<div id="LinearRecurrencesCON" class="ssAV" data-short-name="LinearRecurrencesCON" data-long-name="LinearRecurrencesCON" alt="LinearRecurrencesCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinearRecurrencesCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinearRecurrencesCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>What happens if we have to do some linear-time work in each recursive
+call? That is, if the recurrence is <span class="math inline">T(n) =
+T(n-1) + O(n)</span>. Assuming that the linear time work is <span
+class="math inline">cn\in O(n)</span>, we can expand the recurrence like
+this:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;~=~   cn + T(n-1)
+      ~=~   cn + (c(n-1) + T(n-2))
+\\   &amp;~=~   c\cdot(\underbrace{n + ((n-1) + ((n-2) + (\cdots +
+1)))}_{n \text{ linear-time terms}})
+     ~\in~  O(n^2)
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an interactive explanation of this recurrence relation.</p>
+</summary>
+
+<div id="LinearRecurrencesNCON" class="ssAV" data-short-name="LinearRecurrencesNCON" data-long-name="LinearRecurrencesNCON" alt="LinearRecurrencesNCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesNCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinearRecurrencesNCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinearRecurrencesNCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>How about recursive binary search? In each invocation it does some
+constant work, and then calls itself with the half the search interval.
+This can be modeled by the recurrence <span class="math inline">T(n) =
+T(n/2) + O(1)</span>, where <span class="math inline">n</span> is the
+size of the interval. This recurrence is expanded as follows, where
+<span class="math inline">m = \log_2(n)</span> is the number of
+recursive levels until we reach the base case:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;~=~   T(n/2) + c
+      ~=~   (T(n/4) + c) + c
+      ~=~   ((T(n/8) + c) + c) + c
+\\   &amp;~=~   \underbrace{(((\cdots(c + c)\cdots) + c) + c) + c}_{m
+\text{ constant-time terms}}
+     ~\in~  O(\log(n))
+\end{align*}</span></p>
+<p>Finally, Mergesort calls itself twice with the argument halved, and
+then performs a linear-time merge. This can be modeled by the recurrence
+<span class="math inline">T(n) = 2\cdot T(n/2) + O(n)</span>. By
+expanding the recurrence we can deduce the linearithmic complexity,
+<span class="math inline">O(n\log(n))</span>:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;~=~   2 \cdot T(n/2) + c\cdot n
+      ~=~   2 \cdot (2 \cdot T(n/4) + c\cdot n/2) + c\cdot n
+\\   &amp;~=~   2 \cdot (2 \cdot (\cdots (2 \cdot T(1) + c\cdot n/2^m)
+\cdots) + c\cdot n/2) + c\cdot n
+\\   &amp;~=~   2^m c  +  \underbrace{2^{m-1} c\cdot n /
+2^{m-1}  +  2^{m-2} c\cdot n / 2^{m-2}  +
+                              \cdots  +  2 c\cdot n / 2  +  c\cdot n}_{m
+\text{ linear-time terms}}
+\\   &amp;~=~   c\cdot n + c\cdot n\cdot\log_2(n)
+     ~\in~  O(n \log(n))
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a more complicated example.</p>
+</summary>
+
+<div id="ExpandRecurrenceCON" class="ssAV" data-short-name="ExpandRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow" alt="Divide-and-Conquer Expansion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/AlgAnal/ExpandRecurrenceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ExpandRecurrenceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ExpandRecurrenceCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>So, is there some kind of general formula for how to solve recurrence
+relations?</p>
 </section>
-<section id="sec:memory-complexity-of-dynamic-arrays"
-class="level4 unnumbered">
-<h4 class="unnumbered">Memory complexity of dynamic arrays</h4>
-<p>The memory complexity of dynamic arrays is also an important aspect
-to consider. When a dynamic array resizes, it typically allocates a new
-array that is <em>larger</em> than the current one. The memory used by a
-dynamic array is proportional to its capacity, not just the number of
-elements it currently holds. Thus, the memory complexity of a dynamic
-array is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the current number of elements in the array. This can lead to
-situations where the dynamic array uses more memory than strictly
-necessary.</p>
+<section id="sec:analysis-3:master-theorem" class="level3"
+data-number="7.3.2">
+<h3 data-number="7.3.2"><span class="header-section-number">7.3.2</span>
+The Master theorem</h3>
+<p>There is a general way to solve so called <em>divide-and-conquer</em>
+recurrence relations. These have the form <span class="math inline">T(n)
+= a\cdot T(n/b) + c\cdot n^k</span>, where <span
+class="math inline">a</span>, <span class="math inline">b</span>, <span
+class="math inline">c</span>, and <span class="math inline">k</span> are
+constants. This recurrence describes a problem of size <span
+class="math inline">n</span> divided into <span
+class="math inline">a</span> subproblems of size <span
+class="math inline">n/b</span>, while <span class="math inline">c\cdot
+n^k</span> is the extra work needed to split the input or combine the
+partial solutions. Both binary search and Mergesort are examples of
+divide-and-conquer algorithms that fit this form.</p>
+<p>To solve a divide-and-conquer recurrence, we do the same as we did
+before, expand it until we reach the base case. The recursion stops when
+we reach <span class="math inline">T(1)</span>, which is after <span
+class="math inline">m=\log_b(n)</span> levels. This is a bit tedious and
+we won’t show it here, but after a while we get to the following sum,
+where <span class="math inline">r = b^k/a</span>:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;~=~   c \cdot a^m \cdot
+(\underbrace{1  +  \tfrac{b^{k}}{a}  +  \tfrac{b^{2k}}{a^3}  +
+                                    \tfrac{b^{2k}}{a^2}  +  \cdots  +  \tfrac{b^{mk}}{a^m}}_{m
+\text{ terms}})
+\\   &amp;~=~   c \cdot a^m \cdot \sum^m (\tfrac{b^k}{a})^i
+      ~=~   c \cdot a^m \cdot \sum^m r^i
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a more visual presentation of this same derivation.</p>
+</summary>
+
+<div id="DandCRecurrenceCON" class="ssAV" data-short-name="DandCRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow 2" alt="Divide-and-Conquer Expansion Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/AlgAnal/DandCRecurrenceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DandCRecurrenceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DandCRecurrenceCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>The value of <span class="math inline">\sum^m r^i</span> depends on
+if <span class="math inline">r</span> is less than, equal to, or larger
+than 1:</p>
+<dl>
+<dt><span class="math inline">r &lt; 1</span> (the subproblems
+dominate)</dt>
+<dd>
+<p>The infinite sum <span class="math inline">\sum r^i</span> converges
+to <span class="math inline">1/(1-r)</span> which is constant, so <span
+class="math inline">\sum^m r^i \in O(1)</span>. Therefore <span
+class="math inline">T(n) \in O(a^m) = O(n^d)</span>, because <span
+class="math inline">a^m = a^{\log_b(n)}</span> = <span
+class="math inline">n^{\log_b(a)} = n^d</span>.</p>
+</dd>
+<dt><span class="math inline">r = 1</span> (they are comparable)</dt>
+<dd>
+<p>The sum collapses to <span class="math inline">\sum^m 1 \in O(m) =
+O(\log(n))</span>. Furthermore, <span class="math inline">a =
+b^k</span>, and so <span class="math inline">k = \log_b(a)</span>.
+Therefore <span class="math inline">a^m = n^{\log_b(a)} = n^k</span>,
+and we get <span class="math inline">T(n) \in O(n^k \log(n))</span>.</p>
+</dd>
+<dt><span class="math inline">r &gt; 1</span> (the extra work
+dominates)</dt>
+<dd>
+<p>Now it is a well-known summation with value <span
+class="math inline">(r^{m+1} - 1) / (r - 1) \in O(r^m)</span>. And since
+<span class="math inline">b^m = n</span>, we get <span
+class="math inline">T(n) \in O(a^m r^m)</span> = <span
+class="math inline">O(a^m (b^k/a)^m)</span> = <span
+class="math inline">O(b^{km}) = O(n^k)</span>.</p>
+</dd>
+</dl>
+<p>We can summarise the above derivation as the following theorem.</p>
+<section id="sec:the-master-theorem" class="level4 unnumbered topic">
+<h4 class="unnumbered">The master theorem</h4>
+<p>For any recurrence relation <span class="math inline">T(n)</span>, of
+the form <span class="math inline">T(n) = a\cdot T(n/b) + O(n^k)</span>,
+exactly one the following holds:</p>
+<p><span class="math display">
+T(n) \in
+\left\{ \begin{array}{ll}
+    O(n^d)         &amp;  \text{if } a &gt; b^k, ~ \text{where }
+d=\log_b(a)\\
+    O(n^k \log(n)) &amp;  \text{if } a = b^k \\
+    O(n^k)         &amp;  \text{if } a &lt; b^k
+\end{array} \right.
+</span></p>
+</section>
+<section id="sec:example-applying-the-master-theorem"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Applying the master theorem</h4>
+<p>Here are some example recurrence relations that can be solved by the
+Master theorem:</p>
+<dl>
+<dt>Binary search</dt>
+<dd>
+<span class="math inline">T(n) = T(n/2) + O(1)</span>. Here <span
+class="math inline">a = 1</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 0</span>, and <span
+class="math inline">a = b^k</span> so we get the second case: <span
+class="math inline">T(n) \in O(n^k \log(n))</span> = <span
+class="math inline">O(\log(n))</span>.
+</dd>
+<dt>Mergesort</dt>
+<dd>
+<span class="math inline">T(n) = 2\cdot T(n/2) + O(n)</span>. Here <span
+class="math inline">a = 2</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 1</span>, and again <span
+class="math inline">a = b^k</span>. So we get the second case, and <span
+class="math inline">T(n) \in O(n^k \log(n))</span> = <span
+class="math inline">O(n \log(n))</span>.
+</dd>
+<dt>Three recursive calls</dt>
+<dd>
+<span class="math inline">T(n) = 3\cdot T(n/2) + O(n)</span>. Now <span
+class="math inline">a = 3</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 1</span>, and <span
+class="math inline">a &gt; b^k</span>. This gives the first case where
+the recursive work dominates, so <span class="math inline">T(n) \in
+O(n^{\log_b(a)}) = O(n^{\log_2(3)}) \approx O(n^{1.6})</span>.
+</dd>
+<dt>Quadratic extra work</dt>
+<dd>
+<span class="math inline">T(n) = 3\cdot T(n/2) + O(n^2)</span>. Now
+<span class="math inline">a = 3</span>, <span class="math inline">b =
+2</span> and <span class="math inline">k = 2</span>, and <span
+class="math inline">a &lt; b^k</span>. This is the third case, which
+tells us that the extra work dominates, so <span
+class="math inline">T(n) \in O(n^k) = O(n^2)</span>.
+</dd>
+</dl>
+</section>
+</section>
+<section id="sec:case-study-karatsuba-multiplication" class="level3"
+data-number="7.3.3">
+<h3 data-number="7.3.3"><span class="header-section-number">7.3.3</span>
+Case study: Karatsuba multiplication</h3>
+<p>How do we multiply numbers? If they are small enough they are handled
+efficiently by the processor, but what if the numbers are large with
+thousands of digits each? Let’s say we want to multiply two numbers
+<span class="math inline">x</span> and <span
+class="math inline">y</span>, having <span class="math inline">2m</span>
+digits each. We can turn this into a divide-and-conquer problem by
+splitting the numbers into halves:<a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p> The reason why we write <span
+class="math inline">2^m</span> is that we assume that the numbers are
+stored in binary form. If they had been represented as decimal numbers
+we would write <span class="math inline">10^m</span> instead.<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+<p><span class="math display">\begin{align*}
+x  &amp;=  x_1 \cdot 2^m + x_0  &amp;
+y  &amp;=  y_1 \cdot 2^m + y_0
+\end{align*}</span></p>
+<p>Note that multiplying by <span class="math inline">2^m</span> is an
+efficient operation because it is just a shift of digit positions.
+Therefore we can ignore every such digit shift, and only count “normal”
+multiplications and additions. Now we can expand <span
+class="math inline">x\cdot y</span>:</p>
+<p><span class="math display">\begin{align*}
+(x_1 \cdot 2^m + x_0) \cdot (y_1 \cdot 2^m + y_0)
+    &amp;=  x_1 y_1 \cdot 2^{2m}  +  (x_1 y_0 + x_0 y_1) \cdot
+2^m  +  x_0 y_0
+\end{align*}</span></p>
+<p>Thus, the recursive implementation of <span class="math inline">x
+\cdot y</span> consists of four multiplications of numbers half the
+size, plus some additions, which are <span
+class="math inline">O(n)</span> in the number of digits. So we get the
+following recurrence relation for the complexity of <span
+class="math inline">x \cdot y</span>:</p>
+<p><span class="math display">\begin{align*}
+T(n)  &amp;=  4 \cdot T(n/2) + O(n)
+\end{align*}</span></p>
+<p>From the Master theorem we see that <span class="math inline">a =
+4</span>, <span class="math inline">b = 2</span> and <span
+class="math inline">k = 1</span>, and <span class="math inline">a &gt;
+b^k</span>. The theorem then tells us that <span
+class="math inline">T(n) \in O(n^{\log_2(4)}) = O(n^2)</span>, so this
+is a quadratic algorithm, as expected.</p>
+<p>Can this be improved upon? Yes, and to see this we first write the
+computation on the form <span class="math inline">x \cdot y  =  z_2
+\cdot 2^{2m} + z_1 \cdot 2^m + z_0</span>, where:</p>
+<p><span class="math display">\begin{align*}
+z_0  &amp;=  x_0 y_0  &amp;  z_1  &amp;=  x_1 y_0 + x_0
+y_1  &amp;  z_2  &amp;=  x_1 y_1
+\end{align*}</span></p>
+<p>Now we can be smart! <span class="math inline">z_0</span> and <span
+class="math inline">z_2</span> use only one multiplication each, while
+<span class="math inline">z_1</span> uses two. Let’s introduce a new
+variable <span class="math inline">z_3</span>, which uses only one
+multiplication:</p>
+<p><span class="math display">\begin{align*}
+z_3  &amp;=  (x_0 + x_1) (y_0 + y_1)
+\end{align*}</span></p>
+<p><span class="math inline">z_1</span> can now be formulated in terms
+of <span class="math inline">z_0</span>, <span
+class="math inline">z_2</span> and <span
+class="math inline">z_3</span>:</p>
+<p><span class="math display">\begin{align*}
+z_1 &amp;=  x_1 y_0 + x_0 y_1
+    =  (x_0 + x_1) (y_0 + y_1) - x_1 y_1 - x_0 y_0
+    =  z_3 - z_2 - z_0
+\end{align*}</span></p>
+<p>This means that <span class="math inline">x \cdot y</span> can be
+calculated from <span class="math inline">z_0</span>, <span
+class="math inline">z_2</span> and <span class="math inline">z_3</span>,
+like this:</p>
+<p><span class="math display">\begin{align*}
+x \cdot y  &amp;=  z_2 \cdot 2^{2m}  +  (z_3 - z_2 - z_0) \cdot
+2^m  +  z_0
+\end{align*}</span></p>
+<p>Formulated like this, we only use <em>three</em> multiplications
+instead of four, plus some linear-time work. This gives the following
+recurrence relation:</p>
+<p><span class="math display">\begin{align*}
+T(n)  &amp;=  3 \cdot T(n/2) + O(n)
+\end{align*}</span></p>
+<p>The Master theorem now tells us that <span class="math inline">T(n)
+\in O(n^{\log_2(3)}) \approx O(n^{1.6})</span>, so this is a
+sub-quadratic algorithm that still has a complexity higher than
+linearithmic.<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a> Note that even though this is
+asymptotically faster than the naive algorithm, it comes with high
+constant factors (we use many more additions than the naive version
+does). Therefore it is only worthwhile to use this algorithm for very
+large numbers, having 100 digits or more.</p>
+<aside id="footnotes-2" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol start="2">
+<li id="fn2"><p> The first who noticed this algorithm was Anatoly
+Karatsuba in 1960 and therefore it is called <em>Karatsuba
+multiplication</em>.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 </section>
 </section>
 </main>
@@ -199,10 +565,10 @@ necessary.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-7.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-7.2.html" accesskey="p" rel="previous">Amortised analysis</a>
+<a href="section-7.2.html" accesskey="p" rel="previous">Case study: Analysing dynamic arrays</a>
 </div>
 <div class="navlink">
-<a href="section-7.4.html" accesskey="n" rel="next">Recurrence relations</a>
+<a href="section-7.4.html" accesskey="n" rel="next">Multiple parameters</a>
 <a href="section-7.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -210,5 +576,6 @@ necessary.</p>
 
 </body>
 </html>
+
 
 

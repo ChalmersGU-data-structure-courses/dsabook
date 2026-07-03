@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Stacks, queues, and lists</title>
+  <title>DSABook – Sequences</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -80,69 +99,79 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-5.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-5.5.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-5.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.6.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div>
-<a href="section-6.1.html" accesskey="n" rel="next">Collections</a>
+<a href="section-6.1.html" accesskey="n" rel="next">Stacks and queues</a>
 <a href="section-6.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:stacks-queues-and-lists" class="level1"
-data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Stacks,
-queues, and lists</h1>
-<p>If your program needs to store a few things – numbers, payroll
-records, or job descriptions for example – the simplest and most
-effective approach might be to put them in a list. Only when you have to
-organise and search through a large number of things do more
-sophisticated data structures like <a href="section-14.html#search-tree"
+<section id="sec:sequences" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span>
+Sequences</h1>
+<p>If your program needs to store a small number of things – numbers,
+payroll records, or job descriptions for example – the simplest and most
+effective approach might be to put them in a list. More sophisticated
+data structures such as <a href="section-13.3.html#search-tree"
 class="term"
-title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $O(\log n)$.">search
-trees</a> become necessary. Many applications don’t require any form of
-search, and they do not require that an ordering be placed on the
-objects being stored. Some applications require that actions be
-performed in a strict chronological order, processing objects in the
-order that they arrived, or perhaps processing objects in the reverse of
-the order that they arrived. For all these situations, a simple list
-structure is appropriate.</p>
-<p>This chapter describes two different representations lists-like
-structures, the <a href="section-14.html#linked-list" class="term"
+title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $O(\log(n))$.">search
+trees</a> or <a href="section-13.3.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
+tables</a> only become necessary when you have to organise and search
+through a large number of things. Many algorithms do not require any
+form of search. They also do not require the stored objects to be kept
+in any particular order. Some algorithms instead require us to process
+objects in strict chronological order, either in the order they arrived
+or in the reverse order. In these situations, a simple list structure is
+appropriate.</p>
+<p>Previously in the book we have discussed <em>algorithms</em> (mainly
+for searching and sorting), but now we will introduce <em>data
+structures</em>. This chapter describes two different representations
+lists-like data structures, the <a href="section-13.3.html#linked-list"
+class="term"
 title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
-list</a> and the <a href="section-14.html#array-based-list" class="term"
-title="An implementation for the list ADT that uses an array to store the list elements. Typical implementations fix the array size at creation of the list, and the overhead is the number of array positions that are presently unused.">array-based
-list</a>. We also show how these representations can be used to
+list</a> and the <a href="section-13.3.html#dynamic-array" class="term"
+title="Arrays, once allocated, are of fixed size. A dynamic array puts an interface around the array so as to appear to allow the array to grow and shrink in size as necessary. Typically this is done by allocating a new copy, copying the contents of the old array, and then returning the old array to free store. If done correctly, the amortised cost for dynamically resizing the array can be made constant. In some programming languages such as Java, the term vector is used as a synonym for dynamic array.">dynamic
+array</a>. We also show how these representations can be used to
 implement important list-like structures such as the <a
-href="section-14.html#stack" class="term"
+href="section-13.3.html#stack" class="term"
 title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
-and the <a href="section-14.html#queue" class="term"
-title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>.
-Along with presenting these fundamental data structures, the other goals
-of the chapter are to:</p>
-<ol type="1">
-<li>Give examples that show the separation of a logical representation
-in the form of an ADT from a physical implementation as a data
-structure.</li>
-<li>Illustrate the use of asymptotic analysis in the context of simple
-operations that you might already be familiar with. In this way you can
-begin to see how asymptotic analysis works, without the complications
-that arise when analysing more sophisticated algorithms and data
-structures.</li>
-</ol>
+and the <a href="section-13.3.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>.</p>
+<p>A programmer who needs to use a stack or a queue in the application
+they are developing, should be able to use either of a linked list or a
+dynamic array. This is similar to the problem of sorting, where any of
+the algorithms we presented in <a
+href="section-2.html#sec:sorting-1">Chapter 2</a> and <a
+href="section-4.html#sec:sorting-2">Chapter 4</a> can be used for
+sorting an array. And just as for the sorting problem, we might want to
+choose a specific data structure because its performance characteristics
+fit best with the application we have in mind.</p>
+<p>Stacks and queues are both examples of sequences, or <em>lists</em>.
+When we discuss list data structures, we use some common terminology.
+The number of elements in a list is called its <em>length</em> or
+<em>size</em>, the beginning of the list is called the <em>head</em>,
+<em>top</em>, or <em>front</em>, and the end of the list is called the
+<em>tail</em>, <em>bottom</em>, <em>rear</em>, or <em>back</em>.</p>
+<p>Another thing you will learn in this chapter is the first example of
+<em>amortised complexity analysis</em>. A dynamic array has on the first
+sight a really bad worst-case complexity, but with a deeper analysis we
+will see that it actually performs very well.</p>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-5.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-5.5.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-5.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.6.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div class="navlink">
-<a href="section-6.1.html" accesskey="n" rel="next">Collections</a>
+<a href="section-6.1.html" accesskey="n" rel="next">Stacks and queues</a>
 <a href="section-6.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -150,5 +179,6 @@ structures.</li>
 
 </body>
 </html>
+
 
 

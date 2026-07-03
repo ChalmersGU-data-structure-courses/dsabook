@@ -15,7 +15,7 @@ $(document).ready(function() {
 	  "sc16": "At <em>i=2</em>",
 	  "sc20": "At <em>i=3</em>",
 	  "sc23": "At <em>i=4</em>",
-	  "sc24": "Thus, the number of comparisons is defined by the equation &Sigma;<em><sub>i&lt;n</sub> i</em> &nbsp;=&nbsp; <em>n(n-1)/2</em>, or <em>O(n<sup>2</sup>)</em>, while the number of swaps is <em>O(n)</em>.",
+	  "sc24": "Thus, the number of comparisons is defined by the equation &Sigma;<em><sub>i&lt;n</sub> i</em> &nbsp;=&nbsp; <em>n(n-1)/2</em>, or <em>quadratic</em> in the size of the array, while the number of swaps is <em>linear</em>.",
     "lab1": "<b><u>Number of comparisons</u></b>",
     "lab2": "<b><u>Number of swaps</u></b>"
   };

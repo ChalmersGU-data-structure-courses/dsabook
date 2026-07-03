@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Motivation</title>
+  <title>DSABook – Motivation and core concepts</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -84,80 +103,102 @@
 <a href="section-1.html" accesskey="p" rel="previous">Introduction</a>
 </div>
 <div>
-<a href="section-1.2.html" accesskey="n" rel="next">Selecting a data structure</a>
+<a href="section-1.2.html" accesskey="n" rel="next">Practical examples</a>
 <a href="section-1.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:motivation" class="level2" data-number="1.1">
+<section id="sec:intro:motivation" class="level2" data-number="1.1">
 <h2 data-number="1.1"><span class="header-section-number">1.1</span>
-Motivation</h2>
-<p>You might think that with ever more powerful computers, program
-efficiency is becoming less important. After all, processor speed and
-memory size still continue to improve. Won’t today’s efficiency problem
-be solved by tomorrow’s hardware?</p>
-<p>The short answer to this question is <strong><em>no</em></strong>! It
-is not at all certain that a twice as fast computer can solve twice as
-large problems. On the contrary – most interesting problems are very
-difficult, in the sense that if we increase the computing power we can
-still only solve a very small increase in the size of the problem.</p>
-<p>As we develop more powerful computers, our history so far has always
-been to use that additional computing power to tackle more complex
-problems, be it in the form of more sophisticated user interfaces,
-bigger problem sizes, or new problems previously deemed computationally
-infeasible. More complex problems demand more computation, making the
-need for efficient programs even greater. Unfortunately, as tasks become
-more complex, they become less like our everyday experience. So today’s
-computer scientists must be trained to have a thorough understanding of
-the principles behind efficient program design, because their ordinary
-life experiences often do not apply when designing computer
-programs.</p>
-<p>In the most general sense, a <a href="section-14.html#data-structure"
-class="term" title="The implementation for an ADT.">data structure</a>
-is any data representation and its associated operations. Even an
-integer or floating point number stored on the computer can be viewed as
-a simple data structure. More commonly, people use the term “data
-structure” to mean an organisation or structuring for a collection of
-data items. A sorted list of integers stored in an array is an example
-of such a structuring. These ideas are explored further in <a
-href="section-1.7.html#sec:abstract-data-types">Section 1.7</a> about <a
-href="section-14.html#abstract-data-type" class="term"
-title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">abstract
-data types</a>.</p>
-<p>Given sufficient space to store a collection of <a
-href="section-14.html#data-item" class="term"
-title="A piece of information or a record whose value is drawn from a type.">data
-items</a>, it is always possible to search for specified items within
-the collection, print or otherwise process the data items in any desired
-order, or modify the value of any particular data item. The most obvious
-example is an unsorted array containing all of the data items. It is
-possible to perform all necessary operations on an unsorted array.
-However, using the proper data structure can make the difference between
-a program running in a few seconds and one requiring many days. For
-example, searching for a given record in a <a
-href="section-14.html#hash-table" class="term"
-title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
-table</a> is much faster than searching for it in an unsorted array.</p>
-<p>A solution is said to be <a href="section-14.html#efficient"
-class="term"
-title="A solution is said to be efficient if it solves the problem within the required resource constraints. A solution is sometimes said to be efficient if it requires fewer resources than known alternatives, regardless of whether it meets any particular requirements.">efficient</a>
-if it solves the problem within the required <a
-href="section-14.html#resource-constraints" class="term"
-title="Examples of resource constraints include the total space available to store the data (possibly divided into separate main memory and disk space constraints) and the time allowed to perform each subtask.">resource
-constraints</a>. Examples of resource constraints include the total
-space available to store the data – possibly divided into separate main
-memory and disk space constraints – and the time allowed to perform each
-subtask. A solution is sometimes said to be efficient if it requires
-fewer resources than known alternatives, regardless of whether it meets
-any particular requirements. The <a href="section-14.html#cost"
-class="term"
-title="The amount of resources that given run of an algorithm consumes.">cost</a>
-of a solution is the amount of resources that the solution consumes.
-Most often, cost is measured in terms of one key resource such as time,
-with the implied assumption that the solution meets the other resource
-constraints.</p>
+Motivation and core concepts</h2>
+<p>How many cities with more than 100,000 people lie within 200
+kilometres of Paris, France? How many people in Swedish towns with less
+than 50,000 people earn less than 50% of the average income of people in
+Sweden? How much more CO<sub>2</sub> will be emitted if I travel by
+plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I
+take the train? How can I see if a text contains plagiarism, that is, if
+it copied some parts from another existing text?</p>
+<p>Gathering the necessary information is not sufficient to answer
+questions like these, the information must be organised to allow
+efficient access and analysis. To organise our data we use different
+<em>data structures</em>, and to update or analyse our data we use
+<em>algorithms</em> on these data structures. The subjects of data
+structures and algorithms are deeply intertwined: Efficient data
+structures are used when designing and implementing algorithms, and
+algorithms are used to design efficient data structures.</p>
+<p>A university course on data structures and algorithms is essential to
+anyone who intends to do any substantial programming in their line of
+work. Often, choosing the right data structure for a task is half the
+battle of solving it, and conversely using the wrong data structure is
+an easy way to end up with an inefficient or error-prone mess.
+Hopefully, by the time you have read this book you can look back at your
+earlier solutions to programming exercises and realise how much you can
+improve them by using a set instead of a list, or a priority queue
+instead of a sorted array.</p>
+<p>Apart from using the right data structure for the job, analysing an
+algorithm is another essential skill. If two algorithms solve the same
+problem, which one is better? Will the performance of your program scale
+to thousands of users? Which part of a piece of code is going to use all
+the processing power (and is thus the only part worth optimising)?</p>
+<p>Suppose you have an algorithm for finding someone in a list of names.
+Let us say that it is very fast when searching among 1000 names, for
+example your social media friends. Can you use the same algorithm to
+search among all 10 million people living in Sweden? That problem is
+10,000 times larger, is it still feasible to do it using your old laptop
+or do you need a supercomputer? These questions can be answered by
+algorithm analysis, and it is not certain that it takes 10,000 times
+longer to solve a 10,000 times larger problem – it depends on the
+algorithm. (The specific example of searching in a list is discussed in
+more detail in <a
+href="section-1.3.html#sec:intro:searching">Section 1.3</a>.)</p>
+<p>The subjects in this book fall into one of four categories:</p>
+<dl>
+<dt>Data structures</dt>
+<dd>
+A data structure describes how we can <em>organise</em> our data so that
+it can be retrieved and updated efficiently. We explain the fundamental
+ideas of various data structures, and present the most common
+implementations. Examples of data structures that you may be familiar
+with are <em>arrays</em>, <em>linked lists</em>, <em>search trees</em>
+and <em>hash tables</em>.
+</dd>
+<dt>Abstract data types</dt>
+<dd>
+An abstract data type (ADT) describes the <em>capabilities</em> of a
+data structure. In other words, what operations can we use on a given
+data structure? Are there different data structures that have the same
+capabilities? We use ADTs to categorise the different use cases.
+Examples of ADTs include <em>lists</em>, <em>queues</em>, <em>sets</em>
+and <em>maps</em>. Slightly simplified using programming terms: An ADT
+is an interface, and a data structure is the full implementation with
+all the technical details.
+</dd>
+<dt>Algorithms</dt>
+<dd>
+An algorithm is a process for solving a specific problem, taking an
+input and producing a correct output. This can include operations on
+data structures, such as querying, iterating or updating them. We
+describe algorithms using natural language, explain how to analyze them,
+and how to implement them as programs.
+</dd>
+<dt>Analysis</dt>
+<dd>
+The main purpose of analysing data structures and algorithms is to know
+how <em>efficient</em> they are. We focus on theoretical algorithm
+analysis, and in particular <em>asymptotic complexity analysis</em>,
+where we mathematically can derive how an algorithm behaves when the
+size of the input grows.
+</dd>
+</dl>
+<p>We also show how to describe algorithms and data structures to
+others, using well-established technical terms and structures, such as
+pseudocode and diagrams. We abstract away from technical details of a
+particular programming language, and focus on explaining the underlying
+ideas of a data structure or algorithm. We aim to provide you, the
+reader, with the means to write a good implementation in your favourite
+programming language.</p>
 </section>
 </main>
 
@@ -168,7 +209,7 @@ constraints.</p>
 <a href="section-1.html" accesskey="p" rel="previous">Introduction</a>
 </div>
 <div class="navlink">
-<a href="section-1.2.html" accesskey="n" rel="next">Selecting a data structure</a>
+<a href="section-1.2.html" accesskey="n" rel="next">Practical examples</a>
 <a href="section-1.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -176,5 +217,6 @@ constraints.</p>
 
 </body>
 </html>
+
 
 

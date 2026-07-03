@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Converting objects to table indices</title>
+  <title>DSABook – Traversing graphs: DFS and BFS</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,217 +100,362 @@
 <nav class="sitenav">
 <div>
 <a href="section-12.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.1.html" accesskey="p" rel="previous">Hash functions</a>
+<a href="section-12.1.html" accesskey="p" rel="previous">Definitions and properties</a>
 </div>
 <div>
-<a href="section-12.3.html" accesskey="n" rel="next">Separate chaining</a>
+<a href="section-12.3.html" accesskey="n" rel="next">Shortest-path problems and Dijkstra’s algorithm</a>
 <a href="section-12.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:converting-objects-to-table-indices" class="level2"
-data-number="12.2">
+<section id="sec:graphs:traversal" class="level2" data-number="12.2">
 <h2 data-number="12.2"><span class="header-section-number">12.2</span>
-Converting objects to table indices</h2>
-<p>We want to be able to build hash tables for any kind of object – be
-it a string, a complex datatype of persons, or an x-ray image. But we
-(i.e., the ones implementing the hash table) do not know which kind of
-object the user (i.e., the one using the hash table) wants to put in
-their hash table. Therefore the easiest is to <em>delegate</em> the
-implementation of the hash function to the object itself. By this we
-mean that every datatype (strings, persons, x-ray images) should have a
-designated method that turns a specific object into an integer, just as
-for the Person datatype we showed in the end of the last section:</p>
+Traversing graphs: DFS and BFS</h2>
+<p>Many graph algorithms involve <em>traversing</em> a graph, starting
+from a given vertex and visit each reachable vertex once. This is
+similar to tree traversal, but made more difficult by the presence of
+cycles. A simple recursive procedure would get stuck in an infinite
+loop.</p>
+<p>Instead we use an iterative procedure, very similar to the ones shown
+for trees in <a
+href="section-9.1.html#sec:trees:traversal">Section 9.1.3</a>, but we
+have to keep track of visited vertices to avoid infinite loops. Thus, in
+each step of the traversal: Select an edge from a visited vertex to an
+unvisited vertex, and visit that vertex. Stop when there are no edges
+from visited to unvisited vertices.</p>
+<p>By varying how we select the next edge, and what we do when we visit
+a vertex, we can implement a wide range of useful algorithms on graphs.
+Most of the algorithms described in this chapter use three data
+structures: an <em>agenda</em>, a <em>visitation set</em>, and a
+<em>result</em>.</p>
+<ul>
+<li>The <em>agenda</em> is the collection of edges we have discovered
+but not yet traversed. Different algorithms use different kind of
+agendas, and this is the main tool to distinguish different ways of
+traversing the graph.</li>
+<li>The <em>visitation set</em> is the set of vertices we have already
+visited, and that should not be visited again.</li>
+<li>The <em>result</em> can be anything that the algorithm builds while
+traversing the graph, but here we assume that it is a set of the edges
+that it has processed.</li>
+</ul>
+<figure id="fig:GraphTraversal1">
+<img src="images/Graphs-traversal1.svg" style="width:80.0%"
+alt="Figure 12.2: Steps of a graph traversal in an undirected graph, starting in A. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: (A,B) (A,E) (B,F) (A,D) (F,C), and these edges form the final result set." />
+<figcaption aria-hidden="true">Figure 12.2: Steps of a graph traversal
+in an undirected graph, starting in <span class="math inline">A</span>.
+The circled areas are the set of visited vertices, and the pointed
+arrows show the selected edges. The edges with circles on them show the
+agenda. This traversal selects these edges in order: <span
+class="math inline">(A,B) (A,E) (B,F) (A,D) (F,C)</span>, and these
+edges form the final result set.</figcaption>
+</figure>
+<section id="sec:algorithm-generic-graph-traversal"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Generic graph traversal</h4>
+<p>To traverse a graph from a starting vertex <span
+class="math inline">s</span>, we first create an empty set of
+<em>visited</em> vertices and the <em>result</em> set. Initialise the
+<em>agenda</em> with a single a dummy edge <span
+class="math inline">?\rightarrow s</span> (that is, going from something
+unspecified to the starting vertex), then repeat the following until the
+agenda is empty:</p>
+<ul>
+<li>Remove an edge <span class="math inline">a\rightarrow b</span> from
+the <em>agenda</em></li>
+<li>If <span class="math inline">b</span> is not in <em>visited</em>:
+<ul>
+<li>Add <span class="math inline">b</span> to <em>visited</em>, and the
+edge to the <em>result</em></li>
+<li>Add all outgoing edges of <span class="math inline">b</span>
+<strong>that do not end in a visited vertex</strong>, to the
+<em>agenda</em></li>
+</ul></li>
+</ul>
+</section>
+<p><a href="#fig:GraphTraversal1">Figure 12.2</a> illustrates how a
+graph traversal can unfold. It shows a useful trick when trying to
+understand graph traversal algorithms on pen and paper: Circle the
+visited vertices, and the edges you cross will be the important parts of
+the agenda.</p>
+<p>The result of the traversal is a set of directed edges. Importantly,
+these edges do <em>not</em> form a single path – instead they form a
+<em>spanning tree</em> of all paths reachable from the starting vertex.
+You can see the resulting spanning tree in the lower right of <a
+href="#fig:GraphTraversal1">Figure 12.2</a>, the selected edges form a
+tree with <span class="math inline">A</span> as the root.</p>
+<p>Note that the algorithm does not specify in which order we select
+vertices. In particular, it does not necessarily select a vertex
+adjacent to the previous vertex we visited, but rather skip around to
+vertices that are adjacent to <em>some</em> visited vertex.</p>
+<p>There are some things to note about this very abstract algorithm:</p>
+<ul>
+<li><p>To get the process rolling, we add a fake edge to the agenda,
+leading to the starting vertex <span class="math inline">s</span>. Its
+only purpose is to start the whole process: the first thing the loop
+does is to visit the starting vertex.</p></li>
+<li><p>The agenda does not only contain edges from visited vertices to
+unvisited ones. Sometimes it will contain edges between two visited
+vertices, which is why we need to check that <span
+class="math inline">b</span> is not visited.</p></li>
+<li><p>It is a bit silly to add an edge to the agenda if its destination
+vertex is already visited, since it will anyway be filtered out in the
+visitation check. For example, the graph in <a
+href="#fig:GraphTraversal1">Figure 12.2</a> is undirected, so when we
+have removed the edge <span class="math inline">a\rightarrow b</span>
+from the agenda, it would be very silly to immediately add the reverse
+edge <span class="math inline">b\rightarrow a</span> to the agenda.</p>
+<p>This is why we have the additional check in the last line (the
+boldfaced text “…that do not end in a visited vertex”), which is a
+simple and often very effective optimisation. But note that it does not
+let us remove the original visitation check in the while loop.</p></li>
+</ul>
+<p>The traversal algorithm can be translated into pseudocode like
+this:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Person:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    firstName: String</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    middleName: String</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    lastName: String</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    hashCode() <span class="op">-&gt;</span> <span class="bu">Integer</span>:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        code <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> part <span class="kw">in</span> (firstName, middleName, lastName):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            code <span class="op">=</span> p<span class="op">*</span>code <span class="op">+</span> part.hashCode()</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> code</span></code></pre></div>
-<p>This is a very common strategy in many programming languages – e.g.,
-in Java this designated method is called exactly
-<code>hashCode()</code>, and in Python it is called
-<code>__hash__()</code>.</p>
-<section id="sec:compressing-a-hash-code" class="level3"
-data-number="12.2.1">
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>traverse(start):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> empty <span class="bu">set</span> <span class="kw">of</span> vertices</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="kw">new</span> empty <span class="bu">set</span> <span class="kw">of</span> edges</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> [(<span class="va">null</span>,start)]   <span class="co">// We do not specify which ADT we use for the agenda</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> agenda <span class="kw">is</span> <span class="kw">not</span> empty:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        (a,b) <span class="op">=</span> agenda.<span class="bu">remove</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> visited.<span class="bu">contains</span>(b):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">add</span>(b)    <span class="co">// Visiting the vertex b for the first time</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> (b0,c) <span class="kw">in</span> outgoingEdges(b):  <span class="co">// b0 is the same vertex as b</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> visited.<span class="bu">contains</span>(c):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>((b0,c))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<section id="sec:graphs:DFS" class="level3" data-number="12.2.1">
 <h3 data-number="12.2.1"><span
-class="header-section-number">12.2.1</span> Compressing a hash code</h3>
-<p>Internally, a hash table is an array of a fixed length, say
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
-and each of these
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-slots represent a bucket which contains some objects. The hash function
-should help us by telling in which bucket we should search for the given
-object.</p>
-<p>Now, the problem is that the datatypes and objects have no idea how
-large the internal array is, i.e., which array index they should return.
-Instead, the only thing that the <code>hashCode()</code> method can do
-is to return an arbitrary integer. So, how can we solve this
-dilemma?</p>
-<p>The solution is to implement a function that transforms an arbitrary
-hash code into an array index. This is called <em>compression</em> – we
-compress the arbitrary integer that is the hash code into an array index
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">0\leq i&lt;m</annotation></semantics></math>.</p>
-<p>Therefore, computing the hash table index for a given object is a
-two-step process:</p>
-<ol type="1">
-<li>First calculate the hash code which is an arbitrary integer – this
-is calculated by the object itself.</li>
-<li>Then compress the hash code into a table index
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">0\leq i&lt;m</annotation></semantics></math>
-– this is calculated by an internal function in the hash table.</li>
-</ol>
+class="header-section-number">12.2.1</span> Depth-first traversal</h3>
+<p>To turn this high level description of the algorithm into an
+efficient procedure, we need to decide how to represent the agenda. If
+we use a <em>stack</em> for the agenda we will get a depth-first
+traversal, similar to how one can implement DFS for trees (see <a
+href="section-9.1.html#sec:trees:traversal">Section 9.1.3</a>).</p>
+<p>The edges selected and the order in which vertices are visited depend
+on the order in which <code>outgoingEdges</code> produces edges. Let us
+assume that <code>outgoingEdges</code> gives edges in albethical order
+of their destination, meaning that <span
+class="math inline">\texttt{outgoingEdges}(A)</span> returns <span
+class="math inline">[A\rightarrow B, A\rightarrow D, A\rightarrow
+E]</span>. Then the vertices would be visited in this order: <span
+class="math inline">[A,E,F,C,B,D]</span>. This is far from obvious, so
+let us walk through the steps of depth-first traversing the graph:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">edge</th>
+<th style="text-align: left;">visited</th>
+<th style="text-align: left;">agenda at end of iteration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">{\,?\,}\rightarrow A</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, A\rightarrow E]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">A\rightarrow
+E</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,E\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, E\rightarrow B, E\rightarrow F]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">E\rightarrow
+F</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,E,F\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, E\rightarrow B, F\rightarrow B, F\rightarrow
+C]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">F\rightarrow
+C</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,E,F,C\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, E\rightarrow B, F\rightarrow B]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">F\rightarrow
+B</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,E,F,C,B\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, E\rightarrow B]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">A\rightarrow
+D</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,E,F,C,B,D\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow
+B]</span></td>
+</tr>
+</tbody>
+</table>
+<p> Keep in mind how a stack operates: Because <span
+class="math inline">E</span> is the last edge in <span
+class="math inline">\texttt{outgoingEdges}(A)</span>, it will be pushed
+last and be on top of the agenda after visiting <span
+class="math inline">A</span>. Also note how after visiting <span
+class="math inline">F</span>, there are three edges leading to <span
+class="math inline">B</span> in the agenda. Because our agenda is a
+stack, the last one to be pushed is the one selected, the others are
+discarded. This is what makes the algorithm depth-first: it will tend to
+select vertices that are <em>deeper</em> in the sense that the
+constructed paths from the origin are longer. So one way of describing
+depth-first graph traversal is: In each step, we select an edge from the
+vertex that was <em>most recently visited</em> and still has at least
+one unvisited adjacent vertex. You can see the same depth-first
+traversal in <a href="#fig:GraphTraversal2">Figure 12.3</a>.</p>
+<figure id="fig:GraphTraversal2">
+<img src="images/Graphs-traversal2.svg" style="width:90.0%"
+alt="Figure 12.3: Steps of a depth-first traversal, starting in A, using a stack and assuming outgoingEdges are given in alphabetical order of destination vertex. The right part shows the result as a tree. The algorithm can be described as: select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex." />
+<figcaption aria-hidden="true">Figure 12.3: Steps of a depth-first
+traversal, starting in <span class="math inline">A</span>, using a stack
+and assuming <code>outgoingEdges</code> are given in alphabetical order
+of destination vertex. The right part shows the result as a tree. The
+algorithm can be described as: select the alphabetically last edge from
+the most recently visited vertex adjacent to an unvisited
+vertex.</figcaption>
+</figure>
+<section id="sec:variants" class="level4 unnumbered">
+<h4 class="unnumbered">Variants</h4>
+<p>The algorithm above produces a set of <em>result</em> edges. In many
+cases this is exactly what we need, but sometimes we can make some some
+variants, depending on what we want to use the result for. Here are some
+examples:</p>
+<ul>
+<li>If we only want to find a path from <span
+class="math inline">s</span> to a known goal vertex, we can stop
+immidately when we reach the goal, we do not have to continue traversing
+the whole graph.</li>
+<li>If we only want to know which vertices are <em>reachable</em> from
+<span class="math inline">s</span>, we do not need to track edges used
+at all: we can keep vertices in the agenda, and use the visited set as
+our result.</li>
+</ul>
+<p>As already discussed for trees in <a
+href="section-9.1.html#sec:trees:traversal">Section 9.1.3</a>, DFS can
+also be implemented using recursion instead of an agenda. In this way
+the recursion call stack acts as an implicit agenda. Instead of pushing
+an edge to the agenda, we simply call the DFS function recursively with
+the edge as argument. But note that we still need to check for visited
+vertices, and this visitation set needs to be another argument to the
+function. We leave the recursive DFS implementation as an exercise to
+the reader.</p>
 </section>
-<section id="sec:modular-compression" class="level3"
-data-number="12.2.2">
+</section>
+<section id="sec:graphs:BFS" class="level3" data-number="12.2.2">
 <h3 data-number="12.2.2"><span
-class="header-section-number">12.2.2</span> Modular compression</h3>
-<p>The simplest way to compress a hash code
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h\geq 0</annotation></semantics></math>
-into a table index
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
-is to take
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
-<strong>modulo</strong> the array size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mi>h</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">
-i = h \mod m
-</annotation></semantics></math></p>
-<p>This is called <em>modular compression</em> and is the most common
-compression method.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is an interactive explanation of modular compression.</p>
-</summary>
-
-<div id="hashFuncExCON1" class="ssAV" data-short-name="hashFuncExCON1" data-long-name="Hash Function Slideshow 1" alt="Hash Function Slideshow 1" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/hashFuncExCON1.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("hashFuncExCON1", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#hashFuncExCON1 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>Recall that it is common to use an integer as its own hash code. Now
-we see that this is not the full picture, because the integer will then
-be compressed into the internal array of the hash table. Assume that we
-have an integer hash table of sixteen slots – then the combined hash
-function will be the same as the modular compression:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="bu">hash</span>(n):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">%</span> <span class="dv">16</span></span></code></pre></div>
-<p>Note that the values 0 to 15 can be represented with four bits (i.e.,
-0000 to 1111). The value returned by this hash function depends solely
-on the least significant four bits of the key. Because these bits are
-likely to be poorly distributed (as an example, a high percentage of the
-keys might be even numbers, which means that the low order bit is zero),
-the result will also be poorly distributed. This example shows that the
-size of the table
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-can have a big effect on the performance of a hash system.</p>
-<p>One way to get a better distribution is to always let the size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-of the internal array be a prime number.</p>
-</section>
-<section id="sec:negative-hash-codes" class="level3"
-data-number="12.2.3">
-<h3 data-number="12.2.3"><span
-class="header-section-number">12.2.3</span> Negative hash codes</h3>
-<p>However, in general integers are signed, so the method
-<code>hashCode()</code> might return a negative integer. If we take this
-modulo
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
-we might get a negative result. A negative index is not suitable as a
-table index, so first we have to make the hash code positive.</p>
-<p>One way to do this is to mask off the sign bit. Most programming
-languages use integers in the range
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>31</mn></msup><mo>≤</mo><mi>h</mi><mo>&lt;</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}\leq h&lt;2^{31}</annotation></semantics></math>.
-In these cases we can e.g. use <code>h &amp; 0x7fffffff</code> to make
-the hash code positive.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> compress(h):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> h <span class="op">&amp;</span> <span class="bn">0x7fffffff</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> h <span class="op">%</span> m</span></code></pre></div>
-</section>
-<section id="sec:the-hash-code-never-changes" class="level3"
-data-number="12.2.4">
-<h3 data-number="12.2.4"><span
-class="header-section-number">12.2.4</span> The hash code never
-changes</h3>
-<p>The generic hash codes should never change, because hashing must be
-predictable. Therefore we don’t have to recalculate the hash code when
-we resize the internal table, it is only the table indices that have to
-be updated.</p>
-<p>One implication of this is that it’s only meaningful to calculate
-hash codes for <em>immutable objects</em>, i.e., objects that don’t
-change (after they are initialised). Many programming languages make a
-difference between <em>tuples</em> and <em>lists</em>, where the latter
-are <em>mutable</em>. This means that we can add elements to and remove
-from lists, but we cannot do that with tuples. Once the tuple is
-initialised we cannot change it – and therefore we can use a tuple as an
-object in a hash table.</p>
-<p>Python uses this fact to optimise their built-in hash tables by
-storing the hash codes together with the keys and values. This increases
-the size of the table slightly, but on the other hand it ensures that
-hash codes are not calculated more than once.</p>
-<p>In Java, the optimisation is delegated to the object classes
-themselves. E.g., a Java string only calculates its hash code once and
-then stores it in an instance variable for immediate lookup.</p>
-</section>
-<section id="sec:handling-collisions" class="level3"
-data-number="12.2.5">
-<h3 data-number="12.2.5"><span
-class="header-section-number">12.2.5</span> Handling collisions</h3>
-<p>So far we have talked about how to calculate an array index for an
-arbitrary object. One thing we haven’t discussed yet is what we should
-do if two two different objects get assigned the same slots in the
-table.</p>
-<p>Assume that we have an internal array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">m=16</annotation></semantics></math>,
-and we use modular compression like above. Then every 16th integer will
-get the same array index, such as the integers 7, 23, 39, 55, etc.</p>
-<p>So, one very important question is how to handle <em>collision</em>,
-i.e., when two objects want to occupy the same slot. There are two main
-approaches to this, two <em>collision resolution strategies</em>:</p>
-<dl>
-<dt>Separate chaining</dt>
-<dd>
-The internal array contains pointers to <em>collections</em> of objects
-– it could be linked lists, self-balancing trees, or some other suitable
-data structure.
-</dd>
-<dt>Open addressing</dt>
-<dd>
-The internal array contains the objects themselves. Collisions are
-handled by <em>probing</em> the array – i.e., searching through the
-table to find an empty slot.
-</dd>
-</dl>
-<p>Both of these are common – e.g., the Java standard library implements
-a separate chaining hash table, while the Python sets and dictionaries
-are implemented using open addressing hash tables.</p>
-<p>We will start by describing separate chaining hash tables in <a
-href="section-12.3.html#sec:separate-chaining">Section 12.3</a>, and
-then continue with open addressing in <a
-href="section-12.5.html#sec:open-addressing">Section 12.5</a>.</p>
+class="header-section-number">12.2.2</span> Breadth-first traversal</h3>
+<p>By changing the data type of the agenda from a stack to a
+<em>queue</em>, we get an even more useful algorithm. The only change is
+the type of the agenda, the rest is exactly the same. Again, let us look
+at the execution of BFS from vertex <span
+class="math inline">A</span>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">edge</th>
+<th style="text-align: left;">visited</th>
+<th style="text-align: left;">agenda at end of iteration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span
+class="math inline">{\,?\,}\rightarrow A</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow B,
+A\rightarrow D, A\rightarrow E]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">A\rightarrow
+B</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,B\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow D,
+A\rightarrow E, B\rightarrow E, B\rightarrow F]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">A\rightarrow
+D</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,B,D\}</span></td>
+<td style="text-align: left;"><span class="math inline">[A\rightarrow E,
+B\rightarrow E, B\rightarrow F]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">A\rightarrow
+E</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,B,D,E\}</span></td>
+<td style="text-align: left;"><span class="math inline">[B\rightarrow E,
+B\rightarrow F, E\rightarrow F]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">B\rightarrow
+F</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,B,D,E,F\}</span></td>
+<td style="text-align: left;"><span class="math inline">[E\rightarrow F,
+F\rightarrow C]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">F\rightarrow
+C</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,B,D,E,F,C\}</span></td>
+<td style="text-align: left;"><span class="math inline">[]</span></td>
+</tr>
+</tbody>
+</table>
+<p> You may notice the following pattern: The algorithm starts by
+visiting all vertices directly adjecent to <span
+class="math inline">A</span>, then the vertices adjacent to those
+vertices, etc. This is not only for this graph, but for every graph, and
+regardless of the order in which edges are presented by
+<code>outgoingEdges</code>. Consider: After visiting <span
+class="math inline">A</span>, its immediate neighbors will all be in the
+agenda and visited before anything else (because the agenda is a queue
+now). After all those are visited, the agenda will have all the vertices
+that are two steps away from <span class="math inline">A</span>, and
+after all those, three steps. The different steps are visualised in <a
+href="#fig:GraphTraversal3">Figure 12.4</a>. Breadth-first order will
+always visit vertices in order of their minimal distance from the
+starting vertex.</p>
+<figure id="fig:GraphTraversal3">
+<img src="images/Graphs-traversal3.svg" style="width:90.0%"
+alt="Figure 12.4: Steps of a breadth-first traversal, starting in A, using a stack and assuming outgoingEdges are given in alphabetical order of destination vertex. The right part shows the result as a tree. The algorithm can be described as: select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex." />
+<figcaption aria-hidden="true">Figure 12.4: Steps of a breadth-first
+traversal, starting in <span class="math inline">A</span>, using a stack
+and assuming <code>outgoingEdges</code> are given in alphabetical order
+of destination vertex. The right part shows the result as a tree. The
+algorithm can be described as: select the alphabetically first edge from
+the earliest visited vertex still adjacent to an unvisited
+vertex.</figcaption>
+</figure>
+<p>This further means that the tree produced will not only contain a
+path from <span class="math inline">A</span> to <span
+class="math inline">C</span>, but that path is guaranteed to be the
+<em>shortest possible</em> one. In fact, the tree contains shortest
+paths from <span class="math inline">A</span> to all other vertices.
+This is supremely useful in a wide range of applications: Obviously
+things like pathfinding in maps or simulations, but also in applications
+like AI problem solving and most types of optimisation problems.</p>
 </section>
 </section>
 </main>
@@ -300,10 +464,10 @@ href="section-12.5.html#sec:open-addressing">Section 12.5</a>.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-12.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.1.html" accesskey="p" rel="previous">Hash functions</a>
+<a href="section-12.1.html" accesskey="p" rel="previous">Definitions and properties</a>
 </div>
 <div class="navlink">
-<a href="section-12.3.html" accesskey="n" rel="next">Separate chaining</a>
+<a href="section-12.3.html" accesskey="n" rel="next">Shortest-path problems and Dijkstra’s algorithm</a>
 <a href="section-12.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -311,5 +475,6 @@ href="section-12.5.html#sec:open-addressing">Section 12.5</a>.</p>
 
 </body>
 </html>
+
 
 

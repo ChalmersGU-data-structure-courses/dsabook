@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Analysing binary search</title>
+  <title>DSABook – Review*</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/BsearchDandCRecurCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,147 +100,1178 @@
 <nav class="sitenav">
 <div>
 <a href="section-2.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-2.7.html" accesskey="p" rel="previous">Algorithm analysis in practice</a>
+<a href="section-2.7.html" accesskey="p" rel="previous">Empirical analysis and code tuning*</a>
 </div>
 <div>
-<a href="section-2.9.html" accesskey="n" rel="next">Code tuning</a>
-<a href="section-2.9.html" class="navbutton">&gt;&gt;</a>
+<a href="section-3.html" accesskey="n" rel="next">Algorithm analysis, part 1</a>
+<a href="section-3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-analysing-binary-search" class="level2"
-data-number="2.8">
-<h2 data-number="2.8"><span class="header-section-number">2.8</span>
-Case study: Analysing binary search</h2>
-<p>Now we will discuss the algorithmic complexity of the two search
-algorithms that we introduced in <a
-href="section-1.6.html#sec:case-study-searching-in-a-list">Section 1.6</a>.</p>
-<p>In <a href="section-2.3.html#sec:input-size">Section 2.3.1</a>, we
-deduced that the running time for linear search on an array if size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.
-If we assume that the value is equally likely to appear in any location,
-this complexity is both the average case and the worst case. (The best
-case is constant,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>,
-and occurs when the searched value occurs first in the array. But as we
-already discussed we are rarely interested in the best case.)</p>
-<p>But what is the complexity of the binary search algorithm?</p>
-<section id="sec:complexity-of-binary-search" class="level3"
+<section id="sec:sorting-1:quizzes" class="level2" data-number="2.8">
+<h2 data-number="2.8"><span class="header-section-number">2.8*</span>
+Review</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:quiz-sorting-terminology" class="level3 quiz"
 data-number="2.8.1">
 <h3 data-number="2.8.1"><span class="header-section-number">2.8.1</span>
-Complexity of binary search</h3>
-<p>To find the worst-case cost of binary search, we can model the
-running time as a recurrence and then find the closed-form solution.
-Each recursive call to <code>binarySearch</code> cuts the size of the
-array approximately in half, so we can model the worst-case cost as
-follows, assuming for simplicity that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is a power of two.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>1</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{equation*}
-\begin{split}
-O(n) &amp;= O(n/2) + 1 \\
-O(1) &amp;= 1
-\end{split}
-\end{equation*}</annotation></semantics></math></p>
-<p>If we expand the recurrence, we will find that we can do so only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
-times before we reach the base case, and each expansion adds one to the
-cost.</p>
-<ul>
-<li>For a problem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-we have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-unit of work plus the amount of work required for one subproblem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) = 1 + O(n/2)</annotation></semantics></math></li>
-<li>For a problem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>,
-we have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-unit of work plus the amount of work required for one subproblem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>4</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) = 1 + (1 + O(n/4))</annotation></semantics></math></li>
-<li>For a problem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>,
-we have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-unit of work plus the amount of work required for one subproblem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>8</mn></mrow><annotation encoding="application/x-tex">n/8</annotation></semantics></math>:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>8</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) = 1 + (1 + (1 + O(n/8)))</annotation></semantics></math></li>
-<li>…etc, until we reach a subproblem of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><munder><mrow><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>…</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mtext mathvariant="normal"> levels</mtext></mrow></munder></mrow><annotation encoding="application/x-tex">O(n) = \underbrace{1 + (1 + (1 + (\ldots)))}_{\log n \text{~levels}}</annotation></semantics></math></li>
+Quiz: Sorting terminology</h3>
+<div class="question">
+Which of these is the best definition for a stable sorting algorithm?
+</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An algorithm that does
+not change the relative ordering of equal elements</label></li>
+<li><label><input type="checkbox" />An algorithm that is as fast as the
+best one known</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+right answer</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+same order for duplicate keys from run to run</label></li>
 </ul>
-<p>Thus, the closed form solution of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">O(n) = O(n/2) + 1</annotation></semantics></math>
-can be modeled by the summation</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow></munderover><mn>1</mn><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
-\sum_{i=0}^{\log n} 1 \in O(\log n)
-</annotation></semantics></math></p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is a visual explanation of the complexity of binary search.</p>
-</summary>
-
-<div id="BsearchDandCRecurCON" class="ssAV" data-short-name="BsearchDandCRecurCON" data-long-name="Binary Search recurrence slideshow" alt="Binary Search recurrence slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
+<div class="hints">
+<ul>
+<li>“Stable” has nothing to do with how fast an algorithm is.</li>
+<li>It refers to maintaining the relative order of elements that compare
+equal.</li>
+</ul>
 </div>
-
-<script type="text/javascript" src="../interactive/AlgAnal/BsearchDandCRecurCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("BsearchDandCRecurCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BsearchDandCRecurCON "+rule)}
-    
-  });
-</script>
-
-</details>
 </div>
-<p>Comparing sequential search to binary search, we see that as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-grows, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-running time for sequential search in the average and worst cases
-quickly becomes much greater than the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-running time for binary search. Taken in isolation, binary search
-appears to be much more efficient than sequential search. This is
-despite the fact that the constant factor for binary search is greater
-than that for sequential search, because the calculation for the next
-search position in binary search is more expensive than just
-incrementing the current position, as sequential search does.</p>
-<p>However, binary search comes with a precondition: the array must be
-sorted. And sorting an array is a time-consuming operation – in fact it
-is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n\log n)</annotation></semantics></math>
-in the worst case, as we will see in <a
-href="section-4.html#sec:sorting-divide-and-conquer">Chapter 4</a>. So
-there’s a tradeoff here – to be able to search the array efficiently we
-need to keep it sorted. This is not much of a problem if this is
-something we only have to do once, but it can be very costly if the
-array changes because we insert and delete elements. Only in the context
-of the complete problem to be solved can we know whether the advantage
-outweighs the disadvantage.</p>
-<p>So, if we want to maintain a searchable collection which changes over
-time, a sorted array is not a good choice. But an unsorted array isn’t
-either – instead we should use smarter data structures such as <a
-href="section-14.html#search-tree" class="term"
-title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $O(\log n)$.">search
-trees</a> (<a href="section-11.html#sec:search-trees">Chapter 11</a>) or
-<a href="section-14.html#hash-table" class="term"
-title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
-tables</a> (<a href="section-12.html#sec:hash-tables">Chapter
-12</a>).</p>
+<div class="question">
+<p>Which of these will NOT affect the RELATIVE running times for two
+sorting algorithms?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The CPU
+speed</label></li>
+<li><label><input type="checkbox" />The number of elements</label></li>
+<li><label><input type="checkbox" />The allowable range for the
+values</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we speed up the CPU by a factor of two, both sorts will go twice
+as fast.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is a traditional measure for the cost of a sorting
+algorithm?</p>
+<p><em>Note</em>: Multiple answers are possible!</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The number of
+comparisons</label></li>
+<li><label><input type="checkbox" checked="" />The number of
+swaps</label></li>
+<li><label><input type="checkbox" />The number of elements</label></li>
+<li><label><input type="checkbox" />The memory size</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This question does not ask what <em>affects</em> the cost. It asks
+what is a <em>measure</em> of the cost.</li>
+<li>The number of elements affects the cost, but it does not measure the
+cost.</li>
+<li>The memory size affects the cost, but it does not measure the
+cost.</li>
+<li>Elements being out of order can increase the cost, but not measure
+it.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which case might the number of comparisons <em>not</em> be a good
+representation of the cost for a sorting algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are comparing
+strings of widely varying length</label></li>
+<li><label><input type="checkbox" />When there are lots of
+elements</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Number of elements or amount of space won’t affect the value of
+counting comparisons.</li>
+<li>The longer the string, the longer it takes to compare.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Sometimes, the constant factors in an algorithm’s runtime equation
+are more important thant its growth rate. When the problem is sorting,
+this can happen in which situation?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are sorting lots
+of small groups of elements.</label></li>
+<li><label><input type="checkbox" />When there are lots of
+elements.</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast.</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small.</label></li>
+<li><label><input type="checkbox" />When the elements are nearly
+sorted.</label></li>
+<li><label><input type="checkbox" />When the elements are nearly reverse
+sorted.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Elements being sorted or reverse sorted affects the growth rate of
+different algorithms differently. But not relevant to this
+question.</li>
+<li>When we sort only a few elements, constants matter a lot.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-bubble-sort" class="level3 quiz"
+data-number="2.8.2">
+<h3 data-number="2.8.2"><span class="header-section-number">2.8.2</span>
+Quiz: Bubble sort</h3>
+<p>Here are some review questions to check your understanding of Bubble
+sort.</p>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Bubble sort (as the code is written in this chapter) is a stable
+sorting algorithm.</p>
+<p>(Recall that a stable sorting algorithm maintains the relative order
+of equal elements.)</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember that: Bubble sort consists of a simple double for
+loop.</li>
+<li>The first iteration of the inner for loop moves through the array
+from bottom to top, comparing adjacent elements.</li>
+<li>If the lower-indexed element is greater than its higher-indexed
+neighbour, then the two are swapped.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Bubble sort (as
+the algorithm is presented in this chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble sort’s cost vary according to the order of the array
+input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Bubble sort (as presented in this chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None.</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference.</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble sort change when it make a comparison according to the
+order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Bubble sort (as the algorithm is
+presented in this chapter) to sort an array of <span
+class="math inline">n</span> records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^n)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble sort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Bubble sort when the input is an array
+where all elements are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each comparison test in the inner for loop will fail because the
+value at position <span class="math inline">i</span> is never less than
+the value at position <span class="math inline">i-1</span>.</li>
+<li>However, this observation does not affect the number of comparisons
+to be made, it only affects the number of swaps.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time for Bubble sort when the input array has
+values that are in reverse sort order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>On each iteration, the <span class="math inline">i</span>th record
+will have to move to the start of the array.</li>
+<li>This is the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Bubble sort (as the algorithm is
+presented in this chapter) when the input is an array that has already
+been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position <span class="math inline">i</span> is never less than the value
+at position <span class="math inline">i-1</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Bubble sort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is no situation
+where Bubble sort is the best choice over all of the others in this
+chapter.</label></li>
+<li><label><input type="checkbox" />Each component of the array requires
+a large amount of memory.</label></li>
+<li><label><input type="checkbox" />Each component of the array requires
+a small amount of memory.</label></li>
+<li><label><input type="checkbox" />The array has only a few items out
+of place.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble sort’s cost vary with how much the input is out of
+order?</li>
+<li>Bubble sort always does a lot of work, as compared to other sorting
+algorithms.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Bubble sort is
+closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n/4</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2n^2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2/4</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Bubble sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed <span class="math inline">n-1</span>
+times.</li>
+<li>The inner for loop is executed <span class="math inline">i</span>
+times.</li>
+<li>The total cost is the sum of <span class="math inline">i</span>’s
+for <span class="math inline">i</span> goes from 1 to <span
+class="math inline">n</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-selection-sort" class="level3 quiz"
+data-number="2.8.3">
+<h3 data-number="2.8.3"><span class="header-section-number">2.8.3</span>
+Quiz: Selection sort</h3>
+<p>Here are some review questions to check how well you understand
+Selection sort.</p>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection sort is simple, but less efficient than the best sorting
+algorithms.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What is Selection sort’s worst case complexity?</li>
+<li>It is <span class="math inline">O(n^2)</span>.</li>
+<li>Are there any better sorting algorithms?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection sort (as the code is written in this chapter) is a stable
+sorting algorithm.</p>
+<p>(Recall that a stable sorting algorithm maintains the relative order
+of equal elements.)</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Can you find a counter-example to the proposition?</li>
+<li>What about the array [2,2,1]?</li>
+<li>Will the relative order between the two 2’s change while
+sorting?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Suppose that Selection sort is given an input of 100 elements, and it
+has completed 37 iterations of the main loop.</p>
+<p>How many elements are now guaranteed to be in their final position
+(never to be moved again by the sort)?</p>
+<p><input type="text" value="37"/></p>
+<div class="hints">
+<ul>
+<li>On each pass, Selection sort puts a element into its final
+position.</li>
+<li>So, if Selection sort has done <span class="math inline">k</span>
+passes, then at least <span class="math inline">k</span> elements are in
+their final positions.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many times does Selection sort call the swap function on an array
+of <span class="math inline">n</span> records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n-1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n
+\log(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" />It depends on the order of the
+records</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection sort first finds the smallest element in an unsorted list,
+then the second smallest, and so on.</li>
+<li>To find the next smallest element requires searching through the
+entire unsorted portion of the array, but the search itself needs no
+swaps.</li>
+<li>Once the next smallest element is found, one swap is required to put
+the element in place.</li>
+<li>We don’t need to check anything on the very last pass, since at that
+point the last element must already be in place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Selection
+sort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection sort’s cost vary according to the order of the array
+input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Selection sort (as presented in this
+chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection sort change when it make a comparison according to
+the order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Selection sort to sort an array of n
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection sort’s order and number of comparisons depend on the
+particular order of the input array?</li>
+<li>No, it does not.</li>
+<li>Recall that our implementation for Selection sort will try to swap
+even if the current record is in its correct location.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Selection sort when the input is an array
+that has already been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will be the same no matter what the
+order of the input array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Selection sort when the input is an array
+that has all equal values?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will be the same no matter what the
+order of the input array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which statement best characterises Selection sort (as the code is
+written in this chapter)?</p>
+<p>(Recall that a stable sorting algorithm maintains the relative order
+of equal elements.)</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Selection sort is not
+stable, but with minor modifications it could be made so</label></li>
+<li><label><input type="checkbox" />Selection sort is
+stable</label></li>
+<li><label><input type="checkbox" />Selection sort is not
+stable</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behaviour of every pass through the inner for loop of
+Selection sort if two elements are equal, with the smallest value in the
+array.</li>
+<li>Which element will be selected?</li>
+<li>The last such element.</li>
+<li>It will be moved to the first position in the array, putting it out
+of order with other equal elements.</li>
+<li>But we could easily change the minimum-finding part of the loop to
+take the last of these equal elements.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of swaps done by Selection sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n
+\log(n)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection sort’s number of swaps depend on the particular order
+of the input array?</li>
+<li>No, it does not.</li>
+<li>Recall that our implementation for Selection sort will try to swap
+even if the current record is in its correct location.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Selection sort a good choice to use for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When the cost of a swap
+is large</label></li>
+<li><label><input type="checkbox" />When each component of the array
+requires a small amount of memory</label></li>
+<li><label><input type="checkbox" />When the array has only a few
+elements out of place</label></li>
+<li><label><input type="checkbox" />None of these answers</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The big advantage of Selection sort is that it keeps the number of
+swaps small.</li>
+<li>So it will make best use of this advantage when the cost to swap is
+large.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Selection sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n-1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2/4</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed <span class="math inline">n-1</span>
+times.</li>
+<li>The inner for loop is executed <span class="math inline">n-i</span>
+times.</li>
+<li>The total cost is the sum of <span class="math inline">i</span>’s
+for <span class="math inline">i</span> goes from 1 to <span
+class="math inline">n</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-insertion-sort" class="level3 quiz"
+data-number="2.8.4">
+<h3 data-number="2.8.4"><span class="header-section-number">2.8.4</span>
+Quiz: Insertion sort</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Insertion sort (as the code is written in this chapter) is a stable
+sorting algorithm.</p>
+<p>(Recall that a stable sorting algorithm maintains the relative order
+of equal elements.)</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behaviour of every pass through the inner for loop of
+the Insertion sort if the elements are equal.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When implementing Insertion sort, a binary search could be used to
+locate the position within the first <span
+class="math inline">i-1</span> elements of the array into which element
+<span class="math inline">i</span> should be inserted. Using binary
+search will:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Not speed up the
+asymptotic running time because shifting the elements to make room for
+the insert will require <span class="math inline">O(i)</span>
+time.</label></li>
+<li><label><input type="checkbox" />Speed up the asymptotic running time
+because the position to insert will be found in <span
+class="math inline">O(\log(i))</span> time.</label></li>
+<li><label><input type="checkbox" />Speed up the asymptotic running time
+because shifting the elements to make room for the insert will require
+<span class="math inline">O(i)</span> time.</label></li>
+<li><label><input type="checkbox" />None of these answers is
+correct.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The position at which to insert could be found in <span
+class="math inline">O(\log(i))</span> steps, but shifting the elements
+to make room for the this element will require <span
+class="math inline">O(i)</span> time.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When implementing Insertion sort, a binary search could be used to
+locate the position within the first <span
+class="math inline">i-1</span> elements of the array into which element
+<span class="math inline">i</span> should be inserted. In this
+implementation, the worst case time will be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The position to insert could be found in <span class="math inline">O
+(\log(i))</span>, but shifting the elements to makeroom for the insert
+will still require <span class="math inline">O(i)</span> time</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>We know that the worst case for Insertion sort is about <span
+class="math inline">n^2/2</span>, while the average case is about <span
+class="math inline">n^2/4</span>. This means that:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The growth rates are the
+same</label></li>
+<li><label><input type="checkbox" />The runtime in the average case is
+about half that of the worst case</label></li>
+<li><label><input type="checkbox" checked="" />Both of the
+above</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Growth rates ignore constants.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the growth rates the same for Insertion sort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst and Average
+only</label></li>
+<li><label><input type="checkbox" />Worst and Best only</label></li>
+<li><label><input type="checkbox" />Best and Average only</label></li>
+<li><label><input type="checkbox" />Worst, Average, and
+Best</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion sort is really cheap in the best case.</li>
+<li>Its average and worst case times differ by a constant factor.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input elements has what impact on the number of
+comparisons required by Insertion sort (as presented in this
+chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is a big
+difference, the asymptotic running time can change</label></li>
+<li><label><input type="checkbox" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Insertion sort change when it make a comparison according to
+the order of the array input values?</li>
+<li>Yes, Insertion sort might stop early or might look at many
+elements.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Insertion sort to sort an array of n
+elements?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In the worst case, each element must make its way to the start of
+the array. This would occur if the elements are initially arranged from
+highest to lowest, in the reverse of sorted order.</li>
+<li>In this case, the number of comparisons will be one the first time
+through the for loop, two the second time, and so on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the best-case time for Insertion sort to sort an array of n
+elements?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The best-case cost occurs when the elements are already in sorted
+order from lowest to highest.</li>
+<li>In this case, every test on the inner for loop will fail
+immediately, and no elements will be moved.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Insertion sort when the input is an array
+where all elements are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n ^
+n)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position <span class="math inline">i</span> is never less than the value
+at position <span class="math inline">i-1</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If <span class="math inline">i</span> is the number of inversions in
+an input array of <span class="math inline">n</span> elements, then
+Insertion sort will run in what time?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n+i)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n -
+i)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(i -
+n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(i)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion sort has to do <span class="math inline">n</span> passes
+where it compares at least once.</li>
+<li>If the element for this pass has no remaining inversions, then it
+requires no work.</li>
+<li>But if it does have inversions, it will need a swap for each such
+inversion.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time for Insertion sort when the input array has
+values that are in reverse sort order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>On each iteration, the <span class="math inline">i</span>th element
+will have to move to the start of the array.</li>
+<li>This is the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Insertion sort when the input is an array
+that has already been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position <span class="math inline">i</span> is never less than the value
+at position <span class="math inline">i-1</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Insertion sort a good choice for sorting an array?</p>
+<p><em>Note</em>: Multiple answers are possible!</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The array has only a few
+elements out of sorted order</label></li>
+<li><label><input type="checkbox" checked="" />The array contains only a
+few elements</label></li>
+<li><label><input type="checkbox" />Each element requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each element requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+elements</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+<li><label><input type="checkbox" />We need a reasonably fast algorithm
+with a good worst case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion sort if fairly simple.</li>
+<li>Because Insertion sort is simple, it tends to cost only a little bit
+per comparison when compared to more complicated sorting
+algorithms.</li>
+<li>Remember that Insertion sort implementation is made up of two nested
+for loops.</li>
+<li>The outer for loop is executed <span class="math inline">n-1</span>
+times. While the number of times the inner for loop executes depends on
+how many keys in positions 0 to <span class="math inline">i-1</span>
+have a value less than that of the key in position i.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Insertion sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n
+\log(n)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed <span class="math inline">n-1</span>
+times.</li>
+<li>The inner for loop is executed <span class="math inline">i</span>
+times.</li>
+<li>The total cost is the sum of <span class="math inline">i</span>’s
+for <span class="math inline">i</span> goes from 1 to <span
+class="math inline">n</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-exchange-sort" class="level3 quiz"
+data-number="2.8.5">
+<h3 data-number="2.8.5"><span class="header-section-number">2.8.5</span>
+Quiz: Exchange sort</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Consider an array <span class="math inline">A</span> of <span
+class="math inline">n</span> records each with a unique key value, and
+<span class="math inline">A_R</span> the same array in reverse order.
+Any given pair of records must be an inversion in exactly one of <span
+class="math inline">A</span> or <span
+class="math inline">A_R</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Any given pair of records with different values is either in order,
+or not in order.</li>
+<li>Being out of order is called an inversion.</li>
+<li>If your pair is in order in some array, then it must be out of order
+in the reverse.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Consider an array <span class="math inline">A</span> of <span
+class="math inline">n</span> records each with a unique key value, and
+<span class="math inline">A_R</span> the same array in reverse order.
+There are a certain number of pairs, where an arbitrary position <span
+class="math inline">i</span> and position <span
+class="math inline">j</span> is a pair. Between these two arrays,
+exactly half of these pairs must be inverted.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Any given pair of records with different key values is either in
+order, or not in order.</li>
+<li>Being out of order is called an inversion.</li>
+<li>Any given pair must be inverted in exactly one of these arrays.</li>
+<li>So every pair must be inverted in either <span
+class="math inline">A</span> or <span
+class="math inline">A_R</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The average number of inversions in an array of <span
+class="math inline">n</span> records is <span
+class="math inline">n(n-1)/4</span>. This is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" />Better than <span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" />Worse than <span
+class="math inline">O(n^2)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li><span class="math inline">n(n-1)/4 = n^2/4 - n/4</span>.</li>
+<li>From the rules on asymptotic analysis, <span
+class="math inline">O(n^2/4 - n/4)</span> is <span
+class="math inline">O(n^2)</span></li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An exchange sort is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Any sort where only
+adjacent records are swapped</label></li>
+<li><label><input type="checkbox" />Any sort where records are swapped
+rather than using another mechanism for rearranging the
+array</label></li>
+<li><label><input type="checkbox" />Another name for Insertion
+sort</label></li>
+<li><label><input type="checkbox" />Any <span
+class="math inline">O(n^2)</span> sort</label></li>
+<li><label><input type="checkbox" />Any <span
+class="math inline">O(n)</span> sort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Most of the sorts that we study swap records.</li>
+<li>Insertion sort is not the only exchange sort.</li>
+<li>An “exchange” means a swap of adjacent records.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An inversion is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When a record with key
+value greater than the current record’s key appears before it in the
+array</label></li>
+<li><label><input type="checkbox" />A swap</label></li>
+<li><label><input type="checkbox" />A type of sort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We have not used “inversion” to refer to a type of sort.</li>
+<li>While “inversions” are related to swaps (since ultimately a swap is
+needed to undo an inversion), it is not a swap.</li>
+<li>Inversion refers to an instance of a record being out of order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many ways can <span class="math inline">n</span> distinct values
+be arranged?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n!</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2^n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n(n+1)/2</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There are <span class="math inline">n</span> ways to pick the first
+record.</li>
+<li>That leaves <span class="math inline">n-1</span> ways to pick the
+second record.</li>
+<li>This means that there are <span class="math inline">n * (n-1)</span>
+ways to pick the first two records.</li>
+<li>And so on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If <span class="math inline">i</span> is the number of inversions in
+an input array of n records, then Insertion sort will require how many
+swaps?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">i</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n -
+i</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">i -
+n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">i +
+n</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">i -
+1</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n -
+1</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An inversion requires a swap to undo it.</li>
+<li>The number of comparisons done by an algorithm is generally
+different from the number of swaps.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The total number of pairs of records among <span
+class="math inline">n</span> records is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">n(n-1)/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n^2/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2n^2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">n
+\log(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n!</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n!/2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n(n+1)/2</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There are <span class="math inline">n</span> ways to pick the first
+record in the pair.</li>
+<li>This leaves <span class="math inline">n-1</span> ways to pick the
+second record.</li>
+<li>We consider pair (A, B) to be the same as pair (B, A).</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 </main>
@@ -230,16 +1280,17 @@ tables</a> (<a href="section-12.html#sec:hash-tables">Chapter
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-2.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-2.7.html" accesskey="p" rel="previous">Algorithm analysis in practice</a>
+<a href="section-2.7.html" accesskey="p" rel="previous">Empirical analysis and code tuning*</a>
 </div>
 <div class="navlink">
-<a href="section-2.9.html" accesskey="n" rel="next">Code tuning</a>
-<a href="section-2.9.html" class="navbutton">&gt;&gt;</a>
+<a href="section-3.html" accesskey="n" rel="next">Algorithm analysis, part 1</a>
+<a href="section-3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
 </body>
 </html>
+
 
 

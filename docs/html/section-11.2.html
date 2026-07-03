@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Self-balancing trees</title>
+  <title>DSABook – Separate chaining</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,76 +100,101 @@
 <nav class="sitenav">
 <div>
 <a href="section-11.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.1.html" accesskey="p" rel="previous">Binary search trees</a>
+<a href="section-11.1.html" accesskey="p" rel="previous">Hash table overview</a>
 </div>
 <div>
-<a href="section-11.3.html" accesskey="n" rel="next">AVL trees</a>
+<a href="section-11.3.html" accesskey="n" rel="next">Open addressing and linear probing</a>
 <a href="section-11.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:self-balancing-trees" class="level2"
+<section id="sec:hash-tables:separate-chaining" class="level2"
 data-number="11.2">
 <h2 data-number="11.2"><span class="header-section-number">11.2</span>
-Self-balancing trees</h2>
-<p>The <a href="section-14.html#binary-search-tree" class="term"
-title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">Binary
-Search Tree</a> has a serious deficiency for practical use as a search
-structure. That is the fact that it can easily become unbalanced, so
-that some nodes are deep in the tree. In fact, it is possible for a BST
-with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-nodes to have a depth of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-making it no faster to search in the worst case than a linked list. If
-we could keep the tree balanced in some way, then search cost would only
-be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
-a huge improvement.</p>
-<p>One solution to this problem is to adopt another search tree
-structure instead of using a BST at all. An example of such an
-alternative tree structure is the <a href="section-14.html#2-3-tree"
-class="term"
-title="A specialised form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $O(\log n)$ cost.">2-3
-tree</a> or the <a href="section-14.html#b-tree" class="term"
-title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-tree</a>.
-But another alternative would be to modify the BST access functions in
-some way to guarantee that the tree performs well. This is an appealing
-concept, and the concept works well for heaps, whose access functions
-maintain the heap in the shape of a complete binary tree. Unfortunately,
-the heap keeps its balanced shape at the cost of weaker restrictions on
-the relative values of a node and its children, making it a bad search
-structure. And requiring that the BST always be in the shape of a
-complete binary tree requires excessive modification to the tree during
-update, as we see in the example in <a
-href="#fig:rebalanceBST">Figure 11.2</a>.</p>
-<figure id="fig:rebalanceBST">
-<img src="images/BSTBal.png" style="width:60.0%"
-alt="Figure 11.2: An attempt to re-balance a BST after insertion can be expensive. (a) A BST with six nodes in the shape of a complete binary tree. (b) A node with value 1 is inserted into the BST of (a). To maintain both the complete binary tree shape and the BST property, a major reorganisation of the tree is required." />
-<figcaption aria-hidden="true">Figure 11.2: An attempt to re-balance a
-BST after insertion can be expensive. (a) A BST with six nodes in the
-shape of a complete binary tree. (b) A node with value 1 is inserted
-into the BST of (a). To maintain both the complete binary tree shape and
-the BST property, a major reorganisation of the tree is
-required.</figcaption>
+Separate chaining</h2>
+<p>Separate chaining solves the problem of <em>collisions</em> in hash
+tables. That is: when two distinct keys <span
+class="math inline">x</span> and <span class="math inline">y</span> hash
+to the same position in the internal array. Or in mathematical notation,
+<span class="math inline">x</span> and <span
+class="math inline">y</span> has a collision if <span
+class="math inline">h(x)\bmod N = h(y)\bmod N</span>, where <span
+class="math inline">h</span> is the hash function and <span
+class="math inline">N</span> is the table size. Note that this can
+happen in two ways: either <span class="math inline">x</span> and <span
+class="math inline">y</span> have the same hash value (<span
+class="math inline">h(x)=h(y)</span>) and will always collide, or they
+have different hash values but compress to the same index for hash table
+size <span class="math inline">N</span> specifically.</p>
+<p>Separate chaining is perhaps the most intuitive solution to the
+problem of collsions: If two keys want to inhabit the same cell in our
+hash table, we let them, and instead of a single (key,value)-entry we
+store a collection of entries in each array cell.</p>
+<p>The word <em>separate</em> is because the data structure can not be
+stored directly in the hash table array, the array must contain pointers
+to some separate structure. This is a fundamental limitation of arrays,
+all cells must have a uniform size in memory.</p>
+<p>That leaves the question of what data structure to use for the
+collections. We want a collection of (key,value)-entries that we can
+modify and search by key values. This is, we want some implementation of
+the <em>Map</em> ADT (see <a
+href="section-8.3.html#sec:ADTs:maps">Section 8.3.2</a>), and any such
+implementation works fine. It can for example be a simple linked list
+(<a href="section-8.5.html#sec:ADTs:naive-analysis">Section 8.5</a>), or
+a more efficient AVL-tree (<a
+href="section-10.3.html#sec:search-trees:AVL-trees">Section 10.3</a>).</p>
+<p>So we should use an AVL tree, because it is faster than a linked
+list? This has some issues:</p>
+<ul>
+<li>AVL trees are more complicated than linked lists, which means that a
+linked list is usually faster if we only have a handful of
+elements.</li>
+<li>AVL trees use more memory for every entry compared to a linked list,
+since each AVL node needs two child pointers and linked list node only
+need one.</li>
+<li>We have to be able to <em>compare</em> the keys, and not just
+calculate a hash value, and for some datatypes it can be complex to
+define comparison and not just equality.</li>
+</ul>
+<figure id="fig:SepChain2">
+<img src="images/Hashing-SepChain2.svg" style="width:80.0%"
+alt="Figure 11.2: Memory content of a separate chaining hash table of size 13 mapping three emails to names. The arrows are pointers, and the empty cells in the array are null values, representing empty linked lists." />
+<figcaption aria-hidden="true">Figure 11.2: Memory content of a separate
+chaining hash table of size 13 mapping three emails to names. The arrows
+are pointers, and the empty cells in the array are null values,
+representing empty linked lists.</figcaption>
 </figure>
-<p>If we are willing to weaken the balance requirements, we can come up
-with alternative update routines that perform well both in terms of cost
-for the update and in balance for the resulting tree structure. The AVL
-tree (see <a href="section-11.3.html#sec:avl-trees">Section 11.3</a>)
-works in this way, using insertion and deletion routines altered from
-those of the BST to ensure that, for every node, the depths of the left
-and right subtrees differ by at most one. The <a
-href="section-14.html#red-black-tree" class="term"
-title="A balanced variation on a BST.">red-black tree</a> is also a
-binary tree, which uses a different balancing mechanism.</p>
-<p>A different approach to improving the performance of the BST is to
-not require that the tree always be balanced, but rather to expend some
-effort toward making the BST more balanced every time it is accessed.
-One example of such a compromise is called the splay tree (see <a
-href="section-11.4.html#sec:splay-trees">Section 11.4</a>).</p>
+<p>For these reasons, the typical choice of data structure is a
+<em>linked list</em>, hence the word <em>chaining</em> (a linked list
+forms a chain of elements). <a href="#fig:SepChain2">Figure 11.2</a>
+shows the memory content of a separate chaining hash table. Array index
+5 points to a list with two elements, so there was a collision between
+the two emails. This may be because both have the same hash value, or
+more frequently because their hash values were compressed into the same
+index. What we know about the entries on index 5 is the following:</p>
+<p><span class="math display">
+h(\text{``alice@example.com&#39;&#39;})\bmod 13 =
+h(\text{``bob@example.com&#39;&#39;})\bmod 13 = 5 </span></p>
+<p>Performing a lookup of any key that compresses to index 5, that is
+when <span class="math inline">h(x)\bmod 13=5</span>, will require a
+linear search by key in the linked list with Alice and Bob in it. Note
+that a lookup is required even for <code>put</code> operations: we need
+to ensure that a key is not already present before we add an entry to
+the linked list.</p>
+<p>At this point, you should be concerned about performance. Searching
+in a linked list is not fast, and in fact if all our values end up in
+the same cell, our hash map will be slower than an AVL map (<span
+class="math inline">O(n)</span> instead of <span
+class="math inline">O(log n)</span>). The idea to avoid this problem is
+ensuring that the maximum length of any list in our table is a small
+constant. This involves two main techniques:</p>
+<ul>
+<li>Having a good hash function.</li>
+<li>When the hash table starts getting crowded, resize it by creating a
+larger table and transfering all the existing values to it.</li>
+</ul>
 </section>
 </main>
 
@@ -158,10 +202,10 @@ href="section-11.4.html#sec:splay-trees">Section 11.4</a>).</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-11.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.1.html" accesskey="p" rel="previous">Binary search trees</a>
+<a href="section-11.1.html" accesskey="p" rel="previous">Hash table overview</a>
 </div>
 <div class="navlink">
-<a href="section-11.3.html" accesskey="n" rel="next">AVL trees</a>
+<a href="section-11.3.html" accesskey="n" rel="next">Open addressing and linear probing</a>
 <a href="section-11.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -169,5 +213,6 @@ href="section-11.4.html#sec:splay-trees">Section 11.4</a>).</p>
 
 </body>
 </html>
+
 
 

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing general trees*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/General/SequentialTreeCON.css" rel="stylesheet" type="text/css"/></head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.9.html" accesskey="p" rel="previous">Iteration, recursion, and information flow*</a>
+</div>
+<div>
+<a href="section-9.11.html" accesskey="n" rel="next">Case study: Disjoint sets in depth*</a>
+<a href="section-9.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:trees:implementing-general-trees" class="level2"
+data-number="9.10">
+<h2 data-number="9.10"><span class="header-section-number">9.10*</span>
+Implementing general trees</h2>
+<p>Next we consider a fundamentally different approach to implementing
+trees. The goal is to store a series of node values with the minimum
+information needed to reconstruct the tree structure.</p>
+<p>This approach, known as a <a
+href="section-13.3.html#sequential-tree-representation" class="term"
+title="A representation that stores a series of node values with the minimum information needed to reconstruct the tree structure. This is a technique for serialising a tree.">sequential
+tree representation</a>, has the advantage of saving space because no
+pointers are stored. It has the disadvantage that accessing any node in
+the tree requires sequentially processing all nodes that appear before
+it in the node list. In other words, node access must start at the
+beginning of the node list, processing nodes sequentially in whatever
+order they are stored until the desired node is reached. Thus, one
+primary virtue of the other implementations discussed in this section is
+lost: efficient access (typically <span
+class="math inline">O(\log(n))</span> time) to arbitrary nodes in the
+tree. Sequential tree implementations are ideal for archiving trees on
+disk for later use because they save space, and the tree structure can
+be reconstructed as needed for later processing.</p>
+<p>Sequential tree implementations can be used to <a
+href="section-13.3.html#serialisation" class="term"
+title="The process of taking a data structure in memory and representing it as a sequence of bytes. This is sometimes done in order to transmit the data structure across a network or store the data structure in a stream, such as on disk. Deserialisation reconstructs the original data structure from the serialised representation.">serialise</a>
+a tree structure. Serialisation is the process of storing an object as a
+series of bytes, typically so that the data structure can be transmitted
+between computers. This capability is important when using data
+structures in a distributed processing environment.</p>
+<p>A sequential tree implementation typically stores the node values as
+they would be enumerated by a preorder traversal, along with sufficient
+information to describe the tree’s shape. If the tree has restricted
+form, for example if it is a full binary tree, then less information
+about structure typically needs to be stored. A general tree, because it
+has the most flexible shape, tends to require the most additional shape
+information. There are many possible sequential tree implementation
+schemes. We will begin by describing methods appropriate to binary
+trees, then generalise to an implementation appropriate to a general
+tree structure.</p>
+<p>Because every node of a binary tree is either a leaf or has two
+(possibly empty) children, we can take advantage of this fact to
+implicitly represent the tree’s structure. The most straightforward
+sequential tree implementation lists every node value as it would be
+enumerated by a preorder traversal. Unfortunately, the node values alone
+do not provide enough information to recover the shape of the tree. In
+particular, as we read the series of node values, we do not know when a
+leaf node has been reached. However, we can treat all non-empty nodes as
+internal nodes with two (possibly empty) children. Only NULL values will
+be interpreted as leaf nodes, and these can be listed explicitly. Such
+an augmented node list provides enough information to recover the tree
+structure.</p>
+<p>Here is again the example binary tree from <a
+href="section-9.1.html#fig:example_bintree">Figure 9.3</a>, which will be used in the
+examples below:</p>
+
+<div id="img-jsav-724636494c24388679b93597bd965149" class="ssAV" data-short-name="img-jsav-724636494c24388679b93597bd965149" data-long-name="img-jsav-724636494c24388679b93597bd965149" alt="img-jsav-724636494c24388679b93597bd965149" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-724636494c24388679b93597bd965149", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-724636494c24388679b93597bd965149 "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the original tree in <a
+href="section-9.1.html#fig:example_bintree">Figure 9.3</a> from its sequential
+representation.</p>
+</summary>
+
+<div id="SequentialTreeCON" class="ssAV" data-short-name="SequentialTreeCON" data-long-name="First sequential representation Slideshow" alt="First sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/General/SequentialTreeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SequentialTreeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SequentialTreeCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for sequential tree representation.</p>
+</summary>
+
+<div id="SequentialTreePRO" class="embedContainer">
+<iframe id="SequentialTreePRO_iframe" aria-label="SequentialTreePRO" src="../interactive/General/SequentialTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<section id="sec:alternative-sequential-representation"
+class="level4 unnumbered">
+<h4 class="unnumbered">Alternative sequential representation</h4>
+<p>To illustrate the difficulty involved in using the sequential tree
+representation for processing, consider searching for the right child of
+the root node. We must first move sequentially through the node list of
+the left subtree. Only at this point do we reach the value of the root’s
+right child. Clearly the sequential representation is space efficient,
+but not time efficient for descending through the tree along some
+arbitrary path.</p>
+<p>Assume that each node value takes a constant amount of space. An
+example would be if the node value is a positive integer and
+<code>null</code> is indicated by the value zero. From the <a
+href="section-13.3.html#full-binary-tree-theorem" class="term"
+title="This theorem states that the number of leaves in a non-empty full binary tree is one more than the number of internal nodes. Equivalently, then number of null pointers in a standard pointer-based implementation for binary tree nodes is one more than the number of nodes in the binary tree.">Full
+Binary Tree Theorem</a>, we know that the size of the node list will be
+about twice the number of nodes (that is, the overhead fraction is 1/2).
+The extra space is required by the <code>null</code> pointers. We should
+be able to store the node list more compactly. However, any sequential
+implementation must recognise when a leaf node has been reached, that
+is, a leaf node indicates the end of a subtree. One way to do this is to
+explicitly list with each node whether it is an internal node or a leaf.
+If a node <span class="math inline">X</span> is an internal node, then
+we know that its two children (which may be subtrees) immediately follow
+<span class="math inline">X</span> in the node list. If <span
+class="math inline">X</span> is a leaf node, then the next node in the
+list is the right child of some ancestor of <span
+class="math inline">X</span>, not the right child of <span
+class="math inline">X</span>. In particular, the next node will be the
+child of <span class="math inline">X</span> ‘s most recent ancestor that
+has not yet seen its right child. However, this assumes that each
+internal node does in fact have two children, in other words, that the
+tree is full. Empty children must be indicated in the node list
+explicitly. Assume that internal nodes are marked with a prime (’) and
+that leaf nodes show no mark. Empty children of internal nodes are
+indicated by “/”, but the (empty) children of leaf nodes are not
+represented at all. Note that a full binary tree stores no
+<code>null</code> values with this implementation, and so requires less
+overhead.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the original tree in <a
+href="section-9.1.html#fig:example_bintree">Figure 9.3</a> from the alternative
+sequential representation.</p>
+</summary>
+
+<div id="SequentialTreeAltCON" class="ssAV" data-short-name="SequentialTreeAltCON" data-long-name="Second sequential representation Slideshow" alt="Second sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/General/SequentialTreeAltCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SequentialTreeAltCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SequentialTreeAltCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Storing <span class="math inline">n</span> extra bits can be a
+considerable savings over storing <span class="math inline">n</span>
+<code>null</code> values. In the example above, each node was shown with
+a mark if it is internal, or no mark if it is a leaf. This requires that
+each node value has space to store the mark bit. This might be true if,
+for example, the node value were stored as a 4-byte integer but the
+range of the values sored was small enough so that not all bits are
+used. An example would be if all node values must be positive. Then the
+high-order (sign) bit of the integer value could be used as the mark
+bit.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for the alternative sequential representation.</p>
+</summary>
+
+<div id="SequentialTreeAltPRO" class="embedContainer">
+<iframe id="SequentialTreeAltPRO_iframe" aria-label="SequentialTreeAltPRO" src="../interactive/General/SequentialTreeAltPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+<section id="sec:bit-vector-representation" class="level4 unnumbered">
+<h4 class="unnumbered">Bit vector representation</h4>
+<p>Another approach is to store a separate bit vector to represent the
+status of each node. In this case, each node of the tree corresponds to
+one bit in the bit vector. A value of “1” could indicate an internal
+node, and “0” could indicate a leaf node.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the shape of the tree in <a
+href="section-9.1.html#fig:example_bintree">Figure 9.3</a> from its bit vector
+representation.</p>
+</summary>
+
+<div id="SequentialTreeBitsCON" class="ssAV" data-short-name="SequentialTreeBitsCON" data-long-name="Bit vector sequential representation Slideshow" alt="Bit vector sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/General/SequentialTreeBitsCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SequentialTreeBitsCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SequentialTreeBitsCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for the bit vector representation.</p>
+</summary>
+
+<div id="SequentialTreeBitVectorPRO" class="embedContainer">
+<iframe id="SequentialTreeBitVectorPRO_iframe" aria-label="SequentialTreeBitVectorPRO" src="../interactive/General/SequentialTreeBitVectorPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+<section id="sec:serialising-general-trees" class="level4 unnumbered">
+<h4 class="unnumbered">Serialising general trees</h4>
+<p>Storing general trees by means of a sequential implementation
+requires that more explicit structural information be included with the
+node list. Not only must the general tree implementation indicate
+whether a node is leaf or internal, it must also indicate how many
+children the node has. Alternatively, the implementation can indicate
+when a node’s child list has come to an end. The next example dispenses
+with marks for internal or leaf nodes. Instead it includes a special
+mark (we will use the “)” symbol) to indicate the end of a child list.
+All leaf nodes are followed by a “)” symbol because they have no
+children. A leaf node that is also the last child for its parent would
+indicate this by two or more successive “)” symbols.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing a general from its sequential representation.</p>
+</summary>
+
+<div id="SequentialGenTreeCON" class="ssAV" data-short-name="SequentialGenTreeCON" data-long-name="General Tree sequential representation Slideshow" alt="General Tree sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/General/SequentialGenTreeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SequentialGenTreeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SequentialGenTreeCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Note that this representation for serialising general trees cannot be
+used for binary trees. This is because a binary tree is not merely a
+restricted form of general tree with at most two children. Every binary
+tree node has a left and a right child, though either or both might be
+empty. So this representation cannot let us distinguish whether node
+<span class="math inline">D</span> in <a
+href="section-9.1.html#fig:example_bintree">Figure 9.3</a> is the left or right child of
+node <span class="math inline">B</span>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for sequential representation of general trees.</p>
+</summary>
+
+<div id="SequentialTreeGenTreePRO" class="embedContainer">
+<iframe id="SequentialTreeGenTreePRO_iframe" aria-label="SequentialTreeGenTreePRO" src="../interactive/General/SequentialTreeGenTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.9.html" accesskey="p" rel="previous">Iteration, recursion, and information flow*</a>
+</div>
+<div class="navlink">
+<a href="section-9.11.html" accesskey="n" rel="next">Case study: Disjoint sets in depth*</a>
+<a href="section-9.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Deriving the Master theorem*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/AlgAnal/DandCRecurrenceCON.css" rel="stylesheet" type="text/css"/></head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.5.html" accesskey="p" rel="previous">Space complexity*</a>
+</div>
+<div>
+<a href="section-7.7.html" accesskey="n" rel="next">Case study: Average-case analysis of Quicksort*</a>
+<a href="section-7.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:analysis-3:deriving-master-theorem" class="level2"
+data-number="7.6">
+<h2 data-number="7.6"><span class="header-section-number">7.6*</span>
+Deriving the Master theorem</h2>
+<p>This section is a longer version of <a
+href="section-7.3.html#sec:analysis-3:master-theorem">Section 7.3.2</a>.
+Here we show step-by-step how to derive the Master theorem.</p>
+<p>There is a general way to solve so called <em>divide-and-conquer</em>
+recurrence relations. These have the form <span class="math inline">T(n)
+= a\cdot T(n/b) + c\cdot n^k</span>, where <span
+class="math inline">a</span>, <span class="math inline">b</span>, <span
+class="math inline">c</span>, and <span class="math inline">k</span> are
+constants. This recurrence describes a problem of size <span
+class="math inline">n</span> divided into <span
+class="math inline">a</span> subproblems of size <span
+class="math inline">n/b</span>, while <span class="math inline">c\cdot
+n^k</span> is the extra work needed to split the input or combine the
+partial solutions. Both binary search and Mergesort are examples of
+divide-and-conquer algorithms that fit this form.</p>
+<p>To solve a divide-and-conquer recurrence, we do the same as we did
+before – expand it until we reach the base case:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;=  a \cdot T(n/b) + c \cdot n^k  =  a \cdot (a \cdot T(n/b^2)
++ c \cdot (n/b)^k) + c \cdot n^k
+\\   &amp;=  a \cdot (a \cdot (a \cdot T(n/b^3) + c \cdot (n/b^2)^k) + c
+\cdot (n/b)^k) + c \cdot n^k
+\\   &amp;=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot T(1) + c \cdot
+(n/b^{m-1})^k) + c \cdot (n/b^{m-2})^k) \cdots) + c \cdot (n/b)^k) + c
+\cdot n^k
+\end{align*}</span></p>
+<p>The recursion stops when we reach <span
+class="math inline">T(1)</span>, which is after <span
+class="math inline">m</span> levels, where <span class="math inline">n =
+b^m</span>. Now let’s replace <span class="math inline">n</span> with
+<span class="math inline">b^m</span> and <span
+class="math inline">T(1)</span> with <span class="math inline">c</span>,
+and then expand the parentheses:</p>
+<p><span class="math display">\begin{align*}
+\cdots &amp;=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot c + c \cdot
+(b^m/b^{m-1})^k) + c \cdot (b^m/b^{m-2})^k) \cdots) + c \cdot (b^m/b)^k)
++ c \cdot b^{mk}
+\\     &amp;=  a \cdot (a \cdot (\cdots (a \cdot (a \cdot c + c \cdot
+b^{1k}) + c \cdot b^{2k}) \cdots) + c \cdot b^{(m-1)k}) + c \cdot b^{mk}
+\\     &amp;=  a^m c \cdot b^{0k}  +  a^{m-1} c \cdot b^{1k}  +  a^{m-2}
+c \cdot b^{2k}  +  \cdots  +  a^1 c \cdot b^{(m-1)k}  +  a^0 c \cdot
+b^{mk}
+\\     &amp;=  c \cdot (a^m b^{0k}  +  a^{m-1} b^{1k}  +  a^{m-2}
+b^{2k}  +  \cdots  +  a^1 b^{(m-1)k}  +  a^0 b^{mk})
+\\     &amp;=  c \cdot a^m \cdot (b^{0k} / a^0  +  b^{1k} / a^1
++  b^{2k} / a^2  +  \cdots  +  b^{(m-1)k} / a^{(m-1)}  +  b^{mk} / a^m)
+\\     &amp;=  c \cdot a^m \cdot \sum^m (b^k/a)^i
+\\     &amp;=  c \cdot a^m \cdot \sum^m r^i,
+           \text{ where } r = b^k / a  \text{ and }  m = \log_b(n)
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a more visual presentation of this same derivation.</p>
+</summary>
+
+<div id="DandCRecurrenceCON" class="ssAV" data-short-name="DandCRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow 2" alt="Divide-and-Conquer Expansion Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/AlgAnal/DandCRecurrenceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DandCRecurrenceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DandCRecurrenceCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>The value of <span class="math inline">\sum^m r^i</span> depends on
+if <span class="math inline">r</span> is less than, equal to, or larger
+than 1:</p>
+<dl>
+<dt><span class="math inline">r &lt; 1</span> (the subproblems
+dominate)</dt>
+<dd>
+<p>The infinite sum <span class="math inline">\sum r^i</span> converges
+to <span class="math inline">1/(1-r)</span> which is constant, so <span
+class="math inline">\sum^m r^i \in O(1)</span>. Therefore <span
+class="math inline">T(n) \in O(a^m) = O(n^d)</span>, because <span
+class="math inline">a^m = a^{\log_b(n)}</span> = <span
+class="math inline">n^{\log_b(a)} = n^d</span>.</p>
+</dd>
+<dt><span class="math inline">r = 1</span> (they are comparable)</dt>
+<dd>
+<p>The sum collapses to <span class="math inline">\sum^m r^i = \sum^m 1
+\in O(m) = O(\log(n))</span>. Furthermore, <span class="math inline">a =
+b^k</span>, and so <span class="math inline">k = \log_b(a)</span>.
+Therefore <span class="math inline">a^m = n^{\log_b(a)} = n^k</span>,
+and we get <span class="math inline">T(n) \in O(n^k \log(n))</span>.</p>
+</dd>
+<dt><span class="math inline">r &gt; 1</span> (the extra work
+dominates)</dt>
+<dd>
+<p>Now the sum becomes <span class="math inline">\sum^m r^i = (r^{m+1} -
+1) / (r - 1) \in O(r^m)</span>. Since <span class="math inline">b^m =
+n</span>, we get <span class="math inline">T(n) \in O(a^m r^m)</span> =
+<span class="math inline">O(a^m (b^k/a)^m)</span> = <span
+class="math inline">O(b^{km}) = O(n^k)</span>.</p>
+</dd>
+</dl>
+<p>We can summarise the above derivation as the following theorem.</p>
+<section id="sec:the-master-theorem-1" class="level4 unnumbered topic">
+<h4 class="unnumbered">The master theorem</h4>
+<p>For any recurrence relation of the form <span
+class="math inline">T(n) = a\cdot T(n/b) + O(n^k)</span>, exactly one
+the following holds:</p>
+<p><span class="math display">
+T(n) \in
+\left\{ \begin{array}{ll}
+    O(n^d)         &amp;  \text{if } a &gt; b^k, ~ (\text{where }
+d=\log_b(a))\\
+    O(n^k \log(n)) &amp;  \text{if } a = b^k \\
+    O(n^k)         &amp;  \text{if } a &lt; b^k
+\end{array} \right.
+</span></p>
+</section>
+<section id="sec:example-applying-the-master-theorem-1"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Applying the master theorem</h4>
+<p>Here are some example recurrence relations that can be solved by the
+Master theorem:</p>
+<dl>
+<dt>Binary search</dt>
+<dd>
+<span class="math inline">T(n) = T(n/2) + O(1)</span>. Here <span
+class="math inline">a = 1</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 0</span>, and since <span
+class="math inline">a = b^k</span> we get the second case, so <span
+class="math inline">T(n) \in O(n^k \log(n))</span> = <span
+class="math inline">O(\log(n))</span>.
+</dd>
+<dt>Mergesort</dt>
+<dd>
+<span class="math inline">T(n) = 2\cdot T(n/2) + O(n)</span>. Here <span
+class="math inline">a = 2</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 1</span>, and again <span
+class="math inline">a = b^k</span>. So we get the second case, and <span
+class="math inline">T(n) \in O(n^k \log(n))</span> = <span
+class="math inline">O(n \log(n))</span>.
+</dd>
+<dt>Three recursive calls</dt>
+<dd>
+<span class="math inline">T(n) = 3\cdot T(n/2) + O(n)</span>. Now <span
+class="math inline">a = 3</span>, <span class="math inline">b = 2</span>
+and <span class="math inline">k = 1</span>, and <span
+class="math inline">a &gt; b^k</span>. This gives the first case where
+the recursive work dominates, so <span class="math inline">T(n) \in
+O(n^{\log_b(a)}) = O(n^{\log_2(3)}) \approx O(n^{1.6})</span>.
+</dd>
+<dt>Quadratic extra work</dt>
+<dd>
+<span class="math inline">T(n) = 3\cdot T(n/2) + O(n^2)</span>. Now
+<span class="math inline">a = 3</span>, <span class="math inline">b =
+2</span> and <span class="math inline">k = 2</span>, and <span
+class="math inline">a &lt; b^k</span>. This is the third case, which
+tells us that the extra work dominates, so <span
+class="math inline">T(n) \in O(n^k) = O(n^2)</span>.
+</dd>
+</dl>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.5.html" accesskey="p" rel="previous">Space complexity*</a>
+</div>
+<div class="navlink">
+<a href="section-7.7.html" accesskey="n" rel="next">Case study: Average-case analysis of Quicksort*</a>
+<a href="section-7.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

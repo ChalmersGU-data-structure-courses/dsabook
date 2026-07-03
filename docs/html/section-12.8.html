@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Different probing strategies</title>
+  <title>DSABook – Implementing graphs*</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,8 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -82,626 +100,163 @@
 <nav class="sitenav">
 <div>
 <a href="section-12.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.7.html" accesskey="p" rel="previous">Deletion in open addressing</a>
+<a href="section-12.7.html" accesskey="p" rel="previous">Graph representation and implementation</a>
 </div>
 <div>
-<a href="section-12.9.html" accesskey="n" rel="next">Analysis of hash tables</a>
+<a href="section-12.9.html" accesskey="n" rel="next">Topological sort for directed acyclic graphs*</a>
 <a href="section-12.9.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:different-probing-strategies" class="level2"
+<section id="sec:graphs:implementation" class="level2"
 data-number="12.8">
-<h2 data-number="12.8"><span class="header-section-number">12.8</span>
-Different probing strategies</h2>
-<p>While linear probing is probably the first idea that comes to mind
-when considering collision resolution policies, it is not the only one
-possible. Probe function <strong>p</strong> allows us many options for
-how to do collision resolution. In fact, linear probing is one of the
-worst collision resolution methods.</p>
-<div class="online">
-<section id="sec:example-the-problem-with-linear-probing"
-class="level4 unnumbered example">
-<h4 class="unnumbered">Example: The problem with linear probing</h4>
-<p>Recall how linear probing works:</p>
-
-<div id="linProbeCON1" class="ssAV" data-short-name="linProbeCON1" data-long-name="Linear Probing Slideshow 1" alt="Linear Probing Slideshow 1" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("linProbeCON1", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#linProbeCON1 "+rule)}
-    
-  });
-</script>
-
-<p>Now the problem is illustrated here:</p>
-
-<div id="linProbeCON2" class="ssAV" data-short-name="linProbeCON2" data-long-name="Linear Probing Slideshow 2" alt="Linear Probing Slideshow 2" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/linProbeCON2.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("linProbeCON2", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#linProbeCON2 "+rule)}
-    
-  });
-</script>
-
-</section>
-</div>
-<p>Again, the ideal behaviour for a collision resolution mechanism is
-that each empty slot in the table will have equal probability of
-receiving the next record inserted (assuming that every slot in the
-table has equal probability of being hashed to initially). This tendency
-of linear probing to cluster items together is known as <a
-href="section-14.html#primary-clustering" class="term"
-title="In hashing, the tendency in certain collision resolution methods to create clustering in sections of the hash table. The classic example is linear probing. This tends to happen when a group of keys follow the same probe sequence during collision resolution.">primary
-clustering</a>. Small clusters tend to merge into big clusters, making
-the problem worse.</p>
-<div class="online">
-<p>The problem with primary clustering is that it leads to long probe
-sequences, which increases execution time. However, linear probing is
-still a very common probing method, because it is so simple and can be
-implemented efficiently.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:exercise-practice-linear-probing"
-class="level4 unnumbered">
-<h4 class="unnumbered">Exercise: Practice linear probing</h4>
-</summary>
-
-<div id="HashLinearPPRO" class="embedContainer">
-<iframe id="HashLinearPPRO_iframe" aria-label="HashLinearPPRO" src="../interactive/Hashing/HashLinearPPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</section>
-</div>
-<section id="sec:linear-probing-by-steps" class="level3"
-data-number="12.8.1">
+<h2 data-number="12.8"><span class="header-section-number">12.8*</span>
+Implementing graphs</h2>
+<p>We next turn to the problem of implementing a general-purpose <a
+href="section-13.3.html#graph" class="term"
+title="A graph $G = (V, E)$ consists of a set of vertices $V$ and a set of edges $E$, such that each edge in $E$ is a connection between a pair of vertices in $V$.">graph</a>
+class. There are two traditional approaches to representing graphs: The
+<a href="section-13.3.html#adjacency-matrix" class="term"
+title="An implementation for a graph that uses a 2-dimensional array where each row and each column corresponds to a vertex in the graph. A given row and column in the matrix corresponds to an edge from the vertex corresponding to the row to the vertex corresponding to the column.">adjacency
+matrix</a> and the <a href="section-13.3.html#adjacency-list"
+class="term"
+title="An implementation for a graph that uses an (array-based) list to represent the vertices of the graph, and each vertex is in turn represented by a (linked) list of the vertices that are neighbours.">adjacency
+list</a>. In this section we will show actual implementations for each
+approach. We will begin with an interface defining an ADT for graphs
+that a given implementation must meet.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Graph</span> <span class="kw">of</span> V:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span>                       <span class="co">// The number of vertices in the graph.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    vertices() <span class="op">-&gt;</span> <span class="bu">Collection</span> <span class="kw">of</span> V   <span class="co">// Returns all vertices in the graph.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v: V) <span class="op">-&gt;</span> <span class="bu">Collection</span> <span class="kw">of</span> <span class="bu">Edge</span> <span class="kw">of</span> V</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="co">// Returns the edges that originates in vertex v.</span></span></code></pre></div>
+<p>Note that this API is quite generic, and perhaps not suited for all
+kinds of implementations. For example, the adjacency matrix
+implementation works best if the vertices are integers in the range
+<span class="math inline">0\ldots |\mathbf{V}|-1</span> where <span
+class="math inline">|\mathbf{V}|</span> is the number of vertices.</p>
+<p>According to this interface, the size of the graph is the number of
+vertices, <span class="math inline">|\mathbf{V}|</span>, and there is no
+operation that returns the number of edges, <span
+class="math inline">|\mathbf{E}|</span>. A practical implementation
+would have operations for both of these sizes, as well as operations for
+adding vertices and edges to the graph (and removing too).</p>
+<p>Given an edge, we can use the attributes <em>start</em> and
+<em>end</em> to know the adjacent vertices, and <em>weight</em> to know
+its weight.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> <span class="bu">Edge</span> <span class="kw">of</span> V:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    start: V              <span class="co">// start vertex</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    end: V                <span class="co">// end vertex</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    weight: <span class="bu">Float</span> <span class="op">=</span> <span class="fl">1.0</span>   <span class="co">// weight, defaults to 1.0</span></span></code></pre></div>
+<p>Nearly every graph algorithm presented in this chapter will require
+visits to all neighbours of a given vertex. The
+<code>outgoingEdges</code> operation returns a collection containing the
+edges that originate in the given vertex. To get the neighbours you can
+simply call <code>e.end</code> for each outgoing edge <code>e</code>.
+The following lines appear in many graph algorithms:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">each</span> <span class="bu">Edge</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> e.end</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> w <span class="kw">is</span> <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span> w <span class="kw">to</span> visited</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ...do something with v, w, <span class="kw">or</span> e...</span></code></pre></div>
+<p>Here, <code>visited</code> is a set of vertices to keep track that we
+don’t visit a vertex twice.</p>
+<p>It is reasonably straightforward to implement our graph ADT using
+either the adjacency list or adjacency matrix. The sample
+implementations presented here do not address the issue of how the graph
+is actually created. The user of these implementations must add
+functionality for this purpose, perhaps reading the graph description
+from a file.</p>
+<section id="sec:adjacency-matrix" class="level3" data-number="12.8.1">
 <h3 data-number="12.8.1"><span
-class="header-section-number">12.8.1</span> Linear probing by steps</h3>
-<p>How can we avoid primary clustering? One possible improvement might
-be to use linear probing, but to skip slots by some constant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-other than 1. This would make the probe function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>c</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = ci</annotation></semantics></math>,
-and so the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-th slot in the probe sequence will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>i</mi><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + ic) \mod m</annotation></semantics></math>.
-In this way, records with adjacent home positions will not follow the
-same probe sequence.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Example: linear probing by steps</p>
-</summary>
-
-<div id="collisionCON1" class="ssAV" data-short-name="collisionCON1" data-long-name="Linear Probing By Steps Slideshow 1" alt="Linear Probing By Steps Slideshow 1" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON1.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON1", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON1 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>One quality of a good probe sequence is that it will cycle through
-all slots in the hash table before returning to the home position.
-Clearly linear probing (which “skips” slots by one each time) does this.
-Unfortunately, not all values for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-will make this happen. For example, if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">c = 2</annotation></semantics></math>
-and the table contains an even number of slots, then any key whose home
-position is in an even slot will have a probe sequence that cycles
-through only the even slots. Likewise, the probe sequence for a key
-whose home position is in an odd slot will cycle through the odd slots.
-Thus, this combination of table size and linear probing constant
-effectively divides the records into two sets stored in two disjoint
-sections of the hash table. So long as both sections of the table
-contain the same number of records, this is not really important.
-However, just from chance it is likely that one section will become
-fuller than the other, leading to more collisions and poorer performance
-for those records. The other section would have fewer records, and thus
-better performance. But the overall system performance will be degraded,
-as the additional cost to the side that is more full outweighs the
-improved performance of the less-full side.</p>
-<p>Constant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-must be relatively prime to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-to generate a linear probing sequence that visits all slots in the table
-(that is,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-must share no factors). For a hash table of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">m = 10</annotation></semantics></math>,
-if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-is any one of 1, 3, 7, or 9, then the probe sequence will visit all
-slots for any key. When
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">m = 11</annotation></semantics></math>,
-any value for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-between 1 and 10 generates a probe sequence that visits all slots for
-every key.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Example: Using a relative prime step factor.</p>
-</summary>
-
-<div id="collisionCON2" class="ssAV" data-short-name="collisionCON2" data-long-name="Linear Probing By Steps Slideshow 2" alt="Linear Probing By Steps Slideshow 2" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON2.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON2", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON2 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Now you can practice linear probing by different step sizes.</p>
-</summary>
-
-<div id="HashLinearStepPPRO" class="embedContainer">
-<iframe id="HashLinearStepPPRO_iframe" aria-label="HashLinearStepPPRO" src="../interactive/Hashing/HashLinearStepPPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
+class="header-section-number">12.8.1</span> Adjacency matrix</h3>
+<p>Here is an implementation for the adjacency matrix. To simplify the
+implementation we assume that the vertices are integers <span
+class="math inline">0\ldots n-1</span>: then we can use the vertices as
+indices in the adjacency matrix.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MatrixGraph <span class="kw">implements</span> <span class="bu">Graph</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// The edge matrix is an n x n matrix of weights.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    edgeMatrix: <span class="bu">Array</span> <span class="kw">of</span> (<span class="bu">Array</span> <span class="kw">of</span> Edges)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(vertexCount):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        edgeMatrix <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            edgeMatrix[i] <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    vertices():</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> the collection [<span class="dv">0</span>, <span class="dv">1</span>, ..., <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        outgoing <span class="op">=</span> <span class="kw">new</span> <span class="bu">List</span>()</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> w <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            weight <span class="op">=</span> edgeMatrix[v][w]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="co">// We use the special weight 0 to indicate that there is no edge.</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> weight <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                outgoing.<span class="bu">append</span>(<span class="kw">new</span> <span class="bu">Edge</span>(v, w, weight))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outgoing</span></code></pre></div>
+<p>The edge matrix is implemented as an integer array of size <span
+class="math inline">n \times n</span> for a graph of <span
+class="math inline">n</span> vertices. Position <span
+class="math inline">(i, j)</span> in the matrix stores the weight for
+edge <span class="math inline">(i, j)</span> if it exists. A weight of
+zero for edge <span class="math inline">(i, j)</span> is used to
+indicate that no edge connects vertices <span
+class="math inline">i</span> and <span class="math inline">j</span>.</p>
+<p>This means that this simple implementation of an adjacency matrix
+does not work for all kinds of vertex types, but only for integer
+vertices. In addition, the vertices must be numbered <span
+class="math inline">0\ldots |\mathbf{V}|-1</span>. The
+<code>vertices</code> operation returns a collection of all vertices,
+which in this case is just the numbers <span class="math inline">0\ldots
+|\mathbf{V}|-1</span>.</p>
+<p>Given a vertex <span class="math inline">v</span>, the
+<code>outgoingEdges</code> operation scans through row <code>v</code> of
+the matrix to locate the positions of the various neighbours. It creates
+an edge for each neighbour and adds it to a list.</p>
 </section>
-<section id="sec:pseudo-random-probing" class="level3"
-data-number="12.8.2">
+<section id="sec:adjacency-list" class="level3" data-number="12.8.2">
 <h3 data-number="12.8.2"><span
-class="header-section-number">12.8.2</span> Pseudo-random probing</h3>
-<p>Consider the situation where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">c = 2</annotation></semantics></math>
-and we wish to insert a record with key
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-such that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>k</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\textbf{h}(k_1) = 3</annotation></semantics></math>.
-The probe sequence for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-is 3, 5, 7, 9, and so on. If another key
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
-has home position at slot 5, then its probe sequence will be 5, 7, 9,
-and so on. The probe sequences of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
-are linked together in a manner that contributes to clustering. In other
-words, linear probing with a value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">c &gt; 1</annotation></semantics></math>
-does not solve the problem of primary clustering. We would like to find
-a probe function that does not link keys together in this way. We would
-prefer that the probe sequence for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
-after the first step on the sequence should not be identical to the
-probe sequence of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.
-Instead, their probe sequences should diverge.</p>
-<p>The ideal probe function would select the next position on the probe
-sequence at random from among the unvisited slots; that is, the probe
-sequence should be a random permutation of the hash table positions.
-Unfortunately, we cannot actually select the next position in the probe
-sequence at random, because we would not be able to duplicate this same
-probe sequence when searching for the key. However, we can do something
-similar called <a href="section-14.html#pseudo-random-probing"
-class="term"
-title="In hashing, this is a collision resolution method that stores a random permutation of the values 1 through the size of the hash table. Term $i$ of the probe sequence is simply the value of position $i$ in the permuation.">pseudo-random
-probing</a>. In pseudo-random probing, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-th slot in the probe sequence is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + r_i) \mod m</annotation></semantics></math>
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>i</mi></msub><annotation encoding="application/x-tex">r_i</annotation></semantics></math>
-is the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-th value in a random permutation of the numbers from 1 to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m-1</annotation></semantics></math>.
-All inserts and searches must use the same sequence of random numbers.
-The probe function would be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mtext mathvariant="bold">𝐏𝐞𝐫𝐦𝐮𝐭𝐚𝐭𝐢𝐨𝐧</mtext><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = \textbf{Permutation}[i]</annotation></semantics></math>
-where <strong>Permutation</strong> is an array of length
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-that stores a value of 0 in position <strong>Permutation[0]</strong>,
-and stores a random permutation of the values from 1 to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m - 1</annotation></semantics></math>
-in slots 1 to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m - 1</annotation></semantics></math>.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Slideshow for pseudo-random probing</p>
-</summary>
-
-<div id="collisionCON3" class="ssAV" data-short-name="collisionCON3" data-long-name="Pseudo-Random Probing Slideshow" alt="Pseudo-Random Probing Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON3.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON3", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON3 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is a practice exercise for pseudo-random probing.</p>
-</summary>
-
-<div id="HashPseudoRandomPPRO" class="embedContainer">
-<iframe id="HashPseudoRandomPPRO_iframe" aria-label="HashPseudoRandomPPRO" src="../interactive/Hashing/HashPseudoRandomPPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Pseudo-random probing exhibits another desirable feature in a hash
-function.</p>
-</summary>
-
-<div id="collisionCON4" class="ssAV" data-short-name="collisionCON4" data-long-name="Avoiding the Train" alt="Avoiding the Train" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON4.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON4", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON4 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
+class="header-section-number">12.8.2</span> Adjacency list</h3>
+<p>Here is an implementation of the adjacency list representation for
+graphs. This implementation uses a generic type for vertices, so that
+you can use strings or anything else.</p>
+<p>Its main data structure is a map from vertices to sets of edges.
+Exactly which kind of map or set we use can depend on our needs, but it
+can, for example, be any of the ones we have discussed earlier in the
+book.</p>
+<p>One specific implementation that is particularly suited for an
+adjacency list <a href="section-13.3.html#separate-chaining"
+class="term" title="In hashing, a synonym for open hashing">separate
+chaining</a> hash map, backed with a set implemented as a <a
+href="section-13.3.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a>. In that case, for each vertex we store a linked list of all
+the edges originating from that vertex. This makes the operation
+<code>outgoingEdges</code> very efficient, because the only thing we
+have to do is to look up the given vertex in the internal map. To make
+the operations <code>vertexCount</code> and <code>vertices</code>
+efficient, we in addition store the vertices separately in the set
+<code>verticesSet</code>.</p>
+<p>The implementations of the API operations are quite straightforward,
+as can be seen here:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> AdjacencyGraph <span class="kw">implements</span> <span class="bu">Graph</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    edgesMap: <span class="bu">Map</span> from V <span class="kw">to</span> <span class="bu">Edge</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    vertices: <span class="bu">Set</span> <span class="kw">of</span> V <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> vertices.<span class="bu">size</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    vertices():</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> verticesSet</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edgesMap.<span class="bu">get</span>(v)</span></code></pre></div>
 </section>
-<section id="sec:quadratic-probing" class="level3" data-number="12.8.3">
-<h3 data-number="12.8.3"><span
-class="header-section-number">12.8.3</span> Quadratic probing</h3>
-<p>Another probe function that eliminates primary clustering is called
-<a href="section-14.html#quadratic-probing" class="term"
-title="In hashing, this is a collision resolution method that computes term $i$ of the probe sequence using some quadratic equation $ai^2 _ bi + c$ for suitable constants $a, b, c$. The simplest form is simply to use $i^2$ as term $i$ of the probe sequence.">quadratic
-probing</a>. Here the probe function is some quadratic function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>i</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = c_1 i^2 + c_{2}i + c_3</annotation></semantics></math>
-for some choice of constants
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>2</mn></msub><annotation encoding="application/x-tex">c_2</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>3</mn></msub><annotation encoding="application/x-tex">c_3</annotation></semantics></math>.</p>
-<p>The simplest variation is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>i</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = i^2</annotation></semantics></math>
-(i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">c_1 = 1</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_2 = 0</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>3</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_3 = 0</annotation></semantics></math>).
-Then the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-th value in the probe sequence would be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msup><mi>i</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + i^2) \mod m</annotation></semantics></math>.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>How quadratic probing works.</p>
-</summary>
-
-<div id="collisionCON5" class="ssAV" data-short-name="collisionCON5" data-long-name="Quadratic Probing Slideshow" alt="Quadratic Probing Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON5.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON5", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON5 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Now you can practice quadratic probing.</p>
-</summary>
-
-<div id="HashQuadraticPPRO" class="embedContainer">
-<iframe id="HashQuadraticPPRO_iframe" aria-label="HashQuadraticPPRO" src="../interactive/Hashing/HashQuadraticPPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<p>There is one problem with quadratic probing: Its probe sequence
-typically will not visit all slots in the hash table.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>The problem with quadratic probing.</p>
-</summary>
-
-<div id="collisionCON6" class="ssAV" data-short-name="collisionCON6" data-long-name="Quadratic Probing Problem" alt="Quadratic Probing Problem" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON6.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON6", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON6 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>For many hash table sizes, this probe function will cycle through a
-relatively small number of slots. If all slots on that cycle happen to
-be full, this means that the record cannot be inserted at all! A more
-realistic example is a table with 105 slots. The probe sequence starting
-from any given slot will only visit 23 other slots in the table. If all
-24 of these slots should happen to be full, even if other slots in the
-table are empty, then the record cannot be inserted because the probe
-sequence will continually hit only those same 24 slots.</p>
-<p>Fortunately, it is possible to get good results from quadratic
-probing at low cost. The right combination of probe function and table
-size will visit many slots in the table. In particular, if the hash
-table size is a prime number and the probe function is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>i</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = i^2</annotation></semantics></math>,
-then at least half the slots in the table will be visited. Thus, if the
-table is less than half full, we can be certain that a free slot will be
-found. Alternatively, if the hash table size is a power of two and the
-probe function is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = (i^2 + i)/2</annotation></semantics></math>,
-then every slot in the table will be visited by the probe function.</p>
-</section>
-<section id="sec:double-hashing" class="level3" data-number="12.8.4">
-<h3 data-number="12.8.4"><span
-class="header-section-number">12.8.4</span> Double hashing</h3>
-<p>Both pseudo-random probing and quadratic probing eliminate primary
-clustering, which is the name given to the the situation when keys share
-substantial segments of a probe sequence. If two keys hash to the same
-home position, however, then they will always follow the same probe
-sequence for every collision resolution method that we have seen so far.
-The probe sequences generated by pseudo-random and quadratic probing
-(for example) are entirely a function of the home position, not the
-original key value. This is because function <strong>p</strong> ignores
-its input parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-for these collision resolution methods. If the hash function generates a
-cluster at a particular home position, then the cluster remains under
-pseudo-random and quadratic probing. This problem is called <a
-href="section-14.html#secondary-clustering" class="term"
-title="In hashing, the tendency in certain collision resolution methods to create clustering in sections of the hash table. In primary clustering, this is caused by a cluster of keys that don&#39;t necessarily hash to the same slot but which following significant portions of the same probe sequence during collision resolution. Secondary clustering results from the keys hashing to the same slot of the table (and so a collision resolution method that is not affected by the key value must use the same probe sequence for all such keys). This problem can be resolved by double hashing since its probe sequence is determined in part by a second hash function.">secondary
-clustering</a>.</p>
-<p>To avoid secondary clustering, we need to have the probe sequence
-make use of the original key value in its decision-making process. A
-simple technique for doing this is to return to linear probing by a
-constant step size for the probe function, but to have that constant be
-determined by a second hash function,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>.
-Thus, the probe sequence would be of the form
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>⋅</mi><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = \cdot \textbf{h}_2(k)</annotation></semantics></math>.
-This method is called <a href="section-14.html#double-hashing"
-class="term"
-title="A collision resolution method. A second hash function is used to generate a value $c$ on the key. That value is then used by this key as the step size in linear probing by steps. Since different keys use different step sizes (as generated by the second hash function), this process avoids the clustering caused by standard linear probing by steps.">double
-hashing</a>.</p>
-<p>There are important restrictions on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>.
-Most importantly, the value returned by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>
-must never be zero (or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
-because that will immediately lead to an infinite loop as the probe
-sequence makes no progress. However, a good implementation of double
-hashing should also ensure that all of the probe sequence constants are
-relatively prime to the table size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>.
-For example, if the hash table size were 100 and the step size for
-linear probing (as generated by function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>)
-were 50, then there would be only one slot on the probe sequence. If
-instead the hash table size is 101 (a prime number), than any step size
-less than 101 will visit every slot in the table.</p>
-<p>This can be achieved easily. One way is to select
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-to be a prime number, and have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
-return a value in the range
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>≤</mo><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \leq \textbf{h}_2(k) \leq m - 1</annotation></semantics></math>.
-We can do this by using this secondary hash function:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = 1 + (k \mod (m-1))</annotation></semantics></math>.
-An alternative is to set
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>
-for some value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-and have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
-return an odd value between 1 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>q</mi></msup><annotation encoding="application/x-tex">2^q</annotation></semantics></math>.
-We can get that result with this secondary hash function:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1</annotation></semantics></math>.</p>
-<div class="note">
-<p><em>Note</em>: The secondary hash function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1</annotation></semantics></math>
-might seem rather mysterious, so let’s break this down. This is being
-used in the context of two facts: (1) We want the function to return an
-odd value that is less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-the hash table size, and (2) we are using a hash table of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>,
-which means that taking the mod of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-is using the bottom
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits of the key value. OK, since
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
-is multiplying something by 2 and adding 1, we guarentee that it is an
-odd number. Now,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">((X \mod (m/2)) * 2) + 1</annotation></semantics></math>
-must be in the range 1 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m-1</annotation></semantics></math>
-(if you need to, play around with this on paper to convince yourself
-that this is true). This is exactly what we want. The last piece of the
-puzzle is the first part
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">k/m</annotation></semantics></math>.
-That is not strictly necessary. But remember that since the table size
-is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>,
-this is the same as shifting the key value right by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits. In other words, we are not using the bottom
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits to decide on the second hash function value, which is especially a
-good thing if we used the bottom
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits to decide on the first hash function value! In other words, we
-really do not want the value of the step sized used by the linear
-probing to be fixed to the slot in the hash table that we chose. So we
-are using the next
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits of the key value instead. Note that this would only be a good idea
-if we have keys in a large enough key range, that is, we want plenty of
-use of those second
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
-bits in the key range. This will be true if the max key value uses at
-least
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">2m</annotation></semantics></math>
-bits, meaning that the max key value should be at least the square of
-the hash table size. This is not a problem for typical hashing
-applications.</p>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Calculating the secondary hash when the table size
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
-is prime.</p>
-</summary>
-
-<div id="collisionCON7" class="ssAV" data-short-name="collisionCON7" data-long-name="Double Hashing Slideshow 2" alt="Double Hashing Slideshow 2" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON7.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON7", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON7 "+rule)}
-    
-  });
-</script>
-
-<p>Secondary hash when the table size
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
-is a power of 2.</p>
-
-<div id="collisionCON8" class="ssAV" data-short-name="collisionCON8" data-long-name="Double Hashing Slideshow 3" alt="Double Hashing Slideshow 3" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("collisionCON8", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON8 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Double hashing exercise.</p>
-</summary>
-
-<div id="HashDoublePPRO" class="embedContainer">
-<iframe id="HashDoublePPRO_iframe" aria-label="HashDoublePPRO" src="../interactive/Hashing/HashDoublePPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-</section>
-</div>
 </section>
 </main>
 
@@ -709,10 +264,10 @@ Your browser does not support iframes.
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-12.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.7.html" accesskey="p" rel="previous">Deletion in open addressing</a>
+<a href="section-12.7.html" accesskey="p" rel="previous">Graph representation and implementation</a>
 </div>
 <div class="navlink">
-<a href="section-12.9.html" accesskey="n" rel="next">Analysis of hash tables</a>
+<a href="section-12.9.html" accesskey="n" rel="next">Topological sort for directed acyclic graphs*</a>
 <a href="section-12.9.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -720,5 +275,6 @@ Your browser does not support iframes.
 
 </body>
 </html>
+
 
 

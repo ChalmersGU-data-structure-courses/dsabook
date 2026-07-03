@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Case study: Average-case analysis of
+Quicksort*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/></head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.6.html" accesskey="p" rel="previous">Deriving the Master theorem*</a>
+</div>
+<div>
+<a href="section-8.html" accesskey="n" rel="next">Abstract data types</a>
+<a href="section-8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:analysis-3:quicksort-average-case" class="level2"
+data-number="7.7">
+<h2 data-number="7.7"><span class="header-section-number">7.7*</span>
+Case study: Average-case analysis of Quicksort</h2>
+<p>Quicksort’s average-case behavior falls somewhere between the
+extremes of worst and best case. Average-case analysis considers the
+cost for all possible arrangements of input, summing the costs and
+dividing by the number of cases. We make one reasonable simplifying
+assumption: At each partition step, the pivot is equally likely to end
+in any position in the (sorted) array. In other words, the pivot is
+equally likely to break an array into partitions of sizes 0 and <span
+class="math inline">n-1</span>, or 1 and <span
+class="math inline">n-2</span>, and so on.</p>
+<p>Given this assumption, the average-case cost is computed from the
+following equation:</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;= cn + \frac{1}{n}\sum_{k=0}^{n-1} [T(k) + T(n -1 - k)] \\
+T(0) = T(1) &amp;= c
+\end{align*}</span></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualization will help you to understand how this recurrence
+relation was formed.</p>
+</summary>
+
+<div id="QuickSortAverageCaseCON" class="ssAV" data-short-name="QuickSortAverageCaseCON" data-long-name="Quicksort Average Case Analysis Slideshow" alt="Quicksort Average Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortAverageCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortAverageCaseCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Note that this relation <em>is not</em> of the form <span
+class="math inline">a\cdot T(n/b) + O(n^k)</span>, so we cannot use the
+Master theorem to derive the complexity.</p>
+<p>The <span class="math inline">cn</span> term is an upper bound on the
+<em>findpivot</em> and <em>partition</em> steps. This equation comes
+from assuming that the partitioning element is equally likely to occur
+in any position <span class="math inline">k</span>. It can be simplified
+by observing that the two recurrence terms <span
+class="math inline">T(k)</span> and <span class="math inline">T(n - 1 -
+k)</span> are equivalent, because one simply counts up from <span
+class="math inline">T(0)</span> to <span
+class="math inline">T(n-1)</span> while the other counts down from <span
+class="math inline">T(n-1)</span> to <span
+class="math inline">T(0)</span>. This yields</p>
+<p><span class="math display">\begin{align*}
+T(n) &amp;= cn + \frac{2}{n}\sum_{k=0}^{n-1} T(k)
+\end{align*}</span></p>
+<p>This form is known as a <a
+href="section-13.3.html#recurrence-with-full-history" class="term"
+title="A special form of recurrence relation that includes a summation with a copy of the recurrence inside. The recurrence that represents the average case cost for Quicksort is an example. This internal summation can typically be removed with simple techniques to simplify solving the recurrence.">recurrence
+with full history</a>. The key to solving such a recurrence is to cancel
+out the summation terms. The shifting method for summations provides a
+way to do this. Multiply both sides by <span
+class="math inline">n</span> and subtract the result from the formula
+for <span class="math inline">nT(n+1)</span>:</p>
+<p><span class="math display">\begin{align*}
+nT(n)  &amp;=  cn^2 + 2 \sum_{k=1}^{n-1} T(k)\\
+(n+1)T(n+1)  &amp;=  c(n+1)^2 + 2 \sum_{k=1}^{n} T(k)
+\end{align*}</span></p>
+<p>Subtracting <span class="math inline">nT(n)</span> from both sides
+yields:</p>
+<p><span class="math display">\begin{align*}
+(n+1)T(n+1) - nT(n)  &amp;=  c(n+1)^2 - cn^2 + 2T(n)\\
+(n+1)T(n+1) - nT(n)  &amp;=  c(2n+1) + 2T(n)\\
+(n+1)T(n+1)  &amp;=  c(2n+1) + (n+2)T(n)\\
+T(n+1)  &amp;=  \frac{c(2n+1)}{n+1} + \frac{n+2}{n+1}T(n)
+\end{align*}</span></p>
+<p>At this point, we have eliminated the summation and can now use our
+normal methods for solving recurrences to get a closed-form solution.
+Note that <span class="math inline">\frac{c(2n+1)}{n+1} &lt; 2c</span>,
+so we can simplify the result. Expanding the recurrence, we get</p>
+<p><span class="math display">\begin{align*}
+T(n+1)  &amp;\leq  2c + \frac{n+2}{n+1} T(n)\\
+           &amp;=  2c + \frac{n+2}{n+1}\left (2c +
+                     \frac{n+1}{n}T(n-1)\right )\\
+           &amp;=  2c + \frac{n+2}{n+1}\left (2c + \frac{n+1}{n}\left
+                    (2c + \frac{n}{n-1}T(n-2)\right )\right )\\
+           &amp;=  2c + \frac{n+2}{n+1}\left (2c + \cdots +
+                         \frac{4}{3}(2c + \frac{3}{2}T(1))\right )\\
+           &amp;=  2c\left (1 + \frac{n+2}{n+1}
+                  + \frac{n+2}{n+1}\frac{n+1}{n} + \cdots
+                  + \frac{n+2}{n+1}\frac{n+1}{n}\cdots\frac{3}{2}\right
+)\\
+           &amp;=  2c\left (1 + (n+2)\left (\frac{1}{n+1}
+                  + \frac{1}{n} + \cdots + \frac{1}{2}\right )\right )\\
+           &amp;=  2c + 2c(n+2)\left (\mathcal{H}_{n+1} - 1\right )
+\end{align*}</span></p>
+<p>for <span class="math inline">\mathcal{H}_{n+1}</span>, the Harmonic
+Series. This is a standard summation, <span
+class="math inline">\mathcal{H}_{n+1} \in O(\log(n))</span>, so the
+final solution is <span class="math inline">O(n \log(n))</span>.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.6.html" accesskey="p" rel="previous">Deriving the Master theorem*</a>
+</div>
+<div class="navlink">
+<a href="section-8.html" accesskey="n" rel="next">Abstract data types</a>
+<a href="section-8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

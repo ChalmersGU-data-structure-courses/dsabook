@@ -18,7 +18,7 @@ $(document).ready(function() {
     "sc21": "The total amount of comparisons will be the surface area of this shape.",
     "sc22": "The total area will be the sum of the areas of the big triangle + the series of (<em>n–1</em>) small traingles.",
     "sc23": "So, the total area is <em>(n-1)(n-1)/2 + (n-1)/2 = n(n-1)/2</em>.",
-    "sc24": "Therefore, the worst case running time of Bubble sort is <em>O(n<sup>2</sup>).</em>"
+    "sc24": "Therefore, the worst case running time of Bubble sort is <em>quadratic</em>."
   };
 
   var pseudo = av.code([

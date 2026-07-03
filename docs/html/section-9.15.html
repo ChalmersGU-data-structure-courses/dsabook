@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Review*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.14.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.14.html" accesskey="p" rel="previous">Case study: Huffman coding*</a>
+</div>
+<div>
+<a href="section-10.html" accesskey="n" rel="next">Search trees</a>
+<a href="section-10.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:trees:quizzes" class="level2" data-number="9.15">
+<h2 data-number="9.15"><span class="header-section-number">9.15*</span>
+Review</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:quiz-binary-trees" class="level3 quiz"
+data-number="9.15.1">
+<h3 data-number="9.15.1"><span
+class="header-section-number">9.15.1</span> Quiz: Binary trees</h3>
+<div class="question">
+<p>Which statement is false?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Every binary tree has at
+least one node</label></li>
+<li><label><input type="checkbox" />Every non-empty binary tree has
+exactly one root node</label></li>
+<li><label><input type="checkbox" />Every node in a binary tree has
+exactly two children</label></li>
+<li><label><input type="checkbox" />Every non-root node in a binary tree
+has exactly one parent</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look carefully at the definition for a binary tree.</li>
+<li>It states that every binary tree is either empty, or it has a root
+node and two binary trees as children.</li>
+<li>So, every binary tree node has two children, but not every binary
+tree has a node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a complete binary tree with
+height 3?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Start filling in the tree level by level.</li>
+<li>Stop when you draw the first node at level 3.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Select the one true statement.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None of the
+alternatives</label></li>
+<li><label><input type="checkbox" />Every binary tree is either complete
+or full</label></li>
+<li><label><input type="checkbox" />Every complete binary tree is also a
+full binary tree</label></li>
+<li><label><input type="checkbox" />Every full binary tree is also a
+complete binary tree</label></li>
+<li><label><input type="checkbox" />No binary tree is both complete and
+full</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Not every binary tree is either complete or full.</li>
+<li>Not every complete binary tree is full.</li>
+<li>Not every full binary tree is complete.</li>
+<li>Some complete trees are full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a full binary tree with height
+3?</p>
+<p><input type="text" value="7"/></p>
+<div class="hints">
+<ul>
+<li>First, draw a vertical chain of 4 nodes. This is a tree with height
+3.</li>
+<li>Next, add nodes to make the tree be full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Suppose T is a binary tree with 14 nodes. What is the minimum
+possible height of T?</p>
+<p><input type="text" value="3"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing this as a complete treee.</li>
+<li>That is, build a tree of 14 nodes by filling it in level by
+level.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of internal nodes in a binary tree with 8
+nodes?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing some trees. Your best bet is to try and make it
+full.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-example-binary-tree" class="level3 quiz"
+data-number="9.15.2">
+<h3 data-number="9.15.2"><span
+class="header-section-number">9.15.2</span> Quiz: Example binary
+tree</h3>
+<p>Here’s an example binary tree:</p>
+
+<div id="img-jsav-e28fd3a864a4c4c92e74131b009810f6" class="ssAV" data-short-name="img-jsav-e28fd3a864a4c4c92e74131b009810f6" data-long-name="img-jsav-e28fd3a864a4c4c92e74131b009810f6" alt="img-jsav-e28fd3a864a4c4c92e74131b009810f6" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-e28fd3a864a4c4c92e74131b009810f6", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-e28fd3a864a4c4c92e74131b009810f6 "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("24");
+var rt = bt.root();
+rt.left("12");
+rt.left().left("11");
+rt.left().right("13");
+rt.right("21");
+rt.right().left("20");
+rt.right().left().left("17");
+rt.right().right("30");
+rt.right().right().left("40");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<div class="question">
+<p>How many internal nodes does this tree have?</p>
+<p><input type="text" value="5"/></p>
+<div class="hints">
+<ul>
+<li>Anything that is <em>not</em> a leaf node is an internal node.
+Internal nodes might have 1 or 2 children.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the height of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" checked="" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" />Trees have depth – they do not have
+height</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Count the number of steps to the deepest node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many leaf nodes does this tree have?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Anything that has <em>no</em> children is a leaf node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many nodes in the tree have at least one sibling?</p>
+<p><input type="text" value="6"/></p>
+<div class="hints">
+<ul>
+<li>Siblings must have the same parent. If a node has two children, then
+each such child has a sibling.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many descendents does the root of this tree have?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Every node <em>except</em> the root is a descendent.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the depth of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" checked="" />Trees have height – they
+do not have depth</label></li>
+<li><label><input type="checkbox" />None of the above</label>
+</ul></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Nodes have depth.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which statement is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The tree is neither full
+nor complete</label></li>
+<li><label><input type="checkbox" />The tree is complete but not
+full</label></li>
+<li><label><input type="checkbox" />The tree is full but not
+complete</label></li>
+<li><label><input type="checkbox" />The tree is full and
+complete</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Do any internal nodes have only one child? If so, the tree is
+<em>not</em> full.</li>
+<li>A complete tree fills in nodes level by level, with the bottom level
+filled in from left to right.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-binary-tree-traversals" class="level3 quiz"
+data-number="9.15.3">
+<h3 data-number="9.15.3"><span
+class="header-section-number">9.15.3</span> Quiz: Binary tree
+traversals</h3>
+<div class="question">
+<p>Visiting each element in a tree is known as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />“Traversing”</label></li>
+<li><label><input type="checkbox" />“Sorting”</label></li>
+<li><label><input type="checkbox" />“Merging”</label></li>
+<li><label><input type="checkbox" />“Inserting”</label></li>
+<li><label><input type="checkbox" />“Enumerating”</label></li>
+</ul>
+<div class="hints">
+
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>postorder</em> traversal and the order of the nodes as visited by an
+<em>inorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Build yourself a small example tree of about 6 or 7 nodes and see
+what happens.</li>
+<li>Consider the example where the root has value A. In the postorder
+traversal, the left subtree is printed, then the right subtree, then A.
+In the inorder traversal, the left subtree comes first, then the A, then
+the right subtree.</li>
+<li>From this information, we always know the root, the contents of its
+left subtree, and the contents of its right subtree.</li>
+<li>We can apply this concept recursively to reconstruct the left
+subtree and the right subtree.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>preorder</em> traversal and the order of the nodes as visited by an
+<em>inorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Build yourself a small example tree of about 6 or 7 nodes and see
+what happens.</li>
+<li>Consider the example where the root has value A. In the preorder
+traversal, that A is printed first. In the inorder traversal, the left
+subtree comes first, then the A, then the right subtree.</li>
+<li>From this information, we always know the root, the contents of its
+left subtree, and the contents of its right subtree.</li>
+<li>We can apply this concept recursively to reconstruct the left
+subtree and the right subtree.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>preorder</em> traversal and the order of the nodes as visited by a
+<em>postorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Consider this example: The preorder traversal prints ABC, and the
+postorder traversal prints CBA. Can you determine the original tree from
+this information?</li>
+<li>In general, if a node has only one subtree, then the preorder and
+postorder traversals do not give you enough information to determine
+which side the subtree goes on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>When you print out the nodes of binary tree, the <em>leaf nodes</em>
+appear in the same relative order for the preorder, inorder, and
+postorder traversals.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Take a small binary tree with three or four leaf nodes and see what
+happens with the traversals.</li>
+<li>Since all 3 traversals print the left subtree before the right
+subtree, the leaves have to get printed in the same order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The <span class="math inline">n</span> nodes in a binary tree can be
+visited in:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n)</span> time</label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(1)</span> time</label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span> time</label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span> time</label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span> time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This would be done by a traversal. How much work does a traversal do
+at each node?</li>
+<li>Each node is visted once, with constant time spent at each.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Why does function <code>preorder2()</code> presented in the Traversal
+section make only half as many recursive calls as function
+<code>preorder()</code>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Because half of the
+pointers are null</label></li>
+<li><label><input type="checkbox" />Because there are half as many
+nodes</label></li>
+<li><label><input type="checkbox" />Because there are half as many leaf
+nodes</label></li>
+<li><label><input type="checkbox" />Because only internal nodes get
+called</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>All nodes will eventually get called</li>
+<li>The number of nodes in the tree does not change based on the
+algorithm used to traverse it.</li>
+<li>The Full Binary Tree Theorem tells us that roughly half of all
+pointers in a binary tree are null. No recursive call is made for these
+pointers by <code>preorder2</code>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-binary-heaps" class="level3 quiz"
+data-number="9.15.4">
+<h3 data-number="9.15.4"><span
+class="header-section-number">9.15.4</span> Quiz: Binary heaps</h3>
+<div class="question">
+<p>Which feature of heaps allows them to be efficienty implemented using
+an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Heaps are complete binary
+trees</label></li>
+<li><label><input type="checkbox" />Heaps are binary trees</label></li>
+<li><label><input type="checkbox" />Heaps are binary search
+trees</label></li>
+<li><label><input type="checkbox" />Heaps are full binary
+trees</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A heap is not a BST.</li>
+<li>In general, just being a binary tree (or even a full binary tree) is
+not enough to let something be implemented using an array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a max-heap containing <span class="math inline">n</span> elements,
+what is the position of the element with the greatest value?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">0</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n-1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*n+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*n+2</span></label></li>
+<li><label><input type="checkbox" />Possibly in any leaf
+node</label></li>
+<li><label><input type="checkbox" />The leftmost leaf node</label></li>
+<li><label><input type="checkbox" />The rightmost leaf node</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember this is a max-heap. So where is the biggest element?</li>
+<li>It is at the root. So, what position holds the root?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a max-heap containing <span class="math inline">n</span> elements,
+what is the position of the element with the smallest value?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Possibly in any leaf
+node</label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n-1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*n+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*n+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">0</span></label></li>
+<li><label><input type="checkbox" />The leftmost leaf node</label></li>
+<li><label><input type="checkbox" />The rightmost leaf node</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember this is a max-heap. So where is the smallest element?</li>
+<li>It has to be at the bottom.</li>
+<li>But, it could be anywhere at the bottom.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node <span class="math inline">R</span> of a complete
+binary tree whose value is stored in position <span
+class="math inline">i</span> of an array representation for the tree. If
+<span class="math inline">R</span> has a left child, where will the left
+child’s position be in the array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">2*i+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*i+2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\lfloor
+(i-1)/2 \rfloor</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at <span
+class="math inline">i+1</span>.</li>
+<li>If you have a left sibling, it is at <span
+class="math inline">i-1</span>.</li>
+<li>If you have a parent, it is at <span class="math inline">\lfloor
+(i-1)/2 \rfloor</span>.</li>
+<li>If you have a right child, it is at <span
+class="math inline">2*i+2</span>.</li>
+<li>If you have a left child, it is at <span
+class="math inline">2*i+1</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node <span class="math inline">R</span> of a complete
+binary tree whose value is stored in position <span
+class="math inline">i</span> of an array representation for the tree. If
+<span class="math inline">R</span> has a left sibling, where will the
+left sibling’s position be in the array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">i-1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*i+2</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\lfloor
+(i-1)/2 \rfloor</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a parent, it is at <span class="math inline">\lfloor
+(i-1)/2 \rfloor</span>.</li>
+<li>If you have a right child, it is at <span
+class="math inline">2*i+2</span>.</li>
+<li>If you have a left child, it is at <span
+class="math inline">2*i+1</span>.</li>
+<li>If you have a right sibling, it is at <span
+class="math inline">i+1</span>.</li>
+<li>If you have a left sibling, it is at <span
+class="math inline">i-1</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node <span class="math inline">R</span> of a complete
+binary tree whose value is stored in position <span
+class="math inline">i</span> of an array representation for the tree. If
+<span class="math inline">R</span> has a parent, where will the parent’s
+position be in the array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">\lfloor (i-1)/2 \rfloor</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*i+1</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at <span
+class="math inline">i+1</span>.</li>
+<li>If you have a left sibling, it is at <span
+class="math inline">i-1</span>.</li>
+<li>If you have a right child, it is at <span
+class="math inline">2*i+2</span>.</li>
+<li>If you have a left child, it is at <span
+class="math inline">2*i+1</span>.</li>
+<li>If you have a parent, it is at <span class="math inline">\lfloor
+(i-1)/2 \rfloor</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node <span class="math inline">R</span> of a complete
+binary tree whose value is stored in position <span
+class="math inline">i</span> of an array representation for the tree. If
+<span class="math inline">R</span> has a right child, where will the
+right child’s position be in the array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">2*i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+1</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">i+2</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">2*i+1</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\lfloor
+(i-1)/2 \rfloor</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at <span
+class="math inline">i+1</span>.</li>
+<li>If you have a left sibling, it is at <span
+class="math inline">i-1</span>.</li>
+<li>If you have a parent, it is at <span class="math inline">\lfloor
+(i-1)/2 \rfloor</span>.</li>
+<li>If you have a left child, it is at <span
+class="math inline">2*i+1</span>.</li>
+<li>If you have a right child, it is at <span
+class="math inline">2*i+2</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is a true statement about the worst-case time for
+operations on heaps?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Both insertion and
+removal are better than linear</label></li>
+<li><label><input type="checkbox" />Insertion is better than linear, but
+removal is not</label></li>
+<li><label><input type="checkbox" />Removal is better than linear, but
+insertion is not</label></li>
+<li><label><input type="checkbox" />Neither insertion nor removal are
+better than linear</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insert works by putting the new element at the end of the array, and
+moving it up the tree as appropriate.</li>
+<li>So its worst-case cost is proportional to the depth of the
+tree.</li>
+<li>Remove works swapping the element to remove with the one at the end
+of the array. Then move that moved item up or down the tree, as
+appropriate.</li>
+<li>So its worst-case cost is proportional to the depth of the
+tree.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:quiz-heapsort" class="level3 quiz"
+data-number="9.15.5">
+<h3 data-number="9.15.5"><span
+class="header-section-number">9.15.5</span> Quiz: Heapsort</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Heapsort (as the code is written in this chapter) is a stable sorting
+algorithm. Recall that a stable sorting algorithm maintains the relative
+order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What happens when two equal values are in separate branches of the
+tree?</li>
+<li>Can the one appearing later in the array move up in the tree?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A disadvantage of Heapsort is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />It is not stable (that
+is, records with equal keys might not remain in the same order after
+sorting)</label></li>
+<li><label><input type="checkbox" />It needs a lot of auxilliary
+storage</label></li>
+<li><label><input type="checkbox" />Its average case running time is
+<span class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" />None of these answers</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Heapsort does not need auxilliary storage.</li>
+<li>Heapsort runs in <span class="math inline">O(n \log(n))</span>
+time.</li>
+<li>Equal-valued records might be in different sides of the heap, and
+can get out of relative order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Heapsort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst and
+Average</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst, Average and Best</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Heapsort’s cost vary according to the order of the array input
+values?</li>
+<li>No, it does not matter what order the input values have.</li>
+<li>However, the best case occurs when all the values are same.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>(Assuming no duplicate key values) The order of the input records has
+what impact on the number of comparisons required by Heapsort (as
+presented in this chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is a constant
+factor difference</label></li>
+<li><label><input type="checkbox" />None</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Can Heapsort’s behaviour change depending on outcome of a
+comparison?</li>
+<li>Yes, it changes things a little bit in that it might move things up
+and down the heap more or less.</li>
+<li>But this does not matter, because removing a value from the heap
+normally costs <span class="math inline">\log(n)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Heapsort to sort an array of n
+records that each have unique key values?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n \log(n))</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^n)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Heapsort’s number of comparisons depend on the particular order
+of the input array?</li>
+<li>Only a little bit, Heapsort still does basically the same work
+regardless of input data order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Heapsort when the input is an array where
+all key values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n ^
+n)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">O(n
+\log(n))</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Heapsort has the same asymptotic cost in the best, average, and
+worst cases, but only if the key values are all unique.</li>
+<li>If you have a heap with all equal key values, what will the siftdown
+operation do?</li>
+<li>In that case, siftdown will always return immediately, resulting in
+a constant time operation. Since Heapsort calls siftdown <span
+class="math inline">n</span> times, the total cost is <span
+class="math inline">O(n)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How much auxilliary space or overhead (beyond the array holding the
+records) is needed by Heapsort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">O(1)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(\log(n))</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n)</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">O(n^2)</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Heapsort does not require any auxilliary arrays.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.14.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.14.html" accesskey="p" rel="previous">Case study: Huffman coding*</a>
+</div>
+<div class="navlink">
+<a href="section-10.html" accesskey="n" rel="next">Search trees</a>
+<a href="section-10.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

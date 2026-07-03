@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Practical examples</title>
+  <title>DSABook – Case study: Linear and binary search in
+arrays</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +70,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Searching/binarySearchCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,167 +101,281 @@
 <nav class="sitenav">
 <div>
 <a href="section-1.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-1.2.html" accesskey="p" rel="previous">Selecting a data structure</a>
+<a href="section-1.2.html" accesskey="p" rel="previous">Practical examples</a>
 </div>
 <div>
-<a href="section-1.4.html" accesskey="n" rel="next">Mathematical preliminaries</a>
+<a href="section-1.4.html" accesskey="n" rel="next">The right data structure for the problem</a>
 <a href="section-1.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:practical-examples" class="level2" data-number="1.3">
+<section id="sec:intro:searching" class="level2" data-number="1.3">
 <h2 data-number="1.3"><span class="header-section-number">1.3</span>
-Practical examples</h2>
-<p>Here we list some real-world examples where data structures and
-algorithms are crucial.</p>
-<section id="sec:search-engines" class="level4 unnumbered">
-<h4 class="unnumbered">Search engines</h4>
-<p>The World Wide Web (WWW), often referred to as the Internet, has
-completely changed how we access and use information. With just a few
-clicks, we can explore an enormous number of websites filled with text,
-videos, and images on a wide variety of topics. The amount of content
-available is staggering, with millions of pages and an endless stream of
-data at our fingertips. But this vast amount of information also
-presents challenges. It can be overwhelming to sort through all the
-sources available online. Finding the exact address of a website on your
-own is nearly impossible.</p>
-<p>This is where search engines come in. Search engines like Google,
-Bing, and DuckDuckGo help us find the information we need by organising
-the Internet and making it searchable. This process of organising
-information is called indexing.</p>
-<p>Most of us use search engines every day without thinking about the
-incredible job they do. The image below shows the results of a search
-for “binary search”:</p>
-<figure>
-<img src="images/Google.png" style="width:75.0%"
-alt="Searching the Internet with Google" />
-<figcaption aria-hidden="true">Searching the Internet with
-Google</figcaption>
-</figure>
-<p>It is already impressive to be shown a list of relevant web pages,
-but it is even more astonishing that, in this case, Google found 331
-million results in just <em>0.23 seconds</em>.</p>
-<p>Now imagine you are designing a search engine that must index
-billions of web pages. Each page has a unique address, called a Uniform
-Resource Locator (URL), and is associated with a set of keywords. When a
-user submits a search query, the engine must quickly find all the
-relevant pages. A simple list is not an efficient way to store and
-retrieve this information. With billions of pages, it is not practical
-to check each one in order. Even if looking at a single page takes only
-a millisecond, going through them all would take years. To handle this
-challenge, we need smart ways to store and search through the data.</p>
-<p>Let’s consider a simpler version of this problem. Suppose we use an
-array that connects keywords to lists of related web pages. A basic
-approach would be to go through the array one element at a time until we
-find the keyword. This works, but it becomes very slow as the array
-grows larger. To improve efficiency, we can <em>sort</em> the array of
-keywords alphabetically. Then, instead of scanning from the beginning,
-we start in the middle of the array and compare the search word with the
-keyword at that position:</p>
-<ul>
-<li>If they match, we return the corresponding list of web pages.</li>
-<li>If the search word is smaller, we continue the search in the lower
-half of the array.</li>
-<li>If it’s larger, we search in the upper half.</li>
-</ul>
-<p>Each step cuts the number of possibilities in half. So, how many
-times can we divide the array in half before we narrow it down to one
-element? This is a logarithmic process, meaning we divide the search
-space in half again and again. With an array of one billion keywords, we
-would need only about 39 steps to find the right one.</p>
-<p>This model is simplified. In reality, search engines do much more
-than just match keywords. They also rank pages by relevance and take
-many details into account, such as whether letters are uppercase or
-lowercase, and whether the user is combining terms with “and” or
-“or”.</p>
+Case study: Linear and binary search in arrays</h2>
+<p>One of the most fundamental tasks that we use computers for is
+<em>searching</em>. We want to find an object that matches some
+criteria, in a collection of objects. In fact, most of the data
+structures and algorithms that we will present in this book have to do
+with searching in some way – how to store data so that we can retrieve
+them easily, and how to find the data we are interested in.</p>
+<p>One way of storing a collection of objects is to put them in an
+array. So, assuming that we have an array of objects, how can we find a
+certain object in this array?</p>
+<section id="sec:linear-search" class="level4 unnumbered">
+<h4 class="unnumbered">Linear search</h4>
+<p>Suppose we are searching for a particular book in a bookshelf. If the
+shelf is not in any particular order, our only option is to look at each
+book and see if it is the one we are looking for. This algorithm is
+called <em>linear search</em>, and is the most straightforward way to
+search a collection. Here is a simple implementation for an array,
+written in pseudocode:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>linearSearch(arr, key):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span>:     <span class="co">// For each element in the array:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[i] <span class="op">==</span> key:           <span class="co">//     If we found the search key:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> i                <span class="co">//         return this position</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">null</span>                     <span class="co">// Otherwise, return null</span></span></code></pre></div>
+<p>Now imagine that the bookshelf is actually a whole library (the
+British Library has more than 200 million catalogued items). How long
+time will that take – do I have to leave the computer running until
+tomorrow?</p>
+<p>More interesting than the time it takes to search a particular
+bookshelf on a particular computer, is the question of how the time
+scales when the bookshelf is expanded, regardless of how fast the
+computer is. How does the search time change if we double the size of
+the bookshelf? Particularly, we are interested in the <em>worst
+case</em> time. A supremely lucky person may always find their book in
+the first slot they check (in the <code>linearSearch</code> function
+that would correspond to <code>arr[0] == key</code> always being true).
+The <em>worst case</em> is that we are searching for a book that is not
+in the shelf at all.</p>
+<p>In the worst case, doubling the size of the bookshelf will double the
+search time. Thus, in linear search there is (suitably) a linear
+relationship between the size of the bookshelf and the search time. We
+say linear search is a <em>linear time</em> algorithm.</p>
 </section>
-<section id="sec:databases" class="level4 unnumbered">
-<h4 class="unnumbered">Databases</h4>
-<p>A company is developing a database system containing information
-about cities and towns in Europe. There are many thousands of cities and
-towns, and the database program should allow users to find information
-about a particular place by name (another example of an exact-match
-query). Users should also be able to find all places that match a
-particular value or range of values for attributes such as location or
-population size. This is known as a <a
-href="section-14.html#range-query" class="term"
-title="Records are returned if their relevant key value falls within a specified range.">range
-query</a>.</p>
-<p>A reasonable database system must answer queries quickly enough to
-satisfy the patience of a typical user. For an exact-match query, a
-fraction of a second is satisfactory. If the database is meant to
-support range queries that can return many cities that match the query
-specification, the user might tolerate the entire operation to take a
-little longer, perhaps a couple of seconds. To meet this requirement, it
-will be necessary to support operations that process range queries
-efficiently by processing all cities in the range as a batch, rather
-than as a series of operations on individual cities.</p>
-<p>The hash table suggested in the previous example is inappropriate for
-implementing our city database, because it cannot perform efficient
-range queries. The <a href="section-14.html#b-tree" class="term"
-title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-tree</a>
-supports large databases, insertion and deletion of data records, and
-range queries. However, a simple <a href="section-14.html#linear-index"
+<section id="sec:binary-search" class="level4 unnumbered">
+<h4 class="unnumbered">Binary search</h4>
+<p>No library keeps books in random order, because linear search is too
+slow. Instead, books are sorted in the shelves, for example
+alphabetically by author name and title. Most people can intuitively use
+this order to search a bookshelf by looking at only a small fraction of
+the books. When browsing the books we implicitly make deductions like
+“there are no books between Orwell and Owen, so there are no books by
+Osborne” and “this book is by Plato, so all books by Homer must be
+earlier in the shelf”. The formalised algorithm that uses these
+deductions is called <a href="section-13.3.html#binary-search"
 class="term"
-title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
-index</a> would be more appropriate if the database is created once, and
-then never changed, such as an atlas accessed from a website.</p>
+title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log(n))$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
+search</a>. It is a very common choice for a first algorithm to teach
+students, so you may have seen it before. For the example of a book
+shelf sorted alphabetically from left to right, binary search would be
+described as such:</p>
+<ul>
+<li>Compare the middle book in the shelf to the one we are looking for.
+<ul>
+<li>if the middle book is the one we are looking for, our search is
+done!</li>
+<li>if we are searching for an alphabetically earlier book, search the
+left half of the shelf, otherwise search in the right half.</li>
+</ul></li>
+<li>Repeat this procedure for the left or right half, comparing to the
+middle book of that half, and so on.</li>
+</ul>
+<p>This procedure will end in one of two cases: We find the book we are
+looking for, or we end up searching an empty part of the bookshelf, and
+know that the book is not in the shelf.</p>
+<p>To make the description of this algorithm more precise, introduce the
+concept of a <em>search interval</em>. Initially our search interval is
+the entire bookshelf, and with each comparison we reduce the search
+interval to just the left or right side of the middle element. For
+instance, we can go from the problem of searching among 51 books to the
+problem of searching 25 books, by a single comparison with the middle
+book, and excluding either half from the interval. This is further
+reduced to searching among 12 books with another comparison. We need to
+decide what we mean by the middle of 12 books, but we should have to
+search among at most 6 books in the next step. Ultimately we end up
+either finding the book we are looking for, or searching among 0 books,
+and in both cases we have the answer we were looking for.</p>
+<p>This process of reducing a problem to a smaller instance of the same
+problem is a key concept in algorithm design. We can easily generalise
+the algorithm from searching book cases to searching in a sorted array
+of elements.</p>
 </section>
-<section id="sec:banks" class="level4 unnumbered online">
-<h4 class="unnumbered">Banks</h4>
-<p>A bank must support many types of transactions with its customers,
-but we will examine a simple model where customers wish to open
-accounts, close accounts, and add money or withdraw money from accounts.
-We can consider this problem at two distinct levels: (1) the
-requirements for the physical infrastructure and workflow process that
-the bank uses in its interactions with its customers, and (2) the
-requirements for the database system that manages the accounts.</p>
-<p>The typical customer opens and closes accounts far less often than
-accessing the account. Customers are willing to spend many minutes
-during the process of opening or closing the account, but are typically
-not willing to wait more than a brief time for individual account
-transactions such as a deposit or withdrawal. These observations can be
-considered as informal specifications for the time constraints on the
-problem.</p>
-<p>It is common practice for banks to provide two tiers of service.
-Human tellers or automated teller machines (ATMs) support customer
-access to account balances and updates such as deposits and withdrawals.
-Special service representatives are typically provided (during
-restricted hours) to handle opening and closing accounts. Teller and ATM
-transactions are expected to take little time. Opening or closing an
-account can take much longer (perhaps up to an hour from the customer’s
-perspective).</p>
-<p>From a database perspective, we see that ATM transactions do not
-modify the database significantly. For simplicity, assume that if money
-is added or removed, this transaction simply changes the value stored in
-an account record. Adding a new account to the database is allowed to
-take several minutes. Deleting an account need have no time constraint,
-because from the customer’s point of view all that matters is that all
-the money be returned (equivalent to a withdrawal). From the bank’s
-point of view, the account record might be removed from the database
-system after business hours, or at the end of the monthly account
-cycle.</p>
-<p>When considering the choice of data structure to use in the database
-system that manages customer accounts, we see that a data structure that
-has little concern for the cost of deletion, but is highly efficient for
-search and moderately efficient for insertion, should meet the resource
-constraints imposed by this problem. Records are accessible by unique
-account number (sometimes called an <a
-href="section-14.html#exact-match-query" class="term"
-title="Records are accessed by unique identifier.">exact-match
-query</a>). One data structure that meets these requirements is the <a
-href="section-14.html#hashing" class="term"
-title="A search method that uses a hash function to convert a search key value into a position within a hash table. In a properly implemented hash system, that position in the table will have high probability of containing the record that matches the key value. Sometimes, the hash function will return a position that does not store the desired key, due to a process called collision. In that case, the desired record is found through a process known as collision resolution.">hash
-table</a>. Hash tables allow for extremely fast exact-match search. A
-record can be modified quickly when the modification does not affect its
-space requirements. Hash tables also support efficient insertion of new
-records. While deletions can also be supported efficiently, too many
-deletions lead to some degradation in performance for the remaining
-operations. However, the hash table can be reorganised periodically to
-restore the system to peak efficiency. Such reorganisation can occur
-offline so as not to affect ATM transactions.</p>
+<section id="sec:algorithm-binary-search"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Binary search</h4>
+<p>To find out if a <em>key</em> is in a given sorted array, start with
+an interval including the whole array. Repeat the following until
+<em>key</em> has been found, or the interval is empty:</p>
+<ol type="1">
+<li>Compare <em>key</em> with the middle element of the interval.</li>
+<li>If <em>key</em> is equal, return true, the key is in the array.</li>
+<li>Exclude the middle element and all elements either before or after
+it, depending on if the key is greater or smaller than the middle
+element.</li>
+</ol>
+<p>If the interval ends up empty, return false, the key is not in the
+array.</p>
+</section>
+<p>To turn this algorithm into actual code, we need to decide how to
+represent the search interval in computer memory. The operation of
+excluding elements from the interval needs to be fast – making a new
+smaller array is too slow. Instead we define the interval by the lower
+and upper indices it includes, so <span
+class="math inline">(10,24)</span> would represent the interval from
+index 10 to and including index 24 (15 elements). The middle element is
+<span class="math inline">(10+24)/2=17</span> (rounding down when
+needed). Searching the lower half just means altering the interval to
+<span class="math inline">(10,16)</span>, and the upper half <span
+class="math inline">(18,24)</span>. Here is an implementation of binary
+search that does not only say if the key is in the array, but also at
+which index it resides (or null if it is absent):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>binarySearch(arr, key):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span>                      <span class="co">// The index of the first element in the interval</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> arr.<span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span>             <span class="co">// The index of the last element in the interval</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> start <span class="op">&lt;=</span> end:            <span class="co">// Continue until the interval is empty:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        mid <span class="op">=</span> (start <span class="op">+</span> end) <span class="op">/</span> <span class="dv">2</span>    <span class="co">//     Find the index of the middle value</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[mid] <span class="op">&lt;</span> key:         <span class="co">//     Compare with the middle value in the interval:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span>        <span class="co">//         The search key is in the upper half</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[mid] <span class="op">&gt;</span> key:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            end <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span>          <span class="co">//         The search key is in the lower half</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co">// (here arr[mid]==key)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> mid             <span class="co">//         We found the search key!</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">null</span>                    <span class="co">// The value is not in the array.</span></span></code></pre></div>
+<p>An important technical detail here is that <span
+class="math inline">\mathit{mid} = (\mathit{start} + \mathit{end}) /
+2</span> is understood to use integer division, so <span
+class="math inline">(6+11)/2</span> is <span
+class="math inline">8</span>, not <span class="math inline">8.5</span>.
+Consider how this implementation deals with corner cases, for instance
+when the search area has a single element (when <span
+class="math inline">\mathit{start}=\mathit{end}</span>). Or when it has
+two elements. Does it calculate <span
+class="math inline">\mathit{mid}</span> correctly and yield correct
+result in these cases?</p>
+<p>In this particular implementation we use inclusive indices, both
+<span class="math inline">\mathit{start}</span> and <span
+class="math inline">\mathit{end}</span> are inside the area. Another
+common option is to have <span class="math inline">\mathit{start}</span>
+be inclusive, and <span class="math inline">\mathit{end}</span>
+exclusive (so the starting interval is <span
+class="math inline">(0,\mathit{arr.size})</span>). Yet another option is
+to have a start index and a size of the interval. Each variation would
+do slightly different calculations, but require the same fundamental
+building operations: Finding the middle element, and excluding the
+upper/lower half of the interval. <a
+href="#fig:BinSearch1">Figure 1.1</a> illustrates an example search of a
+small array.</p>
+<figure id="fig:BinSearch1">
+<img src="images/Intro-binarySearch1.svg" style="width:80.0%"
+alt="Figure 1.1: Steps of Binary search for the value D in a sorted array of length 9, revealing elements as they are compared to D. After three comparisons, the search interval is empty, D is not in the array." />
+<figcaption aria-hidden="true">Figure 1.1: Steps of Binary search for
+the value D in a sorted array of length 9, revealing elements as they
+are compared to D. After three comparisons, the search interval is
+empty, D is not in the array.</figcaption>
+</figure>
+<p>There are many variations of binary search. If the array had books
+sorted by number of pages, we could use it to find books of a desired
+length, or even all books in a precise range of pages. Consider what
+would happen if the array was not sorted properly, can you construct a
+small example where the algorithm would go wrong? Also consider, could
+binary search be used to determine if an array contains a prime
+number?</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an illustration of the binary search algorithm.</p>
+</summary>
+
+<div id="binarySearchCON" class="ssAV" data-short-name="binarySearchCON" data-long-name="Binary Search Algorithm Slideshow" alt="Binary Search Algorithm Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Searching/binarySearchCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("binarySearchCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#binarySearchCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<section id="sec:running-time-of-binary-search"
+class="level4 unnumbered">
+<h4 class="unnumbered">Running time of binary search</h4>
+<p>For linear search, in the worst case we have to look at all books in
+the bookshelf (all elements of the array). That means running time grows
+linearly with the size of the bookshelf. What is the corresponding worst
+case for binary search?</p>
+<p>We can immediately see that it looks at much fewer books. The first
+comparison we do, looking at a single book, excludes half the bookshelf
+from the search interval. In fact, every comparison, or in the code –
+every iteration of the <code>while</code>-loop, will reduce the size of
+the search interval by at least <span class="math inline">50\%</span>.
+How many times can we integer divide a number <span
+class="math inline">n</span> by 2 before we reach 0? For <span
+class="math inline">n=2^x</span>, the answer is <span
+class="math inline">x+1</span>, so ignoring some rounding the answer is
+<span class="math inline">x=\log_2(n)</span>.</p>
+<p>We say that binary search is a <em>logarithmic time</em> algorithm,
+as opposed to linear search being linear time. For large collections,
+this difference is staggering. For a bookshelf with a million books,
+binary search requires us to look at 20 books worst case, instead of a
+million. For a staggeringly bookshelf of a billion books, binary search
+requires less than 30 comparisons, making it tens of millions times
+faster than a linear search.</p>
+<p>This example highlights a crucial insight about algorithms: Buying a
+computer that is twice as fast will reduce the time consumption of your
+task by half. Switching programming language to C from Python might
+yield a similar speed-up. Both of those are nice, but switching from a
+linear time algorithm to a logarithmic one can reduce runtime by a
+factor of millions, reducing runtime from years to seconds.</p>
+</section>
+<section id="sec:how-is-this-related-to-data-structures"
+class="level4 unnumbered">
+<h4 class="unnumbered">How is this related to data structures?</h4>
+<p>Apart from introducing our first two algorithms (linear search and
+binary search), this section introduces a data structure: The sorted
+array. This data structure differs from from general arrays in what
+operations it supports, more than just the a ability to search
+quickly.</p>
+<p>Returning to the analogy of the bookshelf: If we have an unordered
+bookshelf, where we only ever do linear searches, we can add a new book
+by squeezing it in wherever there is room. We can also switch the order
+of two books if we please.</p>
+<p>If we have an ordered bookshelf, and want to keep using binary search
+on it, adding a new book requires careful consideration. There is a
+single valid position for the new book to be placed, and we cannot swap
+existing books around.</p>
+<p>This touches on the subject of <em>invariants</em>, properties that
+must always hold on a data structure. Having an ordering invariant on an
+array affords us the luxury of efficient search, at the cost of having
+to <em>maintain</em> that invariant when performing modifications.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:binary-search-exercise" class="level4 unnumbered">
+<h4 class="unnumbered">Binary search exercise</h4>
+</summary>
+
+<div id="binarySearchPRO" class="embedContainer">
+<iframe id="binarySearchPRO_iframe" aria-label="binarySearchPRO" src="../interactive/Searching/binarySearchPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</section>
+</div>
 </section>
 </section>
 </main>
@@ -250,10 +384,10 @@ offline so as not to affect ATM transactions.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-1.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-1.2.html" accesskey="p" rel="previous">Selecting a data structure</a>
+<a href="section-1.2.html" accesskey="p" rel="previous">Practical examples</a>
 </div>
 <div class="navlink">
-<a href="section-1.4.html" accesskey="n" rel="next">Mathematical preliminaries</a>
+<a href="section-1.4.html" accesskey="n" rel="next">The right data structure for the problem</a>
 <a href="section-1.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -261,5 +395,6 @@ offline so as not to affect ATM transactions.</p>
 
 </body>
 </html>
+
 
 

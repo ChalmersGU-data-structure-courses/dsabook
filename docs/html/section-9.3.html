@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Heapsort</title>
+  <title>DSABook – Case study: Disjoint sets</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/HeapSortAnalysisCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,242 +100,101 @@
 <nav class="sitenav">
 <div>
 <a href="section-9.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-9.2.html" accesskey="p" rel="previous">Binary heaps</a>
+<a href="section-9.2.html" accesskey="p" rel="previous">Tree representations</a>
 </div>
 <div>
-<a href="section-9.4.html" accesskey="n" rel="next">Case study: Huffman coding</a>
+<a href="section-9.4.html" accesskey="n" rel="next">Heaps for priority queues</a>
 <a href="section-9.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-heapsort" class="level2" data-number="9.3">
+<section id="sec:trees:disjoint-sets" class="level2" data-number="9.3">
 <h2 data-number="9.3"><span class="header-section-number">9.3</span>
-Case study: Heapsort</h2>
-<p>We can use a heap to implement a very simple sorting algorithm:</p>
-<ol type="1">
-<li>Insert all elements from the unsorted array into a
-<em>min</em>-heap.</li>
-<li>Remove each element in turn from the heap, putting it in its right
-place in the original array.</li>
-</ol>
-<p>Since the heap returns the smallest elements first, they will be
-inserted in sorted order into the new array. Here is pseudocode:</p>
+Case study: Disjoint sets</h2>
+<p><a href="section-9.2.html#sec:trees:general-trees">Section 9.2.2</a>
+showed a possible way to implement a general tree, where the children
+are represented by a list of pointers to subtrees. This becomes a little
+complicated, since the number of children can vary a lot for different
+nodes in the same tree.</p>
+<p>But one common property for all trees is that every node can have
+only one <em>parent</em>. This means that we can come up with another
+implementation of trees, where each node only points to its parent. We
+call this a <a href="section-13.3.html#parent" class="term"
+title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent-pointer
+tree</a>, and it has a very simple declaration:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> naiveHeapsort(arr):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    heap <span class="op">=</span> <span class="kw">new</span> MinHeap()</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        heap.<span class="bu">add</span>(arr[i])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        arr[i] <span class="op">=</span> heap.<span class="bu">removeMin</span>()</span></code></pre></div>
-<div class="online">
-<p>What is the time complexity of this algorithm?</p>
-<ul>
-<li>We have two very similar for loops, iterating over the range of the
-array.</li>
-<li>The body of each loop is logarithmic, so the total loop complexity
-is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</li>
-</ul>
-<p>So, we have two loops with linearithmic complexity, and therefore the
-algorithm is linearithmic too,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
-This means that <code>naiveHeapsort</code> is an efficient sorting
-algorithm. However, our algorithm has some disadvantages:</p>
-<ul>
-<li>It is not in-place: we have to allocate
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-additional space for the heap.</li>
-<li>Also, we saw in the previous section that we can build the heap both
-faster and in-place.</li>
-<li>(That’s why we call it <code>naiveHeapsort</code>, and now we will
-find out how to solve both of these problems.)</li>
-</ul>
-<section id="sec:in-place-heapsort" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1"><span class="header-section-number">9.3.1</span>
-In-place Heapsort</h3>
-<p>In <a href="section-9.2.html#sec:building-a-heap">Section 9.2.7</a>
-we saw that there is a more efficient way of turning an array into a
-heap, by using the <code>buildHeap</code> method. We can use this to
-implement a faster and in-place version of Heapsort.</p>
-<p>The crucial step here is to use a <em>max</em>-heap, which might seem
-counter-intuitive. After building the heap we tweak the
-<code>removeMax</code> method a little, so that it <em>keeps</em> the
-removed element, but puts it at the <em>end</em> of the array. This is
-why we need a max-heap – because the first element we remove will be put
-at the very end of the array. Here is an overview of the idea:</p>
-<ul>
-<li>First, turn the array into a <em>max</em>-heap, using
-<code>buildHeap</code>.</li>
-<li>Remove the maximum element, and put it at the end of the array. Then
-decrease the size of the heap – this will make the maximum element to be
-outside of the heap.</li>
-<li>Now remove the second largest element, and put it at the second
-final place. And decrease the size of the heap.</li>
-<li>Then remove the third largest element, and so on.</li>
-<li>Finally, when the heap is exhausted the internal array is
-sorted.</li>
-</ul>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is a visualisation of the Heapsort algorithm.</p>
-</summary>
-
-<div id="heapsortCON" class="ssAV" data-short-name="heapsortCON" data-long-name="Heapsort Slideshow" alt="Heapsort Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/heapsortCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("heapsortCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#heapsortCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>A complete implementation is as follows.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> heapsort(arr):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// First, convert the array to a max heap.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    heap <span class="op">=</span> <span class="kw">new</span> MaxHeap()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    heap.buildHeap(arr)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Then, repeatedly remove each maximum element from the heap,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// and put it just after the heap.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> heap.<span class="bu">size</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">size</span> <span class="kw">in</span> n<span class="op">-</span><span class="dv">1</span>, n<span class="op">-</span><span class="dv">2</span> .. <span class="dv">0</span>:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        heap.swap(<span class="dv">0</span>, <span class="bu">size</span>)  <span class="co">// Put the max element at the end of the heap.</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        heap.<span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span>    <span class="co">// Change the heap size so it excludes the max element.</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        heap.siftDown(<span class="dv">0</span>)    <span class="co">// Now, sift the temporary root down.</span></span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is a warmup practice exercise for Heapsort.</p>
-</summary>
-
-<div id="HeapsortStepPRO" class="embedContainer">
-<iframe id="HeapsortStepPRO_iframe" aria-label="HeapsortStepPRO" src="../interactive/Sorting/HeapsortStepPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:heapsort-proficiency-practice"
-class="level4 unnumbered">
-<h4 class="unnumbered">Heapsort proficiency practice</h4>
-</summary>
-<p>Now test yourself to see how well you understand Heapsort. Can you
-reproduce its behaviour?</p>
-
-<div id="heapsortPRO" class="embedContainer">
-<iframe id="heapsortPRO_iframe" aria-label="heapsortPRO" src="../interactive/Sorting/heapsortPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ParentTree:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    value    <span class="co">// The value of the node</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    parent   <span class="co">// The parent of the node</span></span></code></pre></div>
+<p>But wait, this is just a linked list, and lists are not trees, right?
+This is absolutely true, in one sense: if you look at a tree from the
+leaves, then each path from a leaf to the root is essentially a linked
+list. It becomes a tree because several nodes will share the same
+parent, but there is no way to know this because you cannot see which
+nodes are shared or not.</p>
+<p>So the downside with this representation is that we cannot work with
+the tree as a whole, but we can only view it as a collection of
+back-pointing paths to the root. (We know that the root is the root
+because its parent is <em>null</em>.) In fact, the parent-pointer tree
+has a very limited use, but it can be used to implement a special data
+structure called <em>disjoint sets</em>, or <em>disjoint union</em>.</p>
+<p>In some algorithms, such as Kruskal’s algorithm that we will
+encounter in <a
+href="section-12.5.html#sec:graphs:kruskals-algorithm">Section 12.5</a>,
+we need an efficient way of asking if two elements belong to the same
+set. If we store the sets as parent-pointer trees, and let every element
+remember its own parent-pointer tree node, then the question becomes
+very easy. To decide if two elements <span
+class="math inline">a,b</span> belong to the same set, we find the roots
+of <span class="math inline">a</span> and <span
+class="math inline">b</span> in their respective trees. If they have the
+same root, then they belong to the same set. The fundamental algorithm
+here is to <em>find</em> the root of a tree, and this as simple as
+following the parent pointers until we cannot go longer.</p>
+<p>Algorithms that make use of disjoint sets, such as Kruskal’s, also
+need an efficient way to create parent-pointer trees. It is of course
+trivial to create a tree representing a set with only one value, but
+they also need a way to quickly take the <em>union</em> of two sets.
+This is also an operation that parent-pointer trees can support
+easily:</p>
+<section id="sec:algorithm-the-union-of-two-parent-pointer-trees"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: The union of two parent-pointer
+trees</h4>
+<p>First we find the roots of the two trees. If the roots are equal, the
+trees are already merged. Otherwise assign one of the roots as the
+parent of the other root.</p>
 </section>
-</div>
-<section id="sec:analysis-of-in-place-heapsort"
-class="level4 unnumbered">
-<h4 class="unnumbered">Analysis of in-place Heapsort</h4>
-<p>Here is an analysis of the time complexity of Heapsort:</p>
+<p>This data structure is also called <em>Union/Find</em>, because these
+are the only two operations it supports. So it is a very limited data
+structure, but it fits perfectly for some algorithms, such as
+Kruskal’s.</p>
+<p>The very simple version we have shown above does not have a very good
+time complexity, unfortunately. If we are unlucky the tree will be very
+unbalanced and the <em>find</em> operation will be linear in the size of
+the tree, <span class="math inline">O(n)</span>. But with some simple
+optimisations we can get a really fast data structure:</p>
 <ul>
-<li>The first step in Heapsort is to heapify the array. This will cost
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-running time for an array of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</li>
-<li>Then it swaps each element with the root node and “sifts” it down
-the heap.
-<ul>
-<li>Sifting down is logarithmic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
-in the worst case, since the height of the tree is logarithmic.</li>
-<li>And this is done for each of the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements in the array.</li>
-</ul></li>
-<li>So, the second loop is linearithmic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</li>
+<li><p>When taking the <em>union</em>, we have to choose which root
+should be the root of the union. We can for example select the root of
+the largest tree, or of the highest tree. For this to work we need to
+store the size or the height in all tree nodes.</p></li>
+<li><p>When <em>finding</em> the root, we can modify the tree in place,
+using <em>path compression</em>. This means that we reassign the parent
+pointers along the path while we walk towards the root. We want the tree
+to be as flat as possible, and if we reassign the parent pointer to the
+root we make the tree much flatter.</p></li>
 </ul>
-<p>Therefore the worst-case complexity of Heapsort is linearithmic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>This visualisation explains the running time analysis of
-Heapsort.</p>
-</summary>
-
-<div id="HeapSortAnalysisCON" class="ssAV" data-short-name="HeapSortAnalysisCON" data-long-name="Heapsort Analysis Slideshow" alt="Heapsort Analysis Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/HeapSortAnalysisCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("HeapSortAnalysisCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#HeapSortAnalysisCON "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<p>While typically slower than Quicksort by a constant factor (because
-unloading the heap using <code>removeMax</code> is somewhat slower than
-Quicksort’s series of partitions), Heapsort has one special advantage
-over the other sorts studied so far. Building the heap is relatively
-cheap, requiring
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-time. Removing the maximum-valued record from the heap requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-time in the worst case. Thus, if we wish to find the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-records with the largest key values in an array, we can do so in time
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mi>k</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n + k \log n)</annotation></semantics></math>.
-If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-is small, this is a substantial improvement over the time required to
-find the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-largest-valued records using one of the other sorting methods described
-earlier (many of which would require sorting all of the array first).
-One situation where we are able to take advantage of this concept is in
-the implementation of <a href="section-14.html#kruskals-algorithm"
-class="term"
-title="An algorithm for computing the MST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
-algorithm</a> for <a href="section-14.html#minimum-spanning-tree"
-class="term"
-title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
-spanning trees</a>. That algorithm requires that edges be visited in
-ascending order (so, use a min-heap), but this process stops as soon as
-the MST is complete. Thus, only a relatively small fraction of the edges
-need be sorted.</p>
-<p>Another special case arises when all of the records being sorted have
-the same key value. This represents the best case for Heapsort. This is
-because removing the smallest value requires only constant time, since
-the value swapped to the top is never pushed down the heap.</p>
-</section>
-</section>
-</div>
+<p>If we implement these two optimisations, the <em>union</em> and
+<em>find</em> operations becomes extremely fast. It is possible to prove
+that they are <em>almost</em> constant time, amortised. To be precise,
+the complexity of the operations is <span
+class="math inline">O(\alpha(n))</span>, which is the <em>inverse
+Ackermann function</em>. This function grows so slow that <span
+class="math inline">\alpha(n) &lt; 5</span> for all practical values of
+<span class="math inline">n</span>.</p>
 </section>
 </main>
 
@@ -324,10 +202,10 @@ the value swapped to the top is never pushed down the heap.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-9.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-9.2.html" accesskey="p" rel="previous">Binary heaps</a>
+<a href="section-9.2.html" accesskey="p" rel="previous">Tree representations</a>
 </div>
 <div class="navlink">
-<a href="section-9.4.html" accesskey="n" rel="next">Case study: Huffman coding</a>
+<a href="section-9.4.html" accesskey="n" rel="next">Heaps for priority queues</a>
 <a href="section-9.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -335,5 +213,6 @@ the value swapped to the top is never pushed down the heap.</p>
 
 </body>
 </html>
+
 
 

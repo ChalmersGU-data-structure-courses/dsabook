@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Stacks and queues</title>
+  <title>DSABook – Linked lists</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,315 +100,357 @@
 <nav class="sitenav">
 <div>
 <a href="section-6.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.1.html" accesskey="p" rel="previous">Collections</a>
+<a href="section-6.1.html" accesskey="p" rel="previous">Stacks and queues</a>
 </div>
 <div>
-<a href="section-6.3.html" accesskey="n" rel="next">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" accesskey="n" rel="next">Array-based sequences</a>
 <a href="section-6.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:stacks-and-queues" class="level2" data-number="6.2">
+<section id="sec:sequences:linked-lists" class="level2"
+data-number="6.2">
 <h2 data-number="6.2"><span class="header-section-number">6.2</span>
-Stacks and queues</h2>
-<p>The <a href="section-14.html#stack" class="term"
-title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
-is a list-like structure in which elements may be inserted or removed
-from only one end. This is an extremely simplistic ADT, but it is
-nevertheless used in many many algorithms. The restrictions make stacks
-very inflexible, but they also make stacks both efficient (for those
-operations they can do) and easy to implement. Many applications require
-only the limited form of insert and remove operations that stacks
-provide. In such cases, it is more efficient to use the simpler stack
-data structure rather than a generic list.</p>
-<p>Despite their restrictions, stacks have many uses. Thus, a special
-vocabulary for stacks has developed. Accountants used stacks long before
-the invention of the computer. They called the stack a “<a
-href="section-14.html#lifo" class="term"
-title="Abbreviation for &#39;last-in, first-out&#39;. This is the access paradigm for a stack, and an old terminolgy for the stack is &#39;LIFO list&#39;.">LIFO</a>”
-list, which stands for “Last-In, First-Out.” Note that one implication
-of the LIFO policy is that stacks remove elements in reverse order of
-their arrival.</p>
-<p>Like the stack, the <a href="section-14.html#queue" class="term"
-title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>
-is a list-like structure that provides restricted access to its
-elements. Queue elements may only be inserted at the back (called an <a
-href="section-14.html#enqueue" class="term"
-title="A specialised term used to indicate inserting an element onto a queue.">enqueue</a>
-operation) and removed from the front (called a <a
-href="section-14.html#dequeue" class="term"
-title="A specialised term used to indicate removing an element from a queue.">dequeue</a>
-operation). Queues operate like standing in line at a movie theater
-ticket counter. If nobody cheats, then newcomers go to the back of the
-line. The person at the front of the line is the next to be served.
-Thus, queues release their elements in order of arrival. In Britain, a
-line of people is called a “queue”, and getting into line to wait for
-service is called “queuing up”. Accountants have used queues since long
-before the existence of computers. They call a queue a “<a
-href="section-14.html#fifo" class="term"
-title="Abbreviation for &#39;first-in, first-out&#39;. This is the access paradigm for a queue, and an old terminology for the queue is &#39;FIFO list&#39;.">FIFO</a>”
-list, which stands for “First-In, First-Out”.</p>
-<section id="sec:adt-for-stacks" class="level4 unnumbered">
-<h4 class="unnumbered">ADT for stacks</h4>
-<p>The accessible element of the stack is called the <em>top</em>
-element. Elements are not said to be inserted, they are <a
-href="section-14.html#push" class="term"
-title="A specialised term used to indicate inserting an element onto a stack.">pushed</a>
-onto the stack. When removed, an element is said to be <a
-href="section-14.html#pop" class="term"
-title="A specialised term used to indicate removing an element from a stack.">popped</a>
-from the stack. Here is our <a href="section-14.html#adt" class="term"
-title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
-for stacks:</p>
+Linked lists</h2>
+<p>A linked list is a kind of “distributed” data structure, in the sense
+that the main list object does not have full information of everything.
+The only thing that the list knows about is the <em>first</em> element,
+and instead each element knows which is the next element.</p>
+<p>So it is like a line of people facing backwards: the only thing a
+single person knows is who is standing behind them. A person can never
+know where in the line they stand, and when it is their turn. And the
+main “controller” of the list can only see the first person in the line.
+This means that there is no easy way of knowing the total number of
+people, if the controller needs that information it has to keep track of
+the size itself.</p>
+<p><a href="#fig:linked-list-intro">Figure 6.1</a> shows two different
+representationso of a linked list with four values, where each value is
+encaspulated in a <em>list node</em>. Each node contains a link to the
+next node in the list. Notice that the rightmost node does not have any
+outgoing link.</p>
+<figure id="fig:linked-list-intro">
+<img src="images/Sequences-LinkedListIntro.svg" style="width:80.0%"
+alt="Figure 6.1: A linked list with four values. The right figure is a simplified representation of the same list." />
+<figcaption aria-hidden="true">Figure 6.1: A linked list with four
+values. The right figure is a simplified representation of the same
+list.</figcaption>
+</figure>
+<p>List nodes are distinct objects, as opposed to cells in an array.
+Therefore we declare a list node as a “wrapper” around a <em>value</em>,
+that also contains a pointer to the <em>next</em> node in the list:</p>
+
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x: T)     <span class="co">// Pushes x on top of the stack.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>() <span class="op">-&gt;</span> T     <span class="co">// Pops the top of the stack and returns it.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>() <span class="op">-&gt;</span> T    <span class="co">// Returns the top element, without removing it.</span></span></code></pre></div>
-<p>There are two main approaches to implementing stacks: the <a
-href="section-14.html#linked-stack" class="term"
-title="Analogous to a linked list, this uses dynamic allocation of nodes to store the elements when implementing the stack ADT.">linked
-stack</a> and the <a href="section-14.html#array-based-stack"
-class="term"
-title="Analogous to an array-based list, this uses an array to store the elements when implementing the stack ADT.">array-based
-stack</a>. They will be discussed in Sections <a
-href="section-6.3.html#sec:stacks-implemented-as-linked-lists">6.3</a>,
-<a href="section-6.5.html#sec:stacks-implemented-using-arrays">6.5</a>
-and <a href="section-6.7.html#sec:dynamic-arrays">6.7</a>.</p>
-</section>
-<section id="sec:adt-for-queues" class="level4 unnumbered">
-<h4 class="unnumbered">ADT for queues</h4>
-<p>The accessible element of the queue is called the <em>front</em>
-element. Inserting is called <a href="section-14.html#enqueue"
-class="term"
-title="A specialised term used to indicate inserting an element onto a queue.">enqueue</a>
-and removing <a href="section-14.html#dequeue" class="term"
-title="A specialised term used to indicate removing an element from a queue.">dequeue</a>.
-Here is our <a href="section-14.html#adt" class="term"
-title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
-for queues:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Queue</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(x: T)    <span class="co">// Enqueues x at the end of the queue.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>() <span class="op">-&gt;</span> T   <span class="co">// Dequeues the frontmost element.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>() <span class="op">-&gt;</span> T      <span class="co">// Returns the frontmost element, without removing it.</span></span></code></pre></div>
-<p>There are two main queue implementations: the <a
-href="section-14.html#linked-queue" class="term"
-title="Analogous to a linked list, this uses dynamic allocation of nodes to store the elements when implementing the queue ADT.">linked
-queue</a> and the <a href="section-14.html#array-based-queue"
-class="term"
-title="Analogous to an array-based list, this uses an array to store the elements when implementing the queue ADT.">array-based
-queue</a>. They are discussed in Sections <a
-href="section-6.4.html#sec:queues-implemented-as-linked-lists">6.4</a>,
-<a href="section-6.6.html#sec:queues-implemented-using-arrays">6.6</a>
-and <a href="section-6.7.html#sec:dynamic-arrays">6.7</a>.</p>
-</section>
-<section id="sec:case-study-implementing-recursion" class="level3"
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Node:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// Pointer to the next node in the list</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    value        <span class="co">// Value for this node</span></span></code></pre></div>
+<p>How does the list end? Most languages have a designated “null” value
+which represents nothing at all – in Java it is called
+<code>null</code>, and in Python it is <code>None</code>. So we will use
+that: if <em>next</em> is “null” then we have reached the end of the
+list. This is denoted by crossing out the next pointer in final node in
+the figure above.</p>
+<p>A list built from these very simple nodes is called a <a
+href="section-13.3.html#singly-linked-list" class="term"
+title="A linked list implementation variant where each list node contains access a pointer only to the next element in the list.">singly
+linked list</a>, because each list node has a single pointer to the next
+node on the list. There are also <em>doubly linked lists</em>, where
+each node also has a pointer to the previous node, but we will not
+discuss them in this section. Singly linked lists are all we need to
+implement stacks and queues.</p>
+<section id="sec:sequences:linked-stacks" class="level3"
 data-number="6.2.1">
 <h3 data-number="6.2.1"><span class="header-section-number">6.2.1</span>
-Case study: Implementing recursion</h3>
-<div class="online">
-<div class="alert">
-<p>WARNING! You should not read this section unless you are already
-comfortable with implementing <a href="section-14.html#recursion"
-class="term"
-title="The process of using recursive calls. An algorithm is recursive if it calls itself to do part of its work. See recursion.">recursive
-functions</a>. One of the biggest hang-ups for students learning
-recursion is too much focus on the recursive “process”. The right way to
-think about recursion is to just think about the return value that the
-recursive call gives back. Thinking about <em>how</em> that answer is
-computed just gets in the way of understanding. There are good reasons
-to understand how recursion is implemented, but helping you to write
-recursive functions is not one of them.</p>
-</div>
-</div>
-<p>Perhaps the most common computer application that uses [stacks] is
-not even visible to its users. This is the implementation of subroutine
-calls in most programming language <a
-href="section-14.html#runtime-environment" class="term"
-title="The environment in which a program (of a particular programming language) executes. The runtime environment handles such activities as managing the runtime stack, the free store, and the garbage collector, and it conducts the execution of the program.">runtime
-environments</a>. A subroutine call is normally implemented by <a
-href="section-14.html#push" class="term"
-title="A specialised term used to indicate inserting an element onto a stack.">pushing</a>
-necessary information about the subroutine (including the return
-address, parameters, and local variables) onto a stack. This information
-is called an <a href="section-14.html#activation-record" class="term"
-title="The entity that is stored on the runtime stack during program execution. It stores any active local variable and the return address from which a new subroutine is being called, so that this information can be recovered when the subroutine terminates.">activation
-record</a>. Further subroutine calls add to the stack. Each return from
-a subroutine <a href="section-14.html#pop" class="term"
-title="A specialised term used to indicate removing an element from a stack.">pops</a>
-the top activation record off the stack.</p>
-<div class="online">
-<p>As an example, here is a recursive implementation for the factorial
-function.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Recursively compute and return n-factoral (n!)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> factorialRecursive(n):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Base case: return base solution</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Recursive call for n &gt; 1</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorialRecursive(n<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
-<p>Here is an illustration for how the internal processing works.</p>
-<figure>
-<img src="images/RecurSta.png"
-alt="Implementing recursion with a stack" />
-<figcaption aria-hidden="true">Implementing recursion with a
-stack</figcaption>
+Stacks as linked lists</h3>
+<p>Implementing a stack as a linked list is quite simple. Elements are
+inserted and removed only from the head of the list, so the only
+information we need is a pointer to the <em>top</em> of the stack.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    top <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to the top node of the stack</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>     <span class="co">// Size of the stack</span></span></code></pre></div>
+<p>Note that we also added a variable <em>size</em> storing the number
+of elements. This is in theory unnecessary, but without it the only way
+of knowing the size would be to iterate through the whole stack which
+takes time.</p>
+<p><a href="#fig:linked-stack-queue">Figure 6.2</a> shows a visual
+representation for a linked stack.</p>
+<figure id="fig:linked-stack-queue">
+<img src="images/Sequences-LinkedStackQueue.svg" style="width:90.0%"
+alt="Figure 6.2: Visual representations of linked stacks (left figure) and queues (right figure)." />
+<figcaption aria-hidden="true">Figure 6.2: Visual representations of
+linked stacks (left figure) and queues (right figure).</figcaption>
 </figure>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-values indicate the address of the program instruction to return to
-after completing the current function call. On each recursive function
-call to <code>fact</code>, both the return address and the current value
-of <code>n</code> must be saved. Each return from <code>fact</code> pops
-the top activation record off the stack.</p>
-<p>Consider what happens when we call <code>fact</code> with the value
-4. We use
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-to indicate the address of the program instruction where the call to
-<code>fact</code> is made. Thus, the stack must first store the address
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>,
-and the value 4 is passed to <code>fact</code>. Next, a recursive call
-to <code>fact</code> is made, this time with value 3. We will name the
-program address from which the call is made
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>.
-The address
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>,
-along with the current value for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-(which is 4), is saved on the stack. Function <code>fact</code> is
-invoked with input parameter 3.</p>
-<p>In similar manner, another recursive call is made with input
-parameter 2, requiring that the address from which the call is made (say
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\beta_2</annotation></semantics></math>)
-and the current value for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-(which is 3) are stored on the stack. A final recursive call with input
-parameter 1 is made, requiring that the stack store the calling address
-(say
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>3</mn></msub><annotation encoding="application/x-tex">\beta_3</annotation></semantics></math>)
-and current value (which is 2).</p>
-<p>At this point, we have reached the base case for <code>fact</code>,
-and so the recursion begins to unwind. Each return from
-<code>fact</code> involves popping the stored value for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-from the stack, along with the return address from the function call.
-The return value for <code>fact</code> is multiplied by the restored
-value for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-and the result is returned.</p>
-<p>Because an activation record must be created and placed onto the
-stack for each subroutine call, making subroutine calls is a relatively
-expensive operation. While recursion is often used to make
-implementation easy and clear, sometimes you might want to eliminate the
-overhead imposed by the recursive function calls. In some cases, such as
-the factorial function above, recursion can easily be replaced by
-iteration.</p>
-<section id="sec:example-factorial-function"
-class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Factorial function</h4>
-<p>As a simple example of replacing recursion with a stack, consider the
-following non-recursive version of the factorial function.</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> factorialStack(n):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> <span class="kw">new</span> <span class="bu">Stack</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        S.<span class="bu">push</span>(n)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> S.<span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> result <span class="op">*</span> S.<span class="bu">pop</span>()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
-<p>Here, we simply push successively smaller values of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-onto the stack until the base case is reached, then repeatedly pop off
-the stored values and multiply them into the result.</p>
+<section id="sec:pushing-and-popping" class="level4 unnumbered">
+<h4 class="unnumbered">Pushing and popping</h4>
+<p>Now, so how do we implement the stack operations on this linked list?
+This is quite straightforward: to <em>push</em> something we have to
+create a new node and put it at the top, and to <em>pop</em> we delete
+the current topmost node.</p>
+<ul>
+<li>To <em>push</em> a value, we first create a new <em>Node</em> object
+wrapping the value. Then we can point the node to the current
+<em>top</em> node, and after that we reassign the stack <em>top</em> to
+the new node.</li>
+<li>To <em>pop</em> from the stack, we first have to remember the
+wrapped value of the current <em>top</em> node. Then we can reassign
+<em>top</em> to be the node that the top node points to. Finally we can
+return the value we remembered.</li>
+</ul>
+<p>The only think we have to be careful with is the order in which we do
+things. For example, when popping we cannot start by reassigning the
+stack top, because then we cannot know the value to return.</p>
 </section>
-<p>An iterative form of the factorial function is both simpler and
-faster than the version shown in the example. But it is not always
-possible to replace recursion with iteration. Recursion, or some
-imitation of it, is necessary when implementing algorithms that require
-multiple branching such as in the Towers of Hanoi algorithm, or when
-traversing a binary tree (<a
-href="section-8.4.html#sec:traversing-a-binary-tree">Section 8.4</a>).
-The <a href="section-14.html#mergesort">Mergesort</a> and <a
-href="section-14.html#quicksort">Quicksort</a> sorting algorithms also
-require recursion.</p>
-<p>Fortunately, it is always possible to imitate recursion with a stack.
-Recursive algorithms lend themselves to efficient implementation with a
-stack when the amount of information needed to describe a sub-problem is
-small. For example, <a href="section-14.html#quicksort">Quicksort</a>
-can effectively use a stack to replace its recursion since only bounds
-information for the subarray to be processed needs to be saved.</p>
-<p>Let us now turn to a non-recursive version of the Towers of Hanoi
-function, which cannot be done iteratively.</p>
-<section id="sec:use-case-towers-of-hanoi" class="level4 unnumbered">
-<h4 class="unnumbered">Use case: Towers of Hanoi</h4>
-<p>Here is a recursive implementation for Towers of Hanoi.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute the moves to solve a Tower of Hanoi puzzle.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &#39;move&#39; does (or prints) the actual move of a disk from one pole to another.</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> towersRecursive(n, start, goal, temp):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:                               <span class="co">// Base case</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    towersRecursive(n<span class="op">-</span><span class="dv">1</span>, start, temp, goal)  <span class="co">// Recursive call: n-1 rings</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    move(start, goal)                        <span class="co">// Move bottom disk to goal</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    towersRecursive(n<span class="op">-</span><span class="dv">1</span>, temp, goal, start)  <span class="co">// Recursive call: n-1 rings</span></span></code></pre></div>
-<p><code>towersRecursive</code> makes two recursive calls: one to move
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-rings off the bottom ring, and another to move these
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-rings back to the goal pole. We can eliminate the recursion by using a
-stack to store a representation of the three operations that
-<code>towersRecursive</code> must perform: two recursive calls and a
-move operation. To do so, we must first come up with a representation of
-the various operations, implemented as a data type whose objects will be
-stored on the stack.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Task:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    oper: MOVE <span class="kw">or</span> TOH</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    n: <span class="bu">Int</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    start, temp, goal: Pole</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> towersStack(n, start, goal, temp):</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> <span class="kw">new</span> LinkedStack()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, n, start, goal, temp))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> S.<span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        it <span class="op">=</span> S.<span class="bu">pop</span>()          <span class="co">// Get next task</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> it.oper <span class="op">==</span> MOVE:   <span class="co">// Do a move</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            move(it.start, it.goal)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> it.num <span class="op">&gt;</span> <span class="dv">0</span>:   <span class="co">// Imitate TOH recursive solution (in reverse)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, it.num<span class="op">-</span><span class="dv">1</span>, it.temp, it.goal, it.start))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(MOVE, <span class="dv">0</span>, it.start, it.goal))</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, it.num<span class="op">-</span><span class="dv">1</span>, it.start, it.temp, it.goal))</span></code></pre></div>
-<p>We first enumerate the possible operations MOVE and TOH, to indicate
-calls to the <code>move</code> function and recursive calls to
-<code>towersStack</code>, respectively. The datatype <code>Task</code>
-stores five values: an operation value (indicating either a MOVE or a
-new TOH operation), the number of rings, and the three poles. Note that
-the move operation actually needs only to store information about two
-poles. Thus, there are two constructors: one to store the state when
-imitating a recursive call, and one to store the state for a move
-operation.</p>
-<p>An array-based stack is used because we know that the stack will need
-to store exactly
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2n+1</annotation></semantics></math>
-elements. The new version <code>towersStack</code> begins by placing on
-the stack a description of the initial problem for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-rings. The rest of the function is simply a <code>while</code> loop that
-pops the stack and executes the appropriate operation. In the case of a
-<code>TOH</code> operation (for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n&gt;0</annotation></semantics></math>),
-we store on the stack representations for the three operations executed
-by the recursive version. However, these operations must be placed on
-the stack in reverse order, so that they will be popped off in the
-correct order.</p>
-</section>
+<section id="sec:implementing-push-and-pop" class="level4 unnumbered">
+<h4 class="unnumbered">Implementing push and pop</h4>
+<p>Turning <em>push</em> into pseudocode is straightforward, and we can
+even do all the actions in one single line of code. We also have to
+increase the size of the stack separately, because there is no way of
+doing that automatically.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(stack, value):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    stack.top <span class="op">=</span> <span class="kw">new</span> Node(value, stack.top)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we show how to push to a linked stack.</p>
+</summary>
+
+<div id="LinkedStack-Push-CON" class="ssAV" data-short-name="LinkedStack-Push-CON" data-long-name="Linked Stack Push" alt="Linked Stack Push" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
 </div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Push-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedStack-Push-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Push-CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a proficiency exercise about pushing to linked stacks.</p>
+</summary>
+
+<div id="LstackPushPRO" class="embedContainer">
+<iframe id="LstackPushPRO_iframe" aria-label="LstackPushPRO" src="../interactive/ChalmersGU/LstackPushPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<p>Popping is also straightforward from the description above, as long
+as we remember to decrease the size of the size. The left part of <a
+href="#fig:pop-stack-enqueue-queue">Figure 6.3</a> shows how this is
+done visually.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pop</span>(stack):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    removed <span class="op">=</span> stack.top</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    stack.top <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> removed.value</span></code></pre></div>
+<p>After popping, what will happen with the old top node – will we not
+have to delete it from memory? If we use a language that has automatic
+garbage collection (which most high-level languages do), then it will
+realise that there is nothing that points to the old top anymore, and so
+the garbage collector will automatically remove the old top. For
+low-level languages such as C, we need to tell the system to release the
+memory used by the old top node.</p>
+<figure id="fig:pop-stack-enqueue-queue">
+<img src="images/Sequences-LinkedPopDequeue.svg" style="width:100.0%"
+alt="Figure 6.3: Popping a linked stack (left), and enqueueing an element in a linked queue (right). Grey links and boxes are deleted, and dashed ones are added by the operation." />
+<figcaption aria-hidden="true">Figure 6.3: Popping a linked stack
+(left), and enqueueing an element in a linked queue (right). Grey links
+and boxes are deleted, and dashed ones are added by the
+operation.</figcaption>
+</figure>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we show how to pop from a linked stack.</p>
+</summary>
+
+<div id="LinkedStack-Pop-CON" class="ssAV" data-short-name="LinkedStack-Pop-CON" data-long-name="Linked Stack Pop" alt="Linked Stack Pop" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Pop-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedStack-Pop-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Pop-CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a proficiency exercise about popping from linked stacks.</p>
+</summary>
+
+<div id="LstackPopPRO" class="embedContainer">
+<iframe id="LstackPopPRO_iframe" aria-label="LstackPopPRO" src="../interactive/ChalmersGU/LstackPopPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+</section>
+<section id="sec:sequences:linked-queues" class="level3"
+data-number="6.2.2">
+<h3 data-number="6.2.2"><span class="header-section-number">6.2.2</span>
+Queues as linked lists</h3>
+<p>Implementing a queue is a little more tricky. It is still easy to
+remove elements – we can simply reuse the pop operation. But now we do
+not want to add elements to the front, but instead at the very end. The
+only way to do that in a linked stack is to traverse all nodes until we
+find the end, and this is of course very slow if we have very many
+elements.</p>
+<p>The solution is to add an extra pointer to the “controller”, which
+points to the back of the list. When it comes to queues we also use a
+different terminology than for stacks – so the first element is called
+the <em>front</em> (instead of “top”), and the last element is called
+the <em>rear</em> (instead of “bottom”). <a
+href="#fig:linked-stack-queue">Figure 6.2</a> shows how this can look
+like.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    front <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to the front node</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    rear <span class="op">=</span> <span class="va">null</span>    <span class="co">// Pointer to the rear node</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>       <span class="co">// Size of the queue</span></span></code></pre></div>
+<section id="sec:enqueueing-and-dequeueing" class="level4 unnumbered">
+<h4 class="unnumbered">Enqueueing and dequeueing</h4>
+<p>Dequeueing an element from a linked queue is the same as popping from
+a stack, but we have to remember to update the <em>rear</em> pointer
+when necessary. That is, if the queue becomes empty after we remove the
+<em>front</em> node, we have to remember to also delete the rear
+pointer, otherwise it will point to a non-existing element. (Note that
+the following code assumes that the queue is non-empty.)</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dequeue</span>(queue):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    removed <span class="op">=</span> queue.front</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    queue.front <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> queue.front <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        queue.rear <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    queue.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> removed.value</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we show how to dequeue an element from a linked queue.</p>
+</summary>
+
+<div id="LinkedQueue-Dequeue-CON" class="ssAV" data-short-name="LinkedQueue-Dequeue-CON" data-long-name="Linked Queue Dequeue" alt="Linked Queue Dequeue" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedQueue-Dequeue-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Dequeue-CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a proficiency exercise about dequeuing from linked
+queues.</p>
+</summary>
+
+<div id="LinkedQueue-Dequeue-PRO" class="embedContainer">
+<iframe id="LinkedQueue-Dequeue-PRO_iframe" aria-label="LinkedQueue-Dequeue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<p>But how about enqueueing? Now we want to add the new node to the rear
+instead of in the front. The important thing to remember is that the
+“old” rear has to be updated too. So we first have to point the current
+rear to the new node, and then we can reassign the rear to the new
+node.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">enqueue</span>(queue, value):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    newRear <span class="op">=</span> <span class="kw">new</span> Node(value, <span class="va">null</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> queue.front <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        queue.front <span class="op">=</span> newRear</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        queue.rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    queue.rear <span class="op">=</span> newRear</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    queue.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<p>Note that we have to treat the empty queue specially: we cannot
+reassign the current rear (because there is no currect rear yet), but
+instead we have to update both the <em>front</em> and the <em>rear</em>
+to the new node. The right part of <a
+href="#fig:pop-stack-enqueue-queue">Figure 6.3</a> shows a visual
+representation of enqueueing in a non-empty queue.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we show how to enqueue an element to a linked queue.</p>
+</summary>
+
+<div id="LinkedQueue-Enqueue-CON" class="ssAV" data-short-name="LinkedQueue-Enqueue-CON" data-long-name="Linked Queue Enqueue" alt="Linked Queue Enqueue" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedQueue-Enqueue-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Enqueue-CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a proficiency exercise about enqueuing to linked queues.</p>
+</summary>
+
+<div id="LinkedQueue-Enqueue-PRO" class="embedContainer">
+<iframe id="LinkedQueue-Enqueue-PRO_iframe" aria-label="LinkedQueue-Enqueue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
 </section>
 </section>
 </main>
@@ -398,10 +459,10 @@ correct order.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-6.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.1.html" accesskey="p" rel="previous">Collections</a>
+<a href="section-6.1.html" accesskey="p" rel="previous">Stacks and queues</a>
 </div>
 <div class="navlink">
-<a href="section-6.3.html" accesskey="n" rel="next">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" accesskey="n" rel="next">Array-based sequences</a>
 <a href="section-6.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -409,5 +470,6 @@ correct order.</p>
 
 </body>
 </html>
+
 
 

@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Sets</title>
+  <title>DSABook – Binary search trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Binary/BSTCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,66 +100,571 @@
 <nav class="sitenav">
 <div>
 <a href="section-10.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.html" accesskey="p" rel="previous">Sets and maps</a>
+<a href="section-10.html" accesskey="p" rel="previous">Search trees</a>
 </div>
 <div>
-<a href="section-10.2.html" accesskey="n" rel="next">Maps, or dictionaries</a>
+<a href="section-10.2.html" accesskey="n" rel="next">Self-balancing trees</a>
 <a href="section-10.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:sets-1" class="level2" data-number="10.1">
+<section id="sec:search-trees:BSTs" class="level2" data-number="10.1">
 <h2 data-number="10.1"><span class="header-section-number">10.1</span>
-Sets</h2>
-<p>A <em>set</em> represents a collection of items, where we can
-<em>add</em> and <em>remove</em> items, and <em>check</em> if a given
-item is present in the set. A set cannot contain duplicate items: if we
-try to add an item that is already present, nothing happens, and the set
-is left unchanged. We can specify a minimal interface for sets like
-this:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x: T)               <span class="co">// Adds x to the set.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(x: T)            <span class="co">// Removes x from the set.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(x: T) <span class="op">-&gt;</span> Bool  <span class="co">// Returns true if x is in the set.</span></span></code></pre></div>
-<section id="sec:example-spell-checking"
+Binary search trees</h2>
+<p>A <em>binary search tree</em> (BST) is a binary tree that satisfies
+the following invariant:</p>
+<section id="sec:invariant-binary-search-trees"
 class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Spell-checking</h4>
-<p>We can use a set for the spell-checking example:</p>
+<h4 class="unnumbered">Invariant: Binary search trees</h4>
+<p>For every node with value <span class="math inline">v</span>:</p>
 <ul>
-<li>Given a set containing all valid English words, check if a given
-string is present in the set (i.e. is a valid word).</li>
+<li>all values in the left subtree are <em>smaller</em> than <span
+class="math inline">v</span>, and</li>
+<li><span class="math inline">v</span> is <em>smaller</em> than all
+values in the right subtree.</li>
 </ul>
-<p>To create the spell-checking dictionary, we start with an initially
-empty set, and then call <code>add</code> repeatedly to add each valid
-word to the set. Then to spell-check a given word, we just call
-<code>contains</code>.</p>
+</section>
+<p>The only thing that differentiates a BST from a normal binary tree is
+this invariant. As explained in <a
+href="section-3.2.html#sec:analysis-1:invariants">Section 3.2</a>, an
+invariant is a condition that the BST <em>always</em> must satisfy. This
+means that the example tree from <a
+href="section-9.1.html#sec:trees:binary-trees">Section 9.1</a> is not a
+BST, because it violates the invariant, but <a
+href="#fig:BST-example">Figure 10.1</a> shows four correct BSTs. Note
+that all these trees represent the same set of values, which means that
+if we use them to implement a <em>set</em>, then they should be
+indistinguishable for the program that makes use of them. However, there
+is one important difference between the four trees: the middle ones are
+much more <em>balanced</em> than the other two, and this has
+consequences for the efficiency of the basic operations.</p>
+<figure id="fig:BST-example">
+<img src="images/SearchTrees-BST-FourExamples.svg" style="width:100.0%"
+alt="Figure 10.1: Four example BSTs, all representing the same set of values." />
+<figcaption aria-hidden="true">Figure 10.1: Four example BSTs, all
+representing the same set of values.</figcaption>
+</figure>
+<section id="sec:implementing-bst-sets-and-maps" class="level3"
+data-number="10.1.1">
+<h3 data-number="10.1.1"><span
+class="header-section-number">10.1.1</span> Implementing BST sets and
+maps</h3>
+<p>In most programming languages it is not possible to specify
+invariants, but it is the responsibility of the programmer to make sure
+that the invariants are never violated.</p>
+<p>Note that the BST invariant implies that all values in the tree are
+distinct from each other, which is exactly what we need to implement a
+<em>set</em>. Therefore, to implement a set we can reuse the binary tree
+implementation from <a
+href="section-9.1.html#sec:trees:binary-trees">Section 9.1</a>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BST:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    root <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to the root node of the tree</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>      <span class="co">// Size of the tree</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BSTNode:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    left     <span class="co">// Pointer to left child</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    right    <span class="co">// Pointer to right child</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    value    <span class="co">// Value for this node</span></span></code></pre></div>
+<section id="sec:implementing-multisets" class="level4 unnumbered">
+<h4 class="unnumbered">Implementing multisets</h4>
+<p>A <em>multiset</em>, or a <em>bag</em>, is a collection of values
+that allows duplicates. This is easy to implement as a BST, we just have
+to relax the invariant a little. Instead of requiring that all children
+are unequal to the node value, we can say that the <em>left</em>
+children are smaller <em>or equal</em> to the parent, while the right
+children are still always larger. (It is just a convention that we let
+the left children be equal – we could also mirror it.)</p>
+</section>
+<section id="sec:implementing-maps" class="level4 unnumbered">
+<h4 class="unnumbered">Implementing maps</h4>
+<p>Now, how can we implement a <em>map</em> using a BST? The only
+difference to a normal BST is that the nodes have to both a <em>key</em>
+and a <em>value</em>:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SpellChecker:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    validWords: <span class="bu">Set</span> <span class="kw">of</span> String</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(listOfValidWords: <span class="bu">Collection</span> <span class="kw">of</span> String):</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Convert the list of words into a set.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        validWords <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> listOfValidWords:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            validWords.<span class="bu">add</span>(word)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    isValidWord(word) <span class="op">-&gt;</span> Bool:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> validWords.<span class="bu">contains</span>(word)</span></code></pre></div>
-<p>Here’s how the <code>SpellChecker</code> can be used:</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BSTMapNode:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    left      <span class="co">// Pointer to left child</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    right     <span class="co">// Pointer to right child</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    key       <span class="co">// Key for this node</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    value     <span class="co">// Value for this node</span></span></code></pre></div>
+<p>The BST invariant should now only mention the <em>keys</em> in the
+subtrees, not the values. This is the only difference between a map and
+a set, implemented as BSTs. In the rest of this chapter we will mainly
+talk about how to implement <em>sets</em>, and we trust that you are
+experienced enough to be able to modify the data structures and
+algorithms to implement maps.</p>
+</section>
+</section>
+<section id="sec:searching-in-and-adding-to-a-bst" class="level3"
+data-number="10.1.2">
+<h3 data-number="10.1.2"><span
+class="header-section-number">10.1.2</span> Searching in and adding to a
+BST</h3>
+<p>Because of the BST property, we do not have to search the whole tree
+if we want to find an element. Instead, we can start at the root node
+and compare its value with the value we are searching for. If the value
+is smaller than the root, we can continue searching in the left subtree.
+(And conversely, if the value is larger, we can search in the right
+subtree.) We continue searching until we have found the value in a node,
+or until we reach an empty child. If we reach an empty child (a null
+node), we know that the value is not in the tree.</p>
+<section id="sec:algorithm-searching-in-a-bst"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Searching in a BST</h4>
+<p>To search a BST for a value <span class="math inline">x</span>, we
+initialise a pointer to the root node, and repeat the following:</p>
+<ul>
+<li>If the pointer is an empty (null) node, return failure.</li>
+<li>Compare <span class="math inline">x</span> with the value of the
+pointed node:
+<ul>
+<li>If they are equal, return success.</li>
+<li>Otherwise, move the pointer to the left or right child, depending on
+if <span class="math inline">x</span> is smaller or larger than the node
+value.</li>
+</ul></li>
+</ul>
+</section>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Searching in a BST can also be done recursively, and here is an
+interactive explanation of this.</p>
+</summary>
+
+<div id="BSTsearchCON" class="ssAV" data-short-name="BSTsearchCON" data-long-name="BST Search Slideshow" alt="BST Search Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/BSTsearchCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTsearchCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTsearchCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an exercise on searching in a BST.</p>
+</summary>
+
+<div id="BSTsearchPRO" class="embedContainer">
+<iframe id="BSTsearchPRO_iframe" aria-label="BSTsearchPRO" src="../interactive/Binary/BSTsearchPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+<p>How do we add a value to a BST? First of all we have to search for
+it. If the value is already in the tree we do nothing, and if it doesn’t
+exist we create a new node and attach it to the right place. But how do
+we know where to add the new node? After the search is finished, the
+pointer points to an empty node so this is not useful. Insetad, we have
+to remember the <em>previous</em> node we looked at – and then we can
+attach the new node as a child. If the new value is smaller, we add the
+node as a left child, and if it is larger we add it as a right
+child.</p>
+<section id="sec:algorithm-adding-to-a-bst"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Adding to a BST</h4>
+<p>To add a value <span class="math inline">x</span> to a BST,
+initialise a <em>current</em> pointer to the root node, and a
+<em>previous</em> pointer to null. Then repeat the following until
+<em>current</em> points to null:</p>
+<ul>
+<li>Compare <span class="math inline">x</span> with the value of
+<em>current</em>:
+<ul>
+<li>If they are equal, return and do nothing at all.</li>
+<li>Otherwise, set <em>previous</em> to <em>current</em>, and reassign
+<em>current</em> to the left or right child, depending on if <span
+class="math inline">x</span> is smaller or larger.</li>
+</ul></li>
+</ul>
+<p>Now create a new node with value <span class="math inline">x</span>
+and attach it as follows:</p>
+<ul>
+<li>Attach it to the root if <em>previous</em> is null, or</li>
+<li>to the left or right child of <em>previous</em>, depending on if
+<span class="math inline">x</span> is smaller or larger than
+<em>previous</em>.</li>
+</ul>
+</section>
+<p>If you think that it is clumsy to keep two pointers in the algorithm
+above, the recursive variant becomes very simple and compact:</p>
+<section id="sec:algorithm-adding-to-a-bst-recursive-version"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Adding to a BST, recursive
+version</h4>
+<p>To add a value <span class="math inline">x</span> to a BST node:</p>
+<ul>
+<li>If the node is empty, return a node node with value <span
+class="math inline">x</span>.</li>
+<li>Compare <span class="math inline">x</span> with the node value:
+<ul>
+<li>If they are equal, return the node as it is.</li>
+<li>Otherwise, reassign the left or right child (depending on if <span
+class="math inline">x</span> is smaller or larger) with the result of
+adding <span class="math inline">x</span> to it.</li>
+</ul></li>
+</ul>
+</section>
+<p>How can we translate this high-level algorithm into working code? The
+important part here is to realise that the recursive function should
+<em>return</em> the updated tree, and then it is just a matter of
+reassigning the child. So the pseudocode becomes something like
+this:</p>
+
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> main(wordsToCheck: <span class="bu">Collection</span> <span class="kw">of</span> String):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create a new spell checker.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    checker <span class="op">=</span> <span class="kw">new</span> SpellChecker([<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now we can spell-check a word easily.</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> wordsToCheck:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> checker.isValidWord(word):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span> word <span class="st">&quot;is valid&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span> word <span class="st">&quot;is INVALID&quot;</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>addHelper(node, x) <span class="op">-&gt;</span> BSTNode:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">new</span> BSTNode(x)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> x <span class="op">==</span> node.value:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> node</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> x <span class="op">&lt;</span> node.value:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        node.left <span class="op">=</span> addHelper(node.left, x)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> x <span class="op">&gt;</span> node.value:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        node.right <span class="op">=</span> addHelper(node.right, x)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> node</span></code></pre></div>
+<p>The recursive function above is actually not the “real” function for
+adding a value, but instead an internal <em>helper</em> function. The
+toplevel function will have to call the helper with the <em>root</em> as
+the argument, and also update the root with the result.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span>(bst, x):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    bst.root <span class="op">=</span> addHelper(bst.root, x)</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an interactive explanation of recursive insertion, this time
+in a BST <em>map</em>.</p>
+</summary>
+
+<div id="BSTinsertCON" class="ssAV" data-short-name="BSTinsertCON" data-long-name="BST Insert Slideshow" alt="BST Insert Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/BSTinsertCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTinsertCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTinsertCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an exercise on BST insertion.</p>
+</summary>
+
+<div id="BSTinsertPRO" class="embedContainer">
+<iframe id="BSTinsertPRO_iframe" aria-label="BSTinsertPRO" src="../interactive/Binary/BSTinsertPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+<section id="sec:search-trees:BST-deletion" class="level3"
+data-number="10.1.3">
+<h3 data-number="10.1.3"><span
+class="header-section-number">10.1.3</span> Deleting from a BST</h3>
+<p>Removing a node from a BST is a bit trickier than adding, but it is
+not too hard if we consider the possible cases one by one. The first we
+have to do is to find the node with the element we want to remove, using
+the standard search algorithm. Now there are three possible cases:</p>
+<ul>
+<li>If it is a leaf node, we can just remove the parent’s pointer to the
+node.</li>
+<li>If it has one single child, we simply point the parent’s pointer to
+the child node directly.</li>
+<li>If it has two children, we call it an <em>inner node</em>. This is a
+trickier case that we have to discuss further.</li>
+</ul>
+<p>To delete an inner node in a BST we don’t actually delete the node,
+because then we would have to restructure the tree quite a lot. Instead
+we replace its value with another value. The question is which value can
+we replace with?</p>
+<p>We know that all values in the left subtree are smaller than the
+value we want to delete. Of these values there is one which is the
+largest value, and if we delete this one from the left subtree we can
+put it in the parent node instead. So we replace the inner node value we
+want to delete with the largest of the values in the left subtree.
+(<em>Alternatively</em>, we can replace it with the smallest value from
+the right subtree. This is an equally good strategy, so we can just pick
+one of them.)</p>
+<p>Wait a little, did we really solve anything by doing this? We want to
+delete a value, and to be able to do that we have to delete a value in a
+subtree…</p>
+<p>Yes, this works because we know that the largest value in a BST is
+never an inner node! (And the same holds for smallest value.) So, when
+we delete the largest (or smallest) value in the subtree we know that we
+will have one of the two easy cases. This means that we will not have to
+continue deleting values indefinitely.</p>
+<p>The next question is, how do we find the largest value in a tree?
+This is easy, we just go as far to the right as possible – then we will
+end up in the largest element. (And similar for the smallest value – we
+go as far to the left as possible.)</p>
+<figure id="fig:BST-example-deleted-root">
+<img src="images/SearchTrees-BST-DeleteRoot.svg" style="width:100.0%"
+alt="Figure 10.2: Deleting the root (C) from the leftmost tree results in either of the two trees to the right." />
+<figcaption aria-hidden="true">Figure 10.2: Deleting the root (C) from
+the leftmost tree results in either of the two trees to the
+right.</figcaption>
+</figure>
+<section id="sec:example-deleting-from-a-bst"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Deleting from a BST</h4>
+<p>Suppose we want to delete the value C from the leftmost tree in <a
+href="#fig:BST-example-deleted-root">Figure 10.2</a>.</p>
+<ul>
+<li>First we find the C node, and the node with the largest value in the
+left subtree, which is the B node.</li>
+<li>We delete the B node, which means that we have to redirect the right
+child of its parent X to Y.</li>
+<li>Finally we can replace the value in the C node with B.</li>
+</ul>
+<p>Alternatively, if we instead decide to replace with the smallest
+element in the right subtree:</p>
+<ul>
+<li>The node with the smallest value in the right subtree is the D
+node.</li>
+<li>We delete the D node, which means that we have delete the right
+child of its parent X.</li>
+<li>Finally we replace the value in the C node with D.</li>
+</ul>
+<p>In the end we will get one of the two BSTs to the right in <a
+href="#fig:BST-example-deleted-root">Figure 10.2</a>. Notice that both
+of these trees are different representations of exactly the same
+set.</p>
+</section>
+<p>Now we are ready to formalise deletion into an algorithm.</p>
+<section id="sec:algorithm-deleting-a-value-in-a-bst"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Deleting a value in a BST</h4>
+<p>If we want to delete the value <span class="math inline">x</span> in
+a BST, we first find the node that has that value. There are three
+possibilities for that node:</p>
+<ul>
+<li>If it is a leaf node, we can just delete it – meaning, deleting the
+corresponding child pointer of its parent.</li>
+<li>If the node has exactly one child, redirect its parent to the
+child.</li>
+<li>If it is an inner node, find the largest node <span
+class="math inline">y</span> in the left subtree, and:
+<ul>
+<li>Update the value of the <span class="math inline">x</span> node to
+the value of the <span class="math inline">y</span> node.</li>
+<li>Delete the <span class="math inline">y</span> node from the left
+subtree.</li>
+</ul></li>
+</ul>
+</section>
+<p>How can we translate this algorithm into a working implementation?
+There are several possibilities, but we will show a <em>recursive</em>
+variant because the code becomes a bit less messy. One important thing
+to remember is that the recursive functions should return the updated
+tree, just as the recursive version of adding a value, from above. First
+we need a helper function for finding the largest value from a
+subtree:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>findLargest(node):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> node.right</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> node.value</span></code></pre></div>
+<p>Finally, here is the main recursive function that deletes a value
+from a subtree:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>removeHelper(node, value) <span class="op">-&gt;</span> BSTNode:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// We did not find the value, so do nothing.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> value <span class="op">&lt;</span> node.value:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        node.left <span class="op">=</span> removeHelper(node.left, value)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> value <span class="op">&gt;</span> node.value:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        node.right <span class="op">=</span> removeHelper(node.right, value)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> node has no children:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> <span class="va">null</span>         <span class="co">// The node is a leaf, we can just delete it.</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> node only has a left child:</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> node.left    <span class="co">// Replace the node with its only child.</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> node only has a right child:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> node.right   <span class="co">// Replace the node with its only child.</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:   <span class="co">// Now we know that this is an inner node</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        node.value <span class="op">=</span> findLargest(node.left)      <span class="co">// Find the largest value in the left subnode,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        node.left <span class="op">=</span> removeHelper(node.left, node.value)  <span class="co">// and delete this value.</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> node</span></code></pre></div>
+<p>And just as for recursive addition, we need to wrap this function in
+a toplevel call which starts with the tree root:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(bst, x):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        bst.root <span class="op">=</span> removeHelper(bst.root, x)</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an interactive explanation of BST deletion.</p>
+</summary>
+
+<div id="BSTremoveCON" class="ssAV" data-short-name="BSTremoveCON" data-long-name="BST Remove Slideshow" alt="BST Remove Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/BSTremoveCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTremoveCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTremoveCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an exercise on BST deletion.</p>
+</summary>
+
+<div id="BSTremovePRO" class="embedContainer">
+<iframe id="BSTremovePRO_iframe" aria-label="BSTremovePRO" src="../interactive/Binary/BSTremovePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</div>
+</section>
+<section id="sec:complexity-analysis-3" class="level3"
+data-number="10.1.4">
+<h3 data-number="10.1.4"><span
+class="header-section-number">10.1.4</span> Complexity analysis</h3>
+<p>The complexity of all basic operations all depend on how efficiently
+we can find the correct node, and this depends crucially on the
+structure of the tree.</p>
+<p>When we search for an element we go down one level in the tree every
+time we compare with a node. So the worst case is when we search for a
+value that is in the lowest possible level, which is the same as the
+<em>height</em> of the tree. This means that the complexity of all basic
+operations is linear in the height, <span
+class="math inline">O(h)</span>. The height in turn depends on the tree
+structure:</p>
+<ul>
+<li>If the tree is <em>balanced</em>, meaning that all leaves are
+approximately on the same level, then the height is logarithmic in the
+number of nodes, and then searching is <span
+class="math inline">O(\log(n))</span>. The middle trees in <a
+href="#fig:BST-example">Figure 10.1</a> are examples of balanced
+trees.</li>
+<li>But if the tree us <em>unbalanced</em>, for example as the extremely
+left- and right-leaning trees in <a
+href="#fig:BST-example">Figure 10.1</a>, then the height is the same as
+the number of nodes, and search becomes linear <span
+class="math inline">O(n)</span>.</li>
+</ul>
+<p>If we add values to a BST in sorted order (reversely sorted), then we
+get an extremely unbalanced tree. How long time will it take to build
+this tree? Assume that we add <span class="math inline">n</span> values.
+Adding one value is in the worst case linear in <span
+class="math inline">n</span>, and since we do this <span
+class="math inline">n</span> times it will take <em>quadratic</em> time
+to build the final BST, <span class="math inline">O(n^2)</span>.</p>
+<p>On the contrary, if we add the values in random order, then it is
+possible to prove that the final tree will have <em>expected</em>
+logarithmic height. Therefore, the operations will have expected
+worst-case complexity of <span class="math inline">O(\log(n))</span>.
+And building the final BST with <span
+class="math inline">n</span> values will be <span
+class="math inline">O(n\log(n))</span>.</p>
+<p>(This is similar to Quicksort with the simplest pivot,
+<em>take-first</em>, see <a
+href="section-4.3.html#sec:sorting-2:quicksort">Section 4.3</a>. Sorting
+an already sorted array will take quadratic time, but if the list is
+randomly shuffled the complexity will be expected worst-case <span
+class="math inline">O(n\log(n))</span>.)</p>
+<p>In any case, almost noone uses plain BSTs because there is no
+guarantee of their worst-case complexity. But there are plenty of useful
+data structures that are based on BSTs and which have good worst-case
+guarantees. They accomplish this by automatically rebalancing themselves
+when necessary, and this is the topic of the next section.</p>
+</section>
+<section id="sec:guided-information-flow" class="level3"
+data-number="10.1.5">
+<h3 data-number="10.1.5"><span
+class="header-section-number">10.1.5</span> Guided information flow</h3>
+<p>When writing a recursive function to solve a problem that requires
+traversing a binary tree, we want to make sure that we are visiting the
+required nodes (no more and no less).</p>
+<p>In <a href="section-9.1.html#sec:trees:traversal">Section 9.1.3</a>
+we saw several tree traversals that visited every node of the tree, such
+as depth-first and breadth-first search. In this section we have also
+discussed searching, adding and removing in a BST, which each go down a
+single path of the tree. <em>Guided traversal</em> refers to problems
+that do not require visiting every node in the tree, though they
+typically require looking at more than one path through the tree. This
+means that the recursive function is making some decision at each node
+that sometimes lets it avoid visiting one or both of its children. The
+decision is typically based on the value of the current node. Many
+problems that require information flow on binary search trees are
+“guided” in this way.</p>
+<section id="sec:example-the-number-of-values-within-a-range"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: The number of values within a range</h4>
+<p>Assume that you want to know how many values there are in a BST that
+are within a given range. A bad solution to this problem would visit
+every node of the tree. However, we can take advantage of the BST
+invariant to avoid visiting unnecessary nodes. You know that the values
+greater than the root are always in the right subtree, and those values
+less than the root are in the left subtree. Therefore, we do not have to
+visit the left subtree at all if the node value is smaller than the
+minimum value in the range. And, conversely, we do not have to visit the
+right subtree if the node is larger than the range maximum.</p>
+</section>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of the previous example of counting the
+number of values within a range.</p>
+</summary>
+
+<div id="IneffBinaryTreeRangeCON" class="ssAV" data-short-name="IneffBinaryTreeRangeCON" data-long-name="Inefficient Binary Tree Traversal on Range Slide Show" alt="Inefficient Binary Tree Traversal on Range Slide Show" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/IneffBinaryTreeRangeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("IneffBinaryTreeRangeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#IneffBinaryTreeRangeCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
 </section>
 </section>
 </main>
@@ -149,10 +673,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-10.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.html" accesskey="p" rel="previous">Sets and maps</a>
+<a href="section-10.html" accesskey="p" rel="previous">Search trees</a>
 </div>
 <div class="navlink">
-<a href="section-10.2.html" accesskey="n" rel="next">Maps, or dictionaries</a>
+<a href="section-10.2.html" accesskey="n" rel="next">Self-balancing trees</a>
 <a href="section-10.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -160,5 +684,6 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 
 </body>
 </html>
+
 
 

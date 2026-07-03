@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Priority queues and heaps</title>
+  <title>DSABook – Trees and heaps</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -80,59 +99,184 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-8.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-8.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.6.html" accesskey="p" rel="previous">Comparison with the Java API*</a>
 </div>
 <div>
-<a href="section-9.1.html" accesskey="n" rel="next">Implementing priority queues using binary trees</a>
+<a href="section-9.1.html" accesskey="n" rel="next">Binary trees</a>
 <a href="section-9.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:priority-queues-and-heaps" class="level1"
-data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span>
-Priority queues and heaps</h1>
-<p>In <a href="section-6.11.html#sec:priority-queues">Section 6.11</a>
-we introduced priority queues and showed how to implement them using
-sorted lists. However, this is not a very good implementation, because
-inserting elements into the sorted list is linear,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-in the worst case.</p>
-<p>In this chapter we will see how to use binary trees to implement a
-much more efficient version of priority queues.</p>
-<p>Recall that the API for a <em>minumum</em> priority queue only
-consists of the following methods:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">PriorityQueue</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x: T)         <span class="co">// Adds x to the priority queue.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>() <span class="op">-&gt;</span> T  <span class="co">// Removes and returns the minimum element.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>() <span class="op">-&gt;</span> T     <span class="co">// Returns the minimum element, without removing it.</span></span></code></pre></div>
-<p>Also recall that there is a mirrored variant, called a
-<em>maximum</em> priority queue, with the only difference being that it
-uses the methods <code>removeMax</code> and <code>getMax</code> instead
-of the previous ones.</p>
-<p>In this chapter we will switch between talking about minimum and
-maximum priority queues. Note that it is always easy to convert between
-the two kinds of implementations: just replace any comparison (e.g.,
-&lt; or ≥) with its counterpart (e.g., &gt; or ≥, respectively).</p>
-<p>In general, we will try to use the term <em>priority</em> instead of
-minimum or maximum: in a minumum priority queue, the smallest element is
-the one with the highest priority, wheras in a maximum priority queue,
-it’s the largest element.</p>
+<section id="sec:trees" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Trees
+and heaps</h1>
+<p><a href="section-13.3.html#tree" class="term"
+title="A tree $T$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $T$. If the set $(T -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $T_0$, $T_1$, ..., $T_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">Tree</a>
+structures let us organise data hierarchically. So far, we have mainly
+studied data structures that organise elements in a linear sequence,
+such as arrays, linked lists, stacks, and queues. In those structures,
+each element is followed by at most one next element. Trees take a
+different approach: instead of continuing in a sequence, a node can lead
+to two or more children. This lets us represent <em>hierarchical</em>
+relationships, and it also helps when we want fast access to values that
+are important in some way.</p>
+<p>Trees appear in many settings. We can use them to represent
+mathematical expressions and the syntax of computer programs. We can use
+them to model file systems, where folders contain files and other
+folders. Trees can also be used as data structures, such as <a
+href="section-13.3.html#heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log(n))$ time in the worst case. However, if given all of the values in an unsorted array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heaps</a>,
+for implementing priority queues (<a
+href="section-9.4.html#sec:heaps">Section 9.4</a>), and <a
+href="section-13.3.html#search-tree" class="term"
+title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $O(\log(n))$.">search
+trees</a>, for implementing sets and maps (<a
+href="section-10.html#sec:search-trees">Chapter 10</a>).</p>
+<p>This chapter begins with the basic ideas and terminology for trees.
+We then discuss binary trees (<a
+href="section-9.1.html#sec:trees:binary-trees">Section 9.1</a>), how to
+represent trees in general (<a
+href="section-9.2.html#sec:trees:representations">Section 9.2</a>), and
+show an example of a simple data structure for <a
+href="section-13.3.html#disjoint-sets" class="term"
+title="A collection of sets, any pair of which share no elements in common. A collection of disjoint sets partitions some objects such that every object is in exactly one of the disjoint sets.">disjoint
+sets</a> (<a
+href="section-9.3.html#sec:trees:disjoint-sets">Section 9.3</a>). After
+that we turn to heaps for priority queues (<a
+href="section-9.4.html#sec:heaps">Section 9.4</a>), including <a
+href="section-13.3.html#binary-heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log(n))$ time in the worst case. However, if given all of the values in an unsorted array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heaps</a> (<a
+href="section-9.5.html#sec:heaps:binary-heaps">Section 9.5</a>), and
+other <a href="#meldable-heaps" class="term" title="">meldable heaps</a>
+(<a
+href="section-9.6.html#sec:heaps:meldable-heaps">Section 9.6</a>).</p>
+<section id="sec:tree-terminology" class="level4 unnumbered">
+<h4 class="unnumbered">Tree terminology</h4>
+<figure id="fig:TreeTerminology">
+<img src="images/Trees-terminology.svg" style="width:70.0%"
+alt="Figure 9.1: Drawing of a tree with six nodes, illustrating the concepts of root node, child and parent nodes, size/height/level properties, and paths." />
+<figcaption aria-hidden="true">Figure 9.1: Drawing of a tree with six
+nodes, illustrating the concepts of root node, child and parent nodes,
+size/height/level properties, and paths.</figcaption>
+</figure>
+<p>A tree consists of <a href="section-13.3.html#node" class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>
+connected by parent-child relationships. The topmost node is the <a
+href="section-13.3.html#root" class="term"
+title="In a tree, the topmost node of the tree. All other nodes in the tree are descendants of the root.">root</a>.
+If a node is directly below another node, then it is a <a
+href="section-13.3.html#child" class="term"
+title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">child</a>
+of that node, and the node above it is its <a
+href="section-13.3.html#parent" class="term"
+title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent</a>.
+In <a href="#fig:TreeTerminology">Figure 9.1</a>, <span
+class="math inline">A</span> is the root, and <span
+class="math inline">B</span> and <span class="math inline">C</span> are
+children of <span class="math inline">A</span>.</p>
+<p>Every node in a tree is also the root of a <em>subtree</em>. For
+example, <span class="math inline">B</span> is a child of <span
+class="math inline">A</span>, but it is also the root of the subtree
+containing <span class="math inline">B</span>, <span
+class="math inline">D</span>, and <span class="math inline">E</span>.
+So, depending on context, a node name can refer either to the node
+itself or to the subtree rooted at that node. Two simple rules define
+the shape of a tree:</p>
+<ul>
+<li>Every node except the root has exactly one parent.</li>
+<li>There are no cycles, so a node cannot be its own ancestor.</li>
+</ul>
+<p>Together, these rules give us a hierarchical structure with a unique
+path from the root to every other node. Some common tree terms are:</p>
+<ul>
+<li>A tree is <em>empty</em> if it has no nodes.</li>
+<li>A <em>leaf node</em> is a node with no children.</li>
+<li>An <em>internal node</em> is a node with at least one child.</li>
+<li>A <em>branch</em> usually means an internal node, especially one
+with several children.</li>
+<li>A <a href="section-13.3.html#forest" class="term"
+title="A collection of one or more trees.">forest</a> is a collection of
+trees.</li>
+<li>An <a href="section-13.3.html#ancestor" class="term"
+title="In a tree, for a given node $A$, any node on a path from $A$ up to the root is an ancestor of $A$.">ancestor</a>
+of a node is any node on the path from the root to that node.</li>
+<li>A <a href="section-13.3.html#descendant" class="term"
+title="In a tree, the set of all nodes that have a node $A$ as an ancestor are the descendants of $A$. In other words, all of the nodes that can be reached from $A$ by progressing downwards in tree. Another way to say it is: The children of $A$, their children, and so on.">descendant</a>
+of a node is any node in the subtree rooted at that node.</li>
+<li><a href="section-13.3.html#sibling" class="term"
+title="In a tree, a sibling of node $A$ is any other node with the same parent as $A$.">Siblings</a>
+are nodes with the same parent.</li>
+<li>A <a href="section-13.3.html#path" class="term"
+title="In tree or graph terminology, a sequence of vertices $v_1, v_2, ..., v_n$ forms a path of length $n-1$ if there exist edges from $v_i$ to $v_{i+1}$ for $1 \leq i &lt; n$.">path</a>
+is a sequence of nodes where each node is the parent of the next
+one.</li>
+</ul>
+<p>We will sometimes describe trees and nodes using the concepts of
+size, level, and height. The size of a tree is the number of nodes it
+contains. The <a href="section-13.3.html#level" class="term"
+title="In a tree, all nodes of depth $d$ are at level $d$ in the tree. The root is the only node at level 0, and its depth is 0.">level</a>
+of a node is its distance from the root. Thus, the root is at level 0,
+its children are at level 1, and so on. The depth of a node is
+synonymous with its level. The <a href="section-13.3.html#height"
+class="term"
+title="The height of a tree is one more than the depth of the deepest node in the tree.">height</a>
+of a tree (or subtree) is the number of edges on the longest path from
+its root to a leaf. Consequently, a tree consisting of a single node has
+height 0. We define the height of an empty tree to be <span
+class="math inline">-1</span>.</p>
+<p>Another important question is whether the children of a node have a
+fixed order. In a file system, the order of the children of a folder is
+usually unimportant. In a syntax tree, order matters, because the
+expressions <span class="math inline">a &lt; 3</span> and <span
+class="math inline">3 &lt; a</span> mean different things. This
+distinction will matter later when we compare general trees, binary
+trees, and heaps.</p>
+<figure id="fig:TreeExamples">
+<img src="images/Trees-examples.svg" style="width:70.0%"
+alt="Figure 9.2: Two familiar domains modelled as trees: Programming language syntax and file systems." />
+<figcaption aria-hidden="true">Figure 9.2: Two familiar domains modelled
+as trees: Programming language syntax and file systems.</figcaption>
+</figure>
+<p><a href="#fig:TreeExamples">Figure 9.2</a> shows two typical
+examples. In a syntax tree, each node represents a language construct
+such as a function call or an <code>if</code>-statement, and the
+children are its components. In a file system tree, the nodes are files
+and folders, and the parent of a node is the folder that contains
+it.</p>
+<p>Trees contain data in nodes, but the meaning of the data and the
+meaning of the parent-child relationship depend on the application. So
+there is no single tree data structure in the same way that there is a
+single stack or queue abstraction. Instead, trees form a family of
+related structures.</p>
+</section>
+<section id="sec:why-heaps-belong-here" class="level4 unnumbered">
+<h4 class="unnumbered">Why heaps belong here</h4>
+<p>A <a href="section-13.3.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a> stores elements together with priorities, so that we can
+always access or remove the highest-priority element first. A heap is a
+tree-based way to implement such a priority queue efficiently.</p>
+<p>The key idea is that the most important element is kept at the root.
+This does not mean that the entire structure is sorted. Instead, heaps
+maintain a local ordering rule between parents and children. That rule
+is strong enough to keep the highest-priority element at the root, while
+still allowing updates to be efficient.</p>
+</section>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-8.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-8.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.6.html" accesskey="p" rel="previous">Comparison with the Java API*</a>
 </div>
 <div class="navlink">
-<a href="section-9.1.html" accesskey="n" rel="next">Implementing priority queues using binary trees</a>
+<a href="section-9.1.html" accesskey="n" rel="next">Binary trees</a>
 <a href="section-9.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -140,5 +284,6 @@ it’s the largest element.</p>
 
 </body>
 </html>
+
 
 

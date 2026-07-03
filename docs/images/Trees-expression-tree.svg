@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="390" viewBox="150 10 470 390" fill="none">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L8 3L0 6Z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <style>
+    .node-box { fill: #fff; stroke: #000; stroke-width: 2.5; }
+    .cell-divider { stroke: #000; stroke-width: 2; }
+    .value { fill: #000; font-family: Arial, Helvetica, sans-serif; font-size: 22px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+    .leaf-value { fill: #000; font-family: Georgia, "Times New Roman", serif; font-size: 24px; text-anchor: middle; dominant-baseline: middle; }
+    .italic { font-style: italic; }
+    .arrow { stroke: #000; stroke-width: 2.5; stroke-linecap: round; fill: none; marker-end: url(#arrowhead); }
+  </style>
+
+  <!-- root: - -->
+  <rect x="360" y="20" width="120" height="42" rx="12" class="node-box"/>
+  <line x1="400" y1="20" x2="400" y2="62" class="cell-divider"/>
+  <line x1="440" y1="20" x2="440" y2="62" class="cell-divider"/>
+  <text x="420" y="41.5" class="value">−</text>
+
+  <!-- left subtree root: * -->
+  <rect x="270" y="100" width="120" height="42" rx="12" class="node-box"/>
+  <line x1="310" y1="100" x2="310" y2="142" class="cell-divider"/>
+  <line x1="350" y1="100" x2="350" y2="142" class="cell-divider"/>
+  <text x="330" y="121.5" class="value">×</text>
+
+  <!-- c -->
+  <rect x="490" y="100" width="42" height="42" rx="21" class="node-box"/>
+  <text x="511" y="121.5" class="leaf-value italic">c</text>
+
+  <!-- left-left subtree root: * -->
+  <rect x="170" y="180" width="120" height="42" rx="12" class="node-box"/>
+  <line x1="210" y1="180" x2="210" y2="222" class="cell-divider"/>
+  <line x1="250" y1="180" x2="250" y2="222" class="cell-divider"/>
+  <text x="230" y="201.5" class="value">×</text>
+
+  <!-- right subtree root: + -->
+  <rect x="420" y="190" width="120" height="42" rx="12" class="node-box"/>
+  <line x1="460" y1="190" x2="460" y2="232" class="cell-divider"/>
+  <line x1="500" y1="190" x2="500" y2="232" class="cell-divider"/>
+  <text x="480" y="211.5" class="value">+</text>
+
+  <!-- 4 -->
+  <rect x="160" y="260" width="42" height="42" rx="21" class="node-box"/>
+  <text x="181" y="281.5" class="leaf-value">4</text>
+
+  <!-- x -->
+  <rect x="260" y="260" width="42" height="42" rx="21" class="node-box"/>
+  <text x="281" y="281.5" class="leaf-value italic">x</text>
+
+  <!-- inner * -->
+  <rect x="360" y="260" width="120" height="42" rx="12" class="node-box"/>
+  <line x1="400" y1="260" x2="400" y2="302" class="cell-divider"/>
+  <line x1="440" y1="260" x2="440" y2="302" class="cell-divider"/>
+  <text x="420" y="281.5" class="value">×</text>
+
+  <!-- a -->
+  <rect x="530" y="260" width="42" height="42" rx="21" class="node-box"/>
+  <text x="551" y="281.5" class="leaf-value italic">a</text>
+
+  <!-- 2 -->
+  <rect x="320" y="340" width="42" height="42" rx="21" class="node-box"/>
+  <text x="341" y="361.5" class="leaf-value">2</text>
+
+  <!-- x -->
+  <rect x="480" y="340" width="42" height="42" rx="21" class="node-box"/>
+  <text x="501" y="361.5" class="leaf-value italic">x</text>
+
+  <!-- arrows -->
+  <line x1="380" y1="62" x2="330" y2="100" class="arrow"/>
+  <line x1="460" y1="62" x2="511" y2="100" class="arrow"/>
+
+  <line x1="290" y1="142" x2="230" y2="180" class="arrow"/>
+  <line x1="370" y1="142" x2="480" y2="190" class="arrow"/>
+
+  <line x1="190" y1="222" x2="181" y2="260" class="arrow"/>
+  <line x1="270" y1="222" x2="281" y2="260" class="arrow"/>
+
+  <line x1="440" y1="232" x2="420" y2="260" class="arrow"/>
+  <line x1="520" y1="232" x2="551" y2="260" class="arrow"/>
+
+  <line x1="380" y1="302" x2="341" y2="340" class="arrow"/>
+  <line x1="460" y1="302" x2="501" y2="340" class="arrow"/>
+</svg>

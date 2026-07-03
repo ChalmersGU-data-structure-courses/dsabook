@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Overview of algorithms</title>
+  <title>DSABook – Comparing algorithm performance</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,112 +100,267 @@
 <nav class="sitenav">
 <div>
 <a href="section-3.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-3.2.html" accesskey="p" rel="previous">Comparing values</a>
+<a href="section-3.2.html" accesskey="p" rel="previous">Invariants, preconditions, and postconditions</a>
 </div>
 <div>
-<a href="section-3.4.html" accesskey="n" rel="next">Bubble sort</a>
+<a href="section-3.4.html" accesskey="n" rel="next">Order of growth and time functions</a>
 <a href="section-3.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:overview-of-algorithms" class="level2"
+<section id="sec:analysis-1:comparing-algorithms" class="level2"
 data-number="3.3">
 <h2 data-number="3.3"><span class="header-section-number">3.3</span>
-Overview of algorithms</h2>
-<p>In the sections following we will introduce three basic sorting
-algorithms. Here we will give very short descriptions of each of them,
-and later go through them in more detail.</p>
-<p>For these short descriptions, assume that we want to sort
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-books in a bookshelf. It doesn’t matter what we want to sort the books
-by – it could be by author, or title, or perhaps height. We only need to
-know how to compare two books, where we say that the “smaller” book
-should come before the “larger” in the final ordered bookshelf.</p>
-<section id="sec:bubble-sort-overview" class="level3"
-data-number="3.3.1">
-<h3 data-number="3.3.1"><span class="header-section-number">3.3.1</span>
-Bubble sort overview</h3>
-<p>The first algorithm, <em>Bubble sort</em>, is also the shortest to
-describe:</p>
+Comparing algorithm performance</h2>
+<p>If two algorithms that solve the same problem, how do you compare
+their performance? One way is to do an <a href="#empirical-analysis"
+class="term" title="">empirical analysis</a>: Implement the both
+algorithms and test them on various inputs, and measure the runtime.
+This can be time consuming for the developer, and there are plenty of
+pitfalls. Apart from the efficiency of the algorithm itself, the
+measured runtime can depend on:</p>
+
 <ul>
-<li>As long as there are two adjacent books out of order, swap
-them.</li>
+<li>details of the hardware you are running on,</li>
+<li>how optimized the code for the specific implementations are,</li>
+<li>how you construct the inputs,</li>
+<li>the size of your chosen inputs,</li>
+<li>the version and configuration of the compiler you are using,</li>
+<li>what other processes your computer is running,</li>
+<li>the condition of your laptop battery, and</li>
+<li>hundreds of other difficult-to-predict factors.</li>
 </ul>
-<p>Note that this description is too unspecified to be a real algorithm
-– in particular, we have to know in which order we should look at
-adjacent books. This can be done in many different ways, but the
-commonest implementation is to go from left to right and compare each
-pair of adjacent books. After the first iteration we have moved the
-largest book to the far end of the bookshelf. The next iteration will
-move the second largest book to its right location (next to the largest
-book), and so on. Repeat this left-to-right pass until the list is
-sorted. It’s perhaps not obvious, but in fact we only have to do this at
-most
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-times.</p>
+<p>Even if you manage to solve all these issues and compare two
+algorithms, when someone else designs a third algorithm, they will not
+be able to reproduce your exact setup, so your results will be useless
+to them. For these reasons, empirical analysis is notoriously unreliable
+for comparing algorithms. Luckily, there is a much better option: <a
+href="section-13.3.html#asymptotic-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">asymptotic
+analysis</a> and computational complexity. Computational complexity is a
+big and very important topic. We introduce the basics here, and continue
+in in Chapters <a href="section-5.html#sec:analysis-2">5</a> and <a
+href="section-7.html#sec:analysis-3">7</a>.</p>
+<p>The basic idea is to measure how an algorithm behaves as the input
+size grows. We do this by classifying algorithms into <em>complexity
+classes</em>. We have already been doing this in earlier chapters, when
+saying that Binary search is logarithmic time, Linear search is linear
+time, and various sorting algorithms are quadratic time. This is
+generalised by the big-<span class="math inline">O</span> notation
+(pronounced “big oh notation” or “ordo notation”), using a mathematical
+expression for each complexity class: we say Binary search is <span
+class="math inline">O(\log(n))</span>, Linear search is <span
+class="math inline">O(n)</span> and Selection and Insertion sort are
+<span class="math inline">O(n^2)</span>. A big-<span
+class="math inline">O</span> formula cannot be used to calculate the
+time it takes to sort a list in seconds, but it describes perfectly how
+execution time increases when the input size grows.</p>
+<p>With a bit of practice, determining the complexity class of an
+algorithm or a program is quick and easy. This helps us reliably compare
+algorithms without running any tests. Barring a few obscure cases, an
+<span class="math inline">O(\log(n))</span> algorithm is better than an
+<span class="math inline">O(n)</span> algorithm, which in turn is better
+than an <span class="math inline">O(n^2)</span> one. The only time we
+need to run benchmarks, optimise code, and tweak compiler settings is
+when two algorithms are in the same complexity class.</p>
+<p>A very important complexity class i <span
+class="math inline">O(1)</span>, constant complexity. The <span
+class="math inline">1</span> here should not be understood as the exact
+number 1, but as any constant value independent of <span
+class="math inline">n</span>. This will make more sense after we
+introduce the formal definition of big-<span
+class="math inline">O</span> notation, but for now any part of an
+algorithm where the execution time does not depend on input size is
+considered constant time, <span class="math inline">O(1)</span>.
+Swapping two elements in an array is a good example of a tiny operation
+that is <span class="math inline">O(1)</span> – it takes the same amount
+of time to swap two elements in a huge array as it does in a tiny
+array.</p>
+<section id="sec:what-are-we-measuring" class="level4 unnumbered">
+<h4 class="unnumbered">What are we measuring?</h4>
+<p>In general, complexity can be used to measure us of various
+<em>computational resources</em> of an algorithm. By far the most common
+resource is running time. When we say Insertion sort is <span
+class="math inline">O(n^2)</span>, we mean its execution time will grow
+quadratically with the size of the input. But we can also measure memory
+use: this is called <em>space complexity</em> as opposed to <em>time
+complexity</em>.</p>
+<p>Using space complexity, we can give a more precise meaning to the
+concept of in-place sorting (<a
+href="section-2.3.html#sec:sorting-1:in-place-sorting">Section 2.3.1</a>).
+An in-place algorithm typically has space complexity <span
+class="math inline">O(1)</span>, meaning that their memory usage is
+independent of the size of the input.[^ Strictly speaking, resursive
+algorithms never use constant memory, because every resursive call uses
+up a little memory for book-keeping. Therefore one often excludes the
+book-keeping memory when talking about in-place recursive algorithms.] A
+sorting algorithm that is <em>not</em> in-place has to allocate memory
+for the resulting array: so its memory usage grows linearly with the
+size of the input. Therefore it has <em>linear</em> space complexity,
+<span class="math inline">O(n)</span>: if we double the input size,
+memory usage will also double.</p>
+<p>Both linear and binary search have <span
+class="math inline">O(1)</span> space complexity. This can be determined
+easily by just looking at the source code: the only memory allocated is
+for a few local variables, regardless of how large the input array is.
+But it can be much harder to infer the space complexity of other
+algorithms, especially recursive ones. Each recursive call tends to
+allocate more memory, but the size of the allocated memory can depend on
+how deeply nested the recursion is.</p>
 </section>
-<section id="sec:selection-sort-overview" class="level3"
-data-number="3.3.2">
-<h3 data-number="3.3.2"><span class="header-section-number">3.3.2</span>
-Selection sort overview</h3>
-<p>Now, assume that we instead empty the bookshelf and put all the books
-on the floor, so that we can have a good overview of them. This gives
-the idea for the <em>Selection sort</em> algorithm:</p>
-<ul>
-<li>Repeat until there are no more books on the floor:
-<ul>
-<li>Select the smallest book on the floor and put it to the right of the
-books that are already in the shelf.</li>
-</ul></li>
-</ul>
-<p>This description suggests that Selection sort is not an in-place
-algorithm, because we first move all the books to a new place, meaning
-that we have to have enough extra floor space for all the books. But the
-algorithm can easily be made in-place, and we will describe that in a
-later section.</p>
+<section id="sec:quantitative-properties-of-the-input"
+class="level4 unnumbered">
+<h4 class="unnumbered">Quantitative properties of the input</h4>
+<p>The <span class="math inline">n</span> in <span
+class="math inline">O(n^2)</span> is understood to be the size of the
+input, or more generally some carefully selected quantitative property
+of the input. For most algorithms we have seen so far, <span
+class="math inline">n</span> is the size of an array. This is typical
+for algorithm involving a data structure, the input size of an operation
+is the current number of elements contained in the structure.</p>
+<p>Sometimes the input is a single number, and the behaviour of the
+algorithm depends on how large that number is. One example is Euclid’s
+algorithm for finding the <em>greatest common divisor</em> of two
+integers: the runtime of the algorithm is proportional to the logarithm
+of the largest integer. Another example is various algorithms for
+determining if a number is a prime number. Usually such algorithms are
+used on very large numbers, so the input size <span
+class="math inline">n</span> is chosen to be the number of bits in the
+binary representation of the number.</p>
+<p>Other algorithms have multiple size parameters, for instance an
+algorithm that takes two arrays and finds their common elements may have
+time complexity <span class="math inline">O(n \times m)</span>, where
+<span class="math inline">n</span> and <span
+class="math inline">m</span> are the sizes of the two arrays. An
+algorithm for a matrix operation may have the number of rows and columns
+as separate input sizes, or just the total number of elements in the
+matrix, depending on the level of detail needed to compare two
+algorithms.</p>
+<p>The important takeaway here is that when big-<span
+class="math inline">O</span> notation is used, it is essential to keep
+in mind what the input size <span class="math inline">n</span> is.</p>
 </section>
-<section id="sec:insertion-sort-overview" class="level3"
-data-number="3.3.3">
-<h3 data-number="3.3.3"><span class="header-section-number">3.3.3</span>
-Insertion sort overview</h3>
-<p>Finally, assume that we don’t spread out all books on the floor, but
-instead put them in a single pile. Now we can proceed like as
-<em>Insertion sort</em>:</p>
-<ul>
-<li>Repeat until there are no more books in the pile:
-<ul>
-<li>Take the topmost book in the pile and insert it in the right
-position among the books that are on the bookshelf.</li>
-</ul></li>
-</ul>
-<p>Just as for Selection sort, this description suggests that it is not
-in-place, but there is a simple in-place version, which we will
-introduce later.</p>
+<section id="sec:constant-time-operations" class="level4 unnumbered">
+<h4 class="unnumbered">Constant time operations</h4>
+<p>A good initial understanding of time complexity is as an estimate of
+the number of “basic operations” that are performed by the algorithm in
+the worst case for a given input size. The term “basic operation” is
+rather vague. A basic operation must have the property that it always
+takes the same time to run, or at least that its runtime is independent
+of the input size. That is, every basic operation is <span
+class="math inline">O(1)</span> time.</p>
+<p>Adding or comparing two numbers are examples of basic operations in
+most programming languages, as are assigning a variable or retrieving an
+array value at a given position. But summing the all values in an array
+of size <span class="math inline">n</span> is not <span
+class="math inline">O(1)</span>, because the time depends on the size of
+the array. Creating a new array of size <span
+class="math inline">10</span> is <span class="math inline">O(1)</span>,
+but creating a new array of size <span class="math inline">n</span> is
+<span class="math inline">O(n)</span>, at least if the content is
+cleared after the array is created (which is done by almost all
+programming languages).</p>
+<p>Suppose we run binary search on a large sorted array of email
+addresses (stored as strings). The input size <span
+class="math inline">n</span> is the length of the array, and the
+algorithm does a number of comparisons on emails. Generally speaking,
+comparing two strings is linear time in the length of the shortest
+string (in the worst case it needs to compare all characters), so should
+each comparison be considered <span class="math inline">O(n)</span>? The
+answer is that it should not. Recall that <span
+class="math inline">n</span> is the number of email addresses, saying
+that each individual comparison is <span class="math inline">O(n)</span>
+would mean that when we double the number of email addresses the time
+for a single comparison would double. In this example, we can consider
+comparisons of strings to be <span class="math inline">O(1)</span>,
+because we can assume that the strings are never longer than, say, 100
+characters.</p>
 </section>
-<section id="sec:summary" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4"><span class="header-section-number">3.3.4</span>
-Summary</h3>
-<p>So, what is the complexity of these three algorithms? All of them has
-an outer loop that is repeated
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-times, so how long time does their inner loops take?</p>
-<ul>
-<li><em>Bubble sort</em>: one left-to-right pass iterates through the
-whole shelf, so it’s linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</li>
-<li><em>Selection sort</em>: finding the smallest book in an unsorted
-collection is linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</li>
-<li><em>Insertion sort</em>: inserting one book in the correct position
-in a sorted list is linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</li>
-</ul>
-<p>Therefore, the total complexity of each of the algorithms is
-quadratic,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.</p>
+<section id="sec:example-calculating-the-median-of-three"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Calculating the median-of-three</h4>
+<p>The following is a function that calculates the <em>median</em> of
+the first, the middle and the last values in a given array. (This is a
+useful <em>pivot</em> selection for Quicksort, which will be discussed
+in <a
+href="section-4.3.html#sec:sorting-2:quicksort">Section 4.3</a>.)</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> medianOfThree(arr):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> arr[<span class="dv">0</span>]<span class="op">;</span> b <span class="op">=</span> arr[n<span class="op">/</span><span class="dv">2</span>]<span class="op">;</span> c <span class="op">=</span> arr[n<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="op">&lt;</span> b:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> b <span class="op">&lt;</span> c:      <span class="cf">return</span> b</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> a <span class="op">&lt;</span> c: <span class="cf">return</span> c</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:          <span class="cf">return</span> a</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&lt;</span> c:      <span class="cf">return</span> a</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> b <span class="op">&lt;</span> c: <span class="cf">return</span> c</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:          <span class="cf">return</span> b</span></code></pre></div>
+<p>When the function is called it will do at most four variable
+assignments and three comparisons, no matter how large the array is. Let
+us assume that an assignment takes <span class="math inline">c_1</span>
+time, and a comparison takes <span class="math inline">c_2</span> time.
+Then the runtime equation for the function is <span
+class="math inline">T(n) = 4\cdot c_1+3\cdot c_2</span>. This indicates
+that the size of the input <span class="math inline">n</span> has no
+effect on the running time. The whole function is <span
+class="math inline">O(1)</span> (constant time)!</p>
 </section>
+<section id="sec:example-bubble-sort" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Bubble sort</h4>
+<p>Recall the Bubble sort algorithm from <a
+href="section-2.4.html#sec:sorting-1:bubble-sort">Section 2.4</a>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> bubbleSort(arr):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">2</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="dv">1</span> .. n<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> arr[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> arr[j]:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                swap(arr, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
+<p>In addition to the initialization of the variable and advancing the
+loops as before, there are two basic operations: the
+<code>if</code>-clause comparison and the <code>swap</code>
+operation.</p>
+<p>Technically, the <code>swap</code> operation does several basic
+operations, but the total time to perform a fixed number of constant
+time operations is still a constant. This highlights an important aspect
+of big-<span class="math inline">O</span>: It does not matter if we
+perform one, two, or three constant time operations, the total time is
+still <span class="math inline">O(1)</span>, since it is independent
+from the input size <span class="math inline">n</span>. In fact we could
+look at the whole if-statement and conclude that comparing and swapping
+if needed is a <span class="math inline">O(1)</span>, considering the
+whole body of the loop a single constant time operation.</p>
+<p>The outer <span class="math inline">i</span> loop runs <span
+class="math inline">n</span> times, and for each iteration the inner
+<span class="math inline">j</span> loop runs at most <span
+class="math inline">n</span> times. To be more precise, the inner loop
+first runs <span class="math inline">n</span> times, then <span
+class="math inline">n-1</span> times, then <span
+class="math inline">n-2</span> times, and so on. The total number of
+comparisons is therefore <span
+class="math inline">n+(n-1)+(n-2)+\cdots+1</span>, which can be
+simplified to <span class="math inline">n(n+1)/2</span>. This is
+approximately <span class="math inline">\frac{1}{2} n^2</span>, meaning
+that the running time is <span class="math inline">T(n) \approx
+\frac{c_3}{2} n^2</span>. This is proportional to <span
+class="math inline">n^2</span>, and we call this a <em>quadratic</em>
+running time, <span class="math inline">O(n^2)</span></p>
+</section>
+<p>Note how much detail is simplified away by using complexity classes.
+We do not differentiate between <span class="math inline">n^2</span> and
+<span class="math inline">\frac{1}{2}n^2</span>. There is no
+“triangular” complexity class. This may seem like a weakness of
+big-<span class="math inline">O</span>, but it is a fact a strength that
+makes it such a useful tool for comparing algorithms. To convince
+yourself of this, consider this: runtime is only interesting for very
+large <span class="math inline">n</span>. All algorithms are fast for
+small inputs. Even if an algorithm is <span
+class="math inline">\frac{1}{100}n^2</span>, it is still much slower
+than any <span class="math inline">O(n)</span> algorithm, for any <span
+class="math inline">n</span> that we care about.</p>
 </section>
 </main>
 
@@ -194,10 +368,10 @@ quadratic,
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-3.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-3.2.html" accesskey="p" rel="previous">Comparing values</a>
+<a href="section-3.2.html" accesskey="p" rel="previous">Invariants, preconditions, and postconditions</a>
 </div>
 <div class="navlink">
-<a href="section-3.4.html" accesskey="n" rel="next">Bubble sort</a>
+<a href="section-3.4.html" accesskey="n" rel="next">Order of growth and time functions</a>
 <a href="section-3.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -205,5 +379,6 @@ quadratic,
 
 </body>
 </html>
+
 
 

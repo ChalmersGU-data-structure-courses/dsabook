@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Full binary trees</title>
+  <title>DSABook – Priority queues</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,244 +100,141 @@
 <nav class="sitenav">
 <div>
 <a href="section-8.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.1.html" accesskey="p" rel="previous">Binary trees</a>
+<a href="section-8.1.html" accesskey="p" rel="previous">Collections and sequences</a>
 </div>
 <div>
-<a href="section-8.3.html" accesskey="n" rel="next">Implementing binary trees</a>
+<a href="section-8.3.html" accesskey="n" rel="next">Sets and maps</a>
 <a href="section-8.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-full-binary-trees" class="level2"
-data-number="8.2">
+<section id="sec:ADTs:priority-queues" class="level2" data-number="8.2">
 <h2 data-number="8.2"><span class="header-section-number">8.2</span>
-Case study: Full binary trees</h2>
-<div class="html">
-<p>Some binary tree implementations store data only at the <a
-href="section-14.html#leaf-node" class="term"
-title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaf
-nodes</a>, using the <a href="section-14.html#internal-node"
-class="term"
-title="In a tree, any node that has at least one non-empty child is an internal node.">internal
-nodes</a> to provide structure to the tree. By definition, a leaf node
-does not need to store pointers to its (empty) <a
-href="section-14.html#child" class="term"
-title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>.
-More generally, binary tree implementations might require some amount of
-space for internal nodes, and a different amount for leaf nodes. Thus,
-to compute the space required by such implementations, it is useful to
-know the minimum and maximum fraction of the nodes that are leaves in a
-tree containing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes.</p>
-<p>Unfortunately, this fraction is not fixed. A binary tree of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes might have only one leaf. This occurs when the internal
-nodes are arranged in a chain ending in a single leaf as shown in the
-following figure. In this example, the number of leaves is low because
-each internal node has only one non-empty child.</p>
-<figure id="fig:right_leaning_tree">
-
-<div id="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" class="ssAV" data-short-name="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" data-long-name="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" alt="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964 "+rule)}
-    var AV = NewAV();
-AddCSS(`.dashed {
-  stroke-dasharray: 5, 5;
-}`);
-AddCSS(`.jsavnode.jsavtreenode {
-  min-width: 20px; max-width: 20px;
-  min-height: 20px; max-height: 20px;
-}`);
-var btTop = -5;
-var btLeft = 305;
-var bt = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
-bt.root(" ");
-var rt = bt.root();
-rt.right(" ");
-rt.right().right(" ");
-rt.right().edgeToRight().addClass("dashed");
-rt.right().right().right(" ");
-AV.label("Any number of internal nodes", {left: 400, top: 70});
-bt.layout();
-AV.displayInit();
-AV.recorded();
-  });
-</script>
-
-<figcaption><p>Figure 8.4: A right-leaning tree with one single
-leaf</p></figcaption>
-</figure>
-<p>To find an upper bound on the number of leaves for a tree of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes, first note that the upper bound will occur when each
-internal node has two non-empty children, that is, when the tree is
-full. However, this observation does not tell what shape of tree will
-yield the highest percentage of non-empty leaves. It turns out not to
-matter, because all full binary trees with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes have the same number of leaves. This fact allows us to
-compute the space requirements for a full binary tree implementation
-whose leaves require a different amount of space from its internal
-nodes.</p>
-<section id="sec:theorem-full-binary-tree-theorem"
-class="level4 unnumbered topic">
-<h4 class="unnumbered">Theorem: Full binary tree theorem</h4>
-<p><strong>Full Binary Tree Theorem:</strong> The number of leaves in a
-non-empty full binary tree is one more than the number of internal
-nodes.</p>
-<p><strong>Proof:</strong> The proof is by <a
-href="section-14.html#proof-by-induction" class="term"
-title="A mathematical proof technique similar to recursion. It is used to prove a parameterised theorem $S(n)$, that is, a theorem where there is a induction variable involved (such as the sum of the numbers from 1 to $n$). One first proves that the theorem holds true for a base case, then one proves the implication that whenever $S(n)$ is true then $S(n+1)$ is also true. Another variation is strong induction.">mathematical
-induction</a> on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-the number of internal nodes. This is an example of the style of
-induction proof where we reduce from an arbitrary instance of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-to an instance of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-that meets the induction hypothesis.</p>
-<ol type="i">
-<li><strong>Base Cases:</strong> The non-empty tree with zero internal
-nodes has one leaf node. A full binary tree with one internal node has
-two leaf nodes. Thus, the base cases for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n = 0</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n = 1</annotation></semantics></math>
-conform to the theorem.</li>
-<li><strong>Induction Hypothesis:</strong> Assume that any full binary
-tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-containing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-internal nodes has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-leaves.</li>
-</ol>
-<dl>
-<dt>iii) <strong>Induction Step:</strong></dt>
-<dd>
-<p>Given tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes, select an internal node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-whose children are both leaf nodes. Remove both of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>’s
-children, making
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-a leaf node. Call the new tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>.
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-internal nodes. From the induction hypothesis,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-leaves. Now, restore
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>’s
-two children. We once again have tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes. How many leaves does
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-have? Because
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-leaves, adding the two children yields
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n+2</annotation></semantics></math>.
-However, node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-counted as one of the leaves in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-and has now become an internal node. Thus, tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>
-leaf nodes and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-internal nodes.</p>
-</dd>
-</dl>
-<p>By mathematical induction the theorem holds for all values of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n &gt; 0</annotation></semantics></math>.</p>
+Priority queues</h2>
+<p>There are many situations, both in real life and in computing
+applications, where we wish to choose the next “most important” from a
+collection of people, tasks, or objects. For example, doctors in a
+hospital emergency room often choose to see next the “most critical”
+patient rather than the one who arrived first. When scheduling programs
+for execution in a multitasking operating system, at any given moment
+there might be several programs (usually called <em>jobs</em>) ready to
+run. The next job selected is the one with the highest priority.</p>
+<p>A <em>priority queue</em> is a data structure that stores a
+collection of elements where each element has an associated priority.
+The key difference between priority queues and simpler structures such
+as stacks or queues lies in how elements are retrieved. In a stack, the
+last element inserted is returned first, and in a queue, the first
+element inserted is returned first. A priority queue, however, returns
+the element with the highest priority, regardless of when it was
+inserted. In the most common version of this structure, priority is
+determined by the smallest value, meaning that the smallest element is
+removed first.</p>
+<p>A priority queue typically supports three main operations – adding,
+removing and looking at the topmost element. Note that these are the
+same kind of operations as stacks and queues, the only difference is how
+the elements are ordered. Of this reason we use different names for the
+operations.</p>
+<p>We also have to know how to compare the elements in the priority
+queue, or in other words, how to associate each element with a priority
+value. Furthermore, we have to decide what is meant with a “higher”
+priority: if one element compares smaller than another, is it more or
+less prioritised? There is no “correct” answer to this question, but it
+depends on your application. But a common choice is to let the
+<em>smaller</em> element have priority – and then we have a <em>minimum
+priority queue</em></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">MinPriorityQueue</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(minPQ, elem: T)      <span class="co">// Adds an element to the priority queue.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>(minPQ) <span class="op">-&gt;</span> T    <span class="co">// Removes and returns the minimum element.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>(minPQ) <span class="op">-&gt;</span> T       <span class="co">// Returns the minimum element without removing it.</span></span></code></pre></div>
+<p>Alternatively we might want the larger value have priority, and then
+we have a <em>maximum priority queue</em>. This is not a big problem,
+because minimum and maximum priority queues are mirrors of each other –
+the only difference is that if we compare with <span
+class="math inline">&lt;</span> or with <span
+class="math inline">&gt;</span>. (The operations are also called
+<code>removeMax</code> and <code>getMax</code>, but that goes without
+saying.)</p>
+<p>Therefore, we will mainly talk about minimum priority queues in this
+book, and leave as exercises for you to design everything as maximum
+priority queues. More generally, it is useful to think in terms of
+priority rather than minimum or maximum. In a minimum priority queue,
+the smallest element has the highest priority, whereas in a maximum
+priority queue, the largest element has the highest priority.</p>
+<section id="sec:example-sorting" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Sorting</h4>
+<p>We can use a priority queue to make an efficient sorting algorithm.
+To sort a list of items:</p>
+<ul>
+<li>First create an empty priority queue, and add all the items to
+it.</li>
+<li>Then repeatedly find and remove the smallest item. The items will
+come out in increasing order.</li>
+</ul>
+<p>Here is an implementation of this algorithm in code:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pqSort(arr):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pq <span class="op">=</span> <span class="kw">new</span> <span class="bu">MinPriorityQueue</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> item <span class="kw">in</span> arr:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span>(pq, item)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        arr[i] <span class="op">=</span> <span class="bu">removeMin</span>(pq)</span></code></pre></div>
+<p>What is the time complexity of this algorithm? Well, for an input
+list of size <span class="math inline">n</span>, the algorithm calls
+<code>add</code> <span class="math inline">n</span> times and
+<code>removeMin</code> <span class="math inline">n</span> times. In <a
+href="section-9.5.html#sec:heaps:binary-heaps">Section 9.5</a> we will
+introduce <em>binary heaps</em> where both operations take logarithmic
+time, <span class="math inline">O(\log(n))</span>. Therefore, if we use
+binary heaps, the total runtime of our sorting algorithm is <span
+class="math inline">O(n \log(n))</span> – as efficient as any of the
+sorting algorithms we have seen so far!</p>
 </section>
-<p>When analysing the space requirements for a binary tree
-implementation, it is useful to know how many empty subtrees a tree
-contains. A simple extension of the Full Binary Tree Theorem tells us
-exactly how many empty subtrees there are in <em>any</em> binary tree,
-whether full or not. Here are two approaches to proving the following
-theorem, and each suggests a useful way of thinking about binary
-trees.</p>
-<section id="sec:theorem-number-of-subtrees"
-class="level4 unnumbered topic">
-<h4 class="unnumbered">Theorem: Number of subtrees</h4>
-<p>The number of empty subtrees in a non-empty binary tree is one more
-than the number of nodes in the tree.</p>
-<p><strong>Proof 1:</strong> Take an arbitrary binary tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-and replace every empty subtree with a leaf node. Call the new tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>.
-All nodes originally in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-will be internal nodes in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-(because even the leaf nodes of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-have children in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>).
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-is a full binary tree, because every internal node of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-now must have two children in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>,
-and each leaf node in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-must have two children in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-(the leaves just added). The Full Binary Tree Theorem tells us that the
-number of leaves in a full binary tree is one more than the number of
-internal nodes. Thus, the number of new leaves that were added to create
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-is one more than the number of nodes in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
-Each leaf node in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐓</mi><mo>′</mo></msup><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
-corresponds to an empty subtree in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
-Thus, the number of empty subtrees in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-is one more than the number of nodes in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.</p>
-<p><strong>Proof 2:</strong> By definition, every node in binary tree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
-has two children, for a total of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>
-children in a tree of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-nodes. Every node except the root node has one parent, for a total of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-nodes with parents. In other words, there are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-non-empty children. Because the total number of children is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>,
-the remaining
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>
-children must be empty.</p>
+<section id="sec:implementing-priority-queues-using-sorted-lists"
+class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1"><span class="header-section-number">8.2.1</span>
+Implementing priority queues using sorted lists</h3>
+<p>How can we implement priority queues? The most natural suggestion is
+to use a linked list or a dynamic array, just as for stacks or queues –
+but making sure that it is always kept <em>sorted</em>. The operations
+for adding and removing an element become quite easy to describe:</p>
+<ul>
+<li><em>add</em>: insert an element into the list, in its correct
+position.</li>
+<li><em>removeMin</em>: remove the smallest element.</li>
+</ul>
+<p>Since the list is sorted, removing the smallest element is
+straightforward. Adding a new element is a little more tricky: we have
+to traverse the list until we find the correct position, and then insert
+the new element there. This is similar to how Insertion sort put one
+element in place (see <a
+href="section-2.6.html#sec:sorting-1:insertion-sort">Section 2.6</a>).</p>
+<p>If we decide to use a dynamic array, then it’s best to have it
+<em>reversely sorted</em>, so that the smallest element is at the back
+of the array. The reason for this is that it is easier to remove
+elements from the back than from the front. This is similar to how we
+implement a stack as a dynamic array in reverse order.</p>
+<p>If we instead use a linked list, it should be sorted in normal order
+so that the smallest element is at the front of the list. When we add an
+element to this linked list, we have to traverse the list from the head
+until we find the right location, and then we can squeeze in the new
+element. But to be able to insert the new element we also have to
+remember the previous node while traversing:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span>(pq, value):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    previous <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    current <span class="op">=</span> pq.head</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> current <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> current.value <span class="op">&lt;</span> value:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        previous <span class="op">=</span> current</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        current <span class="op">=</span> current.<span class="bu">next</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    node <span class="op">=</span> <span class="kw">new</span> Node(value, current)  <span class="co">// The new node points to current</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> previous <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        previous.<span class="bu">next</span> <span class="op">=</span> node         <span class="co">// Point previous to the new node...</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        pq.head <span class="op">=</span> node               <span class="co">// ...or point head if the new node is the smallest</span></span></code></pre></div>
 </section>
-</div>
 </section>
 </main>
 
@@ -326,10 +242,10 @@ children must be empty.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-8.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.1.html" accesskey="p" rel="previous">Binary trees</a>
+<a href="section-8.1.html" accesskey="p" rel="previous">Collections and sequences</a>
 </div>
 <div class="navlink">
-<a href="section-8.3.html" accesskey="n" rel="next">Implementing binary trees</a>
+<a href="section-8.3.html" accesskey="n" rel="next">Sets and maps</a>
 <a href="section-8.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -337,5 +253,6 @@ children must be empty.</p>
 
 </body>
 </html>
+
 
 

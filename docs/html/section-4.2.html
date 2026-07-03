@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
   <title>DSABook – Mergesort</title>
   <link rel="stylesheet" href="../css/main.css" />
@@ -68,7 +69,26 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/mergeImplS1CON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -81,40 +101,44 @@
 <nav class="sitenav">
 <div>
 <a href="section-4.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-4.1.html" accesskey="p" rel="previous">Recursion and divide-and-conquer</a>
+<a href="section-4.1.html" accesskey="p" rel="previous">Recursion</a>
 </div>
 <div>
-<a href="section-4.3.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="section-4.3.html" accesskey="n" rel="next">Quicksort</a>
 <a href="section-4.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:mergesort" class="level2" data-number="4.2">
+<section id="sec:sorting-2:mergesort" class="level2" data-number="4.2">
 <h2 data-number="4.2"><span class="header-section-number">4.2</span>
 Mergesort</h2>
-<p>A natural approach to problem solving is divide and conquer. To use
-divide and conquer when sorting, we might consider breaking the list to
-be sorted into pieces, process the pieces, and then put them back
-together somehow. A simple way to do this would be to split the list in
-half, sort the halves, and then merge the sorted halves together. This
-is the idea behind <a href="section-14.html#mergesort" class="term"
-title="A sorting algorithm that requires $O(n \log n)$ in the best, average, and worst cases. Conceptually it is simple: Split the list in half, sort the halves, then merge them together. It is a bit complicated to implement efficiently on an array.">Mergesort</a>.</p>
-<p>Mergesort is one of the simplest sorting algorithms conceptually, and
-has good performance both in the asymptotic sense and in empirical
-running time. Unfortunately, even though it is based on a simple
-concept, it is relatively difficult to implement in practice. Here is a
-pseudocode sketch of Mergesort:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> A.<span class="bu">size</span> <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    L1 <span class="op">=</span> half <span class="kw">of</span> arr</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    L2 <span class="op">=</span> other half <span class="kw">of</span> arr</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(L1)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mergeSort(L2)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    merge(L1, L2)</span></code></pre></div>
+<p>A divide-and-conquer algorithm fits very well into the general
+problem of sorting an array: break the array into pieces, sort each
+piece, and combine the sorted pieces. The problem is how to break the
+array into pieces, and how to combine them afterwards. The idea behind
+<em>Mergesort</em> is to simply split the array in half.</p>
+<section id="sec:algorithm-mergesort"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Mergesort</h4>
+<p>To sort an array using Mergesort:</p>
+<ol type="1">
+<li>Split the array into two halves of equal size,</li>
+<li>then recursively sort each half,</li>
+<li>finally merge the two sorted halves into the final sorted
+array.</li>
+</ol>
+</section>
+<p>Hopefully you noticed that a very important part is missing from the
+algorithm above. The way it is described, it will continue calling the
+recursive step 2 endlessly, so we need a way to stop it all – a <em>base
+case</em>. The standard base case for divide-and-conquer sorting
+algorithms is an empty array or a singleton array containing just one
+element, since such arrays are already sorted.</p>
+<p>Now we only have to know how to split and merge. Splitting is really
+easy: just divide the array in half. what remains is how to implement
+merging.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
@@ -129,31 +153,48 @@ Your browser does not support iframes.
 
 </details>
 </div>
-<section id="sec:merge" class="level4 unnumbered">
-<h4 class="unnumbered">Merge</h4>
-<p>The hardest step to understand about Mergesort is the merge function.
-The merge function starts by examining the first record of each sublist
-and picks the smaller value as the smallest record overall. This smaller
-value is removed from its sublist and placed into the output list.
-Merging continues in this way, comparing the front records of the
-sublists and continually appending the smaller to the output list until
-no more input records remain.</p>
-<p>Here is pseudocode for merging two lists:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(L1, L2):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="kw">new</span> empty list</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">and</span> L2 are nonempty:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> first element <span class="kw">of</span> L1</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> first element <span class="kw">of</span> L2</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&lt;=</span> y:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> x <span class="kw">to</span> answer</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> x from L1</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> y <span class="kw">to</span> answer</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> y from L2</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now only one of L1 and L2 is nonempty, so append its remaining elements</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">append</span> <span class="kw">all</span> elements <span class="kw">of</span> L1 <span class="kw">or</span> L2 <span class="kw">to</span> answer</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code></pre></div>
+<section id="sec:sorting-2:merging" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span>
+Merging</h3>
+<p>The hardest step to understand about Mergesort is how to merge the
+two sorted halves into a single sorted array. This is done by iterating
+through both sorted halves <em>in parallel</em>, and every time moving
+the smallest element to the final result.</p>
+<section id="sec:algorithm-merge" class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Merge</h4>
+<p>First we need a temporary result array, initially empty. We also
+initialise two pointers to the first element of each sorted half. Now we
+repeat the following until one of the halves is empty:</p>
+<ol type="1">
+<li>Compare the elements pointed to in each sorted half.</li>
+<li>Append the smallest of the two to the result array, and move that
+pointer to the next element.</li>
+</ol>
+<p>Finally we can append the remaining elements in the nonempty half to
+the end of the result array.</p>
+</section>
+<p>The <code>merge</code> function relies on the two halves already
+being sorted; this is a precondition of the function. Its postcondition
+is that the merged result is also sorted. <a
+href="#fig:mergesort-split-merge">Figure 4.1</a> shows how Morgesort
+sorts an example array with <span class="math inline">n=11</span>
+elements. Sometimes we cannot split evenly, so the array sizes in each
+level can differ by <span class="math inline">\pm 1</span>. Note that
+each level consists of at most <span class="math inline">n</span>
+elements, and that the number of levels are <em>logarithmic</em> in
+<span class="math inline">n</span>.</p>
+<figure id="fig:mergesort-split-merge">
+<img src="images/Sorting-MergesortSplitMerge.svg"
+alt="Figure 4.1: Mergesorting an array of n=11 elements. To the left we see all levels of splitting, and to the right is the merging. There are k=\lceil\log_2(n)\rceil levels, and each level consists of at most n elements. Note that this is not an accurate description of how recursion works! For instance, it will mergesort the subarray [A,L,G,O,R,I] completely, before it starts splitting [T,H,M,I,C]." />
+<figcaption aria-hidden="true">Figure 4.1: Mergesorting an array of
+<span class="math inline">n=11</span> elements. To the left we see all
+levels of splitting, and to the right is the merging. There are <span
+class="math inline">k=\lceil\log_2(n)\rceil</span> levels, and each
+level consists of at most <span class="math inline">n</span> elements.
+Note that this is not an accurate description of how recursion works!
+For instance, it will mergesort the subarray [A,L,G,O,R,I] completely,
+<em>before</em> it starts splitting [T,H,M,I,C].</figcaption>
+</figure>
 <div class="dsvis">
 <details open="true">
 <summary>
@@ -198,10 +239,9 @@ Your browser does not support iframes.
 <div class="dsvis">
 <details open="true">
 <summary>
-<section id="sec:practice-exercise-merge-sort" class="level3"
-data-number="4.2.1">
-<h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span>
-Practice exercise: Merge sort</h3>
+<section id="sec:practice-exercise-merge-sort"
+class="level4 unnumbered">
+<h4 class="unnumbered">Practice exercise: Merge sort</h4>
 </summary>
 <p>Now here is a full proficiency exercise to put it all together.</p>
 
@@ -215,165 +255,116 @@ Your browser does not support iframes.
 </section>
 </div>
 </section>
-<section id="sec:complexity-analysis" class="level3"
+<section id="sec:categorising-mergesort" class="level3"
 data-number="4.2.2">
 <h3 data-number="4.2.2"><span class="header-section-number">4.2.2</span>
+Categorising Mergesort</h3>
+<p>Note that the merging algorithm is not in-place, becaue we allocate
+space for the temporary result array. In is in fact possible to do the
+merging in-place, but this involves moving around elements in a way
+similar to Insertion sort, which is both is more complex and less
+efficient as the algorithm above.</p>
+<p>If you recall our categorisation of sorting algorithms from <a
+href="section-2.1.html#sec:sorting-1:terminology">Section 2.1</a>, we
+are now ready to categorise Mergesort:</p>
+<ul>
+<li><em>Not in-place</em>: as we already mentioned this is too
+costly.</li>
+<li><em>Stable</em>: two equal elements will never swap places (if we
+implement merging correctly).</li>
+<li><em>Not adaptive</em>: the algorithm runs the same number of steps
+regardless of how the array is sorted from the start.</li>
+</ul>
+<section id="sec:insertion-sort-as-a-variant-of-mergesort"
+class="level4 unnumbered">
+<h4 class="unnumbered">Insertion sort as a variant of Mergesort</h4>
+<p>Mergesort splits the input array into two equal-size arrays. But what
+happens if we split in another way? What if we always make the end part
+just one single element?</p>
+<p>Merging will then be the same as inserting this singleton element
+into a sorted array, and this is exactly what Insertion sort does! So
+conceptually, we can view Insertion sort as a corner case of Mergesort,
+where we split very unevenly.</p>
+</section>
+<section id="sec:divide-heavy-or-combine-heavy"
+class="level4 unnumbered">
+<h4 class="unnumbered">Divide-heavy or combine-heavy</h4>
+<p>Most divide-and-conquer algorithms spend most of their time in one of
+the two main steps. Either they do the heavy work in the divide step
+(making combining trivial), or most work is in the combine step (making
+dividing easy). Mergesort is of the latter kind.</p>
+<p>So, is there any other divide-and-conquer sort that is divide-heavy
+instead? Yes, it is called Quicksort and is the topic for <a
+href="section-4.3.html#sec:sorting-2:quicksort">Section 4.3</a>.</p>
+</section>
+</section>
+<section id="sec:complexity-analysis" class="level3"
+data-number="4.2.3">
+<h3 data-number="4.2.3"><span class="header-section-number">4.2.3</span>
 Complexity analysis</h3>
-<p>Consider repeatedly splitting an array of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements, where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is a power of 2. The recursion will go down
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">k=\log n</annotation></semantics></math>
-levels until there are only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>-element
-arrays left. Each recursion level is shown as one row in this table:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Level</th>
-<th style="text-align: center;">How many parts</th>
-<th style="text-align: center;">Size per part</th>
-<th style="text-align: center;">Splitting each part</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">The full array</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>×</mo><mi>n</mi><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1\times n = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td style="text-align: center;">2</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
-halves</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
-elements</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2\times n/2 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td style="text-align: center;">3</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
-quarters</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>
-elements</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>4</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">4\times n/4 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-</tr>
-<tr>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
-subarrays</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
-elements</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n/2\times 2 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-</tbody>
-</table>
-<p>After a sub-array has been split, the next level is called
-recursively which returns the sorted splits. Then we have to merge them
-before returning the sorted sub-array to the previous level, which is
-shown in the following table:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Level</th>
-<th style="text-align: center;">How many parts</th>
-<th style="text-align: center;">Size per part</th>
-<th style="text-align: center;">Merging pairs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-singleton arrays</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-element each</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mn>1</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n\times 1 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math></td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
-pairs</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
-elements each</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n/2\times 2 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-<td style="text-align: center;">…</td>
-</tr>
-<tr>
-<td style="text-align: center;">2</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
-subarrays</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>
-elements each</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>4</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">4\times n/4 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-<tr>
-<td style="text-align: center;">1</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
-subarrays</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
-elements each</td>
-<td
-style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2\times n/2 = n</annotation></semantics></math>
-units of work</td>
-</tr>
-</tbody>
-</table>
-<p>In summary, each level spends
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
-time, and there are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">k=\log n</annotation></semantics></math>
-levels. So the total running time of Mergesort is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
-Note that this cost is unaffected by the relative order of the values
-being sorted, thus this analysis holds for the best, average, and worst
-cases.</p>
+<p>How efficient is Mergesort? Recall that Selection and Insertion sort
+are quadratic, <span class="math inline">O(n^2)</span>, because they use
+two nested for loops, each of them linear.</p>
+<p>The analysis is actually not trivial because Mergesort is a recursive
+algorithm, and reasoning about recursion is difficult in general.
+However, we can visualise how Mergesort works in a way that will make
+the complexity clearer.</p>
+<section id="sec:if-the-size-is-a-power-of-two"
+class="level4 unnumbered">
+<h4 class="unnumbered">If the size is a power of two</h4>
+<p>First, let us assume that the array consists of exactly <span
+class="math inline">n = 2^k</span> elements. In the first recursive call
+it will split this array into two with <span
+class="math inline">2^{k-1}</span> elements each. Both of these will be
+split into two arrays each, so <span class="math inline">2\times 2 =
+4</span> arrays of size <span class="math inline">2^{k-2}</span>. And
+these will in turn be split into <span class="math inline">2\times
+2\times 2=2^3</span> arrays of size <span
+class="math inline">2^{k-3}</span>, until in the end we have <span
+class="math inline">2^k</span> arrays with only one element.</p>
+<p>Now, when we have reached the base case, we can start merging the
+smaller arrays. First each pair of the <span
+class="math inline">2^k</span> singleton arrays are merged into
+two-element arrays. Then each pair of these <span
+class="math inline">2^{k-1}</span> two-element arrays are merged into
+4-element arrays. Then each pair of these <span
+class="math inline">2^{k-2}</span> 4-element arrays are merged, and so
+on. In the end we will merge two arrays of size <span
+class="math inline">2^{k-1}</span> into the final sorted array.</p>
+<p>Note that each of these levels contain exactly <span
+class="math inline">n = 2^k</span> elements – the size of each level is
+the same! So how does this relate to complexity?</p>
+<ul>
+<li>First we recall that merging is more expensive than splitting, so it
+is enough to only analyse the merging steps.</li>
+<li>What is the complexity of merging two arrays of size <span
+class="math inline">m</span>? Note that in each iteration we increase
+one of the pointers, so when both pointers have reached the end, we have
+executed <span class="math inline">m+m</span> iterations. So merging is
+linear, <span class="math inline">O(m)</span>.</li>
+<li>In each level <span class="math inline">r</span> we merge <span
+class="math inline">2^r</span> arrays, each of size <span
+class="math inline">2^{k-r}</span>. So the total complexity of merging
+one level is <span class="math inline">O(2^r \cdot 2^{k-r})</span>. And
+since <span class="math inline">2^r \cdot 2^{k-r} = 2^k</span>, we get
+<span class="math inline">O(2^k)</span>.</li>
+<li>We have in total <span class="math inline">k</span> levels, so in
+the end we get the final complexity <span class="math inline">O(k \cdot
+2^k)</span>.</li>
+</ul>
+<p>But wait, does this mean that Mergesort is exponential? No,
+definitely not! Recall that <span class="math inline">k</span> is not
+the size of the original array – the size <span
+class="math inline">n</span> is <span class="math inline">2^k</span>,
+and therefore <span class="math inline">O(k) = O(\log_2(n)) =
+O(\log(n))</span>. So we get the following final complexity in the size
+of the array: <span class="math inline">O(n\log(n))</span></p>
+<p>The linearithmic complexity of Mergesort is much much faster than the
+algorithms from <a href="section-2.html#sec:sorting-1">Chapter 2</a>,
+which are all quadratic, <span class="math inline">O(n^2)</span>. In
+fact, <span class="math inline">O(n\log(n))</span> is in practice almost
+linear, because <span class="math inline">\log(n)</span> grows so much
+slower than any polynomial function.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
@@ -400,6 +391,199 @@ Mergesort.</p>
 </details>
 </div>
 </section>
+<section id="sec:complexity-for-arbitrary-array-sizes"
+class="level4 unnumbered">
+<h4 class="unnumbered">Complexity for arbitrary array sizes</h4>
+<p>In our analysis we assumed that we had exactly <span
+class="math inline">n = 2^k</span> elements, so what if the array size
+is not a power of two? Let us assume that the array has <span
+class="math inline">n&#39;</span> elements, where <span
+class="math inline">n/2&lt;n&#39;&lt;n</span>. Since <span
+class="math inline">n=2^k</span> is a power of two, then <span
+class="math inline">\frac{n}{2}=2^{k-1}</span> is also a power of two.
+Our analysis above concluded that the complexity of sorting a size <span
+class="math inline">n=2^k</span> array is <span
+class="math inline">O(n\log(n))</span>. Now, since <span
+class="math inline">\frac{n}{2}=2^{k-1}</span> is also a power of two,
+the same analysis gives the complexity of sorting a size <span
+class="math inline">\frac{n}{2}</span> array to be <span
+class="math inline">O(\frac{n}{2}\log(\frac{n}{2}))</span>. But this can
+be simplified to <span class="math inline">O(n\log(n))</span>, because
+we can ignore constant factors inside big-<span
+class="math inline">O</span>.</p>
+<p>And since sorting arrays of size <span
+class="math inline">\frac{n}{2}</span> and <span
+class="math inline">n</span> both have the same complexity, then that
+must be true for all array sizes in between, <span
+class="math inline">\frac{n}{2}&lt;n&#39;&lt;n</span>.</p>
+<p><a href="#fig:mergesort-split-merge">Figure 4.1</a> shows an example
+where we sort an array with <span class="math inline">n=11</span>
+elements. Note that the last level is <span
+class="math inline">k=4</span>, and <span
+class="math inline">2^{k-1}&lt;11&lt;2^k</span>. Also note that not all
+levels are completely full with <span class="math inline">n</span>
+elements, but this does not change the overall complexity.</p>
+</section>
+</section>
+<section id="sec:sorting-2:mergesort-implementation" class="level3"
+data-number="4.2.4">
+<h3 data-number="4.2.4"><span class="header-section-number">4.2.4</span>
+Implementing Mergesort</h3>
+<p>How can we use the algorithm descriptions above to implement
+Mergesort? The descriptions are quite vague and we have to figure out
+how to make it work in practice. First, splitting an input array into
+two subarrays is easy. We do not have to copy any elements, but we can
+use the same idea as for binary search: use array indices <em>start</em>
+and <em>end</em> to refer to an array interval. To split this subarray
+into two halves, we just calculate the middle index between
+<em>start</em> and <em>end</em>.</p>
+<p>The main function for sorting an interval can now be written like
+this:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Sort the array interval start...end</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mergeSort(arr, start, end):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> start <span class="op">&gt;=</span> end:                   <span class="co">// Base case: Interval length is ≤ 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="bu">int</span>((start <span class="op">+</span> end) <span class="op">/</span> <span class="dv">2</span>)       <span class="co">// The midpoint is where the second half starts</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, start, mid<span class="op">-</span><span class="dv">1</span>)     <span class="co">// Mergesort the first half</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, mid, end)         <span class="co">// Mergesort the second half</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    merge(arr, start, mid, end)      <span class="co">// Merge the two sorted halves</span></span></code></pre></div>
+<p>The initial call would be <code>mergeSort(arr,0,arr.size-1)</code>,
+which sorts the whole array. Merging the sorted array intervals is
+straightforward, we just have to keep track of the pointers to the two
+sorted halves.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Merge the sorted array intervals start .. mid-1 and mid .. end</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>merge(arr, start, mid, end):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    j <span class="op">=</span> start<span class="op">;</span> k <span class="op">=</span> mid                 <span class="co">// Pointers to the sorted halves</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> start .. end:             <span class="co">// Pointer to the temporary array</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j <span class="op">&lt;</span> mid <span class="kw">and</span> (k <span class="op">&gt;</span> end <span class="kw">or</span> arr[j] <span class="op">&lt;=</span> arr[k]):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[j]         <span class="co">// The element from the first half is smaller</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span>                     <span class="co">// (or the second half is exhausted)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[k]         <span class="co">// The element from the second half is smaller</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            k <span class="op">+=</span> <span class="dv">1</span>                     <span class="co">// (or the first half is exhausted)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> start .. end:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        arr[i] <span class="op">=</span> temp[i]             <span class="co">// Copy everything back</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation for the merge step.</p>
+</summary>
+
+<div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow" alt="Mergesort Implementation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("mergeImplS1CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#mergeImplS1CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
+<section id="sec:sorting-2:mergesort-optimisations" class="level3"
+data-number="4.2.5">
+<h3 data-number="4.2.5"><span class="header-section-number">4.2.5</span>
+Optimisations</h3>
+<p>There are some optimisations one can do to the naive Mergesort
+algorithm from above.</p>
+<section id="sec:use-just-one-temporary-array"
+class="level4 unnumbered">
+<h4 class="unnumbered">Use just one temporary array</h4>
+<p>Notice that in the implementation above, the merge function creates a
+new auxiliary array every time it is called. This is quite inefficient,
+because it takes some time to allocate memory for a new array, which
+will be be destroyed directly when merge is finished. A simple
+optimisation is to create one single auxiliary array before the very
+first recursive call, and reuse this array in all invocations of merge.
+The only thing we would have to do is to add an extra argument to
+<code>mergeSort</code> and <code>merge</code>, for the reference to the
+auxiliary array. Then we can create a wrapper function that takes care
+of the initialisation, and makes the first recursive call:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mergeSort(arr):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, temp, <span class="dv">0</span>, arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+</section>
+<section id="sec:using-a-backoff-algorithm" class="level4 unnumbered">
+<h4 class="unnumbered">Using a backoff algorithm</h4>
+<p>Mergesort is way faster than Insertion and Selection sort for large
+arrays because of the better complexity. But when the arrays are small
+(perhaps 50 elements or so), the “slower” algorithms are actually faster
+– the reason for this is that Mergesort is more complex which leads to
+larger constant factors.</p>
+<p>This fact, that there are algorithms that are faster on small arrays,
+can be used for a very simple optimisation. Whenever the size of the
+input array is small enough (say, less than 50 elements), we can call
+Insertion or Selection sort on that array instead of continuing with
+Mergesort.</p>
+<p>Note that this will not change the complexity of the implementation,
+but it can nonetheless improve the speed by some factor. Also note that
+the exact cutoff depends a lot on what computer you have, what
+programming language you use, etc. The only way to know which array size
+is the optimal cutoff is to do a lot of testing – but a rule of thumb is
+that it is probably faster to use Insertion sort on an array of up to 50
+elements.</p>
+</section>
+</section>
+<section id="sec:bottom-up-mergesort" class="level3"
+data-number="4.2.6">
+<h3 data-number="4.2.6"><span class="header-section-number">4.2.6</span>
+Bottom-up Mergesort</h3>
+<p>If you look at the figure above that showed all the splitting steps,
+you might wonder why all this recursive splitting is necessary in the
+first place. We will anyway have to split all the way down to a bunch of
+singleton arrays before we can start merging.</p>
+<p>There is a version of Mergesort that short-circuits the splitting by
+dividing the whole array into singleton arrays already at the start.
+Then it does one pass over this whole array of arrays and merges each
+pair of singletons into two-element arrays. And then each pair of
+two-element arrays into four-element arrays, and so on until we have
+merged the whole array. The structure is exactly as the figure earlier
+showing the merging steps. This variant is called <em>bottom-up
+Mergesort</em> (as opposed to the original top-down Mergesort).
+Bottom-up Mergesort can be implemented without recursion, where every
+level instead becomes an iteration in an outer loop. But just as the
+top-down variant it still needs to allocate additional space for the
+merging.</p>
+<section id="sec:run-based-mergesort" class="level4 unnumbered">
+<h4 class="unnumbered">Run-based Mergesort</h4>
+<p>If we implement bottom-up Mergesort we can be even smarter. Instead
+of splitting the array into the smallest possible parts (that is,
+singleton arrays), we can make use of the “natural order” that’s already
+in the array. Even an array which is very random contains sorted
+subarrays. For example, assume we want to sort the following array:</p>
+<p><span class="math display"> [3, 88, 65, 34, 42, 67, 7, 65, 99, 8]
+</span></p>
+<p>We can start by dividing it into already-sorted arrays, which are
+called <em>runs</em>:</p>
+<p><span class="math display"> [3, 88],  [65],  [34, 42, 67],  [7, 65,
+99],  [8] </span></p>
+<p>Now we can continue merging smaller arrays into larger. This version
+is called <em>run-based Mergesort</em>, and it is one of the most
+efficient sorting algorithms. For example, it is what Python uses as its
+standard sorting algorithm.</p>
+<p>There is a lot more that can be said about run-based Mergesort. One
+thing that has a big effect on the efficiency is in which order we
+choose to merge the runs – we want the runs to be as equal as possible
+in size.</p>
+<p>There are many different strategies to do this, and the following
+blog post gives a good introduction if you are interested:</p>
+<blockquote>
+<p>https://www.wild-inter.net/publications/munro-wild-2018</p>
+</blockquote>
+</section>
+</section>
 </section>
 </main>
 
@@ -407,10 +591,10 @@ Mergesort.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-4.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-4.1.html" accesskey="p" rel="previous">Recursion and divide-and-conquer</a>
+<a href="section-4.1.html" accesskey="p" rel="previous">Recursion</a>
 </div>
 <div class="navlink">
-<a href="section-4.3.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="section-4.3.html" accesskey="n" rel="next">Quicksort</a>
 <a href="section-4.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -418,5 +602,6 @@ Mergesort.</p>
 
 </body>
 </html>
+
 
 

@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Review questions</title>
+  <title>DSABook – Implementation of open addressing</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,72 +100,142 @@
 <nav class="sitenav">
 <div>
 <a href="section-11.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.7.html" accesskey="p" rel="previous">Skip lists</a>
+<a href="section-11.7.html" accesskey="p" rel="previous">Complexity of hash table operations</a>
 </div>
 <div>
-<a href="section-12.html" accesskey="n" rel="next">Hash tables</a>
-<a href="section-12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-11.9.html" accesskey="n" rel="next">Different probing strategies*</a>
+<a href="section-11.9.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:ch11-review" class="level2" data-number="11.8">
+<section id="sec:hash-tables:implementation" class="level2"
+data-number="11.8">
 <h2 data-number="11.8"><span class="header-section-number">11.8</span>
-Review questions</h2>
-<p>This final section contains some review questions about the contents
-of this chapter.</p>
-<section id="sec:review-questions-binary-search-trees"
-class="level3 quiz" data-number="11.8.1">
+Implementation of open addressing</h2>
+<p>While seperate chaining is a bit easier in principle, linear probing
+is arguably easier to implement because it does not require implementing
+operations on linked lists. Below is a very simple implementation of a
+linear probing hash set, where we leave out the problem of resizing (see
+<a
+href="section-11.4.html#sec:hash-tables:resizing">Section 11.4</a>).</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinearProbingSet <span class="kw">implements</span> <span class="bu">Set</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>()  <span class="co">// An array of values, indexed by hashcode and linear probing</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>           <span class="co">// The number of values in the set</span></span></code></pre></div>
+<p>To check if a value is in the set, we first find the position in the
+array where it <em>should</em> be, and then test if that cell is
+nonempty:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">contains</span>(hashset, value) <span class="op">-&gt;</span> Bool:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> lookup(hashset.arr, value)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hashset.arr[index] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span></span></code></pre></div>
+<p>To add a value to the set, we again find the position where it should
+be. If that cell is empty, we can add the value, and we must not forget
+to increase the size:</p>
+
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span>(hashset, value):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> lookup(hashset.arr, value)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hashset.arr[index] <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        hashset.arr[index] <span class="op">=</span> value</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        hashset.<span class="bu">size</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<p>Both operations use a common operation <code>lookup</code> for
+finding the position of a value. If the value is not found, it returns
+the first empty position where it could have been:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lookup(arr, value) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="bu">hash</span>(value) <span class="op">%</span> arr.<span class="bu">size</span>      <span class="co">// Compress the hash value into the array size.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> arr[index] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[index] <span class="op">==</span> value:           <span class="co">// The value already present.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> index</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        index <span class="op">=</span> (index <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> arr.<span class="bu">size</span>  <span class="co">// Linear probing.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> index                          <span class="co">// This is the position of a null value.</span></span></code></pre></div>
+<p>Implementing a map instead of a set would be nearly identical, only
+with an additional value for each key.</p>
+<section id="sec:resizing-the-internal-array-1" class="level3"
+data-number="11.8.1">
 <h3 data-number="11.8.1"><span
-class="header-section-number">11.8.1</span> Review questions: Binary
-search trees</h3>
-<div class="question">
-<p>Answer TRUE or FALSE.</p>
-<p>A BST is another name for a binary tree.</p>
-<ul class="task-list">
-<li><label><input type="checkbox" />True</label></li>
-<li><label><input type="checkbox" checked="" />False</label></li>
-</ul>
-<div class="hints">
-<ul>
-<li>A binary tree is either empty, or else a root node with two binary
-trees as children.</li>
-<li>A BST (binary search tree) is a binary tree where, for every node N,
-all nodes in the left subtree of N have key values less than the key
-value of N, and all nodes in the right subtree of N have key values
-greater than the key value of N.</li>
-</ul>
-</div>
-</div>
-<div class="question">
-<p>BST search, insert, and delete operations typically run in time
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(d)</annotation></semantics></math>.
-What is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>?</p>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="" />The depth of the relevant
-node in the tree</label></li>
-<li><label><input type="checkbox" />The number of divisions at each
-level</label></li>
-<li><label><input type="checkbox" />The number of entries in each
-node</label></li>
-<li><label><input type="checkbox" />The number of nodes in the
-tree</label></li>
-<li><label><input type="checkbox" />The total number of entries in all
-the nodes of the tree</label></li>
-</ul>
-<div class="hints">
-<ul>
-<li>Think about a given insert or search operation.</li>
-<li>How many nodes get looked at?</li>
-<li>The operation moves down the tree, looking at a node at each level
-that it visits.</li>
-<li>So the total work is the number of nodes that it visits, which is
-the same as the depth of the last node.</li>
-</ul>
-</div>
-</div>
+class="header-section-number">11.8.1</span> Resizing the internal
+array</h3>
+<p>The code above does not work. When the array gets too filled it
+starts to take very long time to look up a position, as already
+discussed in <a
+href="section-11.4.html#sec:hash-tables:resizing">Section 11.4</a>. To
+solve this we have to resize it, in a similar way to how <em>dynamic
+arrays</em> work (see Sections <a
+href="section-6.4.html#sec:sequences:dynamic-arrays">6.4</a>, <a
+href="section-9.5.html#sec:heaps:binary-heaps">9.5</a>), but there are
+two important differences: First, contrary to stacks, queues and binary
+heaps, we cannot wait until the array is completely full – instead we
+resize the array when the <em>load factor</em> exceeds a threshold:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">add</span>(hashset, value):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    loadFactor <span class="op">=</span> hashset.<span class="bu">size</span> <span class="op">/</span> hashset.arr.<span class="bu">size</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> loadFactor <span class="op">&gt;</span> threshold:            <span class="co">// The array is too crowded.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        capacity <span class="op">=</span> hashset.arr.<span class="bu">size</span> <span class="op">*</span> <span class="dv">2</span>   <span class="co">// Or use any other multiplier &gt; 1.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        resize(hashset, capacity)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Continue here like the add function above.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>Second, we cannot use the same resize operation as normal dynamic
+arrays, that is, to simply copy over values from the old to the same
+position in the new array. But this does not work, because the
+<em>compression</em> function depends on the array size. Therefore we
+have to recalculate the table index before we add them to the new array.
+Easiest is to simply reuse the <code>add</code> operation above, like
+this:</p>
+
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>resize(hashset, capacity):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    oldArr <span class="op">=</span> hashset.arr</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    hashset.arr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)  <span class="co">// Create a new array with the new capacity.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    hashset.<span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>                   <span class="co">// The new array is initially empty.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> value <span class="kw">in</span> oldArr:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">add</span>(hashset, value)        <span class="co">// re-add all old values to the hash set.</span></span></code></pre></div>
+<p>This code is very nice and clean, but it is not as efficient as it
+could be: <code>add</code> calculates the load factor every time, and in
+this case this is not necessary because the array has already been
+resized. We leave as an exercise to the reader to optimise the code for
+resizing.</p>
+</section>
+<section id="sec:lazy-deletion" class="level3" data-number="11.8.2">
+<h3 data-number="11.8.2"><span
+class="header-section-number">11.8.2</span> Lazy deletion</h3>
+<p>As discussed in <a
+href="section-11.5.html#sec:hash-tables:deletion">Section 11.5</a>, we
+need a unique value for the “tombstones”. This value cannot be of the
+same type as the values that the hash table accepts, and it cannot be
+<code>null</code> because this is used for empty array cells. So, if we
+have a hash table of strings, the tombstone must not be a string. How to
+do this depends on your programming language, so here we will just
+assume that we have a unique value <code>TOMBSTONE</code>. With this, we
+can implement removal like this:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">remove</span>(hashset, value):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> lookup(hashset.arr, value)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hashset.arr[index] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        hashset.arr[index] <span class="op">=</span> TOMBSTONE</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        hashset.<span class="bu">size</span> <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        hashset.tombstones <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<p>But wait, what with the last line? Assume that we start with an empty
+hash table, where the internal array has capacity 100, and the resizing
+threshold is 0.75. Let us add 50 elements, and then remove all of them.
+Then the hash table will be empty (its size is 0), but the internal
+array contains 50 tombstones. Now, let us add 50 more elements. The hash
+table size will now be 50, and the load factor is therefore 0.5, which
+is smaller than the threshold. But the array contains 50 tombstones and
+50 values, so there are no empty cells left.</p>
+<p>What did we do wrong? When we calculate the load factor, we have to
+include the number of existing values <em>and</em> the tombstones.
+Therefore we need another counter for the number of tombstones, and then
+we can calculate the load factor like this:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>loadFactor <span class="op">=</span> (hashset.<span class="bu">size</span> <span class="op">+</span> hashset.tombstones) <span class="op">/</span> hashset.arr.<span class="bu">size</span></span></code></pre></div>
+<p>What is left is to also shrink the internal array when it becomes too
+small. We leave this as an exercise for the reader, just try to make it
+so that you can reuse the <code>resize</code> function above.</p>
 </section>
 </section>
 </main>
@@ -155,16 +244,17 @@ the same as the depth of the last node.</li>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-11.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.7.html" accesskey="p" rel="previous">Skip lists</a>
+<a href="section-11.7.html" accesskey="p" rel="previous">Complexity of hash table operations</a>
 </div>
 <div class="navlink">
-<a href="section-12.html" accesskey="n" rel="next">Hash tables</a>
-<a href="section-12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-11.9.html" accesskey="n" rel="next">Different probing strategies*</a>
+<a href="section-11.9.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
 </body>
 </html>
+
 
 

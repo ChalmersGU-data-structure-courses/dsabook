@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Maps, or dictionaries</title>
+  <title>DSABook – Self-balancing trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,128 +100,215 @@
 <nav class="sitenav">
 <div>
 <a href="section-10.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.1.html" accesskey="p" rel="previous">Sets</a>
+<a href="section-10.1.html" accesskey="p" rel="previous">Binary search trees</a>
 </div>
 <div>
-<a href="section-10.3.html" accesskey="n" rel="next">Case study: Implementing sets using lists</a>
+<a href="section-10.3.html" accesskey="n" rel="next">AVL trees</a>
 <a href="section-10.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:maps-or-dictionaries" class="level2"
+<section id="sec:search-trees:self-balancing" class="level2"
 data-number="10.2">
 <h2 data-number="10.2"><span class="header-section-number">10.2</span>
-Maps, or dictionaries</h2>
-<p>A <em>map</em> (or dictionary) represents a set of <em>keys</em>,
-where each key has an associated <em>value</em>. We can <em>add</em> and
-<em>remove</em> keys, but when we add a key we must specify what
-<em>value</em> we want to associated with it. We can <em>check</em> if a
-given key is present in the map. We can also <em>look up</em> a key to
-find the associated value.</p>
-<p>A map cannot contain duplicate <em>keys</em>, so each key is
-associated with exactly one value. If we call <code>put(k,v)</code>, but
-the key <code>k</code> is already present, then the value associated
-with <code>k</code> gets changed to <code>v</code>. On the other hand, a
-map <em>can</em> contain duplicate <em>values</em>: two keys can have
-the same value. Here is a possible minimal interface for maps:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span> <span class="kw">of</span> K <span class="kw">to</span> V <span class="kw">extends</span> <span class="bu">Collection</span> <span class="kw">of</span> K:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key: K, value: V)        <span class="co">// Sets the value of the given key.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key: K) <span class="op">-&gt;</span> V             <span class="co">// Returns the value associated with the given key, or `null` if the key is not there.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key: K)               <span class="co">// Removes the value associated with the given key.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">containsKey</span>(key: K) <span class="op">-&gt;</span> Bool  <span class="co">// Returns true if the key has an associated value.</span></span></code></pre></div>
-<p>Note that maps depend on two different types, the keys <code>K</code>
-and the values <code>V</code>. These types can be the same or different,
-depending on the needs of your application.</p>
-<section id="sec:example-cash-register"
+Self-balancing trees</h2>
+<p>As we saw in the last section, binary search trees (BST) work fine
+when we insert elements in a somewhat random order. Then the height of
+the final tree will grow logarithmically in the number of nodes, which
+is another way of saying that the tree is quite balanced. The problem
+with BSTs is that we cannot guarantee that the tree will be balanced,
+and if we insert elements in an unfortunate order (for example in sorted
+order), then it will become very unbalanced. That is where
+self-balancing trees come in.</p>
+<p>A <em>self-balancing</em> tree ensures that it will always be
+balanced, regardless in what order elements are added or removed from
+the tree. There are many many different kinds of self-balancing trees,
+and in this book we will only discuss a handful.</p>
+<p>The most straightforward is to start from a normal BST and modify its
+structure whenever we add or remove nodes. We do this by stating
+additional <em>balance invariants</em>, and whenever an invariant is
+broken we make sure to rebalance the tree to satisfy the invariant
+again.</p>
+<p>Therefore we need to come up with a good balancing invariant, and
+some method for rebalancing. Unfortunately, we cannot use the most
+obvious invariant – that the tree must be completely balanced (or in
+other words, that the tree must be <em>complete</em>). The reason for
+this is that it costs too much to maintain this invariant, for example,
+<a href="#fig:BST-rebalance">Figure 10.3</a> shows that we might need to
+reorganise the tree completely after each insertion.</p>
+<figure id="fig:BST-rebalance">
+<img src="images/SearchTrees-BST-PerfectRebalance.svg"
+style="width:100.0%"
+alt="Figure 10.3: An attempt to re-balance a BST after insertion can be expensive. To the left is a BST with six nodes in the shape of a complete binary tree. We insert the value A and get an left-unbalanced tree. If we want to keep the tree as balanced as possible, we need to do a major reorganisation, which is very costly. Note that all nodes have moved around in the final tree to the right." />
+<figcaption aria-hidden="true">Figure 10.3: An attempt to re-balance a
+BST after insertion can be expensive. To the left is a BST with six
+nodes in the shape of a complete binary tree. We insert the value A and
+get an left-unbalanced tree. If we want to keep the tree as balanced as
+possible, we need to do a major reorganisation, which is very costly.
+Note that all nodes have moved around in the final tree to the
+right.</figcaption>
+</figure>
+<p>Instead we need to a find weaker balance invariant, and there are
+lots of different possibilities. For example, in <a
+href="section-10.3.html#sec:search-trees:AVL-trees">Section 10.3</a> we
+introduce the perhaps most famous of all self-balancing trees, the AVL
+tree, and in <a
+href="section-10.4.html#sec:search-trees:23-and-B-trees">Section 10.4</a>
+we discuss 2/3 trees and B-trees which use a different invariants.</p>
+<section id="sec:example-scapegoat-trees"
 class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Cash register</h4>
-<p>The map is a perfect match for our supermarket example:</p>
+<h4 class="unnumbered">Example: Scapegoat trees</h4>
+<p>One very simple solution is not require that the tree must be
+completely balanced, but instead to state that it must be balanced to
+<em>a certain degree</em>. This invariant can be formulated like
+follows:</p>
 <ul>
-<li><em>Cash register:</em> Given a database of all items for sale in a
-supermarket, find information about the item with a given <em>EAN
-code</em>.</li>
+<li>Every tree node <span class="math inline">t</span> must be <span
+class="math inline">\alpha</span>-balanced, meaning that
+<ul>
+<li><span
+class="math inline">\text{size}(t.\text{left})\leq\alpha\cdot\text{size}(t)</span>,
+and</li>
+<li><span
+class="math inline">\text{size}(t.\text{right})\leq\alpha\cdot\text{size}(t)</span>.</li>
+</ul></li>
 </ul>
-<p>Here, the key should be the EAN code that the barcode scanner
-recognises, and the value should be a record containing information
-about the item. If the EAN code is stored in a field <code>ean</code>,
-then to put an item <code>p</code> in the database we call
-<code>database.put(p.ean, p)</code>. To find the item with barcode
-<code>code</code> we call <code>database.get(code)</code>.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Item</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ean: String</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    name: String</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    price: <span class="bu">Number</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    expires: Date</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> CashRegister:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    database: <span class="bu">Map</span> <span class="kw">of</span> String <span class="kw">to</span> Item <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Put the item in the database.</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(p: Item):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        database.<span class="bu">put</span>(p.ean, p)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Remove an item from the database.</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(p: Item):</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        database.<span class="bu">remove</span>(p.ean)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Find the item with the given EAN code.</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    find(ean: String) <span class="op">-&gt;</span> Item:</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> database.<span class="bu">get</span>(ean)</span></code></pre></div>
+<p>After inserting or deleting into the tree, a node might get <span
+class="math inline">\alpha</span>-unbalanced. If this happens we rebuild
+the whole subtree at that node, making it completely balanced. This
+restructuring process takes quite long time because it is linear in the
+size of the subtree, but it can be shown that it will not happen too
+often. Using the techniques from <a
+href="section-7.1.html#sec:analysis-3:amortisation">Section 7.1</a>, it
+can be shown that the <em>amortised complexity</em> of insertion and
+deletion is logarithmic in the size of the tree, <span
+class="math inline">O(\log(n))</span>.</p>
+<p>We will not discuss Scapegoat trees further in this book, and the
+implementation details are left as an exercise to the reader.</p>
 </section>
-<section id="sec:multimaps" class="level3" data-number="10.2.1">
+<p>Another possibility is to use non-binary trees – for example, in <a
+href="section-10.4.html#sec:search-trees:23-and-B-trees">Section 10.4</a>
+we introduce the 2-3 trees and the B-trees. Allowing the tree nodes to
+have more than two children makes it possible to keep the tree
+completely balanced at all times, and therefore 2-3 trees and B-trees
+have logarithmic complexity.</p>
+<section id="sec:search-trees:rotations" class="level3"
+data-number="10.2.1">
 <h3 data-number="10.2.1"><span
-class="header-section-number">10.2.1</span> Multimaps</h3>
-<p>Maps have the restriction that each key has only one value. However,
-sometimes we want to store a list of records, where some records might
-have the same key. Then we want something like a map, but where a key
-can have multiple values associated with it. This structure is called a
-<em>multimap</em>.</p>
-<p>Unfortunately, most programming languages do not provide a multimap
-data structure. Instead, we can implement it ourselves. The idea is to
-use a map, whose value type is a <em>set</em> of the actual values that
-we are interested in.</p>
-<section id="sec:example-search-engine"
-class="level4 unnumbered example">
-<h4 class="unnumbered">Example: Search engine</h4>
-<p>A multimap is the perfect data structure for our search engine
-example:</p>
-<ul>
-<li>Given a collection of documents (e.g. web pages), find all web pages
-containing a given word.</li>
-</ul>
-<p>To find all documents containing a given word, we will build a
-multimap, where the key is a word, and the values are all documents
-containing that word. Then, searching for a word will just mean looking
-it up in the multimap.</p>
+class="header-section-number">10.2.1</span> Tree rotations</h3>
+<p>Most self-balancing trees use <em>rotations</em> to restore their
+balance invariant, and there are two main forms – the <em>single</em>
+and the <em>double</em> rotation. These rotations are used both by AVL
+trees, Red-black trees, Splay trees, and numerous other self-balancing
+BSTs. However, not all use rotations – for example the Scapegoat tree
+above instead builds a completely new subtree.</p>
+<p>In the following we only explain left rotations, but right rotations
+are of course analoguous.</p>
+<section id="sec:single-rotation" class="level4 unnumbered">
+<h4 class="unnumbered">Single rotation</h4>
+<p>Assume that a subtree is <em>right</em>-unbalanced – meaning that the
+right child has a larger size, or a larger height, or in some other way
+is “heavier” than the left child. Let us call the left child <span
+class="math inline">u</span>, and the right child consists of the two
+subtrees <span class="math inline">z</span> and <span
+class="math inline">w</span>. To <em>left-rotate</em> this subtree, we
+make the right child <span class="math inline">y</span> the parent, and
+move the previous parent <span class="math inline">x</span> to the left
+so that it becomes a left child. When doing this, <span
+class="math inline">z</span> – the previous left child of <span
+class="math inline">y</span> – has to reattach itself as a right child
+of <span class="math inline">x</span> instead.</p>
+<figure id="fig:BST-left-rotate">
+<img src="images/SearchTrees-AVL-LeftRotate-1.svg" style="width:65.0%"
+alt="Figure 10.4: Left-rotating over the node x. The previous right child, y, now becomes the parent, and its left child z has to reattach itself as a child of x." />
+<figcaption aria-hidden="true">Figure 10.4: Left-rotating over the node
+<span class="math inline">x</span>. The previous right child, <span
+class="math inline">y</span>, now becomes the parent, and its left child
+<span class="math inline">z</span> has to reattach itself as a child of
+<span class="math inline">x</span>.</figcaption>
+</figure>
+<p>If the right-right child <span class="math inline">w</span> was the
+“heaviest” of the subtrees, then this left-rotation should have made the
+subtree a little more balanced than before. The rotation is shown in <a
+href="#fig:BST-left-rotate">Figure 10.4</a>.</p>
+<p><em>Note</em>: When you want to implement rotation, you have to
+remember to update the parent node too. Before the rotation its child
+was the <span class="math inline">x</span> node, but afterwards this
+should be <span class="math inline">y</span> instead.</p>
+</section>
+<section id="sec:double-rotation" class="level4 unnumbered">
+<h4 class="unnumbered">Double rotation</h4>
+<p>However, if the right-left child <span class="math inline">z</span>
+was “heavier”, then a left-rotation might not solve our problems. In
+that case, the only thing that happens is that the tree becomes
+left-heavy instead of right-heavy.</p>
+<p>To solve right-left cases, we have to do a <em>double</em> rotation.
+This means that we first make a single right rotation of the right child
+<span class="math inline">y</span>, followed by a left rotation of the
+parent <span class="math inline">x</span>. The first right rotation over
+the <span class="math inline">y</span> child transforms it into a
+right-right case, and then we can continue with a normal left rotation
+like above. As you can see in <a
+href="#fig:BST-double-rotate">Figure 10.5</a>, the effect of a double
+rotation is that the right-left grandchild <span
+class="math inline">z</span> moves two levels up to become the new
+parent.</p>
+<figure id="fig:BST-double-rotate">
+<img src="images/SearchTrees-AVL-RightLeftRotate-1.svg"
+style="width:100.0%"
+alt="Figure 10.5: A right-left-rotation. First we right-rotate over the child y, and then left-rotate over the parent x. The effect is that the grandchild z now becomes the parent of both x and y." />
+<figcaption aria-hidden="true">Figure 10.5: A right-left-rotation. First
+we right-rotate over the child <span class="math inline">y</span>, and
+then left-rotate over the parent <span class="math inline">x</span>. The
+effect is that the grandchild <span class="math inline">z</span> now
+becomes the parent of both <span class="math inline">x</span> and <span
+class="math inline">y</span>.</figcaption>
+</figure>
+</section>
+<section id="sec:implementing-rotations" class="level4 unnumbered">
+<h4 class="unnumbered">Implementing rotations</h4>
+<p>We implement a rotation by reassigning the child pointers of the
+involved nodes. The only complication is to make sure to do this in the
+right order, because when we reassign a child the old child is forgotten
+if we have not stored it somewhere else.</p>
+<p>In a single left rotation, the parent <span
+class="math inline">x</span> should become the new left child of <span
+class="math inline">y</span>, so we can assign <code>y.left = x</code>.
+But before we do that we have to do something with <span
+class="math inline">y</span>’s left child <span
+class="math inline">z</span>. This should be the new right child of
+<span class="math inline">x</span>, and since we already know <span
+class="math inline">x</span>’s current right child, <span
+class="math inline">y</span>, it is fine to start with this assignment,
+<code>x.right = y.left</code>. So, a single right rotation can be
+summarised in two simple pointer assignments:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x.right <span class="op">=</span> y.left</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y.left <span class="op">=</span> x</span></code></pre></div>
+<p>But note that the <em>parent</em> should get a new child too – before
+it was <span class="math inline">x</span> and now it is <span
+class="math inline">y</span>. The cleanest solution is if we implement a
+recursive function that calls itself for a child. Then the function can
+simply return <span class="math inline">y</span> instead of <span
+class="math inline">x</span> and trust that it will be resolved by the
+caller.</p>
+<p>If we do not want a recursive implementation we need to keep track of
+the parent too, including if it is a left or right child of the parent –
+this is not difficult, but involves some more variables and
+if-clauses.</p>
+<p>To implement a double right-left rotation, we can do a right rotation
+on the right child, followed by a left rotation on the current, like
+this:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x.right <span class="op">=</span> rotate_right(x.right)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rotate_left(x)</span></code></pre></div>
+<p>But we can also compress the two rotations into the following four
+pointer assignments:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// We model a document as a list of words.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Document:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    contents: <span class="bu">Collection</span> <span class="kw">of</span> String</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SearchEngine:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    database: <span class="bu">Map</span> <span class="kw">of</span> String <span class="kw">to</span> <span class="bu">Set</span> <span class="kw">of</span> Document <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new document to the database.</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(doc: Document):</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> doc.contents:</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> database.<span class="bu">containsKey</span>(word):</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                <span class="co">// This is the first document containing this word.</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                database.<span class="bu">put</span>(word, <span class="kw">new</span> <span class="bu">Set</span>())</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Get the set of documents containing this word, and add the document.</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> database.<span class="bu">get</span>(word)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span>.<span class="bu">add</span>(doc)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Find all documents containing a given word.</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    find(word: String) <span class="op">-&gt;</span> <span class="bu">Set</span> <span class="kw">of</span> Document:</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> database.<span class="bu">containsKey</span>(word):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> database.<span class="bu">get</span>(word)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">// If the word is not found, return an empty set.</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Set</span>()</span></code></pre></div>
-<p>Note that we don’t have to <code>put</code> the updated set back into
-the database (in the <code>add</code> method). This is because complex
-data structures are <em>mutable</em>, as explained in <a
-href="section-1.5.html#sec:programming-preliminaries">Section 1.5</a>.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x.right <span class="op">=</span> z.left <span class="op">;</span> z.left <span class="op">=</span> x</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y.left <span class="op">=</span> z.right <span class="op">;</span> z.right <span class="op">=</span> y</span></code></pre></div>
 </section>
 </section>
 </section>
@@ -212,10 +318,10 @@ href="section-1.5.html#sec:programming-preliminaries">Section 1.5</a>.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-10.1.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.1.html" accesskey="p" rel="previous">Sets</a>
+<a href="section-10.1.html" accesskey="p" rel="previous">Binary search trees</a>
 </div>
 <div class="navlink">
-<a href="section-10.3.html" accesskey="n" rel="next">Case study: Implementing sets using lists</a>
+<a href="section-10.3.html" accesskey="n" rel="next">AVL trees</a>
 <a href="section-10.3.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -223,5 +329,6 @@ href="section-1.5.html#sec:programming-preliminaries">Section 1.5</a>.</p>
 
 </body>
 </html>
+
 
 

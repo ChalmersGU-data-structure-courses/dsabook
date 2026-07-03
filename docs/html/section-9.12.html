@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Case study: Building a heap*</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Binary/HeapsIndCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/heapbuildProofCON.css" rel="stylesheet" type="text/css"/></head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.11.html" accesskey="p" rel="previous">Case study: Disjoint sets in depth*</a>
+</div>
+<div>
+<a href="section-9.13.html" accesskey="n" rel="next">Case study: In-place heapsort*</a>
+<a href="section-9.13.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:heaps:heapify" class="level2" data-number="9.12">
+<h2 data-number="9.12"><span class="header-section-number">9.12*</span>
+Case study: Building a heap</h2>
+<p>If all <span class="math inline">n</span> values are available at the
+beginning of the building process, we can build the heap faster than
+just inserting the values into the heap one by one.</p>
+<p>Consider this example, with two possible ways to heapify the array
+[1,2,3,4,5,6,7] into a <em>max</em>-heap:</p>
+
+<div id="HeapBldChoiceCON" class="ssAV" data-short-name="HeapBldChoiceCON" data-long-name="HeapBldChoiceCON" alt="HeapBldChoiceCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Binary/HeapBldChoiceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("HeapBldChoiceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#HeapBldChoiceCON "+rule)}
+    
+  });
+</script>
+
+<ul>
+<li>The upper (a) heap is built by a series of nine exchanges in the
+order (4-2), (4-1), (2-1), (5-2), (5-4), (6-3), (6-5), (7-5),
+(7-6).</li>
+<li>The lower (b) heap is built by a series of four exchanges in the
+order (5-2), (7-3), (7-1), (6-1).</li>
+</ul>
+<p>From the example, it is clear that the heap for any given set of
+numbers is not unique, and we see that some rearrangements of the input
+values require fewer exchanges than others to build the heap. So, how do
+we pick the best rearrangement?</p>
+<p>One good algorithm stems from induction. Suppose that the left and
+right subtrees of the root are already heaps, and <span
+class="math inline">R</span> is the name of the element at the root.
+This situation is illustrated by this figure:</p>
+
+<div id="HeapsIndCON" class="ssAV" data-short-name="HeapsIndCON" data-long-name="HeapsIndCON" alt="HeapsIndCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/HeapsIndCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("HeapsIndCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#HeapsIndCON "+rule)}
+    
+  });
+</script>
+
+<p>In this case there are two possibilities.</p>
+<ul>
+<li><p><span class="math inline">R</span> has a priority which is higher
+or equal to both its children. In this case, construction is
+complete.</p></li>
+<li><p><span class="math inline">R</span> has a priority which is lower
+than one or both of its children.</p>
+<p>In this case, <span class="math inline">R</span> should be exchanged
+with the highest-priority child. The result will be a heap, except that
+<span class="math inline">R</span> might still have a lower priority
+than one or both of its (new) children. In this case, we simply continue
+the process of “pushing down” <span class="math inline">R</span> until
+it reaches a level where it has a higher priority than its children, or
+is a leaf node.</p>
+<p>This process is implemented by the function
+<code>siftDown</code>.</p></li>
+</ul>
+<p>This approach assumes that the subtrees are already heaps, suggesting
+that a complete algorithm can be obtained by visiting the nodes in some
+order such that the children of a node are visited <em>before</em> the
+node itself. One simple way to do this is simply to work from the high
+index of the array to the low index. Actually, the build process need
+not visit the leaf nodes (they can never move down because they are
+already at the bottom), so the building algorithm can start in the
+middle of the array, with the first internal node.</p>
+<ul>
+<li>Iterate through the internal array indices <span
+class="math inline">i = m, m-1, \ldots, 0</span> in backwards order,
+where <span class="math inline">m</span> is the parent of the last
+element (approximately <span class="math inline">n/2</span>).</li>
+<li>For each index <span class="math inline">i</span>, sift down its
+value.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of the build process for a
+<em>max</em>-heap.</p>
+</summary>
+
+<div id="heapbuildCON" class="ssAV" data-short-name="heapbuildCON" data-long-name="Heapbuild Slideshow" alt="Heapbuild Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapbuildCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("heapbuildCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#heapbuildCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>The function <code>buildHeap</code> implements the building
+algorithm:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>buildHeap(heap, arr):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    heap <span class="op">=</span> arr                  <span class="co">// Initialise the heap to the given array.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> heap.<span class="bu">size</span>            <span class="co">// The capacity of the heap is used in full.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> parent(<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)        <span class="co">// Find the parent of the last leaf.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> mid, mid<span class="op">-</span><span class="dv">1</span> .. <span class="dv">0</span>:   <span class="co">// Iterate the internal nodes backwards.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        siftDown(i)             <span class="co">// Sift each internal node down.</span></span></code></pre></div>
+<p>Note that this operation overwrites the existing heap. Also note that
+the original array will be modified, so the operation is
+<em>destructive</em>! The advantage is that it doesn’t allocate any new
+memory.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-building-a-min-heap"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Building a <em>min</em>-heap</h4>
+</summary>
+
+<div id="heapbuildPRO" class="embedContainer">
+<iframe id="heapbuildPRO_iframe" aria-label="heapbuildPRO" src="../interactive/Binary/heapbuildPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+
+</details>
+</section>
+</div>
+<p>What is the cost of <code>buildHeap</code>? Clearly it is the sum of
+the costs for the calls to <code>siftDown</code>. Each
+<code>siftDown</code> operation can cost at most the number of levels it
+takes for the node being sifted to reach the bottom of the tree. In any
+complete tree, approximately half of the nodes are leaves and so cannot
+be moved downward at all. One quarter of the nodes are one level above
+the leaves, and so their elements can move down at most one level. At
+each step up the tree we get half the number of nodes as were at the
+previous level, and an additional height of one. The maximum sum of
+total distances that elements can go is therefore</p>
+<p><span class="math display">
+\sum_{i=1}^{\log(n)} (i-1)\frac{n}{2^i}
+= \frac{n}{2}\sum_{i=1}^{\log(n)} \frac{i-1}{2^{i-1}}
+</span></p>
+<p>The summation on the right <a href="section-13.3.html#summation"
+class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">is
+known</a> to have a closed-form solution of approximately 2, so this
+algorithm takes <span class="math inline">O(n)</span> time in the worst
+case. This is better than building the heap one element at a time, which
+would cost <span class="math inline">O(n \log(n))</span> in the worst
+case.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visual explanation of the cost of
+<code>buildHeap</code>.</p>
+</summary>
+
+<div id="heapbuildProofCON" class="ssAV" data-short-name="heapbuildProofCON" data-long-name="Heap build analysis proof Slideshow" alt="Heap build analysis proof Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapbuildProofCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("heapbuildProofCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#heapbuildProofCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.11.html" accesskey="p" rel="previous">Case study: Disjoint sets in depth*</a>
+</div>
+<div class="navlink">
+<a href="section-9.13.html" accesskey="n" rel="next">Case study: In-place heapsort*</a>
+<a href="section-9.13.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
+
+

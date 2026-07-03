@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Implementing binary trees</title>
+  <title>DSABook – Sets and maps</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,404 +100,246 @@
 <nav class="sitenav">
 <div>
 <a href="section-8.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.2.html" accesskey="p" rel="previous">Case study: Full binary trees</a>
+<a href="section-8.2.html" accesskey="p" rel="previous">Priority queues</a>
 </div>
 <div>
-<a href="section-8.4.html" accesskey="n" rel="next">Traversing a binary tree</a>
+<a href="section-8.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
 <a href="section-8.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:implementing-binary-trees" class="level2"
-data-number="8.3">
+<section id="sec:ADTs:sets-and-maps" class="level2" data-number="8.3">
 <h2 data-number="8.3"><span class="header-section-number">8.3</span>
-Implementing binary trees</h2>
-<p>In this section we examine one way to implement binary tree nodes. By
-definition, all binary tree nodes have two children, though one or both
-children can be empty. Binary tree nodes typically contain a value
-field, with the type of the field depending on the application. The most
-common node implementation includes a value field and pointers to the
-two children. <a href="#fig:bintree_with_pointers">Figure 8.5</a> is an
-illustration of how the tree from <a
-href="section-8.1.html#fig:example_bintree">Figure 8.1</a> looks like, where the child
-pointers are shown explicitly.</p>
-<figure id="fig:bintree_with_pointers">
-
-<div id="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" class="ssAV" data-short-name="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" data-long-name="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" alt="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-25ee86761084f8f40ef22e6d516e3a2c", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-25ee86761084f8f40ef22e6d516e3a2c "+rule)}
-    var AV = NewAV();
-AddCSS(`.jsavcanvas {width: 600px}`)
-AV.ds.array([" ", "A", " "], {left: 180});
-var topDiff = 50;
-var arrB = AV.ds.array(["/", "B", " "], {left: 40, top: topDiff});
-arrB.css(0, {"background-color": "LightGray"});
-AV.ds.array([" ", "C", " "], {left: 320, top: topDiff});
-
-topDiff += 50;
-var arrD = AV.ds.array(["/", "D", "/"], {left: 70, top: topDiff});
-arrD.css(0, {"background-color": "LightGray"});
-var arrE = AV.ds.array([" ", "E", "/"], {left: 230, top: topDiff});
-arrE.css(2, {"background-color": "LightGray"});
-AV.ds.array([" ", "F", " "], {left: 410, top: topDiff});
-
-topDiff += 50;
-var arrG = AV.ds.array(["/", "G", "/"], {left: 150, top: topDiff});
-var arrH = AV.ds.array(["/", "H", "/"], {left: 350, top: topDiff});
-var arrI = AV.ds.array(["/", "I", "/"], {left: 470, top: topDiff});
-arrG.css(0, {"background-color": "LightGray"});
-arrG.css(2, {"background-color": "LightGray"});
-arrH.css(0, {"background-color": "LightGray"});
-arrH.css(2, {"background-color": "LightGray"});
-arrI.css(0, {"background-color": "LightGray"});
-arrI.css(2, {"background-color": "LightGray"});
-
-//line for A - B
-AV.g.line(200, 40, 90, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for A - C
-AV.g.line(250, 40, 370, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for B - D
-AV.g.line(115, 90, 120, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for C - E
-AV.g.line(340, 90, 280, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for C - F
-AV.g.line(395, 90, 450, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for E - G
-AV.g.line(250, 140, 200, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for F - H
-AV.g.line(430, 140, 395, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for F - I
-AV.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-AV.displayInit();
-AV.recorded();
-  });
-</script>
-
-<figcaption><p>Figure 8.5: Illustration of a typical pointer-based
-binary tree implementation, where each node stores two child pointers
-and a value</p></figcaption>
-</figure>
-<p>Here is a simple implementation for binary tree nodes, which can
-store one single element in each node. Every <code>BinaryNode</code>
-object also has two pointers, one to its left child and another to its
-right child.<br />
-</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BinaryNode <span class="kw">of</span> T:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T            <span class="co">// Element for this node.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    left: BinaryNode   <span class="co">// Pointer to left child.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    right: BinaryNode  <span class="co">// Pointer to right child.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    isLeaf() <span class="op">-&gt;</span> bool:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return true if a leaf node, false otherwise.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.left <span class="kw">is</span> <span class="va">null</span> <span class="kw">and</span> <span class="va">this</span>.right <span class="kw">is</span> <span class="va">null</span></span></code></pre></div>
-<p>We define a <em>leaf</em> to be a node with no children – i.e., where
-both childen pointers point to nothing.</p>
-<p>Some programmers find it convenient to add a pointer to the node’s
-parent, allowing easy upward movement in the tree. Using a parent
-pointer is somewhat analogous to adding a link to the previous node in a
-doubly linked list. In practice, the parent pointer is almost always
-unnecessary and adds to the space overhead for the tree implementation.
-It is not just a problem that parent pointers take space. More
-importantly, many uses of the parent pointer are driven by improper
-understanding of recursion and so indicate poor programming. If you are
-inclined toward using a parent pointer, consider if there is a more
-efficient implementation possible.</p>
-<section id="sec:binary-trees-1" class="level4 unnumbered">
-<h4 class="unnumbered">Binary trees</h4>
-<p>Our final datatype for binary trees is in fact very similar to the
-linked lists that we introduced in <a
-href="section-6.3.html#sec:stacks-implemented-as-linked-lists">Section 6.3</a>
-– we need a reference to the root node and the total size of the
-tree:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BinaryTree:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    root: BinaryNode <span class="op">=</span> <span class="va">null</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
-</section>
-<section id="sec:differentiating-between-internal-nodes-and-leaves"
-class="level3" data-number="8.3.1">
+Sets and maps</h2>
+<p>Many programming tasks involve <em>finding the right piece of
+information</em> in a large dataset. That is, we have a collection of
+items, and we want to quickly retrieve the items matching certain
+criteria. Here are some examples of information retrieval problems:</p>
+<dl>
+<dt>Spell-checking</dt>
+<dd>
+Given a set containing valid English words, check if a given string is a
+valid word.
+</dd>
+<dt>Cash register</dt>
+<dd>
+Given a database of everything for sale in a supermarket, find
+information about the item with a given <em>EAN code</em>.
+</dd>
+<dt>Search engine</dt>
+<dd>
+Given a collection of documents, find all documents containing a given
+word.
+</dd>
+</dl>
+<p>These problems can all be addressed using two abstract data types:
+the <em>set</em> and the <em>map</em>. Both provide efficient ways to
+manage a collection of elements, supporting operations to find, add, and
+remove elements.</p>
+<p>Sets and maps are useful in a huge variety of computer programs, and
+are perhaps the most useful of all data structures. But how can we
+design a class that implements a set or a map, in such a way that
+adding, removing and searching can be done efficiently? Later we will
+see several different ways of implementing sets and maps.</p>
+<ul>
+<li><p>Just as for priority queues we can implement a set or a map using
+a linked list or a dynamic array.</p></li>
+<li><p>In <a href="section-10.html#sec:search-trees">Chapter 10</a>, we
+learn about self-balancing <em>search trees</em>, a data structure for
+sets and maps where adding, removing and searching are all
+efficient.</p></li>
+<li><p>In <a href="section-11.html#sec:hash-tables">Chapter 11</a>, we
+learn about <em>hash tables</em>, which can be even faster than search
+trees, under some circumstances.-</p></li>
+</ul>
+<p>Search trees and hash tables are the main ways that sets and maps are
+implemented in practice. Almost every programming language provides sets
+and maps as a built-in feature, based on one of these technologies.</p>
+<section id="sec:ADTs:sets" class="level3" data-number="8.3.1">
 <h3 data-number="8.3.1"><span class="header-section-number">8.3.1</span>
-Differentiating between internal nodes and leaves</h3>
-<p>An important decision in the design of a pointer-based node
-implementation is whether the same class definition will be used for <a
-href="section-14.html#leaf-node" class="term"
-title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaves</a>
-and <a href="section-14.html#internal-node" class="term"
-title="In a tree, any node that has at least one non-empty child is an internal node.">internal
-nodes</a>. Using the same class for both will simplify the
-implementation, but might be an inefficient use of space. Some
-applications require data values only for the leaves. Other applications
-require one type of value for the leaves and another for the internal
-nodes. Examples include the <a
-href="section-14.html#huffman-coding-tree" class="term"
-title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
-coding tree</a> (see <a
-href="section-9.4.html#sec:case-study-huffman-coding">Section 9.4</a>),
-<span class="online">the <a href="section-14.html#binary-trie"
-class="term"
-title="A binary tree whose structure is that of a trie. Generally this is an implementation for a search tree. This means that the search key values are thought of a binary digits, with the digit in the position corresponding to this a node&#39;s level in the tree indicating a left branch if it is &#39;0&#39;, or a right branch if it is &#39;1&#39;. Examples include the Huffman coding tree and the Bintree.">binary
-trie</a>, the <a href="section-14.html#pr-quadtree" class="term"
-title="A type of quadtree that stores point data in two dimensions. The root of the PR quadtree represents some square region of 2d space. If that space stores more than one data point, then the region is decomposed into four equal subquadrants, each represented recursively by a subtree of the PR quadtree. Since many leaf nodes of the PR quadtree will contain no data points, implementation often makes use of the Flyweight design pattern. Related to the bintree.">PR
-Quadtree</a>,</span> and the <a href="section-14.html#expression-tree"
-class="term"
-title="A tree structure meant to represent a mathematical expression. Internal nodes of the expression tree are operators in the expression, with the subtrees being the sub-expressions that are its operand. All leaf nodes are operands.">expression
-tree</a> illustrated by <a href="#fig:expression_tree">Figure 8.6</a>
-below. By definition, only internal nodes have non-empty children. If we
-use the same node implementation for both internal and leaf nodes, then
-both must store the child pointers. But it seems wasteful to store child
-pointers in the leaf nodes. Thus, there are many reasons why it can save
-space to have separate implementations for internal and leaf nodes.</p>
-<figure id="fig:expression_tree">
+Sets</h3>
+<p>A <em>set</em> represents a collection of items, where we can
+<em>add</em> and <em>remove</em> items, and <em>check</em> if a given
+item is present in the set. A set cannot contain duplicate items: if we
+try to add an item that is already present, nothing happens, and the set
+is left unchanged. We can specify a minimal interface for sets like
+this:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span> <span class="kw">of</span> K <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(<span class="bu">set</span>, key: K)               <span class="co">// Adds the key to the set.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(<span class="bu">set</span>, key: K)            <span class="co">// Removes the key from the set, if it is there.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(<span class="bu">set</span>, key: K) <span class="op">-&gt;</span> Bool  <span class="co">// Returns true if the key is in the set.</span></span></code></pre></div>
+<section id="sec:example-spell-checking"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Spell-checking</h4>
+<p>We can use a set to create a very simple spell-checker, like the
+first example at the beginning of this section.</p>
+<p>To create the spell-checking lexicon, we start with an initially
+empty set, and then repeatedly <em>add</em> each valid word to the set.
+Then to spell-check a given word, we just call <em>contains</em> on the
+set.</p>
+</section>
+<p>We could also extend the interface with “bulk” operations, for taking
+the <em>union</em> or <em>intersection</em> of two sets. There are some
+data structures that can handle operations like that efficiently, such
+as the <em>disjoint-set</em> data structure (see <a
+href="section-9.3.html#sec:trees:disjoint-sets">Section 9.3</a>). But it
+is very difficult to design data structures that can handle bulk
+operations, so we do introduce any interface for them in this
+introductory text.</p>
+</section>
+<section id="sec:ADTs:maps" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2"><span class="header-section-number">8.3.2</span>
+Maps, or dictionaries</h3>
+<p>A <em>map</em> (or dictionary) represents a set of <em>keys</em>,
+where each key has an associated <em>value</em>. We can <em>add</em> and
+<em>remove</em> keys, but when we add a key we must specify what
+<em>value</em> we want to associated with it. We can <em>check</em> if a
+given key is present in the map, and we can also <em>look up</em> a key
+to find the associated value.</p>
+<p>A map cannot contain duplicate <em>keys</em>, so each key is
+associated with exactly one value. If we call <code>put(k,v)</code>, but
+the key <code>k</code> is already present, then the value associated
+with <code>k</code> gets changed to <code>v</code>. On the other hand, a
+map <em>can</em> contain duplicate <em>values</em>: two keys can map to
+the same value. Here is a possible minimal interface for maps:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span> <span class="kw">of</span> K <span class="kw">to</span> V <span class="kw">extends</span> <span class="bu">Collection</span> <span class="kw">of</span> K:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(<span class="bu">map</span>, key: K, value: V)     <span class="co">// Sets the value of the given key.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(<span class="bu">map</span>, key: K) <span class="op">-&gt;</span> V          <span class="co">// Returns the value associated with the given key.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(<span class="bu">map</span>, key: K)            <span class="co">// Removes the value associated with the given key.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(<span class="bu">map</span>, key: K) <span class="op">-&gt;</span> Bool  <span class="co">// Returns true if the key has an associated value.</span></span></code></pre></div>
+<p>Note that maps depend on two different types, the keys <code>K</code>
+and the values <code>V</code>. These types can be the same or different,
+depending on the needs of your application.</p>
+<section id="sec:example-cash-register"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Cash register</h4>
+<p>A map is a perfect match for implementing the <em>cash register</em>
+example from the beginning of this section: to find information about an
+item with a given EAN code.</p>
+<p>Here, the key should be the EAN code that the barcode scanner
+recognises, and the value should be a record containing information
+about the item. For example, the information record could be structured
+like this:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Item:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ean: String</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    name: String</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    price: <span class="bu">Number</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    expires: Date</span></code></pre></div>
+<p>Now, to put an item <code>p</code> in the database we simply call
+<code>put(database, p.ean, p)</code>, and to find the item with barcode
+<code>code</code> we call <code>get(database, code)</code>.</p>
+</section>
+</section>
+<section id="sec:ADTs:multimaps" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3"><span class="header-section-number">8.3.3</span>
+Multimaps</h3>
+<p>Maps have the restriction that each key has only one value. However,
+sometimes we want to store a list of records, where some records might
+have the same key. Then we want something like a map, but where a key
+can have multiple values associated with it. This structure is called a
+<em>multimap</em>.</p>
+<p>Most programming languages do not provide a multimap data structure,
+but this is not a serious drawback because we can easily implement it
+ourselves. The idea is to use a <em>map</em>, whose value type is a
+<em>set</em> of the actual values that we are interested in:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Multimap <span class="kw">of</span> K <span class="kw">to</span> V:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    mmap: <span class="bu">Map</span> <span class="kw">of</span> K <span class="kw">to</span> (<span class="bu">Set</span> <span class="kw">of</span> V)</span></code></pre></div>
+<p>To add a value to a multimap <code>mm</code>, we specify a key and
+value just as with a regular map:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">put</span>(mm, key, value):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span> <span class="op">=</span> <span class="bu">get</span>(mm.mmap, key)       <span class="co">// Fetch the set associated with key</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">null</span>:               <span class="co">// There is no set associated with key</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()           <span class="co">// Needs to use a specific set implementation</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">put</span>(mm.mmap, key, <span class="bu">set</span>)    <span class="co">// Associate key with the currently empty set</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(<span class="bu">set</span>, value)               <span class="co">// Add value to the set associated with key</span></span></code></pre></div>
+<p>Other possible operations can be used to remove a value (with an
+associated key), and to iterate over all values for a given key.</p>
+<p>Note that we do not have to <code>put</code> the updated set back
+into the internal map. Complex data structures are <em>mutable</em>:
+when we update a set using <code>add</code> it is modified
+<em>in-place</em> – so it is still pointed to by the internal map.</p>
+<section id="sec:example-search-engine"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Search engine</h4>
+<p>The <em>search engine</em> example is a good use case of a multimap.
+First we have to build the database, which is a multimap where the key
+is a word, and the values are all document id numbers containing that
+word. Now, searching for a word just means looking it up in the
+multimap, which is the same as calling <code>get</code> on the
+underlying map.</p>
+</section>
+</section>
+<section id="sec:implementing-sets-and-maps-using-linked-lists"
+class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4"><span class="header-section-number">8.3.4</span>
+Implementing sets and maps using linked lists</h3>
+<p>A simple (but inefficient) data structure to implement a set is a
+<em>linked list</em>. Recall from <a
+href="section-6.2.html#sec:sequences:linked-stacks">Section 6.2.1</a>
+that a linked list consists of nodes pointing to their successors:</p>
 
-<div id="img-jsav-749820f6afab4b60c93a51712cc02d13" class="ssAV" data-short-name="img-jsav-749820f6afab4b60c93a51712cc02d13" data-long-name="img-jsav-749820f6afab4b60c93a51712cc02d13" alt="img-jsav-749820f6afab4b60c93a51712cc02d13" tabIndex="-1">
+<div id="img-jsav-498507963fbf23454753aadd6e7dfa4e" class="ssAV" data-short-name="img-jsav-498507963fbf23454753aadd6e7dfa4e" data-long-name="img-jsav-498507963fbf23454753aadd6e7dfa4e" alt="img-jsav-498507963fbf23454753aadd6e7dfa4e" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
 
 
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-749820f6afab4b60c93a51712cc02d13", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-749820f6afab4b60c93a51712cc02d13 "+rule)}
-    var AV = NewAV();
-AddCSS(`.internalnode {
-  border-radius: 50px;
-  background-color: white;
-  line-height: 22px;
-  z-index: 100; /* Prevents the tails of the edges from showing up in the background of the node */
-}`);
-AV.ds.array([" ", "&ndash;", " "], {left: 420});
-
-var topDiff = 60;
-AV.ds.array([" ", "&times;", " "], {left: 350, top: topDiff});
-var arr3 = AV.ds.array(["<em>c</em>"], {left: 520, top: topDiff});
-arr3.addClass([0], "internalnode");
-
-topDiff += 60;
-AV.ds.array([" ", "&times;", " "], {left: 240, top: topDiff});
-AV.ds.array([" ", "+", " "], {left: 460, top: topDiff});
-
-topDiff += 60;
-var arr6 = AV.ds.array(["4"], {left: 240, top: topDiff});
-var arr7 = AV.ds.array(["<em>x</em>"], {left: 300, top: topDiff});
-AV.ds.array([" ", "&times;", " "], {left: 400, top: topDiff});
-var arr9 = AV.ds.array(["<em>a</em>"], {left: 550, top: topDiff});
-arr6.addClass([0], "internalnode");
-arr7.addClass([0], "internalnode");
-arr9.addClass([0], "internalnode");
-
-topDiff += 60;
-var arr10 = AV.ds.array(["2"], {left: 400, top: topDiff});
-var arr11 = AV.ds.array(["<em>x</em>"], {left: 460, top: topDiff});
-arr10.addClass([0], "internalnode");
-arr11.addClass([0], "internalnode");
-
-//line for [-] - [*]
-AV.g.line(440, 40, 400, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [-] - c
-AV.g.line(495, 40, 535, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - [*]
-AV.g.line(370, 100, 290, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - [+]
-AV.g.line(425, 100, 505, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - 4
-AV.g.line(255, 160, 255, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - x
-AV.g.line(315, 160, 315, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [+] - [*]
-AV.g.line(475, 160, 450, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [+] - a
-AV.g.line(535, 160, 565, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - 2
-AV.g.line(420, 220, 420, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for [*] - x
-AV.g.line(475, 220, 475, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-AV.displayInit();
-AV.recorded();
+    function NewAV() {return new JSAV("img-jsav-498507963fbf23454753aadd6e7dfa4e", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-498507963fbf23454753aadd6e7dfa4e "+rule)}
+    var av = NewAV();
+var l = av.ds.list({nodegap: 30});
+l.addFirst("").addFirst("").addFirst("");
+l.layout();
+av.displayInit();
+av.recorded();
   });
 </script>
 
-<figcaption><p>Figure 8.6: An example of an expression tree for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>x</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">4x(2x + a) - c</annotation></semantics></math></p></figcaption>
-</figure>
-<p>As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by <a
-href="#fig:expression_tree">Figure 8.6</a>. The expression tree
-represents an algebraic expression composed of binary operators such as
-addition, subtraction, multiplication, and division. Internal nodes
-store operators, while the leaves store operands. The tree of the figure
-represents the expression
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>x</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">4x(2x + a) - c</annotation></semantics></math>.
-The storage requirements for a leaf in an expression tree are quite
-different from those of an internal node. Internal nodes store one of a
-small set of operators, so internal nodes could store a small code
-identifying the operator such as a single byte for the operator’s
-character symbol. In contrast, leaves store variable names or numbers,
-which is considerably larger in order to handle the wider range of
-possible values. At the same time, leaf nodes need not store child
-pointers.</p>
-<p><a href="section-14.html#object-oriented-programming-paradigm"
-class="term"
-title="An approach to problem-solving where all computations are carried out using objects.">Object-oriented
-languages</a> allow us to differentiate leaf from internal nodes through
-the use of a <a href="section-14.html#class-hierarchy" class="term"
-title="In object-oriented programming, a set of classes and their interrelationships. One of the classes is the base class, and the others are subclasses that inherit either directly or indirectly from the base class.">class
-hierarchy</a>. A <a href="section-14.html#base-class" class="term"
-title="In object-oriented programming, a class from which another class inherits. The class that inherits is called a subclass.">base
-class</a> provides a general definition for an object, and a <a
-href="section-14.html#subclass" class="term"
-title="In object-oriented programming, any class within a class hierarchy that inherits from some other class.">subclass</a>
-modifies the base class to add more detail. We will not discuss further
-how to implement different kind of tree nodes more in this book, but
-will just assume that all nodes are of the same class.</p>
-</section>
-<section id="sec:space-requirements" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2"><span class="header-section-number">8.3.2</span>
-Space requirements</h3>
-<p>In this subsection we present techniques for calculating the amount
-of <a href="section-14.html#overhead" class="term"
-title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>
-required by a <a href="section-14.html#binary-tree" class="term"
-title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
-tree</a>, based on its node implementation.</p>
-<div class="html">
-<p>Recall that overhead is the amount of space necessary to maintain the
-data structure. In other words, it is any space not used to store data
-records. The amount of overhead depends on several factors including
-which nodes store data values (all nodes, or just the leaves), whether
-the leaves store child pointers, and whether the tree is a <a
-href="section-14.html#full-tree" class="term"
-title="A binary tree is full if every node is either a leaf node or else it is an internal node with two non-empty children.">full
-binary tree</a>.</p>
-<p>In a simple pointer-based implementation for binary tree nodes, every
-node has two pointers to its children (even when the children are NULL).
-This implementation requires total space amounting to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo>+</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">n(2P + D)</annotation></semantics></math>
-for a tree of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-nodes. Here,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
-stands for the amount of space required by a pointer, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
-stands for the amount of space required by a data value. The total
-overhead space will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>P</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">2Pn</annotation></semantics></math>
-for the entire tree. Thus, the overhead fraction will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>P</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo>+</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">2P/(2P + D)</annotation></semantics></math>.
-The actual value for this expression depends on the relative size of
-pointers versus data fields. If we arbitrarily assume that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">P = D</annotation></semantics></math>,
-then a binary tree has about two thirds of its total space taken up in
-overhead. Worse yet, the Full Binary Tree Theorem tells us that about
-half of the pointers are “wasted” NULL values that serve only to
-indicate tree structure, but which do not provide access to new
-data.</p>
-<p>In many languages (such as Java or Javascript), the most typical
-implementation is not to store any actual data in a node, but rather a
-pointer to the data record. In this case, each node will typically store
-three pointers, all of which are overhead, resulting in an overhead
-fraction of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi>P</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>3</mn><mi>P</mi><mo>+</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">3P/(3P + D)</annotation></semantics></math>.</p>
-<p>If only leaves store data values, then the fraction of total space
-devoted to overhead depends on whether the tree is full. If the tree is
-not full, then conceivably there might only be one leaf node at the end
-of a series of internal nodes. Thus, the overhead can be an arbitrarily
-high percentage for non-full binary trees. The overhead fraction drops
-as the tree becomes closer to full, being lowest when the tree is truly
-full. In this case, about one half of the nodes are internal.</p>
-<p>Great savings can be had by eliminating the pointers from leaf nodes
-in full binary trees. Again assume the tree stores a pointer to the data
-field. Because about half of the nodes are leaves and half internal
-nodes, and because only internal nodes now have child pointers, the
-overhead fraction in this case will be approximately</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>D</mi><mi>n</mi></mrow></mfrac><mo>=</mo><mfrac><mi>P</mi><mrow><mi>P</mi><mo>+</mo><mi>D</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} = \frac{P}{P + D}
-</annotation></semantics></math></p>
-<p>If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">P = D</annotation></semantics></math>,
-the overhead drops to about one half of the total space. However, if
-only leaf nodes store useful information, the overhead fraction for this
-implementation is actually three quarters of the total space, because
-half of the “data” space is unused.</p>
-<p>If a full binary tree needs to store data only at the leaf nodes, a
-better implementation would have the internal nodes store two pointers
-and no data field while the leaf nodes store only a pointer to the data
-field. This implementation requires</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mn>2</mn><mi>P</mi><mo>+</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mi>P</mi><mo>+</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
-\frac{n}{2}2P + \frac{n}{2}(P+D)
-</annotation></semantics></math></p>
-<p>units of space. If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">P = D</annotation></semantics></math>,
-then the overhead is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi>P</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>3</mn><mi>P</mi><mo>+</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>3</mn><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">3P/(3P + D) = 3/4</annotation></semantics></math>.
-It might seem counter-intuitive that the overhead ratio has gone up
-while the total amount of space has gone down. The reason is because we
-have changed our definition of “data” to refer only to what is stored in
-the leaf nodes, so while the overhead fraction is higher, it is from a
-total storage requirement that is lower.</p>
-<p>There is one serious flaw with this analysis. When using separate
-implementations for internal and leaf nodes, there must be a way to
-distinguish between the node types. When separate node types are
-implemented via Java subclasses, the runtime environment stores
-information with each object allowing it to determine, for example, the
-correct subclass to use when the <code>isLeaf</code> virtual function is
-called. Thus, each node requires additional space. Only one bit is truly
-necessary to distinguish the two possibilities. In rare applications
-where space is a critical resource, implementors can often find a spare
-bit within the node’s value field in which to store the node type
-indicator. An alternative is to use a spare bit within a node pointer to
-indicate node type. For example, this is often possible when the
-compiler requires that structures and objects start on word boundaries,
-leaving the last bit of a pointer value always zero. Thus, this bit can
-be used to store the node-type flag and is reset to zero before the
-pointer is dereferenced. Another alternative when the leaf value field
-is smaller than a pointer is to replace the pointer to a leaf with that
-leaf’s value. When space is limited, such techniques can make the
-difference between success and failure. In any other situation, such
-“bit packing” tricks should be avoided because they are difficult to
-debug and understand at best, and are often machine dependent at
-worst.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Here is an exercise for the space requirements of binary trees.</p>
-</summary>
-
-<div id="TreeOverheadFIB" class="embedContainer">
-<iframe id="TreeOverheadFIB_iframe" aria-label="TreeOverheadFIB" src="../interactive/Binary/TreeOverheadFIB.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<p>To search for an element we just iterate through all nodes and
+compare with the value we are looking for. To add an element we can
+simply insert it at the head of the list. But before we do that we have
+to search for it to check that it is not already in the list, because a
+set does not allow duplicate elements.</p>
+<p>To remove an element we search for it to get its node, and then we
+repoint the preceding node to the node following it, like this to remove
+element <span class="math inline">B</span>:</p>
+<div class="center">
+<p><img src="images/ADTs-LinkedListSet2.svg" style="width:50.0%" /></p>
 </div>
-
-</details>
-</div>
-</div>
+<p>Conceptually this is not difficult, but the code becomes a little
+complicated because we have to keep track of the preceding node:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">remove</span>(<span class="bu">set</span>, key):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    previous <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    node <span class="op">=</span> <span class="bu">set</span>.head</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">!=</span> node.key:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        previous <span class="op">=</span> node</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> node.<span class="bu">next</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> previous <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span>.head <span class="op">=</span> node.<span class="bu">next</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        previous.<span class="bu">next</span> <span class="op">=</span> node.<span class="bu">next</span></span></code></pre></div>
+<p>Note that we have a special case: if the preceding node is null it is
+the head of the list that should be removed.</p>
+<p>The linked list can easily be modified to implement a map instead of
+a set. We just augment the linked list nodes to also include the
+value:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MapNode:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// Pointer to the next node in the list</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    key          <span class="co">// Key for this node</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    value        <span class="co">// Value for this node</span></span></code></pre></div>
+<p>Just as for priority queues, we can also use dynamic arrays to
+implement sets and maps, and we will discuss that in the next
+section.</p>
 </section>
 </section>
 </main>
@@ -487,10 +348,10 @@ Your browser does not support iframes.
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-8.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-8.2.html" accesskey="p" rel="previous">Case study: Full binary trees</a>
+<a href="section-8.2.html" accesskey="p" rel="previous">Priority queues</a>
 </div>
 <div class="navlink">
-<a href="section-8.4.html" accesskey="n" rel="next">Traversing a binary tree</a>
+<a href="section-8.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
 <a href="section-8.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -498,5 +359,6 @@ Your browser does not support iframes.
 
 </body>
 </html>
+
 
 

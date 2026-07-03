@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Implementing sets using lists</title>
+  <title>DSABook – AVL trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -81,225 +100,262 @@
 <nav class="sitenav">
 <div>
 <a href="section-10.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.2.html" accesskey="p" rel="previous">Maps, or dictionaries</a>
+<a href="section-10.2.html" accesskey="p" rel="previous">Self-balancing trees</a>
 </div>
 <div>
-<a href="section-10.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
+<a href="section-10.4.html" accesskey="n" rel="next">2-3 trees and B-trees</a>
 <a href="section-10.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-implementing-sets-using-lists"
-class="level2" data-number="10.3">
+<section id="sec:search-trees:AVL-trees" class="level2"
+data-number="10.3">
 <h2 data-number="10.3"><span class="header-section-number">10.3</span>
-Case study: Implementing sets using lists</h2>
-<p>Both sets and maps can be implemented using lists. For a set, we can
-use a simple list of elements.</p>
-<section id="sec:using-a-linked-list" class="level4 unnumbered">
-<h4 class="unnumbered">Using a linked list</h4>
-<p>Recall from <a
-href="section-6.3.html#sec:stacks-implemented-as-linked-lists">Section 6.3</a>
-that a linked list consists of nodes pointing to their successors:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SetNode <span class="kw">of</span> T:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T             <span class="co">// Value for this node</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: SetNode <span class="kw">of</span> T  <span class="co">// Pointer to next node in list</span></span></code></pre></div>
-<p>Just as for linked stacks, our set datatype will consist of a pointer
-to the head of the list, and its size. We also have to give the
-operations for <code>contains</code>, <code>add</code> and
-<code>remove</code>.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet <span class="kw">implements</span> <span class="bu">Set</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    head: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to head of list</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>       <span class="co">// Size of list</span></span></code></pre></div>
-<p>Searching in a linked list is a simple while loop where we start at
-the head and continue down the list. If we reach the end of the list we
-return <code>false</code>, because the element wasn’t found:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(elem):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> head</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> elem <span class="op">==</span> node.elem:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">true</span>   <span class="co">// We found the element, so return true</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.<span class="bu">next</span>  <span class="co">// Move to the next list node</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">false</span>          <span class="co">// We reached the end of the list</span></span></code></pre></div>
-<p>To add an element we first have to check if it is already there –
-sets are not allowed to contain the same element twice. If it is not in
-the list we can just attach a new list node before the head of the list
-(and increase the size):</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">contains</span>(elem):</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            newHead <span class="op">=</span> <span class="kw">new</span> Node(elem, head)  <span class="co">// Create a new node pointing to the current head</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            head <span class="op">=</span> newHead   <span class="co">// Redirect the head to the new node</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
-<p>Removing an element is slightly trickier. If we want to remove a
-certain node from the list, we have to redirect the <code>next</code>
-pointer from the <em>previous</em> node. So we have to search for the
-node <em>before</em> the node we want to remove. We can do that by
-keeping a <code>prev</code> pointer while iterating through the
-list.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedSet:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(elem):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        prev <span class="op">=</span> <span class="va">null</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> head</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> elem <span class="op">==</span> node.elem:  <span class="co">// We found the node to remove</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> prev <span class="kw">is</span> <span class="va">null</span>:</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                    head <span class="op">=</span> node.<span class="bu">next</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                    prev.<span class="bu">next</span> <span class="op">=</span> node.<span class="bu">next</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                node.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            prev <span class="op">=</span> node</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.<span class="bu">next</span></span></code></pre></div>
-<p>Note that we have a special case: if <code>prev</code> is null it is
-the head itself that we want to remove, because there is not previous
-node yet.</p>
+AVL trees</h2>
+<p>An AVL tree is a binary search tree with the following additional
+balancing invariant:</p>
+<section id="sec:invariant-avl-balance"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Invariant: AVL balance</h4>
+<p>For every node, the heights of its subtrees differ by at most 1.</p>
 </section>
-<section id="sec:linear-complexity" class="level4 unnumbered">
-<h4 class="unnumbered">Linear complexity</h4>
-<p>It is clear that all the operations are linear in the size of the
-list,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-because in the worst case we have to look at all nodes. In later
-chapters we will see how to improve the efficiency, by using</p>
-<ul>
-<li><a href="section-14.html#balanced-tree" class="term"
-title="A tree where the subtrees meet some criteria for being balanced. Two possibilities are that the tree is height balanced, or that the tree has a roughly equal number of nodes in each subtree.">Balanced
-search trees</a> (<a
-href="section-11.2.html#sec:self-balancing-trees">Section 11.2</a>),
-which bring down the complexity of the operations to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>.</li>
-<li><a href="section-14.html#hash-table" class="term"
-title="The data structure (usually an array) that stores data records for lookup using hashing.">Hash
-tables</a> (<a href="section-12.html#sec:hash-tables">Chapter 12</a>),
-which make the operations constant time,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.</li>
-</ul>
-<p>But some times it is enough to use a simple linked list-based
-implementation. And in fact, the <a
-href="section-14.html#separate-chaining" class="term"
-title="In hashing, a synonym for open hashing">separate chaining</a>
-hash table (<a
-href="section-12.3.html#sec:separate-chaining">Section 12.3</a>)
-requires an underlying simpler implementation – and there a linked list
-works very fine!</p>
-</section>
-<section id="sec:using-a-sorted-array" class="level4 unnumbered">
-<h4 class="unnumbered">Using a sorted array</h4>
-<p>There is a way to speed up <em>one</em> of the operations, by using a
-sorted array instead of a linked list. If we have a sorted array of
-elements, the <code>contains</code> method can use <a
-href="section-14.html#binary-search" class="term"
-title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
-search</a> (<a
-href="section-1.6.html#sec:binary-search">Section 1.6.1</a>), which
-takes logarithmic time (<a
-href="section-2.8.html#sec:case-study-analysing-binary-search">Section 2.8</a>).
-Hence looking up items will be really efficient.</p>
-<p>Unfortunately, modifying the data structure is still slow. If we want
-to <code>add</code> an item to a sorted array, we have to keep the array
-sorted – and that means we need to <em>insert</em> the new item at the
-right place in the array, using the insertion algorithm from Insertion
-Sort (<a href="section-3.6.html#sec:insertion-sort">Section 3.6</a>).
-This takes linear time in the worst case. Similarly, to
-<code>remove</code> an item without creating a hole in the array, we
-need to shift a bunch of elements in the array, and this also takes
-linear time.</p>
-<p>However, a sorted array is a suitable way to implement a set or a map
-that <em>never changes</em>, that is where we never need to add or
-remove items after the array is created. We start by sorting the array,
-using either Quicksort or Mergesort, and then we can use binary search
-to find items in it. Sorted arrays also support the <em>sorted set</em>
-and <em>sorted map</em> operations such as <em>range queries</em> (see
-<a href="section-10.4.html#sec:sorted-sets-and-maps">Section 10.4</a>),
-because these can also be implemented using binary search.</p>
-<p>Sorted arrays can also be useful in cases where we always add
-<em>many</em> items in one go. Given a sorted array
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
-and an unsorted list of items
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
-we can add the items in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-as follows. First we sort
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
-then we merge
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
-using the merge algorithm from Mergesort. Note that the merge step takes
-linear time, and sorting
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-takes a bit more than linear time, so this is a lot faster than adding
-all the items from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-one by one (which would take quadratic time).</p>
-</section>
-<section id="sec:implementing-maps" class="level3" data-number="10.3.1">
+<p>Note that this does not mean that AVL trees are perfectly balanced.
+But the invariant guarantees that the height of the tree is never more
+than 1.44 times the height of a perfectly balanced binary search tree.
+(Side note: 1.44 is actually <span
+class="math inline">1/\log_2(\phi)</span>, where <span
+class="math inline">\phi=(1+\sqrt{5})/2</span> is the <em>golden
+ratio</em>.) As always when it comes to complexity the exact constant is
+not important, but what it says is that the maximum height of an AVL
+tree is <span class="math inline">O(\log(n))</span> where <span
+class="math inline">n</span> is its size.</p>
+<p>To maintain the invariant, AVL trees need to store an additional
+property in every tree node, the <em>balance factor</em>. This is not
+really a “factor” (it has nothing to do with multiplication), but rather
+the difference in heights between the right and the left subtrees. Or in
+other words, <span class="math inline">\text{bf}(t) =
+\text{height}(t.\text{right}) - \text{height}(t.\text{left})</span>.
+Using this notation, the invariant can be formulated like this:</p>
+<p><span class="math display"> -1\leq\text{bf}(t)\leq 1 \text{ for all
+tree nodes } t </span></p>
+<p>When we draw AVL trees we usually write the balance factor beside
+each node. <a href="#fig:AVL-examples">Figure 10.6</a> shows two
+balanced AVL trees representing the same set {A,B,C,D,E,F,G}.</p>
+<figure id="fig:AVL-examples">
+<img src="images/SearchTrees-AVL-Examples.svg" style="width:60.0%"
+alt="Figure 10.6: Two balanced AVL trees representing the same set of elements." />
+<figcaption aria-hidden="true">Figure 10.6: Two balanced AVL trees
+representing the same set of elements.</figcaption>
+</figure>
+<p>Now we have to ensure that we restore the balance whenever a tree
+node becomes unbalanced, and we do that by using the <em>tree
+rotations</em> from <a
+href="section-10.2.html#sec:search-trees:rotations">Section 10.2.1</a>.
+The tree can become unbalanced in two cases – when <em>inserting</em>
+and when <em>deleting</em> values.</p>
+<section id="sec:implementing-avl-nodes" class="level3"
+data-number="10.3.1">
 <h3 data-number="10.3.1"><span
-class="header-section-number">10.3.1</span> Implementing maps</h3>
-<p>If we want to implement a map instead of a set, we have two
-choices:</p>
-<ul>
-<li>We can have a list or array of <em>key-value</em> pairs.</li>
-<li>Alternatively, we can use two lists or arrays, one for holding the
-keys and another for holding the values. The two lists must be “kept in
-sync” so that a key with its value occurs at the same position.</li>
-</ul>
-<p>Note that these maps are exactly as slow as the corresponding sets
-(linked lists and sorted arrays), so they are not useful for working
-with large collections – for this we refer to <a
-href="section-11.html#sec:search-trees">Chapters 11</a> and <a
-href="section-12.html#sec:hash-tables">12</a>.</p>
-<section id="sec:using-a-linked-list-1" class="level4 unnumbered">
-<h4 class="unnumbered">Using a linked list</h4>
-<p>If we want to implement the map using a linked list, the easiest is
-probably to have list nodes that contain both the keays and the
-values:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MapNode <span class="kw">of</span> K <span class="kw">to</span> V:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    key: K          <span class="co">// Key for this node</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    value: V        <span class="co">// Value for this node</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: MapNode   <span class="co">// Pointer to next node in list</span></span></code></pre></div>
-<p>The map operations <code>get</code>, <code>put</code> and
-<code>remove</code> are minor modifications to the set operations that
-we defined earlier. We leave them as an exercise to the reader to
-implement.</p>
+class="header-section-number">10.3.1</span> Implementing AVL nodes</h3>
+<p>We can store the balance factor in every node, and this uses very
+little extra memory since there are only three possibilities, <span
+class="math inline">-1</span>, <span class="math inline">0</span> and
+<span class="math inline">+1</span>. Therefore, storing the balance uses
+only two bits per tree node.</p>
+<p>However, if we do this the implementations of insertion and deletion
+become slightly more complicated, so most AVL implementations store the
+<em>height</em> of each node instead. If we know the height of each tree
+node, it is easy to calculate the balance using the formula above.
+Storing the height will use more memory, but not a lot – it is enough to
+use only one byte (8 bits) for the height, because we will anyway never
+have room for any AVL tree with a height larger than <span
+class="math inline">2^8=256</span></p>
 </section>
-<section id="sec:using-a-sorted-array-1" class="level4 unnumbered">
-<h4 class="unnumbered">Using a sorted array</h4>
-<p>If we want to use a sorted array, one possibility is to use two
-arrays – one for the keys and another for the values.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SortedArrayMap <span class="kw">of</span> K <span class="kw">to</span> V:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    keys: <span class="bu">Array</span> <span class="kw">of</span> K</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    values: <span class="bu">Array</span> <span class="kw">of</span> V</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span></span></code></pre></div>
-<p>The implementations of the set methods are left as exercises to the
-reader, but there are some important things to remember:</p>
+<section id="sec:inserting-into-an-avl-tree" class="level3"
+data-number="10.3.2">
+<h3 data-number="10.3.2"><span
+class="header-section-number">10.3.2</span> Inserting into an AVL
+tree</h3>
+<p>To insert a value into an AVL tree we first treat it as a standard
+binary search tree. The value will therefore be added as a new leaf node
+somewhere in the tree. But this might break the balance invariant of the
+parent node, or the parent’s parent, or any other ancestor all the way
+up to the root. For example, if we want to add H to the example trees in
+<a href="#fig:AVL-examples">Figure 10.6</a>, then they will look like in
+<a href="#fig:AVL-add-rotate">Figure 10.7</a>, where the balance factors
+that are changed are marked in bold.</p>
+<figure id="fig:AVL-add-rotate">
+<img src="images/SearchTrees-AVL-ExamplesAddRotate.svg"
+style="width:100.0%"
+alt="Figure 10.7: Inserting H into the trees from Figure 10.6. The affected nodes and their balances are marked in bold. The right tree becomes unbalanced, so we have to left-rotate over the node F." />
+<figcaption aria-hidden="true">Figure 10.7: Inserting H into the trees
+from <a href="#fig:AVL-examples">Figure 10.6</a>. The affected nodes and
+their balances are marked in bold. The right tree becomes unbalanced, so
+we have to left-rotate over the node F.</figcaption>
+</figure>
+<p>Notice that the left tree is still AVL balanced, so we do not have to
+do anything further. But in the right tree, the grandparent F have
+become unbalanced. The F node is <em>right-heavy</em>, and we can solve
+this imbalance by rotating it to the left. In this case it is enough
+with a <em>single</em> rotation.</p>
+<section id="sec:single-rotations" class="level4 unnumbered">
+<h4 class="unnumbered">Single rotations</h4>
+<p>The example above was when the unbalanced node had a <em>right-right
+imbalance</em>. This means that not only the node itself is right-heavy,
+but its child is too. When a node is right-right unbalanced, it has the
+general structure as shown in <a
+href="#fig:AVL-left-rotate">Figure 10.8</a>. This means that the middle
+subtree <span class="math inline">t_2</span> cannot be higher than the
+rightmost subtree <span class="math inline">t_3</span>. And since the
+grandparent <span class="math inline">x</span> has balance <span
+class="math inline">+2</span>, there are only two options: either <span
+class="math inline">t_3</span> has height one more than <span
+class="math inline">t_2</span>, or they have the same height. After
+performing a single left-rotation, <span class="math inline">t_3</span>
+has moved up one level and the left subtree <span
+class="math inline">t_1</span> has moved down one level. The final
+subtree is now AVL-balanced, because no node has a balance factor
+outside of <span class="math inline">\{-1,0,+1\}</span>.</p>
+<figure id="fig:AVL-left-rotate">
+<img src="images/SearchTrees-AVL-LeftRotate-2.svg" style="width:80.0%"
+alt="Figure 10.8: A single left-rotation solve a right-right imbalance. The left subtree t_1 moves down one level, and the right subtree t_3 moves up, and the result is that the final tree becomes a little more balanced." />
+<figcaption aria-hidden="true">Figure 10.8: A single left-rotation solve
+a right-right imbalance. The left subtree <span
+class="math inline">t_1</span> moves down one level, and the right
+subtree <span class="math inline">t_3</span> moves up, and the result is
+that the final tree becomes a little more balanced.</figcaption>
+</figure>
+<p>Notice the difference with <a
+href="section-10.2.html#fig:BST-rebalance">Figure 10.3</a>, where we needed to reorganise
+the tree completely after adding one element. We managed this because
+the AVL invariant is <em>relaxed</em>, it does not require that the tree
+is perfectly balanced.</p>
+</section>
+<section id="sec:double-rotations" class="level4 unnumbered">
+<h4 class="unnumbered">Double rotations</h4>
+<p>There is another right-heavy case – when the <em>right-left</em>
+grandchild (<span class="math inline">t_2</span>) is higher than the
+<em>right-right</em> (<span class="math inline">t_3</span>). If we
+perform a single rotation over <span class="math inline">x</span> we do
+not win anything: the height of <span class="math inline">t_2</span>
+will turn the new tree into a <em>left-right</em> imbalance instead,
+which is just a mirror case of what we started from.</p>
+<p>The solution is to perform a <em>double rotation</em>. That is, first
+we transform the right-left case into a right-right case, by a right
+rotation over <span class="math inline">y</span>. After this we can
+rotate left over <span class="math inline">x</span>. The whole double
+rotation is shown in <a href="#fig:AVL-double-rotate">Figure 10.9</a>,
+and afterwards all nodes are AVL balanced!</p>
+<figure id="fig:AVL-double-rotate">
+<img src="images/SearchTrees-AVL-RightLeftRotate-2.svg"
+style="width:100.0%"
+alt="Figure 10.9: To solve a right-left imbalance we need to do a double rotation. First right-rotate over the child y, and left-rotate over the parent x. Notice how the resulting tree is much more balanced." />
+<figcaption aria-hidden="true">Figure 10.9: To solve a right-left
+imbalance we need to do a double rotation. First right-rotate over the
+child <span class="math inline">y</span>, and left-rotate over the
+parent <span class="math inline">x</span>. Notice how the resulting tree
+is much more balanced.</figcaption>
+</figure>
+<p>The mirrored situations, <em>left</em> imbalances, are of course
+solved in the mirrored way, by performing <em>right</em> rotations.</p>
+</section>
+</section>
+<section id="sec:implementing-insertion" class="level3"
+data-number="10.3.3">
+<h3 data-number="10.3.3"><span
+class="header-section-number">10.3.3</span> Implementing insertion</h3>
+<p>AVL tree insertion and deletion are easiest to implement as recursive
+functions. They are very similar to the normal BST insertion and
+deletion, but as the recursion unwinds up the tree, we perform the
+appropriate rotation on any node that is found to be unbalanced.</p>
+<section id="sec:algorithm-adding-to-an-avl-tree-recursively"
+class="level4 unnumbered algorithm">
+<h4 class="unnumbered">Algorithm: Adding to an AVL tree,
+recursively</h4>
+<p>To add a value <span class="math inline">x</span> to an AVL node:</p>
 <ul>
-<li>The <code>keys</code> and <code>values</code> must be kept in sync,
-so that <code>keys[i]</code> is always the key for the value in
-<code>values[i]</code></li>
-<li>This means that we have to remember to modify both arrays in the
-same way – if we delete the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
-element we have to delete both <code>keys[i]</code> and
-<code>values[i]</code> (and shift the arrays in the same way)</li>
+<li>If the node is empty, return a node node with value <span
+class="math inline">x</span>.</li>
+<li>If <span class="math inline">x</span> is equal to the node value,
+return the node as it is.</li>
+<li>If <span class="math inline">x</span> is smaller than the node
+value:
+<ul>
+<li>Reassign the left child with the result of adding <span
+class="math inline">x</span> to it.</li>
+<li>If the node becomes unbalanced, single- or double-rotate to the
+right, depending on the kind of imbalance.</li>
+<li>Update the height of the node, and return it.</li>
+</ul></li>
 </ul>
 </section>
+</section>
+<section id="sec:deleting-a-node" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4"><span
+class="header-section-number">10.3.4</span> Deleting a node</h3>
+<p>Deletion in an AVL tree is similar to AVL insertion: first we use the
+normal BST deletion, and then we rebalance the parent nodes all the way
+up to the root.</p>
+<p>We can start from the pseudocode in <a
+href="section-10.1.html#sec:search-trees:BST-deletion">Section 10.1.3</a>,
+and we just have to rebalance and update the height right before we
+return the updated tree.</p>
+</section>
+<section id="sec:complexity-analysis-4" class="level3"
+data-number="10.3.5">
+<h3 data-number="10.3.5"><span
+class="header-section-number">10.3.5</span> Complexity analysis</h3>
+<p>How much extra time does it take to rebalance the tree?</p>
+<p>When we add a new node (or delete one), several nodes might become
+unbalanced. But all of these nodes are ancestors of the added (or
+deleted) node. So in the worst case we have to rebalance all nodes that
+we passed when searching for the insertion point. That is, all nodes on
+the path from the root node to the added node.</p>
+<p>Since an AVL tree is balanced, there are never more than <span
+class="math inline">O(\log(n))</span> ancestors to any node. So, in the
+worst case we will rebalance at most <span
+class="math inline">O(\log(n))</span> nodes after one insertion (or
+deletion).</p>
+<p>Rebalancing one single node is constant time. It involves one or two
+rotations, and a rotation is constant time. Therefore, rebalancing a
+tree after insertion or deletion is logarithmic, <span
+class="math inline">O(\log(n))</span>. In fact, rebalancing after
+addition is constant time, because the tree will always be balanced
+after the first rebalancing. But this doesn’t change the complexity of
+addition, because it is logarithmic to find the insertion point.</p>
+<p>In summary, we have come up with our first <em>efficient</em>
+general-purpose data structure for sets and maps. This is also one of
+the most common ones in practice, and very easy to implement.</p>
+</section>
+<section id="sec:yet-another-sorting-algorithm" class="level3"
+data-number="10.3.6">
+<h3 data-number="10.3.6"><span
+class="header-section-number">10.3.6</span> Yet another sorting
+algorithm</h3>
+<p>Using AVL trees we can define a very simple but efficient sorting
+algorithm. First we build an AVL tree from all elements, and then we do
+an <em>inorder traversal</em> (see <a
+href="section-9.1.html#sec:trees:traversal">Section 9.1.3</a>) to get
+the elements in sorted order:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>avlTreeSort(list):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    tree <span class="op">=</span> <span class="kw">new</span> ampty AVL tree</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> x <span class="kw">in</span> list:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span> x <span class="kw">to</span> tree</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inorder(tree)</span></code></pre></div>
+<p>What is the complexity of this algorithm? The slowest part is
+building the tree: it is a loop over <span class="math inline">n</span>
+elements and each iteration adds to the tree, which is logarithmic in
+<span class="math inline">n</span>. The final complexity of the loop is
+<span class="math inline">O(n \log(n))</span>, and since inorder
+traversal is linear, the complexity of sorting via an AVL tree is <span
+class="math inline">O(n \log(n))</span>.</p>
+<p>This has the same complexity as Mergesort, which is as good as the
+best sorting algorithms. So why do not anyone use it? It is because the
+hidden constants are bigger than Mergesort: it takes longer time and
+also uses more extra memory.</p>
 </section>
 </section>
 </main>
@@ -308,10 +364,10 @@ element we have to delete both <code>keys[i]</code> and
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-10.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-10.2.html" accesskey="p" rel="previous">Maps, or dictionaries</a>
+<a href="section-10.2.html" accesskey="p" rel="previous">Self-balancing trees</a>
 </div>
 <div class="navlink">
-<a href="section-10.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
+<a href="section-10.4.html" accesskey="n" rel="next">2-3 trees and B-trees</a>
 <a href="section-10.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -319,5 +375,6 @@ element we have to delete both <code>keys[i]</code> and
 
 </body>
 </html>
+
 
 

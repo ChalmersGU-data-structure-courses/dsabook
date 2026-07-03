@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Bucket hashing</title>
+  <title>DSABook – Review*</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/buckethashCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,148 +100,681 @@
 <nav class="sitenav">
 <div>
 <a href="section-12.10.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.10.html" accesskey="p" rel="previous">Better hash functions</a>
+<a href="section-12.10.html" accesskey="p" rel="previous">Floyd’s algorithm: All-pairs shortest paths*</a>
 </div>
 <div>
-<a href="section-12.12.html" accesskey="n" rel="next">Hash tables in practice</a>
-<a href="section-12.12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-13.html" accesskey="n" rel="next">Appendices*</a>
+<a href="section-13.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:bucket-hashing" class="level2" data-number="12.11">
-<h2 data-number="12.11"><span class="header-section-number">12.11</span>
-Bucket hashing</h2>
-<p>One implementation for open addressing groups hash table slots into
-<a href="section-14.html#bucket" class="term"
-title="In bucket hashing, a bucket is a sequence of slots in the hash table that are grouped together.">buckets</a>.
-The
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
-slots of the hash table are divided into
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-buckets, with each bucket consisting of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>/</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">M/B</annotation></semantics></math>
-slots. The hash function assigns each record to the first slot within
-one of the buckets. If this slot is already occupied, then the bucket
-slots are searched sequentially until an open slot is found. If a bucket
-is entirely full, then the record is stored in an <a
-href="section-14.html#overflow-bucket" class="term"
-title="In bucket hashing, this is the bucket into which a record is placed if the bucket containing the record&#39;s home slot is full. The overflow bucket is logically considered to have infinite capacity, though in practice search and insert will become relatively expensive if many records are stored in the overflow bucket.">overflow
-bucket</a> of infinite capacity at the end of the table. All buckets
-share the same overflow bucket. A good implementation will use a hash
-function that distributes the records evenly among the buckets so that
-as few records as possible go into the overflow bucket.</p>
-<div class="online">
-<p>When searching for a record, the first step is to hash the key to
-determine which bucket should contain the record. The records in this
-bucket are then searched. If the desired key value is not found and the
-bucket still has free slots, then the search is complete. If the bucket
-is full, then it is possible that the desired record is stored in the
-overflow bucket. In this case, the overflow bucket must be searched
-until the record is found or all records in the overflow bucket have
-been checked. If many records are in the overflow bucket, this will be
-an expensive process.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Demonstration of bucket hashing.</p>
-</summary>
-
-<div id="buckethashCON1" class="ssAV" data-short-name="buckethashCON1" data-long-name="Bucket Hashing Slideshow 1" alt="Bucket Hashing Slideshow 1" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/buckethashCON1.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("buckethashCON1", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#buckethashCON1 "+rule)}
-    
-  });
-</script>
-
-</details>
-</div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Now you can try it yourself.</p>
-</summary>
-
-<div id="HashBucketPRO" class="embedContainer">
-<iframe id="HashBucketPRO_iframe" aria-label="HashBucketPRO" src="../interactive/Hashing/HashBucketPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</div>
-<section id="sec:an-alternative-approach-to-bucket-hashing"
-class="level3" data-number="12.11.1">
+<section id="sec:graphs:quizzes" class="level2" data-number="12.11">
+<h2 data-number="12.11"><span class="header-section-number">12.11*</span>
+Review</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:quiz-graph-terminology" class="level3 quiz"
+data-number="12.11.1">
 <h3 data-number="12.11.1"><span
-class="header-section-number">12.11.1</span> An alternative approach to
-bucket hashing</h3>
-<p>A simple variation on bucket hashing is to hash a key value to some
-slot in the hash table as though bucketing were not being used. If the
-home position is full, then we search through the rest of the bucket to
-find an empty slot. If all slots in this bucket are full, then the
-record is assigned to the overflow bucket. The advantage of this
-approach is that initial collisions are reduced, because any slot can be
-a home position rather than just the first slot in the bucket.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>Demonstration of alternative bucket hashing.</p>
-</summary>
-
-<div id="buckethashCON2" class="ssAV" data-short-name="buckethashCON2" data-long-name="Bucket Hashing Slideshow 2" alt="Bucket Hashing Slideshow 2" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
+class="header-section-number">12.11.1</span> Quiz: Graph
+terminology</h3>
+<div class="question">
+<p>When a vertex <span class="math inline">Q</span> is connected by an
+edge to a vertex <span class="math inline">K</span>, what is the term
+for their relationship?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">Q</span> and <span class="math inline">K</span> are
+adjacent</label></li>
+<li><label><input type="checkbox" /><span class="math inline">Q</span>
+and <span class="math inline">K</span> are incident</label></li>
+<li><label><input type="checkbox" /><span class="math inline">Q</span>
+and <span class="math inline">K</span> are insecure</label></li>
+<li><label><input type="checkbox" /><span class="math inline">Q</span>
+and <span class="math inline">K</span> are isolated</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An edge connecting two vertices is incident on these vertices.</li>
+<li>Two vertices connected by an edge are adjacent.</li>
+</ul>
 </div>
-
-<script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("buckethashCON2", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#buckethashCON2 "+rule)}
-    
-  });
-</script>
-
-</details>
 </div>
-<p>Bucket methods are good for implementing hash tables stored on disk,
-because the bucket size can be set to the size of a disk block. Whenever
-search or insertion occurs, the entire bucket is read into memory.
-Because the entire bucket is then in memory, processing an insert or
-search operation requires only one disk access, unless the bucket is
-full. If the bucket is full, then the overflow bucket must be retrieved
-from disk as well. Naturally, overflow should be kept small to minimise
-unnecessary disk accesses.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:exercise-bucket-hashing" class="level4 unnumbered">
-<h4 class="unnumbered">Exercise: Bucket hashing</h4>
-</summary>
-
-<div id="HashBucket2PRO" class="embedContainer">
-<iframe id="HashBucket2PRO_iframe" aria-label="HashBucket2PRO" src="../interactive/Hashing/HashBucket2PRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Two vertices of a graph are ADJACENT if there is an edge joining
+them.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Neighboring vertices are adjacent to one another.</li>
+<li>Two vertices are considered neighbours if there is an edge
+connecting them.</li>
+</ul>
 </div>
-
-</details>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphComponents.png" alt="Example graph" />
+<figcaption aria-hidden="true">Example graph</figcaption>
+</figure>
+<p>Answer TRUE or FALSE.</p>
+<p>Vertices 3 and 4 are adjacent.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Two vertices are adjacent if there exists and edge between
+them.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphComponents.png" alt="Example graph" />
+<figcaption aria-hidden="true">Example graph</figcaption>
+</figure>
+<p>How many connected components does this graph have?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The maximally connected subgraphs of an undirected graph are called
+connected components.</li>
+<li>Vertices 0, 1, 2, 3, and 4 form one connnected component</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A DAG is a directed graph without cycles.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A DAG is a Directed Acyclic Graph.</li>
+<li>An acyclic graph has no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a subset S of the vertices in a graph, when all vertices in S
+connect to all other vertices in S, this is called a:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />clique</label></li>
+<li><label><input type="checkbox" />connected component</label></li>
+<li><label><input type="checkbox" />directed graph</label></li>
+<li><label><input type="checkbox" />DAG</label></li>
+<li><label><input type="checkbox" />sparse graph</label></li>
+<li><label><input type="checkbox" />sparse matrix</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A clique is a subset of the graph where all the vertices in the
+subgraph connect to the other vertices.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A complete graph is a clique of size:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span
+class="math inline">|V|</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">|E|</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">|n|</span></label></li>
+<li><label><input type="checkbox" /><span
+class="math inline">n</span></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph containing all possible edges is said to be a complete
+graph</li>
+<li>Any subset of <span class="math inline">V</span> where all vertices
+in the subset connect to all other vertices in the subset is called a
+clique</li>
+<li>A complete graph is a clique of size <span
+class="math inline">|V|</span>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph containing all possible edges is a _____ graph</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />complete</label></li>
+<li><label><input type="checkbox" />full</label></li>
+<li><label><input type="checkbox" />dense</label></li>
+<li><label><input type="checkbox" />sparse</label></li>
+<li><label><input type="checkbox" />directed</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A dense graph is a graph with many edges.</li>
+<li>A sparse graph is a graph with relatively few edges.</li>
+<li>A complete graph is a graph containing all possible edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph without cycles is called a/an:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />acyclic
+graph</label></li>
+<li><label><input type="checkbox" />undirected graph</label></li>
+<li><label><input type="checkbox" />directed graph</label></li>
+<li><label><input type="checkbox" />simple graph</label></li>
+<li><label><input type="checkbox" />connected graph</label></li>
+<li><label><input type="checkbox" />complete graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An acyclilc graph has no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The number of edges incident to a vertex called its:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />degree</label></li>
+<li><label><input type="checkbox" />count</label></li>
+<li><label><input type="checkbox" />number</label></li>
+<li><label><input type="checkbox" />size</label></li>
+<li><label><input type="checkbox" />depth</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An edge connecting vertices is said to be incident.</li>
+<li>The degree of a vertex is the number of graph edges it touches.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A digraph is a:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />directed
+graph</label></li>
+<li><label><input type="checkbox" />undirected graph</label></li>
+<li><label><input type="checkbox" />connected component</label></li>
+<li><label><input type="checkbox" />DAG</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A directed graph is also called a digraph.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph with directed edges is called a</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />directed
+graph</label></li>
+<li><label><input type="checkbox" />labeled graph</label></li>
+<li><label><input type="checkbox" />weighted graph</label></li>
+<li><label><input type="checkbox" />complete graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph with edges directed from one vertex to another is a directed
+graph.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>All graphs must have edges.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph is a set of edges and vertcies.</li>
+<li>The set of edges may be empty.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A free tree is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />a connected graph with no
+cycles</label></li>
+<li><label><input type="checkbox" />a connected graph with only simple
+cycles</label></li>
+<li><label><input type="checkbox" />an unconnected graph with no
+cycles</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A free tree is a connected, undirected graph with no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphDirected.png" alt="Example directed graph" />
+<figcaption aria-hidden="true">Example directed graph</figcaption>
+</figure>
+<p>What is the <em>out</em>-degree of vertex 1?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The <em>in</em>-degree of a vertex is the number of edges going
+<em>into</em> the vertex.</li>
+<li>The <em>out</em>-degree of a vertex is the number of edges going
+<em>out</em> of the vertex.</li>
+<li>Vertex 1 has an three outgoing and two incoming edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphDirected.png" alt="Example directed graph" />
+<figcaption aria-hidden="true">Example directed graph</figcaption>
+</figure>
+<p>What is the <em>in</em>-degree of vertex 2?</p>
+<p><input type="number" value="2" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The <em>in</em>-degree of a vertex is the number of edges going
+<em>into</em> the vertex.</li>
+<li>The <em>out</em>-degree of a vertex is the number of edges going
+<em>out</em> of the vertex.</li>
+<li>Vertex 2 has an one outgoing and two incoming edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Two vertices can be adjacent even if they are not neighbours.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Two vertices are consider neighbours if there is an edge connecting
+them.</li>
+<li>Neighboring vertices are adjacent to one another.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A simple cycle:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />must have all vertices
+unique except that the first and last vertices are the same</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as the length of the path is less than 5</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as no edge is repeated</label></li>
+<li><label><input type="checkbox" />must have all vertices be
+unique</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A cyle is simple if all vertices on the cycle are distinct, with the
+first and last vertices being the same.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A simple path:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />must have all vertices be
+unique</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as the length of the path is less than 5</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as no edge is repeated</label></li>
+<li><label><input type="checkbox" />must have all vertices unique except
+that the first and last vertices are the same</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A path is simple if all vertices on the path are distinct.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphUndirected.png"
+alt="Example undirected graph" />
+<figcaption aria-hidden="true">Example undirected graph</figcaption>
+</figure>
+<p>What is the degree of vertex 4?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The degree of a vertex is the number of edges that the vertex
+touches.</li>
+<li>Vertex 4 has three incident edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A weighted graph must have edge weights and be directed.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A weighted graph must have edge weights.</li>
+<li>A weighted graph can be a directed or undirected graph.</li>
+</ul>
+</div>
+</div>
 </section>
+<section id="sec:quiz-space-requirements-for-graphs" class="level3 quiz"
+data-number="12.11.2">
+<h3 data-number="12.11.2"><span
+class="header-section-number">12.11.2</span> Quiz: Space requirements
+for graphs</h3>
+<p><em>Warning</em>! Read the conditions for the problems in this set
+very carefully!</p>
+<div class="question">
+<p>Assume for an <em>directed unweighted</em> graph with 6 vertices and
+14 edges, that a vertex index requires 2 bytes, and a pointer requires 4
+bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="108" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, the adjacency list does not store any
+weight information.</li>
+<li>The adjacency list has an array (of size <span
+class="math inline">|V|</span>) which points to a list of edges.</li>
+<li>Every edge appears once on the list. And for each edge there has to
+be a vertex ID and a pointer to the next edge.</li>
+<li>It uses <span class="math inline">(|V| \cdot \textrm{pointer}) +
+(|E| \cdot (\textrm{vertex-index} + \textrm{pointer}))</span>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed unweighted</em> graph with 6 vertices and
+14 edges, that a vertex index requires 2 bytes, and a pointer requires 4
+bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="36" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, you can assume that each matrix
+element stores one byte to represent the edge.</li>
+<li>The matrix is <span class="math inline">|V|</span> by <span
+class="math inline">|V|</span>.</li>
+<li>Each position of the matrix needs one byte.</li>
+<li>It uses <span class="math inline">|V|^2 \cdot 1</span> bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed weighted</em> graph with 9 vertices and 11
+edges, that a vertex index requires 5 bytes, a pointer requires 4 bytes.
+and that edge weights require 8 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="223" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The adjacency list has an array (of size <span
+class="math inline">|V|</span>) which points to a list of edges.</li>
+<li>Every edge appears once on the list. And for each edge there has to
+be a vertex ID, a weight and a pointer to the next edge.</li>
+<li>It uses <span class="math inline">(|V| \cdot \textrm{pointer}) +
+(|E| \cdot (\textrm{vertex-index} + \textrm{edge-weight} +
+\textrm{pointer}))</span> bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed weighted</em> graph with 9 vertices and 11
+edges, that a vertex index requires 5 bytes, a pointer requires 4 bytes.
+and that edge weights require 8 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="648" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The matrix is <span class="math inline">|V|</span> by <span
+class="math inline">|V|</span>.</li>
+<li>Each position of the matrix needs <span
+class="math inline">\textrm{edge-weight}</span> byte.</li>
+<li>It uses <span class="math inline">|V|^2 \cdot
+\textrm{edge-weight}</span> bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected unweighted</em> graph with 7 vertices
+and 17 edges, that a vertex index requires 6 bytes, and a pointer
+requires 2 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="286" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, the adjacency list does not store any
+weight information.</li>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The adjacency list has an array (of size <span
+class="math inline">|V|</span>) which points to a list of edges.</li>
+<li>Every edge appears twice on the list (the graph is undirected, so we
+need the directed edge in each direction). And for each edge there has
+to be a vertex ID and a pointer to the next edge.</li>
+<li>It uses <span class="math inline">(|V| \cdot \textrm{pointer}) + (2
+\cdots |E| \cdot (\textrm{vertex-index} + \textrm{pointer}))</span>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected unweighted</em> graph with 7 vertices
+and 17 edges, that a vertex index requires 6 bytes, and a pointer
+requires 2 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="49" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, you can assume that each matrix
+element stores one byte to represent the edge.</li>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The matrix is <span class="math inline">|V|</span> by <span
+class="math inline">|V|</span>.</li>
+<li>Each position of the matrix needs one byte.</li>
+<li>It uses <span class="math inline">|V|^2 \cdot 1</span> bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected weighted</em> graph with 10 vertices and
+15 edges, that a vertex index requires 1 byte, a pointer requires 2
+bytes. and that edge weights require 4 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="230" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The adjacency list has an array (of size <span
+class="math inline">|V|</span>) which points to a list of edges.</li>
+<li>Every edge appears twice on the list (the graph is undirected, so we
+need the directed edge in each direction). And for each edge there has
+to be a vertex ID, a weight and a pointer to the next edge.</li>
+<li>It uses <span class="math inline">(|V| \cdot \textrm{pointer}) + (2
+\cdots |E| \cdot (\textrm{vertex-index} + \textrm{edge-weight} +
+\textrm{pointer}))</span> bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected weighted</em> graph with 10 vertices and
+15 edges, that a vertex index requires 1 byte, a pointer requires 2
+bytes, and that edge weights require 4 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="400" min="0"/></p>
+<div class="hints">
+<ul>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The matrix is <span class="math inline">|V|</span> by <span
+class="math inline">|V|</span>.</li>
+<li>Each position of the matrix needs <span
+class="math inline">\textrm{edge-weight}</span> byte.</li>
+<li>It uses <span class="math inline">|V|^2 \cdot
+\textrm{edge-weight}</span> bytes.</li>
+</ul>
+</div>
 </div>
 </section>
+<section id="sec:quiz-graph-summary-questions" class="level3 quiz"
+data-number="12.11.3">
+<h3 data-number="12.11.3"><span
+class="header-section-number">12.11.3</span> Quiz: Graph summary
+questions</h3>
+<figure>
+<img src="images/GraphCM.png" style="width:60.0%"
+alt="A concept map for the term “graph”" />
+<figcaption aria-hidden="true">A concept map for the term
+“graph”</figcaption>
+</figure>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>An acyclic graph can have cycles.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
 </div>
+</div>
+<div class="question">
+<p>A Graph data structure contains ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Vertices and
+edges</label></li>
+<li><label><input type="checkbox" />Adjacency lists and Adjacency
+matrices</label></li>
+<li><label><input type="checkbox" />Directed and undirected
+graphs</label></li>
+<li><label><input type="checkbox" />Weighed and unweighted
+graphs</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Another name for “Directed graph” is ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Digraph</label></li>
+<li><label><input type="checkbox" />Direct graph</label></li>
+<li><label><input type="checkbox" />Bigraph</label></li>
+<li><label><input type="checkbox" />Dir-graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is true?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None of the
+above</label></li>
+<li><label><input type="checkbox" />A graph may contain no edges and
+many vertices</label></li>
+<li><label><input type="checkbox" />A graph may contain many edges and
+no vertices</label></li>
+<li><label><input type="checkbox" />A graph may contain no edges and no
+vertices</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A Graph data structure can be implemented by ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An adjacency matrix or
+adjacency list</label></li>
+<li><label><input type="checkbox" />Edges</label></li>
+<li><label><input type="checkbox" />Vertices</label></li>
+<li><label><input type="checkbox" />An adjacency matrix or adjacency
+list</label></li>
+<li><label><input type="checkbox" />All of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A directed graph that has no cycles is a(n) _____</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Acyclic directed
+graph</label></li>
+<li><label><input type="checkbox" />Directed graph</label></li>
+<li><label><input type="checkbox" />Undirected graph</label></li>
+<li><label><input type="checkbox" />Acyclic graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these terms does not fit with the others?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Dense graph</label></li>
+<li><label><input type="checkbox" />Shortest path</label></li>
+<li><label><input type="checkbox" />Traversal</label></li>
+<li><label><input type="checkbox" />Topological sort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following are a type of graph data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />All of the
+above</label></li>
+<li><label><input type="checkbox" />Sparse graph</label></li>
+<li><label><input type="checkbox" />Unweighted graph</label></li>
+<li><label><input type="checkbox" />Dense graph</label></li>
+<li><label><input type="checkbox" />All of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+</section>
 </section>
 </main>
 
@@ -230,16 +782,17 @@ Your browser does not support iframes.
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-12.10.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.10.html" accesskey="p" rel="previous">Better hash functions</a>
+<a href="section-12.10.html" accesskey="p" rel="previous">Floyd’s algorithm: All-pairs shortest paths*</a>
 </div>
 <div class="navlink">
-<a href="section-12.12.html" accesskey="n" rel="next">Hash tables in practice</a>
-<a href="section-12.12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-13.html" accesskey="n" rel="next">Appendices*</a>
+<a href="section-13.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
 </body>
 </html>
+
 
 

@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Case study: Searching in a list</title>
+  <title>DSABook – Review*</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +69,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Searching/binarySearchCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,183 +100,295 @@
 <nav class="sitenav">
 <div>
 <a href="section-1.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-1.5.html" accesskey="p" rel="previous">Programming preliminaries</a>
+<a href="section-1.5.html" accesskey="p" rel="previous">Abstract data types</a>
 </div>
 <div>
-<a href="section-1.7.html" accesskey="n" rel="next">Abstract data types</a>
-<a href="section-1.7.html" class="navbutton">&gt;&gt;</a>
+<a href="section-2.html" accesskey="n" rel="next">Sorting, part 1</a>
+<a href="section-2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:case-study-searching-in-a-list" class="level2"
-data-number="1.6">
-<h2 data-number="1.6"><span class="header-section-number">1.6</span>
-Case study: Searching in a list</h2>
-<p>If you want to find the position in an unsorted array of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-objects that stores a particular value, you cannot really do better than
-simply looking through the array from the beginning and moving toward
-the end until you find what you are looking for. This algorithm is
-called <a href="section-14.html#sequential-search" class="term"
-title="The simplest search algorithm: In an array, simply look at the array elements in the order that they appear.">sequential
-search</a>. If you do find it, we call this a <a
-href="section-14.html#successful-search" class="term"
-title="When searching for a key value in a collection of records, we might find it. If so, we call this a successful search. The alternative is an unsuccessful search.">successful
-search</a>. If the value is not in the array, eventually you will reach
-the end. We will call this an <a
-href="section-14.html#unsuccessful-search" class="term"
-title="When searching for a key value in a collection of records, we might not find it. If so, we call this an unsuccessful search. Usually we require that this means that no record in the collection actually has that key value (though a probabilistic algorithm for search might not require this to be true). The alternative to an unsuccessful search is a successful search.">unsuccessful
-search</a>. Here is a simple implementation for sequential search.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return the position of an element in an array A.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// If the element is not found, return `null`.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> sequentialSearch(arr, val) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span>:   <span class="co">// For each element in A,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[i] <span class="op">==</span> val:         <span class="co">// if we found it</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> i              <span class="co">// return this position.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">null</span>                   <span class="co">// Otherwise, return null</span></span></code></pre></div>
-<p>It is natural to ask how long a program or algorithm will take to
-run. But we do not really care exactly how long a particular program
-will run on a particular computer. We just want some sort of estimate
-that will let us compare one approach to solving a problem with another.
-This is the basic idea of <a href="section-14.html#algorithm-analysis"
-class="term"
-title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">algorithm
-analysis</a>. In the case of sequential search, it is easy to see that
-if the value is in position
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-of the array, then sequential search will look at
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-values to find it. If the value is not in the array at all, then we must
-look at all array values. This would be called the <a
-href="section-14.html#worst-case" class="term"
-title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
-case</a> for sequential search. Since the amount of work is proportional
-to the size of the array, we say that the worst case for sequential
-search has <a href="section-14.html#linear-growth-rate" class="term"
-title="For input size $n$, a growth rate of $cn$ (for $c$ any positive constant). In other words, the cost of the associated function is linear on the input size.">linear
-cost</a>. For this reason, the sequential search algorithm is sometimes
-called <a href="section-14.html#linear-search" class="term"
-title="Another name for sequential search.">linear search</a>.</p>
-<section id="sec:binary-search" class="level3" data-number="1.6.1">
+<section id="sec:intro:quizzes" class="level2" data-number="1.6">
+<h2 data-number="1.6"><span class="header-section-number">1.6*</span>
+Review</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:quiz-data-structures-and-algorithms"
+class="level3 quiz" data-number="1.6.1">
 <h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span>
-Binary search</h3>
-<p>Sequential search is the best that we can do when trying to find a
-value in an unsorted array. But if the array is sorted in increasing
-order by value, then we can do much better. We use an algorithm called
-<a href="section-14.html#binary-search" class="term"
-title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
-search</a>.</p>
-<p>Let’s say we search for the value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val</annotation></semantics></math>
-in an array. Binary search begins by examining the value in the middle
-position of the array; call this position
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>
-and the corresponding value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub></mrow><annotation encoding="application/x-tex">val_{mid}</annotation></semantics></math>.
-If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><mo>=</mo><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val_{mid} = val</annotation></semantics></math>,
-then processing can stop immediately. In this case we are lucky, if not,
-knowing the middle value provides useful information that can help guide
-the search process. In particular, if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><mo>&gt;</mo><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val_{mid} &gt; val</annotation></semantics></math>,
-then you know that the value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val</annotation></semantics></math>
-cannot appear in the array at any position greater than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>.
-Thus, you can eliminate future search in the upper half of the array.
-Conversely, if
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><msub><mi>l</mi><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow></msub><mo>&lt;</mo><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val_{mid} &lt; val</annotation></semantics></math>,
-then you know that you can ignore all positions in the array less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>.
-Either way, <strong>half</strong> of the positions are eliminated from
-further consideration. Binary search next looks at the middle position
-in that part of the array where value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val</annotation></semantics></math>
-may exist. The value at this position again allows us to eliminate half
-of the remaining positions from consideration. This process repeats
-until either the desired value is found, or there are no positions
-remaining in the array that might contain the value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">val</annotation></semantics></math>.</p>
-<p>Here is the method in pseudocode:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> binarySearch(arr, val) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    low <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    high <span class="op">=</span> arr.<span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> low <span class="op">&lt;=</span> high:               <span class="co">// Stop when low and high meet.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        mid: <span class="bu">Int</span> <span class="op">=</span> (low <span class="op">+</span> high) <span class="op">/</span> <span class="dv">2</span>  <span class="co">// Integer division</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[mid] <span class="op">&lt;</span> val:           <span class="co">// Check middle of subarray.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            low <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span>            <span class="co">// In upper half.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[mid] <span class="op">&gt;</span> val:</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            high <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span>           <span class="co">// In lower half.</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> mid               <span class="co">// Found it!</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">null</span>                      <span class="co">// Search value not in array.</span></span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>And here is an illustration of the binary search algorithm.</p>
-</summary>
-
-<div id="binarySearchCON" class="ssAV" data-short-name="binarySearchCON" data-long-name="Binary Search Algorithm Slideshow" alt="Binary Search Algorithm Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
+Quiz: Data structures and algorithms</h3>
+<div class="question">
+<p>An <em>ADT</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The specification of a
+data type within some language, independent of an
+implementation</label></li>
+<li><label><input type="checkbox" />A concrete implementation of a
+class</label></li>
+<li><label><input type="checkbox" />An implementation for a data
+structure in a program</label></li>
+<li><label><input type="checkbox" />A collection of values</label></li>
+<li><label><input type="checkbox" />Another name for a data
+structure</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A collection of values is a data type, not an ADT.</li>
+<li>It can’t be a data structure, since an ADT is more like the
+interface for a data structure.</li>
+<li>An implementation for a data structure in a program is close, but
+not really it. An ADT is more abstract than an actual program.</li>
+</ul>
 </div>
-
-<script type="text/javascript" src="../interactive/Searching/binarySearchCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("binarySearchCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#binarySearchCON "+rule)}
-    
-  });
-</script>
-
-</details>
 </div>
-<p>With the right math techniques, it is not too hard to show that the
-cost of binary search on an array of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-values is at most
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_2 n</annotation></semantics></math>.
-This is because we are repeatedly splitting the size of the subarray
-that we must look at in half. We stop (in the worst case) when we reach
-a subarray of size 1. And we can only cut the value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-in half
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_2 n</annotation></semantics></math>
-times before we reach 1.</p>
-<section id="sec:variations" class="level4 unnumbered">
-<h4 class="unnumbered">Variations</h4>
-<p>Binary search is designed to find the (single) occurrence of a value
-and return its position. A special value is returned if the value does
-not appear in the array. The algorithm can be modified to implement
-variations such as returning the position of the <em>first
-occurrence</em> of the value in the array if multiple occurrences are
-allowed. Another variation is returning the position of the greatest
-value less than the value we are looking for when it is not in the
-array.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:binary-search-exercise" class="level4 unnumbered">
-<h4 class="unnumbered">Binary search exercise</h4>
-</summary>
-
-<div id="binarySearchPRO" class="embedContainer">
-<iframe id="binarySearchPRO_iframe" aria-label="binarySearchPRO" src="../interactive/Searching/binarySearchPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="question">
+<p>An ADT is a form of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Abstraction</label></li>
+<li><label><input type="checkbox" />Metaphor</label></li>
+<li><label><input type="checkbox" />Simile</label></li>
+<li><label><input type="checkbox" />Programming</label></li>
+<li><label><input type="checkbox" />Design</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What does the “A” stand for in ADT?</li>
+</ul>
 </div>
-
-</details>
-</section>
 </div>
-</section>
+<div class="question">
+<p>Which is an example of a composite type?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A bank account
+record</label></li>
+<li><label><input type="checkbox" />An integer</label></li>
+<li><label><input type="checkbox" />A floating point number</label></li>
+<li><label><input type="checkbox" />A character</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A composite type is made up of two or more simple types.</li>
+<li>Character, Integer, and floating point numbers are all simple
+types.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>composite type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A type comprised of other
+types</label></li>
+<li><label><input type="checkbox" />A type composed from at least one
+simple type</label></li>
+<li><label><input type="checkbox" />Another term for an Abstract Data
+Type</label></li>
+<li><label><input type="checkbox" />An instance of a class</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A type with only 1 simple type is just a simple type. There is a
+better answer to this question.</li>
+<li>An ADT is the realisation of a data type, including the type and the
+operations allowed on the type.</li>
+<li>An object is an instance of a class.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>data structure</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Used to implement an
+ADT</label></li>
+<li><label><input type="checkbox" />A specification for an
+implementation</label></li>
+<li><label><input type="checkbox" />A collection of values</label></li>
+<li><label><input type="checkbox" />A type</label></li>
+<li><label><input type="checkbox" />Another name for an ADT</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A data structure is not an ADT.</li>
+<li>A data structure is not a type (which is also a collection of
+values).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An ADT is most like which of the following?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An interface</label></li>
+<li><label><input type="checkbox" />A data structure</label></li>
+<li><label><input type="checkbox" />A class</label></li>
+<li><label><input type="checkbox" />An object</label></li>
+<li><label><input type="checkbox" />A method</label></li>
+<li><label><input type="checkbox" />A program</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A data structure, program, class, or method are all concrete
+implementation.</li>
+<li>An object is something created at runtime.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>primitive type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A type that cannot be
+broken down into smaller types</label></li>
+<li><label><input type="checkbox" />The simplest type in a
+class</label></li>
+<li><label><input type="checkbox" />The model of a type</label></li>
+<li><label><input type="checkbox" />A subset of a type</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A class may have more than one, or only simple types as
+members.</li>
+<li>The model of a type is another way to define an ADT.</li>
+<li>Any type is a collection of values and therefore, a subset of
+another type.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A collection of
+values</label></li>
+<li><label><input type="checkbox" />A variable</label></li>
+<li><label><input type="checkbox" />An integer</label></li>
+<li><label><input type="checkbox" />An implementation</label></li>
+<li><label><input type="checkbox" />Another name for an ADT</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A type is a general concept, so it is not an integer, or an
+implementation, or a variable.</li>
+<li>A type has values. An ADT is a collection of actions on an object (a
+type).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A tool for measuring the efficiency of an algorithm or problem
+is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Algorithm
+analysis</label></li>
+<li><label><input type="checkbox" />The system clock</label></li>
+<li><label><input type="checkbox" />A profiler</label></li>
+<li><label><input type="checkbox" />Empirical analysis</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A profiler works on a program, not an algorithm.</li>
+<li>The system clock works on a program, not an algorithm.</li>
+<li>Empirical analysis works on a program, not an algorithm.</li>
+<li>Algorithm analysis estimates the cost of an algorithm or
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is NOT a topic that a this course book focuses on?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />How to design and
+maintain large programs.</label></li>
+<li><label><input type="checkbox" />The commonly used data
+structures.</label></li>
+<li><label><input type="checkbox" />Introduce the idea of tradeoffs and
+reinforce the concept that there are costs and benefits associated with
+every data structure.</label></li>
+<li><label><input type="checkbox" />How to measure the effectiveness of
+a data structure or algorithm.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A key topic for any DSA course is the basic toolkit of data
+structures and algorithms.</li>
+<li>A key concept for any DSA course is the concept of tradeoffs for
+costs versus benefits.</li>
+<li>A key skill for any DSA course is ability to measure the
+effectiveness of a data structure or algorithm.</li>
+<li>Designing and maintaining large programs is a focus for Software
+Engineering.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>As computers have become more powerful:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We have used that
+additional computing power to tackle more complex problems.</label></li>
+<li><label><input type="checkbox" />The need for good algorithms has
+become less because processor speed can make up for a slow
+algorithm.</label></li>
+<li><label><input type="checkbox" />The algorithms have become easier to
+understand.</label></li>
+<li><label><input type="checkbox" />We are better able to use our
+everyday intuition to solve problems.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Good solutions for large, complex computational problems usually
+require different approaches than what we do in everyday life.</li>
+<li>As problems that we try to solve grow more complicated, their
+solutions tend to grow more complicated.</li>
+<li>Processor speed cannot grow as fast as the cost of a slower
+algorithm applied to a bigger problem.</li>
+<li>As our computers have become more powerful, our history has been to
+apply them to more complex problems.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is more a concern for Software Engineering than for a
+data structures course?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />To design an algorithm
+that is easy to understand, code, and debug.</label></li>
+<li><label><input type="checkbox" />To design an algorithm that makes
+efficient use of the computer’s resources.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Designing efficient programs is a focus for data structures and
+algorithms courses.</li>
+<li>Designing and maintaining large programs is a focus for Software
+Engineering.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is NOT one of the three standard steps to follow when
+selecting a data structure to solve a problem?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Run simulations to
+quantify the expected running time of the program.</label></li>
+<li><label><input type="checkbox" />Analyse your problem to determine
+the basic operations that must be supported.</label></li>
+<li><label><input type="checkbox" />Quantify the resource constraints
+for each operation.</label></li>
+<li><label><input type="checkbox" />Select the data structure that best
+meets the requirements determined in the prior steps of the
+process.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Knowing the basic operations required to solve your problem is the
+first step to selecting a suitable data structure.</li>
+<li>Knowing the resource constraints for your problem’s basic operations
+is the second step to selecting a suitable data structure.</li>
+<li>Once you know the basic operations and their resource constraints,
+then you can select a data structure that matches.</li>
+<li>Many problems do not require that you run simulations to determine
+the expected times for alternative solutions.</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 </main>
@@ -266,16 +397,17 @@ Your browser does not support iframes.
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-1.5.html" class="navbutton">&lt;&lt;</a>
-<a href="section-1.5.html" accesskey="p" rel="previous">Programming preliminaries</a>
+<a href="section-1.5.html" accesskey="p" rel="previous">Abstract data types</a>
 </div>
 <div class="navlink">
-<a href="section-1.7.html" accesskey="n" rel="next">Abstract data types</a>
-<a href="section-1.7.html" class="navbutton">&gt;&gt;</a>
+<a href="section-2.html" accesskey="n" rel="next">Sorting, part 1</a>
+<a href="section-2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
 </body>
 </html>
+
 
 

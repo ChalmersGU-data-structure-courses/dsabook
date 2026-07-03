@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Graphs</title>
+  <title>DSABook – Appendices*</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -80,70 +99,31 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-12.13.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.13.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-12.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.11.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div>
-<a href="section-13.1.html" accesskey="n" rel="next">Definitions and properties</a>
+<a href="section-13.1.html" accesskey="n" rel="next">Mathematical preliminaries*</a>
 <a href="section-13.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:graphs" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span>
-Graphs</h1>
-<p>Graphs provide the ultimate in data structure flexibility. A graph
-consists of a set of nodes, and a set of edges where an edge connects
-two nodes. Trees and lists can be viewed as special cases of graphs.</p>
-<p>Graphs are used to model both real-world systems and abstract
-problems, and are the data structure of choice in many applications.
-Here is a small sampling of the types of problems that graphs are
-routinely used for.</p>
-<ol type="1">
-<li>Modeling connectivity in computer and communications networks.</li>
-<li>Representing an abstract map as a set of locations with distances
-between locations. This can be used to compute shortest routes between
-locations such as in a GPS routefinder.</li>
-<li>Modeling flow capacities in transportation networks to find which
-links create the bottlenecks.</li>
-<li>Finding a path from a starting condition to a goal condition. This
-is a common way to model problems in artificial intelligence
-applications and computerised game players.</li>
-<li>Modeling computer algorithms, to show transitions from one program
-state to another.</li>
-<li>Finding an acceptable order for finishing subtasks in a complex
-activity, such as constructing large buildings.</li>
-<li>Modeling relationships such as family trees, business or military
-organisations, and scientific taxonomies.</li>
-</ol>
-<p>The next section covers some basic graph terminology. The rest of the
-chapter will describe fundamental representations for graphs, provide a
-reference implementation, and cover core graph algorithms including <a
-href="section-14.html#traversal" class="term"
-title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>,
-<a href="section-14.html#topological-sort" class="term"
-title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
-sort</a>, <a href="section-14.html#shortest-path" class="term"
-title="Given a graph with distances or weights on the edges, the shortest path between two nodes is the path with least total distance or weight. Examples of the shortest paths problems are the single-source shortest paths problem and the all-pairs shortest paths problem.">shortest
-paths</a> algorithms, and algorithms to find the <a
-href="section-14.html#minimum-spanning-tree" class="term"
-title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
-spanning tree</a>. Besides being useful and interesting in their own
-right, these algorithms illustrate the use of many other data structures
-presented throughout the course.</p>
+<section id="sec:appendices" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13*</span>
+Appendices</h1>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-12.13.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.13.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-12.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.11.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div class="navlink">
-<a href="section-13.1.html" accesskey="n" rel="next">Definitions and properties</a>
+<a href="section-13.1.html" accesskey="n" rel="next">Mathematical preliminaries*</a>
 <a href="section-13.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -151,5 +131,6 @@ presented throughout the course.</p>
 
 </body>
 </html>
+
 
 

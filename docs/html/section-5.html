@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Algorithm analysis, part 2: Theory</title>
+  <title>DSABook – Algorithm analysis, part 2</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -80,71 +99,106 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-4.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-4.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-4.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.6.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div>
-<a href="section-5.1.html" accesskey="n" rel="next">Upper bounds: the
-big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-notation</a>
+<a href="section-5.1.html" accesskey="n" rel="next">Upper bounds: the big-<span class="math inline">O</span> notation</a>
 <a href="section-5.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:algorithm-analysis-theory" class="level1"
-data-number="5">
+<section id="sec:analysis-2" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span>
-Algorithm analysis, part 2: Theory</h1>
-<p>In <a
-href="section-2.html#sec:algorithm-analysis-introduction">Chapter 2</a>
-we introduced the ideas behind algorithmic analysis, and explained the
-basics on an abstract level. Now that you understand everything about
-sorting algorithms, we can go into more depth with our analysis tools.
-Recall that we introduced the upper, lower and tight bounds in <a
-href="section-2.6.html#sec:orders-of-growth">Section 2.6.1</a>:</p>
+Algorithm analysis, part 2</h1>
+<p>In <a href="section-3.html#sec:analysis-1">Chapter 3</a> we
+introduced the idea of algorithmic analysis, and explained big-<span
+class="math inline">O</span> notation without providing a formal
+definition. Now that you understand everything about sorting algorithms,
+we can go into more depth with our analysis tools.</p>
+<p>So far we have understood big-<span class="math inline">O</span> as
+complexity classes of algorithms, we say things like Linear search is
+<span class="math inline">O(n)</span> to describe the computational
+complexity of Linear search. This is perfectly reasonable for everyday
+algorithmic analysis, but is not mathematically accurate for two
+reasons:</p>
+<ul>
+<li>Formally <span class="math inline">O(n)</span> is a set of numeric
+functions, and Linear search is not a numeric function so it cannot be
+in <span class="math inline">O(n)</span>. What we actually mean is that
+the time function <span class="math inline">T(n)</span> that describes
+the worst case runtime of Linear search for input size <span
+class="math inline">n</span> is in <span
+class="math inline">O(n)</span>. So writing <span class="math inline">T
+\in O(n)</span> is more correct, and even that is shorthand for <span
+class="math inline">T \in O(f)</span> for <span
+class="math inline">f(n)=n</span>.</li>
+<li><span class="math inline">O(n)</span> is actually an <em>upper
+bound</em> for the complexity. That means that technically every
+algorithm that runs in <span class="math inline">O(n)</span> time, also
+runs in <span class="math inline">O(n^2)</span> time (but not the other
+way around). Mathematically, <span class="math inline">O(n) \subset
+O(n^2)</span>.</li>
+</ul>
+<p>Rather than understanding <span class="math inline">O(n)</span> as
+“time functions that grow linearly”, a more mathematically correct
+intuition is “time functions that do not grow faster than linear” (which
+includes for instance binary search: a logarithmic function does not
+grow faster than a linear one).</p>
+<p>The reason for deceiving you in <a
+href="section-3.html#sec:analysis-1">Chapter 3</a> is that, while it is
+technically a true statement that Binary search is <span
+class="math inline">O(n)</span>, any computer scientist hearing you say
+that would correct you and point out that it is in fact <span
+class="math inline">O(\log(n))</span> (which is also true, and more
+precise). We tend to use big-<span class="math inline">O</span> as if it
+were a tight bound, rather than an upper bound.</p>
+<p>There is a separate notation for tight bounds (<span
+class="math inline">\Theta</span>, pronounced “big theta”), and one for
+lower bounds (<span class="math inline">\Omega</span>, “big omega”), but
+these are not as frequently used as “big O”.</p>
+
 <dl>
 <dt>Upper bound</dt>
 <dd>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in O(g)</annotation></semantics></math>
-<strong>iff</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
-grows <em>at least as fast</em> as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math></p>
+<p><span class="math inline">f\in O(g)</span> <strong>if and only
+if</strong> <span class="math inline">f</span> grows at most as fast as
+<span class="math inline">g</span></p>
 </dd>
 <dt>Lower bound</dt>
 <dd>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in\Omega(g)</annotation></semantics></math>
-<strong>iff</strong>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
-grows <em>at most as fast</em> as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math></p>
+<p><span class="math inline">f\in\Omega(g)</span> <strong>if and only
+if</strong> <span class="math inline">f</span> grows at least as fast as
+<span class="math inline">g</span></p>
 </dd>
 <dt>Tight bound</dt>
 <dd>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in\Theta(g)</annotation></semantics></math>
-<strong>iff</strong> both functions grow <em>at the same rate</em></p>
+<p><span class="math inline">f\in\Theta(g)</span> <strong>if and only
+if</strong> both functions grow at the same rate</p>
 </dd>
 </dl>
-<p>In this chapter we will give formal definitions of these concepts and
-show how to use them to reason about algorithms and problems.</p>
-<p>After reading this chapter you should be able to analyse the
-computational complexity of most algorithms, both for sorting and the
-data structures we will introduce later.</p>
+<p>These concepts are often confused with best case and worst case (<a
+href="section-3.5.html#sec:analysis-1:complexity-cases">Section 3.5</a>).
+A lower bound does not mean a best case. We first decide to analyse
+best, average or worst case (usually worst case), then for each of those
+we can determine an upper, lower, or tight bound.</p>
+<p>In this chapter we give formal definitions of these concepts and show
+how to use them to analyse the computational complexity of most
+algorithms, both for sorting and the data structures we introduce in
+subsequent chapters.</p>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-4.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-4.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-4.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.6.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div class="navlink">
-<a href="section-5.1.html" accesskey="n" rel="next">Upper bounds: the
-big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-notation</a>
+<a href="section-5.1.html" accesskey="n" rel="next">Upper bounds: the big-<span class="math inline">O</span> notation</a>
 <a href="section-5.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -152,5 +206,6 @@ notation</a>
 
 </body>
 </html>
+
 
 

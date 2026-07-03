@@ -4,7 +4,7 @@
 /* Math tables */
 
 /* Padding between table rows */
-mtr:not(:first-child) mtd { 
+mtr:not(:first-child) mtd {
     padding-top: 1ex;
 }
 
@@ -13,3 +13,9 @@ mtd:not(:first-child) {
     padding-left: 1ex;
 }
 
+/* KaTeX settings */
+
+.katex {
+    /* Default KaTeX font size is 1.21em */
+    font-size: 1.1em !important;
+}

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
   <title>DSABook – Data Structures and Algorithms</title>
   <link rel="stylesheet" href="../css/main.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -88,419 +107,359 @@
 <h1 class="title">Data Structures and Algorithms</h1>
 <p class="author">Peter Ljunglöf</p>
 <p class="author">Alex Gerdes</p>
+<p class="author">Jonas Duregård</p>
 <p class="author">(editors)</p>
-<p class="date">2016–2025</p>
+<p class="date">2016–2026</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><details open><summary><a href="section-1.html#sec:introduction"
-id="toc-sec:introduction"><span class="toc-section-number">1</span>
-Introduction</a></summary>
+<li><details open><summary><a href="section-1.html#sec:intro" id="toc-sec:intro"><span
+class="toc-section-number">1</span> Introduction</a></summary>
 <ul>
-<li><a href="section-1.1.html#sec:motivation"
-id="toc-sec:motivation"><span class="toc-section-number">1.1</span>
-Motivation</a></li>
-<li><a href="section-1.2.html#sec:selecting-a-data-structure"
-id="toc-sec:selecting-a-data-structure"><span
-class="toc-section-number">1.2</span> Selecting a data
-structure</a></li>
-<li><a href="section-1.3.html#sec:practical-examples"
-id="toc-sec:practical-examples"><span
-class="toc-section-number">1.3</span> Practical examples</a></li>
-<li><a href="section-1.4.html#sec:mathematical-preliminaries"
-id="toc-sec:mathematical-preliminaries"><span
-class="toc-section-number">1.4</span> Mathematical
-preliminaries</a></li>
-<li><a href="section-1.5.html#sec:programming-preliminaries"
-id="toc-sec:programming-preliminaries"><span
-class="toc-section-number">1.5</span> Programming preliminaries</a></li>
-<li><details><summary><a href="section-1.6.html#sec:case-study-searching-in-a-list"
-id="toc-sec:case-study-searching-in-a-list"><span
-class="toc-section-number">1.6</span> Case study: Searching in a
-list</a></summary>
+<li><a href="section-1.1.html#sec:intro:motivation"
+id="toc-sec:intro:motivation"><span
+class="toc-section-number">1.1</span> Motivation and core
+concepts</a></li>
+<li><a href="section-1.2.html#sec:intro:examples"
+id="toc-sec:intro:examples"><span class="toc-section-number">1.2</span>
+Practical examples</a></li>
+<li><a href="section-1.3.html#sec:intro:searching"
+id="toc-sec:intro:searching"><span class="toc-section-number">1.3</span>
+Case study: Linear and binary search in arrays</a></li>
+<li><a href="section-1.4.html#sec:intro:select-data-structure"
+id="toc-sec:intro:select-data-structure"><span
+class="toc-section-number">1.4</span> The right data structure for the
+problem</a></li>
+<li><a href="section-1.5.html#sec:intro:abstract-data-types"
+id="toc-sec:intro:abstract-data-types"><span
+class="toc-section-number">1.5</span> Abstract data types</a></li>
+<li><details><summary><a href="section-1.6.html#sec:intro:quizzes"
+id="toc-sec:intro:quizzes"><span class="toc-section-number">1.6*</span>
+Review</a></summary>
 <ul>
-<li><a href="section-1.6.html#sec:binary-search"
-id="toc-sec:binary-search"><span class="toc-section-number">1.6.1</span>
-Binary search</a></li>
+<li><a href="section-1.6.html#sec:quiz-data-structures-and-algorithms"
+id="toc-sec:quiz-data-structures-and-algorithms"><span
+class="toc-section-number">1.6.1</span> Quiz: Data structures and
+algorithms</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-1.7.html#sec:abstract-data-types"
-id="toc-sec:abstract-data-types"><span
-class="toc-section-number">1.7</span> Abstract data types</a></summary>
-<ul>
-<li><a href="section-1.7.html#sec:adt-linear-collections"
-id="toc-sec:adt-linear-collections"><span
-class="toc-section-number">1.7.1</span> Linear collections</a></li>
-<li><a href="section-1.7.html#sec:adt-sets-and-maps"
-id="toc-sec:adt-sets-and-maps"><span
-class="toc-section-number">1.7.2</span> Sets and maps</a></li>
-<li><a href="section-1.7.html#sec:adt-graphs"
-id="toc-sec:adt-graphs"><span class="toc-section-number">1.7.3</span>
-Graphs</a></li>
 </ul></details></li>
-<li><a href="section-1.8.html#sec:ch01-review"
-id="toc-sec:ch01-review"><span class="toc-section-number">1.8</span>
-Review questions</a></li>
-</ul></details></li>
-<li><details open><summary><a href="section-2.html#sec:algorithm-analysis-introduction"
-id="toc-sec:algorithm-analysis-introduction"><span
-class="toc-section-number">2</span> Algorithm analysis, part 1:
-Introduction</a></summary>
+<li><details open><summary><a href="section-2.html#sec:sorting-1" id="toc-sec:sorting-1"><span
+class="toc-section-number">2</span> Sorting, part 1</a></summary>
 <ul>
-<li><details><summary><a href="section-2.1.html#sec:problems-algorithms-and-programs"
-id="toc-sec:problems-algorithms-and-programs"><span
-class="toc-section-number">2.1</span> Problems, algorithms, and
-programs</a></summary>
+<li><details><summary><a href="section-2.1.html#sec:sorting-1:terminology"
+id="toc-sec:sorting-1:terminology"><span
+class="toc-section-number">2.1</span> Terminology and notation</a></summary>
 <ul>
-<li><a href="section-2.1.html#sec:problems" id="toc-sec:problems"><span
-class="toc-section-number">2.1.1</span> Problems</a></li>
-<li><a href="section-2.1.html#sec:algorithms"
-id="toc-sec:algorithms"><span class="toc-section-number">2.1.2</span>
-Algorithms</a></li>
-<li><a href="section-2.1.html#sec:programs" id="toc-sec:programs"><span
-class="toc-section-number">2.1.3</span> Programs</a></li>
-</ul></details></li>
-<li><a
-href="section-2.2.html#sec:invariants-preconditions-and-postconditions"
-id="toc-sec:invariants-preconditions-and-postconditions"><span
-class="toc-section-number">2.2</span> Invariants, preconditions, and
-postconditions</a></li>
-<li><details><summary><a href="section-2.3.html#sec:comparing-algorithms"
+<li><a href="section-2.1.html#sec:comparing-algorithms"
 id="toc-sec:comparing-algorithms"><span
-class="toc-section-number">2.3</span> Comparing algorithms</a></summary>
-<ul>
-<li><a href="section-2.3.html#sec:input-size"
-id="toc-sec:input-size"><span class="toc-section-number">2.3.1</span>
-Basic operations and input size</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-2.4.html#sec:growth-rates"
-id="toc-sec:growth-rates"><span class="toc-section-number">2.4</span>
-Growth rates</a></summary>
-<ul>
-<li><a href="section-2.4.html#sec:getting-a-faster-computer"
-id="toc-sec:getting-a-faster-computer"><span
-class="toc-section-number">2.4.1</span> Getting a faster
-computer</a></li>
-<li><a href="section-2.4.html#sec:comparing-different-growth-rates"
-id="toc-sec:comparing-different-growth-rates"><span
-class="toc-section-number">2.4.2</span> Comparing different growth
-rates</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-2.5.html#sec:best-worst-and-average-cases"
-id="toc-sec:best-worst-and-average-cases"><span
-class="toc-section-number">2.5</span> Best, worst, and average cases</a></summary>
-<ul>
-<li><a href="section-2.5.html#sec:the-problem-with-average-case"
-id="toc-sec:the-problem-with-average-case"><span
-class="toc-section-number">2.5.1</span> The problem with average
-case</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-2.6.html#sec:asymptotic-analysis"
-id="toc-sec:asymptotic-analysis"><span
-class="toc-section-number">2.6</span> Asymptotic analysis</a></summary>
-<ul>
-<li><a href="section-2.6.html#sec:orders-of-growth"
-id="toc-sec:orders-of-growth"><span
-class="toc-section-number">2.6.1</span> Orders of growth</a></li>
-<li><a href="section-2.6.html#sec:should-we-use-o-omega-or-theta"
-id="toc-sec:should-we-use-o-omega-or-theta"><span
-class="toc-section-number">2.6.2</span> Should we use
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
-or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>?</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-2.7.html#sec:algorithm-analysis-in-practice"
-id="toc-sec:algorithm-analysis-in-practice"><span
-class="toc-section-number">2.7</span> Algorithm analysis in practice</a></summary>
-<ul>
-<li><a href="section-2.7.html#sec:simplification-rules"
-id="toc-sec:simplification-rules"><span
-class="toc-section-number">2.7.1</span> Simplification rules</a></li>
-<li><a href="section-2.7.html#sec:the-complexity-hierarchy"
-id="toc-sec:the-complexity-hierarchy"><span
-class="toc-section-number">2.7.2</span> The complexity
-hierarchy</a></li>
-<li><a href="section-2.7.html#sec:analysing-code-fragments"
-id="toc-sec:analysing-code-fragments"><span
-class="toc-section-number">2.7.3</span> Analysing code
-fragments</a></li>
-<li><a href="section-2.7.html#sec:alg-analysis-examples"
-id="toc-sec:alg-analysis-examples"><span
-class="toc-section-number">2.7.4</span> Examples of algorithm
-analysis</a></li>
-<li><a href="section-2.7.html#sec:advanced-algorithm-analysis"
-id="toc-sec:advanced-algorithm-analysis"><span
-class="toc-section-number">2.7.5</span> Advanced algorithm
-analysis</a></li>
-<li><a href="section-2.7.html#sec:other-control-statements"
-id="toc-sec:other-control-statements"><span
-class="toc-section-number">2.7.6</span> Other control
-statements</a></li>
-<li><a href="section-2.7.html#sec:recursive-functions"
-id="toc-sec:recursive-functions"><span
-class="toc-section-number">2.7.7</span> Recursive functions</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-2.8.html#sec:case-study-analysing-binary-search"
-id="toc-sec:case-study-analysing-binary-search"><span
-class="toc-section-number">2.8</span> Case study: Analysing binary
-search</a></summary>
-<ul>
-<li><a href="section-2.8.html#sec:complexity-of-binary-search"
-id="toc-sec:complexity-of-binary-search"><span
-class="toc-section-number">2.8.1</span> Complexity of binary
-search</a></li>
-</ul></details></li>
-<li><a href="section-2.9.html#sec:code-tuning"
-id="toc-sec:code-tuning"><span class="toc-section-number">2.9</span>
-Code tuning</a></li>
-<li><a href="section-2.10.html#sec:empirical-analysis"
-id="toc-sec:empirical-analysis"><span
-class="toc-section-number">2.10</span> Empirical analysis</a></li>
-<li><details><summary><a href="section-2.11.html#sec:ch02-review"
-id="toc-sec:ch02-review"><span class="toc-section-number">2.11</span>
-Review questions</a></summary>
-<ul>
-<li><a href="section-2.11.html#sec:review-questions-introduction"
-id="toc-sec:review-questions-introduction"><span
-class="toc-section-number">2.11.1</span> Review questions:
-Introduction</a></li>
-<li><a href="section-2.11.html#sec:review-questions-growth-rates"
-id="toc-sec:review-questions-growth-rates"><span
-class="toc-section-number">2.11.2</span> Review questions: Growth
-rates</a></li>
-<li><a href="section-2.11.html#sec:review-questions-running-time"
-id="toc-sec:review-questions-running-time"><span
-class="toc-section-number">2.11.3</span> Review questions: Running
-time</a></li>
-</ul></details></li>
-</ul></details></li>
-<li><details open><summary><a href="section-3.html#sec:sorting-simple"
-id="toc-sec:sorting-simple"><span class="toc-section-number">3</span>
-Sorting, part 1: Simple algorithms</a></summary>
-<ul>
-<li><details><summary><a href="section-3.1.html#sec:terminology-and-notation"
-id="toc-sec:terminology-and-notation"><span
-class="toc-section-number">3.1</span> Terminology and notation</a></summary>
-<ul>
-<li><a href="section-3.1.html#sec:comparing-algorithms-1"
-id="toc-sec:comparing-algorithms-1"><span
-class="toc-section-number">3.1.1</span> Comparing algorithms</a></li>
-<li><a href="section-3.1.html#sec:terminology"
-id="toc-sec:terminology"><span class="toc-section-number">3.1.2</span>
+class="toc-section-number">2.1.1</span> Comparing algorithms</a></li>
+<li><a href="section-2.1.html#sec:terminology"
+id="toc-sec:terminology"><span class="toc-section-number">2.1.2</span>
 Terminology</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-3.2.html#sec:comparing-values"
-id="toc-sec:comparing-values"><span
-class="toc-section-number">3.2</span> Comparing values</a></summary>
+<li><details><summary><a href="section-2.2.html#sec:sorting-1:comparing"
+id="toc-sec:sorting-1:comparing"><span
+class="toc-section-number">2.2</span> Comparing values</a></summary>
 <ul>
 <li><a
-href="section-3.2.html#sec:two-main-approaches-to-comparing-values"
+href="section-2.2.html#sec:two-main-approaches-to-comparing-values"
 id="toc-sec:two-main-approaches-to-comparing-values"><span
-class="toc-section-number">3.2.1</span> Two main approaches to comparing
+class="toc-section-number">2.2.1</span> Two main approaches to comparing
 values</a></li>
-<li><a href="section-3.2.html#sec:natural-vs-key-based-comparison"
+<li><a href="section-2.2.html#sec:natural-vs-key-based-comparison"
 id="toc-sec:natural-vs-key-based-comparison"><span
-class="toc-section-number">3.2.2</span> Natural vs key-based
+class="toc-section-number">2.2.2</span> Natural vs key-based
 comparison</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-3.3.html#sec:overview-of-algorithms"
-id="toc-sec:overview-of-algorithms"><span
-class="toc-section-number">3.3</span> Overview of algorithms</a></summary>
+<li><details><summary><a href="section-2.3.html#sec:sorting-1:overview"
+id="toc-sec:sorting-1:overview"><span
+class="toc-section-number">2.3</span> Overview of algorithms</a></summary>
 <ul>
-<li><a href="section-3.3.html#sec:bubble-sort-overview"
-id="toc-sec:bubble-sort-overview"><span
-class="toc-section-number">3.3.1</span> Bubble sort overview</a></li>
-<li><a href="section-3.3.html#sec:selection-sort-overview"
-id="toc-sec:selection-sort-overview"><span
-class="toc-section-number">3.3.2</span> Selection sort overview</a></li>
-<li><a href="section-3.3.html#sec:insertion-sort-overview"
-id="toc-sec:insertion-sort-overview"><span
-class="toc-section-number">3.3.3</span> Insertion sort overview</a></li>
-<li><a href="section-3.3.html#sec:summary" id="toc-sec:summary"><span
-class="toc-section-number">3.3.4</span> Summary</a></li>
+<li><a href="section-2.3.html#sec:sorting-1:in-place-sorting"
+id="toc-sec:sorting-1:in-place-sorting"><span
+class="toc-section-number">2.3.1</span> In-place sorting</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-3.4.html#sec:bubble-sort"
-id="toc-sec:bubble-sort"><span class="toc-section-number">3.4</span>
-Bubble sort</a></summary>
+<li><details><summary><a href="section-2.4.html#sec:sorting-1:bubble-sort"
+id="toc-sec:sorting-1:bubble-sort"><span
+class="toc-section-number">2.4</span> Bubble sort</a></summary>
 <ul>
-<li><a href="section-3.4.html#sec:bubble-sort-analysis"
-id="toc-sec:bubble-sort-analysis"><span
-class="toc-section-number">3.4.1</span> Bubble sort analysis</a></li>
+<li><a href="section-2.4.html#sec:analysis-of-bubble-sort"
+id="toc-sec:analysis-of-bubble-sort"><span
+class="toc-section-number">2.4.1</span> Analysis of Bubble sort</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-3.5.html#sec:selection-sort"
-id="toc-sec:selection-sort"><span class="toc-section-number">3.5</span>
-Selection sort</a></summary>
+<li><details><summary><a href="section-2.5.html#sec:sorting-1:selection-sort"
+id="toc-sec:sorting-1:selection-sort"><span
+class="toc-section-number">2.5</span> Selection sort</a></summary>
 <ul>
-<li><a href="section-3.5.html#sec:selection-sort-analysis"
+<li><a href="section-2.5.html#sec:selection-sort-analysis"
 id="toc-sec:selection-sort-analysis"><span
-class="toc-section-number">3.5.1</span> Selection sort analysis</a></li>
+class="toc-section-number">2.5.1</span> Selection sort analysis</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-3.6.html#sec:insertion-sort"
-id="toc-sec:insertion-sort"><span class="toc-section-number">3.6</span>
-Insertion sort</a></summary>
+<li><details><summary><a href="section-2.6.html#sec:sorting-1:insertion-sort"
+id="toc-sec:sorting-1:insertion-sort"><span
+class="toc-section-number">2.6</span> Insertion sort</a></summary>
 <ul>
-<li><a href="section-3.6.html#sec:insertion-sort-analysis"
+<li><a href="section-2.6.html#sec:insertion-sort-analysis"
 id="toc-sec:insertion-sort-analysis"><span
-class="toc-section-number">3.6.1</span> Insertion sort analysis</a></li>
+class="toc-section-number">2.6.1</span> Insertion sort analysis</a></li>
 </ul></details></li>
-<li><details><summary><a
-href="section-3.7.html#sec:summary-analysis-of-basic-sorting-algorithms"
-id="toc-sec:summary-analysis-of-basic-sorting-algorithms"><span
-class="toc-section-number">3.7</span> Summary analysis of basic sorting
-algorithms</a></summary>
+<li><details><summary><a href="section-2.7.html#sec:sorting-1:empirical-analysis"
+id="toc-sec:sorting-1:empirical-analysis"><span
+class="toc-section-number">2.7*</span> Empirical analysis and code
+tuning</a></summary>
+<ul>
+<li><a href="section-2.7.html#sec:empirical-comparison"
+id="toc-sec:empirical-comparison"><span
+class="toc-section-number">2.7.1</span> Empirical comparison</a></li>
+<li><a href="section-2.7.html#sec:optimising-bubble-sort"
+id="toc-sec:optimising-bubble-sort"><span
+class="toc-section-number">2.7.2</span> Optimising Bubble sort</a></li>
+<li><a href="section-2.7.html#sec:optimising-selection-sort"
+id="toc-sec:optimising-selection-sort"><span
+class="toc-section-number">2.7.3</span> Optimising Selection
+sort</a></li>
+<li><a href="section-2.7.html#sec:optimising-insertion-sort"
+id="toc-sec:optimising-insertion-sort"><span
+class="toc-section-number">2.7.4</span> Optimising Insertion
+sort</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-2.8.html#sec:sorting-1:quizzes"
+id="toc-sec:sorting-1:quizzes"><span
+class="toc-section-number">2.8*</span> Review</a></summary>
+<ul>
+<li><a href="section-2.8.html#sec:quiz-sorting-terminology"
+id="toc-sec:quiz-sorting-terminology"><span
+class="toc-section-number">2.8.1</span> Quiz: Sorting
+terminology</a></li>
+<li><a href="section-2.8.html#sec:quiz-bubble-sort"
+id="toc-sec:quiz-bubble-sort"><span
+class="toc-section-number">2.8.2</span> Quiz: Bubble sort</a></li>
+<li><a href="section-2.8.html#sec:quiz-selection-sort"
+id="toc-sec:quiz-selection-sort"><span
+class="toc-section-number">2.8.3</span> Quiz: Selection sort</a></li>
+<li><a href="section-2.8.html#sec:quiz-insertion-sort"
+id="toc-sec:quiz-insertion-sort"><span
+class="toc-section-number">2.8.4</span> Quiz: Insertion sort</a></li>
+<li><a href="section-2.8.html#sec:quiz-exchange-sort"
+id="toc-sec:quiz-exchange-sort"><span
+class="toc-section-number">2.8.5</span> Quiz: Exchange sort</a></li>
+</ul></details></li>
+</ul></details></li>
+<li><details open><summary><a href="section-3.html#sec:analysis-1"
+id="toc-sec:analysis-1"><span class="toc-section-number">3</span>
+Algorithm analysis, part 1</a></summary>
+<ul>
+<li><a href="section-3.1.html#sec:analysis-1:problems-and-algorithms"
+id="toc-sec:analysis-1:problems-and-algorithms"><span
+class="toc-section-number">3.1</span> Problems, algorithms, and
+programs</a></li>
+<li><a href="section-3.2.html#sec:analysis-1:invariants"
+id="toc-sec:analysis-1:invariants"><span
+class="toc-section-number">3.2</span> Invariants, preconditions, and
+postconditions</a></li>
+<li><a href="section-3.3.html#sec:analysis-1:comparing-algorithms"
+id="toc-sec:analysis-1:comparing-algorithms"><span
+class="toc-section-number">3.3</span> Comparing algorithm
+performance</a></li>
+<li><a href="section-3.4.html#sec:analysis-1:order-of-growth"
+id="toc-sec:analysis-1:order-of-growth"><span
+class="toc-section-number">3.4</span> Order of growth and time
+functions</a></li>
+<li><a href="section-3.5.html#sec:analysis-1:complexity-cases"
+id="toc-sec:analysis-1:complexity-cases"><span
+class="toc-section-number">3.5</span> Best, worst, and average
+cases</a></li>
+<li><a href="section-3.6.html#sec:analysis-1:simplification-rules"
+id="toc-sec:analysis-1:simplification-rules"><span
+class="toc-section-number">3.6</span> Asymptotic analysis in
+practice</a></li>
+<li><a href="section-3.7.html#sec:analysis-1:examples"
+id="toc-sec:analysis-1:examples"><span
+class="toc-section-number">3.7*</span> Examples of algorithm
+analysis</a></li>
+<li><details><summary><a href="section-3.8.html#sec:analysis-1:empirical-analysis"
+id="toc-sec:analysis-1:empirical-analysis"><span
+class="toc-section-number">3.8*</span> Empirical analysis and code
+tuning</a></summary>
+<ul>
+<li><a href="section-3.8.html#sec:comparative-timing"
+id="toc-sec:comparative-timing"><span
+class="toc-section-number">3.8.1</span> Comparative timing</a></li>
+<li><a href="section-3.8.html#sec:simulation"
+id="toc-sec:simulation"><span class="toc-section-number">3.8.2</span>
+Simulation</a></li>
+<li><a href="section-3.8.html#sec:code-tuning"
+id="toc-sec:code-tuning"><span class="toc-section-number">3.8.3</span>
+Code tuning</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-3.9.html#sec:analysis-1:quizzes"
+id="toc-sec:analysis-1:quizzes"><span
+class="toc-section-number">3.9*</span> Review</a></summary>
 <ul>
 <li><a
-href="section-3.7.html#sec:inversions-and-the-reason-for-the-quadratic-behaviour"
-id="toc-sec:inversions-and-the-reason-for-the-quadratic-behaviour"><span
-class="toc-section-number">3.7.1</span> Inversions and the reason for
-the quadratic behaviour</a></li>
-</ul></details></li>
-<li><a href="section-3.8.html#sec:empirical-analysis-and-code-tuning"
-id="toc-sec:empirical-analysis-and-code-tuning"><span
-class="toc-section-number">3.8</span> Empirical analysis and code
-tuning</a></li>
-<li><details><summary><a href="section-3.9.html#sec:ch03-review"
-id="toc-sec:ch03-review"><span class="toc-section-number">3.9</span>
-Review questions</a></summary>
-<ul>
-<li><a href="section-3.9.html#sec:review-questions-terminology"
-id="toc-sec:review-questions-terminology"><span
-class="toc-section-number">3.9.1</span> Review questions:
-Terminology</a></li>
-<li><a href="section-3.9.html#sec:review-questions-bubble-sort"
-id="toc-sec:review-questions-bubble-sort"><span
-class="toc-section-number">3.9.2</span> Review questions: Bubble
-sort</a></li>
-<li><a href="section-3.9.html#sec:review-questions-selection-sort"
-id="toc-sec:review-questions-selection-sort"><span
-class="toc-section-number">3.9.3</span> Review questions: Selection
-sort</a></li>
-<li><a href="section-3.9.html#sec:review-questions-insertion-sort"
-id="toc-sec:review-questions-insertion-sort"><span
-class="toc-section-number">3.9.4</span> Review questions: Insertion
-sort</a></li>
-<li><a href="section-3.9.html#sec:review-questions-exchange-sort"
-id="toc-sec:review-questions-exchange-sort"><span
-class="toc-section-number">3.9.5</span> Review questions: Exchange
-sort</a></li>
+href="section-3.9.html#sec:quiz-introduction-to-algorithm-analysis"
+id="toc-sec:quiz-introduction-to-algorithm-analysis"><span
+class="toc-section-number">3.9.1</span> Quiz: Introduction to algorithm
+analysis</a></li>
+<li><a href="section-3.9.html#sec:quiz-growth-rates"
+id="toc-sec:quiz-growth-rates"><span
+class="toc-section-number">3.9.2</span> Quiz: Growth rates</a></li>
+<li><a href="section-3.9.html#sec:quiz-running-time"
+id="toc-sec:quiz-running-time"><span
+class="toc-section-number">3.9.3</span> Quiz: Running time</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a href="section-4.html#sec:sorting-divide-and-conquer"
-id="toc-sec:sorting-divide-and-conquer"><span
-class="toc-section-number">4</span> Sorting, part 2: Divide-and-conquer
-algorithms</a></summary>
+<li><details open><summary><a href="section-4.html#sec:sorting-2" id="toc-sec:sorting-2"><span
+class="toc-section-number">4</span> Sorting, part 2</a></summary>
 <ul>
-<li><details><summary><a href="section-4.1.html#sec:recursion-and-divide-and-conquer"
-id="toc-sec:recursion-and-divide-and-conquer"><span
-class="toc-section-number">4.1</span> Recursion and
-divide-and-conquer</a></summary>
+<li><details><summary><a href="section-4.1.html#sec:sorting-2:recursion"
+id="toc-sec:sorting-2:recursion"><span
+class="toc-section-number">4.1</span> Recursion</a></summary>
 <ul>
-<li><a href="section-4.1.html#sec:recursion"
-id="toc-sec:recursion"><span class="toc-section-number">4.1.1</span>
-Recursion</a></li>
-<li><a href="section-4.1.html#sec:divide-and-conquer"
-id="toc-sec:divide-and-conquer"><span
-class="toc-section-number">4.1.2</span> Divide and conquer</a></li>
+<li><a href="section-4.1.html#sec:sorting-2:divide-and-conquer"
+id="toc-sec:sorting-2:divide-and-conquer"><span
+class="toc-section-number">4.1.1</span> Divide and conquer</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-4.2.html#sec:mergesort"
-id="toc-sec:mergesort"><span class="toc-section-number">4.2</span>
-Mergesort</a></summary>
+<li><details><summary><a href="section-4.2.html#sec:sorting-2:mergesort"
+id="toc-sec:sorting-2:mergesort"><span
+class="toc-section-number">4.2</span> Mergesort</a></summary>
 <ul>
+<li><a href="section-4.2.html#sec:sorting-2:merging"
+id="toc-sec:sorting-2:merging"><span
+class="toc-section-number">4.2.1</span> Merging</a></li>
+<li><a href="section-4.2.html#sec:categorising-mergesort"
+id="toc-sec:categorising-mergesort"><span
+class="toc-section-number">4.2.2</span> Categorising Mergesort</a></li>
 <li><a href="section-4.2.html#sec:complexity-analysis"
 id="toc-sec:complexity-analysis"><span
-class="toc-section-number">4.2.2</span> Complexity analysis</a></li>
+class="toc-section-number">4.2.3</span> Complexity analysis</a></li>
+<li><a href="section-4.2.html#sec:sorting-2:mergesort-implementation"
+id="toc-sec:sorting-2:mergesort-implementation"><span
+class="toc-section-number">4.2.4</span> Implementing Mergesort</a></li>
+<li><a href="section-4.2.html#sec:sorting-2:mergesort-optimisations"
+id="toc-sec:sorting-2:mergesort-optimisations"><span
+class="toc-section-number">4.2.5</span> Optimisations</a></li>
+<li><a href="section-4.2.html#sec:bottom-up-mergesort"
+id="toc-sec:bottom-up-mergesort"><span
+class="toc-section-number">4.2.6</span> Bottom-up Mergesort</a></li>
 </ul></details></li>
-<li><a href="section-4.3.html#sec:implementing-mergesort"
-id="toc-sec:implementing-mergesort"><span
-class="toc-section-number">4.3</span> Implementing Mergesort</a></li>
-<li><details><summary><a href="section-4.4.html#sec:quicksort"
-id="toc-sec:quicksort"><span class="toc-section-number">4.4</span>
-Quicksort</a></summary>
+<li><details><summary><a href="section-4.3.html#sec:sorting-2:quicksort"
+id="toc-sec:sorting-2:quicksort"><span
+class="toc-section-number">4.3</span> Quicksort</a></summary>
 <ul>
-<li><a href="section-4.4.html#sec:partition"
-id="toc-sec:partition"><span class="toc-section-number">4.4.1</span>
-Partition</a></li>
-<li><a href="section-4.4.html#sec:complexity-analysis-1"
+<li><a href="section-4.3.html#sec:sorting-2:partitioning"
+id="toc-sec:sorting-2:partitioning"><span
+class="toc-section-number">4.3.1</span> Partitioning</a></li>
+<li><a href="section-4.3.html#sec:categorising-quicksort"
+id="toc-sec:categorising-quicksort"><span
+class="toc-section-number">4.3.2</span> Categorising Quicksort</a></li>
+<li><a href="section-4.3.html#sec:sorting-2:quicksort-implementation"
+id="toc-sec:sorting-2:quicksort-implementation"><span
+class="toc-section-number">4.3.3</span> Implementing Quicksort</a></li>
+<li><a href="section-4.3.html#sec:selecting-a-pivot"
+id="toc-sec:selecting-a-pivot"><span
+class="toc-section-number">4.3.4</span> Selecting a pivot</a></li>
+<li><a href="section-4.3.html#sec:complexity-analysis-1"
 id="toc-sec:complexity-analysis-1"><span
-class="toc-section-number">4.4.2</span> Complexity analysis</a></li>
+class="toc-section-number">4.3.5</span> Complexity analysis</a></li>
+<li><a href="section-4.3.html#sec:sorting-2:quicksort-optimisations"
+id="toc-sec:sorting-2:quicksort-optimisations"><span
+class="toc-section-number">4.3.6</span> Variants and
+optimisations</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-4.5.html#sec:implementing-quicksort"
-id="toc-sec:implementing-quicksort"><span
-class="toc-section-number">4.5</span> Implementing Quicksort</a></summary>
+<li><details><summary><a href="section-4.4.html#sec:sorting-2:summary"
+id="toc-sec:sorting-2:summary"><span
+class="toc-section-number">4.4</span> Summary of sorting algorithms</a></summary>
 <ul>
-<li><a href="section-4.5.html#sec:partition-1"
-id="toc-sec:partition-1"><span class="toc-section-number">4.5.1</span>
-Partition</a></li>
-<li><a href="section-4.5.html#sec:selecting-the-pivot"
-id="toc-sec:selecting-the-pivot"><span
-class="toc-section-number">4.5.2</span> Selecting the pivot</a></li>
-<li><a href="section-4.5.html#sec:more-practical-improvements"
-id="toc-sec:more-practical-improvements"><span
-class="toc-section-number">4.5.3</span> More practical
-improvements</a></li>
+<li><a href="section-4.4.html#sec:stability-adaptivity-and-in-place"
+id="toc-sec:stability-adaptivity-and-in-place"><span
+class="toc-section-number">4.4.1</span> Stability, adaptivity and
+in-place</a></li>
+<li><a href="section-4.4.html#sec:time-complexity"
+id="toc-sec:time-complexity"><span
+class="toc-section-number">4.4.2</span> Time complexity</a></li>
 </ul></details></li>
-<li><a
-href="section-4.6.html#sec:empirical-comparison-of-sorting-algorithms"
-id="toc-sec:empirical-comparison-of-sorting-algorithms"><span
-class="toc-section-number">4.6</span> Empirical comparison of sorting
+<li><a href="section-4.5.html#sec:sorting-2:empirical-comparison"
+id="toc-sec:sorting-2:empirical-comparison"><span
+class="toc-section-number">4.5*</span> Empirical comparison of sorting
 algorithms</a></li>
-<li><details><summary><a href="section-4.7.html#sec:ch04-review"
-id="toc-sec:ch04-review"><span class="toc-section-number">4.7</span>
-Review questions</a></summary>
+<li><details><summary><a href="section-4.6.html#sec:sorting-2:quizzes"
+id="toc-sec:sorting-2:quizzes"><span
+class="toc-section-number">4.6*</span> Review</a></summary>
 <ul>
-<li><a href="section-4.7.html#sec:review-questions-mergesort"
-id="toc-sec:review-questions-mergesort"><span
-class="toc-section-number">4.7.1</span> Review questions:
-Mergesort</a></li>
-<li><a href="section-4.7.html#sec:review-questions-quicksort"
-id="toc-sec:review-questions-quicksort"><span
-class="toc-section-number">4.7.2</span> Review questions:
-Quicksort</a></li>
-<li><a
-href="section-4.7.html#sec:review-questions-comparison-of-sorting-algorithms"
-id="toc-sec:review-questions-comparison-of-sorting-algorithms"><span
-class="toc-section-number">4.7.3</span> Review questions: Comparison of
-sorting algorithms</a></li>
+<li><a href="section-4.6.html#sec:quiz-mergesort"
+id="toc-sec:quiz-mergesort"><span
+class="toc-section-number">4.6.1</span> Quiz: Mergesort</a></li>
+<li><a href="section-4.6.html#sec:quiz-quicksort"
+id="toc-sec:quiz-quicksort"><span
+class="toc-section-number">4.6.2</span> Quiz: Quicksort</a></li>
+<li><a href="section-4.6.html#sec:quiz-comparison-of-sorting-algorithms"
+id="toc-sec:quiz-comparison-of-sorting-algorithms"><span
+class="toc-section-number">4.6.3</span> Quiz: Comparison of sorting
+algorithms</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a href="section-5.html#sec:algorithm-analysis-theory"
-id="toc-sec:algorithm-analysis-theory"><span
-class="toc-section-number">5</span> Algorithm analysis, part 2:
-Theory</a></summary>
+<li><details open><summary><a href="section-5.html#sec:analysis-2"
+id="toc-sec:analysis-2"><span class="toc-section-number">5</span>
+Algorithm analysis, part 2</a></summary>
 <ul>
-<li><details><summary><a href="section-5.1.html#sec:upper-bounds-the-big-o-notation"
-id="toc-sec:upper-bounds-the-big-o-notation"><span
-class="toc-section-number">5.1</span> Upper bounds: the
-big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-notation</a></summary>
+<li><details><summary><a href="section-5.1.html#sec:analysis-2:upper-bounds"
+id="toc-sec:analysis-2:upper-bounds"><span
+class="toc-section-number">5.1</span> Upper bounds: the big-<span
+class="math inline">O</span> notation</a></summary>
 <ul>
-<li><a href="section-5.1.html#sec:formal-definition"
-id="toc-sec:formal-definition"><span
-class="toc-section-number">5.1.1</span> Formal definition</a></li>
-<li><a href="section-5.1.html#sec:simplifying-rules"
-id="toc-sec:simplifying-rules"><span
-class="toc-section-number">5.1.2</span> Simplifying rules</a></li>
 <li><a href="section-5.1.html#sec:big-o-and-logarithms"
 id="toc-sec:big-o-and-logarithms"><span
-class="toc-section-number">5.1.3</span>
-big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-and logarithms</a></li>
+class="toc-section-number">5.1.1</span> Big-<span
+class="math inline">O</span> and logarithms</a></li>
+<li><a href="section-5.1.html#sec:the-complexity-hierarchy"
+id="toc-sec:the-complexity-hierarchy"><span
+class="toc-section-number">5.1.2</span> The complexity
+hierarchy</a></li>
+<li><a href="section-5.1.html#sec:analysis-2:simplifying-rules"
+id="toc-sec:analysis-2:simplifying-rules"><span
+class="toc-section-number">5.1.3</span> Simplifying rules</a></li>
+<li><a href="section-5.1.html#sec:recursive-functions"
+id="toc-sec:recursive-functions"><span
+class="toc-section-number">5.1.4</span> Recursive functions</a></li>
+<li><a href="section-5.1.html#sec:advanced-algorithm-analysis"
+id="toc-sec:advanced-algorithm-analysis"><span
+class="toc-section-number">5.1.5</span> Advanced algorithm
+analysis</a></li>
 </ul></details></li>
-<li><a href="section-5.2.html#sec:lower-bounds-and-tight-bounds"
-id="toc-sec:lower-bounds-and-tight-bounds"><span
-class="toc-section-number">5.2</span> Lower bounds and tight
-bounds</a></li>
-<li><details><summary><a href="section-5.3.html#sec:analysing-problems"
-id="toc-sec:analysing-problems"><span
+<li><details><summary><a href="section-5.2.html#sec:analysis-2:other-bounds"
+id="toc-sec:analysis-2:other-bounds"><span
+class="toc-section-number">5.2</span> Lower bounds and tight bounds</a></summary>
+<ul>
+<li><a href="section-5.2.html#sec:tight-bounds-the-theta-notation"
+id="toc-sec:tight-bounds-the-theta-notation"><span
+class="toc-section-number">5.2.1</span> Tight bounds: the <span
+class="math inline">\Theta</span> notation</a></li>
+<li><a href="section-5.2.html#sec:strict-bounds"
+id="toc-sec:strict-bounds"><span class="toc-section-number">5.2.2</span>
+Strict bounds</a></li>
+<li><a href="section-5.2.html#sec:summary-of-asymptotic-notations"
+id="toc-sec:summary-of-asymptotic-notations"><span
+class="toc-section-number">5.2.3</span> Summary of asymptotic
+notations</a></li>
+<li><a href="section-5.2.html#sec:asymptotic-equivalence"
+id="toc-sec:asymptotic-equivalence"><span
+class="toc-section-number">5.2.4</span> Asymptotic equivalence</a></li>
+<li><a href="section-5.2.html#sec:classifying-functions-using-limits"
+id="toc-sec:classifying-functions-using-limits"><span
+class="toc-section-number">5.2.5</span> Classifying functions using
+limits</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-5.3.html#sec:analysis-2:analysing-problems"
+id="toc-sec:analysis-2:analysing-problems"><span
 class="toc-section-number">5.3</span> Analysing problems</a></summary>
 <ul>
-<li><a href="section-5.3.html#sec:lower-bounds-for-sorting"
-id="toc-sec:lower-bounds-for-sorting"><span
-class="toc-section-number">5.3.1</span> Case study: Lower bounds for
-sorting</a></li>
+<li><a href="section-5.3.html#sec:inversions"
+id="toc-sec:inversions"><span class="toc-section-number">5.3.1</span>
+Case study: Inversions and quadratic sorting algorithms</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-5.4.html#sec:common-misunderstandings"
-id="toc-sec:common-misunderstandings"><span
+<li><details><summary><a href="section-5.4.html#sec:analysis-2:misunderstandings"
+id="toc-sec:analysis-2:misunderstandings"><span
 class="toc-section-number">5.4</span> Common misunderstandings</a></summary>
 <ul>
 <li><a
@@ -509,708 +468,930 @@ id="toc-sec:best-case-upper-bound-or-worst-case-lower-bound"><span
 class="toc-section-number">5.4.1</span> Best-case upper bound, or
 worst-case lower bound?</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-5.5.html#sec:ch05-review"
-id="toc-sec:ch05-review"><span class="toc-section-number">5.5</span>
-Review questions</a></summary>
+<li><a href="section-5.5.html#sec:lower-bounds-for-sorting"
+id="toc-sec:lower-bounds-for-sorting"><span
+class="toc-section-number">5.5*</span> Case study: Lower bounds for
+sorting</a></li>
+<li><details><summary><a href="section-5.6.html#sec:analysis-2:quizzes"
+id="toc-sec:analysis-2:quizzes"><span
+class="toc-section-number">5.6*</span> Review</a></summary>
 <ul>
-<li><a href="section-5.5.html#sec:review-questions-upper-bounds"
-id="toc-sec:review-questions-upper-bounds"><span
-class="toc-section-number">5.5.1</span> Review questions: Upper
-bounds</a></li>
-<li><a href="section-5.5.html#sec:review-questions-asymptotic-notations"
-id="toc-sec:review-questions-asymptotic-notations"><span
-class="toc-section-number">5.5.2</span> Review questions: Asymptotic
+<li><a href="section-5.6.html#sec:quiz-big-o-notation"
+id="toc-sec:quiz-big-o-notation"><span
+class="toc-section-number">5.6.1</span> Quiz: Big-<span
+class="math inline">O</span> notation</a></li>
+<li><a href="section-5.6.html#sec:quiz-asymptotic-notations"
+id="toc-sec:quiz-asymptotic-notations"><span
+class="toc-section-number">5.6.2</span> Quiz: Asymptotic
 notations</a></li>
-<li><a href="section-5.5.html#sec:review-questions-analysing-problems"
-id="toc-sec:review-questions-analysing-problems"><span
-class="toc-section-number">5.5.3</span> Review questions: Analysing
+<li><a href="section-5.6.html#sec:quiz-analysing-problems"
+id="toc-sec:quiz-analysing-problems"><span
+class="toc-section-number">5.6.3</span> Quiz: Analysing
 problems</a></li>
-<li><a
-href="section-5.5.html#sec:review-questions-common-misunderstandings"
-id="toc-sec:review-questions-common-misunderstandings"><span
-class="toc-section-number">5.5.4</span> Review questions: Common
+<li><a href="section-5.6.html#sec:quiz-common-misunderstandings"
+id="toc-sec:quiz-common-misunderstandings"><span
+class="toc-section-number">5.6.4</span> Quiz: Common
 misunderstandings</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a href="section-6.html#sec:stacks-queues-and-lists"
-id="toc-sec:stacks-queues-and-lists"><span
-class="toc-section-number">6</span> Stacks, queues, and lists</a></summary>
+<li><details open><summary><a href="section-6.html#sec:sequences" id="toc-sec:sequences"><span
+class="toc-section-number">6</span> Sequences</a></summary>
 <ul>
-<li><details><summary><a href="section-6.1.html#sec:collections"
-id="toc-sec:collections"><span class="toc-section-number">6.1</span>
-Collections</a></summary>
+<li><a href="section-6.1.html#sec:sequences:stacks-and-queues"
+id="toc-sec:sequences:stacks-and-queues"><span
+class="toc-section-number">6.1</span> Stacks and queues</a></li>
+<li><details><summary><a href="section-6.2.html#sec:sequences:linked-lists"
+id="toc-sec:sequences:linked-lists"><span
+class="toc-section-number">6.2</span> Linked lists</a></summary>
 <ul>
-<li><a href="section-6.1.html#sec:what-is-a-sequence"
-id="toc-sec:what-is-a-sequence"><span
-class="toc-section-number">6.1.1</span> What is a sequence?</a></li>
+<li><a href="section-6.2.html#sec:sequences:linked-stacks"
+id="toc-sec:sequences:linked-stacks"><span
+class="toc-section-number">6.2.1</span> Stacks as linked lists</a></li>
+<li><a href="section-6.2.html#sec:sequences:linked-queues"
+id="toc-sec:sequences:linked-queues"><span
+class="toc-section-number">6.2.2</span> Queues as linked lists</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-6.2.html#sec:stacks-and-queues"
-id="toc-sec:stacks-and-queues"><span
-class="toc-section-number">6.2</span> Stacks and queues</a></summary>
+<li><details><summary><a href="section-6.3.html#sec:sequences:array-sequences"
+id="toc-sec:sequences:array-sequences"><span
+class="toc-section-number">6.3</span> Array-based sequences</a></summary>
 <ul>
-<li><a href="section-6.2.html#sec:case-study-implementing-recursion"
-id="toc-sec:case-study-implementing-recursion"><span
-class="toc-section-number">6.2.1</span> Case study: Implementing
-recursion</a></li>
+<li><a href="section-6.3.html#sec:sequences:array-stacks"
+id="toc-sec:sequences:array-stacks"><span
+class="toc-section-number">6.3.1</span> Array-based stacks</a></li>
+<li><a href="section-6.3.html#sec:sequences:array-queues"
+id="toc-sec:sequences:array-queues"><span
+class="toc-section-number">6.3.2</span> Array-based queues</a></li>
 </ul></details></li>
-<li><a href="section-6.3.html#sec:stacks-implemented-as-linked-lists"
-id="toc-sec:stacks-implemented-as-linked-lists"><span
-class="toc-section-number">6.3</span> Stacks implemented as linked
-lists</a></li>
-<li><details><summary><a href="section-6.4.html#sec:queues-implemented-as-linked-lists"
-id="toc-sec:queues-implemented-as-linked-lists"><span
-class="toc-section-number">6.4</span> Queues implemented as linked
-lists</a></summary>
+<li><details><summary><a href="section-6.4.html#sec:sequences:dynamic-arrays"
+id="toc-sec:sequences:dynamic-arrays"><span
+class="toc-section-number">6.4</span> Dynamic arrays</a></summary>
 <ul>
-<li><a
-href="section-6.4.html#sec:case-study-sorting-a-linked-list-using-mergesort"
-id="toc-sec:case-study-sorting-a-linked-list-using-mergesort"><span
-class="toc-section-number">6.4.1</span> Case study: Sorting a linked
-list using Mergesort</a></li>
+<li><a href="section-6.4.html#sec:resizing-the-internal-array"
+id="toc-sec:resizing-the-internal-array"><span
+class="toc-section-number">6.4.1</span> Resizing the internal
+array</a></li>
+<li><a href="section-6.4.html#sec:doubling-the-size"
+id="toc-sec:doubling-the-size"><span
+class="toc-section-number">6.4.2</span> Doubling the size</a></li>
+<li><a href="section-6.4.html#sec:multiplying-by-any-factor"
+id="toc-sec:multiplying-by-any-factor"><span
+class="toc-section-number">6.4.3</span> Multiplying by any
+factor</a></li>
+<li><a href="section-6.4.html#sec:resizing-an-array-based-queue"
+id="toc-sec:resizing-an-array-based-queue"><span
+class="toc-section-number">6.4.4</span> Resizing an array-based
+queue</a></li>
+<li><a href="section-6.4.html#sec:sequences:shrink-array"
+id="toc-sec:sequences:shrink-array"><span
+class="toc-section-number">6.4.5</span> Shrinking the internal
+array</a></li>
 </ul></details></li>
-<li><a href="section-6.5.html#sec:stacks-implemented-using-arrays"
-id="toc-sec:stacks-implemented-using-arrays"><span
-class="toc-section-number">6.5</span> Stacks implemented using
-arrays</a></li>
-<li><details><summary><a href="section-6.6.html#sec:queues-implemented-using-arrays"
-id="toc-sec:queues-implemented-using-arrays"><span
-class="toc-section-number">6.6</span> Queues implemented using
+<li><details><summary><a href="section-6.5.html#sec:sequences:analysis"
+id="toc-sec:sequences:analysis"><span
+class="toc-section-number">6.5</span> Analysing linked lists and dynamic
 arrays</a></summary>
 <ul>
-<li><a href="section-6.6.html#sec:circular-queues"
-id="toc-sec:circular-queues"><span
-class="toc-section-number">6.6.1</span> Circular queues</a></li>
+<li><a href="section-6.5.html#sec:time-complexity-1"
+id="toc-sec:time-complexity-1"><span
+class="toc-section-number">6.5.1</span> Time complexity</a></li>
+<li><a href="section-6.5.html#sec:memory-usage"
+id="toc-sec:memory-usage"><span class="toc-section-number">6.5.2</span>
+Memory usage</a></li>
+<li><a href="section-6.5.html#sec:queues-as-pairs-of-stacks"
+id="toc-sec:queues-as-pairs-of-stacks"><span
+class="toc-section-number">6.5.3</span> Queues as pairs of
+stacks</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-6.7.html#sec:dynamic-arrays"
-id="toc-sec:dynamic-arrays"><span class="toc-section-number">6.7</span>
-Dynamic arrays</a></summary>
+<li><a href="section-6.6.html#sec:sequences:more-sequences"
+id="toc-sec:sequences:more-sequences"><span
+class="toc-section-number">6.6</span> Other kinds of sequences</a></li>
+<li><a href="section-6.7.html#sec:sequences:mergesort-linked-list"
+id="toc-sec:sequences:mergesort-linked-list"><span
+class="toc-section-number">6.7*</span> Sorting a linked list with
+Mergesort</a></li>
+<li><details><summary><a href="section-6.8.html#sec:sequences:other-sequences"
+id="toc-sec:sequences:other-sequences"><span
+class="toc-section-number">6.8*</span> Other kinds of sequences</a></summary>
 <ul>
-<li><a href="section-6.7.html#sec:resizing-the-internal-array"
-id="toc-sec:resizing-the-internal-array"><span
-class="toc-section-number">6.7.1</span> Resizing the internal
-array</a></li>
-<li><a href="section-6.7.html#sec:how-much-to-increase-the-array-size"
-id="toc-sec:how-much-to-increase-the-array-size"><span
-class="toc-section-number">6.7.2</span> How much to increase the array
-size</a></li>
-<li><a href="section-6.7.html#sec:resizing-an-array-based-queue"
-id="toc-sec:resizing-an-array-based-queue"><span
-class="toc-section-number">6.7.3</span> Resizing an array-based
-queue</a></li>
-<li><a href="section-6.7.html#sec:shrinking-the-internal-array"
-id="toc-sec:shrinking-the-internal-array"><span
-class="toc-section-number">6.7.4</span> Shrinking the internal
-array</a></li>
-</ul></details></li>
+<li><a href="section-6.8.html#sec:sequences:priority-queues"
+id="toc-sec:sequences:priority-queues"><span
+class="toc-section-number">6.8.1</span> Priority queues</a></li>
+<li><a href="section-6.8.html#sec:sequences:deques"
+id="toc-sec:sequences:deques"><span
+class="toc-section-number">6.8.2</span> Double-ended queues</a></li>
+<li><a href="section-6.8.html#sec:sequences:general-lists"
+id="toc-sec:sequences:general-lists"><span
+class="toc-section-number">6.8.3</span> General lists</a></li>
 <li><a
-href="section-6.8.html#sec:comparison-of-linked-lists-vs-dynamic-arrays"
-id="toc-sec:comparison-of-linked-lists-vs-dynamic-arrays"><span
-class="toc-section-number">6.8</span> Comparison of linked lists vs
-dynamic arrays</a></li>
-<li><a href="section-6.9.html#sec:double-ended-queues"
-id="toc-sec:double-ended-queues"><span
-class="toc-section-number">6.9</span> Double-ended queues</a></li>
-<li><a href="section-6.10.html#sec:general-lists"
-id="toc-sec:general-lists"><span class="toc-section-number">6.10</span>
-General lists</a></li>
-<li><details><summary><a href="section-6.11.html#sec:priority-queues"
-id="toc-sec:priority-queues"><span
-class="toc-section-number">6.11</span> Priority queues</a></summary>
-<ul>
-<li><a href="section-6.11.html#sec:adt-for-priority-queues"
-id="toc-sec:adt-for-priority-queues"><span
-class="toc-section-number">6.11.1</span> ADT for priority
-queues</a></li>
-<li><a href="section-6.11.html#sec:use-cases-for-priority-queues"
-id="toc-sec:use-cases-for-priority-queues"><span
-class="toc-section-number">6.11.2</span> Use cases for priority
-queues</a></li>
+href="section-6.8.html#sec:implementing-general-lists-using-linked-lists"
+id="toc-sec:implementing-general-lists-using-linked-lists"><span
+class="toc-section-number">6.8.4</span> Implementing general lists using
+linked lists</a></li>
 <li><a
-href="section-6.11.html#sec:implementing-priority-queues-using-sorted-lists"
-id="toc-sec:implementing-priority-queues-using-sorted-lists"><span
-class="toc-section-number">6.11.3</span> Implementing priority queues
-using sorted lists</a></li>
+href="section-6.8.html#sec:implementing-general-lists-using-arrays"
+id="toc-sec:implementing-general-lists-using-arrays"><span
+class="toc-section-number">6.8.5</span> Implementing general lists using
+arrays</a></li>
+<li><a href="section-6.8.html#sec:when-to-use-linked-lists"
+id="toc-sec:when-to-use-linked-lists"><span
+class="toc-section-number">6.8.6</span> When to use linked
+lists?</a></li>
+<li><a
+href="section-6.8.html#sec:how-are-lists-implemented-in-the-standard-libraries"
+id="toc-sec:how-are-lists-implemented-in-the-standard-libraries"><span
+class="toc-section-number">6.8.7</span> How are lists implemented in the
+standard libraries?</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-6.12.html#sec:ch06-review"
-id="toc-sec:ch06-review"><span class="toc-section-number">6.12</span>
-Review questions</a></summary>
+<li><a href="section-6.9.html#sec:sequences:implementing-recursion"
+id="toc-sec:sequences:implementing-recursion"><span
+class="toc-section-number">6.9*</span> Implementing recursion using
+stacks</a></li>
+<li><details><summary><a href="section-6.10.html#sec:sequences:quizzes"
+id="toc-sec:sequences:quizzes"><span
+class="toc-section-number">6.10*</span> Review</a></summary>
 <ul>
-<li><a href="section-6.12.html#sec:review-questions-stacks-and-queues"
-id="toc-sec:review-questions-stacks-and-queues"><span
-class="toc-section-number">6.12.1</span> Review questions: Stacks and
+<li><a href="section-6.10.html#sec:quiz-stacks-and-queues"
+id="toc-sec:quiz-stacks-and-queues"><span
+class="toc-section-number">6.10.1</span> Quiz: Stacks and
 queues</a></li>
-<li><a href="section-6.12.html#sec:review-questions-linked-lists"
-id="toc-sec:review-questions-linked-lists"><span
-class="toc-section-number">6.12.2</span> Review questions: Linked
+<li><a href="section-6.10.html#sec:quiz-linked-lists"
+id="toc-sec:quiz-linked-lists"><span
+class="toc-section-number">6.10.2</span> Quiz: Linked lists</a></li>
+<li><a href="section-6.10.html#sec:quiz-static-array-based-lists"
+id="toc-sec:quiz-static-array-based-lists"><span
+class="toc-section-number">6.10.3</span> Quiz: Static array-based
 lists</a></li>
 <li><a
-href="section-6.12.html#sec:review-questions-static-array-based-lists"
-id="toc-sec:review-questions-static-array-based-lists"><span
-class="toc-section-number">6.12.3</span> Review questions: Static
-array-based lists</a></li>
-<li><a href="section-6.12.html#sec:summary-questions"
-id="toc-sec:summary-questions"><span
-class="toc-section-number">6.12.4</span> Summary questions</a></li>
+href="section-6.10.html#sec:quiz-summary-questions-about-sequences"
+id="toc-sec:quiz-summary-questions-about-sequences"><span
+class="toc-section-number">6.10.4</span> Quiz: Summary questions about
+sequences</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a
-href="section-7.html#sec:algorithm-analysis-part-3-advanced-theory"
-id="toc-sec:algorithm-analysis-part-3-advanced-theory"><span
-class="toc-section-number">7</span> Algorithm analysis, part 3: Advanced
-theory</a></summary>
+<li><details open><summary><a href="section-7.html#sec:analysis-3"
+id="toc-sec:analysis-3"><span class="toc-section-number">7</span>
+Algorithm analysis, part 3</a></summary>
 <ul>
-<li><details><summary><a href="section-7.1.html#sec:space-bounds"
-id="toc-sec:space-bounds"><span class="toc-section-number">7.1</span>
-Space bounds</a></summary>
+<li><details><summary><a href="section-7.1.html#sec:analysis-3:amortisation"
+id="toc-sec:analysis-3:amortisation"><span
+class="toc-section-number">7.1</span> Amortised analysis</a></summary>
 <ul>
-<li><a href="section-7.1.html#sec:space-complexity-of-data-structures"
+<li><a href="section-7.1.html#sec:analysis-3:accounting-method"
+id="toc-sec:analysis-3:accounting-method"><span
+class="toc-section-number">7.1.1</span> The accounting method</a></li>
+<li><a href="section-7.1.html#sec:analysis-3:potential-method"
+id="toc-sec:analysis-3:potential-method"><span
+class="toc-section-number">7.1.2</span> The potential method</a></li>
+<li><a href="section-7.1.html#sec:when-not-to-use-amortisation"
+id="toc-sec:when-not-to-use-amortisation"><span
+class="toc-section-number">7.1.3</span> When not to use
+amortisation</a></li>
+<li><a href="section-7.1.html#sec:analysis-3:different-average-analysis"
+id="toc-sec:analysis-3:different-average-analysis"><span
+class="toc-section-number">7.1.4</span> Different types of average
+analysis</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-7.2.html#sec:analysis-3:dynamic-arrays"
+id="toc-sec:analysis-3:dynamic-arrays"><span
+class="toc-section-number">7.2</span> Case study: Analysing dynamic
+arrays</a></summary>
+<ul>
+<li><a href="section-7.2.html#sec:doubling-the-array-size"
+id="toc-sec:doubling-the-array-size"><span
+class="toc-section-number">7.2.1</span> Doubling the array size</a></li>
+<li><a href="section-7.2.html#sec:resizing-by-any-constant-factor"
+id="toc-sec:resizing-by-any-constant-factor"><span
+class="toc-section-number">7.2.2</span> Resizing by any constant
+factor</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-7.3.html#sec:analysis-3:recurrences"
+id="toc-sec:analysis-3:recurrences"><span
+class="toc-section-number">7.3</span> Recurrence relations</a></summary>
+<ul>
+<li><a href="section-7.3.html#sec:expanding-recurrences"
+id="toc-sec:expanding-recurrences"><span
+class="toc-section-number">7.3.1</span> Expanding recurrences</a></li>
+<li><a href="section-7.3.html#sec:analysis-3:master-theorem"
+id="toc-sec:analysis-3:master-theorem"><span
+class="toc-section-number">7.3.2</span> The Master theorem</a></li>
+<li><a href="section-7.3.html#sec:case-study-karatsuba-multiplication"
+id="toc-sec:case-study-karatsuba-multiplication"><span
+class="toc-section-number">7.3.3</span> Case study: Karatsuba
+multiplication</a></li>
+</ul></details></li>
+<li><a href="section-7.4.html#sec:analysis-3:multiple-parameters"
+id="toc-sec:analysis-3:multiple-parameters"><span
+class="toc-section-number">7.4</span> Multiple parameters</a></li>
+<li><details><summary><a href="section-7.5.html#sec:analysis-3:space-complexity"
+id="toc-sec:analysis-3:space-complexity"><span
+class="toc-section-number">7.5*</span> Space complexity</a></summary>
+<ul>
+<li><a href="section-7.5.html#sec:space-complexity-of-data-structures"
 id="toc-sec:space-complexity-of-data-structures"><span
-class="toc-section-number">7.1.1</span> Space complexity of data
+class="toc-section-number">7.5.1</span> Space complexity of data
 structures</a></li>
-<li><a href="section-7.1.html#sec:space-complexity-of-algorithms"
+<li><a href="section-7.5.html#sec:space-complexity-of-algorithms"
 id="toc-sec:space-complexity-of-algorithms"><span
-class="toc-section-number">7.1.2</span> Space complexity of
+class="toc-section-number">7.5.2</span> Space complexity of
 algorithms</a></li>
-<li><a href="section-7.1.html#sec:space-time-tradeoff"
+<li><a href="section-7.5.html#sec:space-time-tradeoff"
 id="toc-sec:space-time-tradeoff"><span
-class="toc-section-number">7.1.3</span> Space/time tradeoff</a></li>
+class="toc-section-number">7.5.3</span> Space/time tradeoff</a></li>
 </ul></details></li>
-<li><a href="section-7.2.html#sec:amortised-analysis"
-id="toc-sec:amortised-analysis"><span
-class="toc-section-number">7.2</span> Amortised analysis</a></li>
-<li><a href="section-7.3.html#sec:case-study-analysing-dynamic-arrays"
-id="toc-sec:case-study-analysing-dynamic-arrays"><span
-class="toc-section-number">7.3</span> Case study: Analysing dynamic
-arrays</a></li>
-<li><a href="section-7.4.html#sec:recur-relations"
-id="toc-sec:recur-relations"><span class="toc-section-number">7.4</span>
-Recurrence relations</a></li>
-<li><a href="section-7.5.html#sec:multiple-parameters"
-id="toc-sec:multiple-parameters"><span
-class="toc-section-number">7.5</span> Multiple parameters</a></li>
+<li><a href="section-7.6.html#sec:analysis-3:deriving-master-theorem"
+id="toc-sec:analysis-3:deriving-master-theorem"><span
+class="toc-section-number">7.6*</span> Deriving the Master
+theorem</a></li>
+<li><a href="section-7.7.html#sec:analysis-3:quicksort-average-case"
+id="toc-sec:analysis-3:quicksort-average-case"><span
+class="toc-section-number">7.7*</span> Case study: Average-case analysis
+of Quicksort</a></li>
 </ul></details></li>
-<li><details open><summary><a href="section-8.html#sec:trees" id="toc-sec:trees"><span
-class="toc-section-number">8</span> Trees</a></summary>
+<li><details open><summary><a href="section-8.html#sec:ADTs" id="toc-sec:ADTs"><span
+class="toc-section-number">8</span> Abstract data types</a></summary>
 <ul>
-<li><details><summary><a href="section-8.1.html#sec:binary-trees"
-id="toc-sec:binary-trees"><span class="toc-section-number">8.1</span>
-Binary trees</a></summary>
+<li><details><summary><a href="section-8.1.html#sec:ADTs:sequences"
+id="toc-sec:ADTs:sequences"><span class="toc-section-number">8.1</span>
+Collections and sequences</a></summary>
+<ul>
+<li><a href="section-8.1.html#sec:ADTs:stacks-and-queues"
+id="toc-sec:ADTs:stacks-and-queues"><span
+class="toc-section-number">8.1.1</span> Stacks and queues as abstract
+data types</a></li>
+<li><a href="section-8.1.html#sec:double-ended-queues-and-general-lists"
+id="toc-sec:double-ended-queues-and-general-lists"><span
+class="toc-section-number">8.1.2</span> Double-ended queues and general
+lists</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-8.2.html#sec:ADTs:priority-queues"
+id="toc-sec:ADTs:priority-queues"><span
+class="toc-section-number">8.2</span> Priority queues</a></summary>
 <ul>
 <li><a
-href="section-8.1.html#sec:binary-trees-are-recursive-data-structures"
-id="toc-sec:binary-trees-are-recursive-data-structures"><span
-class="toc-section-number">8.1.1</span> Binary trees are recursive data
-structures</a></li>
+href="section-8.2.html#sec:implementing-priority-queues-using-sorted-lists"
+id="toc-sec:implementing-priority-queues-using-sorted-lists"><span
+class="toc-section-number">8.2.1</span> Implementing priority queues
+using sorted lists</a></li>
 </ul></details></li>
-<li><a href="section-8.2.html#sec:case-study-full-binary-trees"
-id="toc-sec:case-study-full-binary-trees"><span
-class="toc-section-number">8.2</span> Case study: Full binary
+<li><details><summary><a href="section-8.3.html#sec:ADTs:sets-and-maps"
+id="toc-sec:ADTs:sets-and-maps"><span
+class="toc-section-number">8.3</span> Sets and maps</a></summary>
+<ul>
+<li><a href="section-8.3.html#sec:ADTs:sets"
+id="toc-sec:ADTs:sets"><span class="toc-section-number">8.3.1</span>
+Sets</a></li>
+<li><a href="section-8.3.html#sec:ADTs:maps"
+id="toc-sec:ADTs:maps"><span class="toc-section-number">8.3.2</span>
+Maps, or dictionaries</a></li>
+<li><a href="section-8.3.html#sec:ADTs:multimaps"
+id="toc-sec:ADTs:multimaps"><span
+class="toc-section-number">8.3.3</span> Multimaps</a></li>
+<li><a
+href="section-8.3.html#sec:implementing-sets-and-maps-using-linked-lists"
+id="toc-sec:implementing-sets-and-maps-using-linked-lists"><span
+class="toc-section-number">8.3.4</span> Implementing sets and maps using
+linked lists</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-8.4.html#sec:ADTs:sorted-sets-and-maps"
+id="toc-sec:ADTs:sorted-sets-and-maps"><span
+class="toc-section-number">8.4</span> Sorted sets and maps</a></summary>
+<ul>
+<li><a href="section-8.4.html#sec:ADTs:sorted-sets"
+id="toc-sec:ADTs:sorted-sets"><span
+class="toc-section-number">8.4.1</span> Sorted sets</a></li>
+<li><a href="section-8.4.html#sec:ADTs:sorted-maps"
+id="toc-sec:ADTs:sorted-maps"><span
+class="toc-section-number">8.4.2</span> Sorted maps</a></li>
+<li><a
+href="section-8.4.html#sec:implementing-sorted-sets-and-maps-using-dynamic-arrays"
+id="toc-sec:implementing-sorted-sets-and-maps-using-dynamic-arrays"><span
+class="toc-section-number">8.4.3</span> Implementing sorted sets and
+maps using dynamic arrays</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-8.5.html#sec:ADTs:naive-analysis"
+id="toc-sec:ADTs:naive-analysis"><span
+class="toc-section-number">8.5</span> Analysing the naive
+implementations</a></summary>
+<ul>
+<li><a href="section-8.5.html#sec:priority-queues"
+id="toc-sec:priority-queues"><span
+class="toc-section-number">8.5.1</span> Priority queues</a></li>
+<li><a href="section-8.5.html#sec:sets-and-maps"
+id="toc-sec:sets-and-maps"><span class="toc-section-number">8.5.2</span>
+Sets and maps</a></li>
+<li><a href="section-8.5.html#sec:sorted-sets-and-maps"
+id="toc-sec:sorted-sets-and-maps"><span
+class="toc-section-number">8.5.3</span> Sorted sets and maps</a></li>
+<li><a href="section-8.5.html#sec:summary" id="toc-sec:summary"><span
+class="toc-section-number">8.5.4</span> Summary</a></li>
+</ul></details></li>
+<li><a href="section-8.6.html#sec:ADTs:standard-libraries"
+id="toc-sec:ADTs:standard-libraries"><span
+class="toc-section-number">8.6*</span> Comparison with the Java
+API</a></li>
+</ul></details></li>
+<li><details open><summary><a href="section-9.html#sec:trees" id="toc-sec:trees"><span
+class="toc-section-number">9</span> Trees and heaps</a></summary>
+<ul>
+<li><details><summary><a href="section-9.1.html#sec:trees:binary-trees"
+id="toc-sec:trees:binary-trees"><span
+class="toc-section-number">9.1</span> Binary trees</a></summary>
+<ul>
+<li><a href="section-9.1.html#sec:trees:full-perfect-complete"
+id="toc-sec:trees:full-perfect-complete"><span
+class="toc-section-number">9.1.1</span> Full, perfect, and complete
+binary trees</a></li>
+<li><a href="section-9.1.html#sec:trees:implementing-binary-trees"
+id="toc-sec:trees:implementing-binary-trees"><span
+class="toc-section-number">9.1.2</span> Implementing binary
 trees</a></li>
-<li><details><summary><a href="section-8.3.html#sec:implementing-binary-trees"
-id="toc-sec:implementing-binary-trees"><span
-class="toc-section-number">8.3</span> Implementing binary trees</a></summary>
+<li><a href="section-9.1.html#sec:trees:traversal"
+id="toc-sec:trees:traversal"><span
+class="toc-section-number">9.1.3</span> Traversing trees</a></li>
+<li><a href="section-9.1.html#sec:traversal-without-recursion"
+id="toc-sec:traversal-without-recursion"><span
+class="toc-section-number">9.1.4</span> Traversal without
+recursion</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-9.2.html#sec:trees:representations"
+id="toc-sec:trees:representations"><span
+class="toc-section-number">9.2</span> Tree representations</a></summary>
 <ul>
 <li><a
-href="section-8.3.html#sec:differentiating-between-internal-nodes-and-leaves"
-id="toc-sec:differentiating-between-internal-nodes-and-leaves"><span
-class="toc-section-number">8.3.1</span> Differentiating between internal
-nodes and leaves</a></li>
-<li><a href="section-8.3.html#sec:space-requirements"
-id="toc-sec:space-requirements"><span
-class="toc-section-number">8.3.2</span> Space requirements</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-8.4.html#sec:traversing-a-binary-tree"
-id="toc-sec:traversing-a-binary-tree"><span
-class="toc-section-number">8.4</span> Traversing a binary tree</a></summary>
-<ul>
-<li><a href="section-8.4.html#sec:preorder-postorder-and-inorder"
-id="toc-sec:preorder-postorder-and-inorder"><span
-class="toc-section-number">8.4.1</span> Preorder, postorder and
-inorder</a></li>
-<li><a href="section-8.4.html#sec:traversing-implementation"
-id="toc-sec:traversing-implementation"><span
-class="toc-section-number">8.4.2</span> Implementation</a></li>
-</ul></details></li>
-<li><a
-href="section-8.5.html#sec:iteration-recursion-and-information-flow"
-id="toc-sec:iteration-recursion-and-information-flow"><span
-class="toc-section-number">8.5</span> Iteration, recursion, and
-information flow</a></li>
-<li><details><summary><a href="section-8.6.html#sec:general-trees"
-id="toc-sec:general-trees"><span class="toc-section-number">8.6</span>
-General trees</a></summary>
-<ul>
-<li><a href="section-8.6.html#sec:definitions-and-terminology"
-id="toc-sec:definitions-and-terminology"><span
-class="toc-section-number">8.6.1</span> Definitions and
-terminology</a></li>
-<li><a href="section-8.6.html#sec:adt-for-general-trees"
-id="toc-sec:adt-for-general-trees"><span
-class="toc-section-number">8.6.2</span> ADT for general trees</a></li>
-<li><a href="section-8.6.html#sec:traversing-a-general-tree"
-id="toc-sec:traversing-a-general-tree"><span
-class="toc-section-number">8.6.3</span> Traversing a general
+href="section-9.2.html#sec:modelling-different-kinds-of-tree-nodes"
+id="toc-sec:modelling-different-kinds-of-tree-nodes"><span
+class="toc-section-number">9.2.1</span> Modelling different kinds of
+tree nodes</a></li>
+<li><a href="section-9.2.html#sec:trees:general-trees"
+id="toc-sec:trees:general-trees"><span
+class="toc-section-number">9.2.2</span> General trees</a></li>
+<li><a href="section-9.2.html#sec:trees:general-traversal"
+id="toc-sec:trees:general-traversal"><span
+class="toc-section-number">9.2.3</span> Traversing a general
 tree</a></li>
-<li><a href="section-8.6.html#sec:sequential-tree-representations"
-id="toc-sec:sequential-tree-representations"><span
-class="toc-section-number">8.6.4</span> Sequential tree
-representations</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-8.7.html#sec:ch08-review"
-id="toc-sec:ch08-review"><span class="toc-section-number">8.7</span>
-Review questions</a></summary>
+<li><a href="section-9.3.html#sec:trees:disjoint-sets"
+id="toc-sec:trees:disjoint-sets"><span
+class="toc-section-number">9.3</span> Case study: Disjoint sets</a></li>
+<li><a href="section-9.4.html#sec:heaps" id="toc-sec:heaps"><span
+class="toc-section-number">9.4</span> Heaps for priority queues</a></li>
+<li><details><summary><a href="section-9.5.html#sec:heaps:binary-heaps"
+id="toc-sec:heaps:binary-heaps"><span
+class="toc-section-number">9.5</span> Binary heaps</a></summary>
 <ul>
 <li><a
-href="section-8.7.html#sec:review-questions-binary-tree-definition"
-id="toc-sec:review-questions-binary-tree-definition"><span
-class="toc-section-number">8.7.1</span> Review questions: Binary tree
-definition</a></li>
-<li><a href="section-8.7.html#sec:review-questions-example-binary-tree"
-id="toc-sec:review-questions-example-binary-tree"><span
-class="toc-section-number">8.7.2</span> Review questions: Example binary
-tree</a></li>
+href="section-9.5.html#sec:representing-complete-binary-trees-as-arrays"
+id="toc-sec:representing-complete-binary-trees-as-arrays"><span
+class="toc-section-number">9.5.1</span> Representing complete binary
+trees as arrays</a></li>
+<li><a href="section-9.5.html#sec:using-dynamic-arrays"
+id="toc-sec:using-dynamic-arrays"><span
+class="toc-section-number">9.5.2</span> Using dynamic arrays</a></li>
+<li><a href="section-9.5.html#sec:implementing-binary-heaps"
+id="toc-sec:implementing-binary-heaps"><span
+class="toc-section-number">9.5.3</span> Implementing binary
+heaps</a></li>
+<li><a href="section-9.5.html#sec:inserting-into-a-heap"
+id="toc-sec:inserting-into-a-heap"><span
+class="toc-section-number">9.5.4</span> Inserting into a heap</a></li>
+<li><a href="section-9.5.html#sec:removing-from-a-heap"
+id="toc-sec:removing-from-a-heap"><span
+class="toc-section-number">9.5.5</span> Removing from a heap</a></li>
+<li><a href="section-9.5.html#sec:heaps:change-priority"
+id="toc-sec:heaps:change-priority"><span
+class="toc-section-number">9.5.6</span> Changing the priority of
+elements</a></li>
+</ul></details></li>
+<li><a href="section-9.6.html#sec:heaps:meldable-heaps"
+id="toc-sec:heaps:meldable-heaps"><span
+class="toc-section-number">9.6</span> Meldable heaps</a></li>
+<li><a href="section-9.7.html#sec:trees:space-requirements"
+id="toc-sec:trees:space-requirements"><span
+class="toc-section-number">9.7*</span> Space requirements</a></li>
+<li><details><summary><a href="section-9.8.html#sec:trees:implementing-traversal"
+id="toc-sec:trees:implementing-traversal"><span
+class="toc-section-number">9.8*</span> Implementing tree traversal</a></summary>
+<ul>
 <li><a
-href="section-8.7.html#sec:review-questions-binary-tree-traversals"
-id="toc-sec:review-questions-binary-tree-traversals"><span
-class="toc-section-number">8.7.3</span> Review questions: Binary tree
+href="section-9.8.html#sec:more-about-implementing-tree-traversals"
+id="toc-sec:more-about-implementing-tree-traversals"><span
+class="toc-section-number">9.8.1</span> More about implementing tree
 traversals</a></li>
 </ul></details></li>
+<li><a href="section-9.9.html#sec:trees:information-flow"
+id="toc-sec:trees:information-flow"><span
+class="toc-section-number">9.9*</span> Iteration, recursion, and
+information flow</a></li>
+<li><a href="section-9.10.html#sec:trees:implementing-general-trees"
+id="toc-sec:trees:implementing-general-trees"><span
+class="toc-section-number">9.10*</span> Implementing general
+trees</a></li>
+<li><details><summary><a href="section-9.11.html#sec:trees:disjoint-sets-in-depth"
+id="toc-sec:trees:disjoint-sets-in-depth"><span
+class="toc-section-number">9.11*</span> Case study: Disjoint sets in
+depth</a></summary>
+<ul>
+<li><a href="section-9.11.html#sec:parent-pointer-trees"
+id="toc-sec:parent-pointer-trees"><span
+class="toc-section-number">9.11.1</span> Parent pointer trees</a></li>
+<li><a href="section-9.11.html#sec:equivalence-classes"
+id="toc-sec:equivalence-classes"><span
+class="toc-section-number">9.11.2</span> Equivalence classes</a></li>
+<li><a href="section-9.11.html#sec:weighted-union"
+id="toc-sec:weighted-union"><span
+class="toc-section-number">9.11.3</span> Weighted union</a></li>
+<li><a href="section-9.11.html#sec:path-compression"
+id="toc-sec:path-compression"><span
+class="toc-section-number">9.11.4</span> Path compression</a></li>
 </ul></details></li>
-<li><details open><summary><a href="section-9.html#sec:priority-queues-and-heaps"
-id="toc-sec:priority-queues-and-heaps"><span
-class="toc-section-number">9</span> Priority queues and heaps</a></summary>
+<li><a href="section-9.12.html#sec:heaps:heapify"
+id="toc-sec:heaps:heapify"><span class="toc-section-number">9.12*</span>
+Case study: Building a heap</a></li>
+<li><details><summary><a href="section-9.13.html#sec:heaps:heapsort"
+id="toc-sec:heaps:heapsort"><span class="toc-section-number">9.13*</span>
+Case study: In-place heapsort</a></summary>
 <ul>
-<li><details><summary><a
-href="section-9.1.html#sec:implementing-priority-queues-using-binary-trees"
-id="toc-sec:implementing-priority-queues-using-binary-trees"><span
-class="toc-section-number">9.1</span> Implementing priority queues using
-binary trees</a></summary>
-<ul>
-<li><a href="section-9.1.html#sec:the-heap-property"
-id="toc-sec:the-heap-property"><span
-class="toc-section-number">9.1.1</span> The heap property</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-9.2.html#sec:binary-heaps"
-id="toc-sec:binary-heaps"><span class="toc-section-number">9.2</span>
-Binary heaps</a></summary>
-<ul>
-<li><a
-href="section-9.2.html#sec:representing-complete-binary-trees-as-arrays"
-id="toc-sec:representing-complete-binary-trees-as-arrays"><span
-class="toc-section-number">9.2.1</span> Representing complete binary
-trees as arrays</a></li>
-<li><a href="section-9.2.html#sec:implementing-binary-heaps"
-id="toc-sec:implementing-binary-heaps"><span
-class="toc-section-number">9.2.2</span> Implementing binary
-heaps</a></li>
-<li><a href="section-9.2.html#sec:inserting-into-a-heap"
-id="toc-sec:inserting-into-a-heap"><span
-class="toc-section-number">9.2.3</span> Inserting into a heap</a></li>
-<li><a href="section-9.2.html#sec:removing-from-the-heap"
-id="toc-sec:removing-from-the-heap"><span
-class="toc-section-number">9.2.4</span> Removing from the heap</a></li>
-<li><a href="section-9.2.html#sec:binary-heaps-as-priority-queues"
-id="toc-sec:binary-heaps-as-priority-queues"><span
-class="toc-section-number">9.2.5</span> Binary heaps as priority
-queues</a></li>
-<li><a href="section-9.2.html#sec:changing-the-priority-of-elements"
-id="toc-sec:changing-the-priority-of-elements"><span
-class="toc-section-number">9.2.6</span> Changing the priority of
-elements</a></li>
-<li><a href="section-9.2.html#sec:building-a-heap"
-id="toc-sec:building-a-heap"><span
-class="toc-section-number">9.2.7</span> Building a heap</a></li>
-</ul></details></li>
-<li><a href="section-9.3.html#sec:case-study-heapsort"
-id="toc-sec:case-study-heapsort"><span
-class="toc-section-number">9.3</span> Case study: Heapsort</a></li>
-<li><a href="section-9.4.html#sec:case-study-huffman-coding"
-id="toc-sec:case-study-huffman-coding"><span
-class="toc-section-number">9.4</span> Case study: Huffman
-coding</a></li>
-<li><details><summary><a href="section-9.5.html#sec:ch09-review"
-id="toc-sec:ch09-review"><span class="toc-section-number">9.5</span>
-Review questions</a></summary>
-<ul>
-<li><a href="section-9.5.html#sec:review-questions-binary-heaps"
-id="toc-sec:review-questions-binary-heaps"><span
-class="toc-section-number">9.5.1</span> Review questions: Binary
-heaps</a></li>
-<li><a href="section-9.5.html#sec:review-questions-heapsort"
-id="toc-sec:review-questions-heapsort"><span
-class="toc-section-number">9.5.2</span> Review questions:
+<li><a href="section-9.13.html#sec:analysis-of-in-place-heapsort"
+id="toc-sec:analysis-of-in-place-heapsort"><span
+class="toc-section-number">9.13.1</span> Analysis of in-place
 Heapsort</a></li>
 </ul></details></li>
-</ul></details></li>
-<li><details open><summary><a href="section-10.html#sec:sets-and-maps"
-id="toc-sec:sets-and-maps"><span class="toc-section-number">10</span>
-Sets and maps</a></summary>
+<li><details><summary><a href="section-9.14.html#sec:heaps:huffman-coding"
+id="toc-sec:heaps:huffman-coding"><span
+class="toc-section-number">9.14*</span> Case study: Huffman coding</a></summary>
 <ul>
-<li><a href="section-10.1.html#sec:sets-1" id="toc-sec:sets-1"><span
-class="toc-section-number">10.1</span> Sets</a></li>
-<li><details><summary><a href="section-10.2.html#sec:maps-or-dictionaries"
-id="toc-sec:maps-or-dictionaries"><span
-class="toc-section-number">10.2</span> Maps, or dictionaries</a></summary>
+<li><a href="section-9.14.html#sec:huffman-coding-trees"
+id="toc-sec:huffman-coding-trees"><span
+class="toc-section-number">9.14.1</span> Huffman coding trees</a></li>
+<li><a href="section-9.14.html#sec:building-huffman-trees"
+id="toc-sec:building-huffman-trees"><span
+class="toc-section-number">9.14.2</span> Building Huffman trees</a></li>
+<li><a href="section-9.14.html#sec:assigning-and-using-huffman-codes"
+id="toc-sec:assigning-and-using-huffman-codes"><span
+class="toc-section-number">9.14.3</span> Assigning and using Huffman
+codes</a></li>
+<li><a href="section-9.14.html#sec:decoding" id="toc-sec:decoding"><span
+class="toc-section-number">9.14.4</span> Decoding</a></li>
+<li><a href="section-9.14.html#sec:how-efficient-is-huffman-coding"
+id="toc-sec:how-efficient-is-huffman-coding"><span
+class="toc-section-number">9.14.5</span> How efficient is Huffman
+coding?</a></li>
+<li><a
+href="section-9.14.html#sec:proof-of-optimality-for-huffman-coding"
+id="toc-sec:proof-of-optimality-for-huffman-coding"><span
+class="toc-section-number">9.14.6</span> Proof of optimality for Huffman
+coding</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-9.15.html#sec:trees:quizzes"
+id="toc-sec:trees:quizzes"><span class="toc-section-number">9.15*</span>
+Review</a></summary>
 <ul>
-<li><a href="section-10.2.html#sec:multimaps"
-id="toc-sec:multimaps"><span class="toc-section-number">10.2.1</span>
-Multimaps</a></li>
-</ul></details></li>
-<li><details><summary><a
-href="section-10.3.html#sec:case-study-implementing-sets-using-lists"
-id="toc-sec:case-study-implementing-sets-using-lists"><span
-class="toc-section-number">10.3</span> Case study: Implementing sets
-using lists</a></summary>
-<ul>
-<li><a href="section-10.3.html#sec:implementing-maps"
-id="toc-sec:implementing-maps"><span
-class="toc-section-number">10.3.1</span> Implementing maps</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-10.4.html#sec:sorted-sets-and-maps"
-id="toc-sec:sorted-sets-and-maps"><span
-class="toc-section-number">10.4</span> Sorted sets and maps</a></summary>
-<ul>
-<li><a href="section-10.4.html#sec:sorted-sets"
-id="toc-sec:sorted-sets"><span class="toc-section-number">10.4.1</span>
-Sorted sets</a></li>
-<li><a href="section-10.4.html#sec:sorted-maps"
-id="toc-sec:sorted-maps"><span class="toc-section-number">10.4.2</span>
-Sorted maps</a></li>
+<li><a href="section-9.15.html#sec:quiz-binary-trees"
+id="toc-sec:quiz-binary-trees"><span
+class="toc-section-number">9.15.1</span> Quiz: Binary trees</a></li>
+<li><a href="section-9.15.html#sec:quiz-example-binary-tree"
+id="toc-sec:quiz-example-binary-tree"><span
+class="toc-section-number">9.15.2</span> Quiz: Example binary
+tree</a></li>
+<li><a href="section-9.15.html#sec:quiz-binary-tree-traversals"
+id="toc-sec:quiz-binary-tree-traversals"><span
+class="toc-section-number">9.15.3</span> Quiz: Binary tree
+traversals</a></li>
+<li><a href="section-9.15.html#sec:quiz-binary-heaps"
+id="toc-sec:quiz-binary-heaps"><span
+class="toc-section-number">9.15.4</span> Quiz: Binary heaps</a></li>
+<li><a href="section-9.15.html#sec:quiz-heapsort"
+id="toc-sec:quiz-heapsort"><span
+class="toc-section-number">9.15.5</span> Quiz: Heapsort</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a href="section-11.html#sec:search-trees"
-id="toc-sec:search-trees"><span class="toc-section-number">11</span>
+<li><details open><summary><a href="section-10.html#sec:search-trees"
+id="toc-sec:search-trees"><span class="toc-section-number">10</span>
 Search trees</a></summary>
 <ul>
-<li><details><summary><a href="section-11.1.html#sec:binary-search-trees"
-id="toc-sec:binary-search-trees"><span
-class="toc-section-number">11.1</span> Binary search trees</a></summary>
+<li><details><summary><a href="section-10.1.html#sec:search-trees:BSTs"
+id="toc-sec:search-trees:BSTs"><span
+class="toc-section-number">10.1</span> Binary search trees</a></summary>
 <ul>
-<li><a href="section-11.1.html#sec:recursive-search-and-insert"
-id="toc-sec:recursive-search-and-insert"><span
-class="toc-section-number">11.1.1</span> Recursive search and
-insert</a></li>
-<li><a href="section-11.1.html#sec:removing-from-a-bst"
-id="toc-sec:removing-from-a-bst"><span
-class="toc-section-number">11.1.2</span> Removing from a BST</a></li>
-<li><a href="section-11.1.html#sec:analysis" id="toc-sec:analysis"><span
-class="toc-section-number">11.1.3</span> Analysis</a></li>
-<li><a href="section-11.1.html#sec:guided-information-flow"
+<li><a href="section-10.1.html#sec:implementing-bst-sets-and-maps"
+id="toc-sec:implementing-bst-sets-and-maps"><span
+class="toc-section-number">10.1.1</span> Implementing BST sets and
+maps</a></li>
+<li><a href="section-10.1.html#sec:searching-in-and-adding-to-a-bst"
+id="toc-sec:searching-in-and-adding-to-a-bst"><span
+class="toc-section-number">10.1.2</span> Searching in and adding to a
+BST</a></li>
+<li><a href="section-10.1.html#sec:search-trees:BST-deletion"
+id="toc-sec:search-trees:BST-deletion"><span
+class="toc-section-number">10.1.3</span> Deleting from a BST</a></li>
+<li><a href="section-10.1.html#sec:complexity-analysis-3"
+id="toc-sec:complexity-analysis-3"><span
+class="toc-section-number">10.1.4</span> Complexity analysis</a></li>
+<li><a href="section-10.1.html#sec:guided-information-flow"
 id="toc-sec:guided-information-flow"><span
-class="toc-section-number">11.1.4</span> Guided information
+class="toc-section-number">10.1.5</span> Guided information
 flow</a></li>
 </ul></details></li>
-<li><a href="section-11.2.html#sec:self-balancing-trees"
-id="toc-sec:self-balancing-trees"><span
-class="toc-section-number">11.2</span> Self-balancing trees</a></li>
-<li><details><summary><a href="section-11.3.html#sec:avl-trees"
-id="toc-sec:avl-trees"><span class="toc-section-number">11.3</span> AVL
-trees</a></summary>
+<li><details><summary><a href="section-10.2.html#sec:search-trees:self-balancing"
+id="toc-sec:search-trees:self-balancing"><span
+class="toc-section-number">10.2</span> Self-balancing trees</a></summary>
 <ul>
-<li><a href="section-11.3.html#sec:rotations"
-id="toc-sec:rotations"><span class="toc-section-number">11.3.1</span>
-Rotations</a></li>
-<li><a href="section-11.3.html#sec:avl-tree-insertion"
-id="toc-sec:avl-tree-insertion"><span
-class="toc-section-number">11.3.2</span> AVL tree insertion</a></li>
+<li><a href="section-10.2.html#sec:search-trees:rotations"
+id="toc-sec:search-trees:rotations"><span
+class="toc-section-number">10.2.1</span> Tree rotations</a></li>
 </ul></details></li>
-<li><a href="section-11.4.html#sec:splay-trees"
-id="toc-sec:splay-trees"><span class="toc-section-number">11.4</span>
-Splay trees</a></li>
-<li><details><summary><a href="section-11.5.html#sec:trees-and-b-trees"
-id="toc-sec:trees-and-b-trees"><span
-class="toc-section-number">11.5</span> 2-3 trees and B-trees</a></summary>
+<li><details><summary><a href="section-10.3.html#sec:search-trees:AVL-trees"
+id="toc-sec:search-trees:AVL-trees"><span
+class="toc-section-number">10.3</span> AVL trees</a></summary>
 <ul>
-<li><a href="section-11.5.html#sec:trees-1" id="toc-sec:trees-1"><span
-class="toc-section-number">11.5.1</span> 2-3 trees</a></li>
-<li><a href="section-11.5.html#sec:b-trees" id="toc-sec:b-trees"><span
-class="toc-section-number">11.5.2</span> B-trees</a></li>
-<li><a href="section-11.5.html#sec:b-trees-1"
-id="toc-sec:b-trees-1"><span class="toc-section-number">11.5.3</span>
-B<sup>+</sup> trees</a></li>
-<li><a href="section-11.5.html#sec:analysis-of-b-trees"
+<li><a href="section-10.3.html#sec:implementing-avl-nodes"
+id="toc-sec:implementing-avl-nodes"><span
+class="toc-section-number">10.3.1</span> Implementing AVL nodes</a></li>
+<li><a href="section-10.3.html#sec:inserting-into-an-avl-tree"
+id="toc-sec:inserting-into-an-avl-tree"><span
+class="toc-section-number">10.3.2</span> Inserting into an AVL
+tree</a></li>
+<li><a href="section-10.3.html#sec:implementing-insertion"
+id="toc-sec:implementing-insertion"><span
+class="toc-section-number">10.3.3</span> Implementing insertion</a></li>
+<li><a href="section-10.3.html#sec:deleting-a-node"
+id="toc-sec:deleting-a-node"><span
+class="toc-section-number">10.3.4</span> Deleting a node</a></li>
+<li><a href="section-10.3.html#sec:complexity-analysis-4"
+id="toc-sec:complexity-analysis-4"><span
+class="toc-section-number">10.3.5</span> Complexity analysis</a></li>
+<li><a href="section-10.3.html#sec:yet-another-sorting-algorithm"
+id="toc-sec:yet-another-sorting-algorithm"><span
+class="toc-section-number">10.3.6</span> Yet another sorting
+algorithm</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-10.4.html#sec:search-trees:23-and-B-trees"
+id="toc-sec:search-trees:23-and-B-trees"><span
+class="toc-section-number">10.4</span> 2-3 trees and B-trees</a></summary>
+<ul>
+<li><a href="section-10.4.html#sec:searching-in-a-2-3-tree"
+id="toc-sec:searching-in-a-2-3-tree"><span
+class="toc-section-number">10.4.1</span> Searching in a 2-3
+tree</a></li>
+<li><a href="section-10.4.html#sec:inserting-into-a-2-3-tree"
+id="toc-sec:inserting-into-a-2-3-tree"><span
+class="toc-section-number">10.4.2</span> Inserting into a 2-3
+tree</a></li>
+<li><a href="section-10.4.html#sec:deleting-from-a-2-3-tree"
+id="toc-sec:deleting-from-a-2-3-tree"><span
+class="toc-section-number">10.4.3</span> Deleting from a 2-3
+tree</a></li>
+<li><a href="section-10.4.html#sec:complexity-analysis-5"
+id="toc-sec:complexity-analysis-5"><span
+class="toc-section-number">10.4.4</span> Complexity analysis</a></li>
+<li><a href="section-10.4.html#sec:red-black-trees-and-2-3-4-trees"
+id="toc-sec:red-black-trees-and-2-3-4-trees"><span
+class="toc-section-number">10.4.5</span> Red-black trees and 2-3-4
+trees</a></li>
+<li><a href="section-10.4.html#sec:search-trees:B-trees"
+id="toc-sec:search-trees:B-trees"><span
+class="toc-section-number">10.4.6</span> B-trees</a></li>
+<li><a href="section-10.4.html#sec:file-systems-and-databases"
+id="toc-sec:file-systems-and-databases"><span
+class="toc-section-number">10.4.7</span> File systems and
+databases</a></li>
+<li><a href="section-10.4.html#sec:b-trees" id="toc-sec:b-trees"><span
+class="toc-section-number">10.4.8</span> B+ trees</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-10.5.html#sec:search-trees:Bplus-trees"
+id="toc-sec:search-trees:Bplus-trees"><span
+class="toc-section-number">10.5*</span> B+ trees in more detail</a></summary>
+<ul>
+<li><a href="section-10.5.html#sec:analysis-of-b-trees"
 id="toc-sec:analysis-of-b-trees"><span
-class="toc-section-number">11.5.4</span> Analysis of B-trees</a></li>
+class="toc-section-number">10.5.1</span> Analysis of B+ trees</a></li>
 </ul></details></li>
-<li><a href="section-11.6.html#sec:disjoint-sets"
-id="toc-sec:disjoint-sets"><span class="toc-section-number">11.6</span>
-Disjoint sets and the Union/Find algorithm</a></li>
-<li><a href="section-11.7.html#sec:skip-lists"
-id="toc-sec:skip-lists"><span class="toc-section-number">11.7</span>
-Skip lists</a></li>
-<li><details><summary><a href="section-11.8.html#sec:ch11-review"
-id="toc-sec:ch11-review"><span class="toc-section-number">11.8</span>
-Review questions</a></summary>
+<li><details><summary><a href="section-10.6.html#sec:search-trees:splay-trees"
+id="toc-sec:search-trees:splay-trees"><span
+class="toc-section-number">10.6*</span> Splay trees</a></summary>
 <ul>
-<li><a href="section-11.8.html#sec:review-questions-binary-search-trees"
-id="toc-sec:review-questions-binary-search-trees"><span
-class="toc-section-number">11.8.1</span> Review questions: Binary search
+<li><a href="section-10.6.html#sec:splaying" id="toc-sec:splaying"><span
+class="toc-section-number">10.6.1</span> Splaying</a></li>
+<li><a href="section-10.6.html#sec:searching-in-a-splay-tree"
+id="toc-sec:searching-in-a-splay-tree"><span
+class="toc-section-number">10.6.2</span> Searching in a splay
+tree</a></li>
+</ul></details></li>
+<li><a href="section-10.7.html#sec:search-trees:skiplists"
+id="toc-sec:search-trees:skiplists"><span
+class="toc-section-number">10.7*</span> Skip lists</a></li>
+<li><details><summary><a href="section-10.8.html#sec:search-trees:quizzes"
+id="toc-sec:search-trees:quizzes"><span
+class="toc-section-number">10.8*</span> Review</a></summary>
+<ul>
+<li><a href="section-10.8.html#sec:quiz-binary-search-trees"
+id="toc-sec:quiz-binary-search-trees"><span
+class="toc-section-number">10.8.1</span> Quiz: Binary search
 trees</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><details open><summary><a href="section-12.html#sec:hash-tables"
-id="toc-sec:hash-tables"><span class="toc-section-number">12</span> Hash
+<li><details open><summary><a href="section-11.html#sec:hash-tables"
+id="toc-sec:hash-tables"><span class="toc-section-number">11</span> Hash
 tables</a></summary>
 <ul>
-<li><details><summary><a href="section-12.1.html#sec:hash-functions"
-id="toc-sec:hash-functions"><span class="toc-section-number">12.1</span>
-Hash functions</a></summary>
+<li><details><summary><a href="section-11.1.html#sec:hash-tables:overview"
+id="toc-sec:hash-tables:overview"><span
+class="toc-section-number">11.1</span> Hash table overview</a></summary>
 <ul>
-<li><a href="section-12.1.html#sec:properties-of-a-hash-function"
-id="toc-sec:properties-of-a-hash-function"><span
-class="toc-section-number">12.1.1</span> Properties of a hash
-function</a></li>
-<li><a href="section-12.1.html#sec:basic-principles-of-hash-functions"
-id="toc-sec:basic-principles-of-hash-functions"><span
-class="toc-section-number">12.1.2</span> Basic principles of hash
-functions</a></li>
+<li><a href="section-11.1.html#sec:maps-where-keys-are-small-integers"
+id="toc-sec:maps-where-keys-are-small-integers"><span
+class="toc-section-number">11.1.1</span> Maps where keys are small
+integers</a></li>
+<li><a
+href="section-11.1.html#sec:maps-where-keys-are-arbitrary-integers"
+id="toc-sec:maps-where-keys-are-arbitrary-integers"><span
+class="toc-section-number">11.1.2</span> Maps where keys are arbitrary
+integers</a></li>
+<li><a href="section-11.1.html#sec:maps-where-keys-are-objects"
+id="toc-sec:maps-where-keys-are-objects"><span
+class="toc-section-number">11.1.3</span> Maps where keys are
+objects</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-12.2.html#sec:converting-objects-to-table-indices"
-id="toc-sec:converting-objects-to-table-indices"><span
-class="toc-section-number">12.2</span> Converting objects to table
-indices</a></summary>
+<li><a href="section-11.2.html#sec:hash-tables:separate-chaining"
+id="toc-sec:hash-tables:separate-chaining"><span
+class="toc-section-number">11.2</span> Separate chaining</a></li>
+<li><a href="section-11.3.html#sec:hash-tables:open-addressing"
+id="toc-sec:hash-tables:open-addressing"><span
+class="toc-section-number">11.3</span> Open addressing and linear
+probing</a></li>
+<li><a href="section-11.4.html#sec:hash-tables:resizing"
+id="toc-sec:hash-tables:resizing"><span
+class="toc-section-number">11.4</span> Resizing hash tables</a></li>
+<li><details><summary><a href="section-11.5.html#sec:hash-tables:deletion"
+id="toc-sec:hash-tables:deletion"><span
+class="toc-section-number">11.5</span> Deleting entries from open
+addressing hash tables</a></summary>
 <ul>
-<li><a href="section-12.2.html#sec:compressing-a-hash-code"
-id="toc-sec:compressing-a-hash-code"><span
-class="toc-section-number">12.2.1</span> Compressing a hash
-code</a></li>
-<li><a href="section-12.2.html#sec:modular-compression"
-id="toc-sec:modular-compression"><span
-class="toc-section-number">12.2.2</span> Modular compression</a></li>
-<li><a href="section-12.2.html#sec:negative-hash-codes"
-id="toc-sec:negative-hash-codes"><span
-class="toc-section-number">12.2.3</span> Negative hash codes</a></li>
-<li><a href="section-12.2.html#sec:the-hash-code-never-changes"
-id="toc-sec:the-hash-code-never-changes"><span
-class="toc-section-number">12.2.4</span> The hash code never
-changes</a></li>
-<li><a href="section-12.2.html#sec:handling-collisions"
-id="toc-sec:handling-collisions"><span
-class="toc-section-number">12.2.5</span> Handling collisions</a></li>
+<li><a href="section-11.5.html#sec:shrinking-tables"
+id="toc-sec:shrinking-tables"><span
+class="toc-section-number">11.5.1</span> Shrinking tables</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-12.3.html#sec:separate-chaining"
-id="toc-sec:separate-chaining"><span
-class="toc-section-number">12.3</span> Separate chaining</a></summary>
+<li><details><summary><a href="section-11.6.html#sec:hash-tables:hash-quality"
+id="toc-sec:hash-tables:hash-quality"><span
+class="toc-section-number">11.6</span> Quality of hash functions</a></summary>
 <ul>
-<li><a href="section-12.3.html#sec:alternatives-to-a-linked-list"
-id="toc-sec:alternatives-to-a-linked-list"><span
-class="toc-section-number">12.3.1</span> Alternatives to a linked
-list</a></li>
-<li><a href="section-12.3.html#sec:resizing-is-important"
-id="toc-sec:resizing-is-important"><span
-class="toc-section-number">12.3.2</span> Resizing is important</a></li>
-<li><a href="section-12.3.html#sec:implementation"
-id="toc-sec:implementation"><span
-class="toc-section-number">12.3.3</span> Implementation</a></li>
-<li><a href="section-12.3.html#sec:load-factor-and-resizing"
-id="toc-sec:load-factor-and-resizing"><span
-class="toc-section-number">12.3.4</span> Load factor and
-resizing</a></li>
-</ul></details></li>
-<li><details><summary><a
-href="section-12.4.html#sec:implementing-sets-and-maps-using-separate-chaining"
-id="toc-sec:implementing-sets-and-maps-using-separate-chaining"><span
-class="toc-section-number">12.4</span> Implementing sets and maps using
-separate chaining</a></summary>
-<ul>
-<li><a href="section-12.4.html#sec:implementing-sets"
-id="toc-sec:implementing-sets"><span
-class="toc-section-number">12.4.1</span> Implementing sets</a></li>
-<li><a href="section-12.4.html#sec:implementing-maps-1"
-id="toc-sec:implementing-maps-1"><span
-class="toc-section-number">12.4.2</span> Implementing maps</a></li>
-</ul></details></li>
-<li><a href="section-12.5.html#sec:open-addressing"
-id="toc-sec:open-addressing"><span
-class="toc-section-number">12.5</span> Open addressing</a></li>
-<li><details><summary><a
-href="section-12.6.html#sec:implementing-sets-and-maps-using-open-addressing"
-id="toc-sec:implementing-sets-and-maps-using-open-addressing"><span
-class="toc-section-number">12.6</span> Implementing sets and maps using
-open addressing</a></summary>
-<ul>
-<li><a href="section-12.6.html#sec:resizing" id="toc-sec:resizing"><span
-class="toc-section-number">12.6.1</span> Resizing</a></li>
-<li><a href="section-12.6.html#sec:implementing-maps-2"
-id="toc-sec:implementing-maps-2"><span
-class="toc-section-number">12.6.2</span> Implementing maps</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-12.7.html#sec:deletion-in-open-addressing"
-id="toc-sec:deletion-in-open-addressing"><span
-class="toc-section-number">12.7</span> Deletion in open addressing</a></summary>
-<ul>
-<li><a href="section-12.7.html#sec:simple-implementation-of-deletion"
-id="toc-sec:simple-implementation-of-deletion"><span
-class="toc-section-number">12.7.1</span> Simple implementation of
-deletion</a></li>
-<li><a href="section-12.7.html#sec:two-load-factors"
-id="toc-sec:two-load-factors"><span
-class="toc-section-number">12.7.2</span> Two load factors</a></li>
-</ul></details></li>
-<li><a href="section-12.8.html#sec:different-probing-strategies"
-id="toc-sec:different-probing-strategies"><span
-class="toc-section-number">12.8</span> Different probing
-strategies</a></li>
-<li><details><summary><a href="section-12.9.html#sec:analysis-of-hash-tables"
-id="toc-sec:analysis-of-hash-tables"><span
-class="toc-section-number">12.9</span> Analysis of hash tables</a></summary>
-<ul>
-<li><a href="section-12.9.html#sec:analysis-of-open-addressing"
-id="toc-sec:analysis-of-open-addressing"><span
-class="toc-section-number">12.9.1</span> Analysis of open
-addressing</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-12.10.html#sec:better-hash-functions"
-id="toc-sec:better-hash-functions"><span
-class="toc-section-number">12.10</span> Better hash functions</a></summary>
-<ul>
-<li><a href="section-12.10.html#sec:a-simple-hash-function-for-strings"
-id="toc-sec:a-simple-hash-function-for-strings"><span
-class="toc-section-number">12.10.3</span> A simple hash function for
+<li><a href="section-11.6.html#sec:a-good-hash-function-for-strings"
+id="toc-sec:a-good-hash-function-for-strings"><span
+class="toc-section-number">11.6.1</span> A good hash function for
 strings</a></li>
-<li><a href="section-12.10.html#sec:improved-string-folding"
+</ul></details></li>
+<li><a href="section-11.7.html#sec:hash-tables:complexity"
+id="toc-sec:hash-tables:complexity"><span
+class="toc-section-number">11.7</span> Complexity of hash table
+operations</a></li>
+<li><details><summary><a href="section-11.8.html#sec:hash-tables:implementation"
+id="toc-sec:hash-tables:implementation"><span
+class="toc-section-number">11.8</span> Implementation of open
+addressing</a></summary>
+<ul>
+<li><a href="section-11.8.html#sec:resizing-the-internal-array-1"
+id="toc-sec:resizing-the-internal-array-1"><span
+class="toc-section-number">11.8.1</span> Resizing the internal
+array</a></li>
+<li><a href="section-11.8.html#sec:lazy-deletion"
+id="toc-sec:lazy-deletion"><span
+class="toc-section-number">11.8.2</span> Lazy deletion</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-11.9.html#sec:hash-tables:probing-strategies"
+id="toc-sec:hash-tables:probing-strategies"><span
+class="toc-section-number">11.9*</span> Different probing strategies</a></summary>
+<ul>
+<li><a href="section-11.9.html#sec:linear-probing-by-steps"
+id="toc-sec:linear-probing-by-steps"><span
+class="toc-section-number">11.9.1</span> Linear probing by
+steps</a></li>
+<li><a href="section-11.9.html#sec:pseudo-random-probing"
+id="toc-sec:pseudo-random-probing"><span
+class="toc-section-number">11.9.2</span> Pseudo-random probing</a></li>
+<li><a href="section-11.9.html#sec:quadratic-probing"
+id="toc-sec:quadratic-probing"><span
+class="toc-section-number">11.9.3</span> Quadratic probing</a></li>
+<li><a href="section-11.9.html#sec:double-hashing"
+id="toc-sec:double-hashing"><span
+class="toc-section-number">11.9.4</span> Double hashing</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-11.10.html#sec:hash-tables:better-hash-functions"
+id="toc-sec:hash-tables:better-hash-functions"><span
+class="toc-section-number">11.10*</span> Better hash functions</a></summary>
+<ul>
+<li><a href="section-11.10.html#sec:binning" id="toc-sec:binning"><span
+class="toc-section-number">11.10.1</span> Binning</a></li>
+<li><a href="section-11.10.html#sec:the-mid-square-method"
+id="toc-sec:the-mid-square-method"><span
+class="toc-section-number">11.10.2</span> The mid-square method</a></li>
+<li><a href="section-11.10.html#sec:a-simple-hash-function-for-strings"
+id="toc-sec:a-simple-hash-function-for-strings"><span
+class="toc-section-number">11.10.3</span> A simple hash function for
+strings</a></li>
+<li><a href="section-11.10.html#sec:improved-string-folding"
 id="toc-sec:improved-string-folding"><span
-class="toc-section-number">12.10.4</span> Improved string
+class="toc-section-number">11.10.4</span> Improved string
 folding</a></li>
 </ul></details></li>
-<li><a href="section-12.11.html#sec:bucket-hashing"
-id="toc-sec:bucket-hashing"><span
-class="toc-section-number">12.11</span> Bucket hashing</a></li>
-<li><details><summary><a href="section-12.12.html#sec:hash-tables-in-practice"
-id="toc-sec:hash-tables-in-practice"><span
-class="toc-section-number">12.12</span> Hash tables in practice</a></summary>
-<ul>
-<li><a href="section-12.12.html#sec:algorithmic-complexity-attacks"
-id="toc-sec:algorithmic-complexity-attacks"><span
-class="toc-section-number">12.12.1</span> Algorithmic complexity
-attacks</a></li>
-<li><a href="section-12.12.html#sec:breaking-hash-functions"
-id="toc-sec:breaking-hash-functions"><span
-class="toc-section-number">12.12.2</span> Breaking hash
-functions</a></li>
-<li><a href="section-12.12.html#sec:hashing-standard-libraries"
-id="toc-sec:hashing-standard-libraries"><span
-class="toc-section-number">12.12.3</span> How are hash tables
-implemented in standard libraries?</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-12.13.html#sec:ch12-review"
-id="toc-sec:ch12-review"><span class="toc-section-number">12.13</span>
-Review questions</a></summary>
-<ul>
-<li><a href="section-12.13.html#sec:review-questions-hash-functions"
-id="toc-sec:review-questions-hash-functions"><span
-class="toc-section-number">12.13.1</span> Review questions: Hash
-functions</a></li>
-<li><a href="section-12.13.html#sec:review-questions-hash-tables"
-id="toc-sec:review-questions-hash-tables"><span
-class="toc-section-number">12.13.2</span> Review questions: Hash
-tables</a></li>
-</ul></details></li>
-</ul></details></li>
-<li><details open><summary><a href="section-13.html#sec:graphs" id="toc-sec:graphs"><span
-class="toc-section-number">13</span> Graphs</a></summary>
-<ul>
-<li><a href="section-13.1.html#sec:definitions-and-properties"
-id="toc-sec:definitions-and-properties"><span
-class="toc-section-number">13.1</span> Definitions and
-properties</a></li>
-<li><a href="section-13.2.html#sec:graph-representations"
-id="toc-sec:graph-representations"><span
-class="toc-section-number">13.2</span> Graph representations</a></li>
-<li><details><summary><a href="section-13.3.html#sec:implementing-graphs"
-id="toc-sec:implementing-graphs"><span
-class="toc-section-number">13.3</span> Implementing graphs</a></summary>
-<ul>
-<li><a href="section-13.3.html#sec:adjacency-matrix"
-id="toc-sec:adjacency-matrix"><span
-class="toc-section-number">13.3.1</span> Adjacency matrix</a></li>
-<li><a href="section-13.3.html#sec:adjacency-list"
-id="toc-sec:adjacency-list"><span
-class="toc-section-number">13.3.2</span> Adjacency list</a></li>
-</ul></details></li>
-<li><details><summary><a href="section-13.4.html#sec:traversing-graphs"
-id="toc-sec:traversing-graphs"><span
-class="toc-section-number">13.4</span> Traversing graphs</a></summary>
-<ul>
-<li><a href="section-13.4.html#sec:depth-first-search"
-id="toc-sec:depth-first-search"><span
-class="toc-section-number">13.4.1</span> Depth-first search</a></li>
-<li><a href="section-13.4.html#sec:breadth-first-search"
-id="toc-sec:breadth-first-search"><span
-class="toc-section-number">13.4.2</span> Breadth-first search</a></li>
-</ul></details></li>
-<li><a href="section-13.5.html#sec:minimum-spanning-trees"
-id="toc-sec:minimum-spanning-trees"><span
-class="toc-section-number">13.5</span> Minimum spanning trees,
-MST</a></li>
-<li><details><summary><a href="section-13.6.html#sec:prims-algorithm"
-id="toc-sec:prims-algorithm"><span
-class="toc-section-number">13.6</span> Prim’s algorithm for finding the
-MST</a></summary>
+<li><a href="section-11.11.html#sec:hash-tables:standard-libraries"
+id="toc-sec:hash-tables:standard-libraries"><span
+class="toc-section-number">11.11*</span> Hash tables in standard
+libraries</a></li>
+<li><details><summary><a href="section-11.12.html#sec:hash-tables:bucket-hashing"
+id="toc-sec:hash-tables:bucket-hashing"><span
+class="toc-section-number">11.12*</span> Bucket hashing</a></summary>
 <ul>
 <li><a
-href="section-13.6.html#sec:priority-queue-implementation-of-prims-algorithm"
-id="toc-sec:priority-queue-implementation-of-prims-algorithm"><span
-class="toc-section-number">13.6.1</span> Priority queue implementation
-of Prim’s algorithm</a></li>
-<li><a href="section-13.6.html#sec:prims-correctness"
-id="toc-sec:prims-correctness"><span
-class="toc-section-number">13.6.2</span> Correctness of Prim’s
+href="section-11.12.html#sec:an-alternative-approach-to-bucket-hashing"
+id="toc-sec:an-alternative-approach-to-bucket-hashing"><span
+class="toc-section-number">11.12.1</span> An alternative approach to
+bucket hashing</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-11.13.html#sec:hash-tables:quizzes"
+id="toc-sec:hash-tables:quizzes"><span
+class="toc-section-number">11.13*</span> Review</a></summary>
+<ul>
+<li><a href="section-11.13.html#sec:quiz-hash-functions"
+id="toc-sec:quiz-hash-functions"><span
+class="toc-section-number">11.13.1</span> Quiz: Hash functions</a></li>
+<li><a href="section-11.13.html#sec:quiz-hash-tables"
+id="toc-sec:quiz-hash-tables"><span
+class="toc-section-number">11.13.2</span> Quiz: Hash tables</a></li>
+</ul></details></li>
+</ul></details></li>
+<li><details open><summary><a href="section-12.html#sec:graphs" id="toc-sec:graphs"><span
+class="toc-section-number">12</span> Graphs</a></summary>
+<ul>
+<li><details><summary><a href="section-12.1.html#sec:graphs:definitions"
+id="toc-sec:graphs:definitions"><span
+class="toc-section-number">12.1</span> Definitions and properties</a></summary>
+<ul>
+<li><a href="section-12.1.html#sec:programming-graph-algorithms"
+id="toc-sec:programming-graph-algorithms"><span
+class="toc-section-number">12.1.1</span> Programming graph
+algorithms</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-12.2.html#sec:graphs:traversal"
+id="toc-sec:graphs:traversal"><span
+class="toc-section-number">12.2</span> Traversing graphs: DFS and
+BFS</a></summary>
+<ul>
+<li><a href="section-12.2.html#sec:graphs:DFS"
+id="toc-sec:graphs:DFS"><span class="toc-section-number">12.2.1</span>
+Depth-first traversal</a></li>
+<li><a href="section-12.2.html#sec:graphs:BFS"
+id="toc-sec:graphs:BFS"><span class="toc-section-number">12.2.2</span>
+Breadth-first traversal</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-12.3.html#sec:graphs:shortest-path"
+id="toc-sec:graphs:shortest-path"><span
+class="toc-section-number">12.3</span> Shortest-path problems and
+Dijkstra’s algorithm</a></summary>
+<ul>
+<li><a href="section-12.3.html#sec:graphs:dijkstras-algorithm"
+id="toc-sec:graphs:dijkstras-algorithm"><span
+class="toc-section-number">12.3.1</span> Dijkstra’s shortest-path
+algorithm</a></li>
+<li><a href="section-12.3.html#sec:extracting-the-shortest-path-tree"
+id="toc-sec:extracting-the-shortest-path-tree"><span
+class="toc-section-number">12.3.2</span> Extracting the shortest-path
+tree</a></li>
+<li><a href="section-12.3.html#sec:optimising-dijkstras-algorithm"
+id="toc-sec:optimising-dijkstras-algorithm"><span
+class="toc-section-number">12.3.3</span> Optimising Dijkstra’s
 algorithm</a></li>
 </ul></details></li>
-<li><a href="section-13.7.html#sec:kruskals-algorithm"
-id="toc-sec:kruskals-algorithm"><span
-class="toc-section-number">13.7</span> Kruskal’s algorithm for finding
-the MST</a></li>
-<li><a href="section-13.8.html#sec:shortest-paths-problems"
-id="toc-sec:shortest-paths-problems"><span
-class="toc-section-number">13.8</span> Shortest-paths problems</a></li>
-<li><details><summary><a href="section-13.9.html#sec:dijkstras-algorithm"
-id="toc-sec:dijkstras-algorithm"><span
-class="toc-section-number">13.9</span> Dijkstra’s shortest-path
-algorithm</a></summary>
+<li><details><summary><a href="section-12.4.html#sec:graphs:MSTs"
+id="toc-sec:graphs:MSTs"><span class="toc-section-number">12.4</span>
+Minimum spanning trees and Prim’s algorithm</a></summary>
 <ul>
-<li><a href="section-13.9.html#sec:using-a-priority-queue"
-id="toc-sec:using-a-priority-queue"><span
-class="toc-section-number">13.9.1</span> Using a priority queue</a></li>
+<li><a href="section-12.4.html#sec:graphs:prims-algorithm"
+id="toc-sec:graphs:prims-algorithm"><span
+class="toc-section-number">12.4.1</span> Prim’s MST algorithm</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-13.10.html#sec:specialised-graph-algorithms"
-id="toc-sec:specialised-graph-algorithms"><span
-class="toc-section-number">13.10</span> Specialised algorithms on
-weighted graphs</a></summary>
+<li><a href="section-12.5.html#sec:graphs:kruskals-algorithm"
+id="toc-sec:graphs:kruskals-algorithm"><span
+class="toc-section-number">12.5</span> Kruskal’s MST algorithm</a></li>
+<li><a href="section-12.6.html#sec:graphs:analysis"
+id="toc-sec:graphs:analysis"><span
+class="toc-section-number">12.6</span> Complexity analysis</a></li>
+<li><a href="section-12.7.html#sec:graphs:representation"
+id="toc-sec:graphs:representation"><span
+class="toc-section-number">12.7</span> Graph representation and
+implementation</a></li>
+<li><details><summary><a href="section-12.8.html#sec:graphs:implementation"
+id="toc-sec:graphs:implementation"><span
+class="toc-section-number">12.8*</span> Implementing graphs</a></summary>
 <ul>
-<li><a href="section-13.10.html#sec:floyds-algorithm"
-id="toc-sec:floyds-algorithm"><span
-class="toc-section-number">13.10.1</span> All-pairs shortest paths:
-Floyd’s algorithm</a></li>
-<li><a href="section-13.10.html#sec:topological-sort"
-id="toc-sec:topological-sort"><span
-class="toc-section-number">13.10.2</span> Acyclic graphs: Topological
-sort</a></li>
+<li><a href="section-12.8.html#sec:adjacency-matrix"
+id="toc-sec:adjacency-matrix"><span
+class="toc-section-number">12.8.1</span> Adjacency matrix</a></li>
+<li><a href="section-12.8.html#sec:adjacency-list"
+id="toc-sec:adjacency-list"><span
+class="toc-section-number">12.8.2</span> Adjacency list</a></li>
 </ul></details></li>
-<li><details><summary><a href="section-13.11.html#sec:ch13-review"
-id="toc-sec:ch13-review"><span class="toc-section-number">13.11</span>
-Review questions</a></summary>
+<li><details><summary><a href="section-12.9.html#sec:graphs:topological-sort"
+id="toc-sec:graphs:topological-sort"><span
+class="toc-section-number">12.9*</span> Topological sort for directed
+acyclic graphs</a></summary>
 <ul>
-<li><a href="section-13.11.html#sec:review-questions-graph-terminology"
-id="toc-sec:review-questions-graph-terminology"><span
-class="toc-section-number">13.11.1</span> Review questions: Graph
+<li><a href="section-12.9.html#sec:depth-first-algorithm"
+id="toc-sec:depth-first-algorithm"><span
+class="toc-section-number">12.9.1</span> Depth-first algorithm</a></li>
+<li><a href="section-12.9.html#sec:queue-based-algorithm"
+id="toc-sec:queue-based-algorithm"><span
+class="toc-section-number">12.9.2</span> Queue-based algorithm</a></li>
+</ul></details></li>
+<li><a href="section-12.10.html#sec:graphs:floyds-algorithm"
+id="toc-sec:graphs:floyds-algorithm"><span
+class="toc-section-number">12.10*</span> Floyd’s algorithm: All-pairs
+shortest paths</a></li>
+<li><details><summary><a href="section-12.11.html#sec:graphs:quizzes"
+id="toc-sec:graphs:quizzes"><span
+class="toc-section-number">12.11*</span> Review</a></summary>
+<ul>
+<li><a href="section-12.11.html#sec:quiz-graph-terminology"
+id="toc-sec:quiz-graph-terminology"><span
+class="toc-section-number">12.11.1</span> Quiz: Graph
 terminology</a></li>
-<li><a
-href="section-13.11.html#sec:review-questions-graph-space-requirements"
-id="toc-sec:review-questions-graph-space-requirements"><span
-class="toc-section-number">13.11.2</span> Review questions: Graph space
-requirements</a></li>
-<li><a href="section-13.11.html#sec:summary-questions-1"
-id="toc-sec:summary-questions-1"><span
-class="toc-section-number">13.11.3</span> Summary questions</a></li>
+<li><a href="section-12.11.html#sec:quiz-space-requirements-for-graphs"
+id="toc-sec:quiz-space-requirements-for-graphs"><span
+class="toc-section-number">12.11.2</span> Quiz: Space requirements for
+graphs</a></li>
+<li><a href="section-12.11.html#sec:quiz-graph-summary-questions"
+id="toc-sec:quiz-graph-summary-questions"><span
+class="toc-section-number">12.11.3</span> Quiz: Graph summary
+questions</a></li>
 </ul></details></li>
 </ul></details></li>
-<li><a href="section-14.html#sec:glossary" id="toc-sec:glossary"><span
-class="toc-section-number">14</span> Glossary</a></li>
-<li><a href="section-15.html#sec:bibliography"
-id="toc-sec:bibliography"><span class="toc-section-number">15</span>
-Bibliography</a></li>
+<li><details open><summary><a href="section-13.html#sec:appendices"
+id="toc-sec:appendices"><span class="toc-section-number">13*</span>
+Appendices</a></summary>
+<ul>
+<li><details><summary><a href="section-13.1.html#sec:appendix:math-preliminaries"
+id="toc-sec:appendix:math-preliminaries"><span
+class="toc-section-number">13.1*</span> Mathematical preliminaries</a></summary>
+<ul>
+<li><a href="section-13.1.html#sec:sets" id="toc-sec:sets"><span
+class="toc-section-number">13.1.1</span> Sets</a></li>
+<li><a href="section-13.1.html#sec:relations"
+id="toc-sec:relations"><span class="toc-section-number">13.1.2</span>
+Relations</a></li>
+<li><a href="section-13.1.html#sec:miscellaneous-notations"
+id="toc-sec:miscellaneous-notations"><span
+class="toc-section-number">13.1.3</span> Miscellaneous
+notations</a></li>
+<li><a href="section-13.1.html#sec:logarithms"
+id="toc-sec:logarithms"><span class="toc-section-number">13.1.4</span>
+Logarithms</a></li>
+<li><a href="section-13.1.html#sec:summations"
+id="toc-sec:summations"><span class="toc-section-number">13.1.5</span>
+Summations</a></li>
+<li><a href="section-13.1.html#sec:mathematical-proof-techniques"
+id="toc-sec:mathematical-proof-techniques"><span
+class="toc-section-number">13.1.6</span> Mathematical proof
+techniques</a></li>
+<li><a href="section-13.1.html#sec:estimation"
+id="toc-sec:estimation"><span class="toc-section-number">13.1.7</span>
+Estimation</a></li>
+<li><a href="section-13.1.html#sec:random-numbers"
+id="toc-sec:random-numbers"><span
+class="toc-section-number">13.1.8</span> Random numbers</a></li>
+</ul></details></li>
+<li><details><summary><a href="section-13.2.html#sec:appendix:programming-preliminaries"
+id="toc-sec:appendix:programming-preliminaries"><span
+class="toc-section-number">13.2*</span> Programming preliminaries</a></summary>
+<ul>
+<li><a href="section-13.2.html#sec:pseudocode"
+id="toc-sec:pseudocode"><span class="toc-section-number">13.2.1</span>
+Pseudocode</a></li>
+<li><a href="section-13.2.html#sec:data-types"
+id="toc-sec:data-types"><span class="toc-section-number">13.2.2</span>
+Data types</a></li>
+<li><a href="section-13.2.html#sec:mutable-and-immutable-data"
+id="toc-sec:mutable-and-immutable-data"><span
+class="toc-section-number">13.2.3</span> Mutable and immutable
+data</a></li>
+<li><a href="section-13.2.html#sec:functions"
+id="toc-sec:functions"><span class="toc-section-number">13.2.4</span>
+Functions</a></li>
+<li><a href="section-13.2.html#sec:interfaces"
+id="toc-sec:interfaces"><span class="toc-section-number">13.2.5</span>
+Interfaces</a></li>
+<li><a href="section-13.2.html#sec:compound-data-types"
+id="toc-sec:compound-data-types"><span
+class="toc-section-number">13.2.6</span> Compound data types</a></li>
+<li><a href="section-13.2.html#sec:computer-memory"
+id="toc-sec:computer-memory"><span
+class="toc-section-number">13.2.7</span> Computer memory</a></li>
+</ul></details></li>
+<li><a href="section-13.3.html#sec:appendix:glossary"
+id="toc-sec:appendix:glossary"><span
+class="toc-section-number">13.3*</span> Glossary</a></li>
+<li><a href="section-13.4.html#sec:appendix:bibliography"
+id="toc-sec:appendix:bibliography"><span
+class="toc-section-number">13.4*</span> Bibliography</a></li>
+</ul></details></li>
 </ul>
 </nav>
 
@@ -1229,5 +1410,6 @@ Bibliography</a></li>
 
 </body>
 </html>
+
 
 

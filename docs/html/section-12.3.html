@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Separate chaining</title>
+  <title>DSABook – Shortest-path problems and Dijkstra’s
+algorithm</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,7 +70,25 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/openhashCON.css" rel="stylesheet" type="text/css"/></head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
 
 <body>
 
@@ -81,257 +101,271 @@
 <nav class="sitenav">
 <div>
 <a href="section-12.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.2.html" accesskey="p" rel="previous">Converting objects to table indices</a>
+<a href="section-12.2.html" accesskey="p" rel="previous">Traversing graphs: DFS and BFS</a>
 </div>
 <div>
-<a href="section-12.4.html" accesskey="n" rel="next">Implementing sets and maps using separate chaining</a>
+<a href="section-12.4.html" accesskey="n" rel="next">Minimum spanning trees and Prim’s algorithm</a>
 <a href="section-12.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:separate-chaining" class="level2" data-number="12.3">
+<section id="sec:graphs:shortest-path" class="level2"
+data-number="12.3">
 <h2 data-number="12.3"><span class="header-section-number">12.3</span>
-Separate chaining</h2>
-<p>While the goal of a hash function is to minimise collisions, some
-collisions are unavoidable in practice. Thus, hashing implementations
-must include some form of collision resolution policy. Collision
-resolution techniques can be broken into two classes: <a
-href="section-14.html#separate-chaining" class="term"
-title="In hashing, a synonym for open hashing">separate chaining</a>
-(also called open hashing) and <a href="section-14.html#open-addressing"
-class="term"
-title="A hash system where all records are stored in slots of the hash table. This is in contrast to an open hash system.">open
-addressing</a> (also called closed hashing). (Yes, it is confusing when
-“open hashing” means the opposite of “open addressing”, but
-unfortunately, that is the way it is.) The difference between the two
-has to do with whether collisions are stored outside the table (separate
-chaining), or whether collisions result in storing one of the records at
-another slot in the table (open addressing).</p>
-<p>The simplest form of separate chaining defines each slot in the hash
-table to be the head of a linked list. All records that hash to a
-particular slot are placed on that slot’s linked list. <a
-href="#fig:openhashCON">Figure 12.1</a> illustrates a separate chaining
-hash table.</p>
-<figure id="fig:openhashCON">
-
-<div id="openhashCON" class="ssAV" data-short-name="openhashCON" data-long-name="openhashCON" alt="openhashCON" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-
-<script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
-<script>
-  $(document).ready(function(){
-    function NewAV() {return new JSAV("openhashCON", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#openhashCON "+rule)}
-    
-  });
-</script>
-
-<figcaption><p>Figure 12.1: A hash table where each slot points to a
-linked list to hold the records associated with that slot. The hash
-function used is the simple mod function.</p></figcaption>
+Shortest-path problems and Dijkstra’s algorithm</h2>
+<p>Breadth-first traversal using a queue lets us find the shortest paths
+through an unweighted graph, but if we want to do something like finding
+the fastest car route through a city we need to generalise to finding
+shortest paths in <em>weighted</em> graphs. Note that “shortest” doesn’t
+have to mean a distance in kilometers – if the weights denote travel
+times, then the problem will be to find the <em>fastest</em> route.</p>
+<p>There are hundreds of other examples of shortest path problems that
+one might not even think of as graph in the first place. For example,
+finding the best move in a chess game, solving a puzzle, proving a
+mathematical theorem, or even deciding what to say in a conversation,
+can be formulated as shortest-path problems in some graph.</p>
+<p>Formally, the <em>shortest path</em> between two vertices is a path
+whose total cost is as low as possible. This of course assumes that
+there is a path, and from here on we will assume that the path actually
+exists. Just as for BFS there may be several shortest paths – that is,
+different paths with the same total cost.</p>
+<figure id="fig:GraphSPTs">
+<img src="images/Graphs-SPTs.svg" style="width:90.0%"
+alt="Figure 12.5: On the left is an undirected weighted graph, and on the right two different SPTs for A and F respecitvely, shown both in the graph and in standard tree notation." />
+<figcaption aria-hidden="true">Figure 12.5: On the left is an undirected
+weighted graph, and on the right two different SPTs for <span
+class="math inline">A</span> and <span class="math inline">F</span>
+respecitvely, shown both in the graph and in standard tree
+notation.</figcaption>
 </figure>
-<p>Records within a slot’s list can be ordered in several ways: by
-insertion order, by key value order, or by frequency-of-access order.
-Ordering the list by key value provides an advantage in the case of an
-unsuccessful search, because we know to stop searching the list once we
-encounter a key that is greater than the one being searched for. If
-records on the list are unordered or ordered by frequency, then an
-unsuccessful search will need to visit every record on the list.</p>
-<p>Given a table of size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-storing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-records, the hash function will (ideally) spread the records evenly
-among the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-positions in the table, yielding on average
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>
-records for each list. This value,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>,
-is commonly called the <a href="section-14.html#load-factor"
-class="term"
-title="In hashing this is the fraction of the hash table slots that contain a record. Hash systems usually try to keep the load factor below 50%.">load
-factor</a>.</p>
-<p>Assuming that the table has more slots than there are records to be
-stored, we can hope that few slots will contain more than one record. In
-the case where a list is empty or has only one record, a search requires
-only one access to the list. Thus, the average cost for hashing should
-be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
-However, if clustering causes many records to hash to only a few of the
-slots, then the cost to access a record will be much higher because many
-elements on the linked list must be searched.</p>
-<p>Separate chaining is most appropriate when the hash table is kept in
-main memory, with the lists implemented by a standard in-memory linked
-list. Storing a separate chaining hash table on disk in an efficient way
-is difficult, because members of a given linked list might be stored on
-different disk blocks. This would result in multiple disk accesses when
-searching for a particular key value, which defeats the purpose of using
-hashing.</p>
-<p>There are similarities between separate chaining and <a
-href="section-14.html#binsort" class="term"
-title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">Binsort</a>.
-One way to view separate chaining is that each record is simply placed
-in a bin. While multiple records may hash to the same bin, this initial
-binning should still greatly reduce the number of records accessed by a
-search operation. In a similar fashion, a simple Binsort reduces the
-number of records in each bin to a small number that can be sorted in
-some other way.</p>
-<div class="dsvis">
-<details open="true">
-<summary>
-<section id="sec:exercise-practicing-separate-chaining"
-class="level4 unnumbered">
-<h4 class="unnumbered">Exercise: Practicing separate chaining</h4>
-</summary>
-
-<div id="OpenHashPRO" class="embedContainer">
-<iframe id="OpenHashPRO_iframe" aria-label="OpenHashPRO" src="../interactive/Hashing/OpenHashPRO.html" width="100%" height="630" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-
-</details>
-</section>
-</div>
-<section id="sec:alternatives-to-a-linked-list" class="level3"
+<p>As we saw earlier, the generic graph traversal algorithm does not
+only find a path from one vertex to another, but from one vertex to all
+others. This is called the <em>single-source</em> shortest path problem.
+The solution is the <em>shortest path tree</em> (SPT).</p>
+<p><a href="#fig:GraphSPTs">Figure 12.5</a> shows two shortest path
+trees in an example graph. They show for example that <span
+class="math inline">A\rightarrow D\rightarrow E</span> is a shortest
+path from <span class="math inline">A</span> to <span
+class="math inline">E</span> with a cost of <span
+class="math inline">5</span>, and that <span
+class="math inline">F\rightarrow E\rightarrow D</span> is another from
+<span class="math inline">F</span> to <span
+class="math inline">D</span>. Neither of the trees help us figure out
+the shortest path from <span class="math inline">B</span> to <span
+class="math inline">E</span>, to do that we would need to construct an
+SPT for <span class="math inline">B</span>.</p>
+<section id="sec:graphs:dijkstras-algorithm" class="level3"
 data-number="12.3.1">
 <h3 data-number="12.3.1"><span
-class="header-section-number">12.3.1</span> Alternatives to a linked
-list</h3>
-<p>There is nothing that requires us to use a linked list as the
-underlying data structure, it could be a dynamic array or a balanced
-search tree too. (In fact, Java’s hash tables use a combination of
-linked lists and balanced trees.)</p>
-<p>Conceptually, a hash table can use any kind of collection data
-structure – the only thing that the actual array does is to partition
-the large collection into
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-disjoint collections. If the hash function is good and distributes the
-objects evenly among the bins, all operations will become
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-times faster (because the bins are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-times smaller than the original large collection).</p>
+class="header-section-number">12.3.1</span> Dijkstra’s shortest-path
+algorithm</h3>
+<p>Dijkstra’s algorithm is perhaps the most well-known graph algorithm
+of all – it solves the single source shortest path problem for weighted
+graphs. Note that the algorithm only work for graphs with
+<em>non-negative</em> weights. For most applications this is not a
+problem, for instance if the weights signify time or distance, there
+will not be any negative weights (unless we have a time machine).</p>
+<p>The algorithm is an instance of the same generic traversal algorithm
+as in the previous section, where we keep an agenda of edges from
+visited to unvisited vertices. For DFS, the agenda is a stack. For BFS,
+the agenda is a queue. For Dijkstra’s algorithm, we use a min-priority
+queue, prioritised by the cost of the path formed from the starting
+vertex.</p>
+<p>This requires a little extra book-keeping since the agenda does not
+simply contain edges, it contains edges with priority values. <a
+href="#fig:GraphDijkstra1">Figure 12.6</a> illustrates this. Note for
+example how in the second step the agenda contains two options for
+visiting <span class="math inline">E</span>:</p>
+<ul>
+<li>Either directly from <span class="math inline">A</span> at a cost of
+<span class="math inline">6</span>: this means that the agenda contains
+the edge <span class="math inline">A\rightarrow E</span> with priority
+value 6.</li>
+<li>Or via the path <span class="math inline">A\rightarrow D\rightarrow
+E</span> at a cost of <span class="math inline">2+3=5</span>: therefore
+the agenda contains the edge <span class="math inline">D\rightarrow
+E</span> with priority value 5.</li>
+</ul>
+<p>Note that in the second option, the priority value is different from
+the edge cost, because the priority is the <em>total</em> cost of the
+path from <span class="math inline">A</span>, while the edge cost is
+just the final step.</p>
+<figure id="fig:GraphDijkstra1">
+<img src="images/Graphs-dijkstra1.svg" style="width:90.0%"
+alt="Figure 12.6: Steps of Dijkstra’s algorithm, starting in A. Visited vertices are annotated with the cost of their shortest path, and edges in the agenda with their cost on the form c+w where c is the cost to the origin vertex and w the cost of the edge. The right part shows the resulting SPT." />
+<figcaption aria-hidden="true">Figure 12.6: Steps of Dijkstra’s
+algorithm, starting in <span class="math inline">A</span>. Visited
+vertices are annotated with the cost of their shortest path, and edges
+in the agenda with their cost on the form <span
+class="math inline">c+w</span> where <span class="math inline">c</span>
+is the cost to the origin vertex and <span class="math inline">w</span>
+the cost of the edge. The right part shows the resulting
+SPT.</figcaption>
+</figure>
+<p>To convince ourselves that Dijktra’s algorithm works, consider this:
+In the first step, it always selects the shortest edge <span
+class="math inline">(s,x)</span> from the starting vertex <span
+class="math inline">s</span> to some other vertex <span
+class="math inline">x</span> (in our example, <span
+class="math inline">x=D</span>). We know there is no shorter path from
+<span class="math inline">s</span> to <span
+class="math inline">x</span>, because any other path would start with a
+longer edge from <span class="math inline">s</span>. The subsequent
+steps work similarly: We select the shortest path leading out of the set
+of visited vertices. Because any other path would start with a longer
+path from the set of visited vertices, we know that the path we use is a
+shortest path.</p>
+<p>As with DFS and BFS before, we can also analyze the agenda at each
+step of the algorithm. Again, we assume that we only add edges that lead
+to unvisited vertices, and we only show the steps that pass the
+visitation check:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">edge</th>
+<th style="text-align: left;">visited</th>
+<th style="text-align: left;">agenda at end of iteration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">(0,
+{\,?\,}\rightarrow A)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(2,
+A\rightarrow D), (4, A\rightarrow B), (6, A\rightarrow E)]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">(2, A\rightarrow
+D)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,D\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(4,
+A\rightarrow B), (5, D\rightarrow E), (6, A\rightarrow E)]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">(4, A\rightarrow
+B)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,D,B\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(5,
+D\rightarrow E), (6, A\rightarrow E), (7, B\rightarrow F), (8,
+B\rightarrow C)]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">(5, D\rightarrow
+E)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,D,B,E\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(6,
+A\rightarrow E), (7, B\rightarrow F), (8, B\rightarrow C), (8,
+E\rightarrow F)]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">(7, B\rightarrow
+F)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,D,B,E,F\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(8,
+B\rightarrow C), (8, E\rightarrow F), (10, F\rightarrow C)]</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">(8, B\rightarrow
+C)</span></td>
+<td style="text-align: left;"><span
+class="math inline">\{A,D,B,E,F,C\}</span></td>
+<td style="text-align: left;"><span class="math inline">[(8,
+E\rightarrow F), (10, F\rightarrow C)]</span></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="sec:resizing-is-important" class="level3"
+<section id="sec:extracting-the-shortest-path-tree" class="level3"
 data-number="12.3.2">
 <h3 data-number="12.3.2"><span
-class="header-section-number">12.3.2</span> Resizing is important</h3>
-<p>Just as for dynamic arrays, it is important that we resize the
-internal table when it becomes too large (or too small). That is, we
-change the size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-so that it is proportional to the number of table entries.</p>
-<p>If
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-is always proportional to the number of entries, <em>and</em> if we have
-a good hash function, the number of elements in a bin will remain
-approximately constant. And then all operations will be expected
-constant time.</p>
-</section>
-<section id="sec:implementation" class="level3" data-number="12.3.3">
-<h3 data-number="12.3.3"><span
-class="header-section-number">12.3.3</span> Implementation</h3>
-<p>Now we will give a very generic overview how to implement a separate
-chaining hash table. In the next section we will discuss implementation
-in more detail.</p>
-<p>As already mentioned, a separate chaining hash table
-<em>partitions</em> its elements into an array of smaller collections,
-or <em>bins</em>.</p>
+class="header-section-number">12.3.2</span> Extracting the shortest-path
+tree</h3>
+<p>Our generic graph traversal algorithm adds the traversed edges to a
+result set, and these edges together constitute a <em>tree</em>. For
+Dijkstra’s algorithm this is the shortest-path tree from the starting
+vertex.</p>
+<p>However, a set of edges is not a very good data structure if we want
+to extract shortest paths from it. Is there a better way to store this
+SPT? A standard tree implementation where nodes point to their children
+does not support an efficient operation for adding a new edge, and it
+will not help us find the path to a specific node after we have finished
+the algorithm. Instead we want a tree where nodes point to their parent,
+a <em>parent-pointer tree</em>. We introduced them in <a
+href="section-9.3.html#sec:trees:disjoint-sets">Section 9.3</a>, and
+they also fit very well for representing the SPT. A parent-pointer tree
+makes it easy to extend the tree with a new leaf by just attaching a new
+node to an existing node. Here is a simple datatype that works just
+fine:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    table: <span class="bu">Array</span> <span class="kw">of</span> Collections</span></code></pre></div>
-<p>Note that we don’t have to know what type of collections the bins
-are, the only thing we have to know is that they support the same
-methods that we want the hash table to support. To implement any kind of
-method, we first have to to decide on a bin and then <em>delegate</em>
-the method to that bin. We use the hash function to decide which bin to
-delegate to, and then simply call the method of that bin, with the same
-arguments as we got in the first place:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    method(elem, ...extra arguments...):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin.method(elem, ...extra arguments...)</span></code></pre></div>
-<p>As explained in the previous chapter, the hash index for an element
-consists of first getting the hash code and then compressing it to an
-array index.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    hashIndex(elem):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">hash</span> <span class="op">=</span> elem.hashCode()</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">hash</span> <span class="op">=</span> <span class="bu">hash</span> <span class="op">&amp;</span> <span class="bn">0x7fffffff</span>  <span class="co">// make the hash code non-negative</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">hash</span> <span class="op">%</span> table.<span class="bu">size</span></span></code></pre></div>
-<p>There are of course some more details one has to take care of to get
-a working implementation. For example, we have not discussed how to
-calculate the size of the hash table, i.e., the total number of
-elements. We have also not discussed how to handle bins that are not
-initialised yet.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ParentTreeNode:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    vertex: Vertex</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    parent: ParentTreeNode</span></code></pre></div>
+<p>The downside with a parent-pointer tree is that we can only view it
+as a collection of paths back to the starting vertex. Fortunately, we
+are usually only interested in extracting the path to a specific vertex,
+and for this purpose a parent-pointer tree works perfectly.</p>
 </section>
-<section id="sec:load-factor-and-resizing" class="level3"
-data-number="12.3.4">
-<h3 data-number="12.3.4"><span
-class="header-section-number">12.3.4</span> Load factor and
-resizing</h3>
-<p>The efficiency of a hash table depends on two factors:</p>
-<ol type="1">
-<li>how well the elements are distributed between the bins</li>
-<li>the size of each bin</li>
-</ol>
-<p>The first factor depends on the hash function, and for now we simply
-assume that it is good – meaning that it distributes the elements evenly
-among the bins. The second factor depends on the load factor – if there
-are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements in total and we have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-bins, then there are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>
-elements per bin on average. Assuming that our underlying collections
-are simple linked lists, then all main operations (searching, adding,
-deleting) are linear in the load factor.</p>
-<p>The key point to making hash tables efficient is to make sure that
-the load factor never becomes larger than a constant – the <em>maximum
-load factor</em>. If we have a constant load factor and a good hash
-function, then all operations on hash tables will be constant time,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.</p>
-<p>To be able to do this we have to <em>resize</em> the internal table
-when the number of elements grow. But we already know how to do this –
-use a dynamic array! So, whenever we implement a method that can change
-the number of elements, we have to check if we need to resize the table.
-Here is how we can do this:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    method(elem, ...extra arguments...):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> bin.method(elem, ...extra arguments...)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> load factor <span class="kw">is</span> too large:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            resizeTable(table.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
-<p>Recall from the dynamic arrays that we have to <em>multiply</em> by a
-factor (the <code>MULTIPLIER</code>) when resizing the table, not adding
-a constant.</p>
-<p>When we resize the internal table, it is very important that we
-<em>do not keep</em> the old hash indices for the keys, because they
-will not be the same after resizing. Instead we save the current
-internal table to a temporary variable, and reinitialise the table to
-the new capacity. Then we iterate through all bins and entries in the
-old table, and simply insert them again into the new resized table.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeTable(newCapacity):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        oldTable <span class="op">=</span> table                <span class="co">// Remember the old table.</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        table <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)  <span class="co">// Reset the internal table.</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>                        <span class="co">// Reset the number of elements.</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> bin <span class="kw">in</span> oldTable:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">add</span> <span class="kw">each</span> elem <span class="kw">in</span> bin</span></code></pre></div>
+<section id="sec:optimising-dijkstras-algorithm" class="level3"
+data-number="12.3.3">
+<h3 data-number="12.3.3"><span
+class="header-section-number">12.3.3</span> Optimising Dijkstra’s
+algorithm</h3>
+<p>There are several optimisations to Dijkstra’s, involving keeping the
+agenda smaller. Consider when we visit <span
+class="math inline">F</span> in the example in <a
+href="#fig:GraphDijkstra1">Figure 12.6</a>. We have already found a path
+of cost <span class="math inline">8</span> to <span
+class="math inline">C</span> (<span class="math inline">A\rightarrow
+B\rightarrow C</span>), yet we add an inferior path to the agenda (<span
+class="math inline">A\rightarrow B\rightarrow F\rightarrow C</span> at
+cost <span class="math inline">10</span>). When we eventually process
+that path, it will be discarded by the visitation check. We could avoid
+this by replacing the visitation set by a map from vertices to costs,
+that efficiently gives us the best cost found so far for a vertex, and
+only add paths that improve the cost.</p>
+<p>Here is an implementation in pseudocode of this optimisation, which
+also builds a parent-pointer tree. Note that we use a helper function
+that returns a default value of <span class="math inline">\infty</span>
+for the visitation map.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dijkstra(start):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">map</span> from vertices <span class="kw">to</span> costs</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="kw">new</span> <span class="bu">map</span> from Vertex <span class="kw">to</span> ParentTreeNode</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">min</span><span class="op">-</span>priority queue ordered by total path cost</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">add</span>(<span class="dv">0</span>, (<span class="va">null</span>,start))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> agenda <span class="kw">is</span> <span class="kw">not</span> empty:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        cost, (a,b) <span class="op">=</span> agenda.<span class="bu">removeMin</span>()  <span class="co">// &#39;cost&#39; is the total cost from &#39;start&#39; to b</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cost <span class="op">&lt;</span> getdefault(visited, b):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Update the best cost for b, and point it to its parent in the SPT:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">put</span>(b, cost)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            result.<span class="bu">put</span>(b, <span class="kw">new</span> ParentTreeNode(b, result.<span class="bu">get</span>(a)))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> (weight,b0,c) <span class="kw">in</span> outgoingEdges(b):  <span class="co">// b0 is the same vertex as b</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> cost <span class="op">+</span> weight <span class="op">&lt;</span> getdefault(visited, c):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(cost <span class="op">+</span> weight, (b0,c))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// If the vertex is not visited, we return the largest possible number (let&#39;s call it &quot;infinity&quot;):</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>getdefault(visited, a):</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> a <span class="kw">in</span> visited: <span class="cf">return</span> visited.<span class="bu">get</span>(a), <span class="cf">else</span> <span class="cf">return</span> infinity</span></code></pre></div>
+<p>Going one step further, we can observe that there should never be two
+edges to the same vertex in the agenda. When we find a better option for
+reaching a vertex, we should <em>replace</em> the old entry in the
+agenda with the improved one. This means the agenda will never contain
+more than one edge to a particular vertex, and that every edge in the
+agenda leads to an unvisited vertex. To to do this we need to have a
+priority queue where we can update the priorities of existing elements.
+We briefly discussed <em>updateable priority queues</em> in <a
+href="section-9.5.html#sec:heaps:change-priority">Section 9.5.6</a>, and
+leave as an exercise for the reader to implement Dijkstra’s algorithm
+using this idea.</p>
 </section>
 </section>
 </main>
@@ -340,10 +374,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-12.2.html" class="navbutton">&lt;&lt;</a>
-<a href="section-12.2.html" accesskey="p" rel="previous">Converting objects to table indices</a>
+<a href="section-12.2.html" accesskey="p" rel="previous">Traversing graphs: DFS and BFS</a>
 </div>
 <div class="navlink">
-<a href="section-12.4.html" accesskey="n" rel="next">Implementing sets and maps using separate chaining</a>
+<a href="section-12.4.html" accesskey="n" rel="next">Minimum spanning trees and Prim’s algorithm</a>
 <a href="section-12.4.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -351,5 +385,6 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 
 </body>
 </html>
+
 
 

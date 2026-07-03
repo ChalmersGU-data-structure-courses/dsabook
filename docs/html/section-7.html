@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Algorithm analysis, part 3: Advanced theory</title>
+  <title>DSABook – Algorithm analysis, part 3</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -68,6 +69,24 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
 
 <body>
@@ -80,21 +99,20 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-6.12.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.12.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-6.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.10.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div>
-<a href="section-7.1.html" accesskey="n" rel="next">Space bounds</a>
+<a href="section-7.1.html" accesskey="n" rel="next">Amortised analysis</a>
 <a href="section-7.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:algorithm-analysis-part-3-advanced-theory"
-class="level1" data-number="7">
+<section id="sec:analysis-3" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span>
-Algorithm analysis, part 3: Advanced theory</h1>
+Algorithm analysis, part 3</h1>
 <p>In this chapter, we move beyond basic runtime analysis to develop a
 richer understanding of algorithm performance. We consider not only
 execution time, but also memory usage. By examining these aspects, we
@@ -116,11 +134,11 @@ complexity.</p>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-6.12.html" class="navbutton">&lt;&lt;</a>
-<a href="section-6.12.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-6.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.10.html" accesskey="p" rel="previous">Review*</a>
 </div>
 <div class="navlink">
-<a href="section-7.1.html" accesskey="n" rel="next">Space bounds</a>
+<a href="section-7.1.html" accesskey="n" rel="next">Amortised analysis</a>
 <a href="section-7.1.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -128,5 +146,6 @@ complexity.</p>
 
 </body>
 </html>
+
 
 

@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="Jonas Duregård" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Implementing priority queues using binary
-trees</title>
+  <title>DSABook – Binary trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -69,7 +69,25 @@ trees</title>
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+<link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -82,61 +100,398 @@ trees</title>
 <nav class="sitenav">
 <div>
 <a href="section-9.html" class="navbutton">&lt;&lt;</a>
-<a href="section-9.html" accesskey="p" rel="previous">Priority queues and heaps</a>
+<a href="section-9.html" accesskey="p" rel="previous">Trees and heaps</a>
 </div>
 <div>
-<a href="section-9.2.html" accesskey="n" rel="next">Binary heaps</a>
+<a href="section-9.2.html" accesskey="n" rel="next">Tree representations</a>
 <a href="section-9.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:implementing-priority-queues-using-binary-trees"
-class="level2" data-number="9.1">
+<section id="sec:trees:binary-trees" class="level2" data-number="9.1">
 <h2 data-number="9.1"><span class="header-section-number">9.1</span>
-Implementing priority queues using binary trees</h2>
-<p>A normal linear data structure, such as a <a
-href="section-14.html#linked-list" class="term"
-title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
-list</a> or <a href="section-14.html#dynamic-array" class="term"
-title="Arrays, once allocated, are of fixed size. A dynamic array puts an interface around the array so as to appear to allow the array to grow and shrink in size as necessary. Typically this is done by allocating a new copy, copying the contents of the old array, and then returning the old array to free store. If done correctly, the amortised cost for dynamically resizing the array can be made constant. In some programming languages such as Java, the term vector is used as a synonym for dynamic array.">dynamic
-array</a>, cannot implement a priority queue efficiently. This is
-because either insertion or removal will take linear time,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
-in the worst case.</p>
-<ul>
-<li>If we use unordered lists, then searching for the element with the
-highest priority will be linear.</li>
-<li>If we instead use sorted lists, then inserting an element into that
-list will be linear.</li>
-</ul>
-<p>In this we show how to use binary trees instead of lists, to
-implement priority queues.</p>
-<section id="sec:the-heap-property" class="level3" data-number="9.1.1">
+Binary trees</h2>
+<p>As we explained in the introduction, trees form a family of related
+structures. In a <a href="section-13.3.html#general-tree" class="term"
+title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">general
+tree</a>, a node may have any number of children. The children may or
+may not have a meaningful order. Many applications fit that flexible
+model. But one special case is particularly important in data structures
+and algorithms: the <a href="section-13.3.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+tree</a>.</p>
+<p>A binary tree is either empty, or it consists of a root node with a
+value and exactly two children that are themselves binary trees. These
+two children are ordered. So we distinguish between the left child and
+the right child. It is common to say that a binary tree node has at most
+two children, but that description hides an important point. If a node
+has only one child, it matters whether that child is on the left or on
+the right. So it is often clearer to think of a binary tree node as
+always having a left subtree and a right subtree. Either subtree may be
+empty.</p>
+<p>A binary tree is either empty or consists of a root node containing a
+value together with two ordered children, each of which is itself a
+binary tree. Because the children are ordered, we distinguish between
+the left child and the right child. Binary trees are often described as
+trees in which each node has at most two children. While this is
+correct, it can obscure an important detail: if a node has only one
+child, it matters whether that child is on the left or on the right. For
+this reason, it is often clearer to think of every node as having both a
+left subtree and a right subtree, with either subtree allowed to be
+empty. This idea is illustrated below.</p>
+<figure id="fig:example_bintree">
+<img src="images/Trees-BinaryTreeExampleNulls.svg" style="width:65.0%"
+alt="Figure 9.3: An example of a binary tree with nodes labeled by letters." />
+<figcaption aria-hidden="true">Figure 9.3: An example of a binary tree
+with nodes labeled by letters.</figcaption>
+</figure>
+<p>The two drawings represent the same binary tree. In the left-hand
+drawing, the black dots make the empty subtrees explicit.</p>
+<p>A node whose left and right subtrees are both empty is called a
+<em>leaf node</em>. Nodes that are not leaves are called <em>internal
+nodes</em>, or sometimes <em>branches</em>. In the figure above, the
+nodes containing <span class="math inline">D</span>, <span
+class="math inline">G</span>, <span class="math inline">H</span>, and
+<span class="math inline">I</span> are leaf nodes.</p>
+<p>We will use the binary tree in <a
+href="#fig:example_bintree">Figure 9.3</a> as a running example
+throughout this chapter. Before continuing, take a moment to study it
+and consider the following questions: Which nodes are leaf nodes? What
+is the path from node <span class="math inline">A</span> to node <span
+class="math inline">H</span>? These questions will help you become
+familiar with the terminology and structure of binary trees.</p>
+<section id="sec:trees:full-perfect-complete" class="level3"
+data-number="9.1.1">
 <h3 data-number="9.1.1"><span class="header-section-number">9.1.1</span>
-The heap property</h3>
-<p>The main idea is that we always keep the highest priority element as
-the root of the tree. This means that we have constant access to it, so
-the method <code>getMin</code> will always be constant time.</p>
-<p>In general, a <a href="section-14.html#heap" class="term"
-title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
-is a tree which satisfies the <em>heap property</em>:</p>
+Full, perfect, and complete binary trees</h3>
+<p>Several restricted forms of binary tree are sufficiently important to
+warrant special names. In a <a href="section-13.3.html#full-tree"
+class="term"
+title="A binary tree is full if every node is either a leaf node or else it is an internal node with two non-empty children.">full
+binary tree</a>, every node is either a leaf node or an internal node
+with exactly two non-empty children. A <a href="#perfect-binary-tree"
+class="term" title="">perfect binary tree</a> is a full binary tree in
+which all leaves are at the same level. Equivalently, every level of a
+perfect binary tree is completely full. A <a
+href="section-13.3.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary tree</a> has a shape obtained by starting at the root and filling
+the tree level by level from left to right. In a complete binary tree of
+height <span class="math inline">d</span>, all levels except possibly
+level <span class="math inline">d</span> are completely full. The bottom
+level is filled from the left side.</p>
+<p><a href="#fig:full_complete_bintrees">Figure 9.4</a> below
+illustrates the differences between full and complete binary trees.
+Neither property implies the other. A perfect binary tree satisfies both
+properties. In the figure, tree (a) is full but not complete, while tree
+(b) is complete but not full. A <a href="section-13.3.html#binary-heap"
+class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log(n))$ time in the worst case. However, if given all of the values in an unsorted array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heap</a> (see <a
+href="section-9.5.html#sec:heaps:binary-heaps">Section 9.5</a>) is an
+example of a complete binary tree, while a <a
+href="section-13.3.html#huffman-coding-tree" class="term"
+title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
+coding tree</a> is an example of a full binary tree.</p>
+<figure id="fig:full_complete_bintrees">
+<img src="images/Trees-full-perfect-complete.svg" style="width:80.0%"
+alt="Three binary trees illustrating the differences between full, perfect, and complete trees." />
+<figcaption><p>Figure 9.4: Examples of restricted binary tree shapes:
+(a) is full but not complete, (b) is perfect and therefore both full and
+complete, and (c) is complete but not full.</p></figcaption>
+</figure>
+</section>
+<section id="sec:trees:implementing-binary-trees" class="level3"
+data-number="9.1.2">
+<h3 data-number="9.1.2"><span class="header-section-number">9.1.2</span>
+Implementing binary trees</h3>
+<p>We continue and examine a way to implement nodes for a binary tree.
+By definition, each node has two children, although either or both may
+be empty. A node also typically stores a value, with the type depending
+on the application. The most common implementation therefore includes a
+value field and pointers to the two children.</p>
+<p>Here is a simple implementation for binary tree nodes, which can
+store one single element in each node.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Node <span class="kw">of</span> T:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    value: T            <span class="co">// Element for this node.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    left: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to left child.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    right: Node <span class="op">=</span> <span class="va">null</span>  <span class="co">// Pointer to right child.</span></span></code></pre></div>
+<p>Each <code>Node</code> object also has two pointers, one to the left
+child and one to the right child. Thus, a <code>Node</code> object
+represents not just a single node, but the root of a subtree. <a
+href="#fig:bintree_with_pointers">Figure 9.5</a> shows how the tree in
+<a href="#fig:example_bintree">Figure 9.3</a> appears in memory, with
+child pointers made explicit.</p>
+<figure id="fig:bintree_with_pointers">
+<img src="images/Trees-BinaryTreeWithPointers.svg" style="width:60.0%"
+alt="Figure 9.5: Illustration of the pointer-based binary tree implementation, where each node stores a value and two child pointers. A black dot in a pointer cell indicates null." />
+<figcaption aria-hidden="true">Figure 9.5: Illustration of the
+pointer-based binary tree implementation, where each node stores a value
+and two child pointers. A black dot in a pointer cell indicates
+<code>null</code>.</figcaption>
+</figure>
+<p>We can easily extend the Node type for different applications, for
+example by storing additional data in each node. It is sometimes
+convenient to add a pointer to the node’s parent, making it easy to move
+upward in the tree. This is somewhat analogous to adding a link to the
+previous node in a doubly linked list. In practice, however, a parent
+pointer is rarely necessary and increases the space overhead of the
+tree. The problem is not only the extra space. More importantly,
+reliance on parent pointers often reflects a poor understanding of
+recursion and can lead to weaker designs. If you find yourself wanting a
+parent pointer, it is worth considering whether there is a cleaner or
+more efficient approach.</p>
+<p>Here is an example of a program using the node type defined above. It
+computes the height of a tree. Since Node is a recursive data type, it
+is often most natural to define functions on it recursively, with the
+empty tree (<code>null</code>) as the base case.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>height(node) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(height(node.left), height(node.right)) <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Study the code and convince yourself that <code>height(A)</code> in
+<a href="#fig:bintree_with_pointers">Figure 9.5</a> will return the
+value 3. Also consider how you would modify the code to compute size
+instead of height.</p>
+<section id="sec:wrapper-data-type" class="level4 unnumbered">
+<h4 class="unnumbered">Wrapper data type</h4>
+<p>Our final binary-tree datatype is a wrapper datatype, similar to the
+linked-list implementations introduced in <a
+href="section-6.2.html#sec:sequences:linked-stacks">Section 6.2.1</a>.
+It stores a reference to the root node, initially <code>null</code>, and
+can also maintain metadata such as the total size of the tree:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BinaryTree:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    root: Node <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+</section>
+</section>
+<section id="sec:trees:traversal" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3"><span class="header-section-number">9.1.3</span>
+Traversing trees</h3>
+<p>Suppose we want to process the contents of a binary tree, for
+instance by printing all the values or converting the tree to a list.
+This is called a <a href="section-13.3.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>
+There are many different ways we can do that, but these are three common
+patterns that differ in the order they process values:</p>
 <ul>
-<li>Every tree node has at least as high priority as all its
-children</li>
+<li><em>preorder</em>: first process the value, then the left subtree,
+then the right</li>
+<li><em>inorder</em>: first process the left subtree, then the value,
+finally the right subtree</li>
+<li><em>postorder</em>: first process the left subtree, then the right,
+and finally the value</li>
 </ul>
-<p>One immediate consequence of this property is that the root in a heap
-always contains the element with the highest priority.</p>
-<p>Now, how do we implement these heaps so that they will always be
-efficient? There are actually several possible ways to do this, each
-having their own advantages and disadvantages. Some heap data
-structurues are <em>leftist heaps</em>, <em>skew heaps</em>,
-<em>Fibonacci heaps</em>, <em>2-3 heaps</em>, <em>binomial heaps</em>,
-and many more.</p>
-<p>In this chapter we will focus on the most basic heap implementation,
-<em>binary heaps</em>. What makes this implementation special is that it
-stores the tree as an array, which makes it very space-efficient.</p>
+<p>All of these are easily implemented using a simple recursive
+algorithm, here for printing the values:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>preorder(n):           inorder(n):            postorder(n):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="kw">is</span> <span class="va">null</span>:          <span class="cf">if</span> n <span class="kw">is</span> <span class="va">null</span>:          <span class="cf">if</span> n <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>                 <span class="cf">return</span>                 <span class="cf">return</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n.value)         inorder(n.left)        postorder(n.left)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    preorder(n.left)       <span class="bu">print</span>(n.value)         postorder(n.right)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    preorder(n.right)      inorder(n.right)       <span class="bu">print</span>(n.value)</span></code></pre></div>
+<p>For our example tree (<a href="#fig:example_bintree">Figure 9.3</a>),
+they will print the nodes in the following order:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><em>preorder</em></th>
+<th style="text-align: center;"><em>inorder</em></th>
+<th style="text-align: center;"><em>postorder</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">A B D C E G F H I</td>
+<td style="text-align: center;">B D A G E C H F I</td>
+<td style="text-align: center;">D B G E H I F C A</td>
+</tr>
+</tbody>
+</table>
+
+<p> It may not be immediately obvious that the procedures above produce
+this order, but this can be checked by tracing them on paper. For
+example, in <code>postorder(A)</code>, the code makes it clear that
+<span class="math inline">A</span> is printed last. More generally,
+postorder always prints both children before the parent, so an ordering
+that prints <span class="math inline">C</span> before either <span
+class="math inline">E</span> or <span class="math inline">F</span> is
+not postorder.</p>
+<p>Each traversal order is useful in different situations. For example,
+a preorder traversal is appropriate for the file system tree in <a
+href="section-9.html#fig:TreeExamples">Figure 9.2</a>, because it can print each
+folder before the files and subfolders it contains. An inorder traversal
+appears naturally when printing the expression tree in <a
+href="section-9.2.html#fig:expression_tree">Figure 9.6</a>, since we first print the
+left operand, then the operator, and finally the right operand. A
+postorder traversal is useful when deleting the tree in <a
+href="#fig:bintree_with_pointers">Figure 9.5</a> and freeing its memory,
+because it processes the children before the parent.</p>
+</section>
+<section id="sec:traversal-without-recursion" class="level3"
+data-number="9.1.4">
+<h3 data-number="9.1.4"><span class="header-section-number">9.1.4</span>
+Traversal without recursion</h3>
+<p>Some programming languages have poor support for recursion. It is
+possible to traverse a tree iteratively (using a loop) with a stack data
+structure. We call the stack our <em>agenda</em>, consider it a to-do
+list containing nodes that we need to process. Here is pseudocode that
+is structurally very similar to our recursive iterations, but instead of
+making recursive calls we add child nodes to the agenda and loop:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dfs(root):    <span class="co">// dfs is for Depth-First Search</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">Stack</span> <span class="kw">of</span> Node</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">push</span>(root)         <span class="co">// Initially, we need to process the root</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> agenda <span class="kw">is</span> <span class="kw">not</span> empty:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> agenda.<span class="bu">pop</span>()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        process(n)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        agenda.<span class="bu">add</span>(n.right)   <span class="co">// replaces the recursive call for n.right</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        agenda.<span class="bu">add</span>(n.left)    <span class="co">// replaces the recursive call for n.left</span></span></code></pre></div>
+<p>This code can be traced on a few example trees by recording the
+contents of the agenda after each loop iteration and keeping track of
+the order in which process is called on the nodes. The result is a
+traversal that mimics a preorder recursive procedure. Note that moving
+<code>process(n)</code> below the add operations has no effect on the
+order in which nodes are processed. Implementing inorder or postorder
+traversals with a stack is also possible, but considerably more
+complicated.</p>
+<p>By modifying the data structure from a stack to a <em>queue</em> (and
+switching the order in which children are added), we get a new traversal
+order. Try to figure out the pattern for this one:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bfs(root):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span> <span class="kw">of</span> Node   <span class="co">// We use a queue instead of a stack</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">enqueue</span>(root)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> agenda <span class="kw">is</span> <span class="kw">not</span> empty:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> agenda.<span class="bu">dequeue</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        process(n)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        agenda.<span class="bu">add</span>(n.left)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        agenda.<span class="bu">add</span>(n.right)</span></code></pre></div>
+<p>It will process the nodes level by level, left to right. That is it
+will first process the root, then all the children of the root, then all
+the children of those nodes et cetera. For <a
+href="#fig:example_bintree">Figure 9.3</a>, it processes
+A,B,C,D,E,F,G,H,I in that order. This traversal order is called a
+Breadth-First Search (BFS) as opposed to the stack-based Depth-First
+Search (DFS). The naming is due to the tendency of DFS to process nodes
+that are deep in the tree early, whereas BFS always visits all closest
+nodes first.</p>
+<p>BFS is useful for a wide range of applications. It is also a good
+example of the power of data structures: By changing the data structure
+of our agenda we can use the same or similar code to acchieve different
+useful behaviors.</p>
+<p>As a reminder, here is the example tree again:</p>
+
+<div id="img-jsav-f63b0e31fef2b61be3e4e3baa65f7345" class="ssAV" data-short-name="img-jsav-f63b0e31fef2b61be3e4e3baa65f7345" data-long-name="img-jsav-f63b0e31fef2b61be3e4e3baa65f7345" alt="img-jsav-f63b0e31fef2b61be3e4e3baa65f7345" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-f63b0e31fef2b61be3e4e3baa65f7345", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-f63b0e31fef2b61be3e4e3baa65f7345 "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<section id="sec:interactive-explanations" class="level4 unnumbered">
+<h4 class="unnumbered">Interactive explanations</h4>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of preorder traversal.</p>
+</summary>
+
+<div id="preorderCON" class="ssAV" data-short-name="preorderCON" data-long-name="Preorder Traversal Slideshow" alt="Preorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/preorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("preorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#preorderCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And a visualisation of postorder traversal.</p>
+</summary>
+
+<div id="postorderCON" class="ssAV" data-short-name="postorderCON" data-long-name="Postorder Traversal Slideshow" alt="Postorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/postorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("postorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#postorderCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And finally a visualisation of inorder traversal.</p>
+</summary>
+
+<div id="inorderCON" class="ssAV" data-short-name="inorderCON" data-long-name="Inorder Traversal Slideshow" alt="Inorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("inorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#inorderCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
 </section>
 </section>
 </main>
@@ -145,10 +500,10 @@ stores the tree as an array, which makes it very space-efficient.</p>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-9.html" class="navbutton">&lt;&lt;</a>
-<a href="section-9.html" accesskey="p" rel="previous">Priority queues and heaps</a>
+<a href="section-9.html" accesskey="p" rel="previous">Trees and heaps</a>
 </div>
 <div class="navlink">
-<a href="section-9.2.html" accesskey="n" rel="next">Binary heaps</a>
+<a href="section-9.2.html" accesskey="n" rel="next">Tree representations</a>
 <a href="section-9.2.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
@@ -156,5 +511,6 @@ stores the tree as an array, which makes it very space-efficient.</p>
 
 </body>
 </html>
+
 
 
