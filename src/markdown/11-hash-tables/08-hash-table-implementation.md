@@ -21,7 +21,7 @@ and then test if that cell is nonempty:
 To add a value to the set, we again find the position where it should be.
 If that cell is empty, we can add the value, and we must not forget to increase the size:
 
-\newpage
+<!-- \newpage -->
 
     add(hashset, value):
         index = lookup(hashset.arr, value)
@@ -68,7 +68,7 @@ But this does not work, because the *compression* function depends on the array 
 Therefore we have to recalculate the table index before we add them to the new array.
 Easiest is to simply reuse the `add` operation above, like this:
 
-\newpage
+<!-- \newpage -->
 
     resize(hashset, capacity):
         oldArr = hashset.arr

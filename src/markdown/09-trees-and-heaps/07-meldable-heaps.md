@@ -102,7 +102,7 @@ Leftist heap
 :   This heap is very similar to ours, but it uses another measure than the height (called the *s-value* or *rank*),
     which is a more difficult concept to explain.
 
-    `\newpage`{=latex}
+    <!-- `\newpage`{=latex} -->
 
 Skew heap
 :   This heap doesn't use any extra information, such as height or rank or anything.

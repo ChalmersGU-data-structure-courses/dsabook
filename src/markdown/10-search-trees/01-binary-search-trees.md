@@ -154,7 +154,7 @@ The important part here is to realise that the recursive function should *return
 and then it is just a matter of reassigning the child.
 So the pseudocode becomes something like this:
 
-\newpage
+<!-- \newpage -->
 
     addHelper(node, x) -> BSTNode:
         if node is null:

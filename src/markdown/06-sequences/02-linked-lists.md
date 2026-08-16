@@ -33,7 +33,7 @@ List nodes are distinct objects, as opposed to cells in an array.
 Therefore we declare a list node as a "wrapper" around a *value*,
 that also contains a pointer to the *next* node in the list:
 
-\newpage
+<!-- \newpage -->
 
     datatype Node:
         next = null  // Pointer to the next node in the list

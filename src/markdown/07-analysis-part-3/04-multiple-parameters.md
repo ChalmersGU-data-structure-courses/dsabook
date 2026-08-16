@@ -51,7 +51,7 @@ Matrix representation
     Finding the indices is logarithmic in the number of people, and testing is constant.
     So the complexity is $O(\log(n))$, which is indepedent of the number of friends per person, $m$.
 
-    `\newpage`{=latex}
+    <!-- `\newpage`{=latex} -->
 
 Array of lists
 

@@ -381,7 +381,7 @@ Here is pseudocode for removing the highest-priority element:
 We use a helper function to identify the smallest child of a node.
 If there are no children it returns null, so that the while loop above can stop.
 
-\newpage
+<!-- \newpage -->
 
     smallestChild(heap, pos):
         if left(pos) >= heap.size:                   // We are at a leaf.

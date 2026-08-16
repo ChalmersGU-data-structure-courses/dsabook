@@ -59,7 +59,7 @@ Afterwards we can forget about the old array because it will not be used anymore
     We have to create a new array with the larger capacity and copy over all elements.
 ](images/6.4-array-stack-resize.svg){#fig:array-stack-resize}
 
-\newpage
+<!-- \newpage -->
 
 @Fig:array-stack-resize shows how resizing works.
 Note that resizing the internal array is a *slow* operation,
