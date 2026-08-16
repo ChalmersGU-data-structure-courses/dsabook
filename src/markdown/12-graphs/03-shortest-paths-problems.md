@@ -19,7 +19,7 @@ Formally, the *shortest path* between two vertices is a path whose total cost is
 This of course assumes that there is a path, and from here on we will assume that the path actually exists.
 Just as for BFS there may be several shortest paths -- that is, different paths with the same total cost.
 
-![On the left is an undirected weighted graph, and on the right two different SPTs for $A$ and $F$ respecitvely, shown both in the graph and in standard tree notation.](images/Graphs-SPTs.svg){width=90% #fig:GraphSPTs}
+![On the left is an undirected weighted graph, and on the right two different SPTs for $A$ and $F$ respecitvely, shown both in the graph and in standard tree notation.](images/12.3-example-SPTs.svg){#fig:GraphSPTs}
 
 As we saw earlier, the generic graph traversal algorithm does not only find a path from one vertex to another, but from one vertex to all others.
 This is called the *single-source* shortest path problem.

@@ -25,7 +25,7 @@ Most of the algorithms described in this chapter use three data structures: an *
 - The *result* can be anything that the algorithm builds while traversing the graph,
   but here we assume that it is a set of the edges that it has processed.
 
-![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$, and these edges form the final result set.](images/Graphs-traversal1.svg){width=80% #fig:GraphTraversal1}
+![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$, and these edges form the final result set.](images/12.2-graph-traversal.svg){#fig:GraphTraversal1}
 
 ::: algorithm
 #### Algorithm: Generic graph traversal
@@ -127,7 +127,7 @@ You can see the same depth-first traversal in @fig:GraphTraversal2.
 ![Steps of a depth-first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
 The right part shows the result as a tree.
 The algorithm can be described as: select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex.
-](images/Graphs-traversal2.svg){width=90% #fig:GraphTraversal2}
+](images/12.2-DFS-traversal.svg){#fig:GraphTraversal2}
 
 #### Variants
 
@@ -174,7 +174,7 @@ Breadth-first order will always visit vertices in order of their minimal distanc
 ![Steps of a breadth-first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
 The right part shows the result as a tree.
 The algorithm can be described as: select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex.
-](images/Graphs-traversal3.svg){width=90% #fig:GraphTraversal3}
+](images/12.2-BFS-traversal.svg){#fig:GraphTraversal3}
 
 This further means that the tree produced will not only contain a path from $A$ to $C$,
 but that path is guaranteed to be the *shortest possible* one.

@@ -19,7 +19,7 @@ and no clear parent/child relationships between nodes.
 If you "lift" either MST by any node, assigning it as the root,
 you will get a tree as the ones we have seen in earlier chapters.
 
-![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/Graphs-MSTs.svg){width=100% #fig:ExampleMSTs}
+![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/12.4-example-MSTs.svg){#fig:ExampleMSTs}
 
 The minimum spanning tree is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST --
 for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.

@@ -14,7 +14,7 @@ Some tree structures store data only in the leaves, while others store one kind 
 Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-coding), the [binary trie]{.term}, the [PR Quadtree]{.term}, and]{.online} the [expression tree]{.term} illustrated by @fig:expression_tree below.
 
 ::: {#fig:expression_tree}
-![](images/Trees-expression-tree.svg){width=35%}
+![](images/9.2-expression-tree.svg)
 
 An example of an expression tree for $4x(2x + a) - c$
 :::

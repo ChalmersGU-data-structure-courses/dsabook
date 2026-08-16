@@ -33,8 +33,8 @@ because the priority is the *total* cost of the path from $A$, while the edge co
 ![Steps of Dijkstra's algorithm, starting in $A$.
 Visited vertices are annotated with the cost of their shortest path,
 and edges in the agenda with their cost on the form $c+w$ where $c$ is the cost to the origin vertex and $w$ the cost of the edge.
-The right part shows the resulting SPT.
-](images/Graphs-dijkstra1.svg){width=90% #fig:GraphDijkstra1}
+The resulting SPT is shown in @fig:GraphSPTs.
+](images/12.3-dijkstra.svg){#fig:GraphDijkstra1}
 
 To convince ourselves that Dijktra's algorithm works, consider this:
 In the first step, it always selects the shortest edge $(s,x)$ from the starting vertex $s$ to some other vertex $x$ (in our example, $x=D$).

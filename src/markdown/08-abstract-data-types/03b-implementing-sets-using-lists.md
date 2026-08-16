@@ -19,7 +19,7 @@ av.recorded();
 ::: latex
 
 ::: center
-![](images/ADTs-LinkedListSet1.svg){width=50%}
+![](images/8.3-linked-list-set.svg)
 :::
 
 This list represents the set $\{A,B,C\}$. Note that we do not have an ordering invariant here, values can appear in any order in the list, so the lists $[C,B,A]$ and $[A,C,B]$ also represent the set $\{A,B,C\}$.
@@ -37,7 +37,7 @@ and then we repoint the preceding node to the node following it, like this to re
 element $B$:
 
 ::: center
-![](images/ADTs-LinkedListSet2.svg){width=50%}
+![](images/8.3-linked-list-set-delete.svg)
 :::
 
 Conceptually this is not difficult, but the code becomes a little complicated

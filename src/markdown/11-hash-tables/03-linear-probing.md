@@ -29,7 +29,7 @@ Consider this example of a linear probing hash table.
 For simplicity, we implement a set instead of a map here, so there are only keys and no values:
 
 
-![An open addressing hash table of size 13, representing the set $\{A,B,C,D,E,F\}$. Since this is not a map, there are no values, only keys. The keys form three clusters: $\{A,B,C\}$, $\{D,E\}$, and $\{F\}$.](images/Hashing-LinProbe1.svg){width=80% #fig:LinProbe1}
+![An open addressing hash table of size 13, representing the set $\{A,B,C,D,E,F\}$. Since this is not a map, there are no values, only keys. The keys form three clusters: $\{A,B,C\}$, $\{D,E\}$, and $\{F\}$.](images/11.3-open-addressing-example.svg){#fig:LinProbe1}
 
 
 The three elements $A$, $B$, and $C$ are adjacent in the (circular) array, forming what is called a cluster.
@@ -47,4 +47,4 @@ Resizing the table is not just necessary for performance, but also for correctne
 including a resize. Study the table and make sure you understand why each value ends up
 where it does
 
-![Linear probing hash table adding the integers 14, 8, 23, 46, and 6 in that order, with $h(x)=x$. The arrows indicate ideal and actual postions of each key. Adding 46 triggers a resize from size 5 to size 10.](images/Hashing-LinProbe2.svg){width=90% #fig:LinProbe2}
+![Linear probing hash table adding the integers 14, 8, 23, 46, and 6 in that order, with $h(x)=x$. The arrows indicate ideal and actual postions of each key. Adding 46 triggers a resize from size 5 to size 10.](images/11.3-linear-probing-add-resize.svg){#fig:LinProbe2}

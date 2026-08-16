@@ -26,7 +26,7 @@ Notice that the rightmost node does not have any outgoing link.
 ![
     A linked list with four values.
     The right figure is a simplified representation of the same list.
-](images/Sequences-LinkedListIntro.svg){width=80% #fig:linked-list-intro}
+](images/6.2-linked-list-example.svg){#fig:linked-list-intro}
 
 
 List nodes are distinct objects, as opposed to cells in an array.
@@ -70,7 +70,7 @@ would be to iterate through the whole stack which takes time.
 
 ![
     Visual representations of linked stacks (left figure) and queues (right figure).
-](images/Sequences-LinkedStackQueue.svg){width=90% #fig:linked-stack-queue}
+](images/6.2-linked-stack-and-queue.svg){#fig:linked-stack-queue}
 
 #### Pushing and popping
 
@@ -133,7 +133,7 @@ For low-level languages such as C, we need to tell the system to release the mem
 ![
     Popping a linked stack (left), and enqueueing an element in a linked queue (right).
     Grey links and boxes are deleted, and dashed ones are added by the operation.
-](images/Sequences-LinkedPopDequeue.svg){width=100% #fig:pop-stack-enqueue-queue}
+](images/6.2-linked-pop-and-enqueue.svg){#fig:pop-stack-enqueue-queue}
 
 
 ::: dsvis

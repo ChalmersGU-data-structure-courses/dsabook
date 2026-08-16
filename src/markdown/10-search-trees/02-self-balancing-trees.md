@@ -35,7 +35,7 @@ for example, @fig:BST-rebalance shows that we might need to reorganise the tree 
     If we want to keep the tree as balanced as possible,
     we need to do a major reorganisation, which is very costly.
     Note that all nodes have moved around in the final tree to the right.
-](images/SearchTrees-BST-PerfectRebalance.svg){width=100% #fig:BST-rebalance}
+](images/10.2-BST-rebalance-bad.svg){#fig:BST-rebalance}
 
 <!-- OPENDSA: END -->
 
@@ -97,7 +97,7 @@ When doing this, $z$ -- the previous left child of $y$ -- has to reattach itself
     Left-rotating over the node $x$.
     The previous right child, $y$, now becomes the parent,
     and its left child $z$ has to reattach itself as a child of $x$.
-](images/SearchTrees-AVL-LeftRotate-1.svg){width=65% #fig:BST-left-rotate}
+](images/10.2-BST-left-rotate.svg){#fig:BST-left-rotate}
 
 If the right-right child $w$ was the "heaviest" of the subtrees,
 then this left-rotation should have made the subtree a little more balanced than before.
@@ -124,7 +124,7 @@ the right-left grandchild $z$ moves two levels up to become the new parent.
     A right-left-rotation.
     First we right-rotate over the child $y$, and then left-rotate over the parent $x$.
     The effect is that the grandchild $z$ now becomes the parent of both $x$ and $y$.
-](images/SearchTrees-AVL-RightLeftRotate-1.svg){width=100% #fig:BST-double-rotate}
+](images/10.2-BST-right-left-rotate.svg){#fig:BST-double-rotate}
 
 
 #### Implementing rotations

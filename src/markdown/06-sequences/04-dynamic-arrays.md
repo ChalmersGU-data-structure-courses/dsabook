@@ -57,7 +57,7 @@ Afterwards we can forget about the old array because it will not be used anymore
     Before resizing, *size* points to after the last cell in the array,
     indicating that the array is full.
     We have to create a new array with the larger capacity and copy over all elements.
-](images/Sequences-ArrayStackResize.svg){#fig:array-stack-resize}
+](images/6.4-array-stack-resize.svg){#fig:array-stack-resize}
 
 \newpage
 
@@ -240,7 +240,7 @@ The word "*every*" has waited the longest and "*they*" is the most recent word.
 ![
     An example circular queue that gets full.
     If we enqueue four elements to the queue on the left we get the full queue to the right.
-](images/Sequences-ArrayQueueFull.svg){#fig:array-queue-full}
+](images/6.4-circular-queue-full.svg){#fig:array-queue-full}
 
 What happens if we want to enqueue yet another element?
 We have to resize the array, and we do this like before by doubling the size.
@@ -248,7 +248,7 @@ But now we have to be a little careful when copying over the elements to the new
 -- we cannot just copy the elements to the same positions, because then we would end up in this situation:
 
 ::: center
-![](images/Sequences-ArrayQueueBadResize.svg){width=80%}
+![](images/6.4-circular-queue-bad-resize.svg)
 :::
 
 Instead we reset the *front* and *rear* pointers so that we copy
@@ -269,7 +269,7 @@ The process and the resulting queue is shown in @Fig:array-queue-resize.
 ![
     Resizing an array-based queue.
     We need to copy the element starting from the *front* pointer, not from index 0.
-](images/Sequences-ArrayQueueResize.svg){#fig:array-queue-resize}
+](images/6.4-circular-queue-resize.svg){#fig:array-queue-resize}
 
 
 ### Shrinking the internal array {#sequences:shrink-array}

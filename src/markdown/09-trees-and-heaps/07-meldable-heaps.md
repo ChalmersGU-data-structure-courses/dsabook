@@ -78,20 +78,16 @@ The trick here is to *not* strive for a balanced tree, but rather the opposite:
 we want our heaps to be as unbalanced as possible -- the more unbalanced, the faster melding becomes.
 @Fig:MeldableHeapExample shows the difference in structure between a binary heap and a meldable heap.
 
+![
+    How a binary heap (left) and a meldable heap (right) looks like after
+    building them from the values 48, 31, 52, 16, 65, 74, and 29, in that order.
+](images/9.6-meldable-vs-binheap.svg){#fig:MeldableHeapExample}
 
-::: {#fig:MeldableHeapExample}
-:::: latex
-![](images/tikz/meldable-heap.pdf){width=90%}
-::::
-
-How (a) a binary heap and (b) a meldable heap looks like after
-building them from the values 48, 31, 52, 16, 65, 74, and 29, in that order.
 <!--
 in: [48, 31, 52, 16, 65, 74, 29]
 mh: (( 65:1 ( 74:0 )) 16:3 ( 29:2 (( 52:0 ) 31:1 ( 48:0 ))))
 bh: [16, 31, 29, 48, 65, 74, 52]
 -->
-:::
 
 
 #### Other meldable heaps

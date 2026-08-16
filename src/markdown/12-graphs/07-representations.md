@@ -11,7 +11,7 @@ Adjacency matrix
 : 	A 2-dimensional matrix where the rows and columns denote vertices (assuming that the vertices are the numbers $0, 1, \ldots, n-1$).
 	A specific cell then denotes the edge from its column vertex to its row vertex -- we can for example store the *weight* of the edge in the cell.
 
-![A small directed graph, and its representation as an adjacency map and adjacency matrix.](images/Graphs-representations.svg){width=90% #fig:GraphRepresentations1}
+![A small directed graph, and its representation as an adjacency map and adjacency matrix.](images/12.7-representations.svg){#fig:GraphRepresentations1}
 
 @Fig:GraphRepresentations1 illustrates the two representations.
 The adjecency list representation is simple and very useful.

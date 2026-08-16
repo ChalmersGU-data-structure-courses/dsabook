@@ -53,7 +53,7 @@ but instead we can move the stack pointer to the left or the right.
     The stack has size 4, but the array has a capacity of 8 elements.
     The left picture is more accurate to how it is stored in memory,
     but the right one is more compact and is how we normally depict it.
-](images/Sequences-ArrayStack.svg){#fig:array-stack width=100%}
+](images/6.3-array-stack.svg){#fig:array-stack}
 
 
 #### Pushing and popping
@@ -128,7 +128,7 @@ at the same time, then the free space in the middle of the array will be
 exhausted quickly.
 <!-- OPENDSA: END -->
 
-![](images/Sequences-ArrayDoubleStack.svg){width=80%}
+![](images/6.3-two-stacks-in-one-array.svg)
 :::
 
 
@@ -212,7 +212,7 @@ When we want to enqueue a new element, it will be assigned to the empty cell aft
     Two possible ways of storing the same 4-element queue in an array with capacity 8.
     The leftmost version is what we get after enqueuing the elements directly into a new empty queue.
     The version to the right can occur if we have enqueued and dequeued a lot of elements.
-](images/Sequences-ArrayQueue.svg){#fig:array-queue}
+](images/6.3-array-queue.svg){#fig:array-queue}
 
 ::: dsvis
 Circular array queue.

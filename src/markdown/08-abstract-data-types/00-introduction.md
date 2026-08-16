@@ -118,4 +118,4 @@ The rest of this chapter gives a high-level overview of the ADTs covered through
 Each ADT will be discussed in more detail later in the book,
 including their operations and the data structures used to implement them.
 
-![An overview of ADTs with their common implementations](images/ADT_overview.png){#fig:adt-overview}
+![An overview of ADTs with their common implementations](images/8.0-ADT-overview.svg){#fig:adt-overview}

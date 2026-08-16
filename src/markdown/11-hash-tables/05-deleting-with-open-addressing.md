@@ -45,7 +45,7 @@ to it, such as how to represent the tombstones.
 In most programming languages you would use null values to represent an
 empty table cell, but then we need a distinct non-value to represent a tombstone.
 
-![Resizing a linear probing hash table in the presence of lazy deletion. Tombstones of deleted entries (marked X) are not transferred. After the resize, the load factor is $1/2$.](images/Hashing-LazyResize.svg){width=60% #fig:LazyResize}
+![Resizing a linear probing hash table in the presence of lazy deletion. Tombstones of deleted entries (marked X) are not transferred. After the resize, the load factor is $1/2$.](images/11.5-lazy-deletion-resize.svg){#fig:LazyResize}
 
 ### Shrinking tables
 

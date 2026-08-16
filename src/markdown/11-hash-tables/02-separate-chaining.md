@@ -37,7 +37,7 @@ This has some issues:
 * We have to be able to *compare* the keys, and not just calculate a hash value,
   and for some datatypes it can be complex to define comparison and not just equality.
 
-![Memory content of a separate chaining hash table of size 13 mapping three emails to names. The arrows are pointers, and the empty cells in the array are null values, representing empty linked lists.](images/Hashing-SepChain2.svg){width=80% #fig:SepChain2}
+![Memory content of a separate chaining hash table of size 13 mapping three emails to names. The arrows are pointers, and the empty cells in the array are null values, representing empty linked lists.](images/11.2-memory-content.svg){#fig:SepChain2}
 
 For these reasons, the typical choice of data structure is a *linked list*, hence the word *chaining*
 (a linked list forms a chain of elements). @fig:SepChain2 shows the memory content of a separate chaining hash table.

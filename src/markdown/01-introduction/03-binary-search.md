@@ -137,7 +137,7 @@ but require the same fundamental building operations:
 Finding the middle element, and excluding the upper/lower half of the interval.
 @fig:BinSearch1 illustrates an example search of a small array.
 
-![Steps of Binary search for the value D in a sorted array of length 9, revealing elements as they are compared to D. After three comparisons, the search interval is empty, D is not in the array.](images/Intro-binarySearch1.svg){width=80% #fig:BinSearch1}
+![Steps of Binary search for the value 29 in a sorted array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array.](images/1.3-steps-of-binary-search.svg){#fig:BinSearch1}
 
 
 There are many variations of binary search. If the array had books sorted by number

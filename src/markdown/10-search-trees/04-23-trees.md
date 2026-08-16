@@ -37,7 +37,7 @@ Because 2-3 trees have two kinds of nodes, we can have a much stricter balance i
 ![
    An example 2-3 tree consisting of six 2-nodes and five 3-nodes, with a total of 16 elements.
    Note that all leaves are on the same level.
-](images/SearchTrees-23-Example.svg){width=65% #fig:23-example}
+](images/10.4-23-example.svg){#fig:23-example}
 
 
 ::: example
@@ -100,7 +100,7 @@ The resulting leaf node becomes too big, so we split and promote the middle valu
 ![
    Inserting the value $c$ into a leaf 3-node results in a 4-node,
    which we have to split and then promote the middle value.
-](images/SearchTrees-23-InsertLeaf.svg){width=80% #fig:23-insert-leaf}
+](images/10.4-23-insert-leaf.svg){#fig:23-insert-leaf}
 
 Promoting a value means that we insert it into the parent node.
 If the parent is a 2-node, then we just change it to a 3-node and we are done.
@@ -110,7 +110,7 @@ This is shown in @fig:23-insert-promote.
 
 ![
    If we promote a value into a 3-node, we have to split and promote again.
-](images/SearchTrees-23-InsertPromote.svg){width=100% #fig:23-insert-promote}
+](images/10.4-23-insert-promote.svg){#fig:23-insert-promote}
 
 
 ::: dsvis
@@ -172,7 +172,7 @@ as shown in @fig:23-delete-steal.
 
 ![
    When deleting from a 2-node: if there is a 3-node sibling, we can steal from it.
-](images/SearchTrees-23-DeleteSteal.svg){width=80% #fig:23-delete-steal}
+](images/10.4-23-delete-steal.svg){#fig:23-delete-steal}
 
 If neither sibling is a 3-node, we cannot steal anything.
 In this situation we can instead *merge* our empty node with a sibling and the parent that lies between.
@@ -183,7 +183,7 @@ The parent value is therefore *demoted* to its child, and the rank of the parent
 ![
    If there is no 3-node sibling, we *demote* the parent and merge with a 2-node sibling.
    The parent loses one element, and maybe the stealing/merging has to continue upwards in the tree.
-](images/SearchTrees-23-DeleteMerge.svg){width=80% #fig:23-delete-merge}
+](images/10.4-23-delete-merge.svg){#fig:23-delete-merge}
 
 Demoting and merging is shown in @fig:23-delete-merge.
 In this example we are lucky -- the parent is a 3-node so it will become a 2-node and we are done.
@@ -222,7 +222,7 @@ Therefore, this kind of trees are called *red-black trees*.
 
 ![
    How to transform a 2-, 3-, and 4-node into a corresponding red-black subtree.
-](images/SearchTrees-23-RedBlack.svg){width=100% #fig:23-redblack-tree}
+](images/10.4-23-red-black.svg){#fig:23-redblack-tree}
 
 The key insight is that any 2-3-4 tree can be converted to a corresponding red-black tree.
 @Fig:23-redblack-tree shows how the conversion looks like, for any 2-, 3- or 4-node.

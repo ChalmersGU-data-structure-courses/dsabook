@@ -5,10 +5,10 @@ Graphs are a very flexible family of data structures used in a wide range of app
 Like trees, there is no single graph data structure, but rather a family of similar
 data structures. A graph always consists of a set of vertices (nodes) and a set of
 edges, where each edge connects two vertices.
-Here are visual representations of two small graphs.
+@Fig:GraphExamples shows visual representations of two small graphs.
 
 
-![Two example graphs, each with four vertices labelled $A$, $B$, $C$, and $D$. The right one also carries numbers in edges.](images/Graphs-examples.svg){width=60% #fig:GraphExamples}
+![Two example graphs, each with four vertices labelled $A$, $B$, $C$, and $D$. The right one also carries numbers in edges.](images/12.0-examples.svg){#fig:GraphExamples}
 
 
 Graphs are used to model both real-world systems and abstract problems.

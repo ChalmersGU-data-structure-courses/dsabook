@@ -70,7 +70,7 @@ solutions after some deliberation:
 - Put `(19934,"B")` in the first empty cell after 34.
   This leads towards *open addressing hash tables with linear probing*.
 
-![Put operations on a tiny hash table of size 5, illustrating the idea of the two ways in which we handle collisions. The keys 1997 and 12 both compress to 2.](images/Hashing-CollisionStrategies.svg){width=90% #fig:CollisionExample}
+![Put operations on a tiny hash table of size 5, illustrating the idea of the two ways in which we handle collisions. The keys 1997 and 12 both compress to 2.](images/11.1-collision-strategies.svg){#fig:CollisionExample}
 
 @fig:CollisionExample illustrates these techniques.
 Both of these methods are used in practice, and we will look more closely at each of them,

@@ -23,7 +23,7 @@ and other [meldable heaps]{.term} (@sec:heaps:meldable-heaps).
 
 #### Tree terminology
 
-![Drawing of a tree with six nodes, illustrating the concepts of root node, child and parent nodes, size/height/level properties, and paths.](images/Trees-terminology.svg){width=70% #fig:TreeTerminology}
+![Drawing of a tree with six nodes, illustrating the concepts of root node, child and parent nodes, size/height/level properties, and paths.](images/9.0-terminology.svg){#fig:TreeTerminology}
 
 A tree consists of [nodes]{.term} connected by parent-child relationships.
 The topmost node is the [root]{.term}.
@@ -31,7 +31,7 @@ If a node is directly below another node, then it is a [child]{.term} of that no
 In @fig:TreeTerminology, $A$ is the root, and $B$ and $C$ are children of $A$.
 
 Every node in a tree is also the root of a *subtree*.
-For example, $B$ is a child of $A$, but it is also the root of the subtree containing $B$, $D$, and $E$.
+For example, $B$ is a child of $A$, but it is also the root of the subtree containing $B$, $D$, $E$, and $F$.
 So, depending on context, a node name can refer either to the node itself or to the subtree rooted at that node.
 Two simple rules define the shape of a tree:
 
@@ -65,7 +65,7 @@ In a syntax tree, order matters,
 because the expressions $a < 3$ and $3 < a$ mean different things.
 This distinction will matter later when we compare general trees, binary trees, and heaps.
 
-![Two familiar domains modelled as trees: Programming language syntax and file systems.](images/Trees-examples.svg){width=70% #fig:TreeExamples}
+![Two familiar domains modelled as trees: Programming language syntax and file systems.](images/9.0-examples.svg){#fig:TreeExamples}
 
 @fig:TreeExamples shows two typical examples.
 In a syntax tree, each node represents a language construct such as a function call or an `if`-statement, and the children are its components.

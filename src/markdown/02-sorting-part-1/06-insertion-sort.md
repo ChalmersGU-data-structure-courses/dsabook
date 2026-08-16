@@ -50,7 +50,7 @@ Note how all values before $i$ are sorted at all times, but unlike Selection sor
 they are not necessarily in their final positions.
 
 
-![Two subsequent steps of Insertion sort. In each step, a value is inserted backwards into the sorted initial segment.](images/BasicSorting-InsertionSort1.svg){width=100% #fig:InsertionSort1}
+![Two subsequent steps of Insertion sort. In each step, a value is inserted backwards into the sorted initial segment.](images/2.6-two-steps-insertion-sort.svg){#fig:InsertionSort1}
 
 
 

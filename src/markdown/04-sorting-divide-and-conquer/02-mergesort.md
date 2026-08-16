@@ -73,7 +73,7 @@ Note that each level consists of at most $n$ elements, and that the number of le
     There are $k=\lceil\log_2(n)\rceil$ levels, and each level consists of at most $n$ elements.
     Note that this is not an accurate description of how recursion works!
     For instance, it will mergesort the subarray [A,L,G,O,R,I] completely, *before* it starts splitting [T,H,M,I,C].
-](images/Sorting-MergesortSplitMerge.svg){#fig:mergesort-split-merge}
+](images/4.2-split-and-merge.svg){#fig:mergesort-split-merge}
 
 
 ::: dsvis

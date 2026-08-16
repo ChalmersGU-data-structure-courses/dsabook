@@ -30,7 +30,7 @@ and this has consequences for the efficiency of the basic operations.
 
 ![
     Four example BSTs, all representing the same set of values.
-](images/SearchTrees-BST-FourExamples.svg){width=100% #fig:BST-example}
+](images/10.1-BST-examples.svg){#fig:BST-example}
 
 ### Implementing BST sets and maps
 
@@ -231,7 +231,7 @@ This is easy, we just go as far to the right as possible -- then we will end up 
 
 ![
     Deleting the root (C) from the leftmost tree results in either of the two trees to the right.
-](images/SearchTrees-BST-DeleteRoot.svg){width=100% #fig:BST-example-deleted-root}
+](images/10.1-BST-delete-root.svg){#fig:BST-example-deleted-root}
 
 
 ::: example

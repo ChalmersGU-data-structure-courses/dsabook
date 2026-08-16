@@ -93,35 +93,35 @@ Here is a step-by-step example of partitioning.
 1.  First we select a pivot element:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-1.svg)
+    ![](images/4.3-partition-1.svg)
 
 2.  Swap the pivot with the first element, and initialise the *lower* and *upper* pointers:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-2.svg)
+    ![](images/4.3-partition-2.svg)
 
 
 3.  Partition the rest of the array. Move the pointers towards each other:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-3.svg)
+    ![](images/4.3-partition-3.svg)
 
     `\noindent`{=latex}
     Whenever the *lower* element is larger than the pivot,
     and the *upper* element is smaller than the pivot, swap them:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-4.svg)
+    ![](images/4.3-partition-4.svg)
 
 4.  Finally, swap the pivot with the element at the *upper* pointer:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-5.svg)
+    ![](images/4.3-partition-5.svg)
 
 5.  Return the new position of the pivot:
 
     `\noindent`{=latex}
-    ![](images/Sorting-QuicksortPartition-6.svg)
+    ![](images/4.3-partition-6.svg)
 
 Note that the partitioning is done completely in-place.
 This is different from Mergesort where we need to allocate space for a temporary array.

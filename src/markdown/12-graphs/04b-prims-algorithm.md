@@ -6,7 +6,7 @@ This means that an implementation of Dijkstras as we have seen before can be cha
 
 ![Steps of Prim's algorithm, starting in $A$.
 In each step, we simply select the cheapest edge from a visited to an unvisited vertex (shown underlined in the image).
-](images/Graphs-prims1.svg){width=90% #fig:GraphPrim1}
+](images/12.4-prim.svg){#fig:GraphPrim1}
 
 @Fig:GraphPrim1 shows the execution of Prim's algorithm.
 The algorithm is very easy to run with pen and paper:

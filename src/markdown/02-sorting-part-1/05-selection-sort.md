@@ -54,7 +54,7 @@ The algorithm above can be implemented as follows in pseudocode:
                     minIndex = j             //             Remember the smaller index
             swap(arr, i, minIndex)           //     Put the smallest value into place
 
-![Two subsequent steps of Selection sort. In each step, a value is placed in its correct position.](images/BasicSorting-SelectionSort1.svg){width=100% #fig:SelectionSort1}
+![Two subsequent steps of Selection sort. In each step, a value is placed in its correct position.](images/2.5-two-steps-selection-sort.svg){#fig:SelectionSort1}
 
 @fig:SelectionSort1 illustrates two steps of this algorithm. Note how the initial part of the array,
 below index $i$, is sorted. Also, the largest value before $i$ is smaller than all subsequent values.

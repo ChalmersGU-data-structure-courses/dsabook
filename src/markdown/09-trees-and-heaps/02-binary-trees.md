@@ -27,7 +27,7 @@ Binary trees are often described as trees in which each node has at most two chi
 While this is correct, it can obscure an important detail: if a node has only one child, it matters whether that child is on the left or on the right.
 For this reason, it is often clearer to think of every node as having both a left subtree and a right subtree, with either subtree allowed to be empty. This idea is illustrated below.
 
-![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExampleNulls.svg){width=65% #fig:example_bintree}
+![An example of a binary tree with nodes labeled by letters.](images/9.1-bintree-with-nulls.svg){#fig:example_bintree}
 
 The two drawings represent the same binary tree.
 In the left-hand drawing, the black dots make the empty subtrees explicit.
@@ -115,7 +115,7 @@ A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete
 a [Huffman coding tree]{.term} is an example of a full binary tree.
 
 ::: {#fig:full_complete_bintrees}
-![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/Trees-full-perfect-complete.svg){width=80%}
+![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/9.1-full-perfect-complete-bintree.svg)
 
 Examples of restricted binary tree shapes:
 (a) is full but not complete,
@@ -274,7 +274,7 @@ Each `Node` object also has two pointers, one to the left child and one to the r
 Thus, a `Node` object represents not just a single node, but the root of a subtree.
 @Fig:bintree_with_pointers shows how the tree in @fig:example_bintree appears in memory, with child pointers made explicit.
 
-![Illustration of the pointer-based binary tree implementation, where each node stores a value and two child pointers. A black dot in a pointer cell indicates `null`.](images/Trees-BinaryTreeWithPointers.svg){width=60% #fig:bintree_with_pointers}
+![Illustration of the pointer-based binary tree implementation, where each node stores a value and two child pointers. A black dot in a pointer cell indicates `null`.](images/9.1-bintree-with-pointers.svg){#fig:bintree_with_pointers}
 
 <!--
 ::: {#fig:bintree_with_pointers}
