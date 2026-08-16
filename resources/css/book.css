@@ -22,6 +22,7 @@ main {
     padding: 1rem 3rem;
     background-color: var(--body-bgcolor);
     border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 }
 
 /* Navigation menu */

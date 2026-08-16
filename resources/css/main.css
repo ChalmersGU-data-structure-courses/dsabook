@@ -31,7 +31,7 @@
         --quote-color: AntiqueWhite;
         --term-color: PaleGreen;
         --text-color: White;
-    }    
+    }
 }
 
 /* A mixture of the following two CSS resets:
@@ -66,7 +66,7 @@ picture, video, canvas, svg {
 }
 img {
 	display: inline-block;
-	max-width: 100%;
+	max-width: 40rem;
 }
 
 /* End CSS reset */
