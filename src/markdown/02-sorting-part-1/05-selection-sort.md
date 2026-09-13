@@ -26,7 +26,7 @@ Whenever we have found the next book to put in place, we *swap* it with the book
 #### Algorithm: Selection sort
 
 Divide the array into a sorted and an unsorted part,
-the sorted part is to the left and initially empty.
+where the sorted part is to the left and initially empty.
 Then repeat the following until the unsorted part is empty:
 
 1. Find the smallest unsorted element, $e$.
@@ -121,7 +121,8 @@ So, Selection sort makes $n(n-1)/2$ comparisons, which is quadratic.
 
 The advantage compared to Bubble sort is that Selection sort makes a lot fewer swaps.
 For each outer iteration it only makes one swap, so the total number of swaps will be $n-1$ (we get the last element in place "for free").
-So, Selection sort makes a *linear* number of swaps, meaning that it grows linearly with the size of the array.
+So, for Selection sort, the number of swaps grows *linearly* with the size of the array.
+(But don't forget that the number of comparisons is still quadratic.)
 
 ::: dsvis
 This visualisation analyses the number of comparisons and swaps required by Selection sort.

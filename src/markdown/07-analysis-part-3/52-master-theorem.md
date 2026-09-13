@@ -30,8 +30,8 @@ Now let's replace $n$ with $b^m$ and $T(1)$ with $c$, and then expand the parent
 \\     &=  a^m c \cdot b^{0k}  +  a^{m-1} c \cdot b^{1k}  +  a^{m-2} c \cdot b^{2k}  +  \cdots  +  a^1 c \cdot b^{(m-1)k}  +  a^0 c \cdot b^{mk}
 \\     &=  c \cdot (a^m b^{0k}  +  a^{m-1} b^{1k}  +  a^{m-2} b^{2k}  +  \cdots  +  a^1 b^{(m-1)k}  +  a^0 b^{mk})
 \\     &=  c \cdot a^m \cdot (b^{0k} / a^0  +  b^{1k} / a^1 +  b^{2k} / a^2  +  \cdots  +  b^{(m-1)k} / a^{(m-1)}  +  b^{mk} / a^m)
-\\     &=  c \cdot a^m \cdot \sum^m (b^k/a)^i
-\\     &=  c \cdot a^m \cdot \sum^m r^i,
+\\     &=  c \cdot a^m \cdot \sum_{i=0}^m (b^k/a)^i
+\\     &=  c \cdot a^m \cdot \sum_{i=0}^m r^i,
            \text{ where } r = b^k / a  \text{ and }  m = \log_b(n)
 \end{align*}
 
@@ -43,23 +43,23 @@ Here is a more visual presentation of this same derivation.
 ```
 :::
 
-The value of $\sum^m r^i$ depends on if $r$ is less than, equal to, or larger than 1:
+The value of $\sum_{i=0}^m r^i$ depends on if $r$ is less than, equal to, or larger than 1:
 
 $r < 1$ (the subproblems dominate)
 
-:   The infinite sum $\sum r^i$ converges to $1/(1-r)$ which is constant,
-    so $\sum^m r^i \in O(1)$.
+:   The infinite sum $\sum_{i=1}^\infty r^i$ converges to $1/(1-r)$ which is constant,
+    so $\sum_{i=1}^m r^i \in O(1)$.
     Therefore $T(n) \in O(a^m) = O(n^d)$, because $a^m = a^{\log_b(n)}$ = $n^{\log_b(a)} = n^d$.
 
 $r = 1$ (they are comparable)
 
-:   The sum collapses to $\sum^m r^i = \sum^m 1 \in O(m) = O(\log(n))$.
+:   The sum collapses to $\sum_{i=1}^m r^i = \sum_{i=1}^m 1 \in O(m) = O(\log(n))$.
     Furthermore, $a = b^k$, and so $k = \log_b(a)$.
     Therefore $a^m = n^{\log_b(a)} = n^k$, and we get $T(n) \in O(n^k \log(n))$.
 
 $r > 1$ (the extra work dominates)
 
-:   Now the sum becomes $\sum^m r^i = (r^{m+1} - 1) / (r - 1) \in O(r^m)$.
+:   Now the sum becomes $\sum_{i=1}^m r^i = (r^{m+1} - 1) / (r - 1) \in O(r^m)$.
     Since $b^m = n$, we get $T(n) \in O(a^m r^m)$ = $O(a^m (b^k/a)^m)$ = $O(b^{km}) = O(n^k)$.
 
 We can summarise the above derivation as the following theorem.

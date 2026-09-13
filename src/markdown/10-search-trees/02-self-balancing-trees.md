@@ -82,7 +82,7 @@ and there are two main forms -- the *single* and the *double* rotation.
 These rotations are used both by AVL trees, Red-black trees, Splay trees, and numerous other self-balancing BSTs.
 However, not all use rotations -- for example the Scapegoat tree above instead builds a completely new subtree.
 
-In the following we only explain left rotations, but right rotations are of course analoguous.
+In the following we only explain left rotations, but right rotations are of course analogous.
 
 #### Single rotation
 

@@ -43,10 +43,10 @@ and how efficient can they be made?
 
 `set`
 :   A general array can implement `set`, but the operation does not make sense for a sorted array.
-    Calling `set(0,4)` on the sorted array $[1,2,3]$ cannot give $[4,2,3]$,
+    Calling `set(a,0,4)` on the sorted array $a=[1,2,3]$ cannot give $[4,2,3]$,
     since that breaks the ordering invariant.
     If `set` shuffles things around around to $[2,3,4]$, it does not comply with the description of `set` and `get`.
-    After running `set(0,4)` we would expect `get(0)` to give $4$, not $2$.
+    After running `set(a,0,4)` we would expect `get(a,0)` to give $4$, not $2$.
 
 `contains`
 :   This operation can be implemented on both data structures,

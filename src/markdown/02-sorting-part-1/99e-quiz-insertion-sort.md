@@ -235,7 +235,7 @@ sorting algorithms.
 of two nested for loops.
 - The outer for loop is executed $n-1$ times.
 While the number of times the inner for loop executes depends
-on how many keys in positions 0 to $i-1$ have a
+on how many keys in positions $0$ to $i-1$ have a
 value less than that of the key in position i.
 :::
 ::::::::::::::::::::::::::::::
@@ -254,7 +254,7 @@ In the worst case, the total number of comparisons for Insertion sort is closest
 - Insertion sort's implementation is made up of two nested for loops.
 - The outer for loop is executed $n-1$ times.
 - The inner for loop is executed $i$ times.
-- The total cost is the sum of $i$'s for $i$ goes from 1 to $n$.
+- The total cost is the sum of $i$'s for $i$ goes from $1$ to $n$.
 :::
 ::::::::::::::::::::::::::::::
 

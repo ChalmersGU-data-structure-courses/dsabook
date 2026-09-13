@@ -18,8 +18,9 @@ but is not mathematically accurate for two reasons:
   $O(n)$. So writing $T \in O(n)$ is more correct,
   and even that is shorthand for $T \in O(f)$ for $f(n)=n$.
 - $O(n)$ is actually an *upper bound* for the complexity.
-  That means that technically every algorithm that runs in $O(n)$ time, also runs in $O(n^2)$ time
-  (but not the other way around). Mathematically, $O(n) \subset O(n^2)$.
+  That means that technically every algorithm that runs in linear time is also a member of $O(n^2)$.
+  So it is formally correct, but not very useful, to say that linear search is $O(n^2)$.
+  Mathematically, this means that $O(n) \subset O(n^2)$.
 
 Rather than understanding $O(n)$ as "time functions that grow linearly",
 a more mathematically correct intuition is

@@ -28,7 +28,7 @@ but it is a handy shortcut so we keep it here.
 ### Stacks and queues as abstract data types {#ADTs:stacks-and-queues}
 
 In @sec:sequences:stacks-and-queues we discussed how stacks and queues work,
-and that they only have two core operations -- adding and removing elememnts.
+and that they only have two core operations -- adding and removing elements.
 As an ADT interface we can specify them like this:
 
     interface Stack of T extends Collection:
@@ -43,7 +43,8 @@ As an ADT interface we can specify them like this:
 
 Note that we also specified the *auxiliary* operation `peek` in this interface,
 even though it is not part of the absolute minimum.
-Also note that the interfaces inherit the `size` and `isEmpty` operations from `Collection`.
+Also note that the interfaces inherit the `size` and `isEmpty` operations from `Collection`,
+as well as the mechanism for iteration.
 
 ### Double-ended queues and general lists
 

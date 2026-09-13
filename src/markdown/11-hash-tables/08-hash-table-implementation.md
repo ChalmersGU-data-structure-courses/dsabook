@@ -64,7 +64,7 @@ instead we resize the array when the *load factor* exceeds a threshold:
 
 Second, we cannot use the same resize operation as normal dynamic arrays,
 that is, to simply copy over values from the old to the same position in the new array.
-But this does not work, because the *compression* function depends on the array size.
+This does not work, because the *compression* function depends on the array size.
 Therefore we have to recalculate the table index before we add them to the new array.
 Easiest is to simply reuse the `add` operation above, like this:
 

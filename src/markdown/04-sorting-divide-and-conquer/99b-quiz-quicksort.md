@@ -106,7 +106,7 @@ What is the worst-case cost for Quicksort to sort an array of n elements?
 - The bad cases have pivots that repeatedly reduce the partition size by one.
 - That leads to a series of partition sizes of $n-1$, $n-2>$, and so on.
 - Since the time to process a partition is linear on its size, this in turn leads to a cost for the whole algorithm
-that is the sum of $i$ from 2 to $n-1$, that you should be very familiar with.
+that is the sum of $i$ from $2$ to $n-1$, that you should be very familiar with.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -172,8 +172,8 @@ the fraction of input cases with cost $O(n^2)$ must:
 - [ ] Never happen
 - [ ] Happen only once
 - [ ] Be less than half
-- [ ] Be less than 1 in $n$
-- [ ] Be less than 1 in $n!$
+- [ ] Be less than $1$ in $n$
+- [ ] Be less than $1$ in $n!$
 
 ::: hints
 - For any size $n$, it does happen that there are

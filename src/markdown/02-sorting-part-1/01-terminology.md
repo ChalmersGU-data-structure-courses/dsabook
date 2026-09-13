@@ -18,7 +18,7 @@ The (key-based) *sorting problem* is to arrange the list into any order $s$ such
 
 <!-- OPENDSA: START -->
 When comparing two sorting algorithms, the simplest approach would be to
-program both and measure their running times.
+implement both and measure their running times.
 This is an example of *empirical comparison*.
 However, doing fair empirical comparisons can be tricky
 because the running time for many sorting algorithms depends on

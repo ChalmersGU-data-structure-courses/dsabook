@@ -8,15 +8,14 @@ we have a collection of data that is not in any order? If we will often
 need to search for items in the data, it makes sense to *sort the data*
 first. In this chapter we will study algorithms for sorting arrays.
 
-We sort many things in our everyday lives: A handful of cards when
-playing Bridge; bills and other piles of paper; jars of spices; and so
+We sort many things in our everyday lives: A hand of playing cards;
+bills and other piles of paper; jars of spices; and so
 on. And we have many intuitive strategies that we can use to do the
 sorting, depending on how many objects we have to sort and how hard they
 are to move around. Sorting is also one of the most frequently performed
 computing tasks. We might sort the records in a database so that we can
-search the collection efficiently. We might sort customer records by zip
-code so that when we print an advertisement we can then mail them more
-cheaply. We might use sorting to help an algorithm to solve some other problem.
+search the collection efficiently.
+We might use sorting to help an algorithm to solve some other problem.
 For example, [Kruskal's algorithm]{.term} is described in @sec:graphs:kruskals-algorithm.
 It builds [minimum spanning trees]{.term} and
 must sort the edges of a graph by their lengths before it can process them.
@@ -24,7 +23,7 @@ must sort the edges of a graph by their lengths before it can process them.
 Because sorting is so important, naturally it has been studied
 intensively and many algorithms have been devised. Some of these
 algorithms are straightforward adaptations of schemes we use in everyday
-life. For example, a natural way to sort your cards in a bridge hand is
+life. For example, a natural way to sort a hand of playing cards is
 to go from left to right, and place each card in turn in its correct
 position relative to the other cards that you have already sorted. This
 is the idea behind [Insertion sort]{.term}.
@@ -33,7 +32,7 @@ things, having been invented to sort thousands or even millions of
 records stored on the computer. For example, no normal person would use
 [Quicksort]{.term} to order a pile of bills by date,
 even though Quicksort is one of the standard
-sorting algorithms of choice for most software libraries. After years of
+sorting algorithms of choice for most software libraries. After decades of
 study, there are still unsolved problems related to sorting. New
 algorithms are still being developed and refined for special-purpose
 applications.

@@ -17,10 +17,10 @@ For example, we can look at the problem of sorting an array and know that for th
 without even knowing if such an algorithm exists.
 Descriptions of problems often include:
 
-- *preconditions* on the input, such as an array being sorted or containing only positive integers
-- *postconditions* on the output, for example that the result of sorting is a sorted permutation of the input
-- *additional capabilities*, such that the elements of an array are comparable
-- *performance requirements*, like taking at most logarithmic time or, using constant additional memory
+- *preconditions* on the input, such as an array being sorted or containing only positive integers;
+- *postconditions* on the output, for example that the result of sorting is a sorted permutation of the input;
+- *additional capabilities*, such that the elements of an array are comparable;
+- *performance requirements*, like taking at most logarithmic time or, using constant additional memory.
 
 Analysing and classifying problems is a large research area, that we mostly avoid in this book.
 More than just finding an algorithm that solves a problem,
@@ -95,7 +95,7 @@ Unlike abstract descriptions of algorithms, computer programs are unambiguous an
 The downside is that high level of technical detail tends to obscure the important parts of the algorithm.
 For a simple algorithm like linear search, executable code in any well known programming language is fine
 as an explanation, but for more complicated algorithms the difference between an algorithm description
-and an implementation can be several lines of code.
+and an implementation can be several hundred lines of code.
 Pseudocode, as frequently used by this book, offers a nice compromise between the
 precision of a programming language and the flexibility of natural language.
 
@@ -106,7 +106,7 @@ or even change the order in which a loop iterates over an array,
 without changing the underlying algorithm.
 
 Not every computer program implements an algorithm.
-One requirement on an algorithm is that it terminates for an input.
+One requirement on an algorithm is that it terminates for every input.
 Most applications do not: for instance, a web browser does not process
 input and then terminate, it only terminates when the user closes it.
 The code of a web browser will however contain several functions that implement

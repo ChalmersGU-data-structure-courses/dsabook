@@ -6,7 +6,7 @@
 - Derive the recurrence for Quicksort
 :::
 
-Quicksort's average-case behavior falls somewhere
+Quicksort's average-case behaviour falls somewhere
 between the extremes of worst and best case.
 Average-case analysis considers the cost for all possible arrangements
 of input, summing the costs and dividing by the number of cases.
@@ -14,7 +14,7 @@ We make one reasonable simplifying assumption:
 At each partition step, the pivot is
 equally likely to end in any position in the (sorted) array.
 In other words, the pivot is equally likely to break an array into
-partitions of sizes 0 and $n-1$, or 1 and $n-2$, and so on.
+partitions of sizes $0$ and $n-1$, or $1$ and $n-2$, and so on.
 
 Given this assumption, the average-case cost is computed from the following equation:
 

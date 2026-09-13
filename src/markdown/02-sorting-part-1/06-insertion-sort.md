@@ -91,9 +91,9 @@ Now try for yourself to see if you understand how Insertion sort works.
 Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
 - The outer loop is iterated $n-1$ times in total.
-- The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$.
-    - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
-    - in the best case, the element is already in place, and then we only need one comparison
+- The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$:
+    - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$;
+    - in the best case, the element is already in place, and then we only need one comparison.
 
 Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Bubble sort and Selection sort.
 In the best case -- when the list is already sorted -- we only have to do one comparison per iteration,
@@ -135,4 +135,4 @@ The algorithms that have better asymptotic growth rates tend to be more complica
 meaning that they typically need fewer comparisons for larger arrays, but they cost more per comparison.
 <!-- OPENDSA: END -->
 One very common optimisation for these more complicated algorithms is to introduce a *cutoff*,
-so that when the array to be sorted is small eonugh we switch to Insertion sort (or Selection sort).
+so that when the array to be sorted is small enough we switch to Insertion sort (or Selection sort).

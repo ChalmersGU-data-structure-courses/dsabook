@@ -34,7 +34,7 @@ and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path)
 #### Example: Simulating particles
 
 Simulating various physical systems is a common software application.
-Suppose we are modelling particles that can collide with other particle or
+Suppose we are modelling particles that can collide with other particles or
 with a physical boundary, causing a change of direction and speed, or perhaps
 randomly splitting the particle in two.
 For each particle we can calculate when its next collision will occur.

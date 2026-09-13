@@ -53,7 +53,7 @@ implicitly make deductions like
 and "this book is by Plato, so all books by Homer must be earlier in the shelf".
 The formalised algorithm that uses these deductions is called [binary search]{.term}.
 It is a very common choice for a first algorithm to teach students, so you may have seen it before.
-For the example of a book shelf sorted alphabetically from left to right, binary search would be described as such:
+For the example of a book shelf sorted alphabetically from left to right, binary search can be described as such:
 
 - Compare the middle book in the shelf to the one we are looking for.
     - if the middle book is the one we are looking for, our search is done!
@@ -64,7 +64,7 @@ For the example of a book shelf sorted alphabetically from left to right, binary
 This procedure will end in one of two cases: We find the book we are looking for,
 or we end up searching an empty part of the bookshelf, and know that the book is not in the shelf.
 
-To make the description of this algorithm more precise, introduce the concept of a *search interval*.
+To make the description of this algorithm more precise, we introduce the concept of a *search interval*.
 Initially our search interval is the entire bookshelf,
 and with each comparison we reduce the search interval to just the left or right side of the middle
 element.
@@ -73,7 +73,7 @@ For instance, we can go from the problem of searching among 51 books to the prob
 the interval.
 This is further reduced to searching among 12 books with another comparison. We need to decide what
 we mean by the middle of 12 books, but we should have to search among at most 6 books in the next step.
-Ultimately we end up either finding the book we are looking for, or searching among 0 books, and in both
+Ultimately we end up either finding the book we are looking for, or searching among no books at all, and in both
 cases we have the answer we were looking for.
 
 This process of reducing a problem to a smaller instance of the same problem
@@ -84,16 +84,17 @@ in a sorted array of elements.
 ::: algorithm
 #### Algorithm: Binary search
 
-To find out if a *key* is in a given sorted array,
+To find out where a given *key* is located in a sorted array,
 start with an interval including the whole array.
 Repeat the following until *key* has been found, or the interval is empty:
 
 1. Compare *key* with the middle element of the interval.
-2. If *key* is equal, return true, the key is in the array.
+2. If *key* is equal, then return the position of the middle element.
 3. Exclude the middle element and all elements either before or after it,
    depending on if the key is greater or smaller than the middle element.
 
-If the interval ends up empty, return false, the key is not in the array.
+If the interval ends up empty, the key is not in the array and we
+return a null
 :::
 
 To turn this algorithm into actual code, we need to decide how to represent the search interval
@@ -103,8 +104,8 @@ upper indices it includes, so $(10,24)$ would represent the interval from
 index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
 when needed). Searching the lower half just means altering the interval to $(10,16)$,
 and the upper half $(18,24)$.
-Here is an implementation of binary search that does not only say if the key is in the array,
-but also at which index it resides (or null if it is absent):
+Here is an implementation of binary search that returns the index of the key in the array,
+or `null` if the key is absent:
 
 
     binarySearch(arr, key):
@@ -113,9 +114,9 @@ but also at which index it resides (or null if it is absent):
         while start <= end:            // Continue until the interval is empty:
             mid = (start + end) / 2    //     Find the index of the middle value
             if arr[mid] < key:         //     Compare with the middle value in the interval:
-                start = mid + 1        //         The search key is in the upper half
+                start = mid + 1        //         The search key may be in the upper half
             else if arr[mid] > key:
-                end = mid - 1          //         The search key is in the lower half
+                end = mid - 1          //         The search key may be in the lower half
             else: // (here arr[mid]==key)
                 return mid             //         We found the search key!
         return null                    // The value is not in the array.
@@ -128,7 +129,7 @@ Does it calculate $\mathit{mid}$ correctly and yield correct result in these cas
 
 
 In this particular implementation we use inclusive indices,
-both $\mathit{start}$ and $\mathit{end}$ are inside the area.
+both $\mathit{start}$ and $\mathit{end}$ are inside the interval.
 Another common option is to have $\mathit{start}$ be inclusive, and $\mathit{end}$ exclusive
 (so the starting interval is $(0,\mathit{arr.size})$).
 Yet another option is to have a start index and a size of the interval.
@@ -164,7 +165,7 @@ We can immediately see that it looks at much fewer books. The first comparison w
 looking at a single book, excludes half the bookshelf from the search interval.
 In fact, every comparison, or in the code -- every iteration of the `while`-loop,
 will reduce the size of the search interval by at least $50\%$.
-How many times can we integer divide a number $n$ by 2 before we reach 0?
+How many times can we integer divide a number $n$ by $2$ before we reach $0$?
 For $n=2^x$, the answer is $x+1$, so ignoring some rounding the answer is $x=\log_2(n)$.
 
 We say that binary search is a *logarithmic time* algorithm, as opposed to
@@ -185,7 +186,7 @@ can reduce runtime by a factor of millions, reducing runtime from years to secon
 Apart from introducing our first two algorithms (linear search and binary search),
 this section introduces a data structure: The sorted array.
 This data structure differs from from general arrays in what operations it supports,
-more than just the a ability to search quickly.
+more than just the ability to search quickly.
 
 Returning to the analogy of the bookshelf: If we have an unordered bookshelf,
 where we only ever do linear searches, we can add a new book by squeezing it in

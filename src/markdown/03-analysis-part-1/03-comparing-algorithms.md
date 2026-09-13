@@ -7,16 +7,16 @@
 - Prio 3: Switch from bubble sort to selection/insertion sort.
 :::
 
-If two algorithms that solve the same problem, how do you compare their performance?
+If you have two algorithms that solve the same problem, how do you compare their performance?
 One way is to do an [empirical analysis]{.term}:
-Implement the both algorithms and test  them on various inputs, and measure the runtime.
+Implement both algorithms and test them on various inputs, then measure the runtime.
 This can be time consuming for the developer, and there are plenty of pitfalls.
 Apart from the efficiency of the algorithm itself, the measured runtime can depend on:
 
 <!-- \newpage -->
 
 * details of the hardware you are running on,
-* how optimized the code for the specific implementations are,
+* how optimised the code for the specific implementations are,
 * how you construct the inputs,
 * the size of your chosen inputs,
 * the version and configuration of the compiler you are using,
@@ -26,7 +26,7 @@ Apart from the efficiency of the algorithm itself, the measured runtime can depe
 
 Even if you manage to solve all these issues and compare two algorithms,
 when someone else designs a third algorithm, they will not be able to reproduce your
-exact setup, so your results will be useless to them.
+exact setup, so your results will not be as valuable to them.
 For these reasons, empirical analysis is notoriously unreliable for comparing algorithms.
 Luckily, there is a much better option: [asymptotic analysis]{.term} and
 computational complexity.
@@ -34,7 +34,7 @@ Computational complexity is a big and very important topic.
 We introduce the basics here, and continue in in
 Chapters [-@sec:analysis-2] and [-@sec:analysis-3].
 
-The basic idea is to measure how an algorithm behaves as the input size grows.
+The basic idea is to describe how an algorithm behaves as the input size grows.
 We do this by classifying algorithms into *complexity classes*.
 We have already been doing this in earlier chapters,
 when saying that Binary search is logarithmic time,
@@ -43,20 +43,20 @@ This is generalised by the big-$O$ notation (pronounced "big oh notation" or "or
 using a mathematical expression for each complexity class:
 we say Binary search is $O(\log(n))$, Linear search is $O(n)$
 and Selection and Insertion sort are $O(n^2)$.
-A big-$O$ formula cannot be used to calculate the time
-it takes to sort a list in seconds, but it describes perfectly how
+A big-$O$ formula cannot be used to calculate the number of seconds
+it takes to sort a list, but it describes quite accurately how
 execution time increases when the input size grows.
 
 With a bit of practice, determining the complexity class of an algorithm or
 a program is quick and easy.
 This helps us reliably compare algorithms without running any tests.
-Barring a few obscure cases, an $O(\log(n))$ algorithm
-is better than an $O(n)$ algorithm, which in turn is better than an $O(n^2)$ one.
+The basic rule of thumb is that, whenever $n$ is sufficiently large,
+an $O(\log(n))$ algorithm is better than an $O(n)$ algorithm, which in turn is better than an $O(n^2)$ one.
 The only time we need to run benchmarks, optimise code, and tweak compiler settings
 is when two algorithms are in the same complexity class.
 
 A very important complexity class i $O(1)$, constant complexity. The $1$ here should
-not be understood as the exact number 1, but as any constant value independent of $n$.
+not be understood as the exact number $1$, but as any constant value independent of $n$.
 This will make more sense after we introduce the formal definition of big-$O$ notation,
 but for now any part of an algorithm where the execution time does not depend on input
 size is considered constant time, $O(1)$. Swapping two elements in an array is a good
@@ -65,7 +65,7 @@ two elements in a huge array as it does in a tiny array.
 
 #### What are we measuring?
 
-In general, complexity can be used to measure us of various
+In general, complexity can be used to measure the use of various
 *computational resources* of an algorithm.
 By far the most common resource is running time. When we say
 Insertion sort is $O(n^2)$, we mean its execution time will grow
@@ -75,12 +75,13 @@ memory use: this is called *space complexity* as opposed to *time complexity*.
 Using space complexity, we can give a more precise meaning to the concept of in-place
 sorting (@sec:sorting-1:in-place-sorting).
 An in-place algorithm typically has space complexity $O(1)$,
-meaning that their memory usage is independent of the size of the input.[^
+meaning that its memory usage is independent of the size of the input.^[
     Strictly speaking, resursive algorithms never use constant memory,
     because every resursive call uses up a little memory for book-keeping.
     Therefore one often excludes the book-keeping memory when talking about in-place recursive algorithms.
 ]
-A sorting algorithm that is *not* in-place has to allocate memory for the resulting array:
+A sorting algorithm that is *not* in-place has to allocate memory for the resulting array
+(or for a temporary array):
 so its memory usage grows linearly with the size of the input.
 Therefore it has *linear* space complexity, $O(n)$:
 if we double the input size, memory usage will also double.
@@ -90,14 +91,14 @@ This can be determined easily by just looking at the source code:
 the only memory allocated is for a few local variables, regardless of how large the input array is.
 But it can be much harder to infer the space complexity of other algorithms, especially recursive ones.
 Each recursive call tends to allocate more memory, but the size of the allocated memory
-can depend on how deeply nested the recursion is.
+depends on how deeply nested the recursion is.
 
 #### Quantitative properties of the input
 
 The $n$ in $O(n^2)$ is understood to be the size of the input, or more generally
 some carefully selected quantitative property of the input.
 For most algorithms we have seen so far, $n$ is the size of an array.
-This is typical for algorithm involving a data structure, the input size of an operation
+This is typical for algorithms involving a data structure, where the input size of an operation
 is the current number of elements contained in the structure.
 
 Sometimes the input is a single number, and the behaviour of the algorithm depends on how large that number is.
@@ -127,7 +128,7 @@ That is, every basic operation is $O(1)$ time.
 
 Adding or comparing two numbers are examples of basic operations in most programming languages,
 as are assigning a variable or retrieving an array value at a given position.
-But summing the all values in an array of size $n$ is not $O(1)$, because the time depends on the size of the array.
+But summing all values in an array of size $n$ is not $O(1)$, because the time depends on the size of the array.
 Creating a new array of size $10$ is $O(1)$, but creating a new array of size $n$ is $O(n)$, at least
 if the content is cleared after the array is created (which is done by almost all programming languages).
 
@@ -234,9 +235,9 @@ This is proportional to $n^2$, and we call this a *quadratic* running time, $O(n
 Note how much detail is simplified away by using complexity classes.
 We do not differentiate between $n^2$ and $\frac{1}{2}n^2$.
 There is no "triangular" complexity class.
-This may seem like a weakness of big-$O$, but it is a fact
+This may seem like a weakness of big-$O$, but it is in fact
 a strength that makes it such a useful tool for comparing algorithms.
 To convince yourself of this, consider this: runtime is only interesting
 for very large $n$. All algorithms are fast for small inputs.
 Even if an algorithm is $\frac{1}{100}n^2$, it is still much slower than
-any $O(n)$ algorithm, for any $n$ that we care about.
+any $O(n)$ algorithm, for any sufficiently large $n$.

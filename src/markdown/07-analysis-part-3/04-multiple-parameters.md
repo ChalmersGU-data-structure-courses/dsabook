@@ -33,7 +33,7 @@ but on the other hand, each list uses on average $O(m)$ memory.
 We can of course assume that $m$ is bounded, for example that it is at most 100 --
 then we can say that $m$ is constant and then we get $O(n)$ for the whole data structure.
 But this is cheating, because we cannot know how $m$ changes when $n$ grows.
-The big-$O$ notation can used for multiple parameters at the same time,
+The big-$O$ notation can be used for multiple parameters at the same time,
 so we can write the space complexity of the new array-of-lists representation as $O(n\times m)$
 because it is linear in both $n$ and $m$.
 
@@ -73,7 +73,7 @@ a picture. Pictures are often represented by a two-dimensional array,
 and a pixel is one cell in the array. The value of a pixel is either the
 code value for the colour, or a value for the intensity of the picture at
 that pixel. Assume that each pixel can take any integer value in the
-range 0 to $c-1$. The problem is to find the number of pixels of each
+range $0$ to $c-1$. The problem is to find the number of pixels of each
 colour value and then sort the colour values with respect to the number of
 times each value appears in the picture. Assume that the picture is a
 rectangle with $p$ pixels. A pseudocode algorithm to solve the problem
@@ -96,14 +96,14 @@ The time for the final line, the call to `sort`, depends on the cost of the sort
 <!-- OPENDSA: END -->
 If we assume that we use a linearithmic algorithm such as Mergesort, it costs $O(c\log(c))$.
 
-So the final complexity of pseudocode depends on both $p$ and $c$, and can be written as $p + c\log(c)$.
+So the final complexity of the pseudocode depends on both $p$ and $c$, and can be written as $O(p + c\log(c))$.
 Which takes the longest time -- the linear part (incrementing the colour values), or the linearithmic part (sorting)?
 This depends on the size of the image ($p$), compared to the range of colour values ($c$).
 For example, a normal GIF-image has $c=256$ possible colours, and perhaps $1000\times 1000$ pixels.
 So $p$ is in the order of a million, which is much larger than $c\log(c)$, so in this case the $O(p)$ part will dominate.
 
-On the other hand, a high-definition image can have $2^16$ values for red, green and blue, which gives $c=(2^16)^3$.
-Even it has a very high resolution of say $100,000\times 50,000$ (that is, $p\approx (2^16)^2$),
+On the other hand, a high-definition image can have $2^{16}$ values for red, green and blue, which gives $c=(2^{16})^3$.
+Even if it has a very high resolution of say $100,000\times 50,000$ (that is, $p\approx (2^{16})^2$),
 then $c$ will still be much larger than $p$.
 So for a high-resolution, high-definition image, the time for sorting, $O(c\log c)$ will dominate.
 Therefore, neither variable should be ignored in the complexity analysis of the algorithm.

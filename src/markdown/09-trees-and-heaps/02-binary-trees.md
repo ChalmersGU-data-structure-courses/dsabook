@@ -25,7 +25,7 @@ A binary tree is either empty or consists of a root node containing a value toge
 Because the children are ordered, we distinguish between the left child and the right child.
 Binary trees are often described as trees in which each node has at most two children.
 While this is correct, it can obscure an important detail: if a node has only one child, it matters whether that child is on the left or on the right.
-For this reason, it is often clearer to think of every node as having both a left subtree and a right subtree, with either subtree allowed to be empty. This idea is illustrated below.
+For this reason, it is often clearer to think of every node as having both a left subtree and a right subtree, with either subtree allowed to be empty. This idea is illustrated in @fig:example_bintree.
 
 ![An example of a binary tree with nodes labeled by letters.](images/9.1-bintree-with-nulls.svg){#fig:example_bintree}
 
@@ -107,10 +107,10 @@ In a complete binary tree of height $d$, all levels except possibly level $d$ ar
 <!-- OPENDSA: END -->
 The bottom level is filled from the left side.
 
-@Fig:full_complete_bintrees below illustrates the differences between full and complete binary trees.
+@Fig:full_complete_bintrees illustrates the differences between full and complete binary trees.
 Neither property implies the other.
 A perfect binary tree satisfies both properties.
-In the figure, tree (a) is full but not complete, while tree (b) is complete but not full.
+In the figure, tree (a) is full but not complete, while tree (c) is complete but not full.
 A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete binary tree, while
 a [Huffman coding tree]{.term} is an example of a full binary tree.
 
@@ -149,7 +149,7 @@ node $M$ in the tree is the length of the path from the root of the tree
 to $M$. The [height]{.term} of a tree is the
 depth of the deepest node in the tree. All nodes of depth $d$ are at
 [level]{.term} $d$ in the tree. The root is the
-only node at level 0, and its depth is 0. A
+only node at level $0$, and its depth is $0$. A
 [leaf node]{.term} is any node that has two
 empty children. An [internal node]{.term} is any
 node that has at least one non-empty child.
@@ -183,10 +183,10 @@ Node $A$ is the root, and nodes $B$ and $C$ are $A$'s children.
 Nodes $B$ and $D$ together form a subtree. Node $B$ has two
 children: Its left child is the empty tree and its right child is $D$.
 Nodes $A$, $C$, and $E$ are ancestors of $G$. Nodes $D$, $E$, and $F$
-make up level 2 of the tree; node $A$ is at level 0. The edges from $A$
+make up level $2$ of the tree; node $A$ is at level $0$. The edges from $A$
 to $C$ to $E$ to $G$ form a path of length 3. Nodes $D$, $G$, $H$, and
 $I$ are leaves. Nodes $A$, $B$, $C$, $E$, and $F$ are internal nodes.
-The depth of $I$ is 3. The height of this tree is 3.
+The depth of $I$ is $3$. The height of this tree is $3$.
 
 
 @Fig:two_bintrees below illustrates an important
@@ -390,7 +390,7 @@ It stores a reference to the root node, initially `null`, and can also maintain 
 :::
 
 Suppose we want to process the contents of a binary tree, for instance by printing all the values or converting the tree to a list.
-This is called a [traversal]{.term}
+This is called a [traversal]{.term}.
 There are many different ways we can do that, but these are three common patterns that differ in the order they process values:
 
 - *preorder*:  first process the value, then the left subtree, then the right
@@ -466,7 +466,6 @@ Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left 
 
 ### Traversal without recursion
 
-Some programming languages have poor support for recursion.
 It is possible to traverse a tree iteratively (using a loop) with a stack data structure.
 We call the stack our *agenda*, consider it a to-do list containing nodes that we need to process.
 Here is pseudocode that is structurally very similar to our recursive iterations, but instead of making recursive calls we add child nodes to the agenda and loop:

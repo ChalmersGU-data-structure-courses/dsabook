@@ -11,7 +11,7 @@ Binary heaps cannot do this in a good way, the
 best possible algorithm is to simply concatenate the two arrays and then *heapify* the result.
 We will not describe the *heapify* algorithm here, the only thing you have to know is that
 it can turn any array into a binary heap in linear time, $O(n)$.
-Thich means that the best algorithm for melding two binary heaps is linear in their size.
+This means that the best algorithm for melding two binary heaps is linear in their size.
 
 If we loosen the requirement that the heap is a *complete* tree, it is possible to implement melding faster than that.
 The downside is that we have to store the heap as a tree, in the same way as we did in @sec:trees:implementing-binary-trees.
@@ -122,4 +122,4 @@ All of them implement efficient versions of *meld*, and they all are very intere
 For example, *Binomial heaps*, *Fibonacci heaps* and *Pairing heaps* consist of a list of heaps,
 with special invariants that make sure that all heap operations have logarithmic complexity.
 In fact, both Fibonacci heaps and Pairing heaps have *constant* time complexity for *meld* and *add*,
-but *deleteMin* is always logarithmic in the worst case.
+but *deleteMin* is amortised logarithmic in the worst case.

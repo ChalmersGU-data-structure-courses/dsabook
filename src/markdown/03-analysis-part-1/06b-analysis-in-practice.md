@@ -48,7 +48,7 @@ Here are two interesting observations from these simplification rules:
   The coefficients are removed because they are constant factors, and we only keep the dominant term.
 - A fully simplified $O$-expression for an algorithm with a single size parameter $n$ will never be an addition.
 
-These simplification rules are supremely useful, because they correspond directly to
+These simplification rules are very useful, because they correspond directly to
 programming language operations. Performing operations in sequence corresponds to addition,
 and loops correspond to multiplication:
 
@@ -161,14 +161,14 @@ Consider this code snippet:
         for each b in arr:
             sum += a*b
 
-The statement `sum+=a*b` performs a multiplication, an addition and a variable assignment,
+The statement `sum` `+=` `a*b` performs a multiplication, an addition and a variable assignment,
 all of which are atomic operations, so the statement is $O(1)$.
 If `arr` has $n$ elements, the inner loop does $O(n)$
 iterations for each iteration of the outer loop, which in turn does $O(n)$ iterations.
 That makes the whole runtime $O(n \cdot n \cdot 1)$, which simplifies to $O(n^2)$.
 
 *Don't be fooled by loops*!
-Not all loops runs $n$ iterations, for example our array `arr` could very well consist of $n^2$ elements,
+Not all loops run $n$ iterations, for example our array `arr` could very well consist of $n^2$ elements,
 or not depend on $n$ at all.
 If `arr` had $n^2$ elements, then the complexity is of the example would be $n^2 \cdot n^2 \cdot 1$,
 which simplifies to $O(n^4)$.
@@ -185,7 +185,7 @@ For example, the pseudocode for Insertion sort (@sec:sorting-1:insertion-sort) c
 which says that $j\geq 0$.
 So to know how many times the loop will iterate,
 we have to know how $j$ is initialised and how it changes in each iteration.
-The starting value is $j=i$, and it is decreased by 1 in each iteration.
+The starting value is $j=i$, and it is decreased by $1$ in each iteration.
 So the `while`-loop will iterate $i$ times in the worst case.
 
 Just like `if`-statements, `while`-loops are often very simple to analyse
@@ -194,6 +194,8 @@ In general, even determining if a `while`-loop terminates can be a genuinely har
 
 #### A general approach
 
+<!-- TODO: säg inte "completely foolproof" -->
+
 There is a completely foolproof method of determining complexity of any piece of code:
 Look at each line of code and answer:
 
@@ -201,7 +203,7 @@ Look at each line of code and answer:
 - What is the (average) complexity of running it?
 
 Then, just multiply the two numbers for each line, sum up the expressions for all lines of code, and simplify.
-I practice, the last step just means circling the line that has the worst complexity.
+In practice, the last step just means circling the line that has the worst complexity.
 Of course, the caveat of this method is that sometimes one or both of the questions above are non-trivial to answer.
 Still, for very many programs, this method works beautifully.
 
@@ -256,10 +258,11 @@ of the algorithm.
         return null
 
 Every individual operation is atomic, so the only question is how many time the loop runs.
-Ignoring `size=size-1` (which we can do if we assume the condition is always false),
-this is a clean example of a loop that starts with `size` = $n$,
+Since we are interested in the worst case, we can assume that the condition is always false.
+Therefore we can ignore the line `size=size-1`, and
+we have a clean example of a loop that starts with `size` = $n$,
 then cuts `size` in half (using integer division) until it
-reaches 0. All such loops run $O(\log(n))$ iterations, so every individual
+reaches $0$. All such loops run $O(\log(n))$ iterations, so every individual
 line inside the loop has a total runtime of $O(\log(n))$,
 which is thus the runtime of the whole function.
 

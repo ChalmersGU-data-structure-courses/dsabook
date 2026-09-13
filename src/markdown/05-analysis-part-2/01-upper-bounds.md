@@ -22,7 +22,7 @@ That is, whenever $n$ becomes sufficiently large, $f(n)$ must not outgrow $g(n)$
 But this is not all there is to it -- we also want to abstract away from constant factors.
 If one algorithm is twice as fast as another algorithm,
 then they grow at the same rate, and we want our notation to capture that.
-So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$.
+So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary positive constant $k$.
 This gives us the following formal definition:
 
 Upper bound
@@ -165,7 +165,8 @@ Thus, we will always say that binary search is in $O(\log(n))$.
 
 ### Simplifying rules {#analysis-2:simplifying-rules}
 
-Using the definition the simplifying rules from @sec:analysis-1:simplification-rules are quite straightforward to prove. We can also prove that as a mathematical relation, $f\in O(g)$ is *transitive*.
+Using the definition it is quite straightforward to prove the simplifying rules from @sec:analysis-1:simplification-rules.
+We can also prove that as a mathematical relation, $f\in O(g)$ is *transitive*.
 
      Rule              Simplification
 ---  ----------------  -------------------------------------------------------------------
@@ -253,7 +254,8 @@ Recurrence relations are discussed further in @sec:analysis-3:recurrences.
 
 ### Advanced algorithm analysis
 
-The simplification rules from above do not always give the tightest possible complexity.
+The simplification rules from @sec:analysis-1:simplification-rules
+do not always give the tightest possible complexity.
 In some rare cases the simple analysis might give a complexity of say $O(n \log(n))$,
 but a more detailed analysis will give a tighter bound, such as $O(n)$.
 So, is there something wrong with the rules?
@@ -275,13 +277,13 @@ the following nested loop, which has a nontrivial complexity:
             sum += 1
         k = k * 2
 
-Since $k$ is multiplied by 2 in each iteration, the outer `while`-loop runs $\log(n)$ times.
+Since $k$ is multiplied by $2$ in each iteration, the outer `while`-loop runs $\log(n)$ times.
 But the inner `for`-loop then runs $k$ times,
 and since $k\in O(n)$ the simplification rules tell us that the code is in $O(n\log(n))$.
 But a more careful analysis reveals a tighter bound.
 
 If we assume that $n=2^d$ is a power of two, then the outer loop is executed $d=\log_2(n)$ times.
-The inner loop has cost $k$, which starts from 1 and doubles after each outer loop iteration.
+The inner loop has cost $k$, which starts from $1$ and doubles after each outer loop iteration.
 This can be expressed as the following summation, where $k = 2^i$:
 
 $$ 1 + 2 + 4 + \cdots + 2^d = \sum_{i=0}^{d} 2^i $$

@@ -243,7 +243,7 @@ the so called *left-leaning* red-black trees (or right-leaning, which are equiva
 
 ### B-trees {#search-trees:B-trees}
 
-As we already mentioned, noone actually uses 2-3 trees or 2-3-4 trees
+As we already mentioned, nobody actually uses 2-3 trees or 2-3-4 trees
 because they are more complex to implement than variants of BSTs,
 such as AVL trees or red-black trees.
 But 2-3 trees are still very important, because their basic idea can be generalised to much larger nodes.
@@ -299,7 +299,7 @@ B-trees is the most common data structure for managing file systems, as well as 
 Normally, the size of a node in the B-tree is chosen to fill a disk block of the particular file system,
 so a typical B-tree implementation has an order of 100 or more.
 This means that we can reduce the number of disk accesses,
-by loading a full B-tree node from the (slow-ish) disk to the (much faster) internal memory.
+by loading a full B-tree node from the (slow) disk to the (much faster) internal memory.
 
 B-trees of high order are very shallow.
 For example, assume we have a B-tree with a height of only four

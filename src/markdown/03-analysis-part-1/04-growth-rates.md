@@ -4,7 +4,7 @@
 Imagine that you are a bookworm and you have 10,000 books divided into 100 bookshelfs.
 Now you want to sort all your books so that you can search for them quickly (using binary search of course).
 You use one of the sorting algorithms from [Chapter @sec:sorting-1]
-and notice it takes one hours to sort the books in one shelf.
+and notice it takes one hour to sort the 100 books in one shelf.
 
 - How long time will it take to sort all 10,000 books?
 - If you buy a sorting robot that is 100 times faster than you are,
@@ -124,14 +124,14 @@ Once again, we see that the growth rate has a tremendous effect on the resources
 <!-- OPENDSA: END -->
 
 
-Growth rate              $n=10$               $100$              $1,000$          $10^4$       $10^5$
----------------------  --------  ------------------  -------------------  --------------  -----------
-$2\cdot\log_2(n)$           $7$                $13$                 $20$            $27$         $33$
-$n/2$                       $5$                $50$                $500$         $5,000$     $50,000$
-$n$                        $10$               $100$              $1,000$        $10,000$    $100,000$
-$n\cdot\log_2(n)/4$         $8$               $166$              $2,491$        $33,219$    $415,241$
-$n^2/10$                   $10$             $1,000$            $100,000$    $10,000,000$       $10^9$
-$2^n/20$                   $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$        $\cdots$     $\cdots$
+Time function  ($T(n)$)      $n=10$               $100$              $1,000$          $10^4$       $10^5$
+-------------------------  --------  ------------------  -------------------  --------------  -----------
+$2\cdot\log_2(n)$               $7$                $13$                 $20$            $27$         $33$
+$n/2$                           $5$                $50$                $500$         $5,000$     $50,000$
+$n$                            $10$               $100$              $1,000$        $10,000$    $100,000$
+$n\cdot\log_2(n)/4$             $8$               $166$              $2,491$        $33,219$    $415,241$
+$n^2/10$                       $10$             $1,000$            $100,000$    $10,000,000$       $10^9$
+$2^n/20$                       $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$        $\cdots$     $\cdots$
 
 : Costs for representative growth rates {#tbl:growth-rates}
 

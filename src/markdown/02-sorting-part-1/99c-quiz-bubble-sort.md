@@ -170,7 +170,7 @@ comparisons for Bubble sort is closest to:
 - Bubble sort's implementation is made up of two nested for loops.
 - The outer for loop is executed $n-1$ times.
 - The inner for loop is executed $i$ times.
-- The total cost is the sum of $i$'s for $i$ goes from 1 to $n$.
+- The total cost is the sum of $i$'s for $i$ goes from $1$ to $n$.
 :::
 ::::::::::::::::::::::::::::::
 

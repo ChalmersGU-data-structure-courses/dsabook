@@ -56,7 +56,7 @@ no empty arrays of length 100.
 Instead, the best case of `linearSearch(arr,x)` is an array where `arr[0]==x`,
 and this is easy to construct for any size.
 
-When we say the worst case of linear Search is $O(n)$, we mean that for every size $n$
+When we say the worst case of linear search is $O(n)$, we mean that for every size $n$
 there is a worst case input value for which the algorithm takes linear time.
 One such worst case for `linearSearch(arr,x)` is that `x` does not occur in `arr`,
 another is that it only occurs in the last position of `arr`.
@@ -125,8 +125,8 @@ about the distribution can be extremely detrimental to performance.
 Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
 For example, all kinds of databases that are publicly available are a risk.
 Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
-If there is just a tiny risk of a worst-case scenario, this opens up for *denial-of-service attacks* on your system.
+If there is just a tiny risk of a worst-case scenario, this opens up for different kinds of cyberattacks.
 
-In summary, for real-time applications and for applications that handle data from untrusted sources,
+In summary, for real-time applications and for applications that handle data from unknown or even untrusted sources,
 we should always prefer a worst-case analysis of an algorithm.
 In other cases we usually desire an average-case analysis, but then we need to know enough about how the input is distributed.

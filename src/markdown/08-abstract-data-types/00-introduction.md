@@ -113,7 +113,7 @@ Graphs
     or minimal set of edges that connect all vertices in a graph.
     Graphs are introduced, together with some of their core algorithms, in [Chapter @sec:graphs].
 
-The rest of this chapter gives a high-level overview of the ADTs covered throughout the course.
+The rest of this chapter gives a high-level overview of the ADTs covered throughout the book.
 @Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book,
 including their operations and the data structures used to implement them.

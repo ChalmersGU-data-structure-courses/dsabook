@@ -16,7 +16,7 @@ In these situations, a simple list structure is appropriate.
 
 Previously in the book we have discussed *algorithms* (mainly for searching and sorting),
 but now we will introduce *data structures*.
-This chapter describes two different representations lists-like data structures,
+This chapter describes two different representations of list-like data structures,
 the [linked list]{.term} and the [dynamic array]{.term}.
 We also show how these representations can be used to
 implement important list-like structures such as the [stack]{.term} and the [queue]{.term}.

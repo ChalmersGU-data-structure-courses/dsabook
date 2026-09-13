@@ -8,7 +8,7 @@
 Kruskal's algorithm solves the same problem as Prim's algorithm:
 construct a minimum spanning tree of a undirected connected graph.
 Kruskal's operates differently from the other alogorithms we have seen (DFS, BFS, Prim's and Dijkstra's) in that it is not a traversal.
-We do not grow an expanding set of visited nodes.
+Rather, we add edges successively as described below.
 
 ::: algorithm
 #### Algorithm: Kruskal's algorithm
@@ -35,22 +35,13 @@ They have the same weight, and if $EF_8$ had been visited before $CD_8$ we would
 
 The problem is how to know if an edge will create a cycle.
 How can we do that?
-This is not difficult: if both the start and end vertex is in the MST, then adding the edge will create a cycle.
-So, if we store the MST as a set of edges we can define this function:
-
-    willCreateCycle(MST, (start,end)):
-        containsStart = containsEnd = false
-        for each edge (a,b) in MST:
-            if start == a or b: containsStart = true
-            if end == a or b: containsEnd = true
-        return true if (containsStart and containsEnd)
-
-This function loops over all edges in the MST, and in the worst case this contains $V-1$ edges, so the complexity is $O(V)$.
+Easy: simply run a DFS or BFS search from one of the edge vertices, and see if we can reach the other vertex.
+In the worst case, depth- or breadth-first traversal will visit all edges in the MST, so the complexity is $O(E)$.
 
 What is then the complexity of Kruskal's algorithm?
-Well, we iterate over $O(E)$ edges, and test each of these for cyclicity, so we get $O(VE)$.
+Well, we iterate over $O(E)$ edges, and test each of these for cyclicity, so we get $O(E^2)$.
 If the graph is sparse, $E \in O(V)$ and the complexity can be simplified to $O(V^2)$,
-but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^3)$.
+but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^4)$.
 
 #### Using a disjoint-set instead of a normal set
 

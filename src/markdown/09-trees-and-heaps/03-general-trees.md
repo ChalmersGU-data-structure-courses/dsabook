@@ -11,7 +11,7 @@ However, many applications distinguish between internal nodes and leaves, becaus
 Using separate node types usually leads to a clearer design.
 
 Some tree structures store data only in the leaves, while others store one kind of information in the leaves and another in the internal nodes.
-Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-coding), the [binary trie]{.term}, the [PR Quadtree]{.term}, and]{.online} the [expression tree]{.term} illustrated by @fig:expression_tree below.
+Examples include [the [Huffman coding tree]{.term} (see @sec:heaps:huffman-coding), the [binary trie]{.term}, the [PR Quadtree]{.term}, and]{.online} the [expression tree]{.term} illustrated by @fig:expression_tree.
 
 ::: {#fig:expression_tree}
 ![](images/9.2-expression-tree.svg)

@@ -42,7 +42,7 @@ Optimised                   0.8            3.3              0.2            0.6  
 
 Here are some general observations from this table:
 
-- The algorithms become (roughly) 4 slower when we double the size of the array.
+- The algorithms become (roughly) 4 times slower when we double the size of the array.
   This is of course what we should expect, since the algorithms have quadratic complexity.
 
 - The programming language that you use can have a big influence on the runtime.

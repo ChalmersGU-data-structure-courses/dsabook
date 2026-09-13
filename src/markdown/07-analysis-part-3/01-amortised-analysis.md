@@ -14,7 +14,7 @@ There are however situations where the worst case of a single operation
 is $O(n)$, but the total cost of $n$ operations is also $O(n)$,
 or $O(n \log(n))$. The reason is that while individual operations
 take $O(n)$ time, that happens rarely enough that the average
-cost of the $n$ operations is $O(1)$ or $O(\log(n) respectively)$.
+cost of the $n$ operations is $O(1)$ or $O(\log(n))$, respectively.
 
 Note that the average here is very different from the average case of
 algorithms like QuickSort (@sec:sorting-2:quicksort).
@@ -143,29 +143,30 @@ If it is too big, it will overestimate the amortised cost, and will not show an 
 ::: example
 #### Example: Incrementing a binary counter
 
-As an example of the potential method, consider the process of incrementing a binary counter.
+As an example of the potential method, consider the process of incrementing a binary counter,
+represented as an array of bits.
 We want to show that this operation (*increment*) takes amortised constant time in the size of the counter.
 Since the counter is stored as a binary number, we say that the size of the counter is the number of bits it uses.
 The *increment* operation can be implemented like this:
 
 - Iterate over the bits in the counter, starting from the lowest-order bit (the rightmost bit):
-    - Flip each 1-bit to a 0, until the first 0-bit is encountered.
-    - Then flip this 0-bit to 1 and return.
+    - Flip each `1`-bit to a `0`, until the first `0`-bit is encountered.
+    - Then flip this `0`-bit to `1` and return.
 
 For example, to increment the number 175 (bitstring `10101111`),
-we flip the four rightmost 1's to 0, and then the next 0-bit to 1.
+we flip the four rightmost `1`'s to `0`, and then the next `0`-bit to `1`.
 This results in the bitstring `10110000`, which is the number 176.
 
-The worst case example is when the counter consists of only 1's, such as the number 255 (bitstring `11111111`).
+The worst case example is when the counter consists of only `1`'s, such as the number 255 (bitstring `11111111`).
 In this case the complexity of *increment* is linear, $O(n)$, in the number of bits $n$.
 So what is the amortised complexity of *increment*?
 
-Let us define the potential function as $\Phi(c) =$ "the number of bits equal to 1";
+Let us define the potential function as $\Phi(c) =$ "the number of bits equal to `1`";
 this is also known as the *hamming weight* of the counter $c$.
-Assume that the counter ends in $k$ 1-bits, and we call *increment*.
-This will flip $k$ bits from 1 to 0, and one bit from 0 to 1.
+Assume that the counter ends in $k$ `1`-bits, before we call *increment*.
+This will flip $k$ bits from `1` to `0`, and one bit from `0` to `1`.
 So the actual cost is $T_{\text{actual}} = k+1$ bit flips.
-At the same time the potential will decrease by $k-1$, because $k$ bits we changed to 0 and one to 1.
+At the same time the potential will decrease by $k-1$, because $k$ bits we changed to `0` and one to `1`.
 Therefore the amortised cost of one *increment* is:
 
 $$ T_{\text{amortised}} = T_{\text{actual}} - (k-1) = (k+1)-(k-1) = 2 \in O(1) $$
@@ -177,7 +178,7 @@ The difficulty is to realise that we should use the hamming weight.
 
 ### When not to use amortisation
 
-In most cases amortised complexity is what we are interested in,
+In most cases we can use the amortised complexity when analysing algorithms,
 but there are some rare cases where it is not the best choice.
 
 If we are implementing a very time-critical system,
@@ -212,7 +213,7 @@ or even "expected amortised average-case complexity".
 (And we can add "asymptotic" too: "asymptotic expected amortised average-case complexity"...)
 
 Average-case complexity
-:   can be used when an algorithm behaves well for most "well-behaved" input,
+:   can be used when an algorithm behaves well for most "well-behaved" inputs,
     but there are some few extreme inputs that make the algorithm behave bad.
     The typical example is Quicksort, which has quadratic worst-case complexity,
     but usually behaves linearithmic (unless there is some evil hacker that
@@ -226,8 +227,7 @@ Amortised complexity
     and limited extent, we can use amortisation to determine the total complexity
     for executing a sequence of operations. The prototypical case is dynamic arrays.
     Note that there is no randomness involved for amortised operations,
-    there is no risk of repeatedly encountering expensive operations due to bad luck or contaminated
-    data.
+    and there is no risk of repeatedly encountering expensive operations due to bad luck or contaminated data.
 
 Expected complexity
 :   is used when the algorithm itself uses randomisation,

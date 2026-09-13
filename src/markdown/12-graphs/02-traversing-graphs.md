@@ -43,7 +43,7 @@ then repeat the following until the agenda is empty:
 
 @fig:GraphTraversal1 illustrates how a graph traversal can unfold.
 It shows a useful trick when trying to understand graph traversal algorithms on pen and paper:
-Circle the visited vertices, and the edges you cross will be the important parts of the agenda.
+Circle the visited vertices, and the edges that intersect with the circle will be the important parts of the agenda.
 
 The result of the traversal is a set of directed edges.
 Importantly, these edges do *not* form a single path -- instead they form a *spanning tree* of all paths reachable from the starting vertex.
@@ -149,7 +149,7 @@ We leave the recursive DFS implementation as an exercise to the reader.
 
 ### Breadth-first traversal {#graphs:BFS}
 
-By changing the data type of the agenda from a stack to a *queue*, we get an even more useful algorithm.
+By changing the data type of the agenda from a stack to a *queue*, we get another useful algorithm.
 The only change is the type of the agenda, the rest is exactly the same.
 Again, let us look at the execution of BFS from vertex $A$:
 

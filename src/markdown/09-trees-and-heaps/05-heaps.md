@@ -36,7 +36,8 @@ We leave that as an exercise for the reader.
 
 The heap property is particularly suitable because it aligns well with the recursive nature of trees.
 Instead of requiring only the root to be the smallest element, the property is enforced locally at every node in the tree.
-Each node must be smaller than its children, and because this rule applies recursively throughout the structure, the root must necessarily be the smallest element in the entire tree.
+Each node must be smaller than or equal to its children, and because this rule applies recursively throughout the structure,
+the root must necessarily be the smallest element in the entire tree.
 Designing invariants that apply uniformly to every node is often a useful strategy when working with tree-based data structures.
 
 The next question is how to implement heaps in a way that keeps operations efficient.

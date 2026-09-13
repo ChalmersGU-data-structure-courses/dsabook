@@ -14,7 +14,7 @@ As explained in @sec:graphs:definitions, a *spanning tree* of an undirected grap
 If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible.
 A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs.
 @Fig:ExampleMSTs shows a graph and two possible MSTs for it, each with a combined weight of $20$.
-You may not immediately recognize the two MSTs as trees, since there is no root element
+You may not immediately recognise the two MSTs as trees, since there is no root element
 and no clear parent/child relationships between nodes.
 If you "lift" either MST by any node, assigning it as the root,
 you will get a tree as the ones we have seen in earlier chapters.

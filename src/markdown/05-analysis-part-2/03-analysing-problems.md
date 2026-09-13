@@ -20,8 +20,9 @@ What we need are useful definitions for the upper bound and lower bound of a *pr
 One might start by thinking that the upper bound for a problem is how hard any algorithm can be for the problem.
 But we can make algorithms as bad as we want, so that is not useful.
 Instead, what is useful is to say that a problem is only as hard as what we *can* do.
-In other words, we should define the upper bound for a problem to be the *best* algorithm that we know for the problem.
+In other words, we should define the upper bound for a problem to be the *best* algorithm that we know for the problem
 <!-- OPENDSA: END -->
+-- there may be a better algorithm that has not been discovered yet.
 
 In contrast, the lower bound refers to the minimum that any algorithm *must* cost.
 For example, when sorting an array, we *must* look at every element, so sorting must be in $\Omega(n)$.
@@ -50,7 +51,9 @@ So, to prove a lower bound, we need an argument that is true, even for algorithm
 <!-- OPENDSA: END -->
 
 
-It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven't done it for sure:). But here is a standard example:
+It is usually very difficult to show that a problem has a certain lower bound,
+so nothing we expect you to come up with in your lifetime.
+But here is a standard example:
 
 - Sorting an array of $n$ elements is trivially $\Omega(n)$, because we at the very least have to look at least once at every element.
 - But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.
@@ -97,15 +100,15 @@ To analyse this we first need to define the concept of *inversion*.
 
 An *inversion* occurs when there are two elements in an array that come in the wrong order.
 Formally, if $A[i]>A[j]$ for array indices $i<j$, then there is an inversion between $i$ and $j$.
-For example, in the array [12,36,84,57,71] there are inversions between indices 2 and 3
-(elements 84 and 57 are out of order), and between indices 2 and 4 (elements 84 and 71).
+For example, in the array $[12,36,84,57,71]$ there are inversions between indices $2$ and $3$
+(elements $84$ and $57$ are out of order), and between indices $2$ and $4$ (elements $84$ and $71$).
 
 The number of inversions in an array is a measure of how sorted the array is.
 The most unsorted array according to this definition is reversely sorted, because then all pairs of indices are inversions.
 So, the maximum number of inversions is the number of pairs, which is $n(n-1)/2$, or quadratic.
 
 Now, assume that we have an array, and we swap two adjacent out-of-order elements.
-This will reduce the number of inversions with at most 1,
+This will reduce the number of inversions with at most $1$,
 because all other inversions in the array will still be inversions.
 Therefore, any algorithm which can only swap *adjacent* elements has to perform at least as many swaps as there are inversions.
 And since there are a quadratic number of inversions in the worst case, any such algorithm will at least be quadratic.

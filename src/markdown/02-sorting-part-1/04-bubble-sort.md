@@ -9,7 +9,7 @@ Bubble sort is often the first sorting algorithm that you learn, because it is r
 However, it is rather slow, even compared to the other similar algorithms, Selection sort and Insertion sort.
 <!-- OPENDSA: START -->
 (It is not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf,
-their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.)
+their card hand or their pile of bills, like they might with Insertion sort or Selection sort.)
 <!-- OPENDSA: END -->
 
 ::: algorithm

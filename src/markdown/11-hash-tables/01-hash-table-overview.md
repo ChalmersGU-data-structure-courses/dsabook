@@ -65,7 +65,7 @@ When faced with the remaining problem that `(234,"B")` wants to be in cell 34,
 but `(19934,"A")` is already there, most people figure out one of these two
 solutions after some deliberation:
 
-- Put some data structure in cell 34, that contain both `(19934,"A")` and `(19934,"B")`.
+- Put some data structure in cell 34, that contains both `(19934,"A")` and `(19934,"B")`.
   This leads in the direction of *separate chaining hash tables*.
 - Put `(19934,"B")` in the first empty cell after 34.
   This leads towards *open addressing hash tables with linear probing*.
@@ -102,7 +102,7 @@ From this simple rule we can already exclude some naive suggestions for hash fun
 - *Returning a constant*, for example always returning 0: this is a valid hash function!
   But it has very poor *distribution* -- all objects will be stored in the same array cell --
   so it will make our hash table completely useless.
-  It will behave similar to a stupid linked list, an search through all objects every time we want to do something.
+  It will behave similar to a linked list, and search through all objects every time we want to do something.
 
 So, how does a good hash function look like?
 One basic requirement is that it should depend on *every little part* of the object.

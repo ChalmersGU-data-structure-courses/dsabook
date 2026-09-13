@@ -3,7 +3,7 @@
 
 A downside of separate chaining is that we abandon the benefits of storing all our
 map entries directly in an array. Storing values in a contiguous memory sequence
-has major performance benefits due to the caching behavior of modern computers,
+has major performance benefits due to the caching behaviour of modern computers,
 and having an array of map entries is a simpler data model than having an array
 of linked lists of map entries.
 
@@ -25,7 +25,7 @@ The invariant required for this to work is the following:
 If a key is present in the table, there can be no empty cells between its ideal position and its actual position.
 :::
 
-Consider this example of a linear probing hash table.
+Consider the example in @fig:LinProbe1 of a linear probing hash table.
 For simplicity, we implement a set instead of a map here, so there are only keys and no values:
 
 

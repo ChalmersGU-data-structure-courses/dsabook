@@ -3,7 +3,7 @@
 
 Graph algorithms have potential to be very inefficient if designed carelessly.
 Consider this naive approach to the shortest path problem from vertex $a$ to $b$:
-Try every possible path between $a$ and $a$, and keep the shortest one.
+Try every possible path between $a$ and $b$, and keep the shortest one.
 Since a (simple) path is a sequence of edges $a\rightarrow\cdots\rightarrow b$,
 every permutation of the vertices forms a potential path (in a complete graph).
 Even a conservative worst case estimate gives us $O(V!)$ such permutations for a graph with $V$ vertices.

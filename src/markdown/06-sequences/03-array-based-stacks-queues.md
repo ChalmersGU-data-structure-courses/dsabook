@@ -27,10 +27,10 @@ In this example the underlying array has an internal size of 100:
         size = 0               // The size of the stack
 
 Note that 100 is the internal *capacity* of the stack, it is not the actual size.
-When the stack is created it should be empty, and therefore the initial stack size is 0.
+When the stack is created it should be empty, and therefore the initial stack size is $0$.
 
 An important design decision is which end of the array should represent the top of the stack.
-It might be tempting to let the top be the first element in the array, that is, the element at position 0.
+It might be tempting to let the top be the first element in the array, that is, the element at position $0$.
 However, this is inefficient:
 whenever we want to push to or pop from the stack,
 we would have to shift all elements in the array one position to the left or to the right.
@@ -240,7 +240,8 @@ Circular array queue -- empty.
 One obvious solution is to keep an explicit count of the number of elements in the queue,
 <!-- OPENDSA: END -->
 that is, to use a special *size* variable.
-Another solution is to set *front* and *rear* to some unused number (such as $-1$) whenever the queue becomes empty.
+Another solution is to set *front* and *rear* to some unused number (such as $-1$) whenever the queue becomes empty,
+and a third solution is to require the the array never gets completely full.
 <!-- OPENDSA: START -->
 Which of these solutions to adopt is purely a matter of the implementor's taste in such affairs.
 <!-- OPENDSA: END -->

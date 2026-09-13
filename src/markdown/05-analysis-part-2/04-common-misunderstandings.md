@@ -18,7 +18,7 @@ One problem with differentiating the concepts of
 [lower bounds](#lower-bound){.term} is that, for
 most algorithms that you will encounter, it is easy to recognise the
 true growth rate for that algorithm. Given complete knowledge about a
-cost function, the upper and lower bound for that cost function are
+cost function, the upper and lower bounds for that cost function are
 always the same. Thus, the distinction between an upper and a lower
 bound is only worthwhile when you have incomplete knowledge about the
 thing being measured.

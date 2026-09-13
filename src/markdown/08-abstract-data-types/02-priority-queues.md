@@ -26,7 +26,7 @@ A priority queue typically supports three main operations --
 adding, removing and looking at the topmost element.
 Note that these are the same kind of operations as stacks and queues,
 the only difference is how the elements are ordered.
-Of this reason we use different names for the operations.
+For this reason we use different names for the operations.
 
 We also have to know how to compare the elements in the priority queue,
 or in other words, how to associate each element with a priority value.
@@ -34,7 +34,7 @@ Furthermore, we have to decide what is meant with a "higher" priority:
 if one element compares smaller than another, is it more or less prioritised?
 There is no "correct" answer to this question, but it depends on your application.
 But a common choice is to let the *smaller* element have priority --
-and then we have a *minimum priority queue*
+and then we have a *minimum priority queue*.
 
     interface MinPriorityQueue of T extends Collection:
         add(minPQ, elem: T)      // Adds an element to the priority queue.

@@ -213,7 +213,7 @@ Another example of the space/time tradeoff is typical of what a
 programmer might encounter when trying to optimise space. Here is a
 simple code fragment for sorting an array of integers. We assume that
 this is a special case where there are $n$ integers whose values are a
-permutation of the integers from 0 to $n-1$. This is an example of a [binsort]{.term}.
+permutation of the integers from $0$ to $n-1$. This is an example of a [binsort]{.term}.
 Binsort assigns each value to an array position corresponding to its value.
 
     newArr = new Array(arr.size)

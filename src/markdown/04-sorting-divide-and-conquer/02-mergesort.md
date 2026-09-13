@@ -31,7 +31,7 @@ The standard base case for divide-and-conquer sorting algorithms is an empty arr
 
 Now we only have to know how to split and merge.
 Splitting is really easy: just divide the array in half.
-what remains is how to implement merging.
+What remains is how to implement merging.
 
 ::: dsvis
 Here is a visualisation that illustrates how Mergesort works.
@@ -105,7 +105,7 @@ Now here is a full proficiency exercise to put it all together.
 ### Categorising Mergesort
 
 Note that the merging algorithm is not in-place, becaue we allocate space for the temporary result array.
-In is in fact possible to do the merging in-place,
+It is in fact possible to do the merging in-place,
 but this involves moving around elements in a way similar to Insertion sort,
 which is both is more complex and less efficient as the algorithm above.
 
@@ -194,7 +194,7 @@ This visualisation provides a running time analysis for Mergesort.
 #### Complexity for arbitrary array sizes
 
 In our analysis we assumed that we had exactly $n = 2^k$ elements, so what if the array size is not a power of two?
-Let us assume that the array has $n'$ elements, where $n/2<n'<n$.
+Let us assume that the array has $n'$ elements, where $\frac{n}{2}<n'<n$.
 Since $n=2^k$ is a power of two, then $\frac{n}{2}=2^{k-1}$ is also a power of two.
 Our analysis above concluded that the complexity of sorting a size $n=2^k$ array is $O(n\log(n))$.
 Now, since $\frac{n}{2}=2^{k-1}$ is also a power of two, the same analysis gives the complexity
@@ -276,7 +276,7 @@ Then we can create a wrapper function that takes care of the initialisation, and
 
 #### Using a backoff algorithm
 
-Mergesort is way faster than Insertion and Selection sort for large arrays because of the better complexity.
+Mergesort is much faster than Insertion and Selection sort for large arrays because of the better complexity.
 But when the arrays are small (perhaps 50 elements or so), the "slower" algorithms are actually faster
 -- the reason for this is that Mergesort is more complex which leads to larger constant factors.
 
@@ -284,7 +284,7 @@ This fact, that there are algorithms that are faster on small arrays, can be use
 Whenever the size of the input array is small enough (say, less than 50 elements),
 we can call Insertion or Selection sort on that array instead of continuing with Mergesort.
 
-Note that this will not change the complexity of the implementation, but it can nonetheless improve the speed by some factor.
+Note that this will not change the time complexity of the implementation, but it can nonetheless improve the speed by some factor.
 Also note that the exact cutoff depends a lot on what computer you have, what programming language you use, etc.
 The only way to know which array size is the optimal cutoff is to do a lot of testing
 -- but a rule of thumb is that it is probably faster to use Insertion sort on an array of up to 50 elements.

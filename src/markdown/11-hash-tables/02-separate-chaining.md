@@ -34,7 +34,7 @@ This has some issues:
   a linked list is usually faster if we only have a handful of elements.
 * AVL trees use more memory for every entry compared to a linked list,
   since each AVL node needs two child pointers and linked list node only need one.
-* We have to be able to *compare* the keys, and not just calculate a hash value,
+* We have to be able to *compare* the keys using < and >, and not just calculate a hash value,
   and for some datatypes it can be complex to define comparison and not just equality.
 
 ![Memory content of a separate chaining hash table of size 13 mapping three emails to names. The arrows are pointers, and the empty cells in the array are null values, representing empty linked lists.](images/11.2-memory-content.svg){#fig:SepChain2}
@@ -55,7 +55,7 @@ already present before we add an entry to the linked list.
 
 At this point, you should be concerned about performance.
 Searching in a linked list is not fast, and in fact if all our values end up in the same cell,
-our hash map will be slower than an AVL map ($O(n)$ instead of $O(log n)$).
+our hash map will be slower than an AVL map ($O(n)$ instead of $O(\log n)$).
 The idea to avoid this problem is ensuring that the maximum length of any list
 in our table is a small constant. This involves two main techniques:
 

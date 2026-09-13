@@ -56,7 +56,7 @@ This additional space is called [overhead]{.term}.
     for the objects actually on the list.
     <!-- OPENDSA: END -->
     However, each list node needs to allocate memory for the pointer to the next node,
-    and all of these pointers combined is the overhead required by the array-based list.
+    and all of these pointers combined is the overhead required by the linked list.
 
 The amount of space required by a linked list is directly proportional
 to the number of elements $n$. Assuming that each list node takes up $k$
@@ -72,7 +72,7 @@ So, which one is the best? It depends on the size $k$ of the list nodes,
 compared to the size $c$ of the array cells.
 In many cases, $k$ is 2--3 times as large as $c$, so they will
 be quite similar in size on average. But this depends on the programming
-language, the operating system, and perhaps other factors.
+language, the specific implementation, the operating system, and other factors.
 
 Note that these calculations exclude the memory used by the actual list
 elements, since the lists themselves only contain pointers to the
@@ -88,7 +88,7 @@ One special property of stacks is that
 if we push a sequence of elements and then pop them all, we get them in *reversed* order.
 And of course, if we do the same again, we get the original order back.
 This insight can be used for a another possible implementation of queues,
-which uses use two stacks -- one "enqueue" stack and another "dequeue" stack.
+which uses two stacks -- one "enqueue" stack and another "dequeue" stack.
 
 - To enqueue an element we push it to the *enqueue stack*.
 - To dequeue an element we pop it from the *dequeue stack*.

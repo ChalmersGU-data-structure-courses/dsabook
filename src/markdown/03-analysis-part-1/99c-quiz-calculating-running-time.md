@@ -203,7 +203,7 @@ and "sort" takes $n \log(n)$ time.
 Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
-Assume array `arr` contains a random permutation of the values from 0 to $n-1$.
+Assume array `arr` contains a random permutation of the values from $0$ to $n-1$.
 
     sum = 0
     for i in 0 .. n-1:

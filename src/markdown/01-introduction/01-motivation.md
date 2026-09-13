@@ -6,13 +6,14 @@
 - Prio 3: is this a good motivation section?
 :::
 
-How many cities with more than 100,000 people lie within 200 kilometres of Paris, France?
+How many cities with more than 100,000 people lie within 200 kilometres of Paris?
 How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
-How much more CO~2~ will be emitted if I travel by plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the train?
+How much CO~2~ can will be saved if I travel by train from Gothenburg to Berlin, compared to if I fly by plane?
 How can I see if a text contains plagiarism, that is, if it copied some parts from another existing text?
 
 Gathering the necessary information is not sufficient to answer questions like these,
-the information must be organised to allow efficient access and analysis.
+the information must be organised to allow efficient access,
+and then processed in an efficient manner.
 To organise our data we use different *data structures*,
 and to update or analyse our data we use *algorithms* on these data structures.
 The subjects of data structures and algorithms are deeply intertwined:
@@ -31,8 +32,8 @@ by using a set instead of a list, or a priority queue instead of a sorted array.
 Apart from using the right data structure for the job, analysing an algorithm is
 another essential skill. If two algorithms solve the same problem, which one is better?
 Will the performance of your program scale to thousands of users?
-Which part of a piece of code is going to use all the processing power
-(and is thus the only part worth optimising)?
+Which parts of a piece of code are going to use all the processing power
+(and are thus the parts that we should try to optimise first)?
 
 Suppose you have an algorithm for finding someone in a list of names.
 Let us say that it is very fast when searching among 1000 names, for example your social media friends.

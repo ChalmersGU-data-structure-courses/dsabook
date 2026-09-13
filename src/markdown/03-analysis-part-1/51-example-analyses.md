@@ -70,10 +70,10 @@ executed $j$ times, by simplifying rule (4) it has cost $c_3j$. The
 outer `for` loop is executed $n$ times, but each time the cost of the
 inner loop is different because it costs $c_3j$ with $j$ changing each
 time. You should see that for the first execution of the outer loop, $j$
-is 1. For the second execution of the outer loop, $j$ is 2. Each time
+is $1$. For the second execution of the outer loop, $j$ is $2$. Each time
 through the outer loop, $j$ becomes one greater, until the last time
 through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
-times the sum of the integers 1 through $n$. We know that
+times the sum of the integers $1$ through $n$. We know that
 
 $$
 \sum_{i = 1}^{n} i = \frac{n (n+1)}{2}

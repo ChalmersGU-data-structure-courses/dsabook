@@ -10,7 +10,7 @@ Both stacks and queues are collections of objects, where you can add elements an
 The difference between them is in which order the elements are removed.
 So, when are stacks and queues used?
 Most of us can easily find situations where a queue is appropriate,
-and it feels more "democratic" to attend to issues in the order they arrive, than the opposite.
+and it feels more "fair" to attend to issues in the order they arrive, than the opposite.
 But in fact stacks are much more common in programming --
 one reason is that they are slightly more efficient than queues,
 so they are a better choice if the inherent order is not important.

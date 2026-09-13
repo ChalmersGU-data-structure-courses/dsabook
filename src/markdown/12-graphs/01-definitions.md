@@ -56,7 +56,7 @@ If we decide which vertex should be the root, then we can say that a *tree* is a
 
 A *subgraph* is a subset of the vertices and edges of a graph.
 A *spanning tree* is both a subgraph and a tree which includes (spans) all the vertices of a graph.
-This of course assumes that the graph is connected, otherwise it is not possible.
+This of course assumes that the graph is connected, otherwise it does not exist.
 
 #### Vertex degree
 
@@ -124,13 +124,13 @@ Here is a rough estimate of the workload of the system:
 - Modifying an edge (scheduled tram connections): Maybe several times per day if it includes delays and such.
 - Finding the quickest route between two stations: Thousands of times per minute during rush hour.
 
-Clearly, the third bullet point is where we should put effort into optimising performance.
+Clearly, the third item is where we should put effort into optimising performance.
 For this reason we will hold off on defining the technical aspects of creating graphs,
 and look at a simple definition that includes only what we expect of any graph:
 
 - Vertices are some kind of objects that uniquely identify vertices.
 - Edges are pairs which we write as $a\rightarrow b$ or as pairs $(a,b)$, where $a$ and $b$ are vertices.
-  For weighted graphs, they include a weight: $a\xrightarrow{w}b$, or as a pair $(w,a,b)$, where $w$ is the weight.
+  For weighted graphs, they include a weight: $a\xrightarrow{w}b$, or as a tuple $(w,a,b)$, where $w$ is the weight.
 - There is a function $\texttt{outgoingEdges}(x)$ that takes a vertex and returns all its outgoing edges (letting us find all its adjacent vertices).
 
 This definition is sufficient to define most of our graph algorithms.

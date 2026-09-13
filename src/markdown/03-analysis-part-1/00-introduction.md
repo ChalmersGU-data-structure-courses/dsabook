@@ -21,12 +21,12 @@ Perhaps most importantly, this chapter introduces the vast subject of
 *computational complexity*, and *asymptotic analysis*.
 Complexity provides a method of comparing the performance of
 algorithms without running any benchmarks,
-and to determine how well an algorithm scales to larger input values.
+and to determine how well an algorithm scales to larger input sizes.
 We have already shown algorithms having logarithmic, linear, and quadratic time.
 This chapter expands this notion into a more general understanding of
 *complexity classes*.
 
-We introduce big-$O$ notation, the universally adopted industry standard
+We introduce big-$O$ notation, the universally adopted standard
 for communicating and reasoning about performance,
 not just for data structures but for programming in general.
 In this chapter we aim to give an incomplete,

@@ -43,20 +43,20 @@ On the contrary, the right loop is slow because it inserts elements at the begin
 ### Resizing the internal array
 
 The basic idea is to not try to resize the internal array -- as we already mentioned it is not possible to resize it.
-Instead we create a *new* array of a larger size, and copy over the elements from the old array to the new.
+Instead we create a *new* array of a larger size, and copy the elements from the old array to the new.
 Afterwards we can forget about the old array because it will not be used anymore.
 
     resize(stack, capacity):
         oldArr = stack.arr               // Remember the old internal array
         stack.arr = new Array(capacity)  // Create a new internal array
         for i in 0 .. oldArr.size-1:
-            stack.arr[i] = oldArr[i]     // Copy over all elements to the new array
+            stack.arr[i] = oldArr[i]     // Copy all elements to the new array
 
 ![
     Resizing an array-based stack, increasing the capacity from 8 to 16.
     Before resizing, *size* points to after the last cell in the array,
     indicating that the array is full.
-    We have to create a new array with the larger capacity and copy over all elements.
+    We have to create a new array with the larger capacity and copy all elements.
 ](images/6.4-array-stack-resize.svg){#fig:array-stack-resize}
 
 <!-- \newpage -->
@@ -98,7 +98,7 @@ Every 100'th time the internal array becomes full and we need to resize it, so w
 In total, we execute the copying statement the following number of times:
 
 $$
-100 + 200 + \cdots + (n-200) + (n-100) = 100 \cdot \sum_1^{n/100} i
+100 + 200 + \cdots + (n-200) + (n-100) = 100 \cdot \sum_{i=1}^{n/100} i
 = n(n-1)/50 \in O(n^2)
 $$
 
@@ -112,7 +112,7 @@ This is of course not acceptable.
 
 But what if we increase the capacity with 1,000 elements instead?
 This will unfortunately not help much -- the reasoning above still holds,
-and the complexity of pushing $n$ to the stack will still be quadratic, $O(n^2)$.
+and the complexity of pushing $n$ values to the stack will still be quadratic, $O(n^2)$.
 
 ### Doubling the size
 
@@ -153,7 +153,7 @@ We can read off how many elements get copied:
 $$ 100 + 200 + 400 + \cdots + 409,600 + 819,200 = 1,638,300 $$
 
 Compare this with the previous version where we increased the capacity with 100 elements every time:
-then we needed to copy 20 billion elements, but now we only need to copy 1.6 million.
+then we needed to copy 20 billion elements, but now we only need to copy $1.6$ million.
 
 <!-- NICSMA: START -->
 Let us now generalise to an arbitrary $n$.
@@ -182,7 +182,7 @@ which holds regardless of what the initial capacity is.
 When using the array-doubling strategy,
 pushing $n$ elements to a stack implemented as a dynamic array
 causes fewer than $2n$ elements to be copied.
-Or in other words, pushing an element to a stack causes on average 2 elements to be copied.
+In other words, pushing an element to a stack causes on average 2 elements to be copied.
 :::
 
 
@@ -244,7 +244,7 @@ The word "*every*" has waited the longest and "*they*" is the most recent word.
 
 What happens if we want to enqueue yet another element?
 We have to resize the array, and we do this like before by doubling the size.
-But now we have to be a little careful when copying over the elements to the new array
+But now we have to be a little careful when copying the elements to the new array
 -- we cannot just copy the elements to the same positions, because then we would end up in this situation:
 
 ::: center
@@ -252,7 +252,7 @@ But now we have to be a little careful when copying over the elements to the new
 :::
 
 Instead we reset the *front* and *rear* pointers so that we copy
-the first queue element to position 0 of the new array, the second to position 1, and so on:
+the first queue element to position $0$ of the new array, the second to position $1$, and so on:
 
     resize(queue, capacity):
         oldArr = queue.arr
@@ -268,7 +268,7 @@ The process and the resulting queue is shown in @Fig:array-queue-resize.
 
 ![
     Resizing an array-based queue.
-    We need to copy the element starting from the *front* pointer, not from index 0.
+    We need to copy the element starting from the *front* pointer, not from index $0$.
 ](images/6.4-circular-queue-resize.svg){#fig:array-queue-resize}
 
 

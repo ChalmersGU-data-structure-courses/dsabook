@@ -302,7 +302,7 @@ because the partitions will be very uneven in size and this is not good for Quic
 #### Middle element
 
 A much better alternative is to pick the *middle* element of the interval.
-This makes partitioning behave very nicely sorted arrays, and on almost-sorted arrays.
+This makes partitioning behave very nicely for sorted arrays, and on almost-sorted arrays.
 However, it is still very easy for a hacker to fool this strategy,
 so in practice, we have to use more sophisticated strategies.
 
@@ -312,9 +312,9 @@ Even better is to look at a sample of the elements and pick the median of those.
 By far the most common is to take the median of the first, middle and last elements.
 This strategy is called *median-of-three*.
 
-For example, given the array [3, 1, 4, 1, 5, 9, 2],
-we pick out the elements 3 (first position), 1 (middle position) and 2 (last position).
-The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
+For example, given the array $[3, 1, 4, 1, 5, 9, 2]$,
+we pick out the elements $3$ (first position), $1$ (middle position) and $2$ (last position).
+The median of $3$, $1$ and $2$ is $2$, so we pick $2$ as the pivot.
 
 Median-of-three is not guaranteed to pick a good pivot:
 there are cases where it partitions the input array badly.
@@ -467,7 +467,7 @@ then we can prove that the *expected* worst-case complexity is linearithimc, $O(
 If we use a random pivot, then at every step,
 the pivot is equally likely to end in any position in the array.
 In other words, the pivot is equally likely to break an array
-into partitions of sizes 0 and $n-1$, or 1 and $n-2$, and so on.
+into partitions of sizes $0$ and $n-1$, or $1$ and $n-2$, and so on.
 Now the average-case cost $T(n)$ can be computed from the following equation:
 
 \begin{align*}

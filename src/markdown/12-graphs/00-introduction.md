@@ -26,7 +26,7 @@ small sampling of what graphs can be used to model:
     that a task depends on another task to finish before it can start.
 4.  Any kind of relationships, for example between social media users:
     Vertices are users, edges are relationships such as friendship, following or blocking.
-5.  The World Wide Web:
+5.  The internet:
     Vertices are web pages and edges are links.
 6.  The memory content of a running program:
     Vertices are objects and edges are references or pointers.

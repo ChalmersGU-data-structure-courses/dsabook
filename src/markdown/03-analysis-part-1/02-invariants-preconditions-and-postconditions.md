@@ -76,12 +76,8 @@ Being aware of this invariant can help a developer to debug a broken implementat
 ("am I sure that every operation I make preserves the invariant?"), and to
 find potential optimisations ("are there other operations that would preserve this invariant?").
 
-Another excellent pair of examples of loop invariants are in Insertion sort and Selection sort
-from [Chapter @sec:sorting-1]. Have a look at those algorithms and try to formulate
-a loop invariant for each of them.
-
 Other excellent examples of loop invariants are for Selection sort and Insertion sort
-from @sec:sorting-1:selection-sort;@sec:sorting-1:insertion-sort.
+from [@sec:sorting-1:selection-sort;@sec:sorting-1:insertion-sort].
 Take a look at those algorithms and try to formulate a loop invariant for each of them.
 
 * *Insertion sort* loops through all the elements in the array and "inserts them backwards" into
@@ -106,7 +102,7 @@ Note how the invariants for both algorithms do two things:
 -   *They make the correct steps of the algorithm obvious*.
     After deciding the loop invariant for Selection sort,
     designing the rest of the algorithm becomes trivial.
-    The only thing we can do to preserve the invariant is find the smallest
+    The only thing we can do to preserve the invariant is to find the smallest
     element after $i$ and put it at the end of the ordered segment.
 
 Loop invariants are a fantastic tool not just for data structures,

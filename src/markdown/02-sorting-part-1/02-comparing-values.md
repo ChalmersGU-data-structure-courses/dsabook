@@ -41,27 +41,27 @@ particular ID number. In this example the ID number is the
 Finally, it is very often the case that we want to compare *virtual keys*,
 that is keys that are not explicitly stored in the record, but calculated on demand.
 One simple example is if we want to sort a list of strings *case-insensitively*, ignoring if a letter is uppercase or lowercase.
-A more complex example is to sort a list if Unicode strings according to a certain language locale.
+A more complex example is to sort a list of Unicode strings according to a certain language locale.
 
 ### Two main approaches to comparing values
 
 When we compare two elements, there are *three* possible outcomes
 -- the first element can be *smaller*, or *larger*, or *equal to*, the second element.
 
-Most programming languages does not have any atomic datatype with three values,
+Most programming languages do not have any atomic datatype with three values,
 so different languages have implemented different solutions to how to compare values.
-There are two main approaches in how a programming language have solved the comparison problem:
+There are two main approaches in how programming languages have solved the comparison problem:
 
-The Python way
-:   In Python, each comparison operator (<, >, =, ...) is implemented separately.
+-   One possibility is to implement each comparison operator (<, >, =, ...) separately,
+    this is for example how Python does it.
     This means that you can write $a<b$, $a=b$, $a>b$, etc., in a way that you are used to think about comparison.
     The disadvantage is that sometimes you have to perform *two* comparisons between two values:
     first you have to check if $a<b$, and then if $a=b$.
     Depending on how your elements are structured, this can lead to some duplicate work
-    (although Python is quite good at optimising the code so that there will be no penalty).
+    (although many programming languages are quite good at optimising the code so that there will be no penalty).
 
-The Java way
-:   In Java, there is one comparison operator, `compare` (or `compareTo`), which returns an integer $k$.
+-   Another alternative is to implement a *three-way* comparison operator which returns an integer $k$.
+    This is for example how Java does it, and it can be called `compare`, `compareTo`, `<=>`, or similar.
     If $k<0$ then $a<b$, if $k>0$ then $a>b$, and if $k=0$ then $a=b$.
     The main advantage with this approach is that you do not risk duplicating work,
     but on the other hand the can code become slightly less readable.

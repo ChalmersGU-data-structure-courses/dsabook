@@ -13,7 +13,7 @@ It is organised as a tree that satisfies the heap property and has an additional
 Recall from @sec:trees:full-perfect-complete that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
 As a result, a complete binary tree with $n$ nodes has exactly one possible shape.
 Because of this structure, the height $h$ of the tree satisfies: $2^h \le n < 2^{h+1}$, which implies that $h\in O(\log n)$.
-Complete binary trees are therefore balanced, and any operation that linear in the height of the tree runs in $O(\log n)$ time.
+Complete binary trees are therefore balanced, and any operation that is linear in the height of the tree runs in $O(\log n)$ time.
 Using a complete tree has several advantages:
 
 * It ensures that the tree remains balanced after adding an element to the tree.
@@ -30,7 +30,7 @@ Instead of pointers, the positions of a node's parent and children can be determ
 
 To represent a complete binary tree in an array, we assign a unique array index to each node according to its position in the tree.
 The nodes are numbered level by level, starting at the root and proceeding from left to right within each level.
-The root node is assigned index 0, its left child index 1, its right child index 2, and so on.
+The root node is assigned index $0$, its left child index $1$, its right child index $2$, and so on.
 This systematic numbering ensures that a node's position in the array directly corresponds to its logical position in the tree.
 As a result, the indices of a node's parent and children can be computed easily using simple arithmetic.
 
@@ -97,7 +97,7 @@ You can use simple formulas to compute the array index of a node's relatives in 
 \text{right}(i)  &= 2i + 2                     & (\text{if~ } & 2i + 2 < n)
 \end{align*}
 
-For example, the left child of node at position 4 (which contains the value 28) is at
+For example, the left child of node at position $4$ (which contains the value 28) is at
 index $\text{left}(4) = 2 \cdot 4 + 1 = 9$ (which contains the value 75).
 
 ::: dsvis
@@ -108,8 +108,8 @@ Here is a practice exercise for calculating the array indices of nodes.
 :::
 
 ::: note
-Some course books and implementations put the root in position 1 in the array,
-and leave the cell at position 0 empty (or use it for temporary values).
+Some course books and implementations put the root in position $1$ in the array,
+and leave the cell at position $0$ empty (or use it for temporary values).
 Doing this changes the arithmetic for calculating the relatives.
 Beware of this if you happen to read another text about binary heaps!
 :::
@@ -143,7 +143,7 @@ Logically, a heap is a tree structure that satisfies the heap property.
 In practice, however, it is implemented using a dynamic array that represents a complete binary tree.
 
 When describing heap operations, we will usually explain them in terms of tree operations,
-since this makes the behavior of the algorithms easier to understand conceptually.
+since this makes the behaviour of the algorithms easier to understand conceptually.
 Nevertheless, it is important to remember that in an actual implementation these operations
 are carried out using array indices and array updates, rather than explicit tree pointers.
 
@@ -210,8 +210,8 @@ To start with, we define a function that verifies that a given binary heap satis
                 return false
         return true
 
-Note that we start the iteration from position 1:
-this is because position 0 contains the root of the tree, and the root doesn't have a parent.
+Note that we start the iteration from position $1$:
+this is because position $0$ contains the root of the tree, and the root doesn't have a parent.
 
 When implementing a data structure, it is often helpful to encode the invariants explicitly and verify them, possibly using assertions, within the various operations.
 This can make it easier to detect errors and ensure that the data structure remains valid after each modification.
@@ -222,9 +222,9 @@ We will follow this approach when defining the binary heap operations.
 
 #### Getting the highest-priority element
 
-Since the array satisfies the heap property, the element at index 0 is the root and will always contain the highest-priority element.
+Since the array satisfies the heap property, the element at index $0$ is the root and will always contain the highest-priority element.
 Therefore it is very efficient to take a little peek into which the next element will be, without modifying the heap.
-Note that we first need to check that the heap is not empty, because then we will get an error message when trying to access index 0.
+Note that we first need to check that the heap is not empty, because then we will get an error message when trying to access index $0$.
 
 
 ### Inserting into a heap
@@ -304,7 +304,7 @@ Therefore, inserting $n$ values one at a time takes $O(n \log(n))$ time in the w
 ### Removing from a heap
 
 Heaps are usually used to implement priority queues, where we repeatedly remove the element with the highest priority.
-This is the next element to be processed, and it is always stored at the root of the heap, at index 0 in the array.
+This is the next element to be processed, and it is always stored at the root of the heap, at index $0$ in the array.
 
 To remove the highest-priority element, we remove the root.
 However, we cannot simply leave the root empty, since this would violate the requirement that the heap remains a complete binary tree.

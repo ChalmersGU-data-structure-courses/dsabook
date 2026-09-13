@@ -36,10 +36,10 @@ and this has consequences for the efficiency of the basic operations.
 
 In most programming languages it is not possible to specify invariants,
 but it is the responsibility of the programmer to make sure that the invariants are never violated.
-
 Note that the BST invariant implies that all values in the tree are distinct from each other,
 which is exactly what we need to implement a *set*.
-Therefore, to implement a set we can reuse the binary tree implementation from @sec:trees:binary-trees:
+
+To implement a set can reuse the binary tree implementation from @sec:trees:binary-trees:
 
     datatype BST:
         root = null   // Pointer to the root node of the tree
@@ -54,7 +54,7 @@ Therefore, to implement a set we can reuse the binary tree implementation from @
 
 A *multiset*, or a *bag*, is a collection of values that allows duplicates.
 This is easy to implement as a BST, we just have to relax the invariant a little.
-Instead of requiring that all children are unequal to the node value,
+Instead of requiring that all children are strictly smaller or larger than the node value,
 we can say that the *left* children are smaller *or equal* to the parent,
 while the right children are still always larger.
 (It is just a convention that we let the left children be equal -- we could also mirror it.)
@@ -125,7 +125,7 @@ To add a value $x$ to a BST, initialise a *current* pointer to the root node, an
 Then repeat the following until *current* points to null:
 
 - Compare $x$ with the value of *current*:
-    - If they are equal, return and do nothing at all.
+    - If they are equal, return -- no need to do anything because $x$ is already in the tree.
     - Otherwise, set *previous* to *current*, and
       reassign *current* to the left or right child, depending on if $x$ is smaller or larger.
 
@@ -260,7 +260,7 @@ Now we are ready to formalise deletion into an algorithm.
 If we want to delete the value $x$ in a BST, we first find the node that has that value.
 There are three possibilities for that node:
 
-- If it is a leaf node, we can just delete it -- meaning, deleting the corresponding child pointer of its parent.
+- If it is a leaf node, we can just delete it -- meaning, setting the corresponding child pointer of its parent to *null*.
 - If the node has exactly one child, redirect its parent to the child.
 - If it is an inner node, find the largest node $y$ in the left subtree, and:
     - Update the value of the $x$ node to the value of the $y$ node.
@@ -336,7 +336,9 @@ The height in turn depends on the tree structure:
 -   But if the tree us *unbalanced*, for example as the extremely left- and right-leaning trees in @fig:BST-example,
     then the height is the same as the number of nodes, and search becomes linear $O(n)$.
 
-If we add values to a BST in sorted order (reversely sorted), then we get an extremely unbalanced tree.
+If we add values to a BST in sorted order (reversely sorted),
+then the new node will always be added as far right as possible.
+Therefore we will get an extremely unbalanced tree.
 How long time will it take to build this tree?
 Assume that we add $n$ values.
 Adding one value is in the worst case linear in $n$, and since we do this $n$ times
@@ -351,7 +353,7 @@ And building the final BST with $n$ values will be $O(n\log(n))$.
 Sorting an already sorted array will take quadratic time,
 but if the list is randomly shuffled the complexity will be expected worst-case $O(n\log(n))$.)
 
-In any case, almost noone uses plain BSTs because there is no guarantee of their worst-case complexity.
+In any case, almost nobody uses plain BSTs because there their worst-case complexity is too bad.
 But there are plenty of useful data structures that are based on BSTs and which have good worst-case guarantees.
 They accomplish this by automatically rebalancing themselves when necessary,
 and this is the topic of the next section.

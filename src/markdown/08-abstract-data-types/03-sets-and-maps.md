@@ -35,7 +35,7 @@ Later we will see several different ways of implementing sets and maps.
     a data structure for sets and maps where adding, removing and searching are all efficient.
 
 -   In [Chapter @sec:hash-tables], we learn about *hash tables*,
-    which can be even faster than search trees, under some circumstances.-
+    which can be even faster than search trees, under some circumstances.
 
 Search trees and hash tables are the main ways that sets and maps are implemented in practice.
 Almost every programming language provides sets and maps as a built-in feature, based on one of these technologies.
@@ -71,7 +71,7 @@ for taking the *union* or *intersection* of two sets.
 There are some data structures that can handle operations like that efficiently,
 such as the *disjoint-set* data structure (see @sec:trees:disjoint-sets).
 But it is very difficult to design data structures that can handle bulk operations,
-so we do introduce any interface for them in this introductory text.
+so we do not introduce any interface for them in this introductory text.
 
 ### Maps, or dictionaries {#ADTs:maps}
 

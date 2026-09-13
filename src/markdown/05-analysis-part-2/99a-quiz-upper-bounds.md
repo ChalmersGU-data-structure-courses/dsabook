@@ -49,7 +49,7 @@ What is the smallest integer $k$ such that $\sqrt n$ is in $O(n^k)$?
 
 ::: hints
 - $\sqrt n = n^{0.5}$
-- What is the smallest integer greater than 0.5?
+- What is the smallest integer greater than $0.5$?
 :::
 ::::::::::::::::::::::::::::::
 

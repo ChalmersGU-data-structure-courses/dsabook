@@ -22,6 +22,7 @@ Double-linked lists
     This means that we can iterate the list in both directions.
     The disadvantage against normal single-linked lists is that the operations become slightly more complex,
     with more pointer redirections.
+    In addition, double-linked nodes use more memory than single-linked nodes.
 
 General lists
 :   Sometimes we want to be able to access elements at arbitrary positions,

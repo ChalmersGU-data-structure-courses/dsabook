@@ -1,8 +1,8 @@
 
 ## Case study: Analysing dynamic arrays {#analysis-3:dynamic-arrays}
 
-Dynamic is a data structure that behaves just like a normal array, but where size may change over time.
-A dynamic array has a underlying *backing array* which is a normal fixed-size array.
+A dynamic array is a data structure that behaves just like a normal array, but where size may change over time.
+It has an underlying *backing array* which is a normal fixed-size array.
 When the backing array becomes full it resizes to a larger fixed-size array.
 
 In @sec:sequences:dynamic-arrays we alreay showed that the key insight is to not increase the size by a constant,
@@ -12,7 +12,7 @@ In this section we will use the accounting method to show the same thing.
 
 The main operation of interest is *append*, which increases the size of the dynamic array by one.
 All other operations (that is, getting and setting values at a certain index)
-are directly mapped to the backing array, and therefore we can assume that they are constant time.
+are directly mapped to the backing array, and therefore we can trivally conclude that they are constant time.
 
 ### Doubling the array size
 

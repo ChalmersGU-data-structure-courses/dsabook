@@ -16,7 +16,8 @@ The algorithm is an instance of the same generic traversal algorithm as in the p
 where we keep an agenda of edges from visited to unvisited vertices.
 For DFS, the agenda is a stack.
 For BFS, the agenda is a queue.
-For Dijkstra's algorithm, we use a min-priority queue, prioritised by the cost of the path formed from the starting vertex.
+For Dijkstra's algorithm, we use a min-priority queue,
+prioritised by the cost of the shortest path from the starting vertex to the end vertext.
 
 This requires a little extra book-keeping since the agenda does not simply contain edges, it contains edges with priority values.
 @Fig:GraphDijkstra1 illustrates this.

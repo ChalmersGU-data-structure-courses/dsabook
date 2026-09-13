@@ -98,7 +98,7 @@ the array index for its parent. There are two main operations to implement.
 tree. **Find** is used to find the ultimate root for a node.
 
 An application using the **Union/Find** operations should store a set of $n$
-objects, where each object is assigned a unique index in the range 0 to
+objects, where each object is assigned a unique index in the range $0$ to
 $n-1$. The indices refer to the corresponding parent pointers in the
 array. Class `ParentPointerTree` creates and initialises the **Union/Find** array,
 and operations **Union** and **Find** take array indices as inputs.

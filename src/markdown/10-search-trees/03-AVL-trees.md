@@ -48,7 +48,7 @@ However, if we do this the implementations of insertion and deletion become slig
 so most AVL implementations store the *height* of each node instead.
 If we know the height of each tree node, it is easy to calculate the balance using the formula above.
 Storing the height will use more memory, but not a lot -- it is enough to use only one byte (8 bits) for the height,
-because we will anyway never have room for any AVL tree with a height larger than $2^8=256$
+because we will anyway never have room for any AVL tree with a height larger than $2^8=256$.
 
 ### Inserting into an AVL tree
 
@@ -66,7 +66,7 @@ then they will look like in @fig:AVL-add-rotate, where the balance factors that 
 ](images/10.3-AVL-add-rotate.svg){#fig:AVL-add-rotate}
 
 Notice that the left tree is still AVL balanced, so we do not have to do anything further.
-But in the right tree, the grandparent F have become unbalanced.
+But in the right tree, the grandparent F has become unbalanced.
 The F node is *right-heavy*, and we can solve this imbalance by rotating it to the left.
 In this case it is enough with a *single* rotation.
 
@@ -202,4 +202,8 @@ the complexity of sorting via an AVL tree is $O(n \log(n))$.
 
 This has the same complexity as Mergesort, which is as good as the best sorting algorithms.
 So why do not anyone use it?
-It is because the hidden constants are bigger than Mergesort: it takes longer time and also uses more extra memory.
+It is because the hidden constants are bigger than for Mergesort:
+it takes longer time and also uses more extra memory.
+
+<!-- TODO: write something about Heapsort -->
+

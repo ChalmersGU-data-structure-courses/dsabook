@@ -17,7 +17,7 @@ So, how many times can we halve an interval until it becomes empty?
 - In the first iteration the interval size is $n$,
 - in the second iteration, it is halved to $n/2$,
 - after that it is halved to $n/4$, and then $n/8$,
-- and so on until we reach something smaller than 1.
+- and so on until we reach something smaller than $1$.
 
 In other words, what is the smallest $k$ such that $\frac{n}{2^k} < 1$?
 The solution to this is $k = \lceil\log_2(n)\rceil$, meaning that the loop is iterated at most $O(\log(n))$ times.
