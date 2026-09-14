@@ -102,17 +102,6 @@ Now here is a full proficiency exercise to put it all together.
 :::
 
 
-#### Divide-heavy or combine-heavy
-
-Most divide-and-conquer algorithms spend most of their time in one of the two main steps.
-Either they do the heavy work in the divide step (making combining trivial),
-or most work is in the combine step (making dividing easy).
-Mergesort is of the latter kind.
-
-So, is there any other divide-and-conquer sort that is divide-heavy instead?
-Yes, it is called Quicksort and is the topic for @sec:sorting-2:quicksort.
-
-
 ### Complexity analysis
 
 How efficient is Mergesort?

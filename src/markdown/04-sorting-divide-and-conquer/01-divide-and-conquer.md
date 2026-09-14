@@ -93,7 +93,17 @@ There are many standard examples of divide-and-conquer algorithms:
 multiplication of large numbers, matrix multiplication and other matrix algorithms,
 geometrical algorithms, syntactic parsing, calculating Fourier transforms, and of course, sorting.
 
+#### Divide-and-conquer sorting
+
 In this chapter we will how divide-and-conquer can be used to derive two efficient sorting algorithms, Mergesort and Quicksort.
 Both Mergesort and Quicksort splits the array into two sub-arrays, which can be sorted independently of each other.
 The key point to making the algorithms efficient is that the sub-arrays must be (approximately) the same size,
 so that the problem sizes are (approximately) halved in each iteration.
+
+Most divide-and-conquer algorithms spend most of their time in one of the two main steps.
+Either they do the heavy work in the divide step (making combining trivial),
+or most work is in the combine step (making dividing easy).
+Mergesort is of the latter kind.
+
+So, is there any other divide-and-conquer sort that is divide-heavy instead?
+Yes, it is called Quicksort and is the topic for @sec:sorting-2:quicksort.
