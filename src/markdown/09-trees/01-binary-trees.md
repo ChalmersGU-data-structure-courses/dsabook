@@ -69,87 +69,8 @@ Thus, a `Node` object represents not just a single node, but the root of a subtr
 
 ![Illustration of the pointer-based binary tree implementation, where each node stores a value and two child pointers. A black dot in a pointer cell indicates `null`.](images/9.1-bintree-with-pointers.svg){#fig:bintree_with_pointers}
 
-<!--
-::: {#fig:bintree_with_pointers}
-:::: online
-```jsav-figure
-var AV = NewAV();
-AddCSS(`.jsavcanvas {width: 600px}`)
-AV.ds.array([" ", "A", " "], {left: 180});
-var topDiff = 50;
-var arrB = AV.ds.array(["/", "B", " "], {left: 40, top: topDiff});
-arrB.css(0, {"background-color": "LightGray"});
-AV.ds.array([" ", "C", " "], {left: 320, top: topDiff});
-
-topDiff += 50;
-var arrD = AV.ds.array(["/", "D", "/"], {left: 70, top: topDiff});
-arrD.css(0, {"background-color": "LightGray"});
-var arrE = AV.ds.array([" ", "E", "/"], {left: 230, top: topDiff});
-arrE.css(2, {"background-color": "LightGray"});
-AV.ds.array([" ", "F", " "], {left: 410, top: topDiff});
-
-topDiff += 50;
-var arrG = AV.ds.array(["/", "G", "/"], {left: 150, top: topDiff});
-var arrH = AV.ds.array(["/", "H", "/"], {left: 350, top: topDiff});
-var arrI = AV.ds.array(["/", "I", "/"], {left: 470, top: topDiff});
-arrG.css(0, {"background-color": "LightGray"});
-arrG.css(2, {"background-color": "LightGray"});
-arrH.css(0, {"background-color": "LightGray"});
-arrH.css(2, {"background-color": "LightGray"});
-arrI.css(0, {"background-color": "LightGray"});
-arrI.css(2, {"background-color": "LightGray"});
-
-//line for A - B
-AV.g.line(200, 40, 90, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for A - C
-AV.g.line(250, 40, 370, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for B - D
-AV.g.line(115, 90, 120, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for C - E
-AV.g.line(340, 90, 280, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for C - F
-AV.g.line(395, 90, 450, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for E - G
-AV.g.line(250, 140, 200, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for F - H
-AV.g.line(430, 140, 395, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-//line for F - I
-AV.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
-
-AV.displayInit();
-AV.recorded();
-```
-::::
-
-:::: latex
-```
-             __________[ | A | ]__________
-            ↓                             ↓
-        [/| B | ]__               __[ | C | ]__
-                   ↓             ↓             ↓
-               [/| D |/]   __[ | E |/]   __[ | F | ]__
-                           ↓             ↓             ↓
-                       [/| G |/]     [/| H |/]     [/| I |/]
-```
-::::
-
-
-Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value.
-The empty cells are null values.
-:::
--->
 We can easily extend the Node type for different applications, for example by storing additional data in each node.
 It is sometimes convenient to add a pointer to the node’s parent, making it easy to move upward in the tree.
-<!-- OPENDSA: START -->
-This is somewhat analogous to adding a link to the previous node in a doubly linked list.
-<!-- OPENDSA: END -->
 In practice, however, a parent pointer is rarely necessary and increases the space overhead of the tree.
 The problem is not only the extra space.
 More importantly, reliance on parent pointers often reflects a poor understanding of recursion and can lead to weaker designs.
