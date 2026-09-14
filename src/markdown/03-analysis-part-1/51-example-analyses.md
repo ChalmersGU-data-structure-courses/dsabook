@@ -76,7 +76,7 @@ through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
 times the sum of the integers $1$ through $n$. We know that
 
 $$
-\sum_{i = 1}^{n} i = \frac{n (n+1)}{2}
+\sum_{i = 1}^{n} i = \tfrac{n (n+1)}{2}
 $$
 
 which is $O(n^2)$. By simplifying rule (3),

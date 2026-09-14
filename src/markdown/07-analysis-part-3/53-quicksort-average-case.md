@@ -19,7 +19,7 @@ partitions of sizes $0$ and $n-1$, or $1$ and $n-2$, and so on.
 Given this assumption, the average-case cost is computed from the following equation:
 
 \begin{align*}
-T(n) &= cn + \frac{1}{n}\sum_{k=0}^{n-1} [T(k) + T(n -1 - k)] \\
+T(n) &= cn + \tfrac{1}{n}\sum_{k=0}^{n-1} [T(k) + T(n -1 - k)] \\
 T(0) = T(1) &= c
 \end{align*}
 
@@ -43,7 +43,7 @@ counts up from $T(0)$ to $T(n-1)$ while the other counts down from
 $T(n-1)$ to $T(0)$. This yields
 
 \begin{align*}
-T(n) &= cn + \frac{2}{n}\sum_{k=0}^{n-1} T(k)
+T(n) &= cn + \tfrac{2}{n}\sum_{k=0}^{n-1} T(k)
 \end{align*}
 
 This form is known as a [recurrence with full history]{.term}. The key to solving such a recurrence is to cancel out the
@@ -62,27 +62,27 @@ Subtracting $nT(n)$ from both sides yields:
 (n+1)T(n+1) - nT(n)  &=  c(n+1)^2 - cn^2 + 2T(n)\\
 (n+1)T(n+1) - nT(n)  &=  c(2n+1) + 2T(n)\\
 (n+1)T(n+1)  &=  c(2n+1) + (n+2)T(n)\\
-T(n+1)  &=  \frac{c(2n+1)}{n+1} + \frac{n+2}{n+1}T(n)
+T(n+1)  &=  \tfrac{c(2n+1)}{n+1} + \tfrac{n+2}{n+1}T(n)
 \end{align*}
 
 At this point, we have eliminated the summation and can now use our
 normal methods for solving recurrences to get a closed-form solution.
-Note that $\frac{c(2n+1)}{n+1} < 2c$, so we can simplify the result.
+Note that $\tfrac{c(2n+1)}{n+1} < 2c$, so we can simplify the result.
 Expanding the recurrence, we get
 
 \begin{align*}
-T(n+1)  &\leq  2c + \frac{n+2}{n+1} T(n)\\
-           &=  2c + \frac{n+2}{n+1}\left (2c +
-                     \frac{n+1}{n}T(n-1)\right )\\
-           &=  2c + \frac{n+2}{n+1}\left (2c + \frac{n+1}{n}\left
-                    (2c + \frac{n}{n-1}T(n-2)\right )\right )\\
-           &=  2c + \frac{n+2}{n+1}\left (2c + \cdots +
-                         \frac{4}{3}(2c + \frac{3}{2}T(1))\right )\\
-           &=  2c\left (1 + \frac{n+2}{n+1}
-                  + \frac{n+2}{n+1}\frac{n+1}{n} + \cdots
-                  + \frac{n+2}{n+1}\frac{n+1}{n}\cdots\frac{3}{2}\right )\\
-           &=  2c\left (1 + (n+2)\left (\frac{1}{n+1}
-                  + \frac{1}{n} + \cdots + \frac{1}{2}\right )\right )\\
+T(n+1)  &\leq  2c + \tfrac{n+2}{n+1} T(n)\\
+           &=  2c + \tfrac{n+2}{n+1}\left (2c +
+                     \tfrac{n+1}{n}T(n-1)\right )\\
+           &=  2c + \tfrac{n+2}{n+1}\left (2c + \tfrac{n+1}{n}\left
+                    (2c + \tfrac{n}{n-1}T(n-2)\right )\right )\\
+           &=  2c + \tfrac{n+2}{n+1}\left (2c + \cdots +
+                         \tfrac{4}{3}(2c + \tfrac{3}{2}T(1))\right )\\
+           &=  2c\left (1 + \tfrac{n+2}{n+1}
+                  + \tfrac{n+2}{n+1}\tfrac{n+1}{n} + \cdots
+                  + \tfrac{n+2}{n+1}\tfrac{n+1}{n}\cdots\tfrac{3}{2}\right )\\
+           &=  2c\left (1 + (n+2)\left (\tfrac{1}{n+1}
+                  + \tfrac{1}{n} + \cdots + \tfrac{1}{2}\right )\right )\\
            &=  2c + 2c(n+2)\left (\mathcal{H}_{n+1} - 1\right )
 \end{align*}
 

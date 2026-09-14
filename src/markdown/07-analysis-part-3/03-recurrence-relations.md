@@ -84,29 +84,29 @@ Here is an interactive explanation of this recurrence relation.
 
 How about recursive binary search?
 In each invocation it does some constant work, and then calls itself with the half the search interval.
-This can be modeled by the recurrence $T(n) = T(\frac{n}{2}) + O(1)$,
+This can be modeled by the recurrence $T(n) = T(\tfrac{n}{2}) + O(1)$,
 where $n$ is the size of the interval.
 This recurrence is expanded as follows,
 where $m = \log_2(n)$ is the number of recursive levels until we reach the base case:
 
 \begin{align*}
-T(n) &~=~   T(\frac{n}{2}) + c
-      ~=~   (T(\frac{n}{4}) + c) + c
-      ~=~   ((T(\frac{n}{8}) + c) + c) + c
+T(n) &~=~   T(\tfrac{n}{2}) + c
+      ~=~   (T(\tfrac{n}{4}) + c) + c
+      ~=~   ((T(\tfrac{n}{8}) + c) + c) + c
 \\   &~=~   \underbrace{(((\cdots(c + c)\cdots) + c) + c) + c}_{m \text{ constant-time terms}}
      ~\in~  O(\log(n))
 \end{align*}
 
 Finally, Mergesort calls itself twice with the argument halved, and then performs a linear-time merge.
-This can be modeled by the recurrence $T(n) = 2\cdot T(\frac{n}{2}) + O(n)$.
+This can be modeled by the recurrence $T(n) = 2\cdot T(\tfrac{n}{2}) + O(n)$.
 By expanding the recurrence we can deduce the linearithmic complexity, $O(n\log(n))$:
 
 \begin{align*}
-T(n) &~=~   2 \cdot T(\frac{n}{2}) + c\cdot n
-      ~=~   2 \cdot (2 \cdot T(\frac{n}{4}) + c\cdot\frac{n}{2}) + c\cdot n
-\\   &~=~   2 \cdot (2 \cdot (\cdots (2 \cdot T(1) + c\cdot\frac{n}{2^m}) \cdots) + c\cdot\frac{n}{2}) + c\cdot n
-\\   &~=~   2^m c  +  \underbrace{2^{m-1} c\cdot\frac{n}{2^{m-1}}  +  2^{m-2} c\cdot\frac{n}{2^{m-2}}  +
-                              \cdots  +  2 c\cdot\frac{n}{2}  +  c\cdot n}_{m \text{ linear-time terms}}
+T(n) &~=~   2 \cdot T(\tfrac{n}{2}) + c\cdot n
+      ~=~   2 \cdot (2 \cdot T(\tfrac{n}{4}) + c\cdot\tfrac{n}{2}) + c\cdot n
+\\   &~=~   2 \cdot (2 \cdot (\cdots (2 \cdot T(1) + c\cdot\tfrac{n}{2^m}) \cdots) + c\cdot\tfrac{n}{2}) + c\cdot n
+\\   &~=~   2^m c  +  \underbrace{2^{m-1} c\cdot\tfrac{n}{2^{m-1}}  +  2^{m-2} c\cdot\tfrac{n}{2^{m-2}}  +
+                              \cdots  +  2 c\cdot\tfrac{n}{2}  +  c\cdot n}_{m \text{ linear-time terms}}
 \\   &~=~   c\cdot n + c\cdot n\cdot\log_2(n)
      ~\in~  O(n \log(n))
 \end{align*}
@@ -125,21 +125,21 @@ So, is there some kind of general formula for how to solve recurrence relations?
 ### The Master theorem {#analysis-3:master-theorem}
 
 There is a general way to solve so called *divide-and-conquer* recurrence relations.
-These have the form $T(n) = a\cdot T(\frac{n}{b}) + c\cdot n^k$,
+These have the form $T(n) = a\cdot T(\tfrac{n}{b}) + c\cdot n^k$,
 where $a$, $b$, $c$, and $k$ are constants.
-This recurrence describes a problem of size $n$ divided into $a$ subproblems of size $\frac{n}{b}$,
+This recurrence describes a problem of size $n$ divided into $a$ subproblems of size $\tfrac{n}{b}$,
 while $c\cdot n^k$ is the extra work needed to split the input or combine the partial solutions.
 Both binary search and Mergesort are examples of divide-and-conquer algorithms that fit this form.
 
 To solve a divide-and-conquer recurrence, we do the same as we did before, expand it until we reach the base case.
 The recursion stops when we reach $T(1)$, which is after $m=\log_b(n)$ levels.
 This is a bit tedious and we won't show it here, but after a while we get to the following sum,
-where $r = \frac{b^k}{a}$:
+where $r = \tfrac{b^k}{a}$:
 
 \begin{align*}
-T(n) &~=~   c \cdot a^m \cdot (\underbrace{1  +  \frac{b^{k}}{a}  +  \frac{b^{2k}}{a^2}  +
-                                    \frac{b^{3k}}{a^3}  +  \cdots  +  \frac{b^{mk}}{a^m}}_{m \text{ terms}})
-\\   &~=~   c \cdot a^m \cdot \sum_{i=0}^m (\frac{b^k}{a})^i
+T(n) &~=~   c \cdot a^m \cdot (\underbrace{1  +  \tfrac{b^{k}}{a}  +  \tfrac{b^{2k}}{a^2}  +
+                                    \tfrac{b^{3k}}{a^3}  +  \cdots  +  \tfrac{b^{mk}}{a^m}}_{m \text{ terms}})
+\\   &~=~   c \cdot a^m \cdot \sum_{i=0}^m (\tfrac{b^k}{a})^i
       ~=~   c \cdot a^m \cdot \sum_{i=0}^m r^i
 \end{align*}
 
@@ -155,7 +155,7 @@ The value of $\sum_{i=0}^m r^i$ depends on if $r$ is less than, equal to, or lar
 
 $r < 1$ (the subproblems dominate)
 
-:   The infinite sum $\sum_{i=0}^\infty r^i$ converges to $\frac{1}{1-r}$ which is constant,
+:   The infinite sum $\sum_{i=0}^\infty r^i$ converges to $\tfrac{1}{1-r}$ which is constant,
     so $\sum_{i=0}^m r^i \in O(1)$.
     Therefore $T(n) \in O(a^m) = O(n^d)$, where $d=\log_b(a)$,
     because $a^m = a^{\log_b(n)}$ = $n^{\log_b(a)} = n^d$.
@@ -168,15 +168,15 @@ $r = 1$ (they are comparable)
 
 $r > 1$ (the extra work dominates)
 
-:   Now it is a well-known summation with value $\frac{r^{m+1} - 1}{r - 1} \in O(r^m)$.
-    And since $b^m = n$, we get $T(n) \in O(a^m r^m)$ = $O(a^m (\frac{b^k}{a})^m)$ = $O(b^{km}) = O(n^k)$.
+:   Now it is a well-known summation with value $\tfrac{r^{m+1} - 1}{r - 1} \in O(r^m)$.
+    And since $b^m = n$, we get $T(n) \in O(a^m r^m)$ = $O(a^m (\tfrac{b^k}{a})^m)$ = $O(b^{km}) = O(n^k)$.
 
 We can summarise the above derivation as the following theorem.
 
 ::: topic
 #### The master theorem
 
-For any recurrence relation $T(n)$, of the form $T(n) = a\cdot T(\frac{n}{b}) + O(n^k)$,
+For any recurrence relation $T(n)$, of the form $T(n) = a\cdot T(\tfrac{n}{b}) + O(n^k)$,
 exactly one the following holds:
 
 $$
@@ -196,23 +196,23 @@ $$
 Here are some example recurrence relations that can be solved by the Master theorem:
 
 Binary search
-:   $T(n) = T(\frac{n}{2}) + O(1)$.
+:   $T(n) = T(\tfrac{n}{2}) + O(1)$.
     Here $a = 1$, $b = 2$ and $k = 0$, and $a = b^k$ so we get the second case:
     $T(n) \in O(n^k \log(n))$ = $O(\log(n))$.
 
 Mergesort
-:   $T(n) = 2\cdot T(\frac{n}{2}) + O(n)$.
+:   $T(n) = 2\cdot T(\tfrac{n}{2}) + O(n)$.
     Here $a = 2$, $b = 2$ and $k = 1$, and again $a = b^k$.
     So we get the second case, and $T(n) \in O(n^k \log(n))$ = $O(n \log(n))$.
 
 Three recursive calls
-:   $T(n) = 3\cdot T(\frac{n}{2}) + O(n)$.
+:   $T(n) = 3\cdot T(\tfrac{n}{2}) + O(n)$.
     Now $a = 3$, $b = 2$ and $k = 1$, and $a > b^k$.
     This gives the first case where the recursive work dominates,
     so $T(n) \in O(n^{\log_b(a)}) = O(n^{\log_2(3)}) \approx O(n^{1.6})$.
 
 Quadratic extra work
-:   $T(n) = 3\cdot T(\frac(n){2}) + O(n^2)$.
+:   $T(n) = 3\cdot T(\tfrac(n){2}) + O(n^2)$.
     Now $a = 3$, $b = 2$ and $k = 2$, and $a < b^k$.
     This is the third case, which tells us that the extra work dominates,
     so $T(n) \in O(n^k) = O(n^2)$.
@@ -247,7 +247,7 @@ plus some additions, which are $O(n)$ in the number of digits.
 So we get the following recurrence relation for the complexity of $x \cdot y$:
 
 \begin{align*}
-T(n)  &=  4 \cdot T(\frac{n}{2}) + O(n)
+T(n)  &=  4 \cdot T(\tfrac{n}{2}) + O(n)
 \end{align*}
 
 From the Master theorem we see that $a = 4$, $b = 2$ and $k = 1$, and $a > b^k$.
@@ -287,7 +287,7 @@ Formulated like this, we only use *three* multiplications instead of four, plus 
 This gives the following recurrence relation:
 
 \begin{align*}
-T(n)  &=  3 \cdot T(\frac{n}{2}) + O(n)
+T(n)  &=  3 \cdot T(\tfrac{n}{2}) + O(n)
 \end{align*}
 
 

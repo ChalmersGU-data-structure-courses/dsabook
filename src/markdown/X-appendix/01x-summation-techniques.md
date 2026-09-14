@@ -76,7 +76,7 @@ $$
 which is more commonly written
 
 $$
-\frac{n(n+1)}{2}
+\tfrac{n(n+1)}{2}
 $$
 
 At this point, we still must do the "test" part of the guess-and-test
@@ -129,8 +129,8 @@ dividing one by the other, as follows.
 $f(n)/f(n\!-\!1)$   --    3/1   4/2   5/3   6/4   7/5   8/6   9/7   10/8   11/9
 
 Dividing by both $n$ and $f(n-1)$ happen to give us useful patterns to
-work with. $\frac{f(n)}{n} = \frac{n+1}{2}$, and
-$\frac{f(n)}{f(n-1)} = \frac{n+1}{n-1}$. Of course, lots of other
+work with. $\tfrac{f(n)}{n} = \tfrac{n+1}{2}$, and
+$\tfrac{f(n)}{f(n-1)} = \tfrac{n+1}{n-1}$. Of course, lots of other
 guesses for function $g$ do not work. For example, $f(n) - n = f(n-1)$.
 Knowing that $f(n) = f(n-1) + n$ is not useful for determining the
 closed form solution to this summation. Or consider $f(n) - f(n-1) = n$.
@@ -138,19 +138,19 @@ Again, knowing that $f(n) = f(n-1) + n$ is not useful. Finding the right
 combination of equations can be like finding a needle in a haystack.
 
 In our first example, we can see directly what the closed-form solution
-should be. Since $\frac{f(n)}{n} = \frac{n+1}{2}$, obviously
+should be. Since $\tfrac{f(n)}{n} = \tfrac{n+1}{2}$, obviously
 $f(n) = n(n+1)/2$.
 
 Dividing $f(n)$ by $f(n-1)$ does not give so obvious a result, but it
 provides another useful illustration.
 
 \begin{align*}
-\frac{f(n)}{f(n-1)} &=  \frac{n+1}{n-1} \\
+\tfrac{f(n)}{f(n-1)} &=  \tfrac{n+1}{n-1} \\
 f(n) (n-1)          &=  (n+1) f(n-1)  \\
 f(n) (n-1)          &=  (n+1) (f(n) - n) \\
 n f(n) - f(n)       &=  n f(n) + f(n) - n^2 - n \\
 2 f(n)              &=  n^2 + n = n (n+1) \\
-f(n)                &=  \frac{n (n + 1)}{2}
+f(n)                &=  \tfrac{n (n + 1)}{2}
 \end{align*}
 
 Once again, we still do not have a proof that $f(n) = n(n+1)/2$. Why?
@@ -166,7 +166,7 @@ induction.
 Solve the summation
 
 $$
-\sum_{i=1}^n \frac{1}{2^i}
+\sum_{i=1}^n \tfrac{1}{2^i}
 $$
 
 We will begin by writing out a table listing the first few values of the
@@ -178,14 +178,14 @@ summation, to see if we can detect a pattern.
 $1-f(n)$   1/2   1/4   1/8    1/16    1/32    1/64
 
 By direct inspection of the second line of the table, we might recognise
-the pattern $f(n) = \frac{2^n-1}{2^n}$. A simple induction proof can
+the pattern $f(n) = \tfrac{2^n-1}{2^n}$. A simple induction proof can
 then prove that this always holds true. Alternatively, consider if we
 hadn't noticed the pattern for the form of $f(n)$. We might observe
 that $f(n)$ appears to be reaching an asymptote at 1. In which case, we
 might consider looking at the difference between $f(n)$ and the expected
 asymptote. This result is shown in the last line of the table, which has
-a clear pattern since the $i$ th entry is of $\frac{1}{2^i}$. From this we can
-easily deduce a guess that $f(n) = 1 - \frac{1}{2^n}$. Again, a simple
+a clear pattern since the $i$ th entry is of $\tfrac{1}{2^i}$. From this we can
+easily deduce a guess that $f(n) = 1 - \tfrac{1}{2^n}$. Again, a simple
 induction proof will verify the guess.
 :::
 
@@ -225,7 +225,7 @@ f(n) - rf(n)  &=  \sum_{i=0}^{n} ar^i - r\sum_{i=0}^{n} ar^i \\
 Thus, we get the result
 
 $$
-f(n) = \frac{a - ar^{n+1}}{1 - r}
+f(n) = \tfrac{a - ar^{n+1}}{1 - r}
 $$
 
 where $r \neq 1$.

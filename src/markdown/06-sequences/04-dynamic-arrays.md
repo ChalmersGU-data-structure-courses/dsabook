@@ -211,7 +211,7 @@ We can calculate the exact performance overhead of growing the array by any give
 
 Growing by a factor
 :   If we grow the array by a factor of $k > 1$ when resizing it,
-    then the overhead is at most $\frac{k}{k-1}$ elements copied per element added to the dynamic array.
+    then the overhead is at most $\tfrac{k}{k-1}$ elements copied per element added to the dynamic array.
     For example, when growing by 20% (k = 1.2), the overhead is 6 elements copied per add.
 
 In short, when resizing a dynamic array list,
@@ -223,8 +223,8 @@ or a low factor (such as 1.2) if we want to save memory.
 <!-- NICSMA: END -->
 
 For example, the Java standard library has the class ArrayList which is a dynamic array
--- it grows by 50% each time (multiplies by $\frac{3}{2}$).
-And the built-in lists in Python grow by as little as 12% (multiplies by $\frac{9}{8}$).
+-- it grows by 50% each time (multiplies by $\tfrac{3}{2}$).
+And the built-in lists in Python grow by as little as 12% (multiplies by $\tfrac{9}{8}$).
 This means that they have to grow more often but on the other hand they do not use as much memory.
 
 

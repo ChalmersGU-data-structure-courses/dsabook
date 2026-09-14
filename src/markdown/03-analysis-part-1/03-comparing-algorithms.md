@@ -229,19 +229,19 @@ To be more precise, the inner loop first runs $n$ times,
 then $n-1$ times, then $n-2$ times, and so on.
 The total number of comparisons is therefore
 $n+(n-1)+(n-2)+\cdots+1$, which can be simplified to $n(n+1)/2$.
-This is approximately $\frac{1}{2} n^2$, meaning that
-the running time is $T(n) \approx \frac{c_3}{2} n^2$.
+This is approximately $\tfrac{1}{2} n^2$, meaning that
+the running time is $T(n) \approx \tfrac{c_3}{2} n^2$.
 This is proportional to $n^2$, and we call this a *quadratic* running time, $O(n^2)$
 :::
 
 Note how much detail is simplified away by using complexity classes.
-We do not differentiate between $n^2$ and $\frac{1}{2}n^2$.
+We do not differentiate between $n^2$ and $\tfrac{1}{2}n^2$.
 There is no "triangular" complexity class.
 This may seem like a weakness of big-$O$, but it is in fact
 a strength that makes it such a useful tool for comparing algorithms.
 To convince yourself of this, consider this: runtime is only interesting
 for very large $n$. All algorithms are fast for small inputs.
-Even if an algorithm is $\frac{1}{100}n^2$, it is still much slower than
+Even if an algorithm is $\tfrac{1}{100}n^2$, it is still much slower than
 any $O(n)$ algorithm, for any sufficiently large $n$.
 
 

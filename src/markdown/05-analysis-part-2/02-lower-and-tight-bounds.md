@@ -243,9 +243,9 @@ Assume $f(n) = n^2$ and $g(n) = 10^9n\log(n)$, how can we classify $f$?
 To answer this we can calculate the limit of the quotient $f(n)/g(n)$ when $n$ grows:
 
 $$
-\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} =
-\lim_{n \rightarrow \infty} \frac{n^2}{10^9n\log(n)} =
-\frac{1}{10^9}\cdot\lim_{n \rightarrow \infty} \frac{n}{\log(n)} = \infty
+\lim_{n \rightarrow \infty} \tfrac{f(n)}{g(n)} =
+\lim_{n \rightarrow \infty} \tfrac{n^2}{10^9n\log(n)} =
+\tfrac{1}{10^9}\cdot\lim_{n \rightarrow \infty} \tfrac{n}{\log(n)} = \infty
 $$
 
 because $n$ grows faster than $\log(n)$.

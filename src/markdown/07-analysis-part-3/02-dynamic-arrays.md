@@ -51,8 +51,8 @@ What if we don't double the size of the backing array,
 but instead multiply with another constant factor $k>1$?
 This means that if the backing array has size $n$, it will be resized to size $kn$.
 
-The argument above still holds, but the pretended cost for the fast append should be $1+\frac{k}{k-1}$ instead of 3.
-This means that every fast append will save $\frac{k}{k-1}$ time units in our account.
+The argument above still holds, but the pretended cost for the fast append should be $1+\tfrac{k}{k-1}$ instead of 3.
+This means that every fast append will save $\tfrac{k}{k-1}$ time units in our account.
 After appending $(k-1)n$ elements, the backing array is full again,
-and then our account contains $(k-1)n\cdot\frac{k}{k-1} = kn$ time units.
+and then our account contains $(k-1)n\cdot\tfrac{k}{k-1} = kn$ time units.
 This is exactly what we need to pay for the resize.

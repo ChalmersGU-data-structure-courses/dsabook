@@ -47,7 +47,7 @@ nodes, and because only internal nodes now have child pointers, the
 overhead fraction in this case will be approximately
 
 $$
-\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} = \frac{P}{P + D}
+\tfrac{\tfrac{n}{2} (2P)}{\tfrac{n}{2} (2P) + Dn} = \tfrac{P}{P + D}
 $$
 
 If $P = D$, the overhead drops to about one half of the total space.
@@ -61,7 +61,7 @@ and no data field while the leaf nodes store only a pointer to the data
 field. This implementation requires
 
 $$
-\frac{n}{2}2P + \frac{n}{2}(P+D)
+\tfrac{n}{2}2P + \tfrac{n}{2}(P+D)
 $$
 
 units of space. If $P = D$, then the overhead is $3P/(3P + D) = 3/4$. It

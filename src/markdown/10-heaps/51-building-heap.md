@@ -88,8 +88,8 @@ as were at the previous level, and an additional height of one. The
 maximum sum of total distances that elements can go is therefore
 
 $$
-\sum_{i=1}^{\log(n)} (i-1)\frac{n}{2^i}
-= \frac{n}{2}\sum_{i=1}^{\log(n)} \frac{i-1}{2^{i-1}}
+\sum_{i=1}^{\log(n)} (i-1)\tfrac{n}{2^i}
+= \tfrac{n}{2}\sum_{i=1}^{\log(n)} \tfrac{i-1}{2^{i-1}}
 $$
 
 

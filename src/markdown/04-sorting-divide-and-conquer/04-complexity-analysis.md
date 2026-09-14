@@ -62,15 +62,15 @@ This visualisation provides a running time analysis for Mergesort.
 #### Complexity for arbitrary array sizes
 
 In our analysis we assumed that we had exactly $n = 2^k$ elements, so what if the array size is not a power of two?
-Let us assume that the array has $n'$ elements, where $\frac{n}{2}<n'<n$.
-Since $n=2^k$ is a power of two, then $\frac{n}{2}=2^{k-1}$ is also a power of two.
+Let us assume that the array has $n'$ elements, where $\tfrac{n}{2}<n'<n$.
+Since $n=2^k$ is a power of two, then $\tfrac{n}{2}=2^{k-1}$ is also a power of two.
 Our analysis above concluded that the complexity of sorting a size $n=2^k$ array is $O(n\log(n))$.
-Now, since $\frac{n}{2}=2^{k-1}$ is also a power of two, the same analysis gives the complexity
-of sorting a size $\frac{n}{2}$ array to be $O(\frac{n}{2}\log(\frac{n}{2}))$.
+Now, since $\tfrac{n}{2}=2^{k-1}$ is also a power of two, the same analysis gives the complexity
+of sorting a size $\tfrac{n}{2}$ array to be $O(\tfrac{n}{2}\log(\tfrac{n}{2}))$.
 But this can be simplified to $O(n\log(n))$, because we can ignore constant factors inside big-$O$.
 
-And since sorting arrays of size $\frac{n}{2}$ and $n$ both have the same complexity,
-then that must be true for all array sizes in between, $\frac{n}{2}<n'<n$.
+And since sorting arrays of size $\tfrac{n}{2}$ and $n$ both have the same complexity,
+then that must be true for all array sizes in between, $\tfrac{n}{2}<n'<n$.
 
 @Fig:mergesort-split-merge shows an example where we sort an array with $n=11$ elements.
 Note that the last level is $k=4$, and $2^{k-1}<11<2^k$.
@@ -116,7 +116,7 @@ that is, when one partition becomes empty, and the other contains $n-1$ elements
 Thus, the total amount of work is determined by the summation:
 
 $$
-\sum_{i=1}^{n} i = \frac{1}{2} n (n-1) \; \in \; O(n^2)
+\sum_{i=1}^{n} i = \tfrac{1}{2} n (n-1) \; \in \; O(n^2)
 $$
 
 ::: dsvis
@@ -194,7 +194,7 @@ into partitions of sizes $0$ and $n-1$, or $1$ and $n-2$, and so on.
 Now the average-case cost $T(n)$ can be computed from the following equation:
 
 \begin{align*}
-T(n) &= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
+T(n) &= cn + \tfrac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 \\
 T(0) = T(1) &= c
 \end{align*}

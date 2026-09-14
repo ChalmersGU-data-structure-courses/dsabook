@@ -111,7 +111,7 @@ We have a nested for loop, where the inner loop depends on the loop variable of 
 So the total number of comparisons is
 
 $$
-(n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \frac{1}{2} n (n-1)
+(n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \tfrac{1}{2} n (n-1)
 $$
 
 As we will learn later (in @sec:analysis-1:order-of-growth), we usually discard constant factors,

@@ -53,9 +53,9 @@ g(n) &= \log(n) + 5
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -74,9 +74,9 @@ g(n) &= \log(n^2)
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -95,9 +95,9 @@ g(n) &= \log(n)
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -116,9 +116,9 @@ g(n) &= \log(n)^2
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -137,9 +137,9 @@ g(n) &= \log(n)
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -158,9 +158,9 @@ g(n) &= \log(n)^2
 - [x] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -179,9 +179,9 @@ g(n) &= \log(10)
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -200,9 +200,9 @@ g(n) &= 10 n^2
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -221,9 +221,9 @@ g(n) &= n \log(n)
 - [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -242,9 +242,9 @@ g(n) &= 3^n
 - [x] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -263,9 +263,9 @@ g(n) &= n^n
 - [x] $f(n)$ is in $O(g(n))$
 
 ::: hints
-- if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
-- if $\lim \frac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow$ constant, then $f(n)$ is $\Theta(g(n))$.
+- if $\lim \tfrac{f(n)}{g(n)} \rightarrow \infty$, then $f(n)$ is in $\Omega(g(n))$.
 :::
 ::::::::::::::::::::::::::::::
 

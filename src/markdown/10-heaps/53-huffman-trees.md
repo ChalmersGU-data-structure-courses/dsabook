@@ -260,7 +260,7 @@ Usually we measure the cost as the number of *bits* that is needed to encode one
 The formula can be reorganised as follows, where $f_i$ is the (relative) frequency of letter $i$ and $f_T$ is the total for all letter frequencies:
 
 $$
-\frac{c_1 f_1 + c_2 f_2 + \cdots + c_n f_n}{f_T}
+\tfrac{c_1 f_1 + c_2 f_2 + \cdots + c_n f_n}{f_T}
 $$
 
 ::: example
@@ -280,10 +280,10 @@ For example, the cost of E is 1 and the cost of K and Z are 6 each.
 Now we can calculate the expected cost per letter using the formula above:
 
 $$
-\frac{
+\tfrac{
 (4 \times 32) + (3 \times 42) + (1 \times 120) + (6 \times 7) + (3 \times 42) + (5 \times 24) + (3 \times 37) + (6 \times 2)
 }{306}
-\;=\; \frac{785}{306} \;\approx\; 2.57
+\;=\; \tfrac{785}{306} \;\approx\; 2.57
 $$
 
 A fixed-length code for these eight letters would require

@@ -274,7 +274,7 @@ Because computing the factorial function directly is a time-consuming
 process, it can be useful to have an equation that provides a
 good approximation.
 Stirling's approximation states that
-$n! \approx \sqrt{2\pi n}(\frac{n}{e})^n$,
+$n! \approx \sqrt{2\pi n}(\tfrac{n}{e})^n$,
 where $e \approx 2.71828$
 ($e$ is the base for the system of natural logarithms) [#]_.
 Thus we see that while $n!$ grows
@@ -489,17 +489,17 @@ Since this appears so often, it will help you later if you can get comfortable w
 Here is a list of useful summations, along with their closed-form solutions.
 
 \begin{align*}
-\sum_{i = 1}^{n} i &= \frac{n (n+1)}{2} \\
-\sum_{i = 1}^{n} i^2 &= \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
+\sum_{i = 1}^{n} i &= \tfrac{n (n+1)}{2} \\
+\sum_{i = 1}^{n} i^2 &= \tfrac{2 n^3 + 3 n^2 + n}{6} = \tfrac{n(2n + 1)(n + 1)}{6} \\
 \sum_{i = 1}^{\log(n)} n &= n \log(n) \\
-\sum_{i = 0}^\infty a^i &= \frac{1}{1-a}  ~~~ \text{if } 0 < a < 1 \\
-\sum_{i = 0}^{n} a^i &= \frac{a^{n+1} - 1}{a - 1}  ~~~ \text{if } a \neq 1
+\sum_{i = 0}^\infty a^i &= \tfrac{1}{1-a}  ~~~ \text{if } 0 < a < 1 \\
+\sum_{i = 0}^{n} a^i &= \tfrac{a^{n+1} - 1}{a - 1}  ~~~ \text{if } a \neq 1
 \end{align*}
 
 As special cases to the last summation, we have the following two:
 
 \begin{align*}
-\sum_{i = 1}^{n} \frac{1}{2^i} &= 1 - \frac{1}{2^n} \\
+\sum_{i = 1}^{n} \tfrac{1}{2^i} &= 1 - \tfrac{1}{2^n} \\
 \sum_{i = 0}^{n} 2^i &= 2^{n+1} - 1
 \end{align*}
 
@@ -512,7 +512,7 @@ As a corollary to the previous summation:
 Finally:
 
 \begin{align*}
-\sum_{i = 1}^{n} \frac{i}{2^i} &= 2 - \frac{n+2}{2^n}
+\sum_{i = 1}^{n} \tfrac{i}{2^i} &= 2 - \tfrac{n+2}{2^n}
 \end{align*}
 
 <!--
@@ -520,7 +520,7 @@ The sum of reciprocals from 1 to $n$, called the [Harmonic Series]{.term} and wr
 To be more precise, as $n$ grows, the summation grows closer to
 
 $$
-\mathcal{H}_n \approx \log_e(n) + \gamma + \frac{1}{2n},
+\mathcal{H}_n \approx \log_e(n) + \gamma + \tfrac{1}{2n},
 $$
 
 where $\gamma$ is Euler's constant and has the value 0.5772...
@@ -753,7 +753,7 @@ The proof is by mathematical induction.
 
     $$
     S(n-1) = \sum_{i=1}^{n-1} i =
-    \frac{(n-1)((n-1)+1)}{2} = \frac{(n-1)(n)}{2}.
+    \tfrac{(n-1)((n-1)+1)}{2} = \tfrac{(n-1)(n)}{2}.
     $$
 
 3. **Use the assumption from the induction hypothesis for**
@@ -765,8 +765,8 @@ The proof is by mathematical induction.
 
     \begin{align*}
     \sum_{i=1}^n i &= \left(\sum_{i=1}^{n-1} i\right) + n
-                        = \frac{(n-1)(n)}{2} + n\\
-                    &=\frac{n^2 - n + 2n}{2} = \frac{n(n+1)}{2}.
+                        = \tfrac{(n-1)(n)}{2} + n\\
+                    &=\tfrac{n^2 - n + 2n}{2} = \tfrac{n(n+1)}{2}.
     \end{align*}
 
     Thus, by mathematical induction,
