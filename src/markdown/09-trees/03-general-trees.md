@@ -1,4 +1,9 @@
-## Tree representations {#trees:representations}
+
+## General trees {#trees:general-trees}
+
+::: TODO
+- Prio 1: double-check that the text is ok
+:::
 
 A binary tree is a special case of a more general tree in which each node has at most two children.
 Many applications, however, require trees with an arbitrary number of children or with different kinds of nodes serving different roles.
@@ -34,30 +39,30 @@ Object-oriented languages commonly express this distinction through a class hier
 Functional languages often use algebraic data types, defining a tree as one of several possible node variants.
 In this book, however, we usually assume that all nodes belong to the same class unless the distinction is important.
 
-### General trees {#trees:general-trees}
+### Multiway trees {#trees:multiway-trees}
 
-A [general tree]{.term} is a tree in which a node may have any number of children.
-Such trees are also called [multiway trees]{.term} or [rose trees]{.term}.
+A [multiway tree]{.term} (also known as a or [rose trees]{.term}) is a tree in which a node may have any number of children.
 This contrasts with binary trees, where each node has at most two children.
-In a pointer-based representation, a general-tree node will therefore usually store its children in a list or some similar container, rather than in fixed left and right child fields.
+A multiway-tree node will therefore usually store its children in a list or array, rather than in fixed left and right child fields.
 
-We can represent such general trees as follows:
+We can represent such multiway trees as follows:
 
     datatype Tree of T:
-        value: T                          // Value stored in the node
-        children: List of Tree of T = []  // List of subtrees
+        value: T                 // Value stored in the node
+        children: List or Array  // Children subtrees
         size: Int
 
-### Traversing a general tree {#trees:general-traversal}
+#### Traversing a multiway tree
 
-We have seen the three traditional tree traversals for binary trees: [preorder]{.term}, [postorder]{.term}, and [inorder]{.term}.
-For general trees, preorder and postorder extend naturally from the binary-tree case.
+In @sec:trees:bintree-traversal we saw the three traditional tree traversals for binary trees:
+[preorder]{.term}, [postorder]{.term}, and [inorder]{.term}.
+For multiway trees, preorder and postorder extend naturally from the binary-tree case.
 In a preorder traversal, we first process the root, and then traverse each subtree from left to right.
 In a postorder traversal, we first traverse all subtrees from left to right, and then process the root.
 
 Inorder traversal, however, does not have a similarly natural generalisation.
 For a binary tree, inorder works because each internal node has exactly two subtrees, so the node can be processed between the left and right subtrees.
-In a general tree, an internal node may have any number of children, so there is no obvious place where the node itself should be processed.
+In a multiway tree, an internal node may have any number of children, so there is no obvious place where the node itself should be processed.
 One can invent an arbitrary convention, such as traversing the leftmost subtree first, then processing the root, and then traversing the remaining subtrees, but such a rule is not especially useful as a general pattern.
 
 ::: dsvis
@@ -74,8 +79,7 @@ Visualisation of postorder traversal.
 ```
 :::
 
-If each node stores its children in a list, then implementations of preorder and postorder traversal are straightforward.
-The code is simple because we defer the management of the children to the underlying `List` implementation.
+If each node stores its children in a list or an array, then implementations of preorder and postorder traversal are straightforward.
 
     preorder(node):
         process(node.value)

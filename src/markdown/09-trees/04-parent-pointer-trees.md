@@ -1,17 +1,19 @@
 
-## Case study: Disjoint sets {#trees:disjoint-sets}
+## Case study: Parent-pointer trees {#trees:parent-pointer-trees}
 
+::: TODO
+- Prio 1: Move details about union/find to graph chapter
+:::
 
 @Sec:trees:general-trees showed a possible way to implement a general tree,
 where the children are represented by a list of pointers to subtrees.
-This becomes a little complicated, since the number of children can vary a lot
-for different nodes in the same tree.
 
-But one common property for all trees is that every node can have only one *parent*.
+This is not the only possible representation of a tree.
+One common property for all trees is that every node can have only one *parent*.
 This means that we can come up with another implementation of trees, where each node only points to its parent.
 We call this a [parent-pointer tree]{.term}, and it has a very simple declaration:
 
-    datatype ParentTree:
+    datatype ParentPointerTree:
         value    // The value of the node
         parent   // The parent of the node
 

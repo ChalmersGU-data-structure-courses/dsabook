@@ -1,10 +1,9 @@
+
 ## Binary trees {#trees:binary-trees}
 
 ::: TODO
+- Prio 1: make sure text is consistent (lots of old stuff are moved to other sections)
 - Prio 1: update figures
-- Prio 2: update section, here's what should be included:
-    - Binary search trees (should it? There's a chapter 11 for that.)
-- Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
 As we explained in the introduction, trees form a family of related structures.

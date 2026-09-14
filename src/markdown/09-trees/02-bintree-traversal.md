@@ -1,7 +1,8 @@
+
 ## Traversing binary trees {#trees:bintree-traversal}
 
 ::: TODO
-- Prio 2: refer to previous chapter
+- Prio 1: make sure text is consistent (it is a new section now)
 :::
 
 Suppose we want to process the contents of a binary tree, for instance by printing all the values or converting the tree to a list.
