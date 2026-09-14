@@ -2,7 +2,7 @@
 ## Performance analysis {#sorting-1:performance-analysis}
 
 ::: TODO
-- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+- Prio 1: Rewrite sections - currently the are just copy-pasted from other parts
 :::
 
 

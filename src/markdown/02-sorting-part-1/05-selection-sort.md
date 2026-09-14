@@ -2,7 +2,8 @@
 ## Selection sort {#sorting-1:selection-sort}
 
 ::: TODO
-- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+- Prio 1: add figure next to the pseudocode showing the array and the variables in the middle of running
+- Prio 1: section is shortened - make sure it's still ok
 :::
 
 Let's say you have a large pile of books that you want to put in your bookshelf, in alphabetical order by author's surname.

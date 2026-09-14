@@ -2,7 +2,8 @@
 ## Insertion sort {#sorting-1:insertion-sort}
 
 ::: TODO
-- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+- Prio 1: add figure next to the pseudocode showing the array and the variables in the middle of running
+- Prio 1: section is shortened - make sure it's still ok
 :::
 
 Consider again the problem of sorting a pile of books.

@@ -1,6 +1,10 @@
 
 ## Linear search {#sorting-1:linear-search}
 
+::: TODO
+- Prio 1: We don't want the subsubsection
+:::
+
 One of the most fundamental tasks that we use computers for is *searching*.
 We want to find an object that matches some criteria, in a collection of objects.
 In fact, most of the data structures and algorithms that we will present in this book

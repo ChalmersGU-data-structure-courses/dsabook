@@ -1,6 +1,13 @@
 
 ## Binary search in arrays {#sorting-1:binary-search}
 
+::: TODO
+- Prio 1: Rewrite "How is this related to data structures" - the section is moved
+- Prio 1: Move natural/key-based before "Python/Java" way
+- Prio 2: Flatten subsections, reduce introduction
+- Prio 2: Use better terms for the "Python/Java way", don't call the section "Two main approaches"
+:::
+
 No library keeps books in random order, because linear search is too slow.
 Instead, books are sorted in the shelves, for example alphabetically by author name
 and title.

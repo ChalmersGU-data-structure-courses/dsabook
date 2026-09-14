@@ -3,8 +3,9 @@
 
 ::: TODO
 - Prio 1: Merge with subsection "Comparing algorithms" from previous section
+- Prio 1: Move natural/key-based before "Python/Java" way
 - Prio 2: Flatten subsections, reduce introduction
-- Prio 2: Use better terms for the "Python/Java way"
+- Prio 2: Use better terms for the "Python/Java way", don't call the section "Two main approaches"
 :::
 
 <!-- OPENDSA: START -->

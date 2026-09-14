@@ -2,7 +2,8 @@
 ## Overview of sorting algorithms {#sorting-1:overview}
 
 ::: TODO
-- Prio 2: add nice figure(s) of insertion/selection/bubble sorting books in a bookshelf
+- Prio 1: bubblesort is removed, double check if the text is consistent
+- Prio 2: add nice figure(s) of insertion/selection sorting books in a bookshelf
 :::
 
 Imagine that we want to sort books in a bookshelf, what different strategies can we use to do that?

@@ -2,8 +2,8 @@
 ## Quicksort {#sorting-2:quicksort}
 
 ::: TODO
+- Prio 1: some parts are moved out - check that the text is still ok
 - Prio 1: invariants
-- Prio 1: divide in two sections? Quicksort + Quicksort alternatives
 - Prio 2: make the text more coherent
 :::
 

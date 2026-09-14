@@ -1,6 +1,12 @@
 
 # Searching and sorting {#sorting-1}
 
+::: TODO
+- Prio 1: rewrite (and shorten)
+- Prio 1: make consistent - now it's two sections merged
+- Prio 1: move "Comparing algorithms" to 1.1?
+:::
+
 <!-- OPENDSA: START -->
 We have seen that, when an array is sorted in increasing order, *binary
 search* can be used to find items in it efficiently. But what about when

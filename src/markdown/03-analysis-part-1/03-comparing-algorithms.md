@@ -2,6 +2,7 @@
 ## Comparing algorithm performance {#analysis-1:comparing-algorithms}
 
 ::: TODO
+- Prio 1: It is merged with "Growth rates" - make sure the text is coherent
 - Prio 2: Shorten subsection "What to measure"
 - Prio 2: Shorten examples
 - Prio 3: Switch from bubble sort to selection/insertion sort.
