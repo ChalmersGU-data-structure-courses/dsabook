@@ -149,3 +149,18 @@ Here is a visualisation for the merge step.
 ```
 :::
 
+
+#### Use just one temporary array
+
+Notice that in the implementation above, the merge function creates a new auxiliary array every time it is called.
+This is quite inefficient, because it takes some time to allocate memory for a new array,
+which will be be destroyed directly when merge is finished.
+A simple optimisation is to create one single auxiliary array before the very first recursive call,
+and reuse this array in all invocations of merge.
+The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`, for the reference to the auxiliary array.
+Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
+
+    mergeSort(arr):
+        temp = new Array(arr.size)
+        mergeSort(arr, temp, 0, arr.size-1)
+
