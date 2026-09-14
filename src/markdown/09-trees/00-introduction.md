@@ -1,6 +1,10 @@
 
 # Trees {#trees}
 
+::: TODO
+- Prio 1: Replace "Full, perfect, complete" with "Imbalanced, balanced, perfect"
+:::
+
 [Tree]{.term} structures let us organise data hierarchically.
 So far, we have mainly studied data structures that organise elements in a linear sequence, such as arrays, linked lists, stacks, and queues.
 In those structures, each element is followed by at most one next element.
@@ -72,3 +76,33 @@ In a file system tree, the nodes are files and folders, and the parent of a node
 Trees contain data in nodes, but the meaning of the data and the meaning of the parent-child relationship depend on the application.
 So there is no single tree data structure in the same way that there is a single stack or queue abstraction.
 Instead, trees form a family of related structures.
+
+#### Full, perfect, and complete binary trees
+
+<!-- OPENDSA: START -->
+Several restricted forms of binary tree are sufficiently important to warrant special names.
+<!-- OPENDSA: END -->
+In a [full binary tree](#full-tree){.term}, every node is either a leaf node or an internal node with exactly two non-empty children.
+A [perfect binary tree]{.term} is a full binary tree in which all leaves are at the same level.
+Equivalently, every level of a perfect binary tree is completely full.
+<!-- OPENDSA: START -->
+A [complete binary tree]{.term} has a shape obtained by starting at the root and filling the tree level by level from left to right.
+In a complete binary tree of height $d$, all levels except possibly level $d$ are completely full.
+<!-- OPENDSA: END -->
+The bottom level is filled from the left side.
+
+@Fig:full_complete_bintrees illustrates the differences between full and complete binary trees.
+Neither property implies the other.
+A perfect binary tree satisfies both properties.
+In the figure, tree (a) is full but not complete, while tree (c) is complete but not full.
+A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete binary tree, while
+a [Huffman coding tree]{.term} is an example of a full binary tree.
+
+::: {#fig:full_complete_bintrees}
+![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/9.1-full-perfect-complete-bintree.svg)
+
+Examples of restricted binary tree shapes:
+(a) is full but not complete,
+(b) is perfect and therefore both full and complete,
+and (c) is complete but not full.
+:::
