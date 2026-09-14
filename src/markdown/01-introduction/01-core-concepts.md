@@ -1,6 +1,11 @@
 
 ## Core concepts {#intro:core-concepts}
 
+::: TODO
+- Prio 1: This is now very short section, needs revision?
+- Prio 1: Add another term, "Problem" (compared with Algorithm)
+:::
+
 The subjects in this book fall into one of four categories:
 
 Data structures

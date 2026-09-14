@@ -1,6 +1,10 @@
 
 ## Practical examples {#intro:examples}
 
+:::
+- Prio 1: Add 1-3 new examples, make the existing ones shorter (not so technical)
+:::
+
 Here we list some real-world examples where data structures and algorithms are crucial.
 
 #### Example: Searching texts

@@ -1,6 +1,12 @@
 
 ## Data structures and abstract data types {#intro:DS-and-ADT}
 
+::: TODO
+- Prio 1: This is merged with the ADT section - rewrite!
+- Prio 1: Binsearch is moved so we cannot refer to it
+- Prio 1: Still good to talk about arrays vs sorted arrays
+:::
+
 We write programs to solve problems.
 This might sound obvious, but sometimes we forget this and do not analyse the problem properly.
 Returning to the comparison between linear search and binary search,
