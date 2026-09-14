@@ -8,7 +8,7 @@
 - Prio 3: both recursive and iterative versions
 :::
 
-### Inserting into a BST {#search-trees:BST-deletion}
+### Inserting into a BST {#search-trees:BST-insertion}
 
 How do we add a value to a BST?
 First of all we have to search for it.
