@@ -1,5 +1,5 @@
 
-## Order of growth and time functions {#analysis-1:order-of-growth}
+### Order of growth and time functions {#analysis-1:order-of-growth}
 
 Imagine that you are a bookworm and you have 10,000 books divided into 100 bookshelfs.
 Now you want to sort all your books so that you can search for them quickly (using binary search of course).
