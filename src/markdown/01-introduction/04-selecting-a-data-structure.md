@@ -1,5 +1,5 @@
 
-## The right data structure for the problem {#intro:select-data-structure}
+## Data structures and abstract data types {#intro:DS-and-ADT}
 
 We write programs to solve problems.
 This might sound obvious, but sometimes we forget this and do not analyse the problem properly.

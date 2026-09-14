@@ -1,5 +1,5 @@
 
-## Bubble sort {#sorting-1:bubble-sort}
+## Bubble sort
 
 ::: TODO
 - Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running

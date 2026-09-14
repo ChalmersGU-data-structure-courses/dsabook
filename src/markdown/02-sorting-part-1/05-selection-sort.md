@@ -109,25 +109,3 @@ Now try for yourself to see if you understand how Selection sort works.
 ::::::::
 
 
-### Selection sort analysis
-
-We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
-
-- The outer loop is iterated $n$ times in total.
-- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
-
-As you might notice, this is exactly the same as the number of comparisons Bubble sort makes.
-So, Selection sort makes $n(n-1)/2$ comparisons, which is quadratic.
-
-The advantage compared to Bubble sort is that Selection sort makes a lot fewer swaps.
-For each outer iteration it only makes one swap, so the total number of swaps will be $n-1$ (we get the last element in place "for free").
-So, for Selection sort, the number of swaps grows *linearly* with the size of the array.
-(But don't forget that the number of comparisons is still quadratic.)
-
-::: dsvis
-This visualisation analyses the number of comparisons and swaps required by Selection sort.
-
-``` {.jsav-animation src="Sorting/SelectionSortAnalysisCON.js" links="Sorting/SelectionSortAnalysisCON.css" name="Selection Sort Analysis Slideshow"}
-```
-:::
-

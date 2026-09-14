@@ -1,5 +1,5 @@
 
-## Abstract data types {#intro:abstract-data-types}
+### Abstract data types {#intro:abstract-data-types}
 
 An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
 This is done by specifying what operations that can be performed on it, and how these operations should behave.
