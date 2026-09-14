@@ -100,22 +100,6 @@ The advantage to doing this is that then we can safely use the simplest pivot se
 And if we use the take-first pivot strategy we do not have to swap the pivot with the first element at the start of every partitioning.
 Depending on the computer and programming language, this can yield a slight improvement compared to using a random pivot.
 
-#### Running Insertion sort in a single final pass
-
-There is a variant of the optimisation above:
-<!-- OPENDSA: START -->
-When Quicksort partitions are below a certain size, do nothing!
-The values within that partition will be out of order. However, we do know that all
-values in the array to the left of the partition are smaller than all
-values in the partition. All values in the array to the right of the
-partition are greater than all values in the partition. Thus, even if
-Quicksort only gets the values to "nearly" the right locations, the
-array will be close to sorted. This is an ideal situation in which to
-take advantage of the best-case performance of Insertion sort. The final
-step is a single call to Insertion sort to process the entire array,
-putting the records into final sorted order.
-<!-- OPENDSA: END -->
-
 
 #### Alternative partitioning approaches
 
