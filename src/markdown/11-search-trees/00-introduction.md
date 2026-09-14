@@ -1,6 +1,11 @@
 
 # Search trees {#search-trees}
 
+::: TODO
+- Prio 1: Note that all search tree operations are linear in the *height* of the tree
+- Prio 1: Discuss *ordered* set/map operations
+:::
+
 This chapter covers *search trees*,
 which are trees that have *ordering invariants* so that they can implement sets or maps.
 
@@ -17,3 +22,18 @@ who all have their own way of making the basic operations logarithmic, $O(\log(n
 
 Not all data structures used for searching are trees
 -- for exampe, *Skip lists* is an interesting hybrid between trees and *linked lists*.
+
+
+<!--
+### Ordered sets and maps
+
+Search trees have an additional property that for example hash tables do not: the elements are stored in sorted order. This means that we can implement some additional operations that sometimes are very useful: we can find the *minimum* or *maximum* values easily, and we can even find the *predecessor* or *successor* of a given value, or the *floor* or *ceiling*.
+
+- *minimum*(): the smallest value in the set
+- *predecessor*($e$): the largest value in the set that is smaller than $e$
+- *floor*($e$): the largest value that is smaller or equal to $e$
+- (and similar for *maximum*, *successor* and *ceiling*)
+
+And of course there are corresponding operations for *ordered maps* too.
+-->
+

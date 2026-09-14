@@ -14,8 +14,9 @@ For every node, the heights of its subtrees differ by at most 1.
 
 Note that this does not mean that AVL trees are perfectly balanced.
 But the invariant guarantees that the height of the tree is never more than
-1.44 times the height of a perfectly balanced binary search tree.
-(Side note: 1.44 is actually $1/\log_2(\phi)$, where $\phi=(1+\sqrt{5})/2$ is the *golden ratio*.)
+1.44 times the height of a perfectly balanced binary search tree.^[
+    1.44 is actually $1/\log_2(\phi)$, where $\phi=(1+\sqrt{5})/2$ is the *golden ratio*.
+]
 As always when it comes to complexity the exact constant is not important,
 but what it says is that the maximum height of an AVL tree is $O(\log(n))$ where $n$ is its size.
 
@@ -38,7 +39,7 @@ Now we have to ensure that we restore the balance whenever a tree node becomes u
 and we do that by using the *tree rotations* from @sec:search-trees:rotations.
 The tree can become unbalanced in two cases -- when *inserting* and when *deleting* values.
 
-### Implementing AVL nodes
+#### Implementing AVL nodes
 
 We can store the balance factor in every node,
 and this uses very little extra memory since there are only three possibilities, $-1$, $0$ and $+1$.
@@ -114,7 +115,7 @@ and afterwards all nodes are AVL balanced!
 The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
 performing *right* rotations.
 
-### Implementing insertion
+#### Implementing insertion
 
 AVL tree insertion and deletion are easiest to implement as recursive functions.
 They are very similar to the normal BST insertion and deletion,
@@ -167,22 +168,8 @@ But this doesn't change the complexity of addition, because it is logarithmic to
 In summary, we have come up with our first *efficient* general-purpose data structure for sets and maps.
 This is also one of the most common ones in practice, and very easy to implement.
 
-
-<!--
-### Ordered sets and maps
-
-Search trees have an additional property that for example hash tables do not: the elements are stored in sorted order. This means that we can implement some additional operations that sometimes are very useful: we can find the *minimum* or *maximum* values easily, and we can even find the *predecessor* or *successor* of a given value, or the *floor* or *ceiling*.
-
-- *minimum*(): the smallest value in the set
-- *predecessor*($e$): the largest value in the set that is smaller than $e$
-- *floor*($e$): the largest value that is smaller or equal to $e$
-- (and similar for *maximum*, *successor* and *ceiling*)
-
-And of course there are corresponding operations for *ordered maps* too.
--->
-
-
-### Yet another sorting algorithm
+:::: example
+#### Example: Yet another sorting algorithm
 
 Using AVL trees we can define a very simple but efficient sorting algorithm.
 First we build an AVL tree from all elements, and then we do an *inorder traversal*
@@ -205,5 +192,4 @@ So why do not anyone use it?
 It is because the hidden constants are bigger than for Mergesort:
 it takes longer time and also uses more extra memory.
 
-<!-- TODO: write something about Heapsort -->
-
+::::
