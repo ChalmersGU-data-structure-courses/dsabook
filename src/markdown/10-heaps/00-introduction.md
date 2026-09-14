@@ -1,5 +1,5 @@
 
-# Heaps for priority queues {#heaps}
+# Heaps {#heaps}
 
 ::: TODO
 - Prio 2: add an example figure (with 2-3 example heaps)
