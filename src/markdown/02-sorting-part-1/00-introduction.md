@@ -1,5 +1,5 @@
 
-# Sorting, part 1 {#sorting-1}
+# Searching and sorting {#sorting-1}
 
 <!-- OPENDSA: START -->
 We have seen that, when an array is sorted in increasing order, *binary

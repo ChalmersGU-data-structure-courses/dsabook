@@ -1,5 +1,5 @@
 
-## Terminology and notation {#sorting-1:terminology}
+#### Terminology and notation
 
 ::: TODO
 - Prio 1: move subsection "Comparing algorithms" to next section (Comparing values), and reduce it
@@ -14,7 +14,7 @@ In other words, the sorting problem is to arrange a set of elements so that they
 If we instead are interested in the more general problem of *key-based sorting*, the definition becomes slightly more complicated:
 The (key-based) *sorting problem* is to arrange the list into any order $s$ such that $a_{s_1},a_{s_2},\ldots,a_{s_n}$ have keys obeying the property $k_{s_1}\leq k_{s_2}\leq\cdots\leq k_{s_n}$. -->
 
-### Comparing algorithms
+#### Comparing algorithms
 
 <!-- OPENDSA: START -->
 When comparing two sorting algorithms, the simplest approach would be to
@@ -65,7 +65,7 @@ memory as possible. We will call attention to sorting algorithms that
 require significant extra memory beyond the input array.
 <!-- OPENDSA: END -->
 
-### Terminology
+#### Terminology
 
 Here are some important terminology which we can use to categorise different algorithms.
 

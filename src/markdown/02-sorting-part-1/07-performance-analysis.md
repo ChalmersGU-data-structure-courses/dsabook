@@ -1,5 +1,5 @@
 
-## Performance analysis {#search-sort:performance-analysis}
+## Performance analysis {#sorting-1:performance-analysis}
 
 ::: TODO
 - Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
