@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: new section with snippets copied from other places, rewrite text
+- Prio 1: join the two texts about backoff sorting algorithm
 :::
 
 ### Using a backoff sorting algorithm {#sorting-2:backoff-algorithm}
@@ -35,7 +36,6 @@ A simple improvement is to replace Quicksort with a faster sort for smaller arra
 This is a very common improvement, and usually one uses Insertion sort as the backoff algorithm.
 Now, at what size should we switch to Insertion sort?
 The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
-Note that in @sec:sorting-2:mergesort-optimisations we discussed exactly the same improvement for Mergesort.
 
 
 ### Bottom-up Mergesort {#sorting-2:bottomup-mergesort}
@@ -205,6 +205,27 @@ and the most common algorithm for solving it is a modification the Lomuto partit
 - Multi-key Quicksort (aka three-way radix Quicksort)
 - Example: Suffix arrays
 :::
+
+### Cocktail shaker sort
+
+- aka, bidirectional bubble sort
+
+### Gnome sort
+
+- variant of insertion sort
+
+### Binary insertion sort
+
+- Improvement of insertion sort
+
+### Shell sort
+
+- Improvement of insertion sort
+
+### Heapsort
+
+- Improvement of selection sort
+- See later chapter
 
 ::::::
 -->

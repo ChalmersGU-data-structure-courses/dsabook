@@ -154,7 +154,7 @@ The range query "are there any elements between $a$ and $b$?",
 can then be answered by the following algorithm:
 
 -   Find the position in the array of the *smallest* element $e \geq a$.
-    (This can be done efficiently using *binary search*, from @sec:intro:searching.)
+    (This can be done efficiently using *binary search*, from @sec:sorting-1:binary-search.)
 -   Check if $e\leq b$.
 
 So, if we have a sorted array all kinds of range queries can be implemented efficiently.

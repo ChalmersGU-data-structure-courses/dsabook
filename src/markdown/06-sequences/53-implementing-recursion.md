@@ -85,7 +85,7 @@ than the version shown in the example. But it is not always possible to
 replace recursion with iteration. Recursion, or some imitation of it, is
 necessary when implementing algorithms that require multiple branching
 such as in the Towers of Hanoi algorithm, or when
-traversing a tree (@sec:trees:traversal).
+traversing a tree (@sec:trees:bintree-traversal).
 The Mergesort (@sec:sorting-2:mergesort) and Quicksort (@sec:sorting-2:quicksort)
 sorting algorithms also require recursion.
 

@@ -2,6 +2,7 @@
 ## Comparing algorithm performance {#analysis-1:comparing-algorithms}
 
 ::: TODO
+- Prio 1: replace the bubble-sort example with selection or insertion sort!
 - Prio 1: It is merged with "Growth rates" - make sure the text is coherent
 - Prio 2: Shorten subsection "What to measure"
 - Prio 2: Shorten examples
@@ -146,7 +147,7 @@ to be $O(1)$, because we can assume that the strings are never longer than, say,
 ::: example
 #### Example: Linear search
 
-Recall the linear search algorithm from @sec:intro:searching,
+Recall the linear search algorithm from @sec:sorting-1:linear-search,
 it searches for a given value in an array.
 The size $n$ of the input is the length of the array.
 The algorithm looks at each array value in turn, comparing with the given value.
@@ -308,7 +309,7 @@ in a modest time frame of a single second. For say an hour, the difference would
 be much more extreme.
 
 The logarithmic growth rate could be the time to find a book in your sorted bookshelf using binary search
-(recall @sec:intro:searching).
+(recall @sec:sorting-1:binary-search).
 In this case we search 32 books in one millisecond.
 But in 10 ms we can search in $10^{15}$ books,
 and in 100 ms we can search a library with more books than there are atoms in the universe.

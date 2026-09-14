@@ -90,7 +90,7 @@ Consider the problem of finding the factorial of $n$.
 
 
 ::: dsvis
-Here is an example where we reason about the *linear search* algorithm from @sec:intro:searching.
+Here is an example where we reason about the *linear search* algorithm from @sec:sorting-1:linear-search.
 
 ``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```

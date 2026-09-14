@@ -173,7 +173,7 @@ This is also one of the most common ones in practice, and very easy to implement
 
 Using AVL trees we can define a very simple but efficient sorting algorithm.
 First we build an AVL tree from all elements, and then we do an *inorder traversal*
-(see @sec:trees:traversal) to get the elements in sorted order:
+(see @sec:trees:bintree-traversal) to get the elements in sorted order:
 
     avlTreeSort(list):
         tree = new ampty AVL tree

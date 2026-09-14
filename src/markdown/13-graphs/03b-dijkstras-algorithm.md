@@ -83,7 +83,7 @@ Is there a better way to store this SPT?
 A standard tree implementation where nodes point to their children does not support an efficient operation for adding a new edge,
 and it will not help us find the path to a specific node after we have finished the algorithm.
 Instead we want a tree where nodes point to their parent, a *parent-pointer tree*.
-We introduced them in @sec:trees:disjoint-sets, and they also fit very well for representing the SPT.
+We introduced them in @sec:trees:parent-pointer-trees, and they also fit very well for representing the SPT.
 A parent-pointer tree makes it easy to extend the tree with a new leaf by just attaching a new node to an existing node.
 Here is a simple datatype that works just fine:
 

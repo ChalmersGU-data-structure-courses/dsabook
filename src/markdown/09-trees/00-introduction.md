@@ -20,8 +20,8 @@ and [search trees]{.term}, for implementing sets and maps ([Chapter @sec:search-
 
 This chapter begins with the basic ideas and terminology for trees.
 We then discuss binary trees (@sec:trees:binary-trees),
-how to represent trees in general (@sec:trees:representations),
-and show an example of a simple data structure for [disjoint sets]{.term} (@sec:trees:disjoint-sets).
+how to represent trees in general (@sec:trees:general-trees),
+and show an example of a simple data structure for [parent-pointer trees]{.term} (@sec:trees:parent-pointer-trees).
 
 #### Tree terminology
 

@@ -44,7 +44,7 @@ There are many other versions of sorting problems, for instance the problem
 of sorting integers is subtly different than the problem of sorting strings
 because we can do arithmetic on integers, which can allow faster algorithms.
 
-Another problem that we have encountered is *searching* in an array (@sec:intro:searching).
+Another problem that we have encountered is *searching* in an array.
 This problem can be divided into searching in an *arbitrary* array (solved by the linear search algorithm)
 and searching in a *sorted* array (solved by the binary search algorithm).
 The second problem can on the one hand be solved much faster, but that comes with a prize --

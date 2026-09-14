@@ -94,7 +94,7 @@ while the lower bound for a problem is the least work that you *must* do.
 
 The sorting algorithms in [Chapter @sec:sorting-2] are all asymptotically much better than
 the algorithms from [Chapter @sec:sorting-1].
-Byt *why* is that -- or rather, why are Bubble, Selection and Insertion sort so much slower?
+Byt *why* is that -- or rather, why are Selection and Insertion sort so much slower?
 The crucial bottleneck is that only *adjacent* records are compared or swapped.
 To analyse this we first need to define the concept of *inversion*.
 
@@ -112,7 +112,7 @@ This will reduce the number of inversions with at most $1$,
 because all other inversions in the array will still be inversions.
 Therefore, any algorithm which can only swap *adjacent* elements has to perform at least as many swaps as there are inversions.
 And since there are a quadratic number of inversions in the worst case, any such algorithm will at least be quadratic.
-This includes Insertion sort and Bubble sort.
+This includes Insertion sort.
 
 ::: TODO
 - Prio 1: is the argument below ok?

@@ -21,7 +21,7 @@ Suppose we have a collection of songs by different artists, and we want to searc
 If the collection is just a list, with new songs added at the end, both kinds of search will be slow.
 Grouping songs by artist could make artist searches faster, but it would not help us search by title.
 Instead, we can create two separate indexes: one in which all songs are ordered alphabetically by artist, and another in which they are ordered by title.
-Then anyone who knows the alphabet can quickly find a song or an artist using a variant of the binary search algorithm (see @sec:intro:searching).
+Then anyone who knows the alphabet can quickly find a song or an artist using a variant of the binary search algorithm (see @sec:sorting-1:binary-search).
 
 #### Example: Travel by train
 

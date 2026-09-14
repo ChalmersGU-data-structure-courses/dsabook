@@ -65,5 +65,5 @@ That problem is 10,000 times larger, is it still feasible to do it using your ol
 These questions can be answered by algorithm analysis,
 and it is not certain that it takes 10,000 times longer to solve a 10,000 times larger problem --
 it depends on the algorithm.
-(The specific example of searching in a list is discussed in more detail in @sec:intro:searching.)
+(The specific example of searching in a list is discussed in more detail in @sec:sorting-1:binary-search.)
 

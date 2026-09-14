@@ -41,7 +41,7 @@ for example, @fig:BST-rebalance shows that we might need to reorganise the tree 
 
 Instead we need to a find weaker balance invariant, and there are lots of different possibilities.
 For example, in @sec:search-trees:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,
-and in @sec:search-trees:23-and-B-trees we discuss 2/3 trees and B-trees which use a different invariants.
+and in [@sec:search-trees:23-trees;@sec:search-trees:B-trees] we discuss 2-3 trees and B-trees which use a different invariants.
 
 ::: example
 #### Example: Scapegoat trees
@@ -66,7 +66,7 @@ and the implementation details are left as an exercise to the reader.
 :::
 
 Another possibility is to use non-binary trees --
-for example, in @sec:search-trees:23-and-B-trees we introduce the 2-3 trees and the B-trees.
+for example, in [@sec:search-trees:23-trees;@sec:search-trees:B-trees] we introduce the 2-3 trees and the B-trees.
 Allowing the tree nodes to have more than two children makes it possible to keep the tree completely balanced at all times,
 and therefore 2-3 trees and B-trees have logarithmic complexity.
 

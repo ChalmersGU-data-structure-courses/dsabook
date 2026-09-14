@@ -35,7 +35,7 @@ This systematic numbering ensures that a node's position in the array directly c
 As a result, the indices of a node's parent and children can be computed easily using simple arithmetic.
 
 An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
-If the tree is traversed in *breadth-fist order* (see @sec:trees:traversal), the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
+If the tree is traversed in *breadth-fist order* (see @sec:trees:bintree-traversal), the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
 In other words, the nodes of the tree are stored in the array level by level, with each level appearing consecutively.
 An example binary heap is shown in @fig:HeapTreeExample, and its array representation is shown in @fig:HeapArrayExample.
 

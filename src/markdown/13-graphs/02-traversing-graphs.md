@@ -10,7 +10,7 @@ Many graph algorithms involve *traversing* a graph, starting from a given vertex
 This is similar to tree traversal, but made more difficult by the presence of cycles.
 A simple recursive procedure would get stuck in an infinite loop.
 
-Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:trees:traversal,
+Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:trees:bintree-traversal,
 but we have to keep track of visited vertices to avoid infinite loops.
 Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex.
 Stop when there are no edges from visited to unvisited vertices.
@@ -94,7 +94,7 @@ The traversal algorithm can be translated into pseudocode like this:
 To turn this high level description of the algorithm into an efficient procedure,
 we need to decide how to represent the agenda.
 If we use a *stack* for the agenda we will get a depth-first traversal,
-similar to how one can implement DFS for trees (see @sec:trees:traversal).
+similar to how one can implement DFS for trees (see @sec:trees:bintree-traversal).
 
 The edges selected and the order in which vertices are visited depend on the order in which `outgoingEdges` produces edges.
 Let us assume that `outgoingEdges` gives edges in albethical order of their destination,
@@ -140,7 +140,7 @@ Here are some examples:
 - If we only want to know which vertices are *reachable* from $s$,
   we do not need to track edges used at all: we can keep vertices in the agenda, and use the visited set as our result.
 
-As already discussed for trees in @sec:trees:traversal, DFS can also be implemented using recursion instead of an agenda.
+As already discussed for trees in @sec:trees:bintree-traversal, DFS can also be implemented using recursion instead of an agenda.
 In this way the recursion call stack acts as an implicit agenda.
 Instead of pushing an edge to the agenda, we simply call the DFS function recursively with the edge as argument.
 But note that we still need to check for visited vertices, and this visitation set needs to be another argument to the function.

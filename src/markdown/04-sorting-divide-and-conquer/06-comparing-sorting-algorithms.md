@@ -7,8 +7,7 @@
 
 In this chapter and [Chapter @sec:sorting-1]
 we discussed five different sorting algorithms in quite some detail.
-How can we compare these algorithms accoring to the terminology that we
-introduced in @sec:sorting-1:terminology, as well as their complexity analysis?
+How can we compare these algorithms accoring to the terminology below?
 
 ### Stability and in-place-ness
 
@@ -39,7 +38,7 @@ It is in fact possible to do the merging in-place,
 but this involves moving around elements in a way similar to Insertion sort,
 which is both is more complex and less efficient as the algorithm above.
 
-If you recall our categorisation of sorting algorithms from @sec:sorting-1:terminology,
+If you recall our categorisation of sorting algorithms,
 we are now ready to categorise Mergesort:
 
 - *Not in-place*: as we already mentioned this is too costly.
@@ -51,7 +50,7 @@ we are now ready to categorise Mergesort:
 Compared to Mergesort, the partitioning process is completely in-place,
 but on the other hand we cannot be certain that the internal order between equal elements are preserved.
 This means that Quicksort is not a stable algorithm, and we have no guarantee for a good time complexity.
-Here is how we can categorise Quicksort according the three parameters from @sec:sorting-1:terminology:
+Here is how we can categorise Quicksort according the three parameters:
 
 - In-place: *yes*, we do not have to create any intermediate arrays.
 - Stable: *no*, equal elements might change order.

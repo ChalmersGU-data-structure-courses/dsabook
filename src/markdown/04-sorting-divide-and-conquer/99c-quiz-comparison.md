@@ -6,21 +6,6 @@ Here are a few multiple choice questions that ask you to compare the
 sorting algorithms that we learned about in the last two chapters.
 
 
-:::::::::: question ::::::::::
-Answer TRUE or FALSE.
-
-Selection sort is generally faster than the Bubble sort on the same input.
-
-- [x] True
-- [ ] False
-
-::: hints
-- Selection sort can be viewed as an optimisation of Bubble sort.
-- On each pass, Selection sort just picks out the next record,
-while Bubble sort has to do a lot of swapping.
-:::
-::::::::::::::::::::::::::::::
-
 
 
 :::::::::: question ::::::::::
@@ -97,7 +82,6 @@ unsorted list?
 A person sorting a hand of cards might reasonably use which sorting algorithm?
 
 - [x] Insertion sort
-- [ ] Bubble sort
 - [ ] Quicksort
 - [ ] Mergesort
 
@@ -118,7 +102,6 @@ Which of the following sorting methods will be the most
 efficient if the input is already in sorted order?
 
 - [x] Insertion sort
-- [ ] Bubble sort
 - [ ] Selection sort
 - [ ] Mergesort
 
@@ -135,7 +118,6 @@ Which of the following sorting methods will be best
 if the number of swaps done is the only measure of efficiency?
 
 - [x] Selection sort
-- [ ] Bubble sort
 - [ ] Insertion sort
 - [ ] Mergesort
 - [ ] Quicksort
@@ -155,13 +137,12 @@ Which of the following sorting algorithms has a worst case complexity of
 $O(n \log(n))$?
 
 - [x] Mergesort
-- [ ] Bubble sort
 - [ ] Selection sort
 - [ ] Insertion sort
 - [ ] Quicksort
 
 ::: hints
-- Bubble sort, Insertion sort, and Selection sort are
+- Insertion sort, and Selection sort are
 referred to as "quadratic sorts" because of their worst-case time cost.
 - Quicksort's worst-case behaviour comes when the pivot is chosen badly.
 :::

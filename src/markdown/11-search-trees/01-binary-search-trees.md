@@ -120,7 +120,7 @@ traversing a binary tree, we want to make sure that we are visiting the
 required nodes (no more and no less).
 <!-- OPENDSA: END -->
 
-In @sec:trees:traversal we saw several tree traversals that visited every node of the tree,
+In @sec:trees:bintree-traversal we saw several tree traversals that visited every node of the tree,
 such as depth-first and breadth-first search.
 In this section we have also discussed searching, adding and removing in a BST,
 which each go down a single path of the tree.
