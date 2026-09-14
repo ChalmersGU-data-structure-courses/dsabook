@@ -1,6 +1,11 @@
 
 ## Open addressing and linear probing {#hash-tables:open-addressing}
 
+::: TODO
+- (Peter) Add a (level-3) subsection about linear probing, and another about other probing variants
+- (Peter) I think the heading should only be "Open addressing" - we want to be clear that they are different things
+:::
+
 A downside of separate chaining is that we abandon the benefits of storing all our
 map entries directly in an array. Storing values in a contiguous memory sequence
 has major performance benefits due to the caching behaviour of modern computers,

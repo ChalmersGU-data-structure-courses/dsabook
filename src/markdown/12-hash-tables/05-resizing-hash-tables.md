@@ -1,6 +1,11 @@
 
 ## Resizing hash tables {#hash-tables:resizing}
 
+::: TODO
+- (Peter) I swapped places for deletion and resizing: this means that shrinking becomes part of this section
+- (Peter) double-check the text
+:::
+
 In both separate chaining hash tables and open addressing,
 we want to ensure that the hash table is not too crowded,
 or performance will degrade.
@@ -38,3 +43,24 @@ The threshold value can be tweaked by developers to find a good compromise
 between memory usage and lookup performance. In @fig:LinProbe2, the resize
 was done when the load factor was about to go from $0.6$ to $0.8$, instead
 decreasing it to $0.4$. Note how the resize broke up the 8-14-23-cluster.
+
+### Shrinking tables
+
+![Resizing a linear probing hash table in the presence of lazy deletion. Tombstones of deleted entries (marked X) are not transferred. After the resize, the load factor is $1/2$.](images/11.5-lazy-deletion-resize.svg){#fig:LazyResize}
+
+With our hash tables supporting removal of elements, we may want to set a lower
+threshold for load factor, and shrink the table down to free up memory.
+This needs to be done carefully so repeated add/remove cycles
+never cause a resize on every operation,
+similar to what we discussed for dynamic arrays in @sec:sequences:shrink-array.
+
+One example strategy for resizing is to try to maintain the load factor around $0.5$,
+and never let it exceed $0.75$ or fall below $0.25$.
+Each resize would set the size of the table to double the current number of
+elements (to a minimum of $1$), ensuring that the load factor is
+always $0.5$ immediately after a resize.
+@fig:LazyResize shows a resize operation performed on a linear probing hash table.
+The resize ends up shrinking the array, since the new size is based on the number
+of actual values, ignoring tombstones.
+
+

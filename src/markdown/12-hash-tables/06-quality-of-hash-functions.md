@@ -3,6 +3,8 @@
 
 ::: TODO
 - Discuss why we want primes in Horner's method: gives best distribution
+- (Peter) Add a (numbered) subsection for hashing objects and arrays
+- (Peter) Discuss why Horner's method is not very good, just good (the Aa-BB vulnerability should come here and not wait until complexity)
 :::
 
 Implementations of hash tables typically do not include the hash functions,

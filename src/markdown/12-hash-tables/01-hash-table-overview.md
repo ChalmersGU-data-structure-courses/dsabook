@@ -1,5 +1,9 @@
 
-## Hash table overview {#hash-tables:overview}
+## Introduction to hash tables {#hash-tables:overview}
+
+::: TODO
+- (Peter) I think we can skip the first step (keys are small integers) and go directly to arbitrary integers
+:::
 
 This section provides an overview of hash tables, glossing over many technical details.
 We will be building up to hash tables in three steps:
@@ -8,7 +12,7 @@ We will be building up to hash tables in three steps:
 - Generalising to maps where keys are arbitrary integers (compression and collision handling).
 - Generalising further to maps where keys are objects (hashing).
 
-### Maps where keys are small integers
+#### Maps where keys are small integers
 
 When designing a data structure, always ask yourself "can I solve this using arrays?".
 The reason is that arrays are memory efficient and blazingly fast,
@@ -41,7 +45,7 @@ There are two caveats to this claim:
   easily dominate the runtime, and lead to exessive memory use.
 
 
-### Maps where keys are arbitrary integers
+#### Maps where keys are arbitrary integers
 
 If our keys are arbitrary integers, a simple array would use too much memory.
 Instead we will use a small array, and *compress* numbers to valid indices.
@@ -77,7 +81,7 @@ Both of these methods are used in practice, and we will look more closely at eac
 but first we will finish the last step of the overview and move from integer keys to
 object keys.
 
-### Maps where keys are objects
+#### Maps where keys are objects
 
 Suppose we want to create a map where keys are email addresses and values are names,
 using a hash table. We can not calculate $\text{``alice@example.com''}\bmod N$
