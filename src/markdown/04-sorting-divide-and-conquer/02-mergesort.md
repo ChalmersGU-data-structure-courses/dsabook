@@ -2,10 +2,10 @@
 ## Mergesort {#sorting-2:mergesort}
 
 ::: TODO
+- Prio 1: some parts are moved out - check that the text is still ok
 - Prio 1: flatten some subsections
-- Prio 1: divide in two sections? Mergesort + Mergesort alternatives
-- Prio 2: general rewrite of the text
-- Prio 2: invariants
+- Prio 1: general rewrite of the text
+- Prio 1: invariants
 :::
 
 A divide-and-conquer algorithm fits very well into the general problem of sorting an array:
@@ -101,30 +101,6 @@ Now here is a full proficiency exercise to put it all together.
 ```
 :::
 
-
-### Categorising Mergesort
-
-Note that the merging algorithm is not in-place, becaue we allocate space for the temporary result array.
-It is in fact possible to do the merging in-place,
-but this involves moving around elements in a way similar to Insertion sort,
-which is both is more complex and less efficient as the algorithm above.
-
-If you recall our categorisation of sorting algorithms from @sec:sorting-1:terminology,
-we are now ready to categorise Mergesort:
-
-- *Not in-place*: as we already mentioned this is too costly.
-- *Stable*: two equal elements will never swap places (if we implement merging correctly).
-- *Not adaptive*: the algorithm runs the same number of steps regardless of how the array is sorted from the start.
-
-#### Insertion sort as a variant of Mergesort
-
-Mergesort splits the input array into two equal-size arrays.
-But what happens if we split in another way?
-What if we always make the end part just one single element?
-
-Merging will then be the same as inserting this singleton element into a sorted array,
-and this is exactly what Insertion sort does!
-So conceptually, we can view Insertion sort as a corner case of Mergesort, where we split very unevenly.
 
 #### Divide-heavy or combine-heavy
 

@@ -150,31 +150,6 @@ We assume that we select the middle element as the pivot.
 :::
 
 
-### Categorising Quicksort
-
-Compared to Mergesort, the partitioning process is completely in-place,
-but on the other hand we cannot be certain that the internal order between equal elements are preserved.
-This means that Quicksort is not a stable algorithm, and we have no guarantee for a good time complexity.
-Here is how we can categorise Quicksort according the three parameters from @sec:sorting-1:terminology:
-
-- In-place: *yes*, we do not have to create any intermediate arrays.
-- Stable: *no*, equal elements might change order.
-- Adaptive: *yes*, but it the complexity will never be better than linearithmic, $O(n\log(n))$.
-
-#### Selection sort as a variant of Quicksort
-
-What happens if we are extremely unlucky (or stupid) with the pivot selection?
-
-Let us say that we always select the smallest possible pivot.
-This means that the lower partition will always be empty, and the upper partition will decrease by one in each step.
-The first time we will find the smallest element and put it first in the array.
-The second time we will find the second smallest element and put it after the first.
-Next time we will find the third smallest element and put it after the second, and so on.
-
-This is exactly how Selection sort works!
-So conceptually, we can view Selection sort as a corner case of Quicksort, where we partition very unevenly.
-
-
 ### Implementing Quicksort {#sorting-2:quicksort-implementation}
 
 Now we're almost ready to implement Quicksort, but one small but important thing remains.

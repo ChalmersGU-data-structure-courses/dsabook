@@ -57,16 +57,20 @@ One problem with both algorithms are that they use a lot of extra space -- the f
 For a computer this means that the input is one array (the floor), and the output is another (the bookshelf).
 Sometimes this is exactly what we want -- if we don't want to change the original array, but make a sorted copy.
 But in most cases we want the algorithm to be *in-place*, meaning that we want to modify the original array.
+
+
+In-place
+:   When the memory use of the algorithm does not grow (too much) when the array size grows.
+    This means that we cannot use an additional array, and therefore have to modify the original array.
+:   An *in-place* sorting algorithm modifies the input array directly and does not build a new array for the sorted result.
+    Usually one also requires that the algorithm does not allocate too much extra space while operating,
+    where "not too much" can mean at most logarithmic extra memory in the size of the array.
+    One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:mergesort), while most other algorithms are.
+
+
 Translating this to our bookshelf analogy:
 the books are already in the shelf, unsorted, and we want to rearrange them without using the floor or another bookshelf.
-We start with a very simple in-place sorting algorithm:
-
-Bubble sort
-:   As long as there are two adjacent books out of order, swap them.
-    Note that this description is too unspecified to be a real algorithm --
-    in particular, we have to know in which order we should look at adjacent books.
-
-What about Selection sort and Insertion sort -- can we make them in-place?
+So, can we make Selection sort and Insertion sort in-place?
 Yes, if we introduce a *marker* that we put between two books.
 The meaning is that the books to the left of the marker are already sorted, while the ones to the right are still unsorted.
 When we start no books are sorted, so we put the marker to the left of the first book.

@@ -132,30 +132,3 @@ Finally, some situations require that a sorting algorithm use as little
 memory as possible. We will call attention to sorting algorithms that
 require significant extra memory beyond the input array.
 <!-- OPENDSA: END -->
-
-#### Terminology
-
-Here are some important terminology which we can use to categorise different algorithms.
-
-Stability
-:   Sometimes the array contains several elements that compare equal --
-    for example, if we want to sort an array of books by author, it might contain several different books by the same author.
-    Sometimes it is desirable to maintain the initial ordering between two elements that compare equal.
-    <!-- OPENDSA: START -->
-    A sorting algorithm is said to be *stable* if it does not change the relative ordering of records with identical values.
-    Many, but not all, of the sorting algorithms presented in this book are stable, or can be made stable with minor changes.
-    <!-- OPENDSA: END -->
-
-Adaptivity
-:   An *adaptive* sorting algorithm can take advantage of the existing order in the input.
-    In general this means that the algorithm runs faster if the list is almost sorted, compared to if the list is completely random.
-    The classic example of an adaptive sorting algorithm is Insertion sort (see @sec:sorting-1:insertion-sort).
-
-In-place
-:   When the memory use of the algorithm does not grow (too much) when the array size grows.
-    This means that we cannot use an additional array, and therefore have to modify the original array.
-:   An *in-place* sorting algorithm modifies the input array directly and does not build a new array for the sorted result.
-    Usually one also requires that the algorithm does not allocate too much extra space while operating,
-    where "not too much" can mean at most logarithmic extra memory in the size of the array.
-    One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:mergesort), while most other algorithms are.
-

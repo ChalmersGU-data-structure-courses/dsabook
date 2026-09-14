@@ -38,9 +38,7 @@ Then repeat the following until the unsorted part is empty:
 The $i$'th pass of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$ in the array.
 <!-- OPENDSA: START -->
 In other words, Selection sort first finds the smallest element in an unsorted list, then the next smallest, and so on.
-Its unique feature is that there are few swaps,
 <!-- OPENDSA: END -->
-much fewer than Bubble sort.
 To find the next-smallest element we have to search through the entire unsorted portion of the array,
 but only one swap is required to put the element into place.
 The algorithm above can be implemented as follows in pseudocode:
@@ -64,11 +62,6 @@ are preserved at each step, and the end result is that the whole array is sorted
 Like any algorithm, Selection sort can be implemented in several slightly different ways.
 For example, we could have written Selection sort to
 find the largest element and put it at the end of the array, then the next smallest, and so on.
-That version of Selection sort would behave very similar to our Bubble sort implementation,
-<!-- OPENDSA: START -->
-except that rather than repeatedly swapping adjacent values to get the next-largest element into place,
-it instead remembers the position of the element to be selected and does one swap at the end.
-<!-- OPENDSA: END -->
 
 
 :::::::: online
