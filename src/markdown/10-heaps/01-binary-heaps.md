@@ -2,15 +2,15 @@
 ## Binary heaps {#heaps:binary-heaps}
 
 ::: TODO
-- Prio 1: update figures
+- Prio 1: add discussion + code for storing priority and element
+- Prio 1: add figure about a complete tree
 - Prio 1: remove some code (replace with text)
-- Prio 1: move subsection "Building a heap" to a separate online section (together with Heapsort)
 :::
 
 The [binary heap]{.term} is a data structure that can be used to implement an efficient priority queue.
 It is organised as a tree that satisfies the heap property and has an additional invariant: it must also be a [complete binary tree]{.term}.
 
-Recall from @sec:trees:full-perfect-complete that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
+A complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
 As a result, a complete binary tree with $n$ nodes has exactly one possible shape.
 Because of this structure, the height $h$ of the tree satisfies: $2^h \le n < 2^{h+1}$, which implies that $h\in O(\log n)$.
 Complete binary trees are therefore balanced, and any operation that is linear in the height of the tree runs in $O(\log n)$ time.
@@ -20,7 +20,7 @@ Using a complete tree has several advantages:
 * A new element can only be placed in one specific position -- the next available spot on the lowest level -- so we do not need to decide where to insert it.
 * The tree can be stored directly in an array, making the implementation simple and space-efficient.
 
-### Representing complete binary trees as arrays
+### Representing complete binary trees as arrays {#heaps:represent-complete-bintree}
 
 Since a complete binary tree has exactly one possible shape for a given number of nodes,
 we can take advantage of this structure and store it directly in an array.
@@ -33,46 +33,6 @@ The nodes are numbered level by level, starting at the root and proceeding from 
 The root node is assigned index $0$, its left child index $1$, its right child index $2$, and so on.
 This systematic numbering ensures that a node's position in the array directly corresponds to its logical position in the tree.
 As a result, the indices of a node's parent and children can be computed easily using simple arithmetic.
-
-<!--
-::: {#fig:example_complete_bintree}
-:::: online
-```jsav-figure
-let av = NewAV();
-let bt = av.ds.binarytree({nodegap: 25});
-let rt = bt.root("0");
-rt.left("1");
-rt.right("2");
-rt.left().left("3");
-rt.left().right("4");
-rt.right().left("5");
-rt.right().right("6");
-rt.left().left().left("7");
-rt.left().left().right("8");
-rt.left().right().left("9");
-rt.left().right().right("10");
-rt.right().left().left("11");
-bt.layout();
-av.displayInit();
-av.recorded();
-```
-::::
-
-:::: latex
-```
-                                  ___ 0 ___
-                                /           \
-                              1               2
-                            /   \           /   \
-                          3       4       5       6
-                         / \     / \     /
-                        7   8   9  10   11
-```
-::::
-
-Complete binary tree node numbering.
-:::
--->
 
 An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
 If the tree is traversed in *breadth-fist order* (see @sec:trees:traversal), the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
@@ -122,7 +82,7 @@ Here is a practice exercise for calculating the array indices of nodes.
 ```
 :::
 
-### Using dynamic arrays
+### Implementing binary heaps using dynamic arrays {#heaps:implement-using-dynmic-arrays}
 
 So, arrays are a compact and efficient representation of complete binary trees.
 But they cannot change their size, and if we want to implement a priority queue
@@ -135,12 +95,11 @@ In our pseudocode below we will assume that we can index them as normal arrays,
 but they also have special methods `addLast` and `removeLast` that grow and shrink
 the array with one element.
 
-
-### Implementing binary heaps
-
 It is important not to confuse the logical representation of a heap with its physical implementation.
 Logically, a heap is a tree structure that satisfies the heap property.
 In practice, however, it is implemented using a dynamic array that represents a complete binary tree.
+
+    datatype BinaryHeap = DynamicArray
 
 When describing heap operations, we will usually explain them in terms of tree operations,
 since this makes the behaviour of the algorithms easier to understand conceptually.
@@ -148,61 +107,9 @@ Nevertheless, it is important to remember that in an actual implementation these
 are carried out using array indices and array updates, rather than explicit tree pointers.
 
 
-<!--
-    datatype BinaryHeap implements PriorityQueue:
-        arr = new DynamicArray()   // The dynamic array storing the heap
--->
-
-
-<!--
-The implementation uses the standard less-than (<) operator to compare elements.
-The exact definition of this operator determines the priority ordering of the elements in the heap.
--->
-
-<!--
-When constructing a heap, you can specify how elements of type `T` should be compared by providing a function that determines whether its first argument is less than its second argument.
-By default, this comparison uses the standard less-than operator, which results in a minimum heap where smaller elements have higher priority.
--->
-
-<!--
-Note that because the heap is stored in an array, we refer to nodes by their logical position in the heap rather than by pointers to node objects.
-In practice, this logical position corresponds directly to the same index in the underlying array, so the node's position in the heap and its position in the array are identical.
--->
-
-<!--
-The data type includes several private auxiliary functions used when inserting and removing elements from the heap.
-The function `isLeaf` determines whether a given position corresponds to a leaf node in the tree, while `leftChild`, `rightChild`, and `parent` return the positions of the left child, right child, and parent of a given node, respectively.
-
-    isLeaf(pos, size):
-        return pos >= size / 2
-    leftChild(pos):
-        return 2 * pos + 1
-    rightChild(pos):
-        return 2 * pos + 2
-    parent(pos):
-        return int((pos - 1) / 2)
-
-We also use an auxiliary function `swap(arr,i,j)` for swapping the values in cells $i$ and $j$ in in array.
-(This is the same function as we used in Quicksort partition, see @sec:sorting-2:quicksort.)
--->
-
-<!--
-Finally, since we use a dynamic array we have to be able to resize the internal array.
-This is explained in further detail in @sec:sequences:dynamic-arrays.
-
-    resize(arr, capacity):
-        oldArr = arr
-        arr = new Array(capacity)
-        for i in 0 .. oldArr.size-1:
-            arr[i] = oldArr[i]
-
-AG: we don't need to resize, we use a dynamic array.
-
--->
-
 #### Checking the heap property
 
-To start with, we define a function that verifies that a given binary heap satisfies the *heap property*:
+As a simple example, we define a function that verifies that a given binary heap satisfies the *heap property*:
 
     checkHeapPropery(heap):
         for pos in 1 .. heap.size-1:
@@ -226,207 +133,3 @@ Since the array satisfies the heap property, the element at index $0$ is the roo
 Therefore it is very efficient to take a little peek into which the next element will be, without modifying the heap.
 Note that we first need to check that the heap is not empty, because then we will get an error message when trying to access index $0$.
 
-
-### Inserting into a heap
-
-We want to be able to add elements to our heap.
-Since we are using a dynamic array, there is only one place where we can insert a new element: at the end of the array.
-However, the newly inserted element is not necessarily in the correct position, so the insertion may temporarily violate the heap invariant.
-We must therefore restore the heap property after adding the new element.
-
-The new element might have higher priority than its parent.
-If this happens, we swap the new element with its parent.
-We then repeat the same check from the new position, because the element may still have too high priority to remain there.
-This process continues until the element either reaches the root or has a parent with higher priority.
-
-Notice that we do not need to compare the new element with its parent's other child, if there is one.
-Before the insertion, the heap already satisfied the heap invariant, so the parent had higher priority than both of its children.
-Therefore, if the new element has higher priority than the parent, it must also have higher priority than the other child.
-On the other hand, if the new element does not have higher priority than its parent, then it is already in the correct position.
-So, to restore the heap invariant after insertion, it is enough to compare the new element only with its parent as it moves upward through the heap.
-This process of moving the value up the tree is often called "bubble-up", "trickle-up", "swim-up" or "sift-up".
-
-::: algorithm
-#### Algorithm: Adding to a binary heap
-To insert the value $v$ into a heap:
-
-- Add $v$ to the end of the heap.
-- Repeat until $v$ reaches its correct position:
-    - Compare $v$ with its parent.
-    - If $v$ has higher priority, swap it with the parent.
-:::
-
-@Fig:HeapAdd10 illustrates how the algorithm works for inserting the value 10 into the heap from @fig:HeapTreeExample.
-Note that the heap is shown as a tree, but you should keep in mind that it is actually stored as an array.
-
-![
-    Inserting 10 into the example heap in @fig:HeapTreeExample.
-    (a) After inserting 10, we place it at the next free position, shown here as the right child of 43.
-    (b) Since 10 is smaller than its parent 43, the two elements swap positions.
-    (c) The value 10 is still smaller than its new parent 12, so we swap once more.
-    Now 10 has parent 8, which is smaller, so the heap property is restored.
-](images/9.5-binheap-add.svg){#fig:HeapAdd10}
-
-::: dsvis
-#### Inserting 10 into the example heap
-``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js" name="Heap insert Slideshow"}
-```
-:::
-
-
-The algorithm above can be translated to pseudocode quite straightforwardly:
-
-    add(heap, elem):
-        heap.addLast(elem)                 // Add the element to end of the heap.
-        pos = heap.size - 1                // This is the position of the new element.
-        while pos > 0 and heap[pos] < heap[parent(pos)]:
-            swap(heap, pos, parent(pos))   // Swap the element with its parent.
-            pos = parent(pos)              // Move up one level in the tree.
-
-Since a heap is a complete binary tree, its height is as small as possible for the number of nodes it contains.
-A heap with $n$ nodes therefore has height $O(\log(n))$.
-Intuitively, this is because each new level in the tree can contain twice as many nodes as the previous level.
-The $i$th level contains $2^i$ nodes, and the first $i+1$ levels together contain $2^{i+1} - 1$ nodes.
-So the number of levels grows logarithmically with the number of nodes.
-
-Each call to `add` takes $O(\log(n))$ time in the worst case.
-This is because the inserted element can move upward by at most one level at a time.
-In the worst case, it moves from the last level all the way to the root.
-Therefore, inserting $n$ values one at a time takes $O(n \log(n))$ time in the worst case.
-
-::: dsvis
-#### Exercise: Insert into a *min*-heap
-
-```{.jsav-embedded src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"}
-```
-:::
-
-### Removing from a heap
-
-Heaps are usually used to implement priority queues, where we repeatedly remove the element with the highest priority.
-This is the next element to be processed, and it is always stored at the root of the heap, at index $0$ in the array.
-
-To remove the highest-priority element, we remove the root.
-However, we cannot simply leave the root empty, since this would violate the requirement that the heap remains a complete binary tree.
-Instead, we remove the *last* element in the array, and replace the root with it.
-This preserves completeness but may violate the heap property.
-
-The new root may now have lower priority than one or both of its children.
-Therefore we compare it with its children and swap it with the one that has higher priority.
-It is essential to choose the smaller child --
-otherwise, the heap property could still be violated after the swap.
-Once the swap is performed, the element moves down the tree.
-We repeat the process from the new position, until the element is in its correct place --
-that is, until it has higher priority than both of its children, or it reaches a leaf.
-At that point, the heap property is restored.
-This process is often called "bubble-down", "trickle-down", "sink-down" or "sift-down".
-
-::: algorithm
-#### Algorithm: Remove the element with highest priority from a binary heap
-To remove the highest-priority element, that is, the root of the heap:
-
-- Delete the last element of the heap, and replace the root with it.
-  Let the new root be $v$.
-- Repeat until $v$ reaches its correct position:
-    - Compare $v$ with its highest-priority child.
-    - If the child has higher priority, swap them.
-:::
-
-
-@Fig:HeapRemove10 illustrates how the algorithm works for removing the highest-priority value
-from the final heap in @fig:HeapAdd10.
-
-![
-    Removing the highest-priority element from the final heap in @fig:HeapAdd10.
-    (a) We remove the last heap element, 43, and replace the root with it.
-    (b) The smallest child, 10, is smaller than 43, so we swap it with the parent.
-    (c) The smallest child, 12, is smaller than 43, so we swap it with the parent.
-    Now 43 only has larger children, so the heap property is restored.
-](images/9.5-binheap-remove.svg){#fig:HeapRemove10}
-
-::: dsvis
-#### Removing the highest-priority value from the example heap
-``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js" name="Remove Max Slideshow"}
-```
-:::
-
-`\bigskip\noindent`{=latex}
-***Note***:
-One common mistake is to forget to replace the root with the last heap element,
-and instead try to replace the root with its smallest child.
-(And then "bubble down" the hole of that child.)
-This approach *does not work* because the heap must maintain the shape of a complete binary tree.
-For example, if we use this idea to remove the minimum element from the final heap in @fig:HeapRemove10,
-we would end up with 12 as the root, and 15 as its right child.
-But 15 would not have any right child, and we no longer have a complete tree.
-
-The complexity of this algorithm is logarithmic, $O(\log(n))$, of the same reason as adding an element:
-Since the tree is complete, there are a logarithmic number of levels,
-and the element travels downward by one level in each iteration.
-In the worst case, it moves from the root all the way to a leaf.
-
-Here is pseudocode for removing the highest-priority element:
-
-    removeMin(heap):
-        oldRoot = heap[0]             // Remember the current highest-priority element.
-        heap[0] = heap.removeLast()   // Remove the last element from the array,
-        pos = 0                       // and put it into the root position.
-        child = smallestChild(heap, pos)
-        while child is not null and heap[child] < heap[pos]:
-            swap(heap, pos, child)             // Swap the element with its smallest child.
-            pos = child                        // Move down one level in the tree.
-            child = smallestChild(heap, pos)   // Find the next smallest child.
-        return oldRoot                // Return the old root.
-
-We use a helper function to identify the smallest child of a node.
-If there are no children it returns null, so that the while loop above can stop.
-
-<!-- \newpage -->
-
-    smallestChild(heap, pos):
-        if left(pos) >= heap.size:                   // We are at a leaf.
-            return null
-        else if right(pos) >= heap.size:             // There is no right child.
-            return left(pos)
-        else if heap[left(pos)] < heap[right(pos)]:  // The left child has higher priority.
-            return left(pos)
-        else:                                        // The right child has higher priority.
-            return right(pos)
-
-
-::: dsvis
-#### Exercise: Delete from a min-heap
-
-```{.jsav-embedded src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"}
-```
-:::
-
-<!-- Don't include removing of arbitrary nodes
-::: dsvis
-#### Removing arbitrary nodes
-
-``` {.jsav-animation src="Binary/heapremoveCON.js" scripts="DataStructures/binaryheap.js" name="Remove Any Slideshow"}
-```
-:::
--->
-
-### Changing the priority of elements {#heaps:change-priority}
-
-In some applications, the priority of an element may change over time, or we may need to remove an element other than the root.
-To support such operations efficiently, we must know the position of the element in the heap.
-
-However, the heap invariant is not helpful for locating an arbitrary element.
-It guarantees only that each node has higher priority than its children.
-It does not tell us how elements are distributed across different subtrees.
-As a result, when searching for a specific element, we cannot determine which subtree to explore next.
-In the worst case, we must traverse the entire tree, which takes $O(n)$ time.
-
-Once the element has been found, updating or removing it is straightforward.
-To update the priority of an element, we restore the heap property by bubbling it up if its priority has increased, or down if its priority has decreased.
-To remove an element, we remove the last element of the array and put it in the place of the element to be removed,
-then we restore the heap property in the same way as when we updated the priority.
-
-To avoid the costly $O(n)$ search, we can maintain an auxiliary data structure that keeps track of each element's position in the heap.
-For example, we can use a lookup table, or map (see @sec:ADTs:maps), that associates each element with its index in the array.
-If lookup in this table takes $O(\log(n))$ time, then updates and removals of arbitrary elements also take $O(\log(n))$ time,
-because the remaining work consists only of restoring the heap property.
