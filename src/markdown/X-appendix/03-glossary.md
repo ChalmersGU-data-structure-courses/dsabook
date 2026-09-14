@@ -1608,7 +1608,7 @@ or [block]{.term}.
 In [graph]{.term} representations, a synonym
 for [weight]{.term}.
 
-### divide and conquer
+### divide-and-conquer
 
 A technique for designing algorithms where a solution is found by
 breaking the problem into smaller (similar) subproblems, solving the
@@ -4312,7 +4312,7 @@ However, a reasonable implmentation will make the
 worst case occur under exceedingly rare circumstances. Due to its
 tight inner loop, it tends to run better than any other known sort
 in general cases. Thus, it is a popular sort to use in code
-libraries. It works by divide and conquer, by selecting a
+libraries. It works by divide-and-conquer, by selecting a
 [pivot]{.term} value, splitting the list
 into parts that are either less than or greater than the pivot, and
 then sorting the two parts.

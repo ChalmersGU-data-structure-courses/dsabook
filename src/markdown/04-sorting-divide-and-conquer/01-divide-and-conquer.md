@@ -1,7 +1,8 @@
 
-### Divide and conquer {#sorting-2:divide-and-conquer}
+### Divide-and-conquer {#sorting-2:divide-and-conquer}
 
 ::: TODO
+- Prio 1: fix text about divide-and-conquer in the end (it is copy-pasted here)
 - Prio 1: add example for recursive binary search
 - Prio 2: make the "divide-and-conquer" strategy an algorithm box
 :::
@@ -64,7 +65,7 @@ where the first row is the *recursive case*, and the second row defines the two 
 :::
 
 
-#### Divide and conquer
+#### Divide-and-conquer
 
 <!-- OPENDSA: START -->
 Solving a problem recursively means to solve one or more smaller versions of the problem,
