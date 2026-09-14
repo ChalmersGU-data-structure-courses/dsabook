@@ -93,7 +93,7 @@ Here is a visual explanation of the same idea.
 
 -->
 
-### Full, perfect, and complete binary trees {#trees:full-perfect-complete}
+#### Full, perfect, and complete binary trees {#trees:full-perfect-complete}
 
 <!-- OPENDSA: START -->
 Several restricted forms of binary tree are sufficiently important to warrant special names.

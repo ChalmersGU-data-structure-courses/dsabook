@@ -1,5 +1,5 @@
 
-# Trees and heaps {#trees}
+# Trees {#trees}
 
 [Tree]{.term} structures let us organise data hierarchically.
 So far, we have mainly studied data structures that organise elements in a linear sequence, such as arrays, linked lists, stacks, and queues.
@@ -11,15 +11,13 @@ Trees appear in many settings.
 We can use them to represent mathematical expressions and the syntax of computer programs.
 We can use them to model file systems, where folders contain files and other folders.
 Trees can also be used as data structures,
-such as [heaps]{.term}, for implementing priority queues (@sec:heaps),
+such as [heaps]{.term}, for implementing priority queues ([Chapter @sec:heaps]),
 and [search trees]{.term}, for implementing sets and maps ([Chapter @sec:search-trees]).
 
 This chapter begins with the basic ideas and terminology for trees.
 We then discuss binary trees (@sec:trees:binary-trees),
 how to represent trees in general (@sec:trees:representations),
 and show an example of a simple data structure for [disjoint sets]{.term} (@sec:trees:disjoint-sets).
-After that we turn to heaps for priority queues (@sec:heaps), including [binary heaps]{.term} (@sec:heaps:binary-heaps),
-and other [meldable heaps]{.term} (@sec:heaps:meldable-heaps).
 
 #### Tree terminology
 
@@ -74,14 +72,3 @@ In a file system tree, the nodes are files and folders, and the parent of a node
 Trees contain data in nodes, but the meaning of the data and the meaning of the parent-child relationship depend on the application.
 So there is no single tree data structure in the same way that there is a single stack or queue abstraction.
 Instead, trees form a family of related structures.
-
-#### Why heaps belong here
-
-A [priority queue]{.term} stores elements together with priorities,
-so that we can always access or remove the highest-priority element first.
-A heap is a tree-based way to implement such a priority queue efficiently.
-
-The key idea is that the most important element is kept at the root.
-This does not mean that the entire structure is sorted.
-Instead, heaps maintain a local ordering rule between parents and children.
-That rule is strong enough to keep the highest-priority element at the root, while still allowing updates to be efficient.
