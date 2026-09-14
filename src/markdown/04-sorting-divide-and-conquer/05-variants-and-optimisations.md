@@ -111,7 +111,7 @@ In this section we discuss some variants of Quicksort, and things we can do to i
 
 #### Shuffle the array
 
-As we explained above, if we use a random pivot we get a good asymptotic behaviour,
+As explained in @sec:sorting-2:quicksort-complexity, if we use a random pivot we get a good asymptotic behaviour,
 because the expected worst-case complexity will be $O(n\log(n))$.
 
 One alternative to using a random pivot is to *shuffle* the array before sorting, that is, rearranging it in random order.

@@ -6,7 +6,7 @@
 :::
 
 
-### Selection sort analysis
+#### Selection sort analysis
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
@@ -29,7 +29,7 @@ This visualisation analyses the number of comparisons and swaps required by Sele
 :::
 
 
-### Insertion sort analysis
+#### Insertion sort analysis
 
 Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 

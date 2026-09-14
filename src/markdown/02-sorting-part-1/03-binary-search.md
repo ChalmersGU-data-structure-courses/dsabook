@@ -1,5 +1,5 @@
 
-## Binary search in arrays {#sorting-1:binary-search}
+## Binary search {#sorting-1:binary-search}
 
 ::: TODO
 - Prio 1: Rewrite "How is this related to data structures" - the section is moved

@@ -44,7 +44,7 @@ that is keys that are not explicitly stored in the record, but calculated on dem
 One simple example is if we want to sort a list of strings *case-insensitively*, ignoring if a letter is uppercase or lowercase.
 A more complex example is to sort a list of Unicode strings according to a certain language locale.
 
-### Two main approaches to comparing values
+#### Two main approaches to comparing values
 
 When we compare two elements, there are *three* possible outcomes
 -- the first element can be *smaller*, or *larger*, or *equal to*, the second element.
@@ -70,7 +70,7 @@ There are two main approaches in how programming languages have solved the compa
 In this book we will usually use the Python way when describing algorithms.
 Not because we think that is a better way of writing algorithms, but because the pseudocode becomes easier to read.
 
-### Natural vs key-based comparison
+#### Natural vs key-based comparison
 
 As we already mentioned in the chapter introduction,
 we will usually just assume that you want to use the natural order when comparing objects.

@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: rewrite (and shorten)
+- Prio 1: move the discussion on "natural" / "key-based" to next section (comparing values)
 - Prio 1: make consistent - now it's two sections merged
 - Prio 1: move "Comparing algorithms" to 1.1?
 :::

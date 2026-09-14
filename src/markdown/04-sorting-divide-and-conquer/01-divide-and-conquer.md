@@ -1,5 +1,5 @@
 
-### Divide-and-conquer {#sorting-2:divide-and-conquer}
+## Divide-and-conquer algorithms {#sorting-2:divide-and-conquer}
 
 ::: TODO
 - Prio 1: fix text about divide-and-conquer in the end (it is copy-pasted here)
