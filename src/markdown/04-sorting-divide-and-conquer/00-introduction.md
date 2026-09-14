@@ -1,7 +1,7 @@
 
-# Sorting, part 2 {#sorting-2}
+# Divide-and-conquer sorting {#sorting-2}
 
-In the previous chapter we presented three simple and relatively slow sorting algorithms, with [quadratic](#quadratic-growth-rate){.term} runtime behaviour.
+In [Chapter @sec:sorting-1] we presented three simple and relatively slow sorting algorithms, with [quadratic](#quadratic-growth-rate){.term} runtime behaviour.
 Now we will introduce two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time: [Mergesort]{.term} and [Quicksort]{.term}.
 
 Both these algorithms make use of a basic strategy for algorithm design, which is called [divide and conquer]{.term}.
