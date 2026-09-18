@@ -3,12 +3,46 @@
 
 ::: TODO
 - Prio 1: rewrite (and shorten)
-- Prio 1: move the discussion on "natural" / "key-based" to next section (comparing values)
-- Prio 1: make consistent - now it's two sections merged
-- Prio 1: move "Comparing algorithms" to 1.1?
+- Prio 1: merge the (commented) discussion on "natural" / "key-based" to next section (comparing values)
+- Prio 1: merge "Comparing algorithms" into 1.1?
 :::
 
+Searching and sorting are two extensively studied problems.
+A sorting algorithm rearranges values in a collection, such as an array, from
+least to greatest. We call such a collection *ordered*.
+This is tremendously useful not just for the obvious things
+that are visible to software users, such as sorting a table by given column,
+but also as part of more complex algorithms. Because sorting is so useful,
+sorting algorithms have been studied extensively, and are frequently used
+as first examples of algorithms.
+
+Search problems include a wide variety of queries on collections of values.
+Unlike sorting, searching does not modify a data structure, but
+determines some property of its content. The most fundamental search problem
+is determining if a collection contain a specific value, but there are several
+similar searching problems, here are a few examples:
+
+- What is the first position of the collection in which a value occurs?
+- What is the least or greatest value in the collection?
+- How many odd values are in a collection of integers?
+
+Each of these, and many more, are useful in different applications.
+Different data structures allow for different algorithms.
+Notably, if we are searching in an ordered array, the problem of
+finding the least value is trivial: It is in position $0$ of the array.
+As we shall soon see, ordered arrays also allow better performance
+for finding a specific value.
+
+In this chapter we introduce two algorithms for searching in arrays:
+*Linear Search* and *Binary Search*, as well as two sorting algorithms
+for arrays: *Selection Sort* and *Insertion sort*.
+This also serves to demonstrate how we describe algorithms,
+how we convince ourselves that an algorithm correctly solves a problem,
+and how to compare the performance of different algorithms.
+
+
 <!-- OPENDSA: START -->
+<!--
 We have seen that, when an array is sorted in increasing order, *binary
 search* can be used to find items in it efficiently. But what about when
 we have a collection of data that is not in any order? If we will often
@@ -43,18 +77,22 @@ sorting algorithms of choice for most software libraries. After decades of
 study, there are still unsolved problems related to sorting. New
 algorithms are still being developed and refined for special-purpose
 applications.
+-->
 <!-- OPENDSA: END -->
 
+<!--
 ::: dsvis
 #### The sorting problem
 
 ``` {.jsav-animation src="Sorting/SortNotationS1CON.js" links="Sorting/SortNotationS1CON.css" name="Sorting Terminology and Notation Slideshow 1"}
 ```
 :::
-
-Sorting can be divided into two kinds depending on how we compare the items in the list:
+-->
 
 <!-- NICSMA: START -->
+<!--
+Sorting can be divided into two kinds depending on how we compare the items in the list:
+
 Natural sorting
 :   The items have some kind of natural order.
     For example, sorting a list of words in alphabetical order, or sorting a list of numbers.
@@ -65,7 +103,9 @@ Key-based sorting
 
 Note that if we sort according to a *key*, it doesn't have to be explicitly stored in the object, but can instead be calculated on demand.
 For example, if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
+-->
 <!-- NICSMA: END -->
+<!--
 This is usually done by a [comparator]{.term} (in Java), or by a [key function]{.term} (in Python).
 
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
@@ -76,22 +116,19 @@ This chapter discusses three simple algorithms that work well on small arrays, a
 
 #### Terminology and notation
 
-::: TODO
-- Prio 1: move subsection "Comparing algorithms" to next section (Comparing values), and reduce it
-- Prio 1: flatten subsection "Terminology"
-:::
-
 Formally, the *sorting problem* is to arrange a list of elements $a_1,a_2,\ldots,a_n$ into any order $s$
 such that $a_{s_1}\leq a_{s_2}\leq\cdots\leq a_{s_n}$.
 In other words, the sorting problem is to arrange a set of elements so that they are in non-decreasing order.
-
+-->
 <!-- Note that the definition above is for *natural sorting*.
 If we instead are interested in the more general problem of *key-based sorting*, the definition becomes slightly more complicated:
 The (key-based) *sorting problem* is to arrange the list into any order $s$ such that $a_{s_1},a_{s_2},\ldots,a_{s_n}$ have keys obeying the property $k_{s_1}\leq k_{s_2}\leq\cdots\leq k_{s_n}$. -->
 
+<!-- OPENDSA: START -->
+<!--
+
 #### Comparing algorithms
 
-<!-- OPENDSA: START -->
 When comparing two sorting algorithms, the simplest approach would be to
 implement both and measure their running times.
 This is an example of *empirical comparison*.
@@ -121,20 +158,18 @@ sorting a sequence of variable length strings) cannot expect all
 comparisons to cost roughly the same. Not only do such situations
 require special measures for analysis, they also will usually benefit
 from special-purpose sorting techniques.
-<!-- OPENDSA: END -->
 
 When analysing sorting algorithms we are most of the time interested in
 how they perform on very large arrays.
 But we can also have applications that
-<!-- OPENDSA: START -->
+
 require that a small number of records be sorted, but that the sort be performed frequently.
 An example would be an application that repeatedly sorts groups of five numbers.
-<!-- OPENDSA: END -->
+
 In such cases, the asymptotic analysis that we do for large arrays is usually of not much help.
 Instead it will be important to reduce the constant factors that are ignored by the analysis.
 Then we might very well find that the best algorithm can be one that performs very poorly on large arrays.
 
-<!-- OPENDSA: START -->
 Finally, some situations require that a sorting algorithm use as little
 memory as possible. We will call attention to sorting algorithms that
 require significant extra memory beyond the input array.
