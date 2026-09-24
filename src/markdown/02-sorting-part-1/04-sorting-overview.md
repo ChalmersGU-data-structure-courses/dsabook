@@ -28,7 +28,7 @@ Selection sort has to find the smallest book, which can take quite some time,
 but there is no additional work to place next to the other books in the shelf.
 On the other hand, Insertion sort takes a book blindly which involves no extra work,
 but instead it has to find the correct position to put it,
-and it also has to move some books to give space for the new book.
+and it also has to move some books to make space for the new book.
 
 *Warning*: There is a risk with analogies like this.
 For example, if you spread out the books on the floor it can be quick to find the smallest one
@@ -88,3 +88,12 @@ Insertion sort
     Instead you can remove the unsorted book (holding it in your hand), and compare it with each of the sorted books from the right.
     If it is smaller, you slide the shelved book one step right and look at the one to the left.
     Otherwise you have found the right spot for your book, and can put it in the empty space.
+
+<!--
+::: dsvis
+#### The sorting problem
+
+``` {.jsav-animation src="Sorting/SortNotationS1CON.js" links="Sorting/SortNotationS1CON.css" name="Sorting Terminology and Notation Slideshow 1"}
+```
+:::
+-->

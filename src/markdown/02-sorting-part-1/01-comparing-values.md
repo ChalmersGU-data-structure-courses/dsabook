@@ -2,81 +2,70 @@
 ## Comparing values {#sorting-1:comparing}
 
 ::: TODO
-- Prio 1: Merge with subsection "Comparing algorithms" from previous section
-- Prio 1: Move natural/key-based before "Python/Java" way
-- Prio 2: Flatten subsections, reduce introduction
-- Prio 2: Use better terms for the "Python/Java way", don't call the section "Two main approaches"
+- Prio 2: Shorten a bit. We want to get to the actual algorithms a bit quicker.
 :::
 
-<!-- OPENDSA: START -->
-If we want to sort some things, we have to be able to compare them, to
-decide which one is bigger. How do we compare two things? If all that we
-wanted to sort or search for was simple integer values, this would not
-be an interesting question. We can just use standard comparison
-operators like "\<" or "\>". Even if we wanted to sort strings,
-most programming languages give us built-in functions for comparing
-strings alphabetically. But we do not usually want to sort just
-integers or strings in a data structure. Often we want to sort
-records, where a record is made up of multiple values, such as a name,
-an address, and a phone number. In that case, how can we "compare"
-records to decide which one is "smaller"? We cannot just use "\<" to
-compare the records! Nearly always in this situation, we are actually
-interested in sorting the records based on the values of one particular
-field used to represent the record, which itself is something simple
-like an integer or a string. This field is referred to as the
-[key]{.term} for the record.
+Sorting algorithms, and many other algorithms in this book, rely on being able to compare values.
+By changing which comparison function is used, we can use the same sorting algorithm to sort
+in many ways in different applications, such as numbers in ascending order, numbers in descending order,
+words in alphabetical order.
+The comparison function needs to distinguish three cases, for two values $a$ and $b$:
 
-Likewise, if we want to search for a given record in a database, how
-should we describe what we are looking for? A database record could
-simply be a number, or it could be quite complicated, such as a payroll
-record with many fields of varying types. We do not want to describe
-what we are looking for by detailing and matching the entire contents of
-the record. If we knew everything about the record already, we probably
-would not need to look for it. Instead, we typically define what record
-we want in terms of a key value. For example, if searching for payroll
-records, we might wish to search for the record that matches a
-particular ID number. In this example the ID number is the
-[search key]{.term}.
-<!-- OPENDSA: END -->
+- $a$ is less than $b$, written $a < b$.
+- $b$ is less than $a$, written as $b<a$.
+- neither of the above, written as $a=b$.
 
-Finally, it is very often the case that we want to compare *virtual keys*,
-that is keys that are not explicitly stored in the record, but calculated on demand.
-One simple example is if we want to sort a list of strings *case-insensitively*, ignoring if a letter is uppercase or lowercase.
-A more complex example is to sort a list of Unicode strings according to a certain language locale.
+The notation for the last is slightly dubious: the values are not necessarily equal,
+they just have the same order. Suppose we are sorting numbers by the sums of our digits, in
+our comparison function $13=22$, since both have a digit sum of $1+3=2+2=4$.
+Also, $a<b$ may not correspond intuitively to the mathematical operator. To sort a list
+of number in descending order, we would use a comparison function that paradoxically
+considers lesser numbers to be greater and vice versa.
 
-#### Two main approaches to comparing values
+There are some requirements on the comparison function used. Mathematically, we would call
+$<$ a *partial order*. The most important property is *transitivity*:
+if $a<b$ and $b<c$, it follows that $a<c$.
+If transitivity does not hold, the the sorting algorithms will not work,
+and the concept of sorting becomes hard to even define (in which order would you place
+$a$, $b$, and $c$ if $a<b<c<a$?).
 
-When we compare two elements, there are *three* possible outcomes
--- the first element can be *smaller*, or *larger*, or *equal to*, the second element.
 
-Most programming languages do not have any atomic datatype with three values,
-so different languages have implemented different solutions to how to compare values.
-There are two main approaches in how programming languages have solved the comparison problem:
+#### Natural and Key-based comparison
 
--   One possibility is to implement each comparison operator (<, >, =, ...) separately,
-    this is for example how Python does it.
-    This means that you can write $a<b$, $a=b$, $a>b$, etc., in a way that you are used to think about comparison.
-    The disadvantage is that sometimes you have to perform *two* comparisons between two values:
-    first you have to check if $a<b$, and then if $a=b$.
-    Depending on how your elements are structured, this can lead to some duplicate work
-    (although many programming languages are quite good at optimising the code so that there will be no penalty).
+Most comparison operators fall into on of three categories:
 
--   Another alternative is to implement a *three-way* comparison operator which returns an integer $k$.
-    This is for example how Java does it, and it can be called `compare`, `compareTo`, `<=>`, or similar.
-    If $k<0$ then $a<b$, if $k>0$ then $a>b$, and if $k=0$ then $a=b$.
-    The main advantage with this approach is that you do not risk duplicating work,
-    but on the other hand the can code become slightly less readable.
+Natural order
+:   Simple types like numbers have a *natural order*, in most programming
+    languages we can simply write $a<b$ to compute a boolean result that is
+    true if a is less than b.
 
-In this book we will usually use the Python way when describing algorithms.
-Not because we think that is a better way of writing algorithms, but because the pseudocode becomes easier to read.
+Key-based comparison
+:   Often we want to sort objects by a *key*, such as sorting books by publishing
+    year or author, or sorting people by age or name. In an object oriented language,
+    the comparison used would be `book1.year < book2.year` or such.
 
-#### Natural vs key-based comparison
+Virtual key comparison
+:   A variant of key-based comparison where keys are not explicitly stored in an
+    object, but calculated on demand. A common example is comparing strings
+    *case-insensitively*, ignoring if a letter is uppercase or lowercase.
+    The comparison would be `toLower(s1) < toLower(s2)`, so each comparison
+    performs a conversion to lowercase before a regular string comparison.
 
-As we already mentioned in the chapter introduction,
-we will usually just assume that you want to use the natural order when comparing objects.
-However, in real life it is much more common that you need to compare values by their keys.
+#### Comparisons in programming languages
 
-Modern high-level languages (including Python and Java) have several different ways to accomplish key-based comparison,
-and we encourage you to find out how this is done in your favourite language.
-It can be done via special methods on objects, or by special classes,
-or by supplying a *key function*, or several other ways.
+Most programming languages have built in comparison operators for numbers and
+other simple data types, that is you can write $a<b$ and compute a boolean result.
+Some languages (like Python) have a mechanism to generalise this to more complex
+types, so you can write $a<b$ even for text strings and other objects,
+and it uses a default comparison function defined for the type.
+
+Some languages (like Java) instead use a *three-way comparison* operator,
+so that `compare(a,b)` gives one of three values, representing $a<b$, $a=b$ and $b<a$.
+In Java and many other languages, the comparison gives an integer value k,
+such that if $k<0$ then $a<b$, if $k>0$ then $a>b$, and if $k=0$ then $a=b$.
+This is potentially more efficient than checking the cases individually,
+but the code can become less readable.
+
+In this book we will usually use the binary comparison operators when describing algorithms.
+Not because we think that is a better way of writing algorithms, but because the
+pseudocode becomes easier to read.
