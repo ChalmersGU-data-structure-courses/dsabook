@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: We don't want the subsubsection
+- Prio 1: Also include a discussion about using a `key` function for testing
 :::
 
 One of the most fundamental tasks that we use computers for is *searching*.
