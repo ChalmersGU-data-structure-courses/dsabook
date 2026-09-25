@@ -24,7 +24,7 @@ Descriptions of problems often include:
 
 Analysing and classifying problems is a large research area, that we mostly avoid in this book.
 More than just finding an algorithm that solves a problem,
-it is sometimes possible to prove that a class of problems can not be solved efficiently.
+it is sometimes possible to prove that a class of problems cannot be solved efficiently.
 However, we can still consider problems separately from the algorithms that solve them,
 and how to formulate a problem precisely.
 For example, in [Chapter @sec:sorting-1] we introduced the problem of sorting an array,
