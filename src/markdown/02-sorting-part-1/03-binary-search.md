@@ -2,10 +2,7 @@
 ## Binary search {#sorting-1:binary-search}
 
 ::: TODO
-- Prio 1: Rewrite "How is this related to data structures" - the section is moved
-- Prio 1: Move natural/key-based before "Python/Java" way
-- Prio 2: Flatten subsections, reduce introduction
-- Prio 2: Use better terms for the "Python/Java way", don't call the section "Two main approaches"
+- None!
 :::
 
 No library keeps books in random order, because linear search is too slow.
@@ -44,12 +41,12 @@ cases we have the answer we were looking for.
 This process of reducing a problem to a smaller instance of the same problem
 is a key concept in algorithm design.
 We can easily generalise the algorithm from searching book cases to searching
-in a sorted array of elements.
+in an ordered array of elements.
 
 ::: algorithm
 #### Algorithm: Binary search
 
-To find out where a given *key* is located in a sorted array,
+To find out where a given *key* is located in an ordered array,
 start with an interval including the whole array.
 Repeat the following until *key* has been found, or the interval is empty:
 
@@ -59,7 +56,7 @@ Repeat the following until *key* has been found, or the interval is empty:
    depending on if the key is greater or smaller than the middle element.
 
 If the interval ends up empty, the key is not in the array and we
-return a null
+return `null`.
 :::
 
 To turn this algorithm into actual code, we need to decide how to represent the search interval
@@ -103,12 +100,12 @@ but require the same fundamental building operations:
 Finding the middle element, and excluding the upper/lower half of the interval.
 @fig:BinSearch1 illustrates an example search of a small array.
 
-![Steps of Binary search for the value 29 in a sorted array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array.](images/1.3-steps-of-binary-search.svg){#fig:BinSearch1}
+![Steps of Binary search for the value 29 in an ordered array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array.](images/1.3-steps-of-binary-search.svg){#fig:BinSearch1}
 
 
-There are many variations of binary search. If the array had books sorted by number
+There are many variations of binary search. If the array had books ordered by number
 of pages, we could use it to find books of a desired length, or even all books in
-a precise range of pages. Consider what would happen if the array was not sorted
+a precise range of pages. Consider what would happen if the array was not ordered
 properly, can you construct a small example where the algorithm would go wrong?
 Also consider, could binary search be used to determine if an array
 contains a prime number?
@@ -137,7 +134,7 @@ We say that binary search is a *logarithmic time* algorithm, as opposed to
 linear search being linear time.
 For large collections, this difference is staggering. For a bookshelf with a million books,
 binary search requires us to look at 20 books worst case, instead of a million.
-For a staggeringly bookshelf of a billion books, binary search requires less than 30 comparisons,
+For a bookshelf of a billion books, binary search requires less than 30 comparisons,
 making it tens of millions times faster than a linear search.
 
 This example highlights a crucial insight about algorithms:
@@ -146,10 +143,10 @@ Switching programming language to C from Python might yield a similar speed-up.
 Both of those are nice, but switching from a linear time algorithm to a logarithmic one
 can reduce runtime by a factor of millions, reducing runtime from years to seconds.
 
-#### How is this related to data structures?
+#### Ordered arrays as a data structure
 
 Apart from introducing our first two algorithms (linear search and binary search),
-this section introduces a data structure: The sorted array.
+this section introduces a data structure: The ordered array.
 This data structure differs from from general arrays in what operations it supports,
 more than just the ability to search quickly.
 
