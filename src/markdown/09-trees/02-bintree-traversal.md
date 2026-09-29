@@ -80,7 +80,7 @@ Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left 
 : Visiting order for the example tree in @fig:example_bintree {#tbl:visiting-orders}
 -->
 
-### Traversal without recursion
+### Traversal without recursion {#trees:traversal-without-recursion}
 
 It is possible to traverse a tree iteratively (using a loop) with a stack data structure.
 We call the stack our *agenda*, consider it a to-do list containing nodes that we need to process.
