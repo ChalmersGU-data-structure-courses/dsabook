@@ -28,6 +28,7 @@ metadata:
   panflute-path: pandoc/filters
   panflute-filters:
     - remove_classes
+    - make_fancybox
     - max_header_numbering
     - make_details
     - latex_figure
