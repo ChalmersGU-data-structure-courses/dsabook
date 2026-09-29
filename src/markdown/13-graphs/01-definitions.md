@@ -115,7 +115,7 @@ Consider for instance how this simple class forms a graph where vertices are peo
         name: String
         friends: List of Person
 
-Furthermore, many graph problems do not involve modifying the graph, but merely analyzing it.
+Furthermore, many graph problems do not involve modifying the graph, but merely analysing it.
 This is different from, for example, maps that we have discussed previously, where efficient modification is important.
 For example: we are modelling a tram network of a city as a graph, for a typical travel planning application.
 Here is a rough estimate of the workload of the system:

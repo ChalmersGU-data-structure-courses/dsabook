@@ -59,7 +59,7 @@ A simple implementaion of Dijkstra's would look like this:
                 agenda.add( (cost+weight, from1, to1) )
  -->
 
-As with DFS and BFS before, we can also analyze the agenda at each step of the algorithm.
+As with DFS and BFS before, we can also analyse the agenda at each step of the algorithm.
 Again, we assume that we only add edges that lead to unvisited vertices, and we only show the steps that pass the visitation check:
 
 edge                           visited              agenda at end of iteration
