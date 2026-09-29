@@ -2,26 +2,28 @@
 # Graphs {#graphs}
 
 Graphs are a very flexible family of data structures used in a wide range of applications.
-Like trees, there is no single graph data structure, but rather a family of similar
-data structures. A graph always consists of a set of vertices (nodes) and a set of
-edges, where each edge connects two vertices.
+Like trees, there is no single data structure that can cover all kinds of graphs,
+but rather a family of similar data structures.
+In any case a graph always consists of a set of *vertices* (also called *nodes*), that are connected via *edges*.
+where each edge connects two vertices.
 @Fig:GraphExamples shows visual representations of two small graphs.
 
-
-![Two example graphs, each with four vertices labelled $A$, $B$, $C$, and $D$. The right one also carries numbers in edges.](images/12.0-examples.svg){#fig:GraphExamples}
+![
+    Two example graphs, each with four vertices labelled $A$, $B$, $C$, and $D$.
+    The right one also carries numbers, or *weights*, in its edges.
+](images/12.0-examples.svg){#fig:GraphExamples}
 
 
 Graphs are used to model both real-world systems and abstract problems.
-Modelling a domain as a graph involves considering what
-vertices and edges represent. Here is a
-small sampling of what graphs can be used to model:
+If we want to model some domain as a graph we need an idea of what the vertices and edges should represent.
+Here is a small sampling of what graphs can be used to model:
 
 1.  Computer- and communications networks:
     Vertices are computers and edges are direct network connections.
 2.  Train networks with distances:
     Vertices are the train stations and edges are the railway tracks between them.
-3.  Scheduling of tasks in a complex activity
-    (such as compiling a program or building a house):
+3.  Scheduling of tasks in a complex activity,
+    such as compiling a program or building a house:
     Vertices are tasks and edges represent their dependencies --
     that a task depends on another task to finish before it can start.
 4.  Any kind of relationships, for example between social media users:

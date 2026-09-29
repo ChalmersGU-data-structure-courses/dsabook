@@ -8,7 +8,9 @@
 - Structure up the definitions a bit. Try to separate graph classifications (directed, weighted, sparse, dense...) from terms (path, cycle, degree, ...)
 :::
 
-A graph consists of a set of vertices (or nodes), and edges. We usually denote the set of vertices as $V$ and edges as $E$. The size of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).
+A graph consists of a set of *vertices* (or *nodes*) and a set of *edges*,
+We usually denote the sets of vertices and edges, as $V$ and $E$, respectively.
+The *size* of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).
 
 #### Types of graphs
 
@@ -18,7 +20,7 @@ and this is different from the reversed edge $b\rightarrow a$.
 Directed graphs are more general than *undirected* graphs,
 in the sense that any undirected graph can be encoded as a directed graph
 where every edge has a complementary edge in the opposite direction.
-Some notions (such as the *minimum spanning tree*) are only defined for undirected graphs.
+However, some notions (such as the *minimum spanning tree*) are only defined for undirected graphs.
 In @fig:GraphExamples, the left graph is an undirected graph, and the right is a directed graph.
 
 In a *weighted* graph all edges have a weight.
@@ -79,8 +81,8 @@ We can roughly categorise graphs by the number of edges in relation to the size 
   where all vertices are adjacent, in which case $E = V^2$.
 
 An example of a sparse graph is a road network (where vertices are intersections).
-Even the most chaotic intersection would have less than say ten outgoing roads.
-If the road network expands, we would not expect the average number of edges per vertex to grow.
+Even the most chaotic road intersection will have fewer than say ten outgoing roads.
+If the road network expands, we should not expect the average number of edges per vertex to grow.
 
 An example of a dense graph could be air traffic, where vertices are airports and edges are potential flight routes.
 <!-- Here the graph would be complete (if you can fly a plane directly between any pairs of airports). -->
@@ -98,9 +100,9 @@ Luckily, in practice, most graphs that we can think of and work with are sparse.
 #### More classifications
 
 There are many additional ways to classify graphs, for instance:
-Should they allow edges between a vertex and itself (as we see in $D$ in the right graph in our example)?
-What data is contained in vertices and in edges?
-In directed graphs, can edges exist in both directions between a specific pairs of vertices, or just one direction?
+Do we allow edges between a vertex and itself (such as the vertex $D$ in the right graph in @fig:GraphExamples)?
+Can we store additional data in vertices and/or edges?
+Do we allow directed edges in both directions between a specific pairs of vertices, or just one direction?
 Look at the list of example domains from the chapter introduction and consider if they should be directed/undirected, weighted, acyclic, etc.
 
 
@@ -116,42 +118,41 @@ Consider for instance how this simple class forms a graph where vertices are peo
         friends: List of Person
 
 Furthermore, many graph problems do not involve modifying the graph, but merely analysing it.
-This is different from, for example, maps that we have discussed previously, where efficient modification is important.
-For example: we are modelling a tram network of a city as a graph, for a typical travel planning application.
-Here is a rough estimate of the workload of the system:
+This is different from, for example, sets or maps that we have discussed previously, where efficient modification is important.
+For example: say that we want to model a city bus network as a graph, for a typical travel planning application.
+Here is a rough estimate of the workload of different tasks for the system:
 
-- Adding or removing a vertex (a tram station): Happens every few years or so.
-- Modifying an edge (scheduled tram connections): Maybe several times per day if it includes delays and such.
-- Finding the quickest route between two stations: Thousands of times per minute during rush hour.
+- Adding or removing a bus stop (a vertex): Happens at most a handful of times per year.
+- Modifying a scheduled bus connection (an edge): Several times per day if we include delays and similar.
+- Finding a route between two bus stops: Thousands of times per minute during rush hour.
 
-Clearly, the third item is where we should put effort into optimising performance.
-For this reason we will hold off on defining the technical aspects of creating graphs,
-and look at a simple definition that includes only what we expect of any graph:
+Clearly, the third task is where we should put effort into optimising performance.
+For this reason we will hold off on the technical aspects of creating and modifying graphs,
+and only give the bare minimum of what we expect of any graph:
 
-- Vertices are some kind of objects that uniquely identify vertices.
-- Edges are pairs which we write as $a\rightarrow b$ or as pairs $(a,b)$, where $a$ and $b$ are vertices.
-  For weighted graphs, they include a weight: $a\xrightarrow{w}b$, or as a tuple $(w,a,b)$, where $w$ is the weight.
-- There is a function $\texttt{outgoingEdges}(x)$ that takes a vertex and returns all its outgoing edges (letting us find all its adjacent vertices).
+- Vertices can be integers, strings, or anything that can be used as a key in a set or map data structure.
+- Edges are pairs of vertices, which we write as $a\rightarrow b$, or if it is undirected, $a\leftrightarrow b$.
+  For weighted graphs, they include a weight $w$: $a\xrightarrow{w}b$, but we often simply write "the weight of $e$".
+- There is a function $\texttt{outgoingEdges}(a)$ returns all edges going out from the vertex $a$.
+  This will let us find all vertices that are adjacent to $a$.
 
-This definition is sufficient to define most of our graph algorithms.
-In algorithms, vertices are frequently stored in sets or used as map keys.
-We will assume that modifications and lookups on these data structures are all $O(1)$.
+This is sufficient to define most of our graph algorithms.
+In graph algorithms, vertices are frequently stored in sets or used as map keys.
+We will assume that updating and searching in these vertex sets or maps are $O(1)$.
 This can either be achieved by using hash tables with a very good hash function,
 or by preprocessing the graph to assign each vertex a unique integer in the range $0,1,\ldots,V-1$.
-Then we can store the outgoing edges in an array of integer sets.
+<!-- Then we can store the outgoing edges in an array of integer sets. -->
 
-<!--
-    datatype VertexSet:
-        arr = array of booleans of length |V|, initialised to false
-    add(vertexset, v):
-        vertexset.arr[v.id] = true
-    contains(vertexset, v):
-        return vertexset.arr[v.id]
- -->
+Note that some graphs are not feasible to store as a whole, but instead they are generated on-demand.
+For example, all possible chess games can be described as a very large (but finite) graph,
+where the vertices are board positions and the edges are valid moves.
+This graph is enourmous and impossible to store in a computer -- there are too many vertices,
+but the function `outgoingEdges` is relatively easy to define because it can calculate the
+legal moves and resulting board positions on-the-fly.
 
 In some algorithms we want to compare weighted edges, such as in Dijkstra's, Prim's and Kruskal's algorithms later in this chapter.
 In these cases we assume that edges are compared by *weight* -- comparing the vertices is not interesting for these algorithms.
-For example, in the rightmost graph in @fig:GraphExamples, we can see that
+For example, in the rightmost graph in @fig:GraphExamples, we see that
 $(A\xrightarrow{3}C) < (C\xrightarrow{6}D) < (A\xrightarrow{8}B)$.
 
 <!--
