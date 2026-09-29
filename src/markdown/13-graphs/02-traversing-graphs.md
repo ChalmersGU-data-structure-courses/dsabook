@@ -6,39 +6,47 @@
  - Sift through the old stuff for useful tidbits.
 :::
 
-Many graph algorithms involve *traversing* a graph, starting from a given vertex and visit each reachable vertex once.
-This is similar to tree traversal, but made more difficult by the presence of cycles.
-A simple recursive procedure would get stuck in an infinite loop.
+Many graph algorithms involve *traversing* a graph --
+they start from a given vertex and visit each reachable vertex exactly once.
+This is similar to traversing a tree, but slightly more difficult because the graph can contain cycles.
+A simple recursive procedure can get stuck in an infinite loop.
 
-Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:trees:bintree-traversal,
+Instead we use an iterative procedure,
+very similar non-recursive tree traversal as described in @sec:trees:traversal-without-recursion,
 but we have to keep track of visited vertices to avoid infinite loops.
-Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex.
-Stop when there are no edges from visited to unvisited vertices.
+Thus, repeat the following until there are no more possible edges:
 
-By varying how we select the next edge, and what we do when we visit a vertex, we can implement a wide range of useful algorithms on graphs.
-Most of the algorithms described in this chapter use three data structures: an *agenda*, a *visitation set*, and a *result*.
+- Select an edge from a visited vertex to an unvisited vertex, and visit that vertex.
+
+<!-- Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex.
+Stop when there are no edges from visited to unvisited vertices. -->
+
+By varying how we select the next edge, and what we do when we visit a vertex,
+we can implement a wide range of useful algorithms on graphs.
+All the traversal algorithms described in this chapter are instances of [](#alg:graph-traversal),
+which we therefore call *generic* graph traversal.
+Examples that we will encounter later are depth- and breadth-first traversal,
+Dijkstra's algorithm, and Prim's algorithm.
+The traversal algorithm uses three data structures: an *agenda*, a *visitation set*, and a *result*.
 
 - The *agenda* is the collection of edges we have discovered but not yet traversed.
   Different algorithms use different kind of agendas, and this is the main tool
   to distinguish different ways of traversing the graph.
-- The *visitation set* is the set of vertices we have already visited, and that should not be visited again.
+- The *visitation set* is the set of vertices we have already visited, and therefore should not be visited again.
 - The *result* can be anything that the algorithm builds while traversing the graph,
   but here we assume that it is a set of the edges that it has processed.
 
-![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$, and these edges form the final result set.](images/12.2-graph-traversal.svg){#fig:GraphTraversal1}
-
-::: algorithm
-#### Algorithm: Generic graph traversal
+::: {.algorithm #alg:graph-traversal}
+#### Generic graph traversal
 To traverse a graph from a starting vertex $s$,
 we first create an empty set of *visited* vertices and the *result* set.
-Initialise the *agenda* with a single a dummy edge $?\rightarrow s$
-(that is, going from something unspecified to the starting vertex),
+Initialise the *agenda* with a single a dummy edge ending in $s$,
 then repeat the following until the agenda is empty:
 
 - Remove an edge $a\rightarrow b$ from the *agenda*
 - If $b$ is not in *visited*:
     - Add $b$ to *visited*, and the edge to the *result*
-    - Add all outgoing edges of $b$ **that do not end in a visited vertex**, to the *agenda*
+    - Add all outgoing edges of $b$ **where the end vertex is not visited**, to the *agenda*
 :::
 
 @fig:GraphTraversal1 illustrates how a graph traversal can unfold.
@@ -46,13 +54,22 @@ It shows a useful trick when trying to understand graph traversal algorithms on 
 Circle the visited vertices, and the edges that intersect with the circle will be the important parts of the agenda.
 
 The result of the traversal is a set of directed edges.
-Importantly, these edges do *not* form a single path -- instead they form a *spanning tree* of all paths reachable from the starting vertex.
-You can see the resulting spanning tree in the lower right of @fig:GraphTraversal1,
-the selected edges form a tree with $A$ as the root.
+Importantly, these edges do *not* form a single path --
+instead they form a *spanning tree* of all paths reachable from the starting vertex.
+You can see the resulting spanning tree in the lower right of @fig:GraphTraversal1:
+the selected, solid, edges form a tree with $A$ as the root.
 
-Note that the algorithm does not specify in which order we select vertices.
+![
+    Steps of a graph traversal in an undirected graph, starting in $A$.
+    The circled areas are the set of visited vertices, and the pointed arrows show the selected edges.
+    The edges with circles on them show the agenda.
+    This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$,
+    and these edges form the final result set.
+](images/12.2-graph-traversal.svg){#fig:GraphTraversal1}
+
+<!-- Note that the algorithm does not specify in which order we select vertices.
 In particular, it does not necessarily select a vertex adjacent to the previous vertex we visited,
-but rather skip around to vertices that are adjacent to *some* visited vertex.
+but rather skip around to vertices that are adjacent to *some* visited vertex. -->
 
 There are some things to note about this very abstract algorithm:
 
@@ -63,43 +80,46 @@ There are some things to note about this very abstract algorithm:
   Sometimes it will contain edges between two visited vertices,
   which is why we need to check that $b$ is not visited.
 
-- It is a bit silly to add an edge to the agenda if its destination vertex is already visited,
-  since it will anyway be filtered out in the visitation check.
+- It is a bit silly to add an edge to the agenda if it ends in an already visited vertex.
   For example, the graph in @fig:GraphTraversal1 is undirected,
-  so when we have removed the edge $a\rightarrow b$ from the agenda,
-  it would be very silly to immediately add the reverse edge $b\rightarrow a$ to the agenda.
-
-  This is why we have the additional check in the last line (the boldfaced text "...that do not end in a visited vertex"),
+  so when we have removed the edge $A\rightarrow B$ from the agenda,
+  it would be foolish to immediately add the reverse edge $B\rightarrow A$ to the agenda.
+  This is why we have the additional check in the last line in [](#alg:graph-traversal),
+  <!-- (the boldfaced text "...that do not end in a visited vertex"), -->
   which is a simple and often very effective optimisation.
-  But note that it does not let us remove the original visitation check in the while loop.
+  But note that it does not let us remove the original visitation check, that $b$ is not visited.
 
-The traversal algorithm can be translated into pseudocode like this:
+<!--
+The algorithm can be translated into pseudocode like this:
 
     traverse(start):
         visited = new empty set of vertices
         result = new empty set of edges
-        agenda = [(null,start)]   // We do not specify which ADT we use for the agenda
+        agenda = [edge ending in start]   // We do not specify which ADT we use for the agenda
         while agenda is not empty:
-            (a,b) = agenda.remove()
-            if not visited.contains(b):
-                visited.add(b)    // Visiting the vertex b for the first time
-                for each (b0,c) in outgoingEdges(b):  // b0 is the same vertex as b
-                    if not visited.contains(c):
-                        agenda.add((b0,c))
+            a→b = remove an edge from agenda
+            if b is not in visited:
+                add b to visited
+                add a→b to result
+                for each b→c in outgoingEdges(b):
+                    if c is not in visited:
+                        add b→c to agenda
         return result
+-->
 
 
 ### Depth-first traversal {#graphs:DFS}
 
 To turn this high level description of the algorithm into an efficient procedure,
 we need to decide how to represent the agenda.
-If we use a *stack* for the agenda we will get a depth-first traversal,
-similar to how one can implement DFS for trees (see @sec:trees:bintree-traversal).
+If we use a *stack* for the agenda we will get a depth-first traversal, DFS.
+<!-- similar to how one can implement DFS for trees (see @sec:trees:bintree-traversal). -->
 
-The edges selected and the order in which vertices are visited depend on the order in which `outgoingEdges` produces edges.
-Let us assume that `outgoingEdges` gives edges in albethical order of their destination,
-meaning that $\texttt{outgoingEdges}(A)$ returns $[A\rightarrow B, A\rightarrow D, A\rightarrow E]$.
-Then the vertices would be visited in this order: $[A,E,F,C,B,D]$.
+Which edges are selected and the order in which vertices are visited depend on the order in which `outgoingEdges` produces edges.
+Let us use the same graph as in @fig:GraphTraversal1 and
+assume that `outgoingEdges` returns edges in alphabethical order of their destination.
+This means that, for example, $\texttt{outgoingEdges}(A)$ returns $[A\rightarrow B, A\rightarrow D, A\rightarrow E]$.
+If we use a stack as the agenda, the vertices will be visited in this order: $[A,E,F,C,B,D]$.
 This is far from obvious, so let us walk through the steps of depth-first traversing the graph:
 
 edge                      visited              agenda at end of iteration
@@ -120,8 +140,8 @@ Because our agenda is a stack, the last one to be pushed is the one selected, th
 This is what makes the algorithm depth-first:
 it will tend to select vertices that are *deeper* in the sense that the constructed paths from the origin are longer.
 So one way of describing depth-first graph traversal is:
-In each step, we select an edge from the vertex that
-was *most recently visited* and still has at least one unvisited adjacent vertex.
+In each step, we select an edge from the vertex that was *most recently visited*.
+<!-- and still has at least one unvisited adjacent vertex. -->
 You can see the same depth-first traversal in @fig:GraphTraversal2.
 
 ![Steps of a depth-first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
@@ -136,7 +156,7 @@ In many cases this is exactly what we need, but sometimes we can make some some 
 Here are some examples:
 
 - If we only want to find a path from $s$ to a known goal vertex,
-  we can stop immidately when we reach the goal, we do not have to continue traversing the whole graph.
+  we can stop immediately when we reach the goal, we do not have to continue traversing the whole graph.
 - If we only want to know which vertices are *reachable* from $s$,
   we do not need to track edges used at all: we can keep vertices in the agenda, and use the visited set as our result.
 
