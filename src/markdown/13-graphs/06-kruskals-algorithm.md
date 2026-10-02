@@ -66,11 +66,15 @@ but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^4
 The complexity derived above assumes that we use the edges in the MST to check for cyclicity,
 but it is possible to do much better by using special-purpose data structure.
 
-There is a better data structure for storing the MST -- the *disjoint-set*.
-This data structure was discussed in @sec:trees:disjoint-sets,
-and it supports exactly the operations we need efficiently, in almost constant time:
-to take the *union* of two sets, and to *find* which set a vertex belongs to.
+The *disjoint set* data structure was introduced in @sec:trees:disjoint-sets,
+and it is perfectly suited for checking if an edge will create a cycle.
+To test if an edge $a{\leftrightarrow}b$ will create a cycle,
+we can simply test if both $a$ and $b$ belong to the same set.
+That is, we test if *find*($a$) = *find*($b$).
+And, if the edge doesn't create a cycle, we can merge the two sets: *union*($a,b$).
 
+As discussed in @sec:trees:disjoint-sets, if they are implemented correctly,
+both *union* and *find* are very efficient, almost constant time operations.
 Therefore, if we use a disjoint-set to store the MST,
 Kruskal's algorithm is (almost) linear time, $O(E)$.
 But first we have to sort the edges, which takes $O(E \log(E))$ time,
