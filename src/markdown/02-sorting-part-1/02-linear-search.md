@@ -2,7 +2,6 @@
 ## Linear search {#sorting-1:linear-search}
 
 ::: TODO
-- Prio 1: We don't want the subsubsection
 - Prio 1: Also include a discussion about using a `key` function for testing
 :::
 
@@ -14,8 +13,6 @@ and how to find the data we are interested in.
 
 One way of storing a collection of objects is to put them in an array.
 So, assuming that we have an array of objects, how can we find a certain object in this array?
-
-#### Linear search
 
 Suppose we are searching for a particular book in a bookshelf.
 If the shelf is not in any particular order, our only option is to
@@ -39,7 +36,7 @@ computer, is the question of how the time scales when the bookshelf is expanded,
 regardless of how fast the computer is. How does the search time change if we double
 the size of the bookshelf? Particularly, we are interested in the *worst case* time.
 A supremely lucky person may always find their book in the first slot they check
-(in the `linearSearch` function that would correspond to `arr[0] == key` always being true).
+(in the `linearSearch` function that would be when `arr[0] == key`).
 The *worst case* is that we are searching for a book that is not in the shelf at all.
 
 In the worst case, doubling the size of the bookshelf will double the search time.

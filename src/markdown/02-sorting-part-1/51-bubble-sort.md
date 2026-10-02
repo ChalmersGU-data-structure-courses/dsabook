@@ -1,7 +1,8 @@
-
+::::: online :::::
 ## Bubble sort
 
 ::: TODO
+- Prio 1: Adjust to online (it's now after SS and IS)
 - Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
 :::
 
@@ -45,7 +46,7 @@ looking at one less element toward the end than in the preceding pass.
                     swap(arr, j-1, j)    //              Swap them with each other
 
 
-::::: online :::::
+
 #### Bubble sort visualisation
 
 ::: note
@@ -92,7 +93,7 @@ Now try for yourself to see if you understand how Bubble sort works.
 ```
 :::
 
-::::::::::
+
 
 
 ### Analysis of Bubble sort
@@ -136,3 +137,4 @@ If we assume that the initial array is random, we can expect that about half of 
 which is also quadratic (recall that constant factors don't matter).
 However, if the initial array is already sorted we will not perform any swaps at all
 -- but we should never rely on the best case, so this doesn't give us much interesting information.
+::::::::::

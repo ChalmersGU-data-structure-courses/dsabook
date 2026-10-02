@@ -1,26 +1,54 @@
 
-## Performance analysis {#sorting-1:performance-analysis}
+## Performance analysis of sorting algorithms {#sorting-1:performance-analysis}
 
 ::: TODO
 - Prio 1: Bubble sort must be removed!
 - Prio 1: Rewrite sections - currently the are just copy-pasted from other parts
 :::
 
+Having seen a couple of algorithms for searching and sorting, we want answers
+to questions like:
+
+- Is either Selection sort or Insertion sort faster than the other?
+- Is it better to perform a linear search directly on an unordered array, or sorting it with linear search and then performing a binary search?
+- How does the running time of these algorithms scale with increasing input size?
+
+The exact runtime of sorting depends on a myriad of factors. Just as with the search
+algorithms shown earlier, the number of comparisons performed is a good proxy for
+runtime -- a sorting algorithm that does many comparisons is going to be slower.
+So our task is determining the worst case number of comparisons required for a given input size.
+
+We saw earlier that linear search, the number of comparisons scale linearly with the
+input size. We say that linear search is a *linear time* algorithm, and that binary search
+is *logarithmic time*. In this chapter we show that both Selection sort and Insertion sort
+are *quadratic time*, the number of comparisons required for $n$ elements is proportional to $n^2$.
 
 #### Selection sort analysis
 
-We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
+One way to describe selection sort:
+For every position from $0$ to $n-1$, search through the remaining $n-i-1$ remaining values
+for the minimal value.
+In our implementation, we have a nested loop, where the inner loop runs fewer and fewer
+iterations in each iteration of the outer loop.
 
 - The outer loop is iterated $n$ times in total.
 - In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 
-As you might notice, this is exactly the same as the number of comparisons Bubble sort makes.
-So, Selection sort makes $n(n-1)/2$ comparisons, which is quadratic.
+So the total number of comparisons is:
 
-The advantage compared to Bubble sort is that Selection sort makes a lot fewer swaps.
-For each outer iteration it only makes one swap, so the total number of swaps will be $n-1$ (we get the last element in place "for free").
-So, for Selection sort, the number of swaps grows *linearly* with the size of the array.
-(But don't forget that the number of comparisons is still quadratic.)
+$$
+(n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \tfrac{1}{2} n (n-1)
+$$
+
+The fact that this is a quadratic formula indicates that the runtime of insertion sort
+grows quadratically with the size of the array being sorted. Just as binary search is logarithmic time,
+and linear search is linear time, selection sort is *quadratic time*.
+
+When describing selection sort as quadratic time, we simplify away a lot of details that may seem important,
+but for determining how runtime scales with input size, this simplification is justifiable.
+Running benchmarks on an implementation of selection sort would show that when the size of the input array
+is doubled, the runtime is almost exactly quadrupled. A tenfold increase in input size yields a hundredfold
+increase in runtime, exactly as predicted when time scales quadratically with input size.
 
 ::: dsvis
 This visualisation analyses the number of comparisons and swaps required by Selection sort.
@@ -29,20 +57,29 @@ This visualisation analyses the number of comparisons and swaps required by Sele
 ```
 :::
 
+This performance analysis does not help us predict the running time of selection sort in minutes and seconds,
+but it does demonstrate that for large input sizes, selection sort is a lot slower than a linear search.
+Slightly simplified: for large input sizes, every logarithmic time algorithm is faster than every linear time algorithm, which in turn is faster than every quadratic time algorithm. Later on, we will introduce the topic
+of *complexity*, expanding this hierarchy to compare the running time of any algorithms.
 
 #### Insertion sort analysis
 
-Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
+In insertion sort, we insert every element in turn into a growing sequence of sorted values.
+Essentially we move every element back until it is in the correct order.
+Just like insertion sort, this is done using a nested loop, but contrary to selection sort,
+the process is initially quick, then gets slower as we progress.
+
+Another complication is that the number of steps an element needs to move, and thus the number of
+comparisons, depends on the elements of the array, not just the size of it.
 
 - The outer loop is iterated $n-1$ times in total.
 - The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$:
-    - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$;
+    - in the absolute worst case, we have to move the element to the front of the list, so the number of comparisons will be $i-1$;
     - in the best case, the element is already in place, and then we only need one comparison.
 
-Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Bubble sort and Selection sort.
+Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Selection sort.
 In the best case -- when the list is already sorted -- we only have to do one comparison per iteration,
 so the number of comparisons is proportional to the size of the array.
-Counting swaps instead of comparisions yields the same results, because each iteration of the inner `while`-loop does both a comparison and a swap.
 
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
@@ -58,15 +95,13 @@ And here is an explanation of the cost of the best case.
 ```
 :::
 
-While the best case is significantly faster than the worst case,
-<!-- OPENDSA: START -->
-the worst case is usually a more reliable indicator of the "typical" running time.
-However, there are situations where we can expect the input to be in sorted or nearly sorted order.
-One example is when an already sorted list is slightly disordered by a small number of additions to the list;
-restoring sorted order using Insertion sort might be a good idea if we know that the disordering is slight.
-So a "nearly sorted" list will always be cheap to sort with Insertion sort.
-<!-- OPENDSA: END -->
-An example of an algorithm that take advantage of the near-best-case running time of Insertion sort is [Shellsort]{.term}.
+Insertion sort is best case linear time (when no element needs to be moved at all) and worst case quadratic time
+(when every element needs to be moved all the way back). For randomly selected data, we would expect elements to
+move through half the sorted part on average -- so in this *average case* the runtime is still quadratic.
+
+Worst case is usually the most reliable indicator of running time for algorithms, but there are exceptions.
+In some applications, arrays may tend to be sorted or nearly sorted from the start, in which case Insertion sort
+will outperform Selection sort dramatically.
 
 <!-- OPENDSA: START -->
 Later we will see algorithms whose worst case growth rate is much better than quadratic.

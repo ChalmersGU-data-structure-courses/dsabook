@@ -4,6 +4,7 @@
 ::: TODO
 - Prio 1: add figure next to the pseudocode showing the array and the variables in the middle of running
 - Prio 1: section is shortened - make sure it's still ok
+- Prio 2: Use the optimized IS that doesn't do swaps?
 :::
 
 Consider again the problem of sorting a pile of books.
@@ -39,10 +40,10 @@ The algorithm above can be implemented as follows in pseudocode:
 
     insertionSort(arr):
         n = arr.size
-        for i in 1 .. n-1:                       // Put the i'th element in its correct position:
+        for i in 1 .. n-1:                       // Move the i'th element to its correct position:
             j = i                                //     Start at the end of the sorted part
             while j > 0 and arr[j] < arr[j-1]:   //     Go backwards until we find the position:
-                swap(arr, j, j-1)                //         Move the element one step forward
+                swap(arr, j, j-1)                //         Move the element one step backwards
                 j -= 1
 
 
