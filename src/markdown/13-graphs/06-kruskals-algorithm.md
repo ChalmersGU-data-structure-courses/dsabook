@@ -63,20 +63,18 @@ but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^4
 
 #### Using a disjoint-set instead of a normal set
 
-The complexity derived above assumes that we store the MST as a set, but it is possible to do much better.
+The complexity derived above assumes that we use the edges in the MST to check for cyclicity,
+but it is possible to do much better by using special-purpose data structure.
 
-There is a better data structure for storing the MST -- the *disjoint-set* (also called union-find).
+There is a better data structure for storing the MST -- the *disjoint-set*.
 This data structure was discussed in @sec:trees:disjoint-sets,
-and it supports exactly the operations we need efficiently, in *almost* constant time:
+and it supports exactly the operations we need efficiently, in almost constant time:
 to take the *union* of two sets, and to *find* which set a vertex belongs to.
 
-Therefore, if we use a disjoint-set to store the MST, Kruskal's algorithm is $O(E)$.^[
-    Actually, the complexity is $O(E\alpha(E))$, where $\alpha$ is the inverse Ackermann function.
-    This function grows so slowly that it's always $\leq 4$ for all imaginable graph sizes, so we can pretend it is constant.
-]
-But first we have to sort the edges, which takes $O(E \log(E))$ time, so the time for sorting the edges will dominate.
-Note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$,
-the total complexity of Kruskal's algorithm can be written as $O(E \log(V))$.
+Therefore, if we use a disjoint-set to store the MST,
+Kruskal's algorithm is (almost) linear time, $O(E)$.
+But first we have to sort the edges, which takes $O(E \log(E))$ time,
+so the time for sorting the edges will dominate.
 
 
 <!--

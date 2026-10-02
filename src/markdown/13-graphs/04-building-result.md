@@ -35,8 +35,7 @@ and it will not help us find the path to a specific vertex after we have finishe
 
 Instead of using a standard tree representation, we can turn it around so that the children point to their parent.
 This is called a *parent-pointer tree* and was introduced in @sec:trees:parent-pointer-trees.
-However, we do not need to introduce a special datatype as was done in that section,
-but the result can be implemented as a simple *map* from vertices to edges.
+The result can therefore be implemented as a simple *map* from vertices to edges.
 The edge that is stored for a vertex $v$ is the edge that ends in $v$,
 and as we explained above there is always only one such incoming edge.
 So, when it says "add the edge to the result" in the algorithm,
