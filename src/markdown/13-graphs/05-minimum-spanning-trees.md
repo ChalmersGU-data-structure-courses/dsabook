@@ -8,15 +8,15 @@
 <!-- START NOTES -->
 
 As explained in @sec:graphs:definitions, a *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph.
-**Interesting fact**: The number of edges in a spanning tree is exactly $V-1$.
-(Why is this? Try to convince yourself about it.)
+**Interesting fact**: The number of edges in a spanning tree is exactly $V{-}1$.
+(Why is this? Try to convince yourself that this is true.)
 
 If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible.
 A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs.
 @Fig:ExampleMSTs shows a graph and two possible MSTs for it, each with a combined weight of $20$.
 You may not immediately recognise the two MSTs as trees, since there is no root element
-and no clear parent/child relationships between nodes.
-If you "lift" either MST by any node, assigning it as the root,
+and no clear parent/child relationships between nodes --
+but if you "lift" either MST by any node, assigning it as the root,
 you will get a tree as the ones we have seen in earlier chapters.
 
 ![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/12.4-example-MSTs.svg){#fig:ExampleMSTs}
@@ -24,9 +24,9 @@ you will get a tree as the ones we have seen in earlier chapters.
 The minimum spanning tree is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST --
 for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
 
-Note that an MST is different from a Shortest Path Tree (as produced by Dijkstra's algorithm).
+Note that an MST is different from a *shortest path tree* (as produced by Dijkstra's algorithm).
 If our graph is a set of islands and the edges represent possible bridges between them, weighted by length of the bridge,
-then Dijkstra's gives lets us optimise bridges to have as short total distance from a designated starting node.
+then Dijkstra's algorithm lets us optimise bridges to have the shortest total distance from a designated starting node.
 The MST instead shows the shortest possible total length of bridges required to connect all islands.
 Both these are useful for different applications, and it is important to understand the difference.
 

@@ -9,8 +9,8 @@ where each edge connects two vertices.
 @Fig:GraphExamples shows visual representations of two small graphs.
 
 ![
-    Two example graphs, each with four vertices labelled $A$, $B$, $C$, and $D$.
-    The right one also carries numbers, or *weights*, in its edges.
+    Two example graphs, each with six vertices labelled $A, \ldots, F$.
+    The left graph is undirected and weighted, while the right one is directed but unweighted.
 ](images/12.0-examples.svg){#fig:GraphExamples}
 
 

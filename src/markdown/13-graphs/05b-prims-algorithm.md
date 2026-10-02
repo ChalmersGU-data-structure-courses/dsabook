@@ -2,13 +2,15 @@
 ### Prim's MST algorithm {#graphs:prims-algorithm}
 
 Similar to Dijkstra's algorithm, Prim's uses a priority queue, but instead of prioritising edges by total cost, they are prioritised only by their weight.
-This means that an implementation of Dijkstras as we have seen before can be changed into Prim's as easily as changing `cost+weight` to just `weight`!
+This means that an implementation of Dijkstra's algorithm as we have seen before can be changed into Prim's as easily as changing `cost+weight` to just `weight`!
 
-![Steps of Prim's algorithm, starting in $A$.
-In each step, we simply select the cheapest edge from a visited to an unvisited vertex (shown underlined in the image).
+![
+    Steps of Prim's algorithm, starting in $A$.
+    In each step, we simply select the cheapest edge from a visited to an unvisited vertex.
+    These edges are shown with circled weights in the image.
 ](images/12.4-prim.svg){#fig:GraphPrim1}
 
-@Fig:GraphPrim1 shows the execution of Prim's algorithm.
+@Fig:GraphPrim1 shows the execution of Prim's algorithm on the same example graph as before.
 The algorithm is very easy to run with pen and paper:
 Simply circle the currently visited nodes, and select the edge with the lowest cost that intersects the perimeter of the circle.
 Note that after visiting $F$ in this example there are two edges with the same weight ($3$).

@@ -8,9 +8,10 @@
 - Prio 2: use cases
 :::
 
-Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph, but if we want to do something like finding the
-fastest car route through a city we need to generalise to finding shortest paths in *weighted* graphs.
-Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
+Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph,
+or equivalently, the paths passing through the fewest edges.
+But often we want to find the shortest route in kilometers, or the fastest in seconds, or the one with the least CO_2 emissions.
+For this we need a *weighted* graph, where the edge weights can denote distance in kilometers, but also travel time, or CO_2 emissions.
 
 There are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place.
 For example, finding the best move in a chess game, solving a puzzle, proving a mathematical theorem, or even deciding what to say in a conversation, can be formulated as shortest-path problems in some graph.
@@ -19,13 +20,17 @@ Formally, the *shortest path* between two vertices is a path whose total cost is
 This of course assumes that there is a path, and from here on we will assume that the path actually exists.
 Just as for BFS there may be several shortest paths -- that is, different paths with the same total cost.
 
-![On the left is an undirected weighted graph, and on the right two different SPTs for $A$ and $F$ respecitvely, shown both in the graph and in standard tree notation.](images/12.3-example-SPTs.svg){#fig:GraphSPTs}
+![
+    On the left is the undirected weighted graph from @fig:GraphExamples,
+    and on the right two different *shortest-path trees* starting from vertices $A$ and $F$ respecitvely.
+    They are shown both within the graph and in standard tree notation.
+](images/12.3-example-SPTs.svg){#fig:GraphSPTs}
 
-As we saw earlier, the generic graph traversal algorithm does not only find a path from one vertex to another, but from one vertex to all others.
-This is called the *single-source* shortest path problem.
-The solution is the *shortest path tree* (SPT).
+As we saw earlier, the generic graph traversal algorithm does not only find a path from one vertex to another,
+but from one vertex to all others.
+A solution to the shortest path problem from a given starting vertex $s$ is called a *shortest path tree* (SPT) for $s$.
 
-@Fig:GraphSPTs shows two shortest path trees in an example graph.
+@Fig:GraphSPTs shows two shortest path trees for the weighted undirected graph in @fig:GraphExamples.
 They show for example that $A\rightarrow D\rightarrow E$ is a shortest path from $A$ to $E$ with a cost of $5$,
 and that $F\rightarrow E\rightarrow D$ is another from $F$ to $D$.
 Neither of the trees help us figure out the shortest path from $B$ to $E$,
