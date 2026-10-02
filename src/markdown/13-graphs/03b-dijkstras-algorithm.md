@@ -1,11 +1,6 @@
 
 ### Dijkstra's shortest-path algorithm {#graphs:dijkstras-algorithm}
 
-::: TODO
-- Rewrite to go from DFS instead of Prims
-:::
-
-
 Dijkstra's algorithm is perhaps the most well-known graph algorithm of all --
 for weighted graphs it solves the shortest path problem from a given vertex.
 Note that the algorithm only work for graphs with *non-negative* weights.

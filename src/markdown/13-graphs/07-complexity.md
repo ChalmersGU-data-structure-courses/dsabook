@@ -1,6 +1,10 @@
 
 ## Complexity analysis {#graphs:analysis}
 
+::: TODO
+- This is too long, repeats itself
+:::
+
 Graph algorithms have the potential to be very inefficient if designed carelessly.
 Consider this naive solution to the shortest path problem from vertex $a$ to $b$:
 Try every possible path between $a$ and $b$, and keep the shortest one.

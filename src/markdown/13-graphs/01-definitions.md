@@ -1,13 +1,6 @@
 
 ## Definitions and properties {#graphs:definitions}
 
-::: TODO
-- Terminology: If length is number of edges and cost is total weight, why is it called "shortest path" and not "cheapest path"...
-- Move the definitions of strongly connected components later section?
-- Decide which of the graphics to keep.
-- Structure up the definitions a bit. Try to separate graph classifications (directed, weighted, sparse, dense...) from terms (path, cycle, degree, ...)
-:::
-
 A graph consists of a set of *vertices* (or *nodes*) and a set of *edges*,
 We usually denote the sets of vertices and edges, as $V$ and $E$, respectively.
 The *size* of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).

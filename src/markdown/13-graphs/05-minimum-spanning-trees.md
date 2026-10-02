@@ -1,10 +1,6 @@
 
 ## Minimum spanning trees and Prim's algorithm {#graphs:MSTs}
 
-::: TODO
-- Prio 2: add use cases
-:::
-
 <!-- START NOTES -->
 
 As explained in @sec:graphs:definitions, a *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph.

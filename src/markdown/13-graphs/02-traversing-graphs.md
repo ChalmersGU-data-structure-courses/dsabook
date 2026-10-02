@@ -1,11 +1,6 @@
 
 ## Traversing graphs: DFS and BFS {#graphs:traversal}
 
-::: TODO
- - Complexity?
- - Sift through the old stuff for useful tidbits.
-:::
-
 Many graph algorithms involve *traversing* a graph --
 they start from a given vertex and visit each reachable vertex exactly once.
 This is similar to traversing a tree, but slightly more difficult because the graph can contain cycles.

@@ -1,13 +1,6 @@
 
 ## Shortest-path problems and Dijkstra's algorithm {#graphs:shortest-path}
 
-::: TODO
-- Prio 2: introduction, discussing
-    - directed/undirected graphs
-    - remembering visited nodes
-- Prio 2: use cases
-:::
-
 Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph,
 or equivalently, the paths passing through the fewest edges.
 But often we want to find the shortest route in kilometers, or the fastest in seconds, or the one with the least CO_2 emissions.
