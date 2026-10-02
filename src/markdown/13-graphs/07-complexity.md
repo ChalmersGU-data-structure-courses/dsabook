@@ -34,19 +34,6 @@ all the other algorithms (DFS, BFS, Dijkstra's, Prim's) are on the form:
         - Do something to collect the result
         - Add an item to the agenda, for every outgoing edge of $b$
 
-<!--
-    traverse(start: Vertex):
-        visited = new empty set of vertices
-        agenda = initalised with starting node
-        while (agenda is not empty):
-            (from, to) = remove an item from the agenda
-            if visited.contains(to):
-                continue
-            Do something to collect the result
-            for each e in outgoingEdges(to):
-                add an item to the agenda
- -->
-
 We can make the following observations:
 
 - Every directed edge is added to the agenda at most once.
