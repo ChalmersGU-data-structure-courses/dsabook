@@ -1,11 +1,7 @@
 
 # Trees {#trees}
 
-::: TODO
-- Prio 1: Replace "Full, perfect, complete" with "Imbalanced, balanced, perfect"
-:::
-
-[Tree]{.term} structures let us organise data hierarchically.
+Tree structures let us organise data hierarchically.
 So far, we have mainly studied data structures that organise elements in a linear sequence, such as arrays, linked lists, stacks, and queues.
 In those structures, each element is followed by at most one next element.
 Trees take a different approach: instead of continuing in a sequence, a node can lead to two or more children.
@@ -25,12 +21,16 @@ and show an example of a simple data structure for [parent-pointer trees]{.term}
 
 #### Tree terminology
 
-![Drawing of a tree with six nodes, illustrating the concepts of root node, child and parent nodes, size/height/level properties, and paths.](images/9.0-terminology.svg){#fig:TreeTerminology}
+![
+    Drawing of a tree with six nodes, illustrating the concepts of
+    root node, child and parent nodes, size/height/level properties, and paths.
+](images/9.0-terminology.svg){#fig:TreeTerminology}
 
 A tree consists of [nodes]{.term} connected by parent-child relationships.
-The topmost node is the [root]{.term}.
+There is a unique topmost node which is called the [root]{.term}.
 If a node is directly below another node, then it is a [child]{.term} of that node, and the node above it is its [parent]{.term}.
-In @fig:TreeTerminology, $A$ is the root, and $B$ and $C$ are children of $A$.
+In @fig:TreeTerminology, $A$ is the root, $B$ and $C$ are children of $A$,
+and $B$ is also a parent of $D$, $E$ and $F$.
 
 Every node in a tree is also the root of a *subtree*.
 For example, $B$ is a child of $A$, but it is also the root of the subtree containing $B$, $D$, $E$, and $F$.
@@ -47,11 +47,11 @@ Some common tree terms are:
 - A *leaf node* is a node with no children.
 - An *internal node* is a node with at least one child.
 - A *branch* usually means an internal node, especially one with several children.
-- A [forest]{.term} is a collection of trees.
-- An [ancestor]{.term} of a node is any node on the path from the root to that node.
-- A [descendant]{.term} of a node is any node in the subtree rooted at that node.
+- An [ancestor]{.term} of a node is any of its direct or indirect parents.
+- A [descendant]{.term} of a node is a child or any node in their subtrees.
 - [Siblings]{.term} are nodes with the same parent.
-- A [path]{.term} is a sequence of nodes where each node is the parent of the next one.
+- A [path]{.term} is a sequence of nodes where each node is followed by a child.
+- A [forest]{.term} is a collection of trees.
 
 We will sometimes describe trees and nodes using the concepts of size, level, and height.
 The size of a tree is the number of nodes it contains.
@@ -62,7 +62,7 @@ The [height]{.term} of a tree (or subtree) is the number of edges on the longest
 Consequently, a tree consisting of a single node has height $0$. We define the height of an empty tree to be $-1$.
 
 Another important question is whether the children of a node have a fixed order.
-In a file system, the order of the children of a folder is usually unimportant.
+In a file system, the order between the children of a folder is usually unimportant.
 In a syntax tree, order matters,
 because the expressions $a < 3$ and $3 < a$ mean different things.
 This distinction will matter later when we compare general trees, binary trees, and heaps.
@@ -73,36 +73,6 @@ This distinction will matter later when we compare general trees, binary trees, 
 In a syntax tree, each node represents a language construct such as a function call or an `if`-statement, and the children are its components.
 In a file system tree, the nodes are files and folders, and the parent of a node is the folder that contains it.
 
-Trees contain data in nodes, but the meaning of the data and the meaning of the parent-child relationship depend on the application.
-So there is no single tree data structure in the same way that there is a single stack or queue abstraction.
-Instead, trees form a family of related structures.
-
-#### Full, perfect, and complete binary trees
-
-<!-- OPENDSA: START -->
-Several restricted forms of binary tree are sufficiently important to warrant special names.
-<!-- OPENDSA: END -->
-In a [full binary tree](#full-tree){.term}, every node is either a leaf node or an internal node with exactly two non-empty children.
-A [perfect binary tree]{.term} is a full binary tree in which all leaves are at the same level.
-Equivalently, every level of a perfect binary tree is completely full.
-<!-- OPENDSA: START -->
-A [complete binary tree]{.term} has a shape obtained by starting at the root and filling the tree level by level from left to right.
-In a complete binary tree of height $d$, all levels except possibly level $d$ are completely full.
-<!-- OPENDSA: END -->
-The bottom level is filled from the left side.
-
-@Fig:full_complete_bintrees illustrates the differences between full and complete binary trees.
-Neither property implies the other.
-A perfect binary tree satisfies both properties.
-In the figure, tree (a) is full but not complete, while tree (c) is complete but not full.
-A [binary heap]{.term} (see @sec:heaps:binary-heaps) is an example of a complete binary tree, while
-a [Huffman coding tree]{.term} is an example of a full binary tree.
-
-::: {#fig:full_complete_bintrees}
-![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/9.1-full-perfect-complete-bintree.svg)
-
-Examples of restricted binary tree shapes:
-(a) is full but not complete,
-(b) is perfect and therefore both full and complete,
-and (c) is complete but not full.
-:::
+Trees can store any kind of data in their nodes,
+but the meaning of the data and the meaning of the parent-child relationship depend on the application.
+So there is no single tree data structure -- instead, trees form a family of related structures.
