@@ -5,7 +5,7 @@
 - Prio 1: Move details about union/find to graph chapter
 :::
 
-@Sec:trees:general-trees showed a possible way to implement a general tree,
+In the previous section we saw a possible way to implement a general tree,
 where the children are represented by a list of pointers to subtrees.
 
 This is not the only possible representation of a tree.
