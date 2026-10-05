@@ -1,10 +1,6 @@
 
 ## Case study: Parent-pointer trees {#trees:parent-pointer-trees}
 
-::: TODO
-- Prio 1: Move details about union/find to graph chapter
-:::
-
 In the previous section we saw a possible way to implement a general tree,
 where the children are represented by a list of pointers to subtrees.
 

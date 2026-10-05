@@ -1,10 +1,6 @@
 
 ## General trees {#trees:general-trees}
 
-::: TODO
-- Prio 1: double-check that the text is ok
-:::
-
 A binary tree is a special case of a more general tree in which each node has at most two children.
 Many applications, however, require trees with an arbitrary number of children
 or with different kinds of nodes serving different roles.
