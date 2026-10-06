@@ -55,7 +55,7 @@ already present before we add an entry to the linked list.
 
 At this point, you should be concerned about performance.
 Searching in a linked list is not fast, and in fact if all our values end up in the same cell,
-our hash map will be slower than an AVL map ($O(n)$ instead of $O(\log n)$).
+our hash map will be slower than an AVL map ($O(n)$ instead of $O(\log(n))$).
 The idea to avoid this problem is ensuring that the maximum length of any list
 in our table is a small constant. This involves two main techniques:
 

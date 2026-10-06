@@ -324,7 +324,7 @@ improves almost like the linear one, but not quite.
 Its growth rate is sometimes called *linearithmic* or *log-linear*,
 and it is a common growth rate for many algorithms shown later on in this book
 (for example the Mergesort algorithm in @sec:sorting-2:mergesort).
-In big-$O$ notation, this is the complexity class $O(n \log n)$.
+In big-$O$ notation, this is the complexity class $O(n\log(n))$.
 
 Note that something special happens in the case of the *exponential* algorithm, $T(n) = 2^n/20$.
 It can only be used to solve very small problems,

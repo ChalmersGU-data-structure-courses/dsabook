@@ -105,6 +105,6 @@ So $p$ is in the order of a million, which is much larger than $c\log(c)$, so in
 On the other hand, a high-definition image can have $2^{16}$ values for red, green and blue, which gives $c=(2^{16})^3$.
 Even if it has a very high resolution of say $100,000\times 50,000$ (that is, $p\approx (2^{16})^2$),
 then $c$ will still be much larger than $p$.
-So for a high-resolution, high-definition image, the time for sorting, $O(c\log c)$ will dominate.
+So for a high-resolution, high-definition image, the time for sorting, $O(c\log(c))$ will dominate.
 Therefore, neither variable should be ignored in the complexity analysis of the algorithm.
 :::
