@@ -8,14 +8,13 @@ However, there are other possible operations that we might want to do on priorit
 One quite common is to be able to *merge* two priority queues into one,
 or as it is often called, to *meld* two heaps.
 Binary heaps cannot do this in a good way, the
-best possible algorithm is to simply concatenate the two arrays and then *heapify* the result.
-We will not describe the *heapify* algorithm here, the only thing you have to know is that
-it can turn any array into a binary heap in linear time, $O(n)$.
+best possible algorithm is to simply concatenate the two arrays and then *heapify* the result (see @sec:heaps:heapify).
 This means that the best algorithm for melding two binary heaps is linear in their size.
 
 If we loosen the requirement that the heap is a *complete* tree, it is possible to implement melding faster than that.
 The downside is that we have to store the heap as a tree, in the same way as we did in @sec:trees:implementing-binary-trees.
-Our meldable heaps will then consist of tree nodes that store their value and their height in the tree,
+This is a lot less compact than using an array, for example we have to store the children pointers explicitly in every node.
+Our meldable heaps will consist of tree nodes that store their value and their height in the tree,
 and just as for normal binary trees, the empty heap is represented by *null*:
 
     class HeapNode:
@@ -27,11 +26,11 @@ Now, let us assume that we already have an operation *meld* that takes two heaps
 Using this we can define the basic heap operations very easily:
 
 - *add*(*value*): Create a new heap for *value*, and meld it with the current heap.
-- *getMin*(): Just look up the root value.
-- *removeMin*(): If we remove the root we are left with the children,
-  but they are heap, so we can simply meld them to get back a new heap.
+- *getMin*(): Look up the root value.
+- *removeMin*(): If we remove the root we have two children.
+  But the children are heaps themselves, so we can simply meld them into a new heap.
 
-So, how can we defined *meld*?
+So, how can we define *meld*?
 This is easiest formulated as a recursive procedure, and the basic idea is like this:
 
 - If either of the heaps are empty, return the other heap.
@@ -40,13 +39,14 @@ This is easiest formulated as a recursive procedure, and the basic idea is like 
 
 The procedure will always result in a heap,
 because in each step we let the highest-priority node be the parent in the resulting heap.
-But the question is, which of the two children should we use in our resursive call?
+But the question is, which of $h_1$'s children should we use in our resursive call?
 We want our procedure to stop as soon as possible, and it will continue until it reaches a leaf.
-Therefore the best is to always meld with the child with the *least* height,
+So the best is to always meld with the child with the *least* height,
 because a low height means that the recursion will stop earlier.
+The procedure is described in [](#alg:meld-heaps).
 
-::: algorithm
-#### Algorithm: Melding two heaps by lowest height
+::: {.algorithm #alg:meld-heaps}
+#### Melding two heaps by lowest height
 If either of the heaps is empty (*null*), return the other heap.
 Otherwise:
 
@@ -72,8 +72,7 @@ Therefore, the shortest branch in a tree is always at most *logarithmic* in the 
 
 In conclusion, the complexity of *meld* is logarithmic in the size of the resulting heap, $O(\log(n))$.
 This is much better than the linear complexity of binary heaps!
-
-One interesting thing with meldable heaps is that they behave fundamentally different from binary heaps.
+One interesting thing with meldable heaps is that they behave in a fundamentally different way from binary heaps.
 The trick here is to *not* strive for a balanced tree, but rather the opposite:
 we want our heaps to be as unbalanced as possible -- the more unbalanced, the faster melding becomes.
 @Fig:MeldableHeapExample shows the difference in structure between a binary heap and a meldable heap.
@@ -100,9 +99,7 @@ The difference is how they decide which of the children to meld with.
 
 Leftist heap
 :   This heap is very similar to ours, but it uses another measure than the height (called the *s-value* or *rank*),
-    which is a more difficult concept to explain.
-
-    <!-- `\newpage`{=latex} -->
+    which is more difficult to explain.
 
 Skew heap
 :   This heap doesn't use any extra information, such as height or rank or anything.
@@ -123,3 +120,16 @@ For example, *Binomial heaps*, *Fibonacci heaps* and *Pairing heaps* consist of 
 with special invariants that make sure that all heap operations have logarithmic complexity.
 In fact, both Fibonacci heaps and Pairing heaps have *constant* time complexity for *meld* and *add*,
 but *deleteMin* is amortised logarithmic in the worst case.
+
+
+#### High constant factors
+
+Most of the time, none of these meldable heaps are faster than a straightforward binary heap.
+The reason for this is that binary heaps have so little overhead,
+both in memory usage and the actual implementation,
+so the constant factors are much smaller than for the meldable heaps.
+
+But for some specialised algorithms, and with very large problem sizes, meldable heaps can be more efficient.
+This is similar to the example with Karatsuba multiplication discussed in @sec:analysis-3:karatsuba.
+Although Karatsuba's algorithm is asymptotically faster than the naive multiplication algorithm,
+it is only worthwile to use it when the numbers are very large -- several hundred digits long.
