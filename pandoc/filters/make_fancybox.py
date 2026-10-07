@@ -6,8 +6,8 @@ Panflute filter: Make numbered algorithms
 import panflute as pf
 from panflute_helper import run_filter
 
-FANCYBOXES = ["example", "algorithm", "note", "todo"]
-
+FANCYBOXES = ["example", "invariant", "algorithm", "note", "todo"]
+NUMBERED = ["example", "algorithm", "invariant"]
 
 COUNTERS = {
     'section': 0,
@@ -40,13 +40,15 @@ def make_fancybox(elem, doc):
         title = elem.attributes.get('title', "")
     if title.lower().startswith(fancybox + ":"):
         _, _, title = title.partition(":")
-    if elem.identifier:
+    header = fancybox.capitalize()
+    if fancybox in NUMBERED:
         COUNTERS['counter'] += 1
-        REF_NAMES[elem.identifier] = fancybox.capitalize()
-        REF_NUMBERS[elem.identifier] = f"{COUNTERS['section']}.{COUNTERS['counter']}"
-        title = f"{REF_NAMES[elem.identifier]} {REF_NUMBERS[elem.identifier]}: {title}".strip(": ")
-    else:
-        title = f"{fancybox.capitalize()}: {title}".strip(": ")
+        numbering = f"{COUNTERS['section']}.{COUNTERS['counter']}"
+        if elem.identifier:
+            REF_NAMES[elem.identifier] = header
+            REF_NUMBERS[elem.identifier] = numbering
+        header += " " + numbering
+    title = f"{header}: {title}".strip(": ")
     elem.content.insert(0, pf.Header(pf.Str(title), level=4))
     return elem
 

@@ -241,7 +241,7 @@ figcaption p, figure figure figcaption {
 
 /* Highlighted blocks */
 
-.topic, .example, .figure, .algorithm, .alert, .note, .quiz, .TODO,
+.topic, .example, .figure, .algorithm, .invariant, .alert, .note, .quiz, .TODO,
 div.embedContainer, div.jsavcontainer, details {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
