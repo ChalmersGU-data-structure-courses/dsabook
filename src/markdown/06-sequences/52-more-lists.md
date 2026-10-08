@@ -61,12 +61,10 @@ The main difference with queues is that the *front* and *rear* pointers are now 
 The operation `addFirst` will move the *front* pointer to the left, and `addLast` will move the *rear* pointer to the right.
 And the opposite for `removeFirst` and `removeLast`, respectively.
 
-::: example
 #### Exercise: Implement a deque using a dynamic array
-
 Implement the class `ArrayDeque` which uses a circular dynamic array,
 together with the operations `addFirst`, `addLast`, `removeFirst` and `removeLast`.
-:::
+
 
 <!-- #### Use case(s) for deques -->
 

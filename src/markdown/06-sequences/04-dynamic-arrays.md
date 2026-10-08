@@ -174,17 +174,11 @@ $$
 $$
 
 In fact, we have just proved the following result,
-which holds regardless of what the initial capacity is.
-
-::: example
-#### Theorem: Array-doubling
+which holds regardless of what the initial capacity is:
 
 When using the array-doubling strategy,
-pushing $n$ elements to a stack implemented as a dynamic array
-causes fewer than $2n$ elements to be copied.
+**pushing $n$ elements to a dynamic array stack causes fewer than $2n$ elements to be copied**.
 In other words, pushing an element to a stack causes on average 2 elements to be copied.
-:::
-
 
 ::: dsvis
 Dynamic arrays -- addition.

@@ -7,7 +7,7 @@
 
 An AVL tree is a binary search tree with the following additional balancing invariant:
 
-::: example
+::: {.invariant #inv:avl-balance}
 #### Invariant: AVL balance
 For every node, the heights of its subtrees differ by at most 1.
 :::
@@ -124,7 +124,7 @@ but as the recursion unwinds up the tree,
 we perform the appropriate rotation on any node that is found to be unbalanced.
 <!-- OPENDSA: END -->
 
-::: algorithm
+::: {.algorithm #alg:avl-add}
 #### Algorithm: Adding to an AVL tree, recursively
 To add a value $x$ to an AVL node:
 
@@ -168,7 +168,7 @@ But this doesn't change the complexity of addition, because it is logarithmic to
 In summary, we have come up with our first *efficient* general-purpose data structure for sets and maps.
 This is also one of the most common ones in practice, and very easy to implement.
 
-:::: example
+:::: {.example #ex:avl-sort}
 #### Example: Yet another sorting algorithm
 
 Using AVL trees we can define a very simple but efficient sorting algorithm.

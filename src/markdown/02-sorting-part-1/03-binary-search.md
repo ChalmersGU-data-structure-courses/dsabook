@@ -43,7 +43,7 @@ is a key concept in algorithm design.
 We can easily generalise the algorithm from searching book cases to searching
 in an ordered array of elements.
 
-::: algorithm
+::: {.algorithm #alg:binary-search}
 #### Algorithm: Binary search
 
 To find out where a given *key* is located in an ordered array,

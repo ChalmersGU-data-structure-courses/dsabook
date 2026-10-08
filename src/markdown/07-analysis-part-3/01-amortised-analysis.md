@@ -35,7 +35,7 @@ Dynamic arrays are such an important example for amortised analysis that we will
 But before that we will explain the concepts and give some other examples.
 
 
-::: example
+::: {.example #ex:multipop-analysis}
 #### Example: Multipop on stacks
 
 Assume that we want to add a new operation *multipop* on stacks,
@@ -94,7 +94,7 @@ we pretend that it is slower than it actually is, but only by a constant factor.
 This additional time that we (pretend to) spend is added to our account.
 Then when there is a slow operation, we can use the saved time to "pay for" the slow operation.
 
-::: example
+::: {.example #ex:multipop-analysis-accounting}
 #### Example: Multipop, revisited
 
 The *multipop* operation is a very good example of how the accounting method can be applied.
@@ -140,7 +140,7 @@ If it is too small, it will map some states to negative values, which breaks the
 If it is too big, it will overestimate the amortised cost, and will not show an improvement to the actual cost.
 
 
-::: example
+::: {.example #ex:increment-counter}
 #### Example: Incrementing a binary counter
 
 As an example of the potential method, consider the process of incrementing a binary counter,

@@ -17,7 +17,7 @@ and 3-nodes, which have two values and three children.
 The normal BST invariant still holds for all 2-nodes,
 but it has to be generalised a little for the 3-nodes:
 
-::: example
+::: {.invariant #inv:3-node }
 #### Invariant: 3-node order invariant
 For every 3-node with values $a$ and $b$:
 
@@ -37,7 +37,7 @@ Because 2-3 trees have two kinds of nodes, we can have a much stricter balance i
 ](images/10.4-23-example.svg){#fig:23-example}
 
 
-::: example
+::: {.invariant #inv:23-balance}
 #### Invariant: 2-3 tree balance
 All leaves are on the same level, or in other words,
 every path from the root to a leaf has the same length, or in other words,

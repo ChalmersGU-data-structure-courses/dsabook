@@ -23,9 +23,8 @@ To perform a lookup of value $x$, we do a linear search from index
 $h(x)\bmod N$ until we either find the key we are looking for,
 or find an empty table cell.
 
-::: example
+::: {.invariant #inv:linear-probing}
 #### Invariant: Linear probing
-
 The invariant required for this to work is the following:
 If a key is present in the table, there can be no empty cells between its ideal position and its actual position.
 :::

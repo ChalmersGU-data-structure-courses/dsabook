@@ -236,7 +236,7 @@ Big-Omega       $f \in \Omega(g)$    $k > 0$
 Little-Omega    $f \in \omega(g)$    $k = \infty$
 
 
-::: example
+::: {.example #ex:compare-two-functions}
 #### Example: Comparing two functions
 
 Assume $f(n) = n^2$ and $g(n) = 10^9n\log(n)$, how can we classify $f$?

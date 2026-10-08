@@ -17,7 +17,7 @@ So, a 2-3 tree is a B-tree of order 3, and a B-tree of order 10 can have nodes w
 
 The invariants for a B-tree of order $m$ are like this:
 
-::: example
+::: {.invariant #inv:b-tree-of-order}
 #### Invariant: B-tree of order $m$
 For every $k$-node in a B-tree of order $m$:
 

@@ -56,7 +56,7 @@ whereas another may scale better for large datasets (millions of elements).
 The most suitable data structure depends on the specific use case,
 and it is important that you can make informed and well-reasoned choices when it comes to selecting what data structure to use.
 
-::: example
+::: {.example #ex:databases}
 #### Example: Databases
 
 A _database_ is a structured collection of data that can be easily accessed, managed, and updated.

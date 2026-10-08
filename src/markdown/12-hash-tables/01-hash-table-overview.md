@@ -92,7 +92,7 @@ it reduces an object $x$ (such as a string or a Java-object) to a fixed size num
 The only absolute requirement is that hashing *preserves equality*,
 meaning that equal objects must always hash to the same value.
 
-::: example
+::: {.invariant #inv:hash-function}
 #### Invariant: Hash function
 A hash function $h$ must *preserve equality*:
 If $x$ and $y$ compare equal, then $h(x)=h(y)$.
@@ -121,7 +121,7 @@ We will discuss the technical details of hashing a bit further later in the chap
 but assuming we have a good hash function for our key data type, we can already
 outline an algorithm for performing a hash table *lookup* given a key value.
 
-::: algorithm
+::: {.algorithm #alg:hashtable-lookup}
 #### Algorithm: Looking up a key
 To lookup a key $k$ in a hash table of size $N$:
 

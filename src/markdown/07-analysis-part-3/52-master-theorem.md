@@ -81,7 +81,7 @@ $$
 
 :::
 
-::: example
+::: {.example #ex:apply-master-theorem}
 #### Example: Applying the master theorem
 
 Here are some example recurrence relations that can be solved by the Master theorem:

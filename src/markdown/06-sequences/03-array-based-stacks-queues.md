@@ -112,7 +112,7 @@ Here is a proficiency exercise about popping from array-based stacks.
 :::
 
 
-::: example
+::: {.example #ex:two-stacks-one-array}
 #### Example: Implementing two stacks using one array
 
 <!-- OPENDSA: START -->

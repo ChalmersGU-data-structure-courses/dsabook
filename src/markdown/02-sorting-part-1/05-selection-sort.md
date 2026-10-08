@@ -23,7 +23,7 @@ But it is easy to turn this into an in-place algorithm, where all books are in t
 We just have to remember an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 Whenever we have found the next book to put in place, we *swap* it with the book that is in the way.
 
-::: algorithm
+::: {.algorithm #alg:selection-sort}
 #### Algorithm: Selection sort
 
 Divide the array into a sorted and an unsorted part,

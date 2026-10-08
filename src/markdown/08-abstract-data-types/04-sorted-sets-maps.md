@@ -122,7 +122,7 @@ Note the similarity to the interface for sorted sets.
                                           // Returns all keys k such that k1 ≤ k ≤ k2.
 -->
 
-::: example
+::: {.example #ex:small-towns}
 #### Example: Small Swedish towns
 
 <!-- NICSMA: START -->

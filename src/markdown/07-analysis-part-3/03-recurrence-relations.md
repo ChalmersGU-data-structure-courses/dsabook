@@ -190,7 +190,7 @@ $$
 
 :::
 
-::: example
+::: {.example #ex:apply-master-theorem}
 #### Example: Applying the master theorem
 
 Here are some example recurrence relations that can be solved by the Master theorem:
@@ -218,7 +218,7 @@ Quadratic extra work
     so $T(n) \in O(n^k) = O(n^2)$.
 :::
 
-### Case study: Karatsuba multiplication
+### Case study: Karatsuba multiplication {#analysis-3:karatsuba}
 
 How do we multiply numbers? If they are small enough they are handled efficiently by the processor,
 but what if the numbers are large with thousands of digits each?

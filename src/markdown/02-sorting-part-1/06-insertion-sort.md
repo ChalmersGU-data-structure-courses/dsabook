@@ -18,7 +18,7 @@ Just as for Selection sort, the description above is not in-place.
 But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm,
 by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 
-::: algorithm
+::: {.algorithm #alg:insertion-sort}
 #### Algorithm: Insertion sort
 
 Divide the array into a sorted and an unsorted part,

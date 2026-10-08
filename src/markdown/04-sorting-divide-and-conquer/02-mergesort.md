@@ -13,7 +13,7 @@ break the array into pieces, sort each piece, and combine the sorted pieces.
 The problem is how to break the array into pieces, and how to combine them afterwards.
 The idea behind *Mergesort* is to simply split the array in half.
 
-::: algorithm
+::: {.algorithm #alg:mergesort}
 #### Algorithm: Mergesort
 
 To sort an array using Mergesort:
@@ -47,7 +47,7 @@ merge the two sorted halves into a single sorted array.
 This is done by iterating through both sorted halves *in parallel*,
 and every time moving the smallest element to the final result.
 
-::: algorithm
+::: {.algorithm #alg:mergesort-merge}
 #### Algorithm: Merge
 
 First we need a temporary result array, initially empty.

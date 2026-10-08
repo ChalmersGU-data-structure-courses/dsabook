@@ -159,7 +159,7 @@ Arrays are one of the fundamental data structures in programming because they ar
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
 
 ::: note
-*Note to Python programmers*:
+#### Note: For Python programmers
 Python doesn't have arrays, instead they have *lists* which are written like this: `[1,2,3]`.
 There is one important difference between arrays and Python lists: any given array has a fixed size.
 However, Python lists can change in size -- for example, the `append` method adds a new element to the list, increasing its size.

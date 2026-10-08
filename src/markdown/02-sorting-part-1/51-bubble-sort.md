@@ -13,7 +13,7 @@ However, it is rather slow, even compared to the other similar algorithms, Selec
 their card hand or their pile of bills, like they might with Insertion sort or Selection sort.)
 <!-- OPENDSA: END -->
 
-::: algorithm
+::: {.algorithm #alg:bubble-sort}
 #### Algorithm: Bubble sort
 
 Divide the array into an unsorted and a sorted part,
@@ -50,6 +50,7 @@ looking at one less element toward the end than in the preceding pass.
 #### Bubble sort visualisation
 
 ::: note
+#### Note: Arrays of integers vs. complex records
 Note that to make the explanation for the sorting algorithms as
 simple as possible, our visualisations will show the array as though it
 stored simple integers rather than more complex records. But you should

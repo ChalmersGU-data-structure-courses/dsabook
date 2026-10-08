@@ -45,7 +45,7 @@ However, the recursive approach usually provides an algorithm that is reasonably
 If necessary, the clear, recursive solution can later be modified to yield a faster implementation.
 <!-- OPENDSA: END -->
 
-::: example
+::: {.example #ex:fibonacci-sequence}
 #### Example: The Fibonacci sequence
 
 Here is an example of a function that is naturally written using recursion.

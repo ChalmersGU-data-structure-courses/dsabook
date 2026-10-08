@@ -43,7 +43,7 @@ Instead we need to a find weaker balance invariant, and there are lots of differ
 For example, in @sec:search-trees:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,
 and in [@sec:search-trees:23-trees;@sec:search-trees:B-trees] we discuss 2-3 trees and B-trees which use a different invariants.
 
-::: example
+::: {.example #ex:scapegoat-trees}
 #### Example: Scapegoat trees
 
 One very simple solution is not require that the tree must be completely balanced,

@@ -19,7 +19,7 @@ After the search is finished, the pointer points to an empty node so this is not
 Insetad, we have to remember the *previous* node we looked at -- and then we can attach the new node as a child.
 If the new value is smaller, we add the node as a left child, and if it is larger we add it as a right child.
 
-::: algorithm
+::: {.algorithm #alg:bst-add}
 #### Algorithm: Adding to a BST
 To add a value $x$ to a BST, initialise a *current* pointer to the root node, and a *previous* pointer to null.
 Then repeat the following until *current* points to null:
@@ -38,8 +38,8 @@ Now create a new node with value $x$ and attach it as follows:
 If you think that it is clumsy to keep two pointers in the algorithm above,
 the recursive variant becomes very simple and compact:
 
-::: algorithm
-#### Algorithm: Adding to a BST, recursive version
+::: {.algorithm #alg:bst-add-recursive}
+#### Adding to a BST, recursive version
 To add a value $x$ to a BST node:
 
 - If the node is empty, return a node node with value $x$.
@@ -134,7 +134,7 @@ This is easy, we just go as far to the right as possible -- then we will end up 
 ](images/10.1-BST-delete-root.svg){#fig:BST-example-deleted-root}
 
 
-::: example
+::: {.example #ex:bst-delete}
 #### Example: Deleting from a BST
 
 Suppose we want to delete the value C from the leftmost tree in @fig:BST-example-deleted-root.
@@ -155,7 +155,7 @@ Notice that both of these trees are different representations of exactly the sam
 
 Now we are ready to formalise deletion into an algorithm.
 
-::: algorithm
+::: {.algorithm #alg:bst-remove}
 #### Algorithm: Deleting a value in a BST
 If we want to delete the value $x$ in a BST, we first find the node that has that value.
 There are three possibilities for that node:

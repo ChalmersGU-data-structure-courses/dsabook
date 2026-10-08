@@ -45,6 +45,7 @@ $O(x^2)$, $O(5x^2)$, and $O(5x^2-7x+100\log_2(x)+10^9)$, all describe the same s
 However, we will always use the simplified form of this set, in this case $O(x^2)$.
 
 ::: note
+#### Note: Simplified definition
 The definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
 This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
 This is not a real restriction for the purposes of algorithm analysis,
@@ -55,7 +56,7 @@ The mathematical definition that allows any non-monotonic functions is slightly 
 and can be found in mathematical textbooks, or in Wikipedia.
 :::
 
-::: example
+::: {.example #ex:comparing-two-functions}
 #### Example: Comparing two functions
 
 Assume $f(n) = n\cdot\log(n)^2$ and $g(n) = 0.001\cdot n^2$.
@@ -90,7 +91,7 @@ definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
  -->
 
-::: example
+::: {.example #ex:quadratic-algorithm}
 #### Example: Quadratic algorithm
 
 Assume that for a particular algorithm, $T(n) = c n^2 + d n$.
@@ -193,7 +194,7 @@ Using these rules we can easily determine the asymptotic growth rate for many al
   you can treat it as you only execute $p$ once.
 
 
-::: example
+::: {.example #ex:non-quadratic-nested-loops}
 #### Example: Non-quadratic nested loops
 
 Not all loops are strictly linear in $n$. Here is an example:
@@ -218,7 +219,7 @@ Simplification rule (3) says that we only need to care about the most expensive 
 so we can say that the whole `while` loop body is linear, $O(n)$.
 The outer `while` loop runs $O(\log(n))$ times,
 so simplification rule (4) tells us that we can multiply the complexities.
-Therefore the complexity of the `while`-loop is linear *times* logarithmic, or $O(n\log(N))$.
+Therefore the complexity of the `while`-loop is linear *times* logarithmic, or $O(n\log(n))$.
 ::::
 
 
@@ -252,7 +253,7 @@ $O(\log(n))$ and $O(n\log(n))$, respectievly.
 Recurrence relations are discussed further in @sec:analysis-3:recurrences.
 
 
-### Advanced algorithm analysis
+### Advanced algorithm analysis {#analysis-2:advanced-upper-bound}
 
 The simplification rules from @sec:analysis-1:simplification-rules
 do not always give the tightest possible complexity.
@@ -263,7 +264,7 @@ So, is there something wrong with the rules?
 No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
 Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O(n\log(n))$.
 
-:::: example
+:::: {.example #ex:linear-nested-loop}
 #### Example: A nested loop with linear complexity
 
 Recall the non-quadratic nested loop in @sec:analysis-2:simplifying-rules.

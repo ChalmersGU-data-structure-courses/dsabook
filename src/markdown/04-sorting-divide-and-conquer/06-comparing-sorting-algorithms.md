@@ -66,7 +66,7 @@ Insertion sort        yes            yes
 Mergesort             yes            no
 Quicksort             no             yes
 
-::: example
+::: {.example #ex:selection-sort-not-stable}
 #### Example: Why Selection sort is not stable
 
 Here is an explanation why Selection sort is not stable.

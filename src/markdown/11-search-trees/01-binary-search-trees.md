@@ -10,7 +10,7 @@
 
 A *binary search tree* (BST) is a binary tree that satisfies the following invariant:
 
-::: example
+::: {.invariant #inv:bst-invariant}
 #### Invariant: Binary search trees
 For every node with value $v$:
 
@@ -87,7 +87,7 @@ If the value is smaller than the root, we can continue searching in the left sub
 We continue searching until we have found the value in a node, or until we reach an empty child.
 If we reach an empty child (a null node), we know that the value is not in the tree.
 
-::: algorithm
+::: {.algorithm #alg:bst-search}
 #### Algorithm: Searching in a BST
 To search a BST for a value $x$, we initialise a pointer to the root node, and repeat the following:
 
@@ -132,7 +132,7 @@ that sometimes lets it avoid visiting one or both of its children.
 The decision is typically based on the value of the current node.
 Many problems that require information flow on binary search trees are "guided" in this way.
 
-::: example
+::: {.example #ex:values-within-range}
 #### Example: The number of values within a range
 
 Assume that you want to know how many values there are in a BST that are within a given range.

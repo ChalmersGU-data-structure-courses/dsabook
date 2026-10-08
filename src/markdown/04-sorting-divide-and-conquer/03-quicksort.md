@@ -16,7 +16,7 @@ So is there a different divide-and-conquer strategy that is easier to make in-pl
 which then makes the merging step completely trivial.
 The overall algorithm is deceivingly similar to Mergesort:
 
-::: algorithm
+::: {.algorithm #alg:quicksort}
 #### Algorithm: Quicksort
 
 To sort an array using Quicksort:
@@ -62,7 +62,7 @@ After the partitioning is finished and the pointers have passed each other,
 the upper pointer will point to the last element in the lower part.
 This is the final position of the pivot, so we can swap it into place.
 
-::: algorithm
+::: {.algorithm #alg:partition}
 #### Algorithm: Quicksort partition
 
 To partition an array interval:

@@ -53,8 +53,8 @@ More generally, it is useful to think in terms of priority rather than minimum o
 In a minimum priority queue, the smallest element has the highest priority,
 whereas in a maximum priority queue, the largest element has the highest priority.
 
-::: example
-#### Example: Sorting
+::: {.example #ex:pq-sorting}
+#### Example: Sorting using a priority queue
 
 <!-- NICSMA: START -->
 We can use a priority queue to make an efficient sorting algorithm.

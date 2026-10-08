@@ -54,7 +54,7 @@ We can specify a minimal interface for sets like this:
         remove(set, key: K)            // Removes the key from the set, if it is there.
         contains(set, key: K) -> Bool  // Returns true if the key is in the set.
 
-::: example
+::: {.example #ex:spell-checking}
 #### Example: Spell-checking
 
 We can use a set to create a very simple spell-checker,
@@ -96,7 +96,7 @@ Here is a possible minimal interface for maps:
 Note that maps depend on two different types, the keys `K` and the values `V`.
 These types can be the same or different, depending on the needs of your application.
 
-::: example
+::: {.example #ex:cash-register}
 #### Example: Cash register
 
 A map is a perfect match for implementing the *cash register* example from the beginning of this section:
@@ -148,7 +148,7 @@ Note that we do not have to `put` the updated set back into the internal map.
 Complex data structures are *mutable*:
 when we update a set using `add` it is modified *in-place* -- so it is still pointed to by the internal map.
 
-::: example
+::: {.example #ex:search-engine}
 #### Example: Search engine
 
 The *search engine* example is a good use case of a multimap.

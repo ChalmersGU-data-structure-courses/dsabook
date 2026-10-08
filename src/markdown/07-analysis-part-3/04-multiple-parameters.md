@@ -64,7 +64,7 @@ Array of lists
     So the complexity of testing friendship is $O(m\cdot\log(n))$.
 
 
-::: example
+::: {.example #ex:pixel-values}
 #### Example: Pixel values in a picture
 
 <!-- OPENDSA: START -->

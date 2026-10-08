@@ -144,7 +144,7 @@ the time for a single comparison would double. In this example, we can consider 
 to be $O(1)$, because we can assume that the strings are never longer than, say, 100 characters.
 
 <!--
-::: example
+::: {.example #ex:linear-search-analysis}
 #### Example: Linear search
 
 Recall the linear search algorithm from @sec:sorting-1:linear-search,
@@ -172,7 +172,7 @@ and they are only performed once each.
 :::
 -->
 
-::: example
+::: {.example #ex:median-of-three-analysis}
 #### Example: Calculating the median-of-three
 
 The following is a function that calculates the *median* of the first,
@@ -199,7 +199,7 @@ This indicates that the size of the input $n$ has no effect on the running time.
 The whole function is $O(1)$ (constant time)!
 :::
 
-::: example
+::: {.example #ex:bubble-sort-analysis}
 #### Example: Bubble sort
 
 Recall the Bubble sort algorithm from @sec:sorting-1:bubble-sort:
