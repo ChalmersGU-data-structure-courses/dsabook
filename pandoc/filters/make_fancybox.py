@@ -38,8 +38,9 @@ def make_fancybox(elem, doc):
         title = pf.stringify(title_elem).strip()
     else:
         title = elem.attributes.get('title', "")
-    if title.lower().startswith(fancybox + ":"):
-        _, _, title = title.partition(":")
+    if ":" in title:
+        fancyprefix, _, title = title.partition(":")
+        assert fancybox == fancyprefix.lower(), f"The title of a {fancybox} must start with '{fancybox.capitalize()}:'"
     header = fancybox.capitalize()
     if fancybox in NUMBERED:
         COUNTERS['counter'] += 1
