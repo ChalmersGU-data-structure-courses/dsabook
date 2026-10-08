@@ -283,8 +283,9 @@ requires a multitude of assumptions about the hardware running it.
 But as a thought experiment we can assume something like $T(n)=3n+5$
 for an algorithm, using some unit of time, and use that to determine
 how large problems can be solved in a given timeframe.
-@Tbl:problem-size-speedup shows this for some example time functions.
+@Fig:problem-size-speedup shows this for some example time functions.
 
+<div id="fig:problem-size-speedup">
 Time function ($T(n)$)     1 ms        10 ms        100 ms       1 second
 -----------------------  ------  -----------  ------------  -------------
 $2\cdot\log_2(n)$          $32$    $10^{15}$    $10^{150}$    $10^{1500}$
@@ -294,9 +295,9 @@ $n\cdot\log_2(n)/4$        $11$         $66$         $453$        $3,408$
 $n^2/10$                   $10$         $31$         $100$          $316$
 $2^n/20$                    $7$         $11$          $14$           $17$
 
-: Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
-  for different various time functions. We assume that every operation takes $0.1$ ms.
-  {#tbl:problem-size-speedup}
+Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
+for different various time functions. We assume that every operation takes $0.1$ ms.
+</div>
 
 This table illustrates many important points.
 The two equations $n$ and $n/2$ are both *linear*; only the value of the constant factor has changed.
@@ -343,7 +344,7 @@ than an algorithmic speed-up, going from a slow to a faster complexity class.
 #### Plotting and tabulating growth rates
 
 Another way of comparing different growth rates is to draw a graph.
-@Fig:growthGraphs plots the six growth rate equations from @tbl:problem-size-speedup earlier.
+@Fig:growthGraphs plots the six growth rate equations from @fig:problem-size-speedup earlier.
 As you can see from the graph, the difference between a linear algorithm
 with cost $T(n) = n$ and a quadratic algorithm with cost $T(n) = n^2/10$
 becomes tremendous as $n$ grows.
@@ -352,7 +353,7 @@ and this difference increases as $n$ grows.
 This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
 
 ![
-    Illustration of growth rates for the same time functions as in @tbl:problem-size-speedup.
+    Illustration of growth rates for the same time functions as in @fig:problem-size-speedup.
     The right view shows the lower-left portion of the left view.
     The horizontal axis represents input size.
     The vertical axis can represent time, space, or any other measure of computational cost.
