@@ -1,5 +1,5 @@
 ::::: online :::::
-## Bubble sort
+## Bubble sort {#sorting-1:bubble-sort}
 
 ::: TODO
 - Prio 1: Adjust to online (it's now after SS and IS)
