@@ -6,8 +6,8 @@ Panflute filter: Make numbered algorithms
 import panflute as pf
 from panflute_helper import run_filter
 
-FANCYBOXES = ["example", "invariant", "algorithm", "note", "todo"]
-NUMBERED = ["example", "algorithm", "invariant"]
+FANCYBOXES = ["example", "algorithm", "invariant", "definition", "note", "todo"]
+NUMBERED = ["example", "algorithm", "invariant", "definition"]
 
 COUNTERS = {
     'section': 0,
