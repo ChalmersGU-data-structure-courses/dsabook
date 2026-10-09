@@ -6,12 +6,12 @@
 :::
 
 <!-- OPENDSA: START -->
-[Big-$O$ notation]{.term} describes an upper bound.
+Big-$O$ notation describes an upper bound.
 In other words, big-$O$ states a claim about
 the greatest amount of some resource (usually time) that is required by an algorithm.
 A similar notation is used to describe the *least* amount of resources that an algorithm needs.
 <!-- OPENDSA: END -->
-This is the lower bound which is denoted by the symbol $\Omega$ (pronounced "Omega").
+This is the lower bound and is denoted by the symbol $\Omega$ (pronounced "Omega").
 However, we are very rarely interested in the lower bound when we analyse algorithms.
 
 Instead we are usually interested in the *tight bound*, $\Theta$ (pronounced "Theta").
@@ -20,20 +20,34 @@ The definition for big-$O$ allows us to greatly overestimate the cost for an alg
 Using the tight bound we can only say that binary search is in $\Theta(\log(n))$,
 so it is a much more exact notion.
 
-However, it is usually much more difficult to reason about the tight bound.
+<div id="fig:upper-lower-tight-bounds">
+--------------------------  ------------------  ------------------  ---------------------------------------
+**Upper bound:**            $f\in O(g)$         **if and only if**  $f$ grows at most as fast as $g$
+**Lower bound:**            $f\in\Omega(g)$     **if and only if**  $f$ grows at least as fast as $g$
+**Tight bound:**            $f\in\Theta(g)$     **if and only if**  $f$ and $g$ grow at the same rate
+--------------------------  ------------------  ------------------  ---------------------------------------
+
+Informal definitions of the upper, lower and tight bounds.
+</div>
+
+All three notions are summarised in @fig:upper-lower-tight-bounds.
+The formal definition of the lower bound, $\Omega$,
+is the same as for the upper bound (see @sec:analysis-2:upper-bounds),
+but reversing the inequality (using $\geq$ instead of $\leq$).
+The definition of tight bound, $\Theta$, is that it is both an upper and a lower bound at the same time.
+
+However, it is usually very difficult to reason about the tight bound.
+For example, since we usually focus on the worst case in our analysis,
+the simplification rules for $\Theta$ might not be applicable
+as we may need to account for a case that is better than the worst case.
+Therefore, if $f\in\Theta(g)$ and $f'\in\Theta(g')$,
+we can neither assume that $f\cdot f'\in\Theta(g\cdot g')$, nor that $f+f'\in\Theta(g+g')$.
+<!--
 For example, the simplification rules for addition and multiplication do not hold for $\Theta$:
 if $f\in\Theta(g)$ and $f'\in\Theta(g')$,
 then it is neither guaranteed that $f\cdot f'\in\Theta(g\cdot g')$, nor that $f+f'\in\Theta(g+g')$,
+-->
 
-The upper, lower and tight bounds can be described as follows:
-
-- **Upper bound**: 	$f \in      O(g)$  **if and only if**  $f$ grows *at most*  as fast as $g$
-- **Lower bound**: 	$f \in \Omega(g)$  **if and only if**  $f$ grows *at least* as fast as $g$
-- **Tight bound**: 	$f \in \Theta(g)$  **if and only if**  both functions grow at the same rate
-
-The formal definition of the lower bound is the same as for the upper bound (see @sec:analysis-2:upper-bounds),
-but reversing the inequality (using $\geq$ instead of $\leq$).
-The definition of tight bound is that it is both an upper and a lower bound at the same time.
 
 <!--
 ::: note
@@ -129,17 +143,13 @@ describe the behaviour of algorithms.
 
 ### Tight bounds: the $\Theta$ notation
 
-The definitions for big-$O$ and $\Omega$ give us ways to describe the upper and lower bounds for an algorithm.
-<!-- OPENDSA: START -->
-When the upper and lower bounds are the same within a constant factor,
-we indicate this by using $\Theta$ (big-Theta) notation.
-<!-- OPENDSA: END -->
-An algorithm is said to be in $\Theta(h)$ if it is both in $O(h)$ and in $\Omega(h)$.
+If an algorithm is both in $O(f)$ and in $\Omega(f)$ for some $f$,
+we can say that it is in $\Theta(f)$,
+and $f$ is a *tight bound* for the algorithm.
 
 Almost all algorithms we will discuss in this book have the same tight bound as their upper bound,
-for example, binary search is in $\Theta(\log(n))$,
-sequential search is in $\Theta(n)$, and
-the sorting algorithms in [Chapter @sec:sorting-1] are all in $\Theta(n\log(n))$.
+for example, Binary search is in $\Theta(\log(n))$, Linear search is in $\Theta(n)$,
+Selection and Insertion sort are in $\Theta(n^2)$, and Mergesort is in $\Theta(n\log(n))$.
 
 <!-- OPENDSA: START -->
 The analysis for most commonly used algorithms is well understood and
@@ -160,87 +170,72 @@ But even though $\Theta$ is a more accurate description of the behaviour of an a
 we have chosen to almost exclusively use the upper bound big-$O$ notation.
 The reason for this because it is more difficult to reason about the tight bound than about big-$O$.
 
-### Strict bounds
-
-The upper and lower bounds are not strict, meaning that a function is in its own class, $f\in O(f)$ and $f\in\Omega(f)$.
-We can also define strict versions of upper and lower bounds:
-
-Strict upper bound (little-$o$)
-
-: $f\in o(g)$ **if and only if** $f\in O(g)$ and $f\not\in\Omega(g)$
-
-Strict lower bound ($\omega$)
-
-: $f\in\omega(g)$ **if and only if** $f\in\Omega(g)$ and $f\not\in O(g)$
-
-
 ### Summary of asymptotic notations
 
-We can summarise the different asymptotic notations ($O$, $o$, $\Omega$, $\omega$, and $\Theta$) in the following table:
+The upper and lower bounds are not strict, meaning that a function is in its own class, $f\in O(f)$ and $f\in\Omega(f)$.
+We can also define strict versions of the upper and lower bounds, $o(f)$ and $\omega(f)$,
+where we just replace the $\leq$ and $\geq$ in the definitions of $O$ and $\Omega$ with the strict inequalities $<$ and $>$.
 
-Name            Notation                   Definition
---------------  -------------------------  --------------------------------------------------
-Little-O        $f(n) \in o(g(n))$         $|f(n)| < k\cdot g(n)$
-Big-O           $f(n) \in O(g(n))$         $|f(n)| \leq k\cdot g(n)$
-Theta           $f(n) \in \Theta(g(n))$    $k_1\cdot g(n) \leq |f(n)| \leq k_2\cdot g(n)$
-Big-Omega       $f(n) \in \Omega(g(n))$    $f(n) \geq k\cdot g(n)$
-Little-Omega    $f(n) \in \omega(g(n))$    $f(n) > k\cdot g(n)$
-
-`\noindent`{=latex}
 All these different bounds correspond to comparison operators between complexity classes.
-For example, $O(f)\in O(g)$ means the same thing as $f\in O(g)$,
-$O(f) = O(g)$ means the same as $f\in\Theta(g)$,
-$O(f) > O(g)$ means the same as $f\in\omega(g)$, and so on.
+For example, $O(f)\leq O(g)$ means the same thing as $f\in O(g)$,
+$O(f)=O(g)$ means the same as $f\in\Theta(g)$,
+$O(f)>O(g)$ means the same as $f\in\omega(g)$, and so on.
 
 
-### Asymptotic equivalence
+#### Asymptotic equivalence
 
-Asymptotic equivalence is an even stricter notion than the tight bound,
-meaning that if two functions $f$ and $g$ are asymptotically equivalent, then $f\in\Theta(g)$.
-
-Asymptotic equivalence
-
-: $f \sim g$ **if and only if** $f(n)/g(n) \rightarrow 1$  (when $n \rightarrow \infty$)
-
-This notion does not disregard all constants -- the multiplicative constants of the fastest-growing term will be kept.
+Two functions $f$ and $g$ are asymptotic equivalenct, $f\sim g$, if
+the quotient $f(n)/g(n)\rightarrow 1$ when $n \rightarrow \infty$.
+This is an even stricter notion than the tight bound $\Theta$.
+With this we mean that that if $f\sim g$ then $f\in\Theta(g)$,
+but it is not necessarily the other way around.
+The difference is that $f\sim g$ does not disregard all constants --
+the multiplicative constants of the fastest-growing term will be kept.
 For example, the following function:
 
 $$ f(n) = 5 n^2 - 7 n + 100 \log_2(n) + 10^9 $$
 
 is asymptotically equal to $5n^2$ when $n \rightarrow \infty$,
 or in other words, $f(n) \sim 5n^2$.
-This notion can be used to compare different algorithms within the same complexity class,
+Asymptotic equivalence can be used to compare different algorithms within the same complexity class,
 but it is even more difficult to reason about than the tight bound.
 
 Interestingly, asymptotic equivalence has an alternative definition in terms of the strict lower bound:
 $f \sim g$ if and only if $(f-g) \in o(g)$.
-It is nice mathematical exercise to show that this is true, from the definitions above.
+It is a nice mathematical exercise to show that this is true, from the definitions above.
 
 
-### Classifying functions using limits
+#### Classifying functions using limits
 
 We defined asymptotic equivalence using limits, and this is also possible for the upper, lower and tight bounds.
 Instead of finding constants $k$ and $n_0$, we can see how the quotient between the two functions behave in the limit.
-
 Given functions $f$ and $g$, we can take the limit of the quotient $f/g$ as $n$ grows towards infinity:
-$k = \lim_{n \rightarrow \infty} f(n)/g(n)$.
-The following table summarises the possibilities for $k$:
+$k = \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)}$.
 
-Name            Notation             Limit, $\lim(f/g) \rightarrow k$
--------------   ------------------   ----------------------------------
-Equivalence     $f \sim g$           $k = 1$
-Little-O        $f \in o(g)$         $k = 0$
-Big-O           $f \in O(g)$         $k < \infty$
-Theta           $f \in \Theta(g)$    $0 < k < \infty$
-Big-Omega       $f \in \Omega(g)$    $k > 0$
-Little-Omega    $f \in \omega(g)$    $k = \infty$
+@fig:limit-classification summarises the definitions the value of the limit $k$,
+for the different asymptotic notations ($O$, $o$, $\Theta$, $\Omega$, $\omega$ and $\sim$).
 
+<div id="fig:limit-classification">
+Name            Notation             Definition                                         $f/g \rightarrow k$
+-------------   ------------------   -------------------------------------------------  ---------------------------
+Little-O        $f \in o(g)$         $f(n) < k\cdot g(n)$                               $k = 0$
+Big-O           $f \in O(g)$         $f(n) \leq k\cdot g(n)$                            $k < \infty$
+Theta           $f \in \Theta(g)$    $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$       $0 < k < \infty$
+Big-Omega       $f \in \Omega(g)$    $f(n) \geq k\cdot g(n)$                            $k > 0$
+Little-Omega    $f \in \omega(g)$    $f(n) > k\cdot g(n)$                               $k = \infty$
+Equivalence     $f \sim g$           $\lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}=1$     $k = 1$
+-------------   ------------------   -------------------------------------------------  ---------------------------
+
+
+
+Summary of the different asymptotic notations.
+</div>
 
 ::: {.example #ex:compare-two-functions}
 #### Example: Comparing two functions
 
-Assume $f(n) = n^2$ and $g(n) = 10^9n\log(n)$, how can we classify $f$?
-To answer this we can calculate the limit of the quotient $f(n)/g(n)$ when $n$ grows:
+Assume $f(n) = n^2$ and $g(n) = 10^9n\log(n)$, how can we classify $f$ in terms of $g$?
+To answer this we calculate the limit of the quotient $f/g$ when $n$ grows:
 
 $$
 \lim_{n \rightarrow \infty} \tfrac{f(n)}{g(n)} =

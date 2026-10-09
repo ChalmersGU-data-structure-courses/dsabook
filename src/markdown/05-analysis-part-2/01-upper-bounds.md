@@ -8,16 +8,16 @@
 On an abstract level, every algorithm has a time function $T(n)$ that
 perfectly calculates the running time of that algorithm for a worst case
 value of size $n$. Determining this function exactly is neither realistically
-possible, or desirable. Instead we determine some properties of $T$,
+possible, nor desirable. Instead we determine some properties of $T$,
 most commonly establishing an [upper bound]{.term} of its growth rate.
 The upper bound is denoted by the big-$O$ notation,
 where $f\in O(g)$, where $g$ is an upper bound of $f$.
 This tells us that the function $f$ will not grow faster than the function $g$.
 But what does this mean?
 
-If $g$ is an upper bound of $f$, that is $f\in O(g)$,
+If $g$ is an upper bound of $f$, that is if $f\in O(g)$,
 then $f(n) \leq g(n)$ in *the long run*.
-That is, whenever $n$ becomes sufficiently large, $f(n)$ must not outgrow $g(n)$.
+This means that whenever $n$ becomes sufficiently large, $f(n)$ must not outgrow $g(n)$.
 
 But this is not all there is to it -- we also want to abstract away from constant factors.
 If one algorithm is twice as fast as another algorithm,
@@ -25,11 +25,12 @@ then they grow at the same rate, and we want our notation to capture that.
 So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary positive constant $k$.
 This gives us the following formal definition:
 
-Upper bound
-
-:   $f \in O(g)$
-    **if and only if** there are positive numbers $k$ and $n_0$
-    such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$.
+::: {.definition #defn:upper-bound}
+#### Upper bound
+$f \in O(g)$
+**if and only if** there are positive numbers $k$ and $n_0$
+such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$.
+:::
 
 If this is the case we say that $g$ is an *upper bound* of $f$.
 
@@ -45,23 +46,19 @@ $O(x^2)$, $O(5x^2)$, and $O(5x^2-7x+100\log_2(x)+10^9)$, all describe the same s
 However, we will always use the simplified form of this set, in this case $O(x^2)$.
 
 ::: note
-#### Note: Simplified definition
-The definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
-This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
-This is not a real restriction for the purposes of algorithm analysis,
-since no realistic algorithms becomes faster when the input size grows.
-In the very best case, the runtime of an algorithm can be independent of the input size,
-but this is also monotonically increasing.
+#### Note: The definition is simplified
+[](#defn:upper-bound) is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
+This means that the values $f(x)$ and $g(x)$ will never decrease whenever $x$ increases.
 The mathematical definition that allows any non-monotonic functions is slightly more complicated,
-and can be found in mathematical textbooks, or in Wikipedia.
+but our simplified version is good enough for the purposes of algorithm analysis --
+there is no realistic algorithm that becomes faster when the input size grows.
 :::
 
 ::: {.example #ex:comparing-two-functions}
 #### Example: Comparing two functions
 
 Assume $f(n) = n\cdot\log(n)^2$ and $g(n) = 0.001\cdot n^2$.
-How can we use the definitions above to prove that $f \in O(g)$?
-
+How can we prove that $f \in O(g)$?
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\leq k\cdot g(n)$.
 Since $g$ has a constant factor of $0.001$, we can try with $k=1000$:
 
@@ -94,15 +91,15 @@ definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 ::: {.example #ex:quadratic-algorithm}
 #### Example: Quadratic algorithm
 
-Assume that for a particular algorithm, $T(n) = c n^2 + d n$.
-If both $c$ and $d$ are positive, then this holds for all $n>1$:
+Assume that for a particular algorithm, $T(n) = c n^2 + d n$, where both $c$ and $d$ are positive.
+Then the following holds for all $n>1$:
 
 $$
 c n^2 + d n \leq c n^2 + d n^2 \leq (c + d) n^2
 $$
 
 So, $T(n) \leq k\cdot n^2$ for $k = c + d$, and $n_0 = 1$.
-Therefore, $T(n)\in O(n^2)$ by the definition.
+Therefore, $T(n)\in O(n^2)$ according to the definition.
 :::
 
 <!--
@@ -125,8 +122,10 @@ One interesting consequence of asymptotic complexity is that the base of a logar
 
 $$ O(\log_2(n)) = O(\log_e(n)) = O(\log_{10}(n)) $$
 
-The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n)\cdot 1/\log_a(b)$.
-But $1/\log_a(b)$ is a constant which we can ignore inside big-$O$, so $O(\log_b(n)) = O(\log_a(n))$.
+The reason for this is that according to the logarithm laws,
+$\log_b(n)$ is equal to $\log_a(n)\cdot 1/\log_a(b)$.
+But $1/\log_a(b)$ is a constant which we can ignore inside big-$O$,
+so $O(\log_b(n))$ is the same complexity class as $O(\log_a(n))$.
 Therefore we can just ignore the base and write $O(\log(n))$.
 
 Another consequence of the logarithm laws is that it doesn't really matter
@@ -136,9 +135,8 @@ $$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
 
 The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws,
 so the exponent $k$ becomes a multiplicative constant and can be ignored.
-
 However, taking the *power* of a logarithm cannot be ignored,
-so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
+meaning that $O(\log(n))$ is not the same complexity class as $O(\log(n)^2)$.
 
 
 ### The complexity hierarchy
@@ -191,7 +189,7 @@ Using these rules we can easily determine the asymptotic growth rate for many al
 - Rule (4) says that if you have a loop that repeats a statement $p$ a number of times $n$,
   the total cost is the cost of $p$ times the number of iterations: $O(n\cdot f)$.
 - Rule (2) also says that if you repeat a statement $p$ a *constant* number of times,
-  you can treat it as you only execute $p$ once.
+  you can treat it as if you only execute $p$ once.
 
 
 ::: {.example #ex:non-quadratic-nested-loops}
@@ -214,7 +212,7 @@ the loop iterates over the values $k=1, 2, 4, 8, \ldots$, until it reaches $k>n$
 In other words, the outer loop will iterate approximately $\log_2(n)$ times.
 
 Now we can use the simplification rules.
-The inner `for`loop is linear, $O(n)$, and the statement after that is constant time.
+The inner `for` loop is linear, $O(n)$, and the statement after that is constant time.
 Simplification rule (3) says that we only need to care about the most expensive of the two,
 so we can say that the whole `while` loop body is linear, $O(n)$.
 The outer `while` loop runs $O(\log(n))$ times,
@@ -241,16 +239,16 @@ T(1) &= 1
 
 Another example is Mergesort, which calls itself *twice* with an halved interval.
 After the recursive calls it merges the results, which takes linear time.
-This gives the following recurrence relation:
+This gives us the following recurrence relation:
 
 \begin{align*}
 T(n) &= 2\cdot T(n/2) + n, \text{ for } n>1 \\
 T(1) &= 1
 \end{align*}
 
-The closed-form solutions for these recurrence relations are
-$O(\log(n))$ and $O(n\log(n))$, respectievly.
-Recurrence relations are discussed further in @sec:analysis-3:recurrences.
+Since we already know that Binary search is $O(\log(n))$ and Mergesort is $O(n\log(n))$,
+the closed-form solutions for the recurrences above must also be in $O(\log(n))$ and $O(n\log(n))$.
+In @sec:analysis-3:recurrences we will discuss recurrence relations further, and show how to solve them.
 
 
 ### Advanced algorithm analysis {#analysis-2:advanced-upper-bound}
@@ -267,7 +265,7 @@ Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O
 :::: {.example #ex:linear-nested-loop}
 #### Example: A nested loop with linear complexity
 
-Recall the non-quadratic nested loop in @sec:analysis-2:simplifying-rules.
+Recall the non-quadratic nested loop in [](#ex:non-quadratic-nested-loops).
 If we just change the inner `for`-loop a little bit we get
 the following nested loop, which has a nontrivial complexity:
 
@@ -281,17 +279,17 @@ the following nested loop, which has a nontrivial complexity:
 Since $k$ is multiplied by $2$ in each iteration, the outer `while`-loop runs $\log(n)$ times.
 But the inner `for`-loop then runs $k$ times,
 and since $k\in O(n)$ the simplification rules tell us that the code is in $O(n\log(n))$.
-But a more careful analysis reveals a tighter bound.
 
+A more careful analysis reveals a tighter bound:
 If we assume that $n=2^d$ is a power of two, then the outer loop is executed $d=\log_2(n)$ times.
 The inner loop has cost $k$, which starts from $1$ and doubles after each outer loop iteration.
 This can be expressed as the following summation, where $k = 2^i$:
 
-$$ 1 + 2 + 4 + \cdots + 2^d = \sum_{i=0}^{d} 2^i $$
+$$ T(n) = 1 + 2 + 4 + \cdots + 2^d = \sum_{i=0}^{d} 2^i $$
 
 Now, this is a well-known summation with the following solution:
 
-$$ 2^{k+1} - 1 = 2^{\log_2(n)+1} - 1 = 2n - 1 $$
+$$ T(n) = 2^{k+1} - 1 = 2^{\log_2(n)+1} - 1 = 2n - 1 $$
 
 So, the code fragment above is actually linear, $O(n)$, and not linearithmic.
 
