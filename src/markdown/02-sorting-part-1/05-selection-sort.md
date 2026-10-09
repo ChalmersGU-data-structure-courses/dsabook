@@ -1,27 +1,16 @@
 
 ## Selection sort {#sorting-1:selection-sort}
 
-::: TODO
-- Prio 1: add figure next to the pseudocode showing the array and the variables in the middle of running
-- Prio 1: section is shortened - make sure it's still ok
-:::
-
-Let's say you have a large pile of books that you want to put in your bookshelf, in alphabetical order by author's surname.
-How would you go about?
-One natural way to do handle this is to look through the pile until you find the first book
+Suppose again we are sorting a large pile of books into a bookshelf,
+in alphabetical order by author's surname.
+One way is to look through the pile until we find the book that should be first
 (say, by an author named *Alakoski*), and put that first in the bookshelf.
-Then you look through the remaining pile until you find the second book
-(written by *Beskow*), and add that behind *Alakoski*.
-Then find the third book (by *Carlberg*), and add behind *Beskow*.
-<!-- OPENDSA: START -->
-Proceed through the shrinking pile of books to select the next one in order until you are done.
-<!-- OPENDSA: END -->
-This is the inspiration for our next sorting algorithm, called [Selection sort]{.term}.
+Then we look through the remaining pile until we find the second book
+(by *Beskow*), and add that behind *Alakoski*.
+The third book (by *Carlberg*), goes behind *Beskow*.
+We proceed through the shrinking pile of books until we are done.
 
-In the description above the books are not in the shelf from the start, which makes the algorithm not in-place.
-But it is easy to turn this into an in-place algorithm, where all books are in the shelf from the start.
-We just have to remember an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
-Whenever we have found the next book to put in place, we *swap* it with the book that is in the way.
+
 
 ::: {.algorithm #alg:selection-sort}
 #### Algorithm: Selection sort
@@ -31,18 +20,12 @@ where the sorted part is to the left and initially empty.
 Then repeat the following until the unsorted part is empty:
 
 1. Find the smallest unsorted element, $e$.
-2. Swap $e$ with the leftmost of the unsorted elements.
-3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
+2. Swap $e$ with the leftmost of the unsorted elements. Now $e$ belongs to the sorted part.
 
-:::
-
-The $i$'th pass of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$ in the array.
-<!-- OPENDSA: START -->
-In other words, Selection sort first finds the smallest element in an unsorted list, then the next smallest, and so on.
-<!-- OPENDSA: END -->
-To find the next-smallest element we have to search through the entire unsorted portion of the array,
-but only one swap is required to put the element into place.
-The algorithm above can be implemented as follows in pseudocode:
+Each repetition of these steps reduces the unsorted part by one element, so by the end of the
+procedure all elements are sorted. We implement the algorithm using a nested loop,
+where the counter $i$ represents the size of the sorted part
+(which is also the index of the first unsorted element):
 
     selectionSort(arr):
         n = arr.size
@@ -53,17 +36,58 @@ The algorithm above can be implemented as follows in pseudocode:
                     minIndex = j             //             Remember the smaller index
             swap(arr, i, minIndex)           //     Put the smallest value into place
 
-![Two subsequent steps of Selection sort. In each step, a value is placed in its correct position.](images/2.5-two-steps-selection-sort.svg){#fig:SelectionSort1}
+Here is an illustration of two steps of the algorithm:
 
-@fig:SelectionSort1 illustrates two steps of this algorithm. Note how the initial part of the array,
-below index $i$, is sorted. Also, the largest value before $i$ is smaller than all subsequent values.
-Because we always select the smallest remaining value for the next position, both these properties
-are preserved at each step, and the end result is that the whole array is sorted.
+![](images/2.5-two-steps-selection-sort.svg)
 
-Like any algorithm, Selection sort can be implemented in several slightly different ways.
-For example, we could have written Selection sort to
-find the largest element and put it at the end of the array, then the next smallest, and so on.
+:::
 
+This is the inspiration for our first sorting algorithm, called [Selection sort]{.term}.
+The bookshelf is of course an array, and selecting the first book in alphabetical order
+corresponds to finding the minimal element using some comparison function.
+There are two main issues with this analogy:
+
+- We want sorting to be in-place, instead of moving books from a pile to a shelf, we want
+  to rearrange books inside a shelf.
+- Finding the smallest book in an array is easy using a linear search, but how do we
+  find the third or one thousandth smallest book?
+
+Luckily solving the first problem also solves the second.
+After we find the smallest element in the array, we move it to the first position.
+Since there is already another element in the first position, we place that in the gap created by
+moving the the smallest element, *swapping* the two books.
+Finding the second smallest book is now easy, just find the smallest element starting from the second position!
+
+The result is an an invisible separator between sorted elements (at the start of the array)
+and still-unsorted elements.
+We repeatedly select the minimal element from the unsorted books and *swap* its position with the first
+unsorted book. See [](#alg:selection-sort).
+
+An important observation about selection sort is that elements in the sorted area are always less than or
+equal to elements in the unsorted area. This guarantees that moving the smallest element in the unsorted
+area to the end of the sorted area keeps the sorted area in correct order.
+
+Another observation is that the $i$'th iteration of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$. This guarantees that the element is in the correct position.
+
+These observations lead to an alternative description of selection sort. To sort $n$ array elements in-place:
+
+1. Move the smallest element first.
+2. Sort the remaining $n-1$ elements in-place.
+
+An interesting aspect of this description is that step two does not require us to
+use Selection sort for the $n-1$ elements, any in-place sorting algorithm would work.
+
+The description highlights how we reduce the problem of sorting $n$ elements into a smaller
+problem of the same kind.
+This is similar to binary search ([](#alg:binary-search)), but the reduction is less significant -- reducing the
+size of the problem by one instead of cutting it in half. We also perform more work to achieve
+the reduction: where binary search required a single comparison, selection sort has to find the smallest
+of $n$ elements.
+
+The alternative description is also great for convincing someone that the algorithm works,
+in fact it is very similar to a mathematical proof by induction: The algorithm is trivially
+correct when sorting $1$ or $0$ elements, and if we assume it works for $n$ elements we can
+easily prove that it works for $n+1$ elements.
 
 :::::::: online
 #### Selection sort visualisation

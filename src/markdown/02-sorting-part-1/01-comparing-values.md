@@ -16,7 +16,7 @@ The comparison function needs to distinguish three cases, for two values $a$ and
 - neither of the above, written as $a=b$.
 
 The notation for the last is slightly dubious: the values are not necessarily equal,
-they just have the same order. Suppose we are sorting numbers by the sums of our digits, in
+they just have the same order. Suppose we are sorting numbers by the sums of their digits, in
 our comparison function $13=22$, since both have a digit sum of $1+3=2+2=4$.
 Also, $a<b$ may not correspond intuitively to the mathematical operator. To sort a list
 of number in descending order, we would use a comparison function that paradoxically

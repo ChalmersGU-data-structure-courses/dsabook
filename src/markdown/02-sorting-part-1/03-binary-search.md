@@ -57,18 +57,8 @@ Repeat the following until *key* has been found, or the interval is empty:
 
 If the interval ends up empty, the key is not in the array and we
 return `null`.
-:::
-
-To turn this algorithm into actual code, we need to decide how to represent the search interval
-in computer memory. The operation of excluding elements from the interval needs to be fast --
- making a new smaller array is too slow. Instead we define the interval by the lower and
-upper indices it includes, so $(10,24)$ would represent the interval from
-index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
-when needed). Searching the lower half just means altering the interval to $(10,16)$,
-and the upper half $(18,24)$.
-Here is an implementation of binary search that returns the index of the key in the array,
-or `null` if the key is absent:
-
+Here is a pseudo code implementation of the algorithm, representing the interval
+by the lower and upper indices it includes:
 
     binarySearch(arr, key):
         start = 0                      // The index of the first element in the interval
@@ -83,12 +73,27 @@ or `null` if the key is absent:
                 return mid             //         We found the search key!
         return null                    // The value is not in the array.
 
+This illustration shows the steps of a Binary search for the value 29 in an ordered array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array:
+
+![](images/1.3-steps-of-binary-search.svg)
+
+:::
+
+To turn this algorithm into actual code, we need to decide how to represent the search interval
+in computer memory. The operation of excluding elements from the interval needs to be fast --
+ making a new smaller array is too slow. Instead we define the interval by the lower and
+upper indices it includes, so $(10,24)$ would represent the interval from
+index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
+when needed). Searching the lower half just means altering the interval to $(10,16)$,
+and the upper half $(18,24)$. The algorithm is presented in full in [](#alg:binary-search) using
+three components that you will see throughout this book: A text description, a pseudocode
+implementation and an illustrated example.
+
 An important technical detail here is that $\mathit{mid} = (\mathit{start} + \mathit{end}) / 2$
 is understood to use integer division, so $(6+11)/2$ is $8$, not $8.5$.
 Consider how this implementation deals with corner cases, for instance when the
 search area has a single element (when $\mathit{start}=\mathit{end}$). Or when it has two elements.
 Does it calculate $\mathit{mid}$ correctly and yield correct result in these cases?
-
 
 In this particular implementation we use inclusive indices,
 both $\mathit{start}$ and $\mathit{end}$ are inside the interval.
@@ -98,10 +103,6 @@ Yet another option is to have a start index and a size of the interval.
 Each variation would do slightly different calculations,
 but require the same fundamental building operations:
 Finding the middle element, and excluding the upper/lower half of the interval.
-@fig:BinSearch1 illustrates an example search of a small array.
-
-![Steps of Binary search for the value 29 in an ordered array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array.](images/1.3-steps-of-binary-search.svg){#fig:BinSearch1}
-
 
 There are many variations of binary search. If the array had books ordered by number
 of pages, we could use it to find books of a desired length, or even all books in

@@ -26,10 +26,10 @@ are *quadratic time*, the number of comparisons required for $n$ elements is pro
 #### Selection sort analysis
 
 One way to describe selection sort:
-For every position from $0$ to $n-1$, search through the remaining $n-i-1$ remaining values
+For every position $i$ from $0$ to $n-1$, search through the remaining $n-i-1$ values
 for the minimal value.
-In our implementation, we have a nested loop, where the inner loop runs fewer and fewer
-iterations in each iteration of the outer loop.
+In our implementation (see [](#alg:selection-sort)), we have a nested loop, where the
+inner loop runs fewer and fewer iterations in each iteration of the outer loop.
 
 - The outer loop is iterated $n$ times in total.
 - In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
@@ -66,7 +66,7 @@ of *complexity*, expanding this hierarchy to compare the running time of any alg
 
 In insertion sort, we insert every element in turn into a growing sequence of sorted values.
 Essentially we move every element back until it is in the correct order.
-Just like insertion sort, this is done using a nested loop, but contrary to selection sort,
+Just like insertion sort, this is done using a nested loop (see [](#alg:insertion-sort)), but contrary to selection sort,
 the process is initially quick, then gets slower as we progress.
 
 Another complication is that the number of steps an element needs to move, and thus the number of
@@ -74,12 +74,12 @@ comparisons, depends on the elements of the array, not just the size of it.
 
 - The outer loop is iterated $n-1$ times in total.
 - The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$:
-    - in the absolute worst case, we have to move the element to the front of the list, so the number of comparisons will be $i-1$;
+    - in the absolute worst case, we have to move the element all the way to position zero, so the number of comparisons will be $i-1$;
     - in the best case, the element is already in place, and then we only need one comparison.
 
 Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Selection sort.
 In the best case -- when the list is already sorted -- we only have to do one comparison per iteration,
-so the number of comparisons is proportional to the size of the array.
+so the number of comparisons is linear in the size of the array.
 
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
@@ -100,8 +100,8 @@ Insertion sort is best case linear time (when no element needs to be moved at al
 move through half the sorted part on average -- so in this *average case* the runtime is still quadratic.
 
 Worst case is usually the most reliable indicator of running time for algorithms, but there are exceptions.
-In some applications, arrays may tend to be sorted or nearly sorted from the start, in which case Insertion sort
-will outperform Selection sort dramatically.
+In some applications, arrays may tend to be sorted or nearly sorted from the start,
+in which case Insertion sort will outperform Selection sort drastically.
 
 <!-- OPENDSA: START -->
 Later we will see algorithms whose worst case growth rate is much better than quadratic.

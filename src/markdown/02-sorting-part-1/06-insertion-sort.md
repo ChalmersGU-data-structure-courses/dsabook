@@ -7,54 +7,48 @@
 - Prio 2: Use the optimized IS that doesn't do swaps?
 :::
 
+::: {.algorithm #alg:insertion-sort}
+#### Algorithm: Insertion sort
+
+Divide the array into an initial sorted part, and an unsorted part.
+The sorted part is initially empty.
+Repeat the following until the unsorted part is empty:
+
+1. Take the first of the unsorted elements, $e$.
+2. Insert $e$: While $e$ is out of order compared to the element before it, swap the two.
+
+After these steps $e$ is in the sorted part, and the unsorted part is reduced by one element.
+Pseudocode implementation:
+
+    insertionSort(arr):
+        n = arr.size
+        for i in 1 .. n-1:                    // i is the start of the unsorted area
+            j = i                             // arr[j] is the element to be inserted
+            while j>0 and arr[j] < arr[j-1]:  // while arr[j] is not in the right position
+                swap(arr, j, j-1)             // move arr[j] backwards one step
+                j -= 1
+
+The illustration below shows two steps of
+the algorithm. Note how all values before $i$ are sorted at all times, but unlike Selection sort,
+they are not necessarily in their final positions.
+
+![](images/2.6-two-steps-insertion-sort.svg)
+:::
+
 Consider again the problem of sorting a pile of books.
 Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.
 Then you take another book from the pile and put it in the bookshelf,
 in the correct position with respect to the first two, and so on.
-As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf sorted.
-This simple approach is the inspiration for our third sorting algorithm, called [Insertion sort]{.term}.
+As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf ordered.
+This simple approach is the inspiration for our second sorting algorithm, called [Insertion sort]{.term}.
 
 Just as for Selection sort, the description above is not in-place.
-But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm,
-by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
+But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm: Keep a
+growing sorted part in the beginning of the array, and a shrinking unsorted part after it. Insert
+values one at a time from the unsorted part into the sorted part. [](#alg:insertion-sort) explains the algorithm.
 
-::: {.algorithm #alg:insertion-sort}
-#### Algorithm: Insertion sort
-
-Divide the array into a sorted and an unsorted part,
-the sorted part is to the left and initially empty.
-Then repeat the following until the unsorted part is empty:
-
-1. Take the leftmost of the unsorted elements, $e$.
-2. While $e$ is out of order compared to its left neighbour, swap the two.
-3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
-
-:::
-
-<!-- OPENDSA: START -->
-Insertion sort iterates through a list of elements.
-For each iteration, the current element is inserted in turn
-at the correct position within a sorted list composed of those elements already processed.
-<!-- OPENDSA: END -->
-The algorithm above can be implemented as follows in pseudocode:
-
-    insertionSort(arr):
-        n = arr.size
-        for i in 1 .. n-1:                       // Move the i'th element to its correct position:
-            j = i                                //     Start at the end of the sorted part
-            while j > 0 and arr[j] < arr[j-1]:   //     Go backwards until we find the position:
-                swap(arr, j, j-1)                //         Move the element one step backwards
-                j -= 1
-
-
-@fig:InsertionSort1 illustrates two steps of the algorithm.
-Note how all values before $i$ are sorted at all times, but unlike Selection sort,
-they are not necessarily in their final positions.
-
-
-![Two subsequent steps of Insertion sort. In each step, a value is inserted backwards into the sorted initial segment.](images/2.6-two-steps-insertion-sort.svg){#fig:InsertionSort1}
-
-
+Insertion sort will move each element backwards so long as it is smaller than the element immediately preceding it.
+When an element less than or equal to $x$ is encountered, `insertionSort` is done with that element because all elements earlier in the array must be smaller.
 
 :::::::: online
 #### Insertion sort visualisation
@@ -66,10 +60,7 @@ Here we see the first few iterations of Insertion sort.
 ```
 :::
 
-This continues on with each element in turn.
-Call the current element $x$.
-Insertion sort will move it to the left so long as it is smaller than element immediately preceding it.
-As an element is less than or equal to $x$ is encountered, `insertionSort` is done with that element because all elements to its left in the array must be smaller.
+
 
 ::: dsvis
 The following visualisation shows the complete Insertion sort. You can input your own data if you like.
