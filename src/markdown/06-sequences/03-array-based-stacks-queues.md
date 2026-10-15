@@ -2,8 +2,10 @@
 ## Array-based sequences {#sequences:array-sequences}
 
 ::: TODO
-- Prio 1: invariants
-- Prio 1: update figures
+- Prio 1: replace title, for example: "Array-based stacks and queues"
+- Prio 1: alternative title for #sequences:array-queues: "Implementing queues using circular arrays" (too long?)
+- Prio 1: rewrite OpenDSA texts
+- Prio 2: can we find good invariants?
 :::
 
 In the last section we showed how to implement stacks and queues using linked lists.

@@ -2,7 +2,8 @@
 ## Stacks and queues {#sequences:stacks-and-queues}
 
 ::: TODO
-- Prio 2: invariants
+- Prio 1: shorten texts?
+- Prio 2: can we find good invariants?
 - Prio 2: use cases for stacks and queues
 :::
 

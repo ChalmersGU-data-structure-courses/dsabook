@@ -2,7 +2,8 @@
 ## Dynamic arrays {#sequences:dynamic-arrays}
 
 ::: TODO
-- Prio 1: invariants
+- Prio 1: shorten texts - now it's 6-7 pages
+- Prio 2: can we find good invariants?
 :::
 
 The problem with array-based stacks and queues is that they have limited capacity.

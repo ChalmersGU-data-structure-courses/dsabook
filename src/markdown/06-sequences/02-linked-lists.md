@@ -2,8 +2,9 @@
 ## Linked lists {#sequences:linked-lists}
 
 ::: TODO
-- Prio 1: invariants
-- Prio 1: update figures
+- Prio 1: shorten texts?
+- Prio 1: alternative title: "Stacks and queues as linked lists"?
+- Prio 2: can we find good invariants?
 :::
 
 A linked list is a kind of "distributed" data structure,

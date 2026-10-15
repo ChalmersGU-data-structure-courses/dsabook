@@ -1,6 +1,11 @@
 
 ## Analysing linked lists and dynamic arrays {#sequences:analysis}
 
+::: TODO
+- Prio 1: shorten texts - now it's 2.5 pages
+- Prio 1: rewrite OpenDSA texts
+:::
+
 <!-- OPENDSA: START -->
 Now that you have seen two substantially different implementations for stacks and queues,
 it is natural to ask which is better.
