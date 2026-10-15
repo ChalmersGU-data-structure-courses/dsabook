@@ -2,7 +2,8 @@
 ## Multiple parameters {#analysis-3:multiple-parameters}
 
 ::: TODO
-- Prio 1: shorten examples
+- Prio 1: shorten example
+- Prio 1: rewrite OpenDSA texts
 - Prio 2: add definitions
 - Prio 2: more examples (only in a separate online section)
 - Prio 3: discuss different definitions and how they differ (only in separate online section)

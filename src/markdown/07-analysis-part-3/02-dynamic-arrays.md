@@ -1,6 +1,10 @@
 
 ## Case study: Analysing dynamic arrays {#analysis-3:dynamic-arrays}
 
+::: TODO
+- Done?
+:::
+
 A dynamic array is a data structure that behaves just like a normal array, but where size may change over time.
 It has an underlying *backing array* which is a normal fixed-size array.
 When the backing array becomes full it resizes to a larger fixed-size array.
@@ -14,7 +18,7 @@ The main operation of interest is *append*, which increases the size of the dyna
 All other operations (that is, getting and setting values at a certain index)
 are directly mapped to the backing array, and therefore we can trivally conclude that they are constant time.
 
-### Doubling the array size
+#### Doubling the array size
 
 When we append to the array, there are two possibilities:
 
@@ -45,7 +49,7 @@ After the resize we have a half-full array and an empty account, again.
 The important things to note are that we never get a negative amount in our account,
 and that we can always use our savings to resize the backing array.
 
-### Resizing by any constant factor
+#### Resizing by any constant factor
 
 What if we don't double the size of the backing array,
 but instead multiply with another constant factor $k>1$?

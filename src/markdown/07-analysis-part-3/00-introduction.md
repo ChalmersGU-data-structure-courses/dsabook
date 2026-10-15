@@ -1,6 +1,10 @@
 
 # Algorithm analysis, part 3 {#analysis-3}
 
+::: TODO
+- Done?
+:::
+
 In this chapter, we move beyond basic runtime analysis to develop a richer understanding of algorithm performance.
 We consider not only execution time, but also memory usage.
 By examining these aspects, we gain deeper insights into the efficiency and practicality of advanced algorithms.
