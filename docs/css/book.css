@@ -22,6 +22,7 @@ main {
     padding: 1rem 3rem;
     background-color: var(--body-bgcolor);
     border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 }
 
 /* Navigation menu */
@@ -166,6 +167,11 @@ li > ol, li > ul {
     margin-top: 0;
 }
 
+li li {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 dt {
     font-style: italic;
 }
@@ -217,6 +223,10 @@ td {
 
 /* Images, figures */
 
+img {
+    background-color: var(--img-bgcolor);
+}
+
 figure {
     text-align: center;
 }
@@ -240,7 +250,7 @@ figcaption p, figure figure figcaption {
 
 /* Highlighted blocks */
 
-.topic, .example, .figure, .algorithm, .alert, .note, .quiz, .TODO,
+.topic, .example, .figure, .algorithm, .invariant, .alert, .note, .quiz, .TODO,
 div.embedContainer, div.jsavcontainer, details {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
