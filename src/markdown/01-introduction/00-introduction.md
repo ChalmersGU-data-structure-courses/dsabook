@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 2: update the 1st paragraph with 1-2 more diverse examples (not just querying a collection)
+- There are more TODOs below!
 :::
 
 How many cities with more than 100,000 people lie within 200 kilometres of Paris?
