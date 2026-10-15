@@ -1,6 +1,10 @@
 
 # Algorithm analysis, part 2 {#analysis-2}
 
+::: TODO
+- Prio 1: too long, and many things are anyway defined in the sections later - others can be moved there
+:::
+
 In [Chapter @sec:analysis-1] we introduced the idea of algorithmic analysis,
 and explained big-$O$ notation without providing a formal definition.
 Now that you understand everything about searching and sorting algorithms,

@@ -2,7 +2,9 @@
 ## Lower bounds and tight bounds {#analysis-2:other-bounds}
 
 ::: TODO
-- Prio 1: update Summary of asymptotic notations - make it a Figure instead
+- Prio 1: shorten the last part "Common misconceptions" - it was previously a section of its own
+- Prio 1: is there a more interesting code example for #analysis-2:tight-bounds?
+- Prio 1: rewrite OpenDSA texts
 :::
 
 <!-- OPENDSA: START -->
@@ -141,7 +143,7 @@ not a law of nature. It is merely a powerful modeling tool used to
 describe the behaviour of algorithms.
 -->
 
-### Tight bounds: the $\Theta$ notation
+### Tight bounds: the $\Theta$ notation {#analysis-2:tight-bounds}
 
 If an algorithm is both in $O(f)$ and in $\Omega(f)$ for some $f$,
 we can say that it is in $\Theta(f)$,
@@ -170,7 +172,7 @@ But even though $\Theta$ is a more accurate description of the behaviour of an a
 we have chosen to almost exclusively use the upper bound big-$O$ notation.
 The reason for this because it is more difficult to reason about the tight bound than about big-$O$.
 
-### Summary of asymptotic notations
+### Summary of asymptotic notations {#analysis-2:summary-of-notations}
 
 The upper and lower bounds are not strict, meaning that a function is in its own class, $f\in O(f)$ and $f\in\Omega(f)$.
 We can also define strict versions of the upper and lower bounds, $o(f)$ and $\omega(f)$,
@@ -246,3 +248,32 @@ $$
 because $n$ grows faster than $\log(n)$.
 Thus, $f\in\Omega(g)$ (or equivalently, $g\in O(f)$).
 :::
+
+
+#### Common misunderstandings
+
+Most people find [growth rates](#growth-rate){.term} and [asymptotic analysis]{.term} confusing.
+It is easy to misunderstand the concepts or the terminology,
+and then it can be helpful to know what the common points of confusion are.
+
+For example, it can be difficult to understand the difference between the upper and lower bound.
+For most of the algorithms you encounter in this book the upper and lower bounds coincide,
+because they are well studied and simple enough to have complete knowledge about them.
+<!-- OPENDSA: START -->
+The distinction between an upper and a lower bound is only meaningful when
+you have incomplete knowledge about the thing being measured.
+<!-- OPENDSA: END -->
+
+Another common mistake is to confuse the lower bound with the *best-case* analysis,
+and analoguously the upper bound with the *worst-case*.
+In fact, it is in principle possible to analys all possible combinations of
+the (upper/lower/tight) bounds, and the (best/worst/average) case.
+But in practice there are only a few combinations that are of interest.
+
+When it comes to analysing algorithms, we are usually not at all interested in any best-case analysis.
+After all, knowing that an algorithm performs well in some very lucky cases doesn't say if it's a good algorithm
+-- it is much more important to know how it performs on worst-case inputs, or sometimes in the average case.
+Of similar reasons, it is not very interesting to learn about the lower bound of an algorithm,
+and it is usually too difficult to find the tight bound.
+Which leaves us with analysing the worst-case upper bound, or sometimes the average-case behaviour.
+So this is what we almost always do.
