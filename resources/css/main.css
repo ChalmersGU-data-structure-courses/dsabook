@@ -12,6 +12,7 @@
     --border-color: Sienna;
     --box-bgcolor: FloralWhite;
     --code-bgcolor: FloralWhite;
+    --img-bgcolor: transparent;
     --html-bgcolor: AntiqueWhite;
     --link-color: DarkRed;
     --quote-color: DarkSlateGrey;
@@ -26,6 +27,7 @@
         --border-color: SandyBrown;
         --box-bgcolor: #201810;
         --code-bgcolor: #201810;
+        --img-bgcolor: FloralWhite;
         --html-bgcolor: Black;
         --link-color: SandyBrown;
         --quote-color: AntiqueWhite;

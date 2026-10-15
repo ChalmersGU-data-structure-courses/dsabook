@@ -223,6 +223,10 @@ td {
 
 /* Images, figures */
 
+img {
+    background-color: var(--img-bgcolor);
+}
+
 figure {
     text-align: center;
 }
