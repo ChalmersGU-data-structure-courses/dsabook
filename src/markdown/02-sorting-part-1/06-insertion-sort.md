@@ -2,10 +2,11 @@
 ## Insertion sort {#sorting-1:insertion-sort}
 
 ::: TODO
-- Prio 1: add figure next to the pseudocode showing the array and the variables in the middle of running
-- Prio 1: section is shortened - make sure it's still ok
-- Prio 2: Use the optimized IS that doesn't do swaps?
+- Prio 1: Move the image out of #alg:selection-sort, and put inline in the text
+- Prio 1: Split the image into 2 and intersperse them with explanatory text (like for quicksort partition)
+- Prio 3: Use the optimized IS that doesn't do swaps?
 :::
+
 
 ::: {.algorithm #alg:insertion-sort}
 #### Algorithm: Insertion sort

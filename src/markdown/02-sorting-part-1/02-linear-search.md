@@ -2,7 +2,8 @@
 ## Linear search {#sorting-1:linear-search}
 
 ::: TODO
-- Prio 1: Also include a discussion about using a `key` function for testing
+- Prio 2: Also include a discussion about using a `key` function for testing
+- Prio 2: Perhaps make an Algorithm box for Linear search? Maybe not
 :::
 
 One of the most fundamental tasks that we use computers for is *searching*.

@@ -2,7 +2,7 @@
 ## Comparing values {#sorting-1:comparing}
 
 ::: TODO
-- Prio 2: Shorten a bit. We want to get to the actual algorithms a bit quicker.
+- Done?
 :::
 
 Sorting algorithms, and many other algorithms in this book, rely on being able to compare values.

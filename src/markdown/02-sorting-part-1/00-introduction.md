@@ -2,7 +2,7 @@
 # Searching and sorting {#sorting-1}
 
 ::: TODO
-- Nothing?
+- Done?
 :::
 
 Searching and sorting are two extensively studied problems.

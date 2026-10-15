@@ -2,8 +2,9 @@
 ## Overview of sorting algorithms {#sorting-1:overview}
 
 ::: TODO
-- Prio 1: remove the performance part?
+- Prio 1: remove the performance part
 - Prio 2: suitable forward references to subsequent sections
+- Prio 2: should the definition of in-place be in a box?
 :::
 
 Imagine that we want to sort books in a bookshelf, what different strategies can we use to do that?
@@ -72,10 +73,8 @@ One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:m
 Translating this to our bookshelf analogy: the books are already in the shelf, unsorted, and we want to rearrange them without using the floor or another bookshelf.
 A fundamental operation on arrays is swapping the positions of two elements:
 
-    swap(arr : array, i : int, j : int):
-        temp = arr[i]
-        arr[i] = arr[j]
-        arr[j] = temp
+    swap(arr: Array, i: Int, j: Int):
+        temp = arr[i]; arr[i] = arr[j]; arr[j] = temp
 
 Because arrays have random access, swapping two elements in an array with a million elements
 does not take more time than in an array of ten elements. Swap is a *constant time*

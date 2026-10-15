@@ -1,6 +1,10 @@
 
 ## Main takeaways and outlook {#sorting-1:takeaway}
 
+::: TODO
+- Prio 1: the first data structures (array + sorted array) should come already in sec 1.2!
+:::
+
 In addition to learning the details of the four algorithms Linear search,
 Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort)), and Insertion sort ([](#alg:insertion-sort)), here is a checklist for what you have seen in this chapter:
 

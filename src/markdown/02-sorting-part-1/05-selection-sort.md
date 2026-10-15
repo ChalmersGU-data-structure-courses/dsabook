@@ -1,6 +1,11 @@
 
 ## Selection sort {#sorting-1:selection-sort}
 
+::: TODO
+- Prio 1: Move the image out of #alg:selection-sort, and put inline in the text
+- Prio 1: Split the image into 2 and intersperse them with explanatory text (like for quicksort partition)
+:::
+
 Suppose again we are sorting a large pile of books into a bookshelf,
 in alphabetical order by author's surname.
 One way is to look through the pile until we find the book that should be first

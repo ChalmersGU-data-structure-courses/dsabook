@@ -2,8 +2,7 @@
 ## Performance analysis of sorting algorithms {#sorting-1:performance-analysis}
 
 ::: TODO
-- Prio 1: Bubble sort must be removed!
-- Prio 1: Rewrite sections - currently the are just copy-pasted from other parts
+- Prio 2: Perhaps reduce text a little - now this section is longer than the algorithms themselves
 :::
 
 Having seen a couple of algorithms for searching and sorting, we want answers

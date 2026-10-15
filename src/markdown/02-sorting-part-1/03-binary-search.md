@@ -2,7 +2,8 @@
 ## Binary search {#sorting-1:binary-search}
 
 ::: TODO
-- None!
+- Prio 1: Move the image out of #alg:binary-search, and put inline in the text
+- Prio 1: Split the image into 4 and intersperse them with explanatory text (like for quicksort partition)
 :::
 
 No library keeps books in random order, because linear search is too slow.
