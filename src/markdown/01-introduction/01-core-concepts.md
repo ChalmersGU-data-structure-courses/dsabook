@@ -2,8 +2,8 @@
 ## Core concepts {#intro:core-concepts}
 
 ::: TODO
-- Prio 1: This is now very short section, needs revision?
-- Prio 1: Add another term, "Problem" (compared with Algorithm)
+- Prio 1: the first sentence is *really* short, should be expanded just a little
+- Prio 1: add something about *correctness* under "Analysis"
 :::
 
 The subjects in this book fall into one of four categories:
@@ -35,99 +35,9 @@ Analysis
     We focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
     where we mathematically can derive how an algorithm behaves when the size of the input grows.
 
-We also show how to describe algorithms and data structures to others,
-using well-established technical terms and structures,
-such as pseudocode and diagrams.
+Throughout the book we show how to describe algorithms and data structures
+using well-established technical terms, illustrations, and pseudocode.
 We abstract away from technical details of a particular programming language,
 and focus on explaining the underlying ideas of a data structure or algorithm.
-We aim to provide you, the reader, with the means to write a good implementation in
+We aim to provide you with the means to write a good implementation in
 your favourite programming language.
-
-
-<!--
-### The need for efficient data structures and algorithms
-
-
-
-A *data structure* is any kind of representation of some data, together with associated operations.
-This can mean almost anything, and even a simple integer or a string is a data structure.
-But in general we usually mean a way of organising a *collection* of data items,
-possibly related to each other in different ways.
-Using the right data structure becomes important when we have many many elements to store,
-such as all 10 million poeple living in Sweden, or all railways in Europe and how they connect with each other.
-An array of strings is one simple example, and in this book we will
-introduce many data structures, such as *linked lists*, *heaps*, *search trees*, *hash tables*, and *graphs*.
-They all come with different characteristics, advantages and disadvantages,
-and one important takeaway is learning when and how to use each one of them.
-
-Many data structures can be used for different purposes,
-and for many purposes there are several different data structures that can be used.
-We use *abstract data types* to categorise these different purposes,
-for example by describing which data structures that can be used as
-*stacks*, *queues*, *priority queues*, *sets*, and *maps*.
-
-With the help of asymptotic complexity analysis, we can compare data structures and algorithms.
-For example, complexity analysis tells us that searching in a sorted array is much more efficient
-than searching in an unsorted array.
-But this comes with a cost, because we have to keep the array sorted,
-and it can take quite some time to do this if we want to add or remove elements often.
-In this case it can be more efficient to use another data structure, such as a search tree or a hash table.
--->
-
-<!--
-You might think that with ever more powerful computers, program
-efficiency is becoming less important. After all, processor speed and
-memory size still continue to improve. Won't today's efficiency
-problem be solved by tomorrow's hardware?
-
-The short answer to this question is ***no***!
-It is not at all certain that a twice as fast computer can solve
-twice as large problems. On the contrary -- most interesting problems
-are very difficult, in the sense that if we increase the computing power
-we can still only solve a very small increase in the size of the problem.
-
-As we develop more powerful computers, our history so far has always
-been to use that additional computing power to tackle more complex
-problems, be it in the form of more sophisticated user interfaces,
-bigger problem sizes, or new problems previously deemed computationally
-infeasible. More complex problems demand more computation, making the
-need for efficient programs even greater. Unfortunately, as tasks become
-more complex, they become less like our everyday experience. So today's
-computer scientists must be trained to have a thorough understanding of
-the principles behind efficient program design, because their ordinary
-life experiences often do not apply when designing computer programs.
-
-In the most general sense, a [data structure]{.term} is any
-data representation and its associated operations.
-Even an integer or floating point number stored on the computer can be
-viewed as a simple data structure. More commonly, people use the term
-"data structure" to mean an organisation or structuring for a
-collection of data items. A sorted list of integers stored in an array
-is an example of such a structuring. These ideas are explored further in
-@sec:intro:abstract-data-types about [abstract data types]{.term}.
-
-Given sufficient space to store a collection of
-[data items]{.term}, it is always
-possible to search for specified items within the collection, print or
-otherwise process the data items in any desired order, or modify the
-value of any particular data item. The most obvious example is an
-unsorted array containing all of the data items. It is possible to
-perform all necessary operations on an unsorted array. However, using
-the proper data structure can make the difference between a program
-running in a few seconds and one requiring many days. For example,
-searching for a given record in a [hash table]{.term}
-is much faster than searching for it in an unsorted array.
-
-A solution is said to be [efficient]{.term} if
-it solves the problem within the required
-[resource constraints]{.term}. Examples of
-resource constraints include the total space available to store the data
--- possibly divided into separate main memory and disk space constraints
--- and the time allowed to perform each subtask. A solution is sometimes
-said to be efficient if it requires fewer resources than known
-alternatives, regardless of whether it meets any particular
-requirements. The [cost]{.term} of a solution is
-the amount of resources that the solution consumes. Most often, cost is
-measured in terms of one key resource such as time, with the implied
-assumption that the solution meets the other resource constraints.
--->

@@ -2,17 +2,7 @@
 # Introduction {#intro}
 
 ::: TODO
-- Prio 1: Extend this introduction just a little
-- Prio 1: "How to read this book", starred sections are online, etc
-- Prio 1: Update the motovation - it is not a numbered subsection anymore
-- Prio 2: Add short reflections for all our data structures and algorithms, for example, who invented it, when, and why
-:::
-
-#### Motivation
-
-::: TODO
-- Prio 3: update the 1st paragraph with more up-to-date examples
-- Prio 3: is this a good motivation section?
+- Prio 2: update the 1st paragraph with 1-2 more diverse examples (not just querying a collection)
 :::
 
 How many cities with more than 100,000 people lie within 200 kilometres of Paris?
@@ -29,7 +19,7 @@ The subjects of data structures and algorithms are deeply intertwined:
 Efficient data structures are used when designing and implementing algorithms,
 and algorithms are used to design efficient data structures.
 
-A university course on data structures and algorithms is essential to anyone
+Data structures and algorithms are essential to anyone
 who intends to do any substantial programming in their line of work.
 Often, choosing the right data structure for a task is half the battle
 of solving it, and conversely using the wrong data structure is an easy way
@@ -44,12 +34,58 @@ Will the performance of your program scale to thousands of users?
 Which parts of a piece of code are going to use all the processing power
 (and are thus the parts that we should try to optimise first)?
 
-Suppose you have an algorithm for finding someone in a list of names.
-Let us say that it is very fast when searching among 1000 names, for example your social media friends.
+::: TODO
+- Prio 2: the following paragraph is a bit unfocused - can we make it more compact and to the point?
+:::
+
+Suppose you have an algorithm for finding someone in a list of names,
+which is very fast when searching among 1000 names, such as someone's followers in social media.
 Can you use the same algorithm to search among all 10 million people living in Sweden?
 That problem is 10,000 times larger, is it still feasible to do it using your old laptop or do you need a supercomputer?
 These questions can be answered by algorithm analysis,
 and it is not certain that it takes 10,000 times longer to solve a 10,000 times larger problem --
 it depends on the algorithm.
-(The specific example of searching in a list is discussed in more detail in @sec:sorting-1:binary-search.)
+The specific example of searching in a list is discussed in more detail in @sec:sorting-1:binary-search.
+
+
+::: TODO
+- Prio 3: add a 4th example?
+:::
+
+#### Example: Searching using an index
+
+A key idea behind a *search index* is to organise the same collection in different ways depending on how we want to search it.
+Suppose we have a collection of songs by different artists, and we want to search either by artist or by song title.
+If the collection is just a list, with new songs added at the end, both kinds of search will be slow.
+Grouping songs by artist could make artist searches faster, but it would not help us search by title.
+Instead, we can create two separate indexes: one in which all songs are ordered alphabetically by artist, and another in which they are ordered by title.
+Then anyone who knows the alphabet can quickly find a song or an artist using a variant of the binary search algorithm (see @sec:sorting-1:binary-search).
+
+#### Example: Travel by train
+
+The railroad is expanding to the new cities!
+Engineers want to build as little total rail length as possible, but still connect all cities.
+After the railway is constructed, travellers wants to find the fastest way of getting from
+city A to city B.
+
+Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
+are connected by edges (potential railroad tracks or train departures).
+Specifically, finding the smallest rail network is a *minimal spanning tree* problem (see @sec:graphs:MSTs)
+and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
+
+#### Example: Simulating particles
+
+Suppose we are modelling a system of particles that can collide with other particles or
+with a physical boundary, causing a change of direction and speed, or perhaps
+randomly splitting the particle in two.
+For each particle we can calculate when its next collision will occur.
+
+To simulate the progression of this system, we can use a *priority queue* data structure
+(see @sec:ADTs:priority-queues) to store future collisions, and efficiently access them in
+the order they occur.
+When we calculate the outcome of a collision, we add new future collisions to the
+priority queue.
+
+This generalises into any system with timed events where there is a main loop that
+repeatedly finds the next event and executes it, possibly spawning new future events.
 
