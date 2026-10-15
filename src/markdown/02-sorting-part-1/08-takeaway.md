@@ -1,5 +1,5 @@
 
-## Main takeaways for Chapter 2 {#sorting-1:takeaway}
+## Main takeaways and outlook {#sorting-1:takeaway}
 
 In addition to learning the details of the four algorithms Linear search,
 Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort)), and Insertion sort ([](#alg:insertion-sort)), here is a checklist for what you have seen in this chapter:
@@ -18,4 +18,11 @@ Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort))
 - Our first and most fundamental data structure: The array, as well as the variant of an ordered array.
 - How different data structures can enable faster solutions to a problem, specifically
   how an ordered array allow faster searches than a general array.
+
+
+:::::: latex
+\wrapQRlink[4mm]{20mm}{-4mm}{\thesectionURL}{Chapter \thechapter{} online}
+\section*{Online material}
+Visit the online book for further reading, interactive explanations, visualisations, extra material, and exercises.
+::::::
 

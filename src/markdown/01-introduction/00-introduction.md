@@ -8,20 +8,6 @@
 - Prio 2: Add short reflections for all our data structures and algorithms, for example, who invented it, when, and why
 :::
 
-:::::: latex
-\booklink{Preliminaries}{13.1}
-::::::
-
-This book assumes that you are already familiar with mathematics and programming, corresponding to a semester of university studies.
-The online appendices present what we assume that you already know about mathematics and programming.
-They serve as a review and reference, allowing you to revisit relevant sections in later chapters.
-
-:::::: online
-- Mathematical preliminaries: @sec:appendix:math-preliminaries
-- Programming preliminaries: @sec:appendix:programming-preliminaries
-::::::
-
-
 #### Motivation
 
 ::: TODO
