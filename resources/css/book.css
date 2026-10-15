@@ -167,6 +167,11 @@ li > ol, li > ul {
     margin-top: 0;
 }
 
+li li {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 dt {
     font-style: italic;
 }
