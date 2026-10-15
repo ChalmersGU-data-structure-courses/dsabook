@@ -1,6 +1,10 @@
 
 # Divide-and-conquer sorting {#sorting-2}
 
+::: TODO
+- Prio 1: Rewrite the OpenDSA sentence
+:::
+
 In [Chapter @sec:sorting-1] we presented three simple and relatively slow sorting algorithms, with [quadratic](#quadratic-growth-rate){.term} runtime behaviour.
 Now we will introduce two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time: [Mergesort]{.term} and [Quicksort]{.term}.
 

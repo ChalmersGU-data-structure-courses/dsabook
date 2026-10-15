@@ -3,6 +3,10 @@
 
 ::: TODO
 - Prio 1: text snippets copied from other places, rewrite text
+- Prio 1: no need to define in-place, it's already done in 2.4
+- Prio 1: no need for subsubsections?
+- Prio 1: the summary table of categorisations is unnecessary
+- Prio 2: maybe some more discussion about the time complexities, in relation to the table at the end
 :::
 
 In this chapter and [Chapter @sec:sorting-1]

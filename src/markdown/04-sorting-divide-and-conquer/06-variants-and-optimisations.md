@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: new section with snippets copied from other places, rewrite text
+- Prio 1: we need an introduction text before 4.5.1
 - Prio 1: join the two texts about backoff sorting algorithm
 :::
 
@@ -102,35 +103,6 @@ Depending on the computer and programming language, this can yield a slight impr
 
 
 #### Alternative partitioning approaches
-
-There are several possible ways we can translate the informal partitioning algorithm into working code.
-For example, in our implementation above
-we move the pointers at most one step in each iteration of the `while`-loop.
-An alternative is to move the pointers as far as possible during each iteration,
-and then the pseudocode will become like this:
-
-    partition(arr, start, end, p) -> Int:
-        swap(arr, start, p)          // Swap the pivot with the first element in the interval.
-        pivot = arr[start]           // Remember the pivot value, and
-        low = start + 1; high = end  // initialise the lower and upper pointers.
-        repeat:
-            while low <= high and arr[low] < pivot:
-                low += 1             // Increase lower pointer as long as it's smaller than the pivot.
-            while low <= high and arr[high] > pivot:
-                high -= 1            // Increase upper pointer as long as it's larger than the pivot.
-            if low > high:
-                break                // Break out of loop when the pointers have passed each other.
-            swap(arr, low, high)     // Otherwise, swap the elements, and
-            low += 1                 // move both pointers towards each other.
-            high -= 1
-        swap(arr, start, high)       // Finally, swap the pivot into place, and
-        return high                  // return the new position of the pivot.
-
-This version is ever so slightly faster than the one in @sec:sorting-2:quicksort-implementation,
-because in some cases it makes fewer comparisons.
-It is even possible to improve this one a little bit more,
-because we do not need test `low<=high` in the second inner while loop
-(try to reason for yourself why that is the case).
 
 The partitioning algorithm we described previously is called *Hoare* partitioning
 (named after the computer scientist C.A.R. Hoare).

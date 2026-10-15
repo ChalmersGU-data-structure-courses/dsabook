@@ -2,7 +2,9 @@
 ## Complexity analysis {#sorting-2:complexity}
 
 ::: TODO
-- Prio 1: new section, rewrite text
+- Prio 1: two subsections from mergesort and from quicksort are merged - need to check consistency
+- Prio 1: we need an introduction text before 4.4.1
+- Prio 1: can we make the text shorter without losing the argumentation?
 :::
 
 ### Mergesort complexity {#sorting-2:mergesort-complexity}

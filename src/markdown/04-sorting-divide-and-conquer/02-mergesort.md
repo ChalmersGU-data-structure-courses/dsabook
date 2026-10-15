@@ -3,9 +3,10 @@
 
 ::: TODO
 - Prio 1: some parts are moved out - check that the text is still ok
-- Prio 1: flatten some subsections
-- Prio 1: general rewrite of the text
-- Prio 1: invariants
+- Prio 1: let the algorithm and pseudocode *return* the new array - the code becomes easier!
+- Prio 1: include pseudocode in #alg:mergesort
+- Prio 1: merge subsection (Implementing mergesort) with the running text here - no subsubsection heading
+- Prio 2: add invariants?
 :::
 
 A divide-and-conquer algorithm fits very well into the general problem of sorting an array:

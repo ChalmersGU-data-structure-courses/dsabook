@@ -2,9 +2,10 @@
 ## Divide-and-conquer algorithms {#sorting-2:divide-and-conquer}
 
 ::: TODO
-- Prio 1: fix text about divide-and-conquer in the end (it is copy-pasted here)
-- Prio 1: add example for recursive binary search
-- Prio 2: make the "divide-and-conquer" strategy an algorithm box
+- Prio 1: make a new Algorithm box for the "divide-and-conquer" strategy
+- Prio 1: rewrite the text up until the Fibonnacci example - it's OpenDSA
+- Prio 1: is Fibonnacci the best example of a recursive function?
+- Prio 2: do we want an example for recursive binary search?
 :::
 
 <!-- OPENDSA: START -->
