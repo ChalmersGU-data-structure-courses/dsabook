@@ -1,6 +1,10 @@
 
 ## Collections and sequences {#ADTs:sequences}
 
+::: TODO
+- Prio 1: do we need all the code?
+:::
+
 A _collection_ is a general term for a data structure that can contain multiple elements.
 In this chapter you will encounter stacks and queues, and more general lists,
 and in later chapters will we introduce sets and maps.

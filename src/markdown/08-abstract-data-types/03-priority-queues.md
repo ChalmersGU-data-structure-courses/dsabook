@@ -2,7 +2,12 @@
 ## Priority queues {#ADTs:priority-queues}
 
 ::: TODO
-- Prio 2: add a better & shorter version of the top-100 example
+- Prio 1: shorten the text in the beginning
+- Prio 1: add forward-reference to chapter 10 Heaps
+- Prio 1: change title and beginning of:
+    - "Implementing priority queues using sorted lists": it must be clear that this is a bad implementation
+    - "Analysis of the naive implementation"
+- Prio 2: add a good short example using prio.queues
 :::
 
 <!-- OPENDSA: START -->
@@ -82,78 +87,63 @@ Therefore, if we use binary heaps, the total runtime of our sorting algorithm is
 as efficient as any of the sorting algorithms we have seen so far!
 :::
 
-<!--
-::: example
-#### Example: Finding the top 100 items
 
-Suppose that we are running a bank. Every day, every transaction that
-occurs at the bank is recorded in a list. When the bank closes at the
-end of the day, we would like to find the 100 highest-valued
-transactions from that day. How can we do it?
+### Implementing priority queues using sorted lists
 
-One way is to use sorting. If we store the transactions in an array and
-sort it by value, then the highest-value transactions will be at the end
-of the array. If there are *n* transactions in total, then transactions
-number $n-100\ldots n-1$ are the ones we need. If we use an efficient
-sorting algorithm, this will take $O(n \log(n))$ time. (More generally,
-this gives us an algorithm for finding the largest $k$ items in a list
-of $n$ items, in $O(n \log(n))$ time.)
+How can we implement priority queues?
+The most natural suggestion is to use a linked list or a dynamic array, just as for stacks or queues --
+but making sure that it is always kept *sorted*.
+The operations for adding and removing an element become quite easy to describe:
 
-Now suppose that we want to monitor the transactions *throughout* the
-day. At any point, we want to be able to find the 100 highest-valued
-transactions *so far* today. How can we do this?
+- *add*: insert an element into the list, in its correct position.
+- *removeMin*: remove the smallest element.
 
-We could still use the sorting approach, but we would need to sort the
-list of transactions *every time* we wanted to find the 100 top
-transactions. This may be prohibitively expensive if there are a lot of
-transactions: it takes $O(n \log(n))$ time every time we do it.
+Since the list is sorted, removing the smallest element is straightforward.
+Adding a new element is a little more tricky:
+we have to traverse the list until we find the correct position, and then insert the new element there.
+This is similar to how Insertion sort put one element in place (see @sec:sorting-1:insertion-sort).
 
-We can do better with the help of a priority queue. The idea is to have
-a priority queue that holds the *100 highest-value transactions* only.
-Whenever a new transaction comes in, we need to update the priority
-queue accordingly:
+If we decide to use a dynamic array, then it's best to have it *reversely sorted*,
+so that the smallest element is at the back of the array.
+The reason for this is that it is easier to remove elements from the back than from the front.
+This is similar to how we implement a stack as a dynamic array in reverse order.
 
-1.  If the priority queue has fewer than 100 transactions (that is, there
-    have been fewer than 100 transactions so far today), then add the
-    new transaction to the priority queue.
-2.  Otherwise, if the new transaction is *greater in value than the
-    lowest-valued of the top 100 transactions*, then remove that
-    transaction and add the new transaction.
-3.  Otherwise, don't add the new transaction to the priority queue
-    (it's not in the top 100).
+If we instead use a linked list, it should be sorted in normal order
+so that the smallest element is at the front of the list.
+When we add an element to this linked list, we have to traverse the list from
+the head until we find the right location, and then we can squeeze in the new element.
+But to be able to insert the new element we also have to remember the previous node while traversing:
 
-Notice that in step 2, we are comparing the new transaction to the
-*lowest-valued* of the top 100 transactions -- if the transactions are
-ordered by value, then this transaction can be found by calling
-`getMin`, and removed using `removeMin`. So this algorithm can be
-implemented efficiently using a priority queue.
-
-In fact, we can simplify these three steps into two steps. First, we add
-the new transaction to the priority queue. This might make the priority
-queue grow to 101 transactions. If so, we remove the lowest-valued
-transaction. Here it is in code:
-
-    datatype Top100Transactions:
-        pq = new PriorityQueue()
-        // Assume that the Transaction type implements comparisons
-        // by comparing the value of the transaction.
-
-    // Add a new transaction to the priority queue.
-    add(pq, transaction):
-        pq.add(transaction)
-        // If the priority queue grows to 101 transactions,
-        // cut it down to 100 by removing the smallest-valued one.
-        if pq.size > 100:
-            pq.removeMin()
-
-    // Return the top 100 transactions.
-    top100(pq):
-        return everything in pq
+    add(pq, value):
+        previous = null
+        current = pq.head
+        while current is not null and current.value < value:
+            previous = current
+            current = current.next
+        node = new Node(value, current)  // The new node points to current
+        if previous is not null:
+            previous.next = node         // Point previous to the new node...
+        else:
+            pq.head = node               // ...or point head if the new node is the smallest
 
 
-What is the complexity of `add`? Well, in fact it takes constant time,
-because the priority queue has a constant maximum size of 100 elements.
-If we generalise this problem to keeping track of the top $k$
-transactions, then the complexity of `add` is $O(\log(k))$.
-:::
--->
+### Analysis of the naive implementation
+
+We have just showed how to implement a priority queue using a sorted list.
+What is the complexity of the core operations?
+
+Removing the minimum element is easy:
+since the list is sorted the minimum element can be found in an instant,
+and removing it is exactly the same as popping a stack,
+which we already know is an efficient operation.
+However, adding an element takes some time because we have to search for
+the right location where to insert it.
+This takes linear time in the size of the list, $O(n)$.
+
+It is also possible to implement the priority queue as an unsorted list.
+Then adding an element becomes efficient, because we can just add it at the front.
+But removing the minumum now takes linear time, because we have to search for it.
+
+Therefore a normal linear data structure, such as a *linked list* or *dynamic array*,
+cannot implement a priority queue efficiently.
+This is because either insertion or removal will take linear time, $O(n)$, in the worst case.

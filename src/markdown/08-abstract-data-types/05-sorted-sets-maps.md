@@ -1,6 +1,14 @@
 
 ## Sorted sets and maps {#ADTs:sorted-sets-and-maps}
 
+::: TODO
+- Prio 1: change title and beginning of:
+    - "Implementing sorted sets and maps using dyn.arrays": it must be clear that this is a bad implementation
+    - "Analysis of the naive implementation"
+- Prio 1: shorten subsection "Implementing sorted sets and maps using dyn.arrays"
+- Prio 1: shorten all sections
+:::
+
 One task that sets or maps cannot solve are *range queries*, such as this example:
 
 Between $x$ and $y$
@@ -185,3 +193,29 @@ To find all values in this multimap, whose keys are between $a$ and $b$, we can 
 - Find the position of the *smallest* key $k_1\geq a$ (using binary search).
 - Find the position of the *largest* key $k_2\leq b$ (again using binary search).
 - Return everything between those two positions in the value array.
+
+
+### Analysis of the naive implementation
+
+To implement sorted sets and maps we used a sorted dynamic array.
+This works a little better than linked lists, because searching for keys becomes efficient.
+Since we know that the internal array is sorted, we can use binary search to lookup elements.
+Therefore, searching in a sorted set or map is efficient, logarithmic in the length of the array, $O(\log(n))$.
+All kinds of range queries for sorted sets and maps are also efficient,
+because these can be implemented using binary search.
+
+Unfortunately, modifying the data structure is still slow.
+If we want to add an item to a sorted array, we have to keep the array sorted --
+and that means we need to *insert* the new item at the right place in the array,
+using the insertion algorithm from Insertion sort (@sec:sorting-1:insertion-sort).
+This takes linear time in the worst case.
+Similarly, to remove an item without creating a hole in the array,
+we need to shift a bunch of elements in the array, and this also takes linear time.
+
+So, a sorted array is still a slow data structure.
+However, it can be useful in some special circumstances:
+if we know that the set *never changes*,
+that is, if we will not need to add or remove items after the set is created.
+Then we can initialise our set by adding all elements to the dynamic array,
+and then sort it (for example, using Quicksort or Mergesort).
+After that we can use binary search to find items in the set.
