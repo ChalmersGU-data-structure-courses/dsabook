@@ -2,7 +2,7 @@
 ## Problems, algorithms, and programs {#analysis-1:problems-and-algorithms}
 
 ::: TODO
-- Prio 2: Shorten the text a bit more?
+- Prio 1: Shorten the text a bit more - in particular the "Problems" section, it is almost 2x longer than the others
 :::
 
 Problems, algorithms, and computer programs are distinct but related concepts

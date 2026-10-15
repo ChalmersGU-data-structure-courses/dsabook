@@ -1,6 +1,10 @@
 
 ## Invariants, preconditions, and postconditions {#analysis-1:invariants}
 
+::: TODO
+- Done?
+:::
+
 When we formulate a problem, and describe a data structure or an algorithm,
 it is useful to describe them in terms of [invariants]{.term}.
 Simply formulated, an invariant is a condition that must always hold for a data structure,

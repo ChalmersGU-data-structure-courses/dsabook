@@ -2,11 +2,11 @@
 ## Comparing algorithm performance {#analysis-1:comparing-algorithms}
 
 ::: TODO
-- Prio 1: replace the bubble-sort example with selection or insertion sort!
+- Prio 1: change the title - it should contain "complexity" in some way. E.g., "Time complexity of algorithms"
 - Prio 1: It is merged with "Growth rates" - make sure the text is coherent
-- Prio 2: Shorten subsection "What to measure"
-- Prio 2: Shorten examples
-- Prio 3: Switch from bubble sort to selection/insertion sort.
+- Prio 1: the text should be shortened
+- Prio 1: the examples should be shorter
+- Prio 1: change the Bubble sort example to Insertion sort. Shorten it - the complexity is already inferred in 2.7, so we don't need to infer it again. Instead discuss that the time function is complex and we want a simplification.
 :::
 
 If you have two algorithms that solve the same problem, how do you compare their performance?

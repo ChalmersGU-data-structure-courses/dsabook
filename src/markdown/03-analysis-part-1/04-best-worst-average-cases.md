@@ -1,6 +1,11 @@
 
 ## Best, worst, and average cases {#analysis-1:complexity-cases}
 
+::: TODO
+- Prio 1: change title to "Best, worst, average case complexity"??
+- Prio 2: shorten the text in general
+:::
+
 For some algorithms, the running time is always determined by the input size $n$,
 for others the exact content of an array or a variable may change the running time drastically.
 A simple example is Linear search. We know that in the worst case it does $n$ comparisons for

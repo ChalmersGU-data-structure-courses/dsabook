@@ -1,6 +1,10 @@
 
 # Algorithm analysis, part 1 {#analysis-1}
 
+::: TODO
+- Done?
+:::
+
 This chapter has two main parts:
 How to best communicate algorithms,
 and how to compare performance of algorithms.

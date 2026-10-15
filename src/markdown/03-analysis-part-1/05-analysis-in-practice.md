@@ -2,7 +2,7 @@
 ## Asymptotic analysis in practice {#analysis-1:simplification-rules}
 
 ::: TODO
-- Prio 1: mention that O is an upper bound
+- Prio 1: mention that O is an upper bound, short discussion what that means
 :::
 
 We have not yet shown a formal definition of big-$O$, and there will not
