@@ -2,7 +2,7 @@
 ## B-trees {#search-trees:B-trees}
 
 ::: TODO
-- Prio 1: check text
+- Prio 1: is fig 11.30 ok?
 :::
 
 As we already mentioned, nobody actually uses 2-3 trees or 2-3-4 trees

@@ -3,9 +3,13 @@
 
 ::: TODO
 - Prio 1: Write short introduction
+- Prio 1: add references to the Algorithms
+- Prio 1: change the order - recursive `add` first, then the iterative version
 - Prio 1: can we reduce some code clutter?
+- Prio 1: psuedocode in Algorithm boxes? (this will make the boxes very large)
+- Prio 1: make the complexity analysis shorter by saying (1) all operations are O(h), and (2) h is O(log) if the tree is balanced and O(n) if it is unbalanced
+- Prio 1: remove parenthesis about Quicksort in complexity analysis (either just the parens, or the whole paragraph)
 - Prio 2: discuss complexity of guided information flow?
-- Prio 3: both recursive and iterative versions
 :::
 
 ### Inserting into a BST {#search-trees:BST-insertion}

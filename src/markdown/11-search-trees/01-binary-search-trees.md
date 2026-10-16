@@ -2,10 +2,13 @@
 ## Binary search trees {#search-trees:BSTs}
 
 ::: TODO
+- Prio 1: note that heaps do not satisfy the BST invariant, and the other way around
 - Prio 1: only show map implementation - say that a set is a map without `value` (only `key`)
-- Prio 1: move multisets behind maps (or remove?)
-- Prio 1: can we reduce some code clutter?
-- Prio 1: update text about "Guided information flow"
+- Prio 1: don't have a subsubsection at all for sets and multisets - just a simple paragraph saying how to modify the map implementation
+- Prio 1: then we can rename `BSTMapNode` to `BSTNode` (and remove some code)
+- Prio 1: do we want to add pseudocode to Algorithm 11.3?
+- Prio 1: either make "Implementing" a subsection, or turn 11.1.1 and 11.1.2 into subsubsections
+- Prio 1: update text about "Guided information flow" - we haven't mentioned "information flow" before (and it includes some OpenDSA text)
 :::
 
 A *binary search tree* (BST) is a binary tree that satisfies the following invariant:

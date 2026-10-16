@@ -2,8 +2,9 @@
 # Search trees {#search-trees}
 
 ::: TODO
-- Prio 1: Note that all search tree operations are linear in the *height* of the tree
-- Prio 1: Discuss *ordered* set/map operations
+- Prio 1: include "sets/maps" in the title, for example: "Search trees for sets and maps", "Sets and maps: Search trees"
+- Prio 1: Add a paragraph about *ordered* set/map operations
+- Prio 1: Start by noting that all search tree operations are linear in the *height* of the tree
 :::
 
 This chapter covers *search trees*,

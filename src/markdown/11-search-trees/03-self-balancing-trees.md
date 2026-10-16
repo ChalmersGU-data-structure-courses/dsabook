@@ -2,7 +2,9 @@
 ## Self-balancing trees {#search-trees:self-balancing}
 
 ::: TODO
-- Prio 2: is the subsection on Implementation ok?
+- Prio 1: add function names to pseudocode (`function rightRotate(x)` and `function leftRightRotate(x)`)
+- Prio 1: andalso rename variables `x`, `y` and `z`? but they are in the figures, so maybe they are good as they are
+- Prio 1: rewrite OpenDSA text
 :::
 
 As we saw in the last section, binary search trees (BST) work fine when we insert elements in a somewhat random order.
@@ -127,7 +129,7 @@ the right-left grandchild $z$ moves two levels up to become the new parent.
 ](images/10.2-BST-right-left-rotate.svg){#fig:BST-double-rotate}
 
 
-#### Implementing rotations
+### Implementing rotations {#search-trees:implementing-rotations}
 
 We implement a rotation by reassigning the child pointers of the involved nodes.
 The only complication is to make sure to do this in the right order,

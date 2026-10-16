@@ -2,7 +2,9 @@
 ## 2-3 trees {#search-trees:23-trees}
 
 ::: TODO
-- Prio 1: check text
+- Prio 1: check text - in particular 11.5.1 Inserting and 11.5.2 Deleting
+- Prio 1: join the two invariants into one box?
+- Prio 1: remove the last paragraph about left-leaning RB-trees?
 :::
 
 AVL trees do not ensure that a tree is perfectly balanced --

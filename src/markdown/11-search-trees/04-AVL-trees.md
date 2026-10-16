@@ -2,7 +2,14 @@
 ## AVL trees {#search-trees:AVL-trees}
 
 ::: TODO
-- Prio 2: are all figures necessary?
+- Prio 1: the section starts very abrupt - perhaps talk a bit more before the first box?
+- Prio 1: rewrite paragraph after the invariant box? say that the height is within a constant, and that constant happens to be 1.44 because of the invariant (but we won't prove it)
+- Prio 1: rename "balance factor" to just "balance", and bf(x) to balance(x)
+- Prio 1: insert reference to Algorithm box #alg:avl-add
+- Prio 1: is the text about deletion (11.4.2) too short?
+- Prio 1: is the discussion about memory storage too technical in "Implementing AVL nodes"?
+- Prio 1: make the complexity analysis shorter by saying (1) all operations are O(h), and (2) h remains O(log) because of the invariant
+- Prio 2: is it possible to make #fig:AVL-left-rotate and #fig:AVL-double-rotate more compact (in height)?
 :::
 
 An AVL tree is a binary search tree with the following additional balancing invariant:
