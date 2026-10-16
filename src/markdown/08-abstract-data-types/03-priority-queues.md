@@ -8,6 +8,7 @@
     - "Implementing priority queues using sorted lists": it must be clear that this is a bad implementation
     - "Analysis of the naive implementation"
 - Prio 2: add a good short example using prio.queues
+- Prio 1: rewrite OpenDSA text
 :::
 
 <!-- OPENDSA: START -->
