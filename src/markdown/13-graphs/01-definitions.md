@@ -1,6 +1,10 @@
 
 ## Definitions and properties {#graphs:definitions}
 
+::: TODO
+- Done?
+:::
+
 A graph consists of a set of *vertices* (or *nodes*) and a set of *edges*,
 We usually denote the sets of vertices and edges, as $V$ and $E$, respectively.
 The *size* of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).

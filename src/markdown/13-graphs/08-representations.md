@@ -1,6 +1,11 @@
 
 ## Graph representation and implementation {#graphs:representation}
 
+::: TODO
+- Prio 1: change title - "Implementing graphs"? "Representing graphs"?
+- Prio 1: (sub)subsection for the special case of V = [0...N)
+:::
+
 There are two main ways of implementing graphs:
 
 Adjacency list

@@ -2,7 +2,7 @@
 ## Complexity analysis {#graphs:analysis}
 
 ::: TODO
-- This is too long, repeats itself
+- Prio 1: This is too long, repeats itself
 :::
 
 Graph algorithms have the potential to be very inefficient if designed carelessly.

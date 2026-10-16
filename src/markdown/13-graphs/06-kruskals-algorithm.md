@@ -2,7 +2,7 @@
 ## Kruskal's MST algorithm {#graphs:kruskals-algorithm}
 
 ::: TODO
-- Update disjoint-set section when the corresponding section in ch10 is updated
+- Done?
 :::
 
 Kruskal's algorithm solves the same problem as Prim's algorithm:

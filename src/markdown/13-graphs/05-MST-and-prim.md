@@ -1,6 +1,11 @@
 
 ## Minimum spanning trees and Prim's algorithm {#graphs:MSTs}
 
+::: TODO
+- Prio 1: rewrite 1st paragraph (now it's lots of parentheses and font changes)
+- Prio 1: Algorithm box for Prim, just saying "run Dijkstra, but use `weight` instead of `cost+weight`
+:::
+
 As explained in @sec:graphs:definitions, a *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph.
 **Interesting fact**: The number of edges in a spanning tree is exactly $V{-}1$.
 (Why is this? Try to convince yourself that this is true.)

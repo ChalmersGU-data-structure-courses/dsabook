@@ -1,6 +1,10 @@
 
 ## Building the result {#graphs:building-result}
 
+::: TODO
+- Prio 1: Change name, perhaps to "Building the graph traversal result"
+:::
+
 The traversal algorithms we have seen so far lacks an important detail, and this makes them quite useless.
 We have shown how to visit the vertices in the graph in a certain order,
 but we have not discussed how to build the result, or even how we want the result to look like.

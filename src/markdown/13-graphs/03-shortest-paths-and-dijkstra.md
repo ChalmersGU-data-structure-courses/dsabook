@@ -2,7 +2,9 @@
 ## Shortest-path problems and Dijkstra's algorithm {#graphs:shortest-path}
 
 ::: TODO
-- Include something about A*
+- Prio 1: Maybe include BFS in the "Optimising" subsection? - if so, raise the level to a separate section "Optimising graph traversal"
+- Prio 1: In the "Optimising" subsection: add subsubsection for "replace agenda entries"
+- Prio 1: Include a short subsubsection about A*, in the "Optimising" subsection
 :::
 
 Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph,
@@ -105,7 +107,7 @@ $(7, B{\rightarrow}F)$         $\{A,D,B,E,F\}$                              $[(8
 $(8, B{\rightarrow}C)$         $\{A,D,B,E,F,C\}$                                                  $[(8, E{\rightarrow}F), (10,F{\rightarrow}C)]$
 
 
-### Optimising Dijkstra's algorithm
+### Optimising Dijkstra's algorithm {#graphs:optimising-dijkstra}
 
 The best optimisation to the generic traversal algorithm is to never add useless edges to the agenda.
 If we know that the edge will be dismissed when it is removed from the agenda, it is better to never add it in the first place.

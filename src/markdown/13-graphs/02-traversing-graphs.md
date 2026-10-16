@@ -1,6 +1,10 @@
 
 ## Traversing graphs: DFS and BFS {#graphs:traversal}
 
+::: TODO
+- Prio 1: check text
+:::
+
 Many graph algorithms involve *traversing* a graph --
 they start from a given vertex and visit each reachable vertex exactly once.
 This is similar to traversing a tree, but slightly more difficult because the graph can contain cycles.
@@ -19,8 +23,8 @@ Stop when there are no edges from visited to unvisited vertices. -->
 #### Generic graph traversal
 To traverse a graph from a starting vertex $s$,
 first create an empty set of *visited* vertices and the *result* set.
-Initialise the *agenda* with a single a dummy edge ending in $s$,
-then repeat the following until the agenda is empty:
+Initialise the *agenda* with a single dummy edge ending in $s$,
+then repeat until the agenda is empty:
 
 - Remove an edge $a\rightarrow b$ from the *agenda*
 - If $b$ is not in *visited*:
@@ -181,11 +185,13 @@ This is supremely useful in a wide range of applications:
 Obviously things like pathfinding in maps or simulations,
 but also in applications like AI problem solving and most types of optimisation problems.
 
-***Note***: By "shortest possible" we mean that the path passes through the *fewest possible* edges.
+::: note
+#### Note: Shortest possible
+By "shortest possible" we mean that the path passes through the *fewest possible* edges.
 It *does not* take the weights of the edges into account.
 If you want to find the shortest path according to the sum of edge weights, BFS does not work.
 Instead we have to look at another algorithm, wihch is the topic of the next section.
-
+:::
 
 
 
