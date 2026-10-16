@@ -4,7 +4,7 @@
 ::: TODO
 - Prio 1: can the code clutter be reduced?
 - Prio 1: add section about rehashing deletion?
-::: TODO
+:::
 
 While seperate chaining is a bit easier in principle,
 linear probing is arguably easier to implement because

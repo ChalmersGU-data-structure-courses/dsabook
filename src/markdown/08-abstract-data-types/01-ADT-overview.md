@@ -1,5 +1,5 @@
 
-# Introduction to Abstract Data Types {#ADTs:overview}
+## Introduction to Abstract Data Types {#ADTs:overview}
 
 ::: TODO
 - Prio 1: do we need the code in the beginning?
