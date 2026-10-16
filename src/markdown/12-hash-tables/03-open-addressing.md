@@ -2,8 +2,10 @@
 ## Open addressing and linear probing {#hash-tables:open-addressing}
 
 ::: TODO
-- (Peter) Add a (level-3) subsection about linear probing, and another about other probing variants
-- (Peter) I think the heading should only be "Open addressing" - we want to be clear that they are different things
+- Prio 1: Add a (sub)subsection about linear probing, and another about other probing variants
+- Prio 1: change the heading to "Open addressing"? - we want to be clear that it's not the same as linear probing
+- Prio 1: fig 12.7 should be split and interspersed in the text - and rewrite text
+- Prio 1: add Algorithm box for insertion (and search?)
 :::
 
 A downside of separate chaining is that we abandon the benefits of storing all our

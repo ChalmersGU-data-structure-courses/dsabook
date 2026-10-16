@@ -1,6 +1,10 @@
 
 ## Complexity of hash table operations {#hash-tables:complexity}
 
+::: TODO
+- Prio 1: Move AaBB example to previous section?
+::: TODO
+
 In this chapter we have seen many pitfalls that can degrade performance of hash tables.
 If we manage to avoid all of them, we get a data structure where lookups are
 *amortised* *average* $O(1)$ time complexity.

@@ -1,6 +1,14 @@
 
 ## Separate chaining {#hash-tables:separate-chaining}
 
+::: TODO
+- Prio 1: include "sets/maps" in the title, for example: "Search trees for sets and maps", "Sets and maps: Search trees"
+- Prio 1: Add a paragraph about *ordered* set/map operations
+- Prio 1: Start by noting that all search tree operations are linear in the *height* of the tree
+- Prio 1: add Algorithm box for insert/delete
+- Prio 1: rewrite the paragraph starting "That leaves the question..."
+:::
+
 Separate chaining solves the problem of *collisions* in hash tables.
 That is: when two distinct keys $x$ and $y$
 hash to the same position in the internal array.

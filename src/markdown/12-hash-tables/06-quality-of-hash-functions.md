@@ -2,9 +2,11 @@
 ## Quality of hash functions {#hash-tables:hash-quality}
 
 ::: TODO
-- Discuss why we want primes in Horner's method: gives best distribution
-- (Peter) Add a (numbered) subsection for hashing objects and arrays
-- (Peter) Discuss why Horner's method is not very good, just good (the Aa-BB vulnerability should come here and not wait until complexity)
+- Prio 1: Discuss why we want primes in Horner's method: gives best distribution
+- Prio 1: Add a (numbered?) subsection for hashing objects and arrays
+- Prio 1: Discuss why Horner's method is not very good, just good (the Aa-BB vulnerability should come here and not wait until complexity)
+- Prio 1: use $p$ instead of 31 in the example? and mention that 31 is used by java but NNN but others?
+- Prio 1: Horner's method is not *very* good, so perhaps change "a good hash function for strings" to "a hash function..."?
 :::
 
 Implementations of hash tables typically do not include the hash functions,
@@ -74,9 +76,11 @@ The hash
 ### A good hash function for strings
 
 We want a hash function where both the character code and postion of each character affect the result.
-One way of doing that is by this sum (where $s_k$ is the character code at position $k$ in the string):
+One way of doing that is by this sum (where $s_k$ is the character code at position $k$ in the string $s$):
 
-$s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0$
+$$
+h(s) = s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0
+$$
 
 We multiply every character code by a distinct power of 31, based on its postion.
 Swapping the positions of two distinct characters will almost certainly result

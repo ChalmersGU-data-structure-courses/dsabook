@@ -2,7 +2,13 @@
 ## Introduction to hash tables {#hash-tables:overview}
 
 ::: TODO
-- (Peter) I think we can skip the first step (keys are small integers) and go directly to arbitrary integers
+- Prio 1: move first part ("keys are small integers") to overview, and start this discussion with the main idea - hashing
+    (keep the caveats here, as start of discussion)
+- Prio 1: change title: "hash function" should be included, and "collisions"
+- Prio 1: update fig. 12.1 - it's ugly
+- Prio 1: start a new subsection before "So, how does a good hash function look like"
+- Prio 1: we don't have any subsection mentioning "collision"! this can include the definition from separate chaining
+- Prio 1: add a figure showing the two steps - hash + compress?
 :::
 
 This section provides an overview of hash tables, glossing over many technical details.

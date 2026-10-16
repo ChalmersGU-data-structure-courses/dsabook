@@ -2,10 +2,12 @@
 # Hash tables {#hash-tables}
 
 ::: TODO
-- Add a discussion about hashtables not being ordered: you cannot use them for *range queries*
-- Decide what to do about the level 3 subsections
+- Prio 1: include "sets/maps" in the title, for example: "Hash tables for sets and maps", "Sets and maps: Hash tables"
+- Prio 1: rewrite text
+- Prio 1: add references to later sections from this overview. (SepChain->complexity, etc)
+- Prio 1: Add a discussion about hashtables not being ordered: you cannot use them for *range queries*
+- Prio 1: move first part of 12.1 ("keys are small integers") to here?
 - References for: Sets and maps, Linked lists, avl-trees...
-- Internal references to later sections from overview. SepChain->complexity.
 - Decide where to introduce pseudocode
 - Terminology: Index/position, cell/position/whatever, entry (for (K,V) pairs), ...
 :::

@@ -1,6 +1,12 @@
 
 ## Deleting entries from open addressing hash tables {#hash-tables:deletion}
 
+::: TODO
+- Prio 1: add Algorithm boxes??
+- Prio 1: have the two approaches as subsubsections
+- Prio 1: add a continuation figure in the text, continuing the insertion example
+:::
+
 In a separate chaining hash table, deletion is simple.
 Just perform a lookup, and delete an entry from a linked list.
 For open addressing, things are more complicated.

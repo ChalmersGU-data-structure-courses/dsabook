@@ -2,8 +2,8 @@
 ## Resizing hash tables {#hash-tables:resizing}
 
 ::: TODO
-- (Peter) I swapped places for deletion and resizing: this means that shrinking becomes part of this section
-- (Peter) double-check the text
+- Prio 1: deletion and resizing have been swapped: this means that shrinking becomes part of this section - double-check the text
+- Prio 1: Algorithm box, emphasizing the difference with dynamic array?
 :::
 
 In both separate chaining hash tables and open addressing,
