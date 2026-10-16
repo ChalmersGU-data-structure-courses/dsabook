@@ -1,6 +1,11 @@
 
 ## Case study: Parent-pointer trees {#trees:parent-pointer-trees}
 
+::: TODO
+- Prio 1: Add `type DisjointSet = Map V V` -- now it's not obvious that this is what is suggested in 9.5.1
+- Prio 1: Mention that Union/Find is another name for disjoint sets
+:::
+
 In the previous section we saw a possible way to implement a general tree,
 where the children are represented by a list of pointers to subtrees.
 

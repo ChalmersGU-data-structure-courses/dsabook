@@ -1,6 +1,10 @@
 
 ## Binary trees {#trees:binary-trees}
 
+::: TODO
+- Prio 1: Done?
+:::
+
 In general, a tree node may have any number of children.
 But a very important special case is the [binary tree]{.term}.
 A binary tree is either empty or consists of a root node with exactly two children, each of which is itself a binary tree.

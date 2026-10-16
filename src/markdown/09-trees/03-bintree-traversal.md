@@ -1,6 +1,10 @@
 
 ## Traversing binary trees {#trees:bintree-traversal}
 
+::: TODO
+- Prio 1: Done?
+:::
+
 Suppose we want to process the contents of a binary tree,
 for instance by printing all the values or converting the tree to a list.
 This is called a [traversal]{.term}.
