@@ -1,6 +1,12 @@
 
 ## Operations on binary heaps {#heaps:binheap-operations}
 
+::: TODO
+- Prio 1: put the pseudocode of `removeMin` into algo. 10.7?
+- Prio 2: do we want to split `add` into `add` and `bubble_up`? and split `removeMin` into `removeMin` and `bubble_down`?
+- Prio 2: do we want a subsection for complexity? (after 10.2.2 or 10.2.3) - now that is hidden in the text
+:::
+
 When implementing a data structure, it is often helpful to encode the invariants explicitly and verify them,
 possibly using assertions, within the various operations.
 This can make it easier to detect errors and ensure that the data structure remains valid after each modification.

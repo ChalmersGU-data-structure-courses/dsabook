@@ -2,9 +2,8 @@
 ## Binary heaps {#heaps:binary-heaps}
 
 ::: TODO
-- Prio 1: add discussion + code for storing priority and element
-- Prio 1: add figure about a complete tree
-- Prio 1: remove some code (replace with text)
+- Prio 1: Fig 10.4: the array has empty spaces, suggestion it's not a dynamic array - remove those spaces?
+- Prio 1: Add another ref. to fig 10.4 from sec. 10.1.2, saying that this is a binary heap with a dynamic array
 :::
 
 The [binary heap]{.term} is a data structure that can be used to implement an efficient priority queue.
@@ -49,7 +48,7 @@ The nodes are numbered level by level, starting at the root and proceeding from 
 The root node is assigned index $0$, its left child index $1$, its right child index $2$, and so on.
 In other words, the nodes of the tree are stored in the array level by level, with each level appearing consecutively.
 This systematic numbering ensures that a node's position in the array directly corresponds to its logical position in the tree.
-An example binary heap together with its array representation is shown in @fig:HeapTreeExample.
+An example complete binary tree together with its array representation is shown in @fig:HeapTreeExample.
 
 ![
     An example binary heap, where smaller values indicate higher priority,

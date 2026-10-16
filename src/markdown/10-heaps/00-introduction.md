@@ -1,6 +1,11 @@
 
 # Heaps {#heaps}
 
+::: TODO
+- Prio 1: include "prio.queues" in the title, for example: "Heaps as priority queues", "Priority queues: Heaps"
+- Prio 2: this intro is a little long - can some things move to later sections?
+:::
+
 A _heap_ provides a natural and efficient implementation of the priority queue introduced in @sec:ADTs:priority-queues.
 Elements (also called "tasks" or "jobs") can be inserted into the heap using their priority as the ordering key,
 and the operation `removeMin` can be used whenever the next prioritised element should be processed.
