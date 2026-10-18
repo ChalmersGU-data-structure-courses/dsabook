@@ -54,7 +54,7 @@ Suppose we have a hash table with millions of email adresses as key.
 That is, the keys are short strings with at most $100$ characters,
 and there are only around $30$ different characters to choose from.
 Even if the strings tend to have distinct characters,
-every string will have a character code sum below $100\times 30 = 3,000$.
+every string will have a character code sum below $100\times 30$ = 3,000.
 In a linear probing hash table with capacity for tens of millions of strings,
 all strings will form a huge cluster at the start of the table.
 This will kill the lookup performance, and the table will be practically useless.
@@ -72,21 +72,21 @@ but also multiply the sum with some number $p$ in each iteration, like this:
             h = p * h + characterCode(char)
         return h
 
-This is actually an efficient way of calculating a polynomial of $p$, called Horner's method
-(where the coefficient $s_k$ is the character code at position $k$):
+This is actually an efficient way of calculating a polynomial of $p$, called Horner's method,
+where the coefficient $s_k$ is the character code at position $k$:
 
 \begin{align*}
 h(s) &= s_0\cdot p^{n-1} + s_1\cdot p^{n-2} + \ldots + s_{n-2}\cdot p^1 + s_{n-1}\cdot p^0 \\
      &= (((s_0\cdot p + s_1)\cdot p + \ldots)\cdot p + s_{n-2})\cdot p + s_{n-1}
 \end{align*}
 
-Note how the multiplication of the old hash value by 31 distributes over the sum,
+Note how the multiplication of the old hash value by $p$ distributes over the sum,
 increasing all previous exponents of $p$ by 1.
 Contrary to the bad function we described earlier,
 displacing a character in the string will almost certainly result in a different hash code.
 This hash function has several advantages:
 
-* It is quite fast, performing just a multiplication and an addition for each character.
+* It is quite fast -- just one multiplication and one addition for each character.
 * It yields large numbers even for short strings.
   Even if $p$ is a small number using up only $5-6$ bits,
   repeated multiplication will anyway quickly overflow a 32-bit integer.
@@ -96,9 +96,9 @@ This hash function has several advantages:
 
 So, what are good values for $p$?
 The most important requirement is that it should be *co-prime* with the table capacity $M$,
-because then the compression $h(s)\bmod M$ will help increase the distribution.
+because then the compression $h(s)\bmod M$ will help to increase the distribution.
 Therefore a decent suggestion is to always use a prime number, if we don't know anything about $M$.
-Popular choices are $31$ or $37$, or $8,443$, or even $2^{19}-1=524,287$.
+Popular choices are $31$ or $37$, or $8{,}443$, or even ${524,}287$ ($2^{19}{-}1$).
 
 A particularly bad choice of $p$ is a power of two, such as $32$.
 This will completely ruin the performance of hash tables in many common situations.

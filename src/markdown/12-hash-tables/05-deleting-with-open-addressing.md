@@ -2,7 +2,7 @@
 ## Deleting entries from open addressing hash tables {#hash-tables:deletion}
 
 ::: TODO
-- Prio 1: add a continuation figure in the text, continuing the insertion example
+- Done?
 :::
 
 In a separate chaining hash table, deletion is simple.
@@ -72,16 +72,23 @@ Therefore, we have to include the tombstones when calculating the load factor.
 Let us try to delete the key $25$ from the final table in [](#ex:linear-probing-resize), using lazy deletion.
 Looking up the key finds the cell $5$, and we insert the tombstone into that cell:
 
-    [  _ |  _ |  _ |  _ | 34 | XX | 16 | 55 |  _ | 49 ]
+`\noindent`{=latex}
+![](images/11.5-linear-probing-delete-1.svg)
 
+<!-- [  _ |  _ |  _ |  _ | 34 | XX | 16 | 55 |  _ | 49 ] -->
+
+`\noindent`{=latex}
 If we instead wanted to use re-hashing, we first delete the cell containing $25$.
 Then we iterate through the rest of the cluster, that is, the cells $16$ and $55$.
 We delete $16$ and immediately re-add it, and it ends up in the same cell as before.
 Then we delete $55$ and re-add: now the ideal position is empty, so we can add $55$ to cell $5$.
 The resulting hash table looks like this, where the arrow indicate how $55$ changed position.
 
-    [  _ |  _ |  _ |  _ | 34 | 55 | 16 |  _ |  _ | 49 ]
-                                ^         ^
+`\noindent`{=latex}
+![](images/11.5-linear-probing-delete-2.svg)
+
+<!-- [  _ |  _ |  _ |  _ | 34 | 55 | 16 |  _ |  _ | 49 ] -->
+<!--                             ^         ^             -->
 
 :::
 

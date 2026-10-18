@@ -2,8 +2,7 @@
 ## Hashing and compressing to resolve collisions {#hash-tables:overview}
 
 ::: TODO
-- Prio 1: update fig. 12.1 - it's not as the caption says anymore
-- Prio 2: add a figure showing the two steps - hash + compress?
+- Done?
 :::
 
 [](#ex:small-int-maps) shows how we can use an array to implement a simple and extremely efficient map.
@@ -60,7 +59,7 @@ There are two possible solutions to this:
   This leads towards *open addressing* hash tables.
 
 ![
-    How to add the entry (67,"*baz*") to a tiny hash table of size 5 that already contains (542,"*foo*").
+    Adding the entry (67,"*baz*") to a tiny hash table of size 5 that already contains (542,"*foo*").
     This illustrates the collision-handling strategies -- the keys 67 and 542 both compress to 2.
 ](images/11.1-collision-strategies.svg){#fig:CollisionExample}
 

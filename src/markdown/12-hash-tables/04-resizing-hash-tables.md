@@ -1,6 +1,10 @@
 
 ## Resizing hash tables {#hash-tables:resizing}
 
+::: TODO
+- Done?
+:::
+
 In both separate chaining hash tables and open addressing,
 we want to ensure that the hash table is not too crowded, or performance will degrade.
 With separate chaining, having a large enough table gives a statistical guarantee
@@ -64,10 +68,12 @@ We create a new empty table twice the size, and iterate through the old table.
 For each key in the old table, we add it to the new table using the normal insertion operation.
 In the example, we will add the keys in the order $49,16,25,34$:
 
-    [ 49 | 16 | 25 |  _ | 34 ]
+`\noindent`{=latex}
+![](images/11.4-linear-probing-resize-1.svg)
 
-    [  _ |  _ |  _ |  _ | 34 | 25 | 16 |  _ |  _ | 49 ]
+<!-- [ 49 | 16 | 25 |  _ | 34 ]   ==>   [  _ |  _ |  _ |  _ | 34 | 25 | 16 |  _ |  _ | 49 ] -->
 
+`\noindent`{=latex}
 Notice that the order between the keys in the table totally changed.
 If we have a good hash function, there is no way to predict how the internal order will change after a resize.
 
@@ -75,8 +81,11 @@ Now we want to insert the key $55$.
 The optimal position is occupied with the key $25$,
 so we have to iterate through $25$ and $16$ until we can add $55$ in position $7$:
 
-    [  _ |  _ |  _ |  _ | 34 | 25 | 16 | 55 |  _ | 49 ]
-                                ^         ^
+`\noindent`{=latex}
+![](images/11.4-linear-probing-resize-2.svg)
+
+<!-- [  _ |  _ |  _ |  _ | 34 | 25 | 16 | 55 |  _ | 49 ] -->
+<!-- .                           ^         ^             -->
 
 :::
 

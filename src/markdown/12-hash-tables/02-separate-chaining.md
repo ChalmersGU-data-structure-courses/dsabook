@@ -2,7 +2,7 @@
 ## Separate chaining {#hash-tables:separate-chaining}
 
 ::: TODO
-- Prio 1: update fig 11.2-memory-content.svg
+- Done?
 :::
 
 Separate chaining is perhaps the most intuitive solution to the problem of collisions:
@@ -86,14 +86,14 @@ For these reasons, the typical choice of data structure is a *linked list*.
 This is why the hash table is called *separate chaining* --
 the buckets are stored *separate* from the array, and a linked list forms a *chain* of elements.
 @fig:SepChain2 shows the memory content of a separate chaining hash table.
-Array index 5 points to a list with two elements, so there was a collision between the two keys.
+Array index $1$ points to a list with two elements, so there was a collision between the two keys.
 This may be because both have the same hash value, or
 more frequently because their hash values were compressed into the same index.
-What we know about the entries on index 5 is the following:
+What we know about the entries on index $1$ is the following:
 
-$$ h(\text{``\emph{Alice}''})\bmod 13 = h(\text{``\emph{Bob}''})\bmod 13 = 5 $$
+$$ h(\text{``\emph{Alex}''})\bmod 13 = h(\text{``\emph{Peter}''})\bmod 13 = 1 $$
 
-Performing a lookup of any key that compresses to index 5, that is when $h(x)\bmod 13=5$,
-will require a linear search by key in the linked list with "*Alice*" and "*Bob*" in it.
+Performing a lookup of any key that compresses to index $1$, that is when $h(x)\bmod 13=1$,
+will require a linear search by key in the linked list with "*Alex*" and "*Peter*" in it.
 Note that a linear search is required even for `put` operations:
 if the key is already present we have to update the entry instead of adding a new one.

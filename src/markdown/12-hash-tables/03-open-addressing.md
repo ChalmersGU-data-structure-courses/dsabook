@@ -2,8 +2,7 @@
 ## Open addressing {#hash-tables:open-addressing}
 
 ::: TODO
-- Prio 1: update #fig:LinProbe1
-- Prio 1: create new images for the example
+- Done?
 :::
 
 A downside of separate chaining is that we abandon the benefits of storing all our
@@ -95,23 +94,34 @@ and we will discuss this further in @sec:hash-tables:resizing.
 Assume that we have a hash table of size $5$ already containing the keys $16$ and $34$.
 For simplicity we use the identity hash function, $h(k)=k$.
 
-    [  _ | 16 |  _ |  _ | 34 ]
+`\noindent`{=latex}
+![](images/11.3-linear-probing-add-1.svg)
 
+<!-- [  _ | 16 |  _ |  _ | 34 ] -->
+
+`\noindent`{=latex}
 To add $49$ to the table, we first calculate its ideal position $h(49)\bmod 5=4$.
 However, cell $4$ is occupied, so we (circularly) move to the next cell.
 This cell is empty and we can put $49$ in cell $0$.
 Here the arrows indicate the ideal and actual positions of $49$:
 
-    [ 49 | 16 |  _ |  _ | 34 ]
-       ^                   ^
+`\noindent`{=latex}
+![](images/11.3-linear-probing-add-2.svg)
 
+<!-- [ 49 | 16 |  _ |  _ | 34 ] -->
+<!--    ^                   ^   -->
+
+`\noindent`{=latex}
 Note that when we added $49$ we accidentally merged the two separate clusters $\{16\}$ and $\{34\}$
 into the much larger cluster $\{34,49,16\}$.
 Finally we want to add $25$ to the table, which has ideal position $h(25)\bmod 5=0$.
 This cell is occupied, as is the next one, so we have to put $25$ in cell $2$:
 
-    [ 49 | 16 | 25 |  _ | 34 ]
-       ^         ^
+`\noindent`{=latex}
+![](images/11.3-linear-probing-add-3.svg)
+
+<!-- [ 49 | 16 | 25 |  _ | 34 ] -->
+<!--    ^         ^             -->
 
 :::
 

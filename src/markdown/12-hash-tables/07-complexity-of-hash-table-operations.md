@@ -2,7 +2,7 @@
 ## Complexity of hash table operations {#hash-tables:complexity}
 
 ::: TODO
-- Prio 1: Move AaBB example to previous section?
+- Done?
 :::
 
 In this chapter we have seen many pitfalls that can degrade performance of hash tables.

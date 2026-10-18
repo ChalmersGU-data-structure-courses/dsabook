@@ -2,9 +2,7 @@
 ## Implementation of open addressing {#hash-tables:implementation}
 
 ::: TODO
-- Prio 1: discuss how to implement a map
-- Prio 1: can the code clutter be reduced?
-- Prio 1: add section about rehashing deletion?
+- Done?
 :::
 
 If we already have an implementation of a set or map data structure lying around (such as linked lists or AVL trees),
