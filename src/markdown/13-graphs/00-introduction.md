@@ -15,7 +15,7 @@ where each edge connects two vertices.
 ![
     Two example graphs, each with six vertices labelled $A, \ldots, F$.
     The left graph is undirected and weighted, while the right one is directed but unweighted.
-](images/12.0-examples.svg){#fig:GraphExamples}
+](images/13.0-examples.svg){#fig:GraphExamples}
 
 
 Graphs are used to model both real-world systems and abstract problems.

@@ -40,7 +40,7 @@ When we draw AVL trees we usually write the balance factor beside each node.
 
 ![
     Two balanced AVL trees representing the same set of elements.
-](images/10.3-AVL-examples.svg){#fig:AVL-examples}
+](images/11.4-AVL-examples.svg){#fig:AVL-examples}
 
 Now we have to ensure that we restore the balance whenever a tree node becomes unbalanced,
 and we do that by using the *tree rotations* from @sec:search-trees:rotations.
@@ -71,7 +71,7 @@ then they will look like in @fig:AVL-add-rotate, where the balance factors that 
     Inserting H into the trees from @fig:AVL-examples.
     The affected nodes and their balances are marked in bold.
     The right tree becomes unbalanced, so we have to left-rotate over the node F.
-](images/10.3-AVL-add-rotate.svg){#fig:AVL-add-rotate}
+](images/11.4-AVL-add-rotate.svg){#fig:AVL-add-rotate}
 
 Notice that the left tree is still AVL balanced, so we do not have to do anything further.
 But in the right tree, the grandparent F has become unbalanced.
@@ -94,7 +94,7 @@ The final subtree is now AVL-balanced, because no node has a balance factor outs
     A single left-rotation solves a right-right imbalance.
     The left subtree $t_1$ moves down one level, and the right subtree $t_3$ moves up,
     and the result is that the final tree becomes a little more balanced.
-](images/10.3-AVL-left-rotate.svg){#fig:AVL-left-rotate}
+](images/11.4-AVL-left-rotate.svg){#fig:AVL-left-rotate}
 
 Notice the difference with @fig:BST-rebalance, where we needed to reorganise the tree completely after adding one element.
 We managed this because the AVL invariant is *relaxed*, it does not require that the tree is perfectly balanced.
@@ -117,7 +117,7 @@ and afterwards all nodes are AVL balanced!
     To solve a right-left imbalance we need to do a double rotation.
     First right-rotate over the child $y$, and left-rotate over the parent $x$.
     Notice how the resulting tree is much more balanced.
-](images/10.3-AVL-right-left-rotate.svg){#fig:AVL-double-rotate}
+](images/11.4-AVL-right-left-rotate.svg){#fig:AVL-double-rotate}
 
 The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
 performing *right* rotations.

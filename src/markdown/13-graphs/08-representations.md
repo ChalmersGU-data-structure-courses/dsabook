@@ -22,7 +22,7 @@ Adjacency matrix
 
 ![
 	A small directed graph, and its representation as an adjacency list and adjacency matrix.
-](images/12.7-representations.svg){#fig:GraphRepresentations1}
+](images/13.7-representations.svg){#fig:GraphRepresentations1}
 
 @Fig:GraphRepresentations1 illustrates the two representations.
 The adjecency list representation is simple and very useful.

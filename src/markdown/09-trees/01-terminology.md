@@ -8,7 +8,7 @@
 ![
     Drawing of a tree with six nodes, illustrating the concepts of
     root node, child and parent nodes, size/height/level properties, and paths.
-](images/9.0-terminology.svg){#fig:TreeTerminology}
+](images/9.1-terminology.svg){#fig:TreeTerminology}
 
 A tree consists of [nodes]{.term} connected by parent-child relationships.
 There is a unique topmost node which is called the [root]{.term}.
@@ -51,7 +51,7 @@ In a syntax tree, order matters,
 because the expressions $a < 3$ and $3 < a$ mean different things.
 This distinction will matter later when we compare general trees, binary trees, and heaps.
 
-![Two familiar domains modelled as trees: Programming language syntax and file systems.](images/9.0-examples.svg){#fig:TreeExamples}
+![Two familiar domains modelled as trees: Programming language syntax and file systems.](images/9.1-examples.svg){#fig:TreeExamples}
 
 @fig:TreeExamples shows two typical examples.
 In a syntax tree, each node represents a language construct such as a function call or an `if`-statement, and the children are its components.

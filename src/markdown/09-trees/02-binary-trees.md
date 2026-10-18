@@ -32,7 +32,7 @@ This becomes even more apparent when we discuss how to implement them.
     An example of a binary tree with 9 nodes.
     To the left is how we usually draw the tree, but
     to the right is how it is actually represented, where the black dots are empty trees.
-](images/9.1-bintree-with-nulls.svg){#fig:example_bintree}
+](images/9.2-bintree-with-nulls.svg){#fig:example_bintree}
 
 
 
@@ -58,7 +58,7 @@ where there is space allocated for the child pointers.
 ![
     Illustration of the pointer-based binary tree implementation, where each node stores a value and two child pointers.
     A black dot in a pointer cell indicates an empty subtree.
-](images/9.1-bintree-with-pointers.svg){#fig:bintree_with_pointers}
+](images/9.2-bintree-with-pointers.svg){#fig:bintree_with_pointers}
 
 We can easily extend the `Node` type for different applications, by storing additional data in each node.
 For example, if we want to implement a [map]{.term} using a [search tree]{.term},
@@ -133,4 +133,4 @@ Of course, most trees are somewhere in between.
     Examples of more and more balanced binary trees, all containing 7 nodes.
     The leftmost tree is as unbalanced as it can be, and
     the rightmost is *perfect* because all leaves are on the same level.
-](images/9.1-unbalanced-perfect-trees.svg){#fig:unbalaced-perfect-trees}
+](images/9.2-unbalanced-perfect-trees.svg){#fig:unbalaced-perfect-trees}

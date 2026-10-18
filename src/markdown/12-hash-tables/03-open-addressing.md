@@ -45,7 +45,7 @@ there can be no empty cells between its ideal position and its actual position.
     An open addressing hash table of size 13, representing the set {A,E,H,L,R,Y,Z}.
     <!-- Since this is not a map, there are no values, only keys.  -->
     The keys form three clusters: {Y,L,Z,A}, {R,E}, and {H}.
-](images/11.3-open-addressing-example.svg){#fig:LinProbe1}
+](images/12.3-open-addressing-example.svg){#fig:LinProbe1}
 
 <!--
   0  1  2  3  4  5  6  7  8  9 10 11 12
@@ -95,7 +95,7 @@ Assume that we have a hash table of size $5$ already containing the keys $16$ an
 For simplicity we use the identity hash function, $h(k)=k$.
 
 `\noindent`{=latex}
-![](images/11.3-linear-probing-add-1.svg)
+![](images/12.3-linear-probing-add-1.svg)
 
 <!-- [  _ | 16 |  _ |  _ | 34 ] -->
 
@@ -106,7 +106,7 @@ This cell is empty and we can put $49$ in cell $0$.
 Here the arrows indicate the ideal and actual positions of $49$:
 
 `\noindent`{=latex}
-![](images/11.3-linear-probing-add-2.svg)
+![](images/12.3-linear-probing-add-2.svg)
 
 <!-- [ 49 | 16 |  _ |  _ | 34 ] -->
 <!--    ^                   ^   -->
@@ -118,7 +118,7 @@ Finally we want to add $25$ to the table, which has ideal position $h(25)\bmod 5
 This cell is occupied, as is the next one, so we have to put $25$ in cell $2$:
 
 `\noindent`{=latex}
-![](images/11.3-linear-probing-add-3.svg)
+![](images/12.3-linear-probing-add-3.svg)
 
 <!-- [ 49 | 16 | 25 |  _ | 34 ] -->
 <!--    ^         ^             -->

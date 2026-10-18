@@ -38,7 +38,7 @@ where the middle one is a non-binary tree, and the rightmost represents a *max*-
     Three trees satisfying the heap property.
     Note that the middle one is not a binary tree, and
     right one represents a *max*-heap.
-](images/9.4-example-heaps.svg){#fig:example-heaps}
+](images/10.0-example-heaps.svg){#fig:example-heaps}
 
 The heap property is particularly suitable because it aligns well with the recursive nature of trees.
 Instead of requiring only the root to be the smallest element, the property is enforced locally at every node in the tree.

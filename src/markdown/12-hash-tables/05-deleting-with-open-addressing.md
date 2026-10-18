@@ -73,7 +73,7 @@ Let us try to delete the key $25$ from the final table in [](#ex:linear-probing-
 Looking up the key finds the cell $5$, and we insert the tombstone into that cell:
 
 `\noindent`{=latex}
-![](images/11.5-linear-probing-delete-1.svg)
+![](images/12.5-linear-probing-delete-1.svg)
 
 <!-- [  _ |  _ |  _ |  _ | 34 | XX | 16 | 55 |  _ | 49 ] -->
 
@@ -85,7 +85,7 @@ Then we delete $55$ and re-add: now the ideal position is empty, so we can add $
 The resulting hash table looks like this, where the arrow indicate how $55$ changed position.
 
 `\noindent`{=latex}
-![](images/11.5-linear-probing-delete-2.svg)
+![](images/12.5-linear-probing-delete-2.svg)
 
 <!-- [  _ |  _ |  _ |  _ | 34 | 55 | 16 |  _ |  _ | 49 ] -->
 <!--                             ^         ^             -->
@@ -99,7 +99,7 @@ The resulting hash table looks like this, where the arrow indicate how $55$ chan
     Resizing a linear probing hash table in the presence of lazy deletion.
     Tombstones of deleted entries (marked X) are not transferred.
     After the resize, the load factor is 50%.
-](images/11.5-lazy-deletion-resize.svg){#fig:LazyResize}
+](images/12.5-lazy-deletion-resize.svg){#fig:LazyResize}
 
 Now that we can support removal of keys from our open addressing hash table,
 we may want to set a lower threshold for the load factor, and shrink the table down to free up memory.

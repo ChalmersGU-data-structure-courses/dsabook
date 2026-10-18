@@ -61,7 +61,7 @@ There are two possible solutions to this:
 ![
     Adding the entry (67,"*baz*") to a tiny hash table of size 5 that already contains (542,"*foo*").
     This illustrates the collision-handling strategies -- the keys 67 and 542 both compress to 2.
-](images/11.1-collision-strategies.svg){#fig:CollisionExample}
+](images/12.1-collision-strategies.svg){#fig:CollisionExample}
 
 @fig:CollisionExample illustrates these techniques.
 Both of these methods are used in practice, and we will look more closely at each of them,

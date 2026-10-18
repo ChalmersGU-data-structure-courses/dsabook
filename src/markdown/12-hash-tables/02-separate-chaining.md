@@ -74,7 +74,7 @@ then each bucket will only contain a handful of elements.
 ![
     Memory content of a separate chaining hash table of size 13 mapping three given names to their family names.
     The arrows are pointers, and the empty cells in the array are null values, representing empty linked lists.
-](images/11.2-memory-content.svg){#fig:SepChain2}
+](images/12.2-memory-content.svg){#fig:SepChain2}
 
 <!--
 Peter -> "Peter Ljunglöf"

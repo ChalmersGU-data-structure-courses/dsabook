@@ -23,7 +23,7 @@ Just as for BFS there may be several shortest paths -- that is, different paths 
     On the left is the undirected weighted graph from @fig:GraphExamples,
     and on the right two different *shortest-path trees* starting from vertices $A$ and $F$ respecitvely.
     They are shown both within the graph and in standard tree notation.
-](images/12.3-example-SPTs.svg){#fig:GraphSPTs}
+](images/13.3-example-SPTs.svg){#fig:GraphSPTs}
 
 As we saw earlier, the generic graph traversal algorithm does not only find a path from one vertex to another,
 but from one vertex to all others.
@@ -69,7 +69,7 @@ because the priority is the *total* cost of the path from $A$, while the edge co
     and edges in the agenda with their cost on the form $\fbox{2+3}$
     where 2 is the cost to the origin vertex and 3 the cost of the edge.
     The resulting SPT is shown in @fig:GraphSPTs.
-](images/12.3-dijkstra.svg){#fig:GraphDijkstra1}
+](images/13.3-dijkstra.svg){#fig:GraphDijkstra1}
 
 Why does Dijkstra's algorithm work?
 Here is an informal argument:

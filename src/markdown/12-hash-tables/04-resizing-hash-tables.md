@@ -69,7 +69,7 @@ For each key in the old table, we add it to the new table using the normal inser
 In the example, we will add the keys in the order $49,16,25,34$:
 
 `\noindent`{=latex}
-![](images/11.4-linear-probing-resize-1.svg)
+![](images/12.4-linear-probing-resize-1.svg)
 
 <!-- [ 49 | 16 | 25 |  _ | 34 ]   ==>   [  _ |  _ |  _ |  _ | 34 | 25 | 16 |  _ |  _ | 49 ] -->
 
@@ -82,7 +82,7 @@ The optimal position is occupied with the key $25$,
 so we have to iterate through $25$ and $16$ until we can add $55$ in position $7$:
 
 `\noindent`{=latex}
-![](images/11.4-linear-probing-resize-2.svg)
+![](images/12.4-linear-probing-resize-2.svg)
 
 <!-- [  _ |  _ |  _ |  _ | 34 | 25 | 16 | 55 |  _ | 49 ] -->
 <!-- .                           ^         ^             -->

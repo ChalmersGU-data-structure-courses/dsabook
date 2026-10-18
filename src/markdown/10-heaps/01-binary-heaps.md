@@ -22,7 +22,7 @@ where the left- and rightmost examples are also perfect trees.
 ![
     Examples of complete binary trees.
     Note that the left and right trees are also perfect.
-](images/9.4-example-complete-trees.svg){#fig:example-complete-trees}
+](images/10.1-example-complete-trees.svg){#fig:example-complete-trees}
 
 The height $h$ of a complete binary tree satisfies $2^h \le n < 2^{h+1}$, which implies that $h\in O(\log(n))$.
 They are therefore balanced, and any operation that is linear in the height of the tree runs in $O(\log(n))$ time.
@@ -54,7 +54,7 @@ An example complete binary tree together with its array representation is shown 
     An example binary heap, where smaller values indicate higher priority,
     together with its array representation.
     The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "34".
-](images/9.5-binheap-example.svg){#fig:HeapTreeExample}
+](images/10.1-binheap-example.svg){#fig:HeapTreeExample}
 
 As a result of the representation,
 the indices of the parent and children of a node can be computed easily using simple arithmetic.

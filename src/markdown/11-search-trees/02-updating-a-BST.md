@@ -135,7 +135,7 @@ This is easy, we just go as far to the right as possible -- then we will end up 
 
 ![
     Deleting the root (C) from the leftmost tree results in either of the two trees to the right.
-](images/10.1-BST-delete-root.svg){#fig:BST-example-deleted-root}
+](images/11.2-BST-delete-root.svg){#fig:BST-example-deleted-root}
 
 
 ::: {.example #ex:bst-delete}

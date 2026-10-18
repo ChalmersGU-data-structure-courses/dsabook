@@ -55,7 +55,7 @@ The generic graph traversal algorithm uses three data structures: an *agenda*, a
     This traversal selects the edges in the following order:
     $A{\rightarrow}B$, $A{\rightarrow}E$, $B{\rightarrow}F$, $A{\rightarrow}D$, $F{\rightarrow}C$,
     and these edges form the final result set.
-](images/12.2-graph-traversal.svg){#fig:GraphTraversal1}
+](images/13.2-graph-traversal.svg){#fig:GraphTraversal1}
 
 @fig:GraphTraversal1 illustrates how a graph traversal can unfold,
 starting from vertex $A$ in the undirected graph from @fig:GraphExamples.
@@ -97,7 +97,7 @@ If we use a *stack* for the agenda we will get a depth-first traversal, DFS.
     using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
     The algorithm can be described as:
     select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex.
-](images/12.2-DFS-traversal.svg){#fig:GraphTraversal2}
+](images/13.2-DFS-traversal.svg){#fig:GraphTraversal2}
 
 However, DFS can unroll in several ways --
 which edges are selected and the order in which vertices are visited depend on the order in which `outgoingEdges` produces edges.
@@ -176,7 +176,7 @@ Breadth-first order will always visit vertices in order of their minimal distanc
     using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
     The algorithm can be described as:
     select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex.
-](images/12.2-BFS-traversal.svg){#fig:GraphTraversal3}
+](images/13.2-BFS-traversal.svg){#fig:GraphTraversal3}
 
 This further means that the tree produced will not only contain a path from $A$ to $F$,
 but that path is guaranteed to be the *shortest possible* one.

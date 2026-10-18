@@ -84,7 +84,7 @@ we want our heaps to be as unbalanced as possible -- the more unbalanced, the fa
 ![
     How a binary heap (left) and a meldable heap (right) looks like after
     building them from the values 48, 31, 52, 16, 65, 74, and 29, in that order.
-](images/9.6-meldable-vs-binheap.svg){#fig:MeldableHeapExample}
+](images/10.3-meldable-vs-binheap.svg){#fig:MeldableHeapExample}
 
 <!--
 in: [48, 31, 52, 16, 65, 74, 29]

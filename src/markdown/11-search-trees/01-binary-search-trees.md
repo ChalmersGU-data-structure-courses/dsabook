@@ -35,7 +35,7 @@ and this has consequences for the efficiency of the basic operations.
 
 ![
     Four example BSTs, all representing the same set of values.
-](images/10.1-BST-examples.svg){#fig:BST-example}
+](images/11.1-BST-examples.svg){#fig:BST-example}
 
 #### Implementing BST sets and maps
 

@@ -18,7 +18,7 @@ and no clear parent/child relationships between nodes --
 but if you "lift" either MST by any node, assigning it as the root,
 you will get a tree as the ones we have seen in earlier chapters.
 
-![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/12.4-example-MSTs.svg){#fig:ExampleMSTs}
+![A graph (leftmost) and two different MSTs for it, both of total weight 20.](images/13.5-example-MSTs.svg){#fig:ExampleMSTs}
 
 The minimum spanning tree is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST --
 for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
@@ -42,7 +42,7 @@ This means that an implementation of Dijkstra's algorithm as we have seen before
     Steps of Prim's algorithm, starting in $A$.
     In each step, we simply select the cheapest edge from a visited to an unvisited vertex.
     These edges are shown with circled weights in the image.
-](images/12.4-prim.svg){#fig:GraphPrim1}
+](images/13.5-prim.svg){#fig:GraphPrim1}
 
 @Fig:GraphPrim1 shows the execution of Prim's algorithm on the same example graph as before.
 The algorithm is very easy to run with pen and paper:

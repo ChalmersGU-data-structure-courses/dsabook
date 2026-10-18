@@ -29,7 +29,7 @@ These node types may also have different fields, reflecting the information they
 
 ![
     An example of an expression tree for $4x(2x + a) - c$.
-](images/9.2-expression-tree.svg){#fig:expression_tree}
+](images/9.4-expression-tree.svg){#fig:expression_tree}
 
 This idea is not specific to binary trees.
 In general tree structures, nodes may have different numbers of children and different structural roles.

@@ -78,7 +78,7 @@ Note that the heap is shown as a tree, but you should keep in mind that it is ac
     (b) Since 10 is smaller than its parent 43, the two elements swap positions.
     (c) The value 10 is still smaller than its new parent 12, so we swap once more.
     Now 10 has parent 8, which is smaller, so the heap property is restored.
-](images/9.5-binheap-add.svg){#fig:HeapAdd10}
+](images/10.2-binheap-add.svg){#fig:HeapAdd10}
 
 
 ::: dsvis
@@ -142,7 +142,7 @@ from the final heap in @fig:HeapAdd10.
     (b) The smallest child, 10, is smaller than 43, so we swap it with the parent.
     (c) The smallest child, 12, is smaller than 43, so we swap it with the parent.
     Now 43 only has larger children, so the heap property is restored.
-](images/9.5-binheap-remove.svg){#fig:HeapRemove10}
+](images/10.2-binheap-remove.svg){#fig:HeapRemove10}
 
 ::: dsvis
 #### Removing the highest-priority value from the example heap
