@@ -7,6 +7,7 @@
     - "Implementing sets and maps using linked lists": it must be clear that this is a bad implementation
     - "Analysis of the naive implementation"
 - Prio 1: shorten subsection "Implementing sets and maps using linked lists"
+- Prio 1: change order between "set" and "map"? and show how to implement a set using a map
 - Prio 2: shorten subsection "multimaps"? maybe make it an "example" instead of a subsection?
     (an example of how to implement a new data structure from existing)
 - Prio 2: are there better examples than (spell-checking, cash register, search engines)?
@@ -187,7 +188,7 @@ and add them to the multimap, something like this:
 
 
 
-### Implementing sets and maps using linked lists
+### Implementing sets and maps using linked lists {#ADTs:sets-maps-using-linked-lists}
 
 A simple (but inefficient) data structure to implement a set is a *linked list*.
 Recall from @sec:sequences:linked-stacks that

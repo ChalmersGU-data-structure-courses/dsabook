@@ -135,14 +135,14 @@ Suppose that we again push 1 million elements onto an empty stack.
 As before we start with a capacity of 100 elements.
 When will `resize` be called, and how many elements get copied each time?
 
------------------------  --------- ------------- ---------
-`resize`($200$)            copying    $100$      elements
-`resize`($400$)            copying    $200$      elements
-`resize`($800$)            copying    $400$      elements
+---------------------------  --------- --------------- ---------
+`resize`($200$)                copying    $100$        elements
+`resize`($400$)                copying    $200$        elements
+`resize`($800$)                copying    $400$        elements
  . . .
-`resize`($819,200$)        copying   $409,600$   elements
-`resize`($1,638,400$)      copying   $819,200$   elements
------------------------  --------- ------------- ---------
+`resize`($819{,}200$)          copying   $409{,}600$   elements
+`resize`($1{,}638{,}400$)      copying   $819{,}200$   elements
+---------------------------  --------- --------------- ---------
 
 <!-- NICSMA: START -->
 `\noindent`{=latex}
@@ -151,7 +151,7 @@ but as it gets bigger, it gets resized less and less often.
 We can read off how many elements get copied:
 <!-- NICSMA: END -->
 
-$$ 100 + 200 + 400 + \cdots + 409,600 + 819,200 = 1,638,300 $$
+$$ 100 + 200 + 400 + \cdots + 409{,}600 + 819{,}200 = 1{,}638{,}300 $$
 
 Compare this with the previous version where we increased the capacity with 100 elements every time:
 then we needed to copy 20 billion elements, but now we only need to copy $1.6$ million.

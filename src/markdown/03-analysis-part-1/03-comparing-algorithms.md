@@ -261,7 +261,7 @@ The sorting algorithms from [Chapter @sec:sorting-1]
 all have a running time proportional to $n^2$ where $n$ is the number of books.
 Using our new big-$O$ notation, the algorithms have $O(n^2)$ time complexity.
 This means that if you double the size of the input, the running time will quadruple.
-If you multiply the input size by 100, the running time will be $100^2 = 10,000$ times longer.
+If you multiply the input size by 100, the running time will be $100^2$ = 10,000 times longer.
 So, it will take 10,000 hours for you to sort all the books,
 and your very expensive sorting robot will still take 100 hours.
 
@@ -289,14 +289,14 @@ how large problems can be solved in a given timeframe.
 Time function ($T(n)$)     1 ms        10 ms        100 ms       1 second
 -----------------------  ------  -----------  ------------  -------------
 $2\cdot\log_2(n)$          $32$    $10^{15}$    $10^{150}$    $10^{1500}$
-$n/2$                      $20$        $200$       $2,000$       $20,000$
-$n$                        $10$        $100$       $1,000$       $10,000$
-$n\cdot\log_2(n)/4$        $11$         $66$         $453$        $3,408$
+$n/2$                      $20$        $200$     $2{,}000$     $20{,}000$
+$n$                        $10$        $100$     $1{,}000$     $10{,}000$
+$n\cdot\log_2(n)/4$        $11$         $66$         $453$      $3{,}408$
 $n^2/10$                   $10$         $31$         $100$          $316$
 $2^n/20$                    $7$         $11$          $14$           $17$
 
 Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
-for different various time functions. We assume that every operation takes $0.1$ ms.
+for different various time functions. We assume that every operation takes 0.1 ms.
 </div>
 
 This table illustrates many important points.
@@ -372,14 +372,14 @@ Once again, we see that the growth rate has a tremendous effect on the resources
 <!-- OPENDSA: END -->
 
 
-Time function  ($T(n)$)      $n=10$               $100$              $1,000$          $10^4$       $10^5$
--------------------------  --------  ------------------  -------------------  --------------  -----------
-$2\cdot\log_2(n)$               $7$                $13$                 $20$            $27$         $33$
-$n/2$                           $5$                $50$                $500$         $5,000$     $50,000$
-$n$                            $10$               $100$              $1,000$        $10,000$    $100,000$
-$n\cdot\log_2(n)/4$             $8$               $166$              $2,491$        $33,219$    $415,241$
-$n^2/10$                       $10$             $1,000$            $100,000$    $10,000,000$       $10^9$
-$2^n/20$                       $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$        $\cdots$     $\cdots$
+Time function  ($T(n)$)      $n=10$               $100$              $1,000$            $10^4$         $10^5$
+-------------------------  --------  ------------------  -------------------    --------------    -----------
+$2\cdot\log_2(n)$               $7$                $13$                 $20$              $27$           $33$
+$n/2$                           $5$                $50$                $500$         $5{,}000$     $50{,}000$
+$n$                            $10$               $100$            $1{,}000$        $10{,}000$    $100{,}000$
+$n\cdot\log_2(n)/4$             $8$               $166$            $2{,}491$        $33{,}219$    $415{,}241$
+$n^2/10$                       $10$           $1{,}000$          $100{,}000$  $10{,}000{,}000$         $10^9$
+$2^n/20$                       $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$          $\cdots$       $\cdots$
 
 : Costs for representative growth rates {#tbl:growth-rates}
 

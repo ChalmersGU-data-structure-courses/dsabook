@@ -212,7 +212,7 @@ It is a nice mathematical exercise to show that this is true, from the definitio
 We defined asymptotic equivalence using limits, and this is also possible for the upper, lower and tight bounds.
 Instead of finding constants $k$ and $n_0$, we can see how the quotient between the two functions behave in the limit.
 Given functions $f$ and $g$, we can take the limit of the quotient $f/g$ as $n$ grows towards infinity:
-$k = \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)}$.
+$k = \lim_{n \rightarrow \infty} \tfrac{f(n)}{g(n)}$.
 
 @fig:limit-classification summarises the definitions the value of the limit $k$,
 for the different asymptotic notations ($O$, $o$, $\Theta$, $\Omega$, $\omega$ and $\sim$).
@@ -225,7 +225,7 @@ Big-O           $f \in O(g)$         $f(n) \leq k\cdot g(n)$                    
 Theta           $f \in \Theta(g)$    $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$       $0 < k < \infty$
 Big-Omega       $f \in \Omega(g)$    $f(n) \geq k\cdot g(n)$                            $k > 0$
 Little-Omega    $f \in \omega(g)$    $f(n) > k\cdot g(n)$                               $k = \infty$
-Equivalence     $f \sim g$           $\lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}=1$     $k = 1$
+Equivalence     $f \sim g$           $\lim_{n\rightarrow\infty}\tfrac{f(n)}{g(n)}=1$    $k = 1$
 -------------   ------------------   -------------------------------------------------  ---------------------------
 
 

@@ -69,7 +69,7 @@ $$
 Now we readily see that $f(n) = n\cdot\log(n)^2$ is
 smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
 
-Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
+Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13{,}789$.
 We can even use very large values such as $k=n_0=10^{99}$,
 since we are only interested in what happens when $n$ grows infinitly large.
 :::
