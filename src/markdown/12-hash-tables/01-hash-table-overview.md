@@ -1,118 +1,99 @@
 
-## Introduction to hash tables {#hash-tables:overview}
+## Hashing and compressing to resolve collisions {#hash-tables:overview}
 
 ::: TODO
-- Prio 1: move first part ("keys are small integers") to overview, and start this discussion with the main idea - hashing
-    (keep the caveats here, as start of discussion)
-- Prio 1: change title: "hash function" should be included, and "collisions"
-- Prio 1: update fig. 12.1 - it's ugly
-- Prio 1: start a new subsection before "So, how does a good hash function look like"
-- Prio 1: we don't have any subsection mentioning "collision"! this can include the definition from separate chaining
-- Prio 1: add a figure showing the two steps - hash + compress?
+- Prio 1: update fig. 12.1 - it's not as the caption says anymore
+- Prio 2: add a figure showing the two steps - hash + compress?
 :::
 
-This section provides an overview of hash tables, glossing over many technical details.
-We will be building up to hash tables in three steps:
-
-- Maps where keys are small integers (arrays).
-- Generalising to maps where keys are arbitrary integers (compression and collision handling).
-- Generalising further to maps where keys are objects (hashing).
-
-#### Maps where keys are small integers
-
-When designing a data structure, always ask yourself "can I solve this using arrays?".
-The reason is that arrays are memory efficient and blazingly fast,
-because the computer knows the exact memory address of each array cell.
-To a large extent, modern computers are built to make processing arrays as fast as possible,
-so we should exploit that whenever we can.
-We have already seen an example of this with *binary heaps* in @sec:heaps:binary-heaps,
-where we used an array to cleverly represent a complete binary tree.
-
-Suppose we want a map where all keys are integer values between 0 and 99.
-This is essentially a description of an array `arr` of length 100,
-where `get(key)` just returns `arr[key]`,
-and `put(key,value)` executes `arr[key]=value`,
-along with some error handling.
-This is easy to generalise to other ranges as well.
-As a simple exercise, consider how to make a map where
-keys are integers between $-500$ and $500$, using an array of length $1001$.
-
+[](#ex:small-int-maps) shows how we can use an array to implement a simple and extremely efficient map.
 Both `get` and `put` are trivially $O(1)$, since they
 only involve indexing and assigning values in the array.
 There are two caveats to this claim:
 
-- Using big-$O$ notation at all here is misleading. Big-$O$ is
-  used for *asymptotic* complexity, describing what happens when
-  the number of elements grows really large. That will never happen here, since
-  the map can have at most 100 elements.
-- There is an initalisation cost to create the array and fill it with null-values,
-  that is linear in the size of the value range.
-  If you have lots of small maps, each containing just a few values, this cost can
-  easily dominate the runtime, and lead to exessive memory use.
+- Using big-$O$ notation at all here is misleading.
+  Big-$O$ is used for *asymptotic* complexity,
+  describing what happens when the number of elements grows really large.
+  But this will never happen here, since the map does not works for arbitrary sizes.
+- There is an initalisation cost to create the array and fill it with *null*-values,
+  which is linear in the size of the number of *possible* keys,
+  not the number of actually used keys.
 
+The small-integer map only works if the keys are small integers.
+If our keys can be very large integers,
+then we have to initialise a very big array which perhaps won't even fit in memory.
+For example, a date in the ISO-standard format can be viewed as a very large integer,
+where $20261017$ means 17 October 2026.
+In theory it is possible to view a date as an array index,
+but in practice it won't work because the array would have to be enourmous.
 
-#### Maps where keys are arbitrary integers
+#### Compress integers into array indices
 
-If our keys are arbitrary integers, a simple array would use too much memory.
-Instead we will use a small array, and *compress* numbers to valid indices.
-For instance if our array is size 100, and we want to perform `put(19934,"A")`
-(mapping the key 19934 to the string "A") we can use the last two digits of the number (34).
-More generally, we can use $k\bmod N$ as our compressed index,
-where $k$ is our key and $N$ is the size of the array.
-This is called *modular compression* (from modulo arithmetic). Depending on
-the programming language, you may need to do additional computation to ensure
-the compressed value is non-negative.
+If our keys can be arbitrary integers, we cannot use them as array indices directly.
+Instead we have to *compress* them so that they fit inside our array.
+Assume that our array is size $M=100$, and
+we want to perform `put(542,"foo")`, mapping the key 542 to the string "*foo*".
+Then we can use the last two digits of the number, and put "*foo*" at array index 42.
+More generally, we can use $k\bmod M$ as our compressed index,
+where $k$ is our key and $M$ is the size of the array.
+This is called *modular compression* (from modulo arithmetic).
+Depending on the programming language, you may need to do additional computation to ensure
+the compressed index is non-negative.
 
-An obvious problem with compression is collisions, the key 19934 is compressed to
-the same index as 234 and 34. This causes problems both for `put` and `get`,
-since `put(234,"B")` would overwrite the "A" value, and `get(34)` would
-return "A" even though 34 is not a key in the map.
+Unfortunately we immediately run into the problem of *collisions*:
+several keys will be compressed into the same array index.
+The keys 42, 142, 242, and even 63,942, all compress into the same index as 542.
+This causes problems both for `get` and `put`,
+since `get(242)` would return "*foo*" even though 242 is not a key in the map,
+and `put(142,"bar")` would overwrite the "*foo*" value.
 
 The problem with `get` can be solved by storing (key,value)-pairs in the array
-instead of just values. We call these pairs entries.
-So instead of an array cell with just "A" in it, it has `(19934,"A")`.
-When faced with the remaining problem that `(234,"B")` wants to be in cell 34,
-but `(19934,"A")` is already there, most people figure out one of these two
-solutions after some deliberation:
+instead of only the values -- we call these pairs *entries*.
+So instead of storing just "*foo*" at the compressed index 42, the cell contains the pair (542,"*foo*").
+But this does not solve the other problem:
+when we call `put(142,"bar")` we want to update cell 42, but it is already occupied with the pair (542,"*foo*").
+There are two possible solutions to this:
 
-- Put some data structure in cell 34, that contains both `(19934,"A")` and `(19934,"B")`.
-  This leads in the direction of *separate chaining hash tables*.
-- Put `(19934,"B")` in the first empty cell after 34.
-  This leads towards *open addressing hash tables with linear probing*.
+- Don't store pairs in the array cells, but store another *map* that contains both (542,"*foo*") and (142,"*bar*").
+  This is the underlying idea of *separate chaining*.
+- Put (142,"*bar*") in the first empty cell after index 42.
+  This leads towards *open addressing* hash tables.
 
-![Put operations on a tiny hash table of size 5, illustrating the idea of the two ways in which we handle collisions. The keys 1997 and 12 both compress to 2.](images/11.1-collision-strategies.svg){#fig:CollisionExample}
+![
+    How to add the entry (67,"*baz*") to a tiny hash table of size 5 that already contains (542,"*foo*").
+    This illustrates the collision-handling strategies -- the keys 67 and 542 both compress to 2.
+](images/11.1-collision-strategies.svg){#fig:CollisionExample}
 
 @fig:CollisionExample illustrates these techniques.
 Both of these methods are used in practice, and we will look more closely at each of them,
-but first we will finish the last step of the overview and move from integer keys to
-object keys.
+but first we will explain how to handle other kinds of keys, such as strings or general objects.
 
-#### Maps where keys are objects
+#### Hashing an arbitrary object into an integer
 
-Suppose we want to create a map where keys are email addresses and values are names,
-using a hash table. We can not calculate $\text{``alice@example.com''}\bmod N$
-because an email is a string, not a number.
-We need to first reduce the string to an integer.
-This is exactly what a *hash function* does:
-it reduces an object $x$ (such as a string or a Java-object) to a fixed size number $h(x)$ (such as a 32-bit integer).
+Suppose we want to create a map from user ids to their names, where the ids are strings.
+Strings cannot be compressed into an array index, because modulus only works on integers.
+So we first need to reduce the string to an integer.
+This is exactly what a *hash function* does --
+it reduces an object (such as a string or a list or a record) to a single integer.
 The only absolute requirement is that hashing *preserves equality*,
 meaning that equal objects must always hash to the same value.
 
 ::: {.invariant #inv:hash-function}
 #### Invariant: Hash function
 A hash function $h$ must *preserve equality*:
-If $x$ and $y$ compare equal, then $h(x)=h(y)$.
+If $x=y$, then $h(x)=h(y)$.
 :::
 
-From this simple rule we can already exclude some naive suggestions for hash functions:
+From this simple invariant we can already exclude some naive suggestions:
 
 - *Returning a random value*: this does not preserve equality, because you get a different value every time.
 - *Returning the memory address* of the object: this does not preserve equality,
   because there can be two objects in different memory locations that are equal to each other.
-- *Returning a constant*, for example always returning 0: this is a valid hash function!
-  But it has very poor *distribution* -- all objects will be stored in the same array cell --
-  so it will make our hash table completely useless.
-  It will behave similar to a linked list, and search through all objects every time we want to do something.
+- *Returning a constant*, for example always returning 42.
+  This actually is a valid hash function -- but it has very poor *distribution*.
+  If all objects have the same hash value, they will all be stored in the same array cell,
+  which will render our hash table completely useless.
+  <!-- It will behave similar to a linked list, and search through all objects every time we want to do something. -->
 
 So, how does a good hash function look like?
 One basic requirement is that it should depend on *every little part* of the object.
@@ -120,22 +101,32 @@ For example, if we want to hash a string, then we want to
 look at all the characters in the string and their positions,
 and perform lots of arithmetic operations to make sure that different strings tend to
 have different hash values.
-However, completely avoiding collisions is impossible since there are
-infinitely many strings, but only finitely many 32 bit integers.
+However, completely avoiding collisions is impossible since there are infinitely many strings,
+or arbitrary objects, but only finitely many array cells in a given hash table.
 
-We will discuss the technical details of hashing a bit further later in the chapter,
-but assuming we have a good hash function for our key data type, we can already
-outline an algorithm for performing a hash table *lookup* given a key value.
+We will discuss the technical details of hashing in @sec:hash-tables:hash-quality,
+but until then we simply assume that we have a good hash function for our key data type.
+[](#alg:hashtable-lookup) shows how to find the entry that should contain a given key.
+The lookup will find the entry with the key we are looking for if it is present, or determine that it is absent.
+At that point we return the associated value (for the `get` operation),
+or modify/add/remove the entry (for `put` and `remove` operations).
 
 ::: {.algorithm #alg:hashtable-lookup}
 #### Algorithm: Looking up a key
-To lookup a key $k$ in a hash table of size $N$:
+To lookup a key $k$ in a hash table of size $M$:
 
-1. Turn the key into a large integer using a *hash function*: $h(k)$.
-2. Use *modular compression* to turn the large integer into an array index: $h(k)\bmod N$.
+1. *Hash* the key into a large integer using a hash function: $h(k)$.
+2. *Compress* the large integer into an array index: $h(k)\bmod M$.
 3. Resolve collisons using *separate chaining* or *open addressing*.
 :::
 
-The lookup will find the entry with the key we are looking for if it is present,
-or determine that it is absent. At that point we return the associated value (for `get`)
-or modify/add/remove an entry (for `put` and `remove` operations).
+::: note
+#### Note: Hash tables are not ordered
+One of the main qualities of a good hash function is that it is unpredictable,
+for example by displacing the internal order between keys.
+Therefore we never not be able to use a hash table to implement a *sorted map*,
+as described in @sec:ADTs:sorted-sets-and-maps.
+If we need to ask *range queries*, or know which key is the smallest or largest,
+then we have to use something else,
+such as an AVL tree (@sec:search-trees:AVL-trees) or a B-tree (@sec:search-trees:B-trees).
+:::
