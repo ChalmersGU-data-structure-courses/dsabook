@@ -6,138 +6,154 @@
 - Prio 1: Split the image into 4 and intersperse them with explanatory text (like for quicksort partition)
 :::
 
-No library keeps books in random order, because linear search is too slow.
-Instead, books are sorted in the shelves, for example alphabetically by author name
-and title.
+No library keeps books in random order, because Linear search is too slow.
+Instead, books are sorted in the shelves, for example alphabetically by author name and title.
 Most people can intuitively use this order to search a bookshelf
-by looking at only a small fraction of the books. When browsing the books we
-implicitly make deductions like
-"there are no books between Orwell and Owen, so there are no books by Osborne"
+by looking at only a small fraction of the books.
+When browsing the books we implicitly make deductions like
+"if there are no books between Orwell and Owen, there must be no books by Osborne",
 and "this book is by Plato, so all books by Homer must be earlier in the shelf".
-The formalised algorithm that uses these deductions is called [binary search]{.term}.
-It is a very common choice for a first algorithm to teach students, so you may have seen it before.
-For the example of a book shelf sorted alphabetically from left to right, binary search can be described as such:
+The formalised algorithm that uses these deductions is called [Binary search]{.term}.
+<!-- It is a very common choice for a first algorithm to teach students, so you may have seen it before. -->
+For the example of a book shelf sorted alphabetically from left to right, Binary search can be described as such:
 
 - Compare the middle book in the shelf to the one we are looking for.
     - if the middle book is the one we are looking for, our search is done!
     - if we are searching for an alphabetically earlier book, search the left half of the shelf,
       otherwise search in the right half.
-- Repeat this procedure for the left or right half, comparing to the middle book of that half, and so on.
+- Repeat this procedure, dividing the search space by half in every iteration.
 
-This procedure will end in one of two cases: We find the book we are looking for,
-or we end up searching an empty part of the bookshelf, and know that the book is not in the shelf.
+We will end in one of two cases:
+Either we find the book we are looking for, or we end up searching an empty part of the bookshelf.
+In the latter case the book cannot be not in the shelf.
 
 To make the description of this algorithm more precise, we introduce the concept of a *search interval*.
 Initially our search interval is the entire bookshelf,
-and with each comparison we reduce the search interval to just the left or right side of the middle
-element.
-For instance, we can go from the problem of searching among 51 books to the problem of searching
-25 books, by a single comparison with the middle book, and excluding either half from
-the interval.
-This is further reduced to searching among 12 books with another comparison. We need to decide what
-we mean by the middle of 12 books, but we should have to search among at most 6 books in the next step.
-Ultimately we end up either finding the book we are looking for, or searching among no books at all, and in both
-cases we have the answer we were looking for.
+and with each comparison we reduce the search interval to just the left or right side of the middle element.
+This means that in each iteration we reduce the size of the problem by half:
+if we want to search among 100 books, they are reduced to 50 after one comparison,
+and to 25 after just one more comparison, and then to 12 and to 6, and so on.
+Ultimately in the end, we either find the book we are looking for, or we search among no books at all.
+And in both cases we have the answer we were looking for.
+This process of reducing a problem to a smaller instance of the same problem is a key concept in algorithm design,
+which we will se over and over again throughout this book.
 
-This process of reducing a problem to a smaller instance of the same problem
-is a key concept in algorithm design.
-We can easily generalise the algorithm from searching book cases to searching
-in an ordered array of elements.
+The *book case* is of course just a metaphor for an ordered array of elements,
+and to turn this algorithm into actual code, we need to decide how to represent the search interval.
+The operation of reducing the interval needs to be fast, so we cannot make a *slice* of the array
+(a slice is a copy of the array containing only some elements).
+Creating a slice uses up additional memory and is too slow.
+Instead we define the interval by two variables, *start* and *end*,
+denoting the lower and upper indices of the interval.
+Assume that we want to search for the value 36 in an ordered array of length 15.
+Initially the interval spans the whole array, so $\textit{start}=0$ and $\textit{end}=14$.
+First we look up the middle element in cell $(0+14)/2=7$, which is revealed to have value 64 --
+the rest of the array is still unknown to us, so we show these cells using question marks:
+
+    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+    >    [  ?   ?   ?   ?   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
+    >       ^                           ^                           ^
+
+Since $36<64$ we take the left half of the interval, so we change the interval *end* to $\textit{mid}-1 = 6$.
+The new middle position is $(0+6)/2=3$, and its value is 22:
+
+    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+    >    [  ?   ?   ?  22   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
+    >       ^           ^           ^
+
+This time $36>22$ so we take the right half:
+the interval *start* becomes $\textit{mid}+1 = 4$, and the new middle is $(4+6)/2=5$.
+This time the middle cell contains 36 which is exactly what we search for, and we can stop:
+
+    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+    >    [  ?   ?   ?  22   ?  36   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
+    >                       ^   ^   ^
+
+Note that we only had to look at 3 cells in the array until we found what we searched for.
+The algorithm is presented in full in [](#alg:binary-search),
+using both an abstract text description and more concrete pseudocode.
 
 ::: {.algorithm #alg:binary-search}
 #### Algorithm: Binary search
 
-To find out where a given *key* is located in an ordered array,
+To search for *key* in an ordered array,
 start with an interval including the whole array.
-Repeat the following until *key* has been found, or the interval is empty:
+Then repeat until *key* has been found, or the interval is empty:
 
-1. Compare *key* with the middle element of the interval.
-2. If *key* is equal, then return the position of the middle element.
-3. Exclude the middle element and all elements either before or after it,
-   depending on if the key is greater or smaller than the middle element.
+1. Compare *key* with the middle element *mid* of the interval.
+2. If *key* is equal, then return the position of *mid*.
+3. Reduce the interval to the elements to the left or right of *mid*
+   depending on if the key is greater or smaller than it.
+<!-- 3. Exclude the middle element and all elements either before or after it,
+   depending on if the key is greater or smaller than the middle element. -->
 
-If the interval ends up empty, the key is not in the array and we
-return `null`.
-Here is a pseudo code implementation of the algorithm, representing the interval
-by the lower and upper indices it includes:
+If the interval ends up empty, the key is not in the array.
+When implementing the algorithm as pseudocode,
+the important thing is to represent the interval as a pair of array indices, (*start*,*end*):
 
+```pseudo
     binarySearch(arr, key):
-        start = 0                      // The index of the first element in the interval
-        end = arr.size - 1             // The index of the last element in the interval
-        while start <= end:            // Continue until the interval is empty:
-            mid = (start + end) / 2    //     Find the index of the middle value
-            if arr[mid] < key:         //     Compare with the middle value in the interval:
-                start = mid + 1        //         The search key may be in the upper half
-            else if arr[mid] > key:
-                end = mid - 1          //         The search key may be in the lower half
-            else: // (here arr[mid]==key)
-                return mid             //         We found the search key!
-        return null                    // The value is not in the array.
-
-This illustration shows the steps of a Binary search for the value 29 in an ordered array of length 9, revealing elements as they are compared to 29. After three comparisons, the search interval is empty, 29 is not in the array:
-
-![](images/1.3-steps-of-binary-search.svg)
-
+        (start, end) = (0, arr.size - 1)     // The initial interval is the whole array
+        while start <= end:                  // Continue until the interval is empty:
+            mid = (start + end) / 2              // The index of the middle value
+            if key < arr[mid]: end = mid - 1     // The key may be in the lower half
+            if key > arr[mid]: start = mid + 1   // The key may be in the upper half
+            if key = arr[mid]: return mid        // We found the key!
+        return null                          // The key is not in the array
+```
 :::
 
-To turn this algorithm into actual code, we need to decide how to represent the search interval
-in computer memory. The operation of excluding elements from the interval needs to be fast --
- making a new smaller array is too slow. Instead we define the interval by the lower and
-upper indices it includes, so $(10,24)$ would represent the interval from
-index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
-when needed). Searching the lower half just means altering the interval to $(10,16)$,
-and the upper half $(18,24)$. The algorithm is presented in full in [](#alg:binary-search) using
-three components that you will see throughout this book: A text description, a pseudocode
-implementation and an illustrated example.
+An important technical detail here is that we must use *integer division* when calculating the middle index.
+Therefore, the midpoint of the interval $(6,11)$ is $(6+11)/2=8$ (and not $8.5$).
+This leads to some corner cases you have make sure they are handled correctly,
+for instance when the interval contains a single element (that is, when $\mathit{start}=\mathit{end}$).
+Or when it has two elements -- does it calculate *mid* correctly in these cases?
 
-An important technical detail here is that $\mathit{mid} = (\mathit{start} + \mathit{end}) / 2$
-is understood to use integer division, so $(6+11)/2$ is $8$, not $8.5$.
-Consider how this implementation deals with corner cases, for instance when the
-search area has a single element (when $\mathit{start}=\mathit{end}$). Or when it has two elements.
-Does it calculate $\mathit{mid}$ correctly and yield correct result in these cases?
+::: note
+#### Note: How to represent the interval
+In this particular implementation we use *inclusive* indices,
+because both *start* and *end* are inside the interval.
+Another common option is to have *start* be inclusive, and *end* exclusive --
+in that case we have to start with the interval $(0,\mathit{arr.size})$.
+Yet another option is to have store the interval using the start index and the size of the interval.
+For each variation you must do slightly different calculations,
+but the fundamental procedure is the same:
+Find the middle element, and exclude the upper or lower half of the interval.
+:::
 
-In this particular implementation we use inclusive indices,
-both $\mathit{start}$ and $\mathit{end}$ are inside the interval.
-Another common option is to have $\mathit{start}$ be inclusive, and $\mathit{end}$ exclusive
-(so the starting interval is $(0,\mathit{arr.size})$).
-Yet another option is to have a start index and a size of the interval.
-Each variation would do slightly different calculations,
-but require the same fundamental building operations:
-Finding the middle element, and excluding the upper/lower half of the interval.
-
-There are many variations of binary search. If the array had books ordered by number
-of pages, we could use it to find books of a desired length, or even all books in
-a precise range of pages. Consider what would happen if the array was not ordered
-properly, can you construct a small example where the algorithm would go wrong?
-Also consider, could binary search be used to determine if an array
-contains a prime number?
+There are many variations of Binary search.
+For example, if there are many books by the same author we can search for the first of these books, or the last.
+Then we will have to make some subtle changes to the implementation, but the basic idea remains the same.
+<!-- Consider what would happen if the array is not ordered properly,
+can you construct a small example where the algorithm would go wrong? -->
+Here is a slightly demanding exercise:
+can you use Binary search to determine if an array contains a prime number?
 
 ::: dsvis
-Here is an illustration of the binary search algorithm.
-
+Here is an illustration of the Binary search algorithm.
 ``` {.jsav-animation src="Searching/binarySearchCON.js" links="Searching/binarySearchCON.css" name="Binary Search Algorithm Slideshow"}
 ```
 :::
 
-#### Running time of binary search
+#### Running time of Binary search
 
-For linear search, in the worst case we have to look at all books in the bookshelf
-(all elements of the array). That means running time grows linearly with the size of the bookshelf.
-What is the corresponding worst case for binary search?
+For Linear search, in the worst case we have to look at all books in the bookshelf (all elements of the array).
+That means running time grows linearly with the size of the bookshelf.
+What is the corresponding worst case for Binary search?
 
 We can immediately see that it looks at much fewer books. The first comparison we do,
 looking at a single book, excludes half the bookshelf from the search interval.
-In fact, every comparison, or in the code -- every iteration of the `while`-loop,
-will reduce the size of the search interval by at least $50\%$.
-How many times can we integer divide a number $n$ by $2$ before we reach $0$?
-For $n=2^x$, the answer is $x+1$, so ignoring some rounding the answer is $x=\log_2(n)$.
+In fact, every iteration of the `while`-loop will reduce the size of the search interval by at least $50\%$.
+How many times can we integer-divide a number $n$ by $2$ before we reach $0$?
+If $n$ is a power of 2, $n=2^k$, then the answer is $k{+}1$ times.
+So if $n<2^k$, then we don't have to do more than $k{+}1$ iterations,
+which is approximately $\log_2(n)$ times (rounding up to the nearest integer).
 
-We say that binary search is a *logarithmic time* algorithm, as opposed to
-linear search being linear time.
-For large collections, this difference is staggering. For a bookshelf with a million books,
-binary search requires us to look at 20 books worst case, instead of a million.
-For a bookshelf of a billion books, binary search requires less than 30 comparisons,
-making it tens of millions times faster than a linear search.
+We say that Binary search is a *logarithmic time* algorithm, as opposed to Linear search being linear time.
+For large collections, this difference is staggering.
+For a bookshelf with a million books, Binary search requires us to look at 20 books worst case, instead of a million.
+For a bookshelf of a billion books, Binary search requires less than 30 comparisons,
+making it tens of millions times faster than a Linear search.
 
 This example highlights a crucial insight about algorithms:
 Buying a computer that is twice as fast will reduce the time consumption of your task by half.
@@ -147,17 +163,17 @@ can reduce runtime by a factor of millions, reducing runtime from years to secon
 
 #### Ordered arrays as a data structure
 
-Apart from introducing our first two algorithms (linear search and binary search),
+Apart from introducing our first two algorithms (Linear search and Binary search),
 this section introduces a data structure: The ordered array.
 This data structure differs from from general arrays in what operations it supports,
 more than just the ability to search quickly.
 
 Returning to the analogy of the bookshelf: If we have an unordered bookshelf,
-where we only ever do linear searches, we can add a new book by squeezing it in
+where we only ever do Linear searches, we can add a new book by squeezing it in
 wherever there is room.
 We can also switch the order of two books if we please.
 
-If we have an ordered bookshelf, and want to keep using binary search on it,
+If we have an ordered bookshelf, and want to keep using Binary search on it,
 adding a new book requires careful consideration.
 There is a single valid position for the new book to be placed,
 and we cannot swap existing books around.

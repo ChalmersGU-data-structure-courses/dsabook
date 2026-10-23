@@ -9,7 +9,7 @@ Having seen a couple of algorithms for searching and sorting, we want answers
 to questions like:
 
 - Is either Selection sort or Insertion sort faster than the other?
-- Is it better to perform a linear search directly on an unordered array, or sorting it with linear search and then performing a binary search?
+- Is it better to perform Linear search directly on an unordered array, or sorting the array and then perform Binary search?
 - How does the running time of these algorithms scale with increasing input size?
 
 The exact runtime of sorting depends on a myriad of factors. Just as with the search
@@ -17,21 +17,21 @@ algorithms shown earlier, the number of comparisons performed is a good proxy fo
 runtime -- a sorting algorithm that does many comparisons is going to be slower.
 So our task is determining the worst case number of comparisons required for a given input size.
 
-We saw earlier that linear search, the number of comparisons scale linearly with the
-input size. We say that linear search is a *linear time* algorithm, and that binary search
+We saw earlier that in Linear search, the number of comparisons scale linearly with the
+input size. We say that Linear search is a *linear time* algorithm, and that Binary search
 is *logarithmic time*. In this chapter we show that both Selection sort and Insertion sort
 are *quadratic time*, the number of comparisons required for $n$ elements is proportional to $n^2$.
 
 #### Selection sort analysis
 
-One way to describe selection sort:
+One way to describe Selection sort:
 For every position $i$ from $0$ to $n-1$, search through the remaining $n-i-1$ values
 for the minimal value.
 In our implementation (see [](#alg:selection-sort)), we have a nested loop, where the
 inner loop runs fewer and fewer iterations in each iteration of the outer loop.
 
 - The outer loop is iterated $n$ times in total.
-- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
+- In iteration $i$, the number of comparisons made by the inner loop is $n{-}i{-}1$.
 
 So the total number of comparisons is:
 
@@ -39,13 +39,13 @@ $$
 (n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \tfrac{1}{2} n (n-1)
 $$
 
-The fact that this is a quadratic formula indicates that the runtime of insertion sort
-grows quadratically with the size of the array being sorted. Just as binary search is logarithmic time,
-and linear search is linear time, selection sort is *quadratic time*.
+The fact that this is a quadratic formula indicates that the runtime of Insertion sort
+grows quadratically with the size of the array being sorted. Just as Binary search is logarithmic time,
+and Linear search is linear time, Selection sort is *quadratic time*.
 
-When describing selection sort as quadratic time, we simplify away a lot of details that may seem important,
+When describing Selection sort as quadratic time, we simplify away a lot of details that may seem important,
 but for determining how runtime scales with input size, this simplification is justifiable.
-Running benchmarks on an implementation of selection sort would show that when the size of the input array
+Running benchmarks on an implementation of Selection sort would show that when the size of the input array
 is doubled, the runtime is almost exactly quadrupled. A tenfold increase in input size yields a hundredfold
 increase in runtime, exactly as predicted when time scales quadratically with input size.
 
@@ -56,24 +56,24 @@ This visualisation analyses the number of comparisons and swaps required by Sele
 ```
 :::
 
-This performance analysis does not help us predict the running time of selection sort in minutes and seconds,
-but it does demonstrate that for large input sizes, selection sort is a lot slower than a linear search.
+This performance analysis does not help us predict the running time of Selection sort in minutes and seconds,
+but it does demonstrate that for large input sizes, Selection sort is a lot slower than Linear search.
 Slightly simplified: for large input sizes, every logarithmic time algorithm is faster than every linear time algorithm, which in turn is faster than every quadratic time algorithm. Later on, we will introduce the topic
 of *complexity*, expanding this hierarchy to compare the running time of any algorithms.
 
 #### Insertion sort analysis
 
-In insertion sort, we insert every element in turn into a growing sequence of sorted values.
+In Insertion sort, we insert every element in turn into a growing sequence of sorted values.
 Essentially we move every element back until it is in the correct order.
-Just like insertion sort, this is done using a nested loop (see [](#alg:insertion-sort)), but contrary to selection sort,
+Just like Selection sort, this is done using a nested loop (see [](#alg:insertion-sort)), but contrary to Selection sort,
 the process is initially quick, then gets slower as we progress.
 
 Another complication is that the number of steps an element needs to move, and thus the number of
 comparisons, depends on the elements of the array, not just the size of it.
 
-- The outer loop is iterated $n-1$ times in total.
-- The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$:
-    - in the absolute worst case, we have to move the element all the way to position zero, so the number of comparisons will be $i-1$;
+- The outer loop is iterated $n{-}1$ times in total.
+- The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i{-}1$ are smaller than the element in position $i$:
+    - in the absolute worst case, we have to move the element all the way to position zero, so the number of comparisons will be $i{-}1$;
     - in the best case, the element is already in place, and then we only need one comparison.
 
 Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Selection sort.

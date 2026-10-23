@@ -32,7 +32,7 @@ As we shall soon see, ordered arrays also allow better performance
 for finding a specific value.
 
 In this chapter we introduce two algorithms for searching in arrays:
-*Linear Search* and *Binary Search*, as well as two sorting algorithms
+*Linear search* and *Binary search*, as well as two sorting algorithms
 for arrays: *Selection Sort* and *Insertion sort*.
 This also serves to demonstrate how we describe algorithms,
 how we convince ourselves that an algorithm correctly solves a problem,

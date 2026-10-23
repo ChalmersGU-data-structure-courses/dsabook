@@ -33,8 +33,9 @@ and it also has to move some books to make space for the new book.
 
 This analogy is a good first step towards our first two sorting algorithms,
 but there is still plenty of work to be done.
-Consider what data structures are involved: The bookshelf is actually an array,
-but what is the floor? In practice, both algorithms are *in-place* --
+Consider what data structures are involved:
+The bookshelf is actually an array, but what is the floor?
+As we will see later, both algorithms are actually implemented *in-place*:
 rather than move or copy elements from one data structure into an empty array,
 they swap elements around inside an existing array.
 
@@ -45,12 +46,12 @@ A bookshelf is not a perfect analogy for an array, for several reasons:
    have to be moved one at a time.
  - A computer cannot actually move an array element in the sense of moving a book.
    The closest they can get is copying the element and then erasing the original.
-   The analogy breaks down further when we consider references: Apart from containing
-   multiple identical books, our bookshelf can contain (references to) the exact
-   same book more than once!
+   The analogy breaks down further when we consider references:
+   Apart from containing multiple identical books,
+   an array can contain (references to) the exact same book more than once!
  - An array has *random access*. For a computer, finding the third book from the left
    is just as easy as finding the millionth book from the left.
-   One way to consider this is that the books are all the same thickness, so we can
+   One way to think about this is that the books are all the same thickness, so we can
    use a measuring tape to find specific positions.
 
 ### In-place sorting {#sorting-1:in-place-sorting}
@@ -62,9 +63,10 @@ but make an ordered copy.
 But in most cases we want the algorithm to be *in-place*, meaning that we shuffle elements
 around in the original array.
 
-In-place
-:   A sorting algorithm is *in-place* if it modifies the input array directly and does not build a
-    new array for the sorted result.
+::: {.invariant #inv:in-place}
+#### In-place sorting algorithm
+A sorting algorithm is *in-place* if it modifies the input array directly and does not build a new array for the sorted result.
+:::
 
 Usually one also requires that the algorithm does not allocate too much extra space while operating,
 where "not too much" can mean at most logarithmic extra memory in the size of the array.
@@ -85,6 +87,7 @@ part of the array is sorted, and the rest is not. Instead of moving a book from 
 to the bookshelf, each step involves swapping books around to move one book from the
 unsorted area into the sorted area. When all books are in the sorted area, the array is sorted.
 
+<!--
 ### Performance analysis
 
 Before we look at more detailed descriptions of the algorithms, it is hard to accurately
@@ -98,6 +101,7 @@ book:
 - There are $n$ iterations, so we get $\approx n^2$ steps.
 
 We say that both algorithms are *quadratic time* in the number of books.
+-->
 
 
 <!--

@@ -10,14 +10,14 @@ Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort))
 
 - How algorithms can be described using text, pseudocode and illustrations.
 - The pattern of solving a problem by reducing it to a smaller problem of the same type.
-    - In linear search, one comparison reduces the problem size by one.
-    - In binary search, one comparison cuts the size of the problem in half.
-    - In selection sort, selecting the smallest element reduces the problem size by one.
+    - In Linear search, one comparison reduces the problem size by one.
+    - In Binary search, one comparison cuts the size of the problem in half.
+    - In Selection sort, selecting the smallest element reduces the problem size by one.
 - How algorithms can be classified by the growth rate of their runtime.
   We have seen four classifications so far:
-    - constant time (swapping two elements in an array).
-    - logarithmic time (Binary search).
-    - linear time (Linear search).
+    - constant time (swapping two elements in an array),
+    - logarithmic time (Binary search),
+    - linear time (Linear search),
     - quadratic time (Selection sort and Insertion sort).
 - Our first and most fundamental data structure: The array, as well as the variant of an ordered array.
 - How different data structures can enable faster solutions to a problem, specifically
