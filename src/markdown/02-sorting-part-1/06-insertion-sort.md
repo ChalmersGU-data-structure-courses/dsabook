@@ -19,21 +19,21 @@ But just as for Selection sort, it's relatively easy to turn it into an in-place
 Keep a growing sorted part in the beginning of the array, and a shrinking unsorted part after it.
 Insert values one at a time from the unsorted part into the sorted part.
 
-Here is the same example array as in @sec:sorting-1:selection-sort, after three iterations of Insertion sort.
-At this point the element at index $3$ will be swapped into place, so $21$ moves two steps to the left:
+Here is the same example array as in @sec:sorting-1:selection-sort, after four iterations of Insertion sort.
+At this point the element at index $4$ will be swapped into place, so $34$ moves two steps to the left:
 
-    >        <------|
-    > [ 19  24->35->21   9  18  27  20  14  31 ]
-    >  |----------|
+`\noindent`{=latex}
+![](images/2.6-two-steps-insertion-sort-1.svg)
 
-The sorted part now consists of four elements, and we put element at index $4$ into place.
-This cell has value $9$, which is smaller than everything we have seen so far,
+`\noindent`{=latex}
+The sorted part now consists of four elements, and we put element at index $5$ into place.
+This cell has value $17$, which is smaller than everything we have seen so far,
 so it will move all the way to the left:
 
-    >    <---------------|
-    > [ 19->21->24->35-->9  18  27  20  14  31 ]
-    >  |--------------|
+`\noindent`{=latex}
+![](images/2.6-two-steps-insertion-sort-2.svg)
 
+`\noindent`{=latex}
 Note how all values before $i$ are sorted at all times, but unlike Selection sort,
 they are not necessarily in their final positions.
 Insertion sort moves each element $e$ backwards so long as it is smaller than the preceding element.

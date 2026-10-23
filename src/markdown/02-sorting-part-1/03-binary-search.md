@@ -50,25 +50,28 @@ Initially the interval spans the whole array, so $\textit{start}=0$ and $\textit
 First we look up the middle element in cell $(0+14)/2=7$, which is revealed to have value 64 --
 the rest of the array is still unknown to us, so we show these cells using question marks:
 
-    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
-    >    [  ?   ?   ?   ?   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
-    >       ^                           ^                           ^
+`\noindent`{=latex}
+![](images/2.3-steps-of-binary-search-1.svg)
+<!-- [  ?   ?   ?   ?   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ] -->
 
+`\noindent`{=latex}
 Since $36<64$ we take the left half of the interval, so we change the interval *end* to $\textit{mid}-1 = 6$.
 The new middle position is $(0+6)/2=3$, and its value is 22:
 
-    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
-    >    [  ?   ?   ?  22   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
-    >       ^           ^           ^
+`\noindent`{=latex}
+![](images/2.3-steps-of-binary-search-2.svg)
+<!-- [  ?   ?   ?  22   ?   ?   ?  64   ?   ?   ?   ?   ?   ?   ?  ] -->
 
+`\noindent`{=latex}
 This time $36>22$ so we take the right half:
 the interval *start* becomes $\textit{mid}+1 = 4$, and the new middle is $(4+6)/2=5$.
 This time the middle cell contains 36 which is exactly what we search for, and we can stop:
 
-    >       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
-    >    [  ?   ?   ?  22   ?  36   ?  64   ?   ?   ?   ?   ?   ?   ?  ]
-    >                       ^   ^   ^
+`\noindent`{=latex}
+![](images/2.3-steps-of-binary-search-3.svg)
+<!-- [  ?   ?   ?  22   ?  36   ?  64   ?   ?   ?   ?   ?   ?   ?  ] -->
 
+`\noindent`{=latex}
 Note that we only had to look at 3 cells in the array until we found what we searched for.
 The algorithm is presented in full in [](#alg:binary-search),
 using both an abstract text description and more concrete pseudocode.

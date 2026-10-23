@@ -33,20 +33,20 @@ Finding the second smallest book is now easy, just find the smallest element sta
 
 The result is an an invisible separator between sorted elements (at the start of the array) and still-unsorted elements.
 We repeatedly select the minimal element from the unsorted books and *swap* its position with the first unsorted book.
-For example, here we are sorting an array with 10 elements, and have already done three iterations.
+For example, here we are sorting an array with 15 elements, and have already done four iterations.
 Now *minIndex* points to the smallest of the unsorted elements and we swap it with the next cell in the sorted part:
 
-    >                <------ 19 -------
-    > [  9  14  18  _  24  35  27  20  _  31 ]
-    >                -------- 21 ----->
+`\noindent`{=latex}
+![](images/2.5-two-steps-selection-sort-1.svg)
 
+`\noindent`{=latex}
 In the next iteration, the sorted part has increased by one,
 and the smallest of the remaining unsorted elements can be swapped into place:
 
-    >                    <-- 20 ---
-    > [  9  14  18  19  _  35  27  _  21  31 ]
-    >                    --- 24 -->
+`\noindent`{=latex}
+![](images/2.5-two-steps-selection-sort-2.svg)
 
+`\noindent`{=latex}
 Selection sort is described in more detail in [](#alg:selection-sort),
 both in plain text and in pseudocode.
 
