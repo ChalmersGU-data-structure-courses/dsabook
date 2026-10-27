@@ -96,7 +96,7 @@ But still, despite this minor difference `traverse` mimics a preorder recursive 
 ::: online
 ![
     As a reminder, here is the example tree in @fig:example_bintree again.
-](images/9.1-bintree-with-nulls.svg)
+](images/9.2-bintree-with-nulls.svg)
 :::
 
 Unfortunately, if we move the `print` function below the add operations, things will not change --
