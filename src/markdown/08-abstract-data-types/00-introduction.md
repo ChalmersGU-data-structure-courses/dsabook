@@ -20,8 +20,8 @@ But we are not interested if this queue is implemented using a dynamic array or 
 so we want to hide away this implementation-specific information.
 
 Using the concept of *abstract data types*, ADTs,
-we can distinguish between the logical behaviour of a data structure and its actual implementation.
+we can distinguish between the logical behaviour of a data structure and its implementation.
 An ADT describes what operations that can be performed on a data structure, and how these operations should behave.
 But it does not say anything about *how* these operations should be implemented.
 The operations offered by an ADT is often called its *application programming interface* (API),
-and is similar to an *interface* or a *protocol* in an object-oriented language.
+and is similar to an *interface* in an object-oriented language.

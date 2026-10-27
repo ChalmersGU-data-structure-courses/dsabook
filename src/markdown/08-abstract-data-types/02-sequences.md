@@ -1,25 +1,20 @@
 
 ## Collections and sequences {#ADTs:sequences}
 
-::: TODO
-- Prio 1: do we need all the code?
-:::
-
 A _collection_ is a general term for a data structure that can contain multiple elements.
-In this chapter you will encounter stacks and queues, and more general lists,
-and in later chapters will we introduce sets and maps.
-The only thing we will require from a collection is that it supports two basic operations:
+The only thing we require from a collection is that it supports two basic operations:
 
-- it must know its own *size*, that is, the number of elements in the collection,
-- it is possible to *iterate* over the elements.
+- It must know its own *size*, that is, the number of elements in the collection,
+- It is possible to *iterate* over the elements.
 
-For convenience we often iterate the elements using a `for`-loop, like this:
+Iteration is normally done using a `for`-loop, like this:
 
     for each x in C:
         // do something with the element x
 
-When we describe the different ADTs (stacks, queues, lists, etc.), we can do this as pseudocode.
-Then we will call the ADT an *interface*, and this interface will *extend* the basic *Collection* interface.
+It is assumed that moving from one element to the next can be done in constant time.
+When we describe the different ADTs (stacks, queues, lists, etc.) in pseudocode,
+we call the ADT an *interface*, and these interfaces will *extend* the basic *Collection* interface.
 
     interface Collection:
         isEmpty(collection) -> Bool   // Tells if the collection contains no elements.
@@ -45,21 +40,17 @@ As an ADT interface we can specify them like this:
         dequeue(queue) -> T   // Dequeues the frontmost element.
         peek(queue) -> T      // Returns the frontmost element, without removing it.
 
-Note that we also specified the *auxiliary* operation `peek` in this interface,
-even though it is not part of the absolute minimum.
-Also note that the interfaces inherit the `size` and `isEmpty` operations from `Collection`,
+Note that we also specified the *auxiliary* operation `peek` in this interface.
+The interfaces inherit the `size` and `isEmpty` operations from `Collection`,
 as well as the mechanism for iteration.
 
 ### Double-ended queues and general lists
 
 Double-ended queues and general lists were briefly mentioned in @sec:sequences:more-sequences.
 A double-ended queue, or a *deque*, is a combination of a stack and a queue,
-meaning that we can add and remove from both ends of the list.
-This could be written as a combined ADT interface (at least if we had different names for the `peek` operations):
-
-    interface Deque extends Stack and Queue
-
-Or we could specify it clearer, and use more self-explaining names:
+meaning that we can add and remove from both ends of the sequence.
+This could be written as a combined ADT extending both Stack and Queue,
+or we could specify it clearer, and use more self-explaining names:
 
     interface Deque of T extends Collection:
         addFirst(deque, x)       // Adds x at the front of the deque.
@@ -70,9 +61,10 @@ Or we could specify it clearer, and use more self-explaining names:
         getLast(deque) -> T      // Looks at the last element.
 
 Note that this specifies exactly the same ADT as if we just use the names of the stack and queue operations.
-The real difference is in the semantics of operations, not how we call them.
+The real difference is in the semantics of operations, not their names.
 
-General lists can in turn be seen as an extension of deques, where we can insert, remove, update and look at an arbitrary position:
+General lists can in turn be seen as an extension of deques, where we can insert, remove,
+update and access arbitrary positions:
 
     interface List of T extends Deque:
         insert(list, i, x)    // Inserts x at position i, increasing the size of the list.
@@ -83,4 +75,4 @@ General lists can in turn be seen as an extension of deques, where we can insert
 As we already mentioned in @sec:sequences:more-sequences,
 it is not possible to implement this ADT such that all operations are efficient.
 For example, if we use a circular dynamic array (see @sec:sequences:array-queues),
-`insert` and `remove` become inefficient when the position `i` is in the middle of the list.
+`insert` and `remove` become inefficient (linear time) when the position `i` is in the middle of the list.

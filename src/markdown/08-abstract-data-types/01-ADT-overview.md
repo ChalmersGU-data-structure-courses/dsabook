@@ -28,14 +28,8 @@ For the example of stacks, here are some common auxiliary operations:
 
 
 Although different implementations of an abstract data type offer the same operations,
-the choice of data structure can significantly impact the *efficiency* of those operations.
+the choice of data structure can significantly impact the *performance* of those operations.
 Often, there are trade-offs involved: optimising one operation may come at the cost of another.
-Furthermore, different applications may prioritise different operations.
-One program might frequently perform operation A, while another relies more heavily on operation B.
-In such cases, it is often not possible to implement all operations efficiently,
-so multiple implementations of the same ADT are needed.
-Additionally, one data structure may be more efficient for small datasets (thousands of elements),
-whereas another may scale better for large datasets (millions of elements).
 
 The most suitable data structure depends on the specific use case,
 and it is important that you can make informed and well-reasoned choices when it comes to selecting what data structure to use.
@@ -55,51 +49,34 @@ On the other hand, B-trees are better suited for _range queries_, where you want
 :::
 
 There are many different abstract data types, but most of them can be categorised in just a few generic groups.
-The ones we use in this book were already introduced in @sec:intro:abstract-data-types, but we repeat them here:
-
-Sequences
-:   In a sequence the order between the elements matters.
-    This means that each element has a specific position in the sequence,
-    and operations on the ADT are sensitive to this order.
-    Insertion, removal, and retrieval operations often depend on the position within the sequence.
-    [Chapter @sec:sequences] covered stacks, queues, double-ended queues (deques), and general lists,
-    as well as the two main data structures that implement sequences -- dynamic arrays and linked lists.
-
-Priority queues
-:   A priority queue is also a kind of sequence, because the order matters.
-    But it is different from other seuences because the order depends on the *priority* of an element.
-    The core operations are similar to stacks and queues, but priority queues often have different use cases,
-    and they are implemented using completely different data structures.
-    [Chapter @sec:heaps] discusses how to implement priority queues using different kinds of *heaps*.
-
-Sets
-:   A set represents an unordered collection of elements.
-    Just like in mathematical sets, an element can only occur once.
-    This means that adding an element sometimes doesn't change the set at all.
-    There are many different data structures that can be used to implement sets,
-    but they can be divided into two main groups --
-    where search trees are discussed in [Chapter @sec:search-trees],
-    and hash tables in [Chapter @sec:hash-tables].
-
-Maps
-:   A map (or *dictionary*) is similar to a set, but represents a collection of *key-value pairs*.
-    The main idea is that you can use a map as a very simple database,
-    where you can look up the *value* for a given *key* (or change the value, or remove it).
-    This means that maps do not allow duplicate keys, just like sets do not allow duplicate elements.
-    Maps and sets are very similar to each other, and all data structures that can be used to implement
-    sets can also be used to implement maps.
-
-Graphs
-:   Graphs are used to model relationships between elements.
-    The elements in a graph are called *vertices* or *nodes*,
-    and the relations between vertices are represented by *edges*.
-    There are many different algorithms on graphs, such as finding the shortest path between two vertices,
-    or minimal set of edges that connect all vertices in a graph.
-    Graphs are introduced, together with some of their core algorithms, in [Chapter @sec:graphs].
-
-The rest of this chapter gives a high-level overview of the ADTs covered throughout the book.
-@Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
+The ones we use in this book were already introduced in @sec:intro:abstract-data-types. @Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book,
 including their operations and the data structures used to implement them.
 
-![An overview of ADTs with their common implementations](images/8.0-ADT-overview.svg){#fig:adt-overview}
+![An overview of ADTs with some common implementations](images/8.0-ADT-overview.svg){#fig:adt-overview}
+
+This chapter will focus on ADTs for for *collection types*, types that contain a collection of values,
+with operations for adding, removing and finding values.
+The data structures we have seen in [Chapter @sec:sequences], dynamic arrays and linked lists, are suitable for
+implementing *Sequence types*, collections of values where each value has a position.
+This includes stacks, queues and lists.
+
+In addition to sequence types, this chapter introduces three main collection ADTs that cannot
+be efficiently implemented using dynamic arrays and linked lists:
+
+Priority queues
+:   A *priority queue* is also a kind of sequence, but the order of elements is determined
+    by a designated priority.
+    Slightly simplified: If a stack removes the newest element first, and a queue removes the oldest,
+    then a priority queue removes the smallest element first -- using some comparison function.
+
+Sets
+:   A *set* represents an unordered collection of elements, capturing the mathematical notion of sets.
+    Unlike sequence types, a set cannot contain duplicate values. The most important operations
+    on sets are adding values and determining if a set contains a specific value.
+
+Maps
+:   A map (or *dictionary*) is similar to a set, but represents a collection of *key-value pairs*.
+    The main idea is that you can use a map look up the *value* for a given
+    *key* (or change the value, or remove it).
+    Maps do not allow duplicate keys, so the keys of a map are a set.
