@@ -2,7 +2,7 @@
 ## Performance analysis of sorting algorithms {#sorting-1:performance-analysis}
 
 ::: TODO
-- Prio 2: Perhaps reduce text a little - now this section is longer than the algorithms themselves
+- Prio 1: Reduce the text - we will discuss this more in ch3 anyway
 :::
 
 Having seen a couple of algorithms for searching and sorting, we want answers

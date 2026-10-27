@@ -2,8 +2,7 @@
 ## Binary search {#sorting-1:binary-search}
 
 ::: TODO
-- Prio 1: Move the image out of #alg:binary-search, and put inline in the text
-- Prio 1: Split the image into 4 and intersperse them with explanatory text (like for quicksort partition)
+- Prio 1: If we introduce ordered arrays in 1.2, then we can remove the subsubsection here?
 :::
 
 No library keeps books in random order, because Linear search is too slow.

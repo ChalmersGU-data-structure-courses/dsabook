@@ -2,8 +2,7 @@
 ## Insertion sort {#sorting-1:insertion-sort}
 
 ::: TODO
-- Prio 1: Move the image out of #alg:selection-sort, and put inline in the text
-- Prio 1: Split the image into 2 and intersperse them with explanatory text (like for quicksort partition)
+- Prio 1: The intro is a repetition of section 2.4, reduce?
 - Prio 3: Use the optimized IS that doesn't do swaps?
 :::
 
@@ -52,7 +51,7 @@ Repeat the following until the unsorted part is empty:
 2. Insert $e$: while $e$ is smaller than the element before it, swap the two.
 
 After these steps $e$ is in the sorted part, and the unsorted part is reduced by one element.
-Pseudocode implementation:
+Here is the corresponding pseudocode implementation:
 
 ```pseudo
     insertionSort(arr):

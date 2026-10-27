@@ -2,9 +2,13 @@
 ## Overview of sorting algorithms {#sorting-1:overview}
 
 ::: TODO
-- Prio 1: remove the performance part
-- Prio 2: suitable forward references to subsequent sections
-- Prio 2: should the definition of in-place be in a box?
+- Prio 1: The definition of in-place is currently an "invariant", should it be a "definition"?
+- Prio 1: Should we remove this section, or reduce it a lot?
+    - Or reduce some parts of the following sections?
+    - Because now there are quite many repetitions.
+- Prio 1: Perhapas tone down the criticism of the bookshelf analogy?
+    - Now we spend almost more time on critisising it than using it.
+- Prio 2: Suitable forward references to subsequent sections
 :::
 
 Imagine that we want to sort books in a bookshelf, what different strategies can we use to do that?

@@ -2,8 +2,7 @@
 ## Selection sort {#sorting-1:selection-sort}
 
 ::: TODO
-- Prio 1: Move the image out of #alg:selection-sort, and put inline in the text
-- Prio 1: Split the image into 2 and intersperse them with explanatory text (like for quicksort partition)
+- Prio 1: The intro is a repetitoin of the last section, reduce?
 :::
 
 Suppose again we are sorting a large pile of books into a bookshelf,
