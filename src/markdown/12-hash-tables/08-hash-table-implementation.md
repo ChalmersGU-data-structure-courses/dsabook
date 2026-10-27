@@ -7,7 +7,7 @@
 
 If we already have an implementation of a set or map data structure lying around (such as linked lists or AVL trees),
 then implementing a separate chaining hash table is really easy.
-The only thing we have to do is to implement [](#alg:separate-chaining) together with some simple error handling.
+The only thing we have to do is to implement [](#alg:separate-chaining)`\parpageref{}`{=latex} together with some simple error handling.
 We leave that as an exercise for the reader.
 
 However, if we do not want to rely on another data structure,
@@ -21,7 +21,7 @@ where we initially leave out the problem of resizing the array.
         size = 0  // The number of elements in the set.
 
 All set operations require us to first lookup the position in the array, where a given key *should* be.
-This is described by [](#alg:linear-probing-lookup), and can be implemented like follows.
+This is described by [](#alg:linear-probing-lookup)`\parpageref{}`{=latex}, and can be implemented like follows.
 The function `lookup` searches for the key, and if it is not found,
 it returns the first empty position where it could have been:
 
