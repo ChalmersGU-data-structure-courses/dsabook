@@ -67,7 +67,7 @@ That means if both `add` and `removeMin` are logarithmic time or faster, the who
 
 For stacks and queues, we managed to implement adding and removing in constant time.
 This is not possible for priority queues, if it was, the sorting algorithm in
-[]@ex:pq-sorting would outperform both Quicksort and Mergesort.
+[](#ex:pq-sorting) would outperform both Quicksort and Mergesort.
 It is possible to have logarithmic time for the operations, and in [Chapter @sec:heaps] we show you how,
 but for now let us see why the data structures we have seen so far are not fast enough.
 

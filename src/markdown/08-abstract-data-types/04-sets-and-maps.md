@@ -13,14 +13,11 @@
 - Prio 2: are there better examples than (spell-checking, cash register, search engines)?
 :::
 
-<!-- NICSMA: START -->
-Many programming tasks involve *finding the right piece of information* in a large dataset.
-That is, we have a collection of items, and we want to quickly retrieve the items matching certain criteria.
-Here are some examples of information retrieval problems:
+Consider these examples of information retrieval problems:
 <!-- NICSMA: END -->
 
 Spell-checking
-:   Given a set containing valid English words, check if a given string is a valid word.
+:   Given a collection of containing valid English words, check if a given string is a valid word.
 
 Cash register
 :   Given a database of everything for sale in a supermarket,
@@ -29,28 +26,17 @@ Cash register
 Search engine
 :   Given a collection of documents, find all documents containing a given word.
 
-These problems can all be addressed using two abstract data types: the *set* and the *map*.
+These problems, and many more like them, can all be solved using two abstract
+data types: the *set* and the *map*.
 Both provide efficient ways to manage a collection of elements,
 supporting operations to find, add, and remove elements.
 
-<!-- NICSMA: START -->
-Sets and maps are useful in a huge variety of computer programs,
-and are perhaps the most useful of all data structures.
-But how can we design a class that implements a set or a map, in such a way that adding,
-removing and searching can be done efficiently?
-Later we will see several different ways of implementing sets and maps.
-
--   Just as for priority queues we can implement a set or a map using
-    a linked list or a dynamic array.
-
--   In [Chapter @sec:search-trees], we learn about self-balancing *search trees*,
-    a data structure for sets and maps where adding, removing and searching are all efficient.
-
--   In [Chapter @sec:hash-tables], we learn about *hash tables*,
-    which can be even faster than search trees, under some circumstances.
-
-Search trees and hash tables are the main ways that sets and maps are implemented in practice.
-Almost every programming language provides sets and maps as a built-in feature, based on one of these technologies.
+Sets and maps are perhaps the most widely used data types of all, and it is vital to have
+efficient data structures for both lookups and construction.
+Just as with priority queues, we will demonstrate that arrays and linked lists
+are insufficient for sets and maps. Later on, we will see implementations using
+*self-balancing search trees* and *hash tables*, in [Chapter @sec:search-trees]
+[Chapter @sec:hash-tables] respectively.
 
 ### Sets {#ADTs:sets}
 
@@ -87,22 +73,23 @@ so we do not introduce any interface for them in this introductory text.
 
 ### Maps, or dictionaries {#ADTs:maps}
 
-<!-- NICSMA: START -->
-A *map* (or dictionary) represents a set of *keys*, where each key has an associated *value*.
-We can *add* and *remove* keys, but when we add a key we must specify what *value* we want to associated with it.
-We can *check* if a given key is present in the map, and
-we can also *look up* a key to find the associated value.
+A *map* (also called a dictionary) represents a set of *keys*, where each key
+has an associated *value*.
+To add an element to the map, we need to specify both the key and the associated value.
+The add operation on maps is usually called `put`.
+We can also *check* if a given key is present in the map, and *look up* a key to
+find the associated value.
 
 A map cannot contain duplicate *keys*, so each key is associated with exactly one value.
-If we call `put(k,v)`, but the key `k` is already present, then the value associated with `k` gets changed to `v`.
+If we call `put(map, key,value)`, but the key is already present, then the value
+associated with the key is changed.
 On the other hand, a map *can* contain duplicate *values*: two keys can map to the same value.
-<!-- NICSMA: END -->
-Here is a possible minimal interface for maps:
+Here is a minimalistic interface for maps:
 
     interface Map of K to V extends Collection of K:
-        put(map, key: K, value: V)     // Sets the value of the given key.
+        put(map, key: K, value: V)     // Sets the value associated with the given key.
         get(map, key: K) -> V          // Returns the value associated with the given key.
-        remove(map, key: K)            // Removes the value associated with the given key.
+        remove(map, key: K)            // Removes the key and its associated value.
         contains(map, key: K) -> Bool  // Returns true if the key has an associated value.
 
 Note that maps depend on two different types, the keys `K` and the values `V`.
@@ -111,7 +98,7 @@ These types can be the same or different, depending on the needs of your applica
 ::: {.example #ex:cash-register}
 #### Example: Cash register
 
-A map is a perfect match for implementing the *cash register* example from the beginning of this section:
+A map is a perfect match for implementing the *cash register* example:
 to find information about an item with a given EAN code.
 
 Here, the key should be the EAN code that the barcode scanner recognises,
@@ -138,7 +125,7 @@ This structure is called a *multimap*.
 <!-- NICSMA: END -->
 
 Most programming languages do not provide a multimap data structure,
-but this is not a serious drawback because we can easily implement it ourselves.
+but we can easily implement one ourselves.
 The idea is to use a *map*, whose value type is a *set* of the actual values that we are interested in:
 
     datatype Multimap of K to V:
@@ -146,7 +133,7 @@ The idea is to use a *map*, whose value type is a *set* of the actual values tha
 
 To add a value to a multimap `mm`, we specify a key and value just as with a regular map:
 
-    put(mm, key, value):
+    mput(mm, key, value):
         set = get(mm.mmap, key)       // Fetch the set associated with key
         if set is null:               // There is no set associated with key
             set = new Set()           // Needs to use a specific set implementation
@@ -170,24 +157,10 @@ and the values are all document id numbers containing that word.
 Now, searching for a word just means looking it up in the multimap,
 <!-- NICSMA: END -->
 which is the same as calling `get` on the underlying map.
-
-<!-- But how do we build this database?
-Let us say that we have a list of "documents",
-where each document is a pair of the name of the document and a list of all its words.
-Building the database now involves to iterate through each word of each document
-and add them to the multimap, something like this:
-
-    buildSearchEngine(documents: List(<Name, List(Word)>)) -> Map(Word, Set(Name))
-        database = new Multimap()
-        for each <name, words> in documents:
-            for each word in words:
-                database.add(name, word)
-        return database
--->
 :::
 
 
-
+<!--
 ### Implementing sets and maps using linked lists {#ADTs:sets-maps-using-linked-lists}
 
 A simple (but inefficient) data structure to implement a set is a *linked list*.
@@ -211,7 +184,7 @@ av.recorded();
 ![](images/8.3-linked-list-set.svg)
 :::
 
-This list represents the set $\{A,B,C\}$. Note that we do not have an ordering invariant here, values can appear in any order in the list, so the lists $[C,B,A]$ and $[A,C,B]$ also represent the set $\{A,B,C\}$.
+This list represents the set $\{A,B,C\}$. Note that we do not have an ordering invariant here, values can appear in any order in the list, so the lists $[C,B,A]$ and $[A,C,B]$ represent the same set.
 The only invariant is that values are distinct, so the list $[A,A,B,C]$ is not a valid representation of a set.
 
 :::
@@ -256,10 +229,24 @@ We just augment the linked list nodes to also include the value:
 
 Just as for priority queues, we can also use dynamic arrays to implement sets and maps,
 and we will discuss that in the next section.
+-->
 
+### Implementing sets and maps using lists {#ADTs:sets-maps-using-linked-lists}
 
-### Analysis of the naive implementation
+Just as with priority queues, the data structures we have seen so far does not allow for
+an efficient enough set or map implementation.
+Using an unsorted dynamic array or linked list gives $O(n)$ time for both `contains` (using linear search)
+and `add` on a set.
+You may think that `add` could be done in $O(1)$, but since `add` needs to prevent duplicates it
+needs to perform a `contains` before adding anything to the list.
 
-In @sec:ADTs:sets-and-maps we showed how to implement sets and maps using a linked list.
-This is quite inefficient: all operations take linear time in the size of the list, $O(n)$,
-because in the worst case we have to look at all nodes.
+The best we can do so far is a sorted array. Contains can be implemented using binary search ([](#alg:binary-search)), which is $O(log(n))$. Modifications will still be $O(n)$, since insertion
+into a sorted dynamic array is linear time.
+
+There is a special case of sets and maps where a sorted array is perfectly fine: If the
+content is *static*. In any application where the set or map is created all at once,
+placing elements in an array and sorting it using a fast sorting algorithm takes
+$O(n log(n))$, so $O(log(n))$ per element.
+The spellchecker in [](#ex:spell-checking) is mostly static -- modifications to
+the lexicon are likely to happen very rarely, so a fast add operation may not be needed.
+

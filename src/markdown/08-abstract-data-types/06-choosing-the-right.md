@@ -1,11 +1,9 @@
-
-## The right data structure for the problem {#ADTs:choosing-the-right}
-
 ::: TODO
-- Prio 1: this text is moved from Ch1 - it has to be rewritten to fit in this chapter
-    (or we can remove it completely if it doesn't work)
-- Prio 1: update title
+- Prio 1: See if anything else should be integrated into the takeaways section
 :::
+<!--
+## The right data type for the problem {#ADTs:choosing-the-right}
+
 
 We write programs to solve problems.
 This might sound obvious, but sometimes we forget this and do not analyse the problem properly.
@@ -59,3 +57,4 @@ No data structure is inherently best for all tasks.
 Every data structure presented in this book has practical applications where they
 are the most suitable choice.
 
+-->
