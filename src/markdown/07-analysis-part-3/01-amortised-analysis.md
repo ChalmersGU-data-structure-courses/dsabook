@@ -2,8 +2,7 @@
 ## Amortised analysis {#analysis-3:amortisation}
 
 ::: TODO
-- Prio 1: shorten the examples
-- Prio 2: replace the (multipop) example with: a queue as a pair of stacks
+- Done?
 :::
 
 Complexity analysis as we have seen it dictates that if an algorithm
@@ -37,50 +36,42 @@ But before that we will explain the concepts and give some other examples.
 ::: {.example #ex:multipop-analysis}
 #### Example: Multipop on stacks
 
-Assume that we want to add a new operation *multipop* on stacks,
-where `multipop(stack, k)` will pop the $k$ topmost elements off the stack.
+Assume that we want to add a new operation `multipop` on stacks,
+where `multipop(stack,k)` will pop the $k$ topmost elements off the stack.
 The operation is implemented in the straightforward way of repeating a
-standard $O(1)$ *pop* operation *k* times.
+standard $O(1)$ `pop` operation *k* times.
 
 What is the time complexity of this new operation in terms of the size $n$ of the stack?
-Since we're repeating the constant-time *pop* operation $k$ times, we get a time complexity of $O(k)$.
+Since we're repeating the constant-time `pop` operation $k$ times, we get a time complexity of $O(k)$.
 And the worst case of this is when $k$ is as large as possible, that is, the stack size $n$.
-So the worst-case complexity for *multipop* is linear in the stack size, $O(n)$.
+So the worst-case complexity for `multipop` is linear in the stack size, $O(n)$.
 This is quite correct, the worst case complexity of a single call is linear.
 
-What is the complexity of executing a large number of *multipop* operations in sequence?
-Let's say that we start with a stack of size $n$, and perform some
-sequence of $n$ *multipop* operations.
-Using our analysis above blindly, the worst case total time of this procedure is
-$n \cdot O(n) = O(n^2)$. But how would that worst case look?
-
-If we try construct this worst case for say $n=10$ we run into problems.
-Recall that the worst case for a single call `multipop(stack, k)` assumed
-that $k=n$, that is it removes all the elements of the stack.
-The $O(n^2)$ worst case implicitly assumes that we first remove all elements,
-then remove just as many more and keep removing more and more elements from
-an empty stack!
+What is the complexity of executing a large number of `multipop` operations in sequence?
+Let's say that we start with a stack of size $n$, and perform some sequence of $n$ `multipop` operations.
+Using our analysis above blindly, the worst case total time of this procedure is $n \cdot O(n) = O(n^2)$.
 
 We can reason like this instead:
 $n$ elements are on the stack, and each of these elements can only be popped once.
-The sum of costs for all calls to *multipop* can never exceed
+The sum of costs for all calls to `multipop` can never exceed
 the total number of elements on the stack, which is $n$.
-This means that the total complexity of our $n$ calls to *multipop* must be in $O(n)$.
+This means that the total complexity of our $n$ calls to `multipop` must be in $O(n)$.
 
-Therefore the average worst-case complexity *per operation* must be $O(n)/n = O(1)$.
-That is, the *amortised* worst-case complexity of *multipop* is constant, $O(1)$.
+Therefore the average worst-case complexity *per operation* must be $O(n)/n$.
+That is, the *amortised* worst-case complexity of `multipop` is constant, $O(1)$.
 :::
 
-In the *multipop* example we got two different complexities for the *multipop* operation:
+In [](#ex:multipop-analysis) we got two different complexities for the `multipop` operation:
 first we found that it is linear in the stack size, $O(n)$,
 but when averaging over a sequence of operations we found that it is constant, $O(1)$.
 Both these seemingly contradicting results are correct.
-The worst case complexity for a single call to *multipop* is linear,
+The worst case complexity for a single call to `multipop` is linear,
 but the *amortised* complexity is constant.
+
 
 ### The accounting method {#analysis-3:accounting-method}
 
-In the *multipop* example we used an informal argument,
+In the `multipop` example we used an informal argument,
 but the underlying idea is the concept of an *account*.
 The basic idea with the *accounting method* is that whenever we perform a cheap operation
 we "pay" some extra time that we save in an account.
@@ -93,27 +84,41 @@ we pretend that it is slower than it actually is, but only by a constant factor.
 This additional time that we (pretend to) spend is added to our account.
 Then when there is a slow operation, we can use the saved time to "pay for" the slow operation.
 
-::: {.example #ex:multipop-analysis-accounting}
-#### Example: Multipop, revisited
+::: {.example #ex:queues-as-pairs-of-stacks}
+#### Example: Queues as pairs of stacks
 
-The *multipop* operation is a very good example of how the accounting method can be applied.
-Assume that the basic operations *push* and *pop* takes 1 time unit each.
-But let us pretend that each *push* costs 2 time units instead of one.
-That is, each *push* will save one time unit in our account,
-and after pushing $m$ elements onto the stack we have $m$ units saved.
+In [Chapter @sec:sequences] we showed two implementations for queues, but there is also a third variant.
+One property of stacks is that if we push a sequence of elements and then pop them all, we get them back in *reversed* order.
+And of course, if we do the same again, we get the original order back.
+This insight can be used for a new possible implementation of queues,
+which uses two stacks -- one "enqueue" stack and another "dequeue" stack.
 
-This means we can use every *push* to pay for a *pop*. Since it is impossible to do
-more total *pop* operations than *push* operations, *pop* operations are
-always paid for by a *push*, and essentially free. Since *multipop* is just a
-repetition of $k$ *pop* operations, it is also paid for by *push*.
+- To enqueue an element we push it to the *enqueue stack*.
+- To dequeue an element we pop it from the *dequeue stack*.
+- If the dequeue stack is empty, we pop all elements from the *enqueue stack*, and push them one by one to the *dequeue stack*.
 
-So not only is a sequence of $n$ *multipop* operations $O(n)$,
-but starting from an empty stack, any valid sequence of $n$
-mixed *push*, *pop* and *multipop* operations is total $O(n)$.
-This claim is quite brittle though: If we add a *multipush* operation to the mix,
-the claim no longer holds.
+This strategy works, because we will be popping from the *enqueue stack* in reverse order,
+and therefore in the end we will pop from the *dequeue stack* in the original order --
+which is exactly how a queue should behave.
+
+So, is this queue implementation efficient?
+When the dequeue stack is empty we have to move all elements from the enqueue stack.
+Therefore the worst-case complexity of a single call to `dequeue` is linear in the number of elements, $O(n)$.
+
+But what is the complexity of executing a large number of queue operations in sequence?
+This is a good example of how the accounting method can be applied.
+Assume that the basic operations `enqueue` and `dequeue` takes 1 time unit each, except when the dequeue stack is empty.
+In that case, `dequeue` will take an additional $m$ time units, where $m$ is the number of elements in the enqueue stack.
+Now, let us *pretend* that each `enqueue` costs 2 time units instead of one.
+That is, each `enqueue` will save one time unit in our account,
+and after enqueueing $m$ elements onto the enqueue stack we have $m$ units saved.
+
+Most of the time, a `dequeue` will be fast and then we do not have to use our account.
+Every once in a while, the dequeue stack is empty, and we have to use $m$ time units to move everything from the enqueue stack.
+But recall that if there are $m$ elements on the enqueue stack, there is also $m$ time units in our account.
+So, the expensive operation of moving the elements between the stacks is already paid for by our savings.
+This means that dequeueing has *amortised* constant time complexity.
 :::
-
 
 ### The potential method {#analysis-3:potential-method}
 
