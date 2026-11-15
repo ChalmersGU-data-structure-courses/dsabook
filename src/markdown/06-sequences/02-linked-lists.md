@@ -1,56 +1,44 @@
 
-## Linked lists {#sequences:linked-lists}
+## Stacks and queues as linked lists {#sequences:linked-lists}
 
 ::: TODO
-- Prio 1: shorten texts?
-- Prio 1: alternative title: "Stacks and queues as linked lists"?
 - Prio 2: can we find good invariants?
 :::
 
 A linked list is a kind of "distributed" data structure,
-in the sense that the main list object does not have full information of everything.
+in the sense that the main list object does not have full information about everything.
 The only thing that the list knows about is the *first* element,
-and instead each element knows which is the next element.
-
-So it is like a line of people facing backwards:
-the only thing a single person knows is who is standing behind them.
-A person can never know where in the line they stand, and when it is their turn.
-And the main "controller" of the list can only see the first person in the line.
-This means that there is no easy way of knowing the total number of people,
-if the controller needs that information it has to keep track of the size itself.
-
-@Fig:linked-list-intro shows two different representationso of
-a linked list with four values, where each value is encaspulated in a *list node*.
-Each node contains a link to the next node in the list.
-Notice that the rightmost node does not have any outgoing link.
+and each element only knows its *next* element.
+This means that there is no easy way of know the total number of elements in the list --
+if we need that information we have to keep track of the size in a variable.
 
 ![
     A linked list with four values.
     The right figure is a simplified representation of the same list.
 ](images/6.2-linked-list-example.svg){#fig:linked-list-intro}
 
-
+@Fig:linked-list-intro shows two different representations of
+a linked list with four values, where each value is encaspulated in a *list node*.
+Each node contains a link to the next node in the list.
+Notice that the rightmost node does not have any outgoing link.
 List nodes are distinct objects, as opposed to cells in an array.
-Therefore we declare a list node as a "wrapper" around a *value*,
-that also contains a pointer to the *next* node in the list:
-
-<!-- \newpage -->
+Therefore we declare a list node as a "wrapper" around a *value*
+and a pointer to the *next* node in the list:
 
     datatype Node:
-        next = null  // Pointer to the next node in the list
         value        // Value for this node
+        next = null  // Pointer to the next node in the list
 
-How does the list end?
+How can we know when the list ends?
 Most languages have a designated "null" value which represents nothing at all
 -- in Java it is called `null`, and in Python it is `None`.
-So we will use that: if *next* is "null" then we have reached the end of the list.
-This is denoted by crossing out the next pointer in final node in the figure above.
+So we will use this "null" value do denote the end of the list.
 
 A list built from these very simple nodes is called a [singly linked list]{.term},
 because each list node has a single pointer to the next node on the list.
 There are also *doubly linked lists*, where each node also has a pointer to the previous node,
-but we will not discuss them in this section.
-Singly linked lists are all we need to implement stacks and queues.
+but we will not discuss them here --
+singly linked lists are all we need to implement stacks and queues.
 
 
 ### Stacks as linked lists {#sequences:linked-stacks}
@@ -63,42 +51,28 @@ so the only information we need is a pointer to the *top* of the stack.
         top = null   // Pointer to the top node of the stack
         size = 0     // Size of the stack
 
-Note that we also added a variable *size* storing the number of elements.
+Note that we also add a variable `size` storing the number of elements.
 This is in theory unnecessary, but without it the only way of knowing the size
 would be to iterate through the whole stack which takes time.
-
-@Fig:linked-stack-queue shows a visual representation for a linked stack.
+@Fig:linked-stack-and-pop shows a visual representation of a linked stack.
+How can we implement the stack operations?
+<!-- To `push` something we create a new node and put it at the top,
+and to `pop` we delete the current topmost node. -->
 
 ![
-    Visual representations of linked stacks (left figure) and queues (right figure).
-](images/6.2-linked-stack-and-queue.svg){#fig:linked-stack-queue}
+    Visual representation of a linked stack, with "*every*" on the top.
+    When we *pop* the stack, the grey links and boxes are deleted, and dashed link is added.
+](images/6.2-linked-stack-and-pop.svg){#fig:linked-stack-and-pop}
 
-#### Pushing and popping
 
-Now, so how do we implement the stack operations on this linked list?
-This is quite straightforward:
-to *push* something we have to create a new node and put it at the top,
-and to *pop* we delete the current topmost node.
+#### Pushing
 
--   To *push* a value, we first create a new *Node* object wrapping the value.
-    Then we can point the node to the current *top* node,
-    and after that we reassign the stack *top* to the new node.
--   To *pop* from the stack, we first have to remember the wrapped value of the current *top* node.
-    Then we can reassign *top* to be the node that the top node points to.
-    Finally we can return the value we remembered.
+To `push` a value to the stack, we create a new `Node` object wrapping the value, and point it to the current `top` node.
+Then we reassign the stack `top` to the new node.
+Turning this description into pseudocode is straightforward,
+we just have to remember to increase the size of the stack afterwards:
 
-The only think we have to be careful with is the order in which we do things.
-For example, when popping we cannot start by reassigning the stack top,
-because then we cannot know the value to return.
-
-#### Implementing push and pop
-
-Turning *push* into pseudocode is straightforward,
-and we can even do all the actions in one single line of code.
-We also have to increase the size of the stack separately,
-because there is no way of doing that automatically.
-
-    push(stack, value):
+    function push(stack, value):
         stack.top = new Node(value, stack.top)
         stack.size += 1
 
@@ -116,26 +90,28 @@ Here is a proficiency exercise about pushing to linked stacks.
 ```
 :::
 
-Popping is also straightforward from the description above, as long as we remember to decrease the size of the size.
-The left part of @fig:pop-stack-enqueue-queue shows how this is done visually.
 
-    pop(stack):
-        removed = stack.top
-        stack.top = removed.next
+#### Popping
+
+To `pop` from the stack, we can simply reassign `top` to the node that the current top node points to,
+and decrease the size of the stack:
+
+    function pop(stack):
+        stack.top = stack.top.next
         stack.size -= 1
-        return removed.value
 
-After popping, what will happen with the old top node -- will we not have to delete it from memory?
-If we use a language that has automatic garbage collection (which most high-level languages do),
-then it will realise that there is nothing that points to the old top anymore,
-and so the garbage collector will automatically remove the old top.
+This is shown in the rightmost part of @fig:linked-stack-and-pop.
+What if we want to also return the popped value?
+Then we have to start by remembering the value of the current top node, before reassigning the stack `top`,
+and in the end we can return the remembered value.
+
+But wait a minute, what should we do with the old top node after it has been popped --
+do we have to remove it in some way?
+No, we don't have to do anything,
+if we use a language that uses *garbage collection* (which most high-level languages do).
+Such a language will automatically realise that there is nothing that refers to the old top anymore,
+and will automatically remove the old top.
 For low-level languages such as C, we need to tell the system to release the memory used by the old top node.
-
-![
-    Popping a linked stack (left), and enqueueing an element in a linked queue (right).
-    Grey links and boxes are deleted, and dashed ones are added by the operation.
-](images/6.2-linked-pop-and-enqueue.svg){#fig:pop-stack-enqueue-queue}
-
 
 ::: dsvis
 Here we show how to pop from a linked stack.
@@ -154,40 +130,43 @@ Here is a proficiency exercise about popping from linked stacks.
 
 ### Queues as linked lists {#sequences:linked-queues}
 
-Implementing a queue is a little more tricky.
-It is still easy to remove elements -- we can simply reuse the pop operation.
+Implementing a queue is just slightly more tricky.
+It is still easy to remove elements -- it is very similar to popping a stack.
 But now we do not want to add elements to the front, but instead at the very end.
-The only way to do that in a linked stack is to traverse all nodes until we find the end,
+The only way to do that in a simple linked list is to traverse all nodes until we find the end,
 and this is of course very slow if we have very many elements.
 
-The solution is to add an extra pointer to the "controller", which points to the back of the list.
-When it comes to queues we also use a different terminology than for stacks
--- so the first element is called the *front* (instead of "top"),
-and the last element is called the *rear* (instead of "bottom").
-@Fig:linked-stack-queue shows how this can look like.
+The solution is to add an extra pointer to the "controller" datatype, which points to the end of the list.
+To distinguish queues from stacks we also rename the variables:
+so the first element in the list is called the *front* (instead of "top"),
+and the last element is called the *back* (instead of "bottom" or "end").
+@Fig:linked-queue-and-enqueue shows how a queue can look like.
 
     datatype LinkedQueue:
         front = null   // Pointer to the front node
-        rear = null    // Pointer to the rear node
+        back = null    // Pointer to the back node
         size = 0       // Size of the queue
 
 
-#### Enqueueing and dequeueing
+![
+    Visual representation of a linked queue, as well as *enqueueing* an element.
+    The grey link is removed, and dashed ones are added by the *enqueue* operation.
+](images/6.2-linked-queue-and-enqueue.svg){#fig:linked-queue-and-enqueue}
 
-Dequeueing an element from a linked queue is the same as popping from a stack,
-but we have to remember to update the *rear* pointer when necessary.
-That is, if the queue becomes empty after we remove the *front* node,
-we have to remember to also delete the rear pointer,
+
+#### Dequeueing
+
+Removing the `front` element from a linked queue works the same as popping from a stack,
+but we have to remember to update the `back` pointer when necessary.
+That is, if the queue becomes empty after we remove the `front` node,
+we have to remember to also delete the back pointer,
 otherwise it will point to a non-existing element.
-(Note that the following code assumes that the queue is non-empty.)
 
-    dequeue(queue):
-        removed = queue.front
-        queue.front = removed.next
+    function dequeue(queue):
+        queue.front = queue.front.next
         if queue.front is null:
-            queue.rear = null
+            queue.back = null
         queue.size -= 1
-        return removed.value
 
 
 ::: dsvis
@@ -204,25 +183,26 @@ Here is a proficiency exercise about dequeuing from linked queues.
 ```
 :::
 
-But how about enqueueing?
-Now we want to add the new node to the rear instead of in the front.
-The important thing to remember is that the "old" rear has to be updated too.
-So we first have to point the current rear to the new node,
-and then we can reassign the rear to the new node.
+#### Enqueueing
 
-    enqueue(queue, value):
-        newRear = new Node(value, null)
+In a queue we want to add new nodes to the `back` instead of in the front.
+The important thing to remember is that the "old" back has to be updated too.
+So we first have to point the current back to the new node,
+and then we can reassign the back to the new node.
+
+    function enqueue(queue, value):
+        newBack = new Node(value, null)
         if queue.front is null:
-            queue.front = newRear
+            queue.front = newBack
         else:
-            queue.rear.next = newRear
-        queue.rear = newRear
+            queue.back.next = newBack
+        queue.back = newBack
         queue.size += 1
 
-Note that we have to treat the empty queue specially:
-we cannot reassign the current rear (because there is no currect rear yet),
-but instead we have to update both the *front* and the *rear* to the new node.
-The right part of @fig:pop-stack-enqueue-queue shows a visual representation of enqueueing in a non-empty queue.
+Note that we have to treat the empty queue separately:
+we cannot reassign `back.next` (because there is no back yet),
+but instead we have to update both `front` and `back` to point at the new node.
+The rightmost part of @fig:linked-queue-and-enqueue shows how enqueueing works.
 
 ::: dsvis
 Here we show how to enqueue an element to a linked queue.

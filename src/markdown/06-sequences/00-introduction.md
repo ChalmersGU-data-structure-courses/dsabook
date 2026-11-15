@@ -25,18 +25,18 @@ the [linked list]{.term} and the [dynamic array]{.term}.
 We also show how these representations can be used to
 implement important list-like structures such as the [stack]{.term} and the [queue]{.term}.
 
-A programmer who needs to use a stack or a queue in the application they are developing,
-should be able to use either of a linked list or a dynamic array.
-This is similar to the problem of sorting, where any of the algorithms we presented in
-[Chapter @sec:sorting-1] and [Chapter @sec:sorting-2] can be used for sorting an array.
+A programmer who wants to use a stack or a queue should not need to worry about how it is implemented.
+Regardless if it is a linked list or a dynamic array, they should work in the same way.
+This is similar to the problem of sorting, where any of the algorithms from
+[Chapters @sec:sorting-1] [and @sec:sorting-2] can be used for sorting an array.
 And just as for the sorting problem, we might want to choose a specific data structure because its performance characteristics fit best with the application we have in mind.
 
-Stacks and queues are both examples of sequences, or *lists*.
+Stacks and queues are both examples of *sequences*, or *lists*.
 When we discuss list data structures, we use some common terminology.
 The number of elements in a list is called its *length* or *size*,
 the beginning of the list is called the *head*, *top*, or *front*,
-and the end of the list is called the *tail*, *bottom*, *rear*, or *back*.
+and the end of the list is called the *tail*, *bottom*, *back*, or *rear*.
 
-Another thing you will learn in this chapter is the first example of *amortised complexity analysis*.
-A dynamic array has on the first sight a really bad worst-case complexity,
+Another thing you will see in this chapter is the first example of *amortised complexity analysis*.
+A dynamic array has at first sight a really bad worst-case complexity,
 but with a deeper analysis we will see that it actually performs very well.
