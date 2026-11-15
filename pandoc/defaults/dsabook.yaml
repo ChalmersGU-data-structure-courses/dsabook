@@ -7,7 +7,6 @@ metadata:
     - Peter Ljunglöf
     - Alex Gerdes
     - Jonas Duregård
-    - (editors)
 
   date: 2016–2026
 
@@ -21,8 +20,8 @@ metadata:
   tblPrefix: ["Table", "Tables"]
   lstPrefix: ["List", "Lists"]
   secPrefix: ["Section", "Sections"]
-  # Doesn't work, don't know why:
-  # subfigureChildTemplate: ($$i$$)
+  # Crossref templates must be parsed as Markdown, so they live in a separate
+  # metadata file (see `metadata-files` below).
 
   # Settings for panflute:
   panflute-path: pandoc/filters
@@ -33,6 +32,10 @@ metadata:
     - make_details
     - latex_figure
     - jsav_figure
+
+
+metadata-files:
+  - ${.}/crossref-templates.yaml
 
 
 variables:
