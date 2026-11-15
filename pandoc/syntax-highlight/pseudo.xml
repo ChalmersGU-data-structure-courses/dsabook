@@ -80,6 +80,7 @@
 			<item>to</item>
 			<item>downto</item>
 			<item>times</item>
+			<item>mod</item>
 			<item>where</item>
 		</list>
 		<list name="flow">
