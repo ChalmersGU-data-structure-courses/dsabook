@@ -37,7 +37,7 @@ since it naturally occurs quite frequently in some applications.
 If we run Insertion sort many times on many randomly generated arrays of size $n$,
 we could expect the `while`-loop on average to go halfway through the array before
 finding the correct insertion index.
-So, in the *average case* Insertion sort runs for half as many iterations as the worst case.
+So, in the *average case* Insertion sort runs for half as many iterations as the worst case, which is still $O(n^2)$.
 However, this definition of the average case depends on an important assumption:
 that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed.
 This is very rarely the case.
@@ -67,37 +67,20 @@ another is that it only occurs in the last position of `arr`.
 
 #### Which case should we use?
 
-The main advantage to analysing the worst case is
-that the algorithm is guaranteed to perform at least that
-well. This is especially important for real-time applications where occasional delays are unacceptable,
-such as an application for monitoring an air traffic control system,
-and for programs that accept data from untrusted sources,
-such as an online database system.
+The main advantage to analysing the worst case is that the algorithm is guaranteed to perform at least that well.
+This is especially important for real-time applications where occasional delays are unacceptable,
+such as an application for monitoring an air traffic control system.
 
-Using the worst case is also important if the data may have been contaminated -- for example by a malicious hacker. Even if the worst case is statistically unlikely to happen repeatedly by accident,
-someone can deliberately or accidentally construct a large data set that consistently hits the worst case.
-
-Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
-For example, all kinds of databases that are publicly available are a risk.
-Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
-If there is just a tiny risk of a worst-case scenario, this opens up for different kinds of cyberattacks.
+The worst case is also important for programs that accept data from untrusted sources, such as publicly available databases.
+Even if the worst case is statistically unlikely to happen by accident,
+someone can deliberately construct a large data set that consistently hits the worst case,
+and you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
+Relying on average-case analysis in such applications opens up for different kinds of cyberattacks.
 
 Average-case analysis requires a deep understanding of the specific application
 that the algorithm is used in, and it is easy to accidentally make false assumptions.
-For example, it was stated previously
-that Insertion sort on average runs for half the number of iterations as the worst case.
-This is only true if every possible array is equally likely as input.
-This assumption is usually *not* correct for most applications where we need to sort values.
-For example, if the input to the array consist of book authors,
-then the vast majority of arrays will never ever appear.
-
-This dependency on the specific application runs contrary to the goal of algorithm
-analysis, which is to study and compare algorithms themselves, independent from their
-specific applications. Consider Linear search again. It is faster when searching for an element
-appearing in the array (particularly if it appears early on), but finding a general answer
-to the question "how likely is a random element to appear in an array of size $n$" is
-entirely impossible.
-
+For example, the average case for Insertion sort above assumes that every possible array is equally likely as input,
+but if the array consists of book authors, the vast majority of arrays will never ever appear.
 This problem is not just limited to sorting and searching.
 How the data is distributed has a significant effect on
 almost all data structures and algorithms, such as those based on
