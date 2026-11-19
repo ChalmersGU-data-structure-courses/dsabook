@@ -1,8 +1,7 @@
 
-## Best, worst, and average cases {#analysis-1:complexity-cases}
+## Best-, worst-, and average-case complexity {#analysis-1:complexity-cases}
 
 ::: TODO
-- Prio 1: change title to "Best, worst, average case complexity"??
 - Prio 2: shorten the text in general
 :::
 
@@ -12,7 +11,7 @@ A simple example is Linear search. We know that in the worst case it does $n$ co
 an array of size n, but if we are searching for the particular value at the very start of the array,
 it only requires a single comparison.
 
-So far, we have only studied the worst case complexity of algorithms.
+So far, we have only studied the worst-case complexity of algorithms.
 When we say that Linear search is $O(n)$, we only consider the slowest possible
 input of size $n$. We can also analyse the *best-case*, and *average-case* complexity of an algorithm.
 
