@@ -6,40 +6,39 @@
 - Prio 1: introduce two DS: array and "sorted array", mention *invariant* for the sorted array
 :::
 
-***Text to be written here, about data structures***
+The term data structure is loosely defined as a way of organising a
+collection of data items in computer memory, along with operations for
+accessing and modifying that data. Generally speaking that includes two things:
 
-<!-- (Here are texts from the old book, for inspiration)
+* A *data representation*, a description of how the data is stored in computer memory
+* Efficient algorithms to access and modify the data
 
-In the most general sense, a *data structure* is any
-data representation and its associated operations.
-Even an integer or floating point number stored on the computer can be
-viewed as a simple data structure. More commonly, people use the term
-"data structure" to mean an organisation or structuring for a
-collection of data items. A sorted list of integers stored in an array
-is an example of such a structuring.
+One of the simplest and most useful example of a data structure is the array.
+We will be using arrays extensively as a building block for more complex data structures.
+An array stores a sequence of elements in a contiguous block of memory.
+As a data structure, arrays have two important limitations:
 
-A *data structure* is any kind of representation of some data, together with associated operations.
-This can mean almost anything, and even a simple integer or a string is a data structure.
-But in general we usually mean a way of organising a *collection* of data items,
-possibly related to each other in different ways.
-Using the right data structure becomes important when we have many many elements to store,
-such as all 10 million poeple living in Sweden, or all railways in Europe and how they connect with each other.
-An array of strings is one simple example, and in this book we will
-introduce many data structures, such as *linked lists*, *heaps*, *search trees*, *hash tables*, and *graphs*.
-They all come with different characteristics, advantages and disadvantages,
-and one important takeaway is learning when and how to use each one of them.
+* All elements must have the same size in memory (for objects like strings, the elements are pointers)
+* The size of an array cannot be extended after creation
 
-Many data structures can be used for different purposes,
-and for many purposes there are several different data structures that can be used.
-We use *abstract data types* to categorise these different purposes,
-for example by describing which data structures that can be used as
-*stacks*, *queues*, *priority queues*, *sets*, and *maps*.
+The first limitations stems from wanting efficient *indexing*, to find
+the element at position $i$, we compute its memory address
+offset from the start of the array. The second limitation is because of how
+computer memory is allocated, the memory immediately around the array may be occupied
+by other data, so while the array can have any initial size, it cannot grow after
+it is created.
 
-With the help of asymptotic complexity analysis, we can compare data structures and algorithms.
-For example, complexity analysis tells us that searching in a sorted array is much more efficient
-than searching in an unsorted array.
-But this comes with a cost, because we have to keep the array sorted,
-and it can take quite some time to do this if we want to add or remove elements often.
-In this case it can be more efficient to use another data structure, such as a search tree or a hash table.
--->
+If you are used to programming in Python, you may object that new elements
+can be appended to arrays. That is because lists in Python are not arrays,
+they are *dynamic arrays* (see @sec:sequences:dynamic-arrays).
 
+A small variation of the array is the *sorted array*. A sorted array is an
+array with an *ordering invariant*, such as an array of integers in
+ascending order. The invariant must be preserved throughout the lifetime of
+the sorted array. Any operation that modifies the array must ensure it remains sorted,
+but it also allows operations to assume the array is sorted initially.
+
+The other fundamental building block of data structures in this book are
+objects as those in object oriented programming. Combinations of arrays
+and objects with various invariants form the data representation of every
+data structure taught in this book.

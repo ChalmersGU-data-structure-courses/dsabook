@@ -8,7 +8,7 @@
 An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
 This is done by specifying what operations that can be performed on it, and how these operations should behave.
 Note that an ADT does not dictate *how* the operations should be implemented, and multiple implementations are often possible.
-By hiding the implementation details from the user, it is possible to change the underlying representation or an algorithm,
+By hiding the implementation details from the user, it is possible to change the underlying representation
 without changing the API of the abstract data type.
 Using abstraction to handle complexity is a core principle throughout computer science.
 
