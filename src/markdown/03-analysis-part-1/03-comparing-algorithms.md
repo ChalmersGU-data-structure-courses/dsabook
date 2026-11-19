@@ -1,14 +1,6 @@
 
 ## Comparing algorithm performance {#analysis-1:comparing-algorithms}
 
-::: TODO
-- Prio 1: change the title - it should contain "complexity" in some way. E.g., "Time complexity of algorithms"
-- Prio 1: It is merged with "Growth rates" - make sure the text is coherent
-- Prio 1: the text should be shortened
-- Prio 1: the examples should be shorter
-- Prio 1: change the Bubble sort example to Insertion sort. Shorten it - the complexity is already inferred in 2.7, so we don't need to infer it again. Instead discuss that the time function is complex and we want a simplification.
-:::
-
 If you have two algorithms that solve the same problem, how do you compare their performance?
 One way is to do an [empirical analysis]{.term}:
 Implement both algorithms and test them on various inputs, then measure the runtime.
@@ -30,21 +22,106 @@ Even if you manage to solve all these issues and compare two algorithms,
 when someone else designs a third algorithm, they will not be able to reproduce your
 exact setup, so your results will not be as valuable to them.
 For these reasons, empirical analysis is notoriously unreliable for comparing algorithms.
-Luckily, there is a much better option: [asymptotic analysis]{.term} and
-computational complexity.
-Computational complexity is a big and very important topic.
-We introduce the basics here, and continue in in
+Luckily, there is a much better option: [asymptotic analysis]{.term}, which is part of the large and important field of computational complexity.
+We introduce the basics here, and continue in
 Chapters [-@sec:analysis-2] and [-@sec:analysis-3].
 
-The basic idea is to describe how an algorithm behaves as the input size grows.
-We do this by classifying algorithms into *complexity classes*.
-We have already been doing this in earlier chapters,
-when saying that Binary search is logarithmic time,
-Linear search is linear time, and various sorting algorithms are quadratic time.
-This is generalised by the big-$O$ notation (pronounced "big oh notation" or "ordo notation"),
-using a mathematical expression for each complexity class:
-we say Binary search is $O(\log(n))$, Linear search is $O(n)$
-and Selection and Insertion sort are $O(n^2)$.
+
+#### Time functions and growth rates {#analysis-1:order-of-growth}
+
+To compare algorithms independently of hardware, we describe their running time as a *time function* $T(n)$: the running time of the worst-case input of size $n$, measured in some abstract unit of time.
+What matters is not the exact value of $T(n)$, but how fast it grows when $n$ grows.
+
+Imagine that you have 10,000 books divided into 100 bookshelves, and you want to sort them so that you can find them quickly using binary search.
+You use one of the sorting algorithms from [Chapter @sec:sorting-1], and it takes you one hour to sort the 100 books on one shelf.
+How long will it take to sort all 10,000 books?
+The running time of these algorithms is proportional to $n^2$, so if we double the number of books the time quadruples, and if we multiply it by 100 the time is multiplied by $100^2$ = 10,000.
+Sorting all books will take 10,000 hours, and even a sorting robot that is 100 times faster than you will take 100 hours.
+A better investment than a faster robot is a faster algorithm.
+
+Determining $T(n)$ exactly is complicated, and requires a multitude of assumptions about the hardware.
+But as a thought experiment we can assume something like $T(n)=3n+5$, using some unit of time, and use that to determine how large problems can be solved in a given timeframe.
+@Fig:problem-size-speedup shows this for some example time functions.
+
+<div id="fig:problem-size-speedup">
+Time function $T(n)$       1 ms        10 ms        100 ms       1 second
+-----------------------  ------  -----------  ------------  -------------
+$2\cdot\log_2(n)$          $32$    $10^{15}$    $10^{150}$    $10^{1500}$
+$n/2$                      $20$        $200$     $2{,}000$     $20{,}000$
+$n$                        $10$        $100$     $1{,}000$     $10{,}000$
+$n\cdot\log_2(n)/4$        $11$         $66$         $453$      $3{,}408$
+$n^2/10$                   $10$         $31$         $100$          $316$
+$2^n/20$                    $7$         $11$          $14$           $17$
+
+Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
+for different time functions. We assume that every operation takes 0.1 ms.
+</div>
+
+The table illustrates several important points:
+
+- The functions $n$ and $n/2$ are both *linear*; only the constant factor differs.
+  In both cases, if we spend ten times more time we can solve a ten times larger problem.
+- The *logarithmic* function, $2\cdot\log_2(n)$, could be the time to find a book using binary search.
+  In 1 ms we can search 32 books, but in 100 ms we can search a library with more books than there are atoms in the universe.
+  Even if we doubled the speed of the linear function a hundred times, the logarithmic function would still get more done in a single second.
+- The *quadratic* function, $n^2/10$, benefits much less from extra time:
+  if we let it run 100 times longer, it can only solve a problem that is $\sqrt{100}=10$ times larger.
+- The *linearithmic* (or *log-linear*) function, $n\log_2(n)/4$, improves almost like the linear one, but not quite.
+  It is a common growth rate for many algorithms later in this book, such as Mergesort (@sec:sorting-2:mergesort).
+- The *exponential* function, $2^n/20$, can only solve very small problems.
+  Spending 10 times longer only increases the problem size by $\log_2(10) \approx 3$, an addition rather than a multiplication.
+  A problem of size 30 takes 15 hours, and a problem of size 50 more than 1,700 years!
+
+In summary, a faster computer gives a speed-up of a different nature than a faster algorithm: the former multiplies the speed by a constant, the latter changes the growth rate.
+
+@Fig:growthGraphs plots the same time functions, and @tbl:growth-rates shows their values for increasingly large $n$.
+The quadratic $n^2/10$ becomes slower than the linear $n$ already from $n > 10$, despite having a smaller constant factor, and the gap only widens as $n$ grows.
+In general, $n^a$ always grows faster than $\log(n)^b$ for all constants $a,b>0$, and $a^n$ always grows faster than $n^b$ for all constants $a>1$ and $b>0$.
+
+![
+    Illustration of growth rates for the same time functions as in @fig:problem-size-speedup.
+    The right view shows the lower-left portion of the left view.
+    The horizontal axis represents input size.
+    The vertical axis can represent time, space, or any other measure of computational cost.
+](images/growth_rates_graph.svg){#fig:growthGraphs width=100%}
+
+Time function $T(n)$      $n=10$               $100$              $1,000$            $10^4$         $10^5$
+-------------------------  --------  ------------------  -------------------    --------------    -----------
+$2\cdot\log_2(n)$               $7$                $13$                 $20$              $27$           $33$
+$n/2$                           $5$                $50$                $500$         $5{,}000$     $50{,}000$
+$n$                            $10$               $100$            $1{,}000$        $10{,}000$    $100{,}000$
+$n\cdot\log_2(n)/4$             $8$               $166$            $2{,}491$        $33{,}219$    $415{,}241$
+$n^2/10$                       $10$           $1{,}000$          $100{,}000$  $10{,}000{,}000$         $10^9$
+$2^n/20$                       $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$          $\cdots$       $\cdots$
+
+: Costs for representative growth rates {#tbl:growth-rates}
+
+::: dsvis
+#### Growth rates exercises
+
+```{.jsav-embedded src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"}
+```
+
+```{.jsav-embedded src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"}
+```
+:::
+
+<!-- TODO
+To make students more engaged in the GrowthRates exercise, we may need a
+tool that allows students to input two growth rate functions. Then the
+tool should plot the graph of both functions and mark their crossing
+point. The student also should be allowed to play with the constant
+values for both functions and see that this only changes the crossing
+point but doesn't change which function grows faster than the other.
+-->
+
+
+#### Complexity classes and big-$O$ notation
+
+Instead of working with exact time functions, which are complicated and depend on many assumptions, we classify them into *complexity classes* by their growth rate.
+We have already done this in earlier chapters, when saying that Binary search is logarithmic time, Linear search is linear time, and various sorting algorithms are quadratic time.
+This is generalised by the big-$O$ notation (pronounced "big oh notation" or in Swedish "ordo-notation"), using a mathematical expression for each complexity class.
+We say Binary search is $O(\log(n))$, Linear search is $O(n)$ and Selection and Insertion sort are $O(n^2)$.
 A big-$O$ formula cannot be used to calculate the number of seconds
 it takes to sort a list, but it describes quite accurately how
 execution time increases when the input size grows.
@@ -52,23 +129,18 @@ execution time increases when the input size grows.
 With a bit of practice, determining the complexity class of an algorithm or
 a program is quick and easy.
 This helps us reliably compare algorithms without running any tests.
-The basic rule of thumb is that, whenever $n$ is sufficiently large,
+The basic rule of thumb is that, whenever $n$ is sufficiently large,
 an $O(\log(n))$ algorithm is better than an $O(n)$ algorithm, which in turn is better than an $O(n^2)$ one.
 The only time we need to run benchmarks, optimise code, and tweak compiler settings
 is when two algorithms are in the same complexity class.
 
-A very important complexity class i $O(1)$, constant complexity. The $1$ here should
-not be understood as the exact number $1$, but as any constant value independent of $n$.
-This will make more sense after we introduce the formal definition of big-$O$ notation,
-but for now any part of an algorithm where the execution time does not depend on input
-size is considered constant time, $O(1)$. Swapping two elements in an array is a good
-example of a tiny operation that is $O(1)$ -- it takes the same amount of time to swap
-two elements in a huge array as it does in a tiny array.
+Note how much detail is simplified away by using complexity classes:
+$n$ and $n/2$ are both $O(n)$, and $n^2/10$ is $O(n^2)$.
+This may seem like a weakness of big-$O$, but as the table above shows, it is in fact a strength: runtime is only interesting for large $n$, since all algorithms are fast for small inputs, and for large $n$ the growth rate matters much more than any constant factor.
 
-#### What are we measuring?
+#### What are we analysing?
 
-In general, complexity can be used to measure the use of various
-*computational resources* of an algorithm.
+In general, complexity can be used to analyse the use of various *computational resources* of an algorithm.
 By far the most common resource is running time. When we say
 Insertion sort is $O(n^2)$, we mean its execution time will grow
 quadratically with the size of the input. But we can also measure
@@ -78,8 +150,8 @@ Using space complexity, we can give a more precise meaning to the concept of in-
 sorting (@sec:sorting-1:in-place-sorting).
 An in-place algorithm typically has space complexity $O(1)$,
 meaning that its memory usage is independent of the size of the input.^[
-    Strictly speaking, resursive algorithms never use constant memory,
-    because every resursive call uses up a little memory for book-keeping.
+    Strictly speaking, recursive algorithms never use constant memory,
+    because every recursive call uses up a little memory for book-keeping.
     Therefore one often excludes the book-keeping memory when talking about in-place recursive algorithms.
 ]
 A sorting algorithm that is *not* in-place has to allocate memory for the resulting array
@@ -117,9 +189,12 @@ have the number of rows and columns as separate input sizes, or just the total n
 elements in the matrix, depending on the level of detail needed to compare two algorithms.
 
 The important takeaway here is that when big-$O$ notation is used,
-it is essential to keep in mind what the input size $n$ is.
+it is important to keep in mind what the input size $n$ is.
 
 #### Constant time operations
+
+An important complexity class is $O(1)$, constant time.
+The $1$ here should not be understood as the exact number $1$, but as any constant value independent of the input size $n$.
 
 A good initial understanding of time complexity is as an estimate of the number of "basic operations"
 that are performed by the algorithm in the worst case for a given input size.
@@ -130,6 +205,7 @@ That is, every basic operation is $O(1)$ time.
 
 Adding or comparing two numbers are examples of basic operations in most programming languages,
 as are assigning a variable or retrieving an array value at a given position.
+Swapping two elements in an array is also $O(1)$, it takes the same amount of time in a huge array as in a tiny one.
 But summing all values in an array of size $n$ is not $O(1)$, because the time depends on the size of the array.
 Creating a new array of size $10$ is $O(1)$, but creating a new array of size $n$ is $O(n)$, at least
 if the content is cleared after the array is created (which is done by almost all programming languages).
@@ -143,41 +219,11 @@ each individual comparison is $O(n)$ would mean that when we double the number o
 the time for a single comparison would double. In this example, we can consider comparisons of strings
 to be $O(1)$, because we can assume that the strings are never longer than, say, 100 characters.
 
-<!--
-::: {.example #ex:linear-search-analysis}
-#### Example: Linear search
-
-Recall the linear search algorithm from @sec:sorting-1:linear-search,
-it searches for a given value in an array.
-The size $n$ of the input is the length of the array.
-The algorithm looks at each array value in turn, comparing with the given value.
-If the value is found it returns the position, otherwise it continues until the end of the array.
-
-    linearSearch(arr, val):
-        for i in 0 .. arr.size - 1:   // For each element in arr,
-            if arr[i] == val:         //     if we found it
-                return i              //         return this position.
-        return null                   // Otherwise, return null
-
-What basic (constant time) operations are we counting in this algorithm?
-The most obvious is counting the number of *comparisons*, that is, the number of times the `if`-test is run.
-For most situations, it is reasonable to assume that one such comparison takes a fixed amount of time,
-regardless of the values of $n$, so it is a basic operation.
-
-There are also some hidden basic operations.
-Advancing the loop means increasing the counter $i$ by one, an arithmetic operation and a memory write,
-each taking constant time. There is also some initialization of the variables *arr* and *val*, and
-performing a single return from the function, all of these are constant time,
-and they are only performed once each.
-:::
--->
-
 ::: {.example #ex:median-of-three-analysis}
 #### Example: Calculating the median-of-three
 
-The following is a function that calculates the *median* of the first,
-the middle and the last values in a given array.
-(This is a useful *pivot* selection for Quicksort, which will be discussed in @sec:sorting-2:quicksort.)
+The following function calculates the *median* of the first, the middle and the last values in an array.
+This is a useful *pivot* selection for Quicksort, see @sec:sorting-2:quicksort.
 
     function medianOfThree(arr):
         n = arr.size
@@ -191,214 +237,23 @@ the middle and the last values in a given array.
             else if b < c: return c
             else:          return b
 
-When the function is called it will do at most four variable assignments and three comparisons,
-no matter how large the array is.
-Let us assume that an assignment takes $c_1$ time, and a comparison takes $c_2$ time.
-Then the runtime equation for the function is $T(n) = 4\cdot c_1+3\cdot c_2$.
-This indicates that the size of the input $n$ has no effect on the running time.
-The whole function is $O(1)$ (constant time)!
+The function does at most four assignments and three comparisons, no matter how large the array is.
+If an assignment takes $c_1$ time and a comparison $c_2$ time, then $T(n) = 4c_1+3c_2$,
+which does not depend on $n$: the function is $O(1)$.
 :::
 
-::: {.example #ex:bubble-sort-analysis}
-#### Example: Bubble sort
+::: {.example #ex:insertion-sort-analysis}
+#### Example: Insertion sort
 
-Recall the Bubble sort algorithm from @sec:sorting-1:bubble-sort:
+In @sec:sorting-1:performance-analysis we saw that Insertion sort (@sec:sorting-1:insertion-sort)
+does $1+2+\cdots+(n-1) = n(n-1)/2$ comparisons and swaps in the worst case.
+If we try to write down its exact time function, we get something like
 
-    function bubbleSort(arr):
-        n = arr.size
-        for i in 0 .. n-2:
-            for j in 1 .. n-i-1:
-                if arr[j-1] > arr[j]:
-                    swap(arr, j-1, j)
+$$T(n) = c_1 + c_2(n-1) + c_3\frac{n(n-1)}{2} = \frac{c_3}{2}n^2 + \Big(c_2-\frac{c_3}{2}\Big)n + (c_1-c_2)$$
 
-In addition to the initialization of the variable and advancing the loops as before,
-there are two basic operations:
-the `if`-clause comparison and the `swap` operation.
-
-Technically, the `swap` operation does several basic operations, but the total
-time to perform a fixed number of constant time operations is still a constant.
-This highlights an important aspect of big-$O$: It does not matter if we perform
-one, two, or three constant time operations, the total time is still $O(1)$, since it
-is independent from the input size $n$. In fact we could look at the whole if-statement
-and conclude that comparing and swapping if needed is a $O(1)$, considering the whole
-body of the loop a single constant time operation.
-
-The outer $i$ loop runs $n$ times,
-and for each iteration the inner $j$ loop runs at most $n$ times.
-To be more precise, the inner loop first runs $n$ times,
-then $n-1$ times, then $n-2$ times, and so on.
-The total number of comparisons is therefore
-$n+(n-1)+(n-2)+\cdots+1$, which can be simplified to $n(n+1)/2$.
-This is approximately $\tfrac{1}{2} n^2$, meaning that
-the running time is $T(n) \approx \tfrac{c_3}{2} n^2$.
-This is proportional to $n^2$, and we call this a *quadratic* running time, $O(n^2)$
+where $c_1$ is the cost of the initialisation, $c_2$ the cost of one iteration of the outer loop,
+and $c_3$ the cost of one iteration of the inner loop.
+This formula is already complicated for such a simple algorithm, and the constants depend on the hardware anyway.
+But for large $n$ the $n^2$ term dominates everything else, so all we really need to know is that Insertion sort is $O(n^2)$.
+In [Chapter @sec:analysis-2] we will make this kind of simplification precise.
 :::
-
-Note how much detail is simplified away by using complexity classes.
-We do not differentiate between $n^2$ and $\tfrac{1}{2}n^2$.
-There is no "triangular" complexity class.
-This may seem like a weakness of big-$O$, but it is in fact
-a strength that makes it such a useful tool for comparing algorithms.
-To convince yourself of this, consider this: runtime is only interesting
-for very large $n$. All algorithms are fast for small inputs.
-Even if an algorithm is $\tfrac{1}{100}n^2$, it is still much slower than
-any $O(n)$ algorithm, for any sufficiently large $n$.
-
-
-
-### Order of growth and time functions {#analysis-1:order-of-growth}
-
-Imagine that you are a bookworm and you have 10,000 books divided into 100 bookshelfs.
-Now you want to sort all your books so that you can search for them quickly (using binary search of course).
-You use one of the sorting algorithms from [Chapter @sec:sorting-1]
-and notice it takes one hour to sort the 100 books in one shelf.
-
-- How long time will it take to sort all 10,000 books?
-- If you buy a sorting robot that is 100 times faster than you are,
-  will you finish sorting books in one hour?
-
-The sorting algorithms from [Chapter @sec:sorting-1]
-all have a running time proportional to $n^2$ where $n$ is the number of books.
-Using our new big-$O$ notation, the algorithms have $O(n^2)$ time complexity.
-This means that if you double the size of the input, the running time will quadruple.
-If you multiply the input size by 100, the running time will be $100^2$ = 10,000 times longer.
-So, it will take 10,000 hours for you to sort all the books,
-and your very expensive sorting robot will still take 100 hours.
-
-So maybe it is not worth the money to buy a faster robot,
-but instead to try to find a sorting algorithm that has better algorithmic complexity.
-
-
-#### Getting a faster computer
-
-How much larger problems can a faster computer solve in the same amount of time?
-Or, equivalently, how much larger problems can we solve if we spend more time?
-
-A more formal way of saying "linear search takes $O(n)$ time", is that
-if $T(n)$ is a *time function* that computes the exact running time of
-the worst case input of size $n$, then the growth rate of $T(n)$ is $O(n)$.
-
-Determining $T(n)$ exactly for any algorithm is complicated, and
-requires a multitude of assumptions about the hardware running it.
-But as a thought experiment we can assume something like $T(n)=3n+5$
-for an algorithm, using some unit of time, and use that to determine
-how large problems can be solved in a given timeframe.
-@Fig:problem-size-speedup shows this for some example time functions.
-
-<div id="fig:problem-size-speedup">
-Time function ($T(n)$)     1 ms        10 ms        100 ms       1 second
------------------------  ------  -----------  ------------  -------------
-$2\cdot\log_2(n)$          $32$    $10^{15}$    $10^{150}$    $10^{1500}$
-$n/2$                      $20$        $200$     $2{,}000$     $20{,}000$
-$n$                        $10$        $100$     $1{,}000$     $10{,}000$
-$n\cdot\log_2(n)/4$        $11$         $66$         $453$      $3{,}408$
-$n^2/10$                   $10$         $31$         $100$          $316$
-$2^n/20$                    $7$         $11$          $14$           $17$
-
-Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
-for different various time functions. We assume that every operation takes 0.1 ms.
-</div>
-
-This table illustrates many important points.
-The two equations $n$ and $n/2$ are both *linear*; only the value of the constant factor has changed.
-In both cases, if we spend ten times more work we can solve a ten times larger problem.
-
-The table also illustrates why a factor two speed-up is not that impressive compared to a speed-up from
-linear time to logarithmic time. If we managed to double the speed of the linear function
-again and again, a hundred times, the logarithmic function would still get more done even
-in a modest time frame of a single second. For say an hour, the difference would
-be much more extreme.
-
-The logarithmic growth rate could be the time to find a book in your sorted bookshelf using binary search
-(recall @sec:sorting-1:binary-search).
-In this case we search 32 books in one millisecond.
-But in 10 ms we can search in $10^{15}$ books,
-and in 100 ms we can search a library with more books than there are atoms in the universe.
-
-The *quadratic* algorithm, $n^2/10$, does not receive nearly as great an improvement
-from the longer working time as a linear algorithm.
-Instead of an improvement by a factor of hundred (if we let it run for 100 times longer),
-the improvement is only the square root of that: $\sqrt{100}=10$.
-
-The algorithm in between linear and quadratic, $T(n) = n\log_2(n)/4$,
-improves almost like the linear one, but not quite.
-Its growth rate is sometimes called *linearithmic* or *log-linear*,
-and it is a common growth rate for many algorithms shown later on in this book
-(for example the Mergesort algorithm in @sec:sorting-2:mergesort).
-In big-$O$ notation, this is the complexity class $O(n\log(n))$.
-
-Note that something special happens in the case of the *exponential* algorithm, $T(n) = 2^n/20$.
-It can only be used to solve very small problems,
-and if you spend 10 times longer it can still only solve a problem of size $n+3$
-(to be precise, it is $n + \log_2(10)$).
-The increase in problem size for an exponential algorithm is by a constant addition, not by a multiplicative factor.
-If you spend 1 second instead of 1 millisecond you can still only solve a problem of size 17,
-and it would take you 15 hours to solve a problem of size 30.
-A problem of size 50 will take more than 1,700 years!
-Thus, exponential growth is radically different than the other growth rates shown in the table.
-
-In summary, buying a faster computer can have some benefits, but they are of a different nature
-than an algorithmic speed-up, going from a slow to a faster complexity class.
-
-
-#### Plotting and tabulating growth rates
-
-Another way of comparing different growth rates is to draw a graph.
-@Fig:growthGraphs plots the six growth rate equations from @fig:problem-size-speedup earlier.
-As you can see from the graph, the difference between a linear algorithm
-with cost $T(n) = n$ and a quadratic algorithm with cost $T(n) = n^2/10$
-becomes tremendous as $n$ grows.
-From $n > 10$ the quadratic algorithm becomes slower than the linear,
-and this difference increases as $n$ grows.
-This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
-
-![
-    Illustration of growth rates for the same time functions as in @fig:problem-size-speedup.
-    The right view shows the lower-left portion of the left view.
-    The horizontal axis represents input size.
-    The vertical axis can represent time, space, or any other measure of computational cost.
-](images/growth_rates_graph.svg){#fig:growthGraphs width=100%}
-
-The graph also shows that the equation $T(n) = n\log_2(n)/4$
-grows somewhat more quickly than the linear equations,
-but not nearly so quickly as the quadratic equation.
-In fact, $n^a$ always grows faster than both $\log(n)^b$ and $\log(n^b)$, for all constants $a,b>1$.
-We also see that exponential algorithms are prohibitively expensive for even modest values of $n$.
-Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
-
-Finally, @tbl:growth-rates shows the difference between the growth rates when $n$ becomes larger and larger.
-<!-- OPENDSA: START -->
-Once again, we see that the growth rate has a tremendous effect on the resources consumed by an algorithm.
-<!-- OPENDSA: END -->
-
-
-Time function  ($T(n)$)      $n=10$               $100$              $1,000$            $10^4$         $10^5$
--------------------------  --------  ------------------  -------------------    --------------    -----------
-$2\cdot\log_2(n)$               $7$                $13$                 $20$              $27$           $33$
-$n/2$                           $5$                $50$                $500$         $5{,}000$     $50{,}000$
-$n$                            $10$               $100$            $1{,}000$        $10{,}000$    $100{,}000$
-$n\cdot\log_2(n)/4$             $8$               $166$            $2{,}491$        $33{,}219$    $415{,}241$
-$n^2/10$                       $10$           $1{,}000$          $100{,}000$  $10{,}000{,}000$         $10^9$
-$2^n/20$                       $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$          $\cdots$       $\cdots$
-
-: Costs for representative growth rates {#tbl:growth-rates}
-
-
-::: dsvis
-#### Growth rates exercises
-
-```{.jsav-embedded src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"}
-```
-
-```{.jsav-embedded src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"}
-```
-:::
-
-<!-- TODO
-To make students more engaged in the GrowthRates exercise, we may need a
-tool that allows students to input two growth rate functions. Then the
-tool should plot the graph of both functions and mark their crossing
-point. The student also should be allowed to play with the constant
-values for both functions and see that this only changes the crossing
-point but doesn't change which function grows faster than the other.
--->

@@ -1,14 +1,9 @@
 
 ## Invariants, preconditions, and postconditions {#analysis-1:invariants}
 
-::: TODO
-- Done?
-:::
-
 When we formulate a problem, and describe a data structure or an algorithm,
-it is useful to describe them in terms of [invariants]{.term}.
-Simply formulated, an invariant is a condition that must always hold for a data structure,
-or sometimes only during the execution of an algorithm.
+it is useful to describe them using [invariants]{.term}.
+Simply formulated, an invariant is a condition that must always hold for a data structure, or sometimes only during the execution of an algorithm.
 
 Invariants are very useful tools for analysing the correctness of an algorithm,
 but they also have a pedagogical value in promoting understanding of how a data
@@ -25,7 +20,7 @@ the minimal element, we know that it is in the first position.
 
 #### Invariants as pre- and postconditions
 
-Preconditions and postconditions are a nice way to specify the behaviour of on an algorithm or a program.
+Preconditions and postconditions are a precise way to specify the behaviour of an algorithm or a program.
 Using them we can express what we assume of the inputs to the algorithm,
 and what can we promise about the output if the input is well-formed.
 Invariants fit nicely with this -- if our data structure has an invariant, that invariant

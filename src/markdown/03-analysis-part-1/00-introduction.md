@@ -1,10 +1,6 @@
 
 # Algorithm analysis, part 1 {#analysis-1}
 
-::: TODO
-- Done?
-:::
-
 This chapter has two main parts:
 How to best communicate algorithms,
 and how to compare performance of algorithms.
@@ -35,4 +31,4 @@ for communicating and reasoning about performance,
 not just for data structures but for programming in general.
 In this chapter we aim to give an incomplete,
 but practically applicable understanding of big-$O$ and complexity,
-that we further expand in [Chapters @sec:analysis-2] and [-@sec:analysis-3].
+which we further expand in [Chapters @sec:analysis-2] and [-@sec:analysis-3].

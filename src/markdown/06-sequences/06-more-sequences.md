@@ -8,7 +8,7 @@
 Stacks and queues are very simple abstract datatypes, and also very commonly used.
 Many many algorithms make use of some kind of "agenda",
 where they can remember things that have to be taken care of and then process them in the right order,
-and most of them do not require anything more complicated than a stack or a queue.
+and most of these do not require anything more complicated than a stack or a queue.
 
 But there are algorithms and programs that need sequences with more capabilities.
 It could be that they order the elements in a more "intelligent" way,
@@ -42,7 +42,7 @@ General lists
 
 Double-ended queues
 :   A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.
-    This means that we can add and remove elements both from the front and the rear
+    This means that we can add and remove elements both from the front and the back
     (but not anywhere in the middle).
     Deques can be implemented in a similar way to stacks and queues, either as dynamic arrays or linked lists.
     However, to be able to implement all operations, the linked list must be a *double-linked list*.

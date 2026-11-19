@@ -1,10 +1,6 @@
 
 ## Problems, algorithms, and programs {#analysis-1:problems-and-algorithms}
 
-::: TODO
-- Prio 1: Shorten the text a bit more - in particular the "Problems" section, it is almost 2x longer than the others
-:::
-
 Problems, algorithms, and computer programs are distinct but related concepts
 in software development:
 We use programs to *implement* algorithms, which in turn *solve* problems.
@@ -12,49 +8,22 @@ We use programs to *implement* algorithms, which in turn *solve* problems.
 #### Problems
 
 We can study problems separately from any specific algorithms that solve them.
-For example, we can look at the problem of sorting an array and know that for the input
-[3,1,2], the output of any algorithm solving the problem should be [1,2,3],
-without even knowing if such an algorithm exists.
+For example, we know that sorting the input [3,1,2] should give [1,2,3], without even knowing if an algorithm for it exists.
 Descriptions of problems often include:
 
 - *preconditions* on the input, such as an array being sorted or containing only positive integers;
 - *postconditions* on the output, for example that the result of sorting is a sorted permutation of the input;
-- *additional capabilities*, such that the elements of an array are comparable;
-- *performance requirements*, like taking at most logarithmic time or, using constant additional memory.
+- *additional capabilities*, such as the elements of an array being comparable;
+- *performance requirements*, like taking at most logarithmic time, or using constant additional memory.
 
-Analysing and classifying problems is a large research area, that we mostly avoid in this book.
-More than just finding an algorithm that solves a problem,
-it is sometimes possible to prove that a class of problems cannot be solved efficiently.
-However, we can still consider problems separately from the algorithms that solve them,
-and how to formulate a problem precisely.
-For example, in [Chapter @sec:sorting-1] we introduced the problem of sorting an array,
-and showed that there are algorithms that can do this in *quadratic* time.
-The natural question is then, is it possible to do it more efficiently?
-We will see in [Chapter @sec:sorting-2] that there are faster algorithms,
-the follow-up question is if these algorithms are *optimal*.
-They are in fact optimal, and to prove this we have to analyse the *problem* and not individual algorithms.
-But proving these things are difficult, even for such a simple problem as sorting, and will not be covered in this book.
+Analysing problems, rather than algorithms, lets us answer questions such as whether an algorithm is *optimal*.
+For example, in [Chapter @sec:sorting-2] we will see sorting algorithms that are faster than the quadratic ones from [Chapter @sec:sorting-1], and it turns out they are optimal, but proving this requires reasoning about the problem itself, which is beyond the scope of this book.
 
-Still, we can try to classify problems in different subcategories.
-For example, a special case of the sorting problem is the *in-place* version
-which requires the output array and the input array to be one and the same (with values rearranged).
-An in-place algorithm also has restrictions on how much additional memory it is allowed to use,
-and an algorithm is only considered a solution if it meets these requirements.
-There are many other versions of sorting problems, for instance the problem
-of sorting integers is subtly different than the problem of sorting strings
-because we can do arithmetic on integers, which can allow faster algorithms.
-
-Another problem that we have encountered is *searching* in an array.
-This problem can be divided into searching in an *arbitrary* array (solved by the linear search algorithm)
-and searching in a *sorted* array (solved by the binary search algorithm).
-The second problem can on the one hand be solved much faster, but that comes with a prize --
-it has stricter requirements on the input:
-
-- The elements in the array needs to be *comparable*,
-  meaning that we should be able to ask if $x<y$, $x=y$, or $x>y$, for any elements.
-- The array needs to be sorted by the *very same* comparator:
-  we cannot use binary search to search for a first name, in an array sorted by family name.
-
+Small changes to the requirements give different problems.
+Searching in an *arbitrary* array is solved by linear search, while searching in a *sorted* array can be solved much faster by binary search.
+The price is stricter requirements on the input: the elements must be *comparable* (we can ask if $x<y$, $x=y$ or $x>y$), and the array must be sorted by the *very same* comparator.
+We cannot use binary search to find a first name in an array sorted by family name.
+Similarly, *in-place* sorting is a stricter variant of sorting that limits how much additional memory the algorithm may use.
 
 #### Algorithms
 
@@ -67,15 +36,15 @@ But note that there are usually several ways of implementing the same functions
 -- and each of those give rise to a different algorithm.
 Since the concept of an algorithm does not have a precise technical definition,
 there is some leeway for the level of details required when specifying them.
-There is no clear line when something crosses from being a vague idea to an actual
-algorithm, but there are some things we expect of an algorithm:
+There is no clear line when something crosses from being a vague idea to an actual algorithm, but there are some things we expect of an algorithm:
 
-1.  It must be *correct*, solving the problem by producing the correct output for every valid inputs,
-    using only the resources allowed by the problem.
+1.  It must be *correct*, solving the problem by producing the correct output
+    for every valid input, using only the resources allowed by the problem.
 
-2.  It should be *unambiguous*. Small parts of the algorithm description can rely on the reader
-    picking up the meaning from context, but generally it is bad if two readers end up with
-    different understanding of how the algorithm works due to an ambiguous description.
+2.  It should be *unambiguous*. Small parts of the algorithm description can
+    rely on the reader picking up the meaning from context, but generally it is
+    bad if two readers end up with different understanding of how the algorithm
+    works due to an ambiguous description.
 
 3.  It must consist of *mechanical steps*. Each individual step should be simple
     enough to be performed by a machine incapable of thought. Ideally, a person who knows nothing
@@ -91,19 +60,17 @@ competent programmer can easily use it to implement it as a computer program.
 #### Programs
 
 A computer [program]{.term} is an implementation of an algorithm in some programming language.
-Unlike abstract descriptions of algorithms, computer programs are unambiguous and mechanical by default.
+Algorithm descriptions should be unambiguous and mechanical, but since they are usually written in natural language, they can only approximate this ideal.
+Computer programs, on the other hand, are unambiguous and mechanical by construction, because the programming language fixes the meaning of every statement.
 The downside is that high level of technical detail tends to obscure the important parts of the algorithm.
 For a simple algorithm like linear search, executable code in any well known programming language is fine
 as an explanation, but for more complicated algorithms the difference between an algorithm description
 and an implementation can be several hundred lines of code.
-Pseudocode, as frequently used by this book, offers a nice compromise between the
-precision of a programming language and the flexibility of natural language.
+Pseudocode, as frequently used in this book, offers a nice compromise between the precision of a programming language and the flexibility of natural language.
 
-There are infinitely many programs that implement the same algorithm.
-Renaming a variable gives you a new program, but that doesn't change the algorithm.
-Sometimes you can change the order between two unrelated statements,
-or even change the order in which a loop iterates over an array,
-without changing the underlying algorithm.
+<!--
+There are infinitely many programs that implement the same algorithm: renaming a variable, swapping two unrelated statements, or even reversing the direction of a loop gives a new program, but not a new algorithm.
+-->
 
 Not every computer program implements an algorithm.
 One requirement on an algorithm is that it terminates for every input.

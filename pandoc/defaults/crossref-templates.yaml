@@ -1,0 +1,6 @@
+# pandoc-crossref templates. These are in a metadata file (not in dsabook.yaml)
+# because templates must be parsed as Markdown to work.
+
+# The default adds ". $$ccs$$" after the caption, which gives ".." since we
+# never use subfigure captions:
+subfigureTemplate: "$$figureTitle$$ $$i$$$$titleDelim$$ $$t$$"
