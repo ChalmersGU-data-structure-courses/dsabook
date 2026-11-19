@@ -65,44 +65,22 @@ there is a worst case input value for which the algorithm takes linear time.
 One such worst case for `linearSearch(arr,x)` is that `x` does not occur in `arr`,
 another is that it only occurs in the last position of `arr`.
 
-#### The value of pessimistic estimates
+#### Which case should we use?
 
 The main advantage to analysing the worst case is
 that the algorithm is guaranteed to perform at least that
 well. This is especially important for real-time applications where occasional delays are unacceptable,
-such as an application for monitoring an air traffic control system.
+such as an application for monitoring an air traffic control system,
 and for programs that accept data from untrusted sources,
 such as an online database system.
 
 Using the worst case is also important if the data may have been contaminated -- for example by a malicious hacker. Even if the worst case is statistically unlikely to happen repeatedly by accident,
 someone can deliberately or accidentally construct a large data set that consistently hits the worst case.
 
-The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a very efficient algorithm. Sorting lists that are already
-sorted may sound silly, but consider an application where one process occasionally sorts an array
-(perhaps to display it to a user), and another occasionally makes changes to specific values.
-If the expected number of changes made between sorting runs is very small,
-then Insertion sort is perhaps the best possible algorithm.
-
-
-
-::: dsvis
-Consider the problem of finding the factorial of $n$.
-
-``` {.jsav-animation src="AlgAnal/AnalCasesSameCON.js" links="AlgAnal/AnalCasesCON.css" name="Simple analysis cases slideshow"}
-```
-:::
-
-
-::: dsvis
-Here is an example where we reason about the *linear search* algorithm from @sec:sorting-1:linear-search.
-
-``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
-```
-:::
-
-
-
-#### The problem with average case
+Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
+For example, all kinds of databases that are publicly available are a risk.
+Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
+If there is just a tiny risk of a worst-case scenario, this opens up for different kinds of cyberattacks.
 
 Average-case analysis requires a deep understanding of the specific application
 that the algorithm is used in, and it is easy to accidentally make false assumptions.
@@ -126,11 +104,28 @@ almost all data structures and algorithms, such as those based on
 [hashing]{.term} and [binary search trees]{.term}. Incorrect assumptions
 about the distribution can be extremely detrimental to performance.
 
-Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
-For example, all kinds of databases that are publicly available are a risk.
-Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
-If there is just a tiny risk of a worst-case scenario, this opens up for different kinds of cyberattacks.
+The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a very efficient algorithm. Sorting lists that are already
+sorted may sound silly, but consider an application where one process occasionally sorts an array
+(perhaps to display it to a user), and another occasionally makes changes to specific values.
+If the expected number of changes made between sorting runs is very small,
+then Insertion sort is perhaps the best possible algorithm.
 
 In summary, for real-time applications and for applications that handle data from unknown or even untrusted sources,
 we should always prefer a worst-case analysis of an algorithm.
 In other cases we usually desire an average-case analysis, but then we need to know enough about how the input is distributed.
+
+
+::: dsvis
+Consider the problem of finding the factorial of $n$.
+
+``` {.jsav-animation src="AlgAnal/AnalCasesSameCON.js" links="AlgAnal/AnalCasesCON.css" name="Simple analysis cases slideshow"}
+```
+:::
+
+
+::: dsvis
+Here is an example where we reason about the *linear search* algorithm from @sec:sorting-1:linear-search.
+
+``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
+```
+:::
