@@ -37,17 +37,13 @@ In-place
 
 #### Mergesort
 
-Note that the merging algorithm is not in-place, becaue we allocate space for the temporary result array.
+Note that the merging algorithm is not in-place, because we allocate space for the temporary result array.
 It is in fact possible to do the merging in-place,
 but this involves moving around elements in a way similar to Insertion sort,
-which is both is more complex and less efficient as the algorithm above.
-
-If you recall our categorisation of sorting algorithms,
-we are now ready to categorise Mergesort:
+which is not linear time. Here is how we would categorise Mergesort:
 
 - *Not in-place*: as we already mentioned this is too costly.
 - *Stable*: two equal elements will never swap places (if we implement merging correctly).
-- *Not adaptive*: the algorithm runs the same number of steps regardless of how the array is sorted from the start.
 
 #### Quicksort
 
@@ -58,8 +54,6 @@ Here is how we can categorise Quicksort according the three parameters:
 
 - In-place: *yes*, we do not have to create any intermediate arrays.
 - Stable: *no*, equal elements might change order.
-- Adaptive: *yes*, but it the complexity will never be better than linearithmic, $O(n\log(n))$.
-
 
 Here is a summary table of the categorisations.
 
