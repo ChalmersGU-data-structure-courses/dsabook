@@ -1,6 +1,12 @@
 
 ## Comparing algorithm performance {#analysis-1:comparing-algorithms}
 
+::: TODO
+- Prio 1: Rename this section?
+- Prio 2: "Complexity classes and big-O notation" was promoted to a section, so the chapter numbering is out of sync.
+:::
+
+
 If you have two algorithms that solve the same problem, how do you compare their performance?
 One way is to do an [empirical analysis]{.term}:
 Implement both algorithms and test them on various inputs, then measure the runtime.
@@ -116,7 +122,7 @@ point but doesn't change which function grows faster than the other.
 -->
 
 
-#### Complexity classes and big-$O$ notation
+## Complexity classes and big-$O$ notation
 
 Instead of working with exact time functions, which are complicated and depend on many assumptions, we classify them into *complexity classes* by their growth rate.
 We have already done this in earlier chapters, when saying that Binary search is logarithmic time, Linear search is linear time, and various sorting algorithms are quadratic time.
