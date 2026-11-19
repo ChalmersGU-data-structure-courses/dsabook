@@ -68,8 +68,8 @@ To find all keys between $a$ and $b$ in a sorted dynamic array:
 - Find the position of the *largest* key $k_2\leq b$ (again using binary search).
 - Return everything between those two positions in the value array.
 
-Since binary search is $O(log(n))$, the whole search procedure is
-$O(log(n) + log(n))=O(log(n))$. Unfortunately, modifying the data structure is still slow.
+Since binary search is $O(\log(n))$, the whole search procedure is
+$O(\log(n) + \log(n))=O(\log(n))$. Unfortunately, modifying the data structure is still slow.
 If we want to add an item to a sorted array, we have to keep the array sorted --
 and that means we need to *insert* the new item at the right place in the
 array which is $O(n)$.

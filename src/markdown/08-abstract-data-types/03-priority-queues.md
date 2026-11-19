@@ -59,7 +59,7 @@ Here is an implementation of this algorithm in code:
 
 What is the time complexity of this algorithm?
 Well, for an input list of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$ times.
-That means if both `add` and `removeMin` are logarithmic time or faster, the whole function is $O(n log n)$, just as fast as the best sorting algorithms we have seen!
+That means if both `add` and `removeMin` are logarithmic time or faster, the whole function is $O(n \log(n))$, just as fast as the best sorting algorithms we have seen!
 :::
 
 
