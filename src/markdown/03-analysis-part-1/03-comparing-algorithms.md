@@ -248,7 +248,9 @@ which does not depend on $n$: the function is $O(1)$.
 In @sec:sorting-1:performance-analysis we saw that Insertion sort (@sec:sorting-1:insertion-sort)
 does $1+2+\cdots+(n-1) = n(n-1)/2$ comparisons and swaps in the worst case.
 If we try to write down its exact time function, we get something like
+
 $$T(n) = c_1 + c_2(n-1) + c_3\frac{n(n-1)}{2} = \frac{c_3}{2}n^2 + \Big(c_2-\frac{c_3}{2}\Big)n + (c_1-c_2)$$
+
 where $c_1$ is the cost of the initialisation, $c_2$ the cost of one iteration of the outer loop,
 and $c_3$ the cost of one iteration of the inner loop.
 This formula is already complicated for such a simple algorithm, and the constants depend on the hardware anyway.
