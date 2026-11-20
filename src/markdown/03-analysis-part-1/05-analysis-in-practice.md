@@ -1,10 +1,6 @@
 
 ## Asymptotic analysis in practice {#analysis-1:simplification-rules}
 
-::: TODO
-- Prio 1: mention that O is an upper bound, short discussion what that means
-:::
-
 We have not yet shown a formal definition of big-$O$, and there will not
 be one in this chapter. The reason for this is that the formal definition
 is much easier to digest after seeing the practical use of it.
@@ -12,17 +8,22 @@ For now, we think of big-$O$ as dividing algorithms into complexity classes.
 If doubling the size of the input to an algorithm doubles the runtime
 (with some rounding applied), then that algorithm is $O(n)$.
 
+Note that big-$O$ is an *upper bound*: saying that an algorithm is $O(f(n))$ means that its runtime grows *at most* as fast as $f(n)$.
+So it is not wrong to say that Linear search is $O(n^2)$, since it certainly does not grow faster than quadratically but it is misleading, because it suggests the algorithm is slower than it is.
+In practice we always give the *smallest* complexity class that fits, so when we say Linear search is $O(n)$ we mean that it grows linearly, not slower and not faster.
+We will define upper bounds formally in @sec:analysis-2:upper-bounds, and see how to express lower and tight bounds in @sec:analysis-2:other-bounds.
+
 There are many advantages with the big-$O$ notation.
 It allows us to analyse complex algorithms easily and
 to get a grasp of how efficient they are on very big inputs.
-By "easily" we mean that there are some rules of thumb that covers almost all practical cases
+By "easily" we mean that there are some rules of thumb that cover almost all practical cases
 -- you almost never need to resort to the formal definitions of asymptotic analysis.
 
 We have only seen a few examples of complexity classes so far, notably $O(1)$, $O(\log(n))$,
 $O(n)$, and $O(n^2)$. There are however infinitely many complexity classes.
-Any distinct exponent of $n$ is a separate class, cubic complexity, O($n^3$), is different
+Any distinct exponent of $n$ is a separate class, cubic complexity, $O(n^3)$, is different
 from quadratic, $O(n^2)$ and both are different from $O(n^{2.5})$.
-We can also combine complexity classes by multiplying them, and get things like $O(n^2 \log(n))$
+We can also combine complexity classes by multiplying them, and get things like $O(n^2 \log(n))$.
 
 This does not mean every expression is a separate complexity class.
 Notably, something like $O(3n)$ is not a separate class from $O(n)$.
@@ -61,7 +62,7 @@ and loops correspond to multiplication:
 
 #### Complexity classes {#analysis-1:complexity-classes}
 
-We can use the upper bound to define an ordering between complexity classes,
+Since big-$O$ is an upper bound, we can use it to define an ordering between complexity classes,
 which makes finding the dominant term easier.
 There are infinitely many complexity classes, but here are a few common ones:
 
@@ -144,7 +145,7 @@ Consider this example, that runs an expensive operation for all prime numbers be
         if isPrime(i):
             expensiveOperation()
 
-The worst case is that all numbers are prime numbers, but that is not how prime number works.
+The worst case is that all numbers are prime numbers, but that is not how prime numbers work.
 This particular example would require serious mathematics to give a good estimate of how often
 the `if`-statement can be true for a given $n$.
 
@@ -170,7 +171,7 @@ That makes the whole runtime $O(n \cdot n \cdot 1)$, which simplifies to $O(n^2)
 *Don't be fooled by loops*!
 Not all loops run $n$ iterations, for example our array `arr` could very well consist of $n^2$ elements,
 or not depend on $n$ at all.
-If `arr` had $n^2$ elements, then the complexity is of the example would be $n^2 \cdot n^2 \cdot 1$,
+If `arr` had $n^2$ elements, then the complexity of the example would be $n^2 \cdot n^2 \cdot 1$,
 which simplifies to $O(n^4)$.
 
 #### While-loops
@@ -182,7 +183,7 @@ we have to look at the variables that are referred by the loop condition
 and then analyse how these variables change in each iteration.
 
 For example, the pseudocode for Insertion sort (@sec:sorting-1:insertion-sort) contains a `while`-loop
-which says that $j\geq 0$.
+with the condition $j > 0$ (among others).
 So to know how many times the loop will iterate,
 we have to know how $j$ is initialised and how it changes in each iteration.
 The starting value is $j=i$, and it is decreased by $1$ in each iteration.
@@ -194,9 +195,7 @@ In general, even determining if a `while`-loop terminates can be a genuinely har
 
 #### A general approach
 
-<!-- TODO: säg inte "completely foolproof" -->
-
-There is a completely foolproof method of determining complexity of any piece of code:
+There is a simple and general method of determining the complexity of any piece of code:
 Look at each line of code and answer:
 
 - How many times is the line executed (if it is inside a loop)?
@@ -215,9 +214,9 @@ In the example, we have annotated each line of code with a comment on the form:
 
     hasDouble(arr):
         result = false                   // O(1) · O(1) = O(1)
-        for each x in A:                 // runs O(n) iterations
+        for each x in arr:               // runs O(n) iterations
             double = x*2                     // O(n) · O(1) = O(n)
-            if linearSearch(A, double):      // O(n) · O(n) = O(n^2)
+            if linearSearch(arr, double):    // O(n) · O(n) = O(n^2)
                 result = true                // O(n) · O(1) = O(n)
         return result                    // O(1) · O(1) = O(1)
 
@@ -258,7 +257,7 @@ of the algorithm.
         return null
 
 Every individual operation is atomic, so the only question is how many time the loop runs.
-Since we are interested in the worst case, we can assume that the condition is always false.
+Since we are interested in the worst case, we can assume that `arr[mid] == key` is always false.
 Therefore we can ignore the line `size=size-1`, and
 we have a clean example of a loop that starts with `size` = $n$,
 then cuts `size` in half (using integer division) until it
