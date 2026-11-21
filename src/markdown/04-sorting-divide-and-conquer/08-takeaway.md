@@ -1,6 +1,10 @@
 
 ## Main takeaways and outlook {#sorting-2:takeaway}
 
+::: TODO
+- Prio 1: Something about comparing sorting algorithms and/or optimizations.
+:::
+
 We have introduced the concept of a divide-and-conquer algorithm, where a problem is broken down into smaller parts that are solved independently, and then the solutions are combined to form a solution to the original problem. This approach is useful for a wide range
 of algorithms. We show two sorting algorithms based on the approach, that also
 
