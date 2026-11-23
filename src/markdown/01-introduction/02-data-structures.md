@@ -10,16 +10,16 @@ The term data structure is loosely defined as a way of organising a
 collection of data items in computer memory, along with operations for
 accessing and modifying that data. Generally speaking that includes two things:
 
-* A *data representation*, a description of how the data is stored in computer memory
-* Efficient algorithms to access and modify the data
+* A *data representation*, a description of how the data is stored in computer memory.
+* Efficient algorithms to access and modify the data.
 
 One of the simplest and most useful example of a data structure is the array.
 We will be using arrays extensively as a building block for more complex data structures.
 An array stores a sequence of elements in a contiguous block of memory.
 As a data structure, arrays have two important limitations:
 
-* All elements must have the same size in memory (for objects like strings, the elements are pointers)
-* The size of an array cannot be extended after creation
+* All elements must have the same size in memory (for objects like strings, the elements are pointers).
+* The size of an array cannot be extended after creation.
 
 The first limitation stems from wanting efficient *indexing*, to find
 the element at position $i$, we compute its memory address

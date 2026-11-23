@@ -2,18 +2,17 @@
 # Introduction {#intro}
 
 ::: TODO
-- Prio 2: update the 1st paragraph with 1-2 more diverse examples (not just querying a collection)
 - There are more TODOs below!
 :::
 
-How many cities with more than 100,000 people lie within 200 kilometres of Paris?
-How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
-How much CO~2~ can will be saved if I travel by train from Gothenburg to Berlin, compared to if I fly by plane?
-How can I see if a text contains plagiarism, that is, if it contains sections copied from another existing text?
+How can a navigation app find the fastest route through a road network with millions of intersections, in less than a second?
+How does a word processor know, while you are still typing, that "algorithmn" is not a word?
+How can we see if a text contains plagiarism, that is, if it contains sections copied from another existing text?
+How can a file be compressed to half its size without losing a single bit of information?
 
-Gathering the necessary information is not sufficient to answer questions like these,
-the information must be organised to allow efficient access,
-and then processed in an efficient manner.
+None of these questions are hard because we lack data: the road network, the dictionary and the texts are all available.
+They are hard because the obvious solutions are far too slow: trying every possible route or comparing every pair of sentences would take years.
+The answer lies in how we organise the data, and how we process it.
 To organise our data we use different *data structures*,
 and to update or analyse our data we use *algorithms* on these data structures.
 The subjects of data structures and algorithms are deeply intertwined:
@@ -35,19 +34,12 @@ Will the performance of your program scale to thousands of users?
 Which parts of a piece of code are going to use all the processing power
 (and are thus the parts that we should try to optimise first)?
 
-::: TODO
-- Prio 2: the following paragraph is a bit unfocused - can we make it more compact and to the point?
-:::
-
-Suppose you have an algorithm for finding someone in a list of names,
-which is very fast when searching among 1000 names, such as someone's followers in social media.
-Can you use the same algorithm to search among all 10 million people living in Sweden?
-That problem is 10,000 times larger, is it still feasible to do it using your old laptop or do you need a supercomputer?
-These questions can be answered by algorithm analysis,
-and it is not certain that it takes 10,000 times longer to solve a 10,000 times larger problem --
-it depends on the algorithm.
-The specific example of searching in a list is discussed in more detail in @sec:sorting-1:binary-search.
-
+Suppose you have an algorithm that sorts the 1000 followers someone has on social media in a millisecond.
+Can you use the same algorithm to sort the 10 million people living in Sweden?
+The problem is 10,000 times larger, but that does not mean it takes 10,000 times longer -- it depends on the algorithm.
+With a simple algorithm such as Insertion sort, it takes about 100 million times longer: more than a day.
+With a smarter algorithm such as Mergesort, it takes about 20 seconds.
+This is the kind of question that algorithm analysis answers, and we return to it in @sec:sorting-1 and @sec:sorting-2.
 
 ::: TODO
 - Prio 3: add a 4th example?

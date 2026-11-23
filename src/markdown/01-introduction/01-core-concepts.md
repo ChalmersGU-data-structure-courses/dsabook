@@ -1,12 +1,9 @@
 
 ## Core concepts {#intro:core-concepts}
 
-::: TODO
-- Prio 1: the first sentence is *really* short, should be expanded just a little
-- Prio 1: add something about *correctness* under "Analysis"
-:::
-
-The subjects in this book fall into one of four categories:
+The subjects in this book fall into four categories, which are closely related but important to keep apart.
+In short, abstract data types are about which *operations* we can perform on our data, data structures are about how we *store* the data to support those operations,
+algorithms are about how we *process* the data, and analysis is about how we know that our solutions are *correct* and *efficient*:
 
 Data structures
 :   A data structure describes how we can *organise* our data so that it can be retrieved and updated efficiently.
@@ -24,15 +21,17 @@ Abstract data types
     a data structure is the full implementation with all the technical details.
 
 Algorithms
-:   An algorithm is a process for solving a specific problem,
+:   An algorithm is a procedure for solving a specific problem,
     taking an input and producing a correct output.
     This can include operations on data structures,
     such as querying, iterating or updating them.
     We describe algorithms using natural language, explain how to analyse them, and how to implement them as programs.
 
 Analysis
-:   The main purpose of analysing data structures and algorithms is to know how *efficient* they are.
-    We focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
+:   The purpose of analysing data structures and algorithms is to know that they are *correct* and how *efficient* they are.
+    To reason about correctness, we use *invariants*, *preconditions* and *postconditions*:
+    conditions that must hold before, during and after an operation (see @sec:analysis-1:invariants).
+    For efficiency, we focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
     where we can mathematically derive how an algorithm behaves when the size of the input grows.
 
 Throughout the book we show how to describe algorithms and data structures
