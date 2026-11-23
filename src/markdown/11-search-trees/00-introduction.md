@@ -3,26 +3,36 @@
 
 ::: TODO
 - Prio 1: include "sets/maps" in the title, for example: "Search trees for sets and maps", "Sets and maps: Search trees"
-- Prio 1: Add a paragraph about *ordered* set/map operations
-- Prio 1: Start by noting that all search tree operations are linear in the *height* of the tree
 :::
 
 This chapter covers *search trees*,
-which are trees that have *ordering invariants* so that they can implement sets or maps.
+which are trees that have *ordering invariants* so that they can implement sets or maps (@sec:ADTs:sets-and-maps).
+Since search trees are ordered, it is also straightforward to implement
+them as *sorted* sets or maps (@sec:ADTs:sorted-sets-and-maps).
+This means that in addition to the basic operations -- searching, inserting and deleting --
+they support *range queries* or finding the closest key, and similar operations.
+One common property of all search trees is that the basic operations
+are linear in the *height* of the tree, $O(h)$.
+If the tree is *balanced* (see @sec:trees:unbalanced-perfect),
+then the height is logarithmic in the number of nodes, $h\in O(\log(n))$.
 
 The simplest search tree is the *binary search tree* (BST), which we cover in @sec:search-trees:BSTs.
-If a BST is *balanced*, meaning that the left and right subtrees are approximately equal in size,
-then all basic operations (searching, adding and removing) become logarithmic in the size of the tree, $O(\log(n))$.
-However, there is no guarantee that the BST will be balanced, and
-if it is unbalanced, all basic operations instead become linear in the size of the tree, $O(n)$.
+Unfortunately, there is no guarantee that the BST will be balanced,
+so the worst case complexity of the basic operations are linear in the tree size, $O(n)$.
 
-The solution to that problem is make the trees automatically rebalance.
-This can be done in many different ways, some examples are *AVL trees*,
-*2-3 trees*, *Red-black trees*, *B-trees*, and *Splay trees*,
-who all have their own way of making the basic operations logarithmic, $O(\log(n))$, in the size of the tree.
+The solution to that problem is to make the trees automatically rebalance.
+This can be done in many different ways -- some examples are
+*Scapegoat trees* ([](#ex:scapegoat-trees)),
+*AVL trees* (@sec:search-trees:AVL-trees),
+*2-3 trees* (@sec:search-trees:23-trees),
+*Red-black trees* (@sec:search-trees:red-black-trees),
+and *B-trees* (@sec:search-trees:B-trees).
+Most of these are variants of BSTs, and they all have their own way of keeping the tree balanced.
+And recall that if the tree is balanced, then the height is logarithmic,
+so all basic operations become logarithmic, $O(\log(n))$, in the size of the tree.
 
-Not all data structures used for searching are trees
--- for exampe, *Skip lists* is an interesting hybrid between trees and *linked lists*.
+<!-- Not all data structures used for searching are trees
+-- for exampe, *Skip lists* are an interesting hybrid between trees and *linked lists*. -->
 
 
 <!--
