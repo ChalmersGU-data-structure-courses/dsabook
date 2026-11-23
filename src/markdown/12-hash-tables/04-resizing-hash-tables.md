@@ -62,7 +62,7 @@ The average size of each bucket will also be $2$, and searching through a size-$
 #### Example: Resizing a linear probing hash set
 
 In the resulting table in [](#ex:linear-probing-add) only one cell is empty,
-and the load factor is $\frac{4}{5}=0.8$.
+and the load factor is $\tfrac{4}{5}=0.8$.
 Assuming that we have a threshold of 75%, we therefore have to resize the table.
 We create a new empty table twice the size, and iterate through the old table.
 For each key in the old table, we add it to the new table using the normal insertion operation.
