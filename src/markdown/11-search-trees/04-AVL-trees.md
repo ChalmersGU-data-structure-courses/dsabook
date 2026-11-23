@@ -2,17 +2,11 @@
 ## AVL trees {#search-trees:AVL-trees}
 
 ::: TODO
-- Prio 1: the section starts very abrupt - perhaps talk a bit more before the first box?
-- Prio 1: rewrite paragraph after the invariant box? say that the height is within a constant, and that constant happens to be 1.44 because of the invariant (but we won't prove it)
-- Prio 1: rename "balance factor" to just "balance", and bf(x) to balance(x)
-- Prio 1: insert reference to Algorithm box #alg:avl-add
-- Prio 1: is the text about deletion (11.4.2) too short?
-- Prio 1: is the discussion about memory storage too technical in "Implementing AVL nodes"?
-- Prio 1: make the complexity analysis shorter by saying (1) all operations are O(h), and (2) h remains O(log) because of the invariant
-- Prio 2: is it possible to make #fig:AVL-left-rotate and #fig:AVL-double-rotate more compact (in height)?
+- Done?
 :::
 
-An AVL tree is a binary search tree with the following additional balancing invariant:
+The AVL tree (named after its inventors Georgy Adelson-Velsky and Evgenii Landis)
+is a binary search tree with the following additional balancing invariant:
 
 ::: {.invariant #inv:avl-balance}
 #### Invariant: AVL balance
@@ -21,51 +15,54 @@ For every node, the heights of its subtrees differ by at most 1.
 
 Note that this does not mean that AVL trees are perfectly balanced.
 But the invariant guarantees that the height of the tree is never more than
-1.44 times the height of a perfectly balanced binary search tree.^[
-    1.44 is actually $1/\log_2(\phi)$, where $\phi=(1+\sqrt{5})/2$ is the *golden ratio*.
+a constant times the height of a perfectly balanced binary search tree.^[
+    This constant factor is actually $1/\log_2(\phi)\approx 1.44$,
+    where $\phi=(1+\sqrt{5})/2$ is the *golden ratio*.
 ]
 As always when it comes to complexity the exact constant is not important,
 but what it says is that the maximum height of an AVL tree is $O(\log(n))$ where $n$ is its size.
 
-To maintain the invariant, AVL trees need to store an additional property in every tree node, the *balance factor*.
-This is not really a "factor" (it has nothing to do with multiplication),
-but rather the difference in heights between the right and the left subtrees.
-Or in other words, $\text{bf}(t) = \text{height}(t.\text{right}) - \text{height}(t.\text{left})$.
-Using this notation, the invariant can be formulated like this:
+To maintain the invariant, AVL trees need to store an additional property in every tree node, the *balance*.
+This is the difference in heights between the right and the left subtrees,
+meaning that the invariant can be formulated like this:
 
-$$ -1\leq\text{bf}(t)\leq 1 \text{ for all tree nodes } t $$
+$$
+-1 \leq \text{height}(t.\text{right}) - \text{height}(t.\text{left}) \leq 1
+\quad(\text{for all tree nodes } t)
+$$
 
-When we draw AVL trees we usually write the balance factor beside each node.
+When we draw AVL trees we usually write the balance beside each node.
 @Fig:AVL-examples shows two balanced AVL trees representing the same set {A,B,C,D,E,F,G}.
 
 ![
     Two balanced AVL trees representing the same set of elements.
 ](images/11.4-AVL-examples.svg){#fig:AVL-examples}
 
-Now we have to ensure that we restore the balance whenever a tree node becomes unbalanced,
-and we do that by using the *tree rotations* from @sec:search-trees:rotations.
-The tree can become unbalanced in two cases -- when *inserting* and when *deleting* values.
-
 #### Implementing AVL nodes
 
-We can store the balance factor in every node,
+It is possible to store the balance in every node,
 and this uses very little extra memory since there are only three possibilities, $-1$, $0$ and $+1$.
 Therefore, storing the balance uses only two bits per tree node.
 
-However, if we do this the implementations of insertion and deletion become slightly more complicated,
-so most AVL implementations store the *height* of each node instead.
-If we know the height of each tree node, it is easy to calculate the balance using the formula above.
-Storing the height will use more memory, but not a lot -- it is enough to use only one byte (8 bits) for the height,
+However, if we do this the implementations of the basic operations become more complicated,
+so most AVL implementations instead store the *height* of each node.
+If we know the height of each tree node, it is easy to calculate the balance by subtracting the heights of the children.
+Storing the height will use more memory, but by not a lot -- it is enough to use only one byte (8 bits) for the height,
 because we will anyway never have room for any AVL tree with a height larger than $2^8=256$.
 
-### Inserting into an AVL tree
+Now we have to ensure that we restore the balance whenever a tree node becomes unbalanced,
+and we do that by using the *tree rotations* from @sec:search-trees:rotations.
+There are two cases where a node can become unbalanced -- when *inserting* and when *deleting* keys.
 
-To insert a value into an AVL tree we first treat it as a standard binary search tree.
-The value will therefore be added as a new leaf node somewhere in the tree.
-But this might break the balance invariant of the parent node, or the parent's parent,
-or any other ancestor all the way up to the root.
-For example, if we want to add H to the example trees in @fig:AVL-examples,
-then they will look like in @fig:AVL-add-rotate, where the balance factors that are changed are marked in bold.
+### Inserting into and deletion from an AVL tree {#search-trees:AVL-insertion}
+
+To insert a key into an AVL tree we first treat it as a standard binary search tree.
+The key will therefore be added as a new leaf node somewhere in the tree.
+But this might break the balance invariant of the parent node, or of the parent's parent,
+or of any other ancestor all the way up to the root.
+
+For example, if we add H to the example trees in @fig:AVL-examples,
+then they will look like in @fig:AVL-add-rotate, where the balances that are changed are marked in bold.
 
 ![
     Inserting H into the trees from @fig:AVL-examples.
@@ -88,7 +85,7 @@ This means that the middle subtree $t_2$ cannot be higher than the rightmost sub
 And since the grandparent $x$ has balance $+2$, there are only two options:
 either $t_3$ has height one more than $t_2$, or they have the same height.
 After performing a single left-rotation, $t_3$ has moved up one level and the left subtree $t_1$ has moved down one level.
-The final subtree is now AVL-balanced, because no node has a balance factor outside of $\{-1,0,+1\}$.
+The final subtree is now AVL-balanced, because no node has a balance outside of $\{-1,0,+1\}$.
 
 ![
     A single left-rotation solves a right-right imbalance.
@@ -96,8 +93,9 @@ The final subtree is now AVL-balanced, because no node has a balance factor outs
     and the result is that the final tree becomes a little more balanced.
 ](images/11.4-AVL-left-rotate.svg){#fig:AVL-left-rotate}
 
-Notice the difference with @fig:BST-rebalance, where we needed to reorganise the tree completely after adding one element.
-We managed this because the AVL invariant is *relaxed*, it does not require that the tree is perfectly balanced.
+Notice the difference with @fig:BST-rebalance `\parpageref{}`{=latex},
+where we needed to reorganise the tree completely after adding one element.
+We can manage this because the AVL invariant is *relaxed*, it does not require that the tree is perfectly balanced.
 
 #### Double rotations
 
@@ -119,73 +117,71 @@ and afterwards all nodes are AVL balanced!
     Notice how the resulting tree is much more balanced.
 ](images/11.4-AVL-right-left-rotate.svg){#fig:AVL-double-rotate}
 
-The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
-performing *right* rotations.
+<!-- The mirrored situations, *left* imbalances, are of course solved in the mirrored way, by
+performing *right* rotations. -->
 
 #### Implementing insertion
 
-AVL tree insertion and deletion are easiest to implement as recursive functions.
-They are very similar to the normal BST insertion and deletion,
+AVL tree insertion is easiest to implement as a recursive function.
+It is very similar to the normal BST insertion in [](#alg:bst-add-recursive)`\parpageref{}`{=latex},
 <!-- OPENDSA: START -->
 but as the recursion unwinds up the tree,
 we perform the appropriate rotation on any node that is found to be unbalanced.
 <!-- OPENDSA: END -->
+This is specified in [](#alg:avl-add).
 
 ::: {.algorithm #alg:avl-add}
 #### Algorithm: Adding to an AVL tree, recursively
-To add a value $x$ to an AVL node:
+To add a key $x$ to an AVL node:
 
-- If the node is empty, return a node node with value $x$.
-- If $x$ is equal to the node value, return the node as it is.
-- If $x$ is smaller than the node value:
-    - Reassign the left child with the result of adding $x$ to it.
-    - If the node becomes unbalanced, single- or double-rotate to the right,
+- If the node is empty, return a node node with key $x$.
+- If $x$ is equal to the node key, return the node as it is.
+- If $x$ is smaller (larger) than the node key:
+    - Reassign the left (right) child with the result of adding $x$ to it.
+    - If the node becomes unbalanced, single- or double-rotate to the right (left),
       depending on the kind of imbalance.
     - Update the height of the node, and return it.
 :::
 
-
-### Deleting a node
+#### Deleting a node
 
 Deletion in an AVL tree is similar to AVL insertion:
-first we use the normal BST deletion, and then we rebalance the parent nodes all the way up to the root.
-
-We can start from the pseudocode in @sec:search-trees:BST-deletion,
-and we just have to rebalance and update the height right before we return the updated tree.
+use the normal BST deletion but make sure to rebalance all nodes that become unbalanced, all the way up to the root.
+The only real difference to [](#alg:bst-remove)`\parpageref{}`{=latex}
+is that we have to rebalance and update the height of the subtree,
+right before we return the updated node.
 
 
 ### Complexity analysis
 
 How much extra time does it take to rebalance the tree?
-
-When we add a new node (or delete one), several nodes might become unbalanced.
+When we add a new node (or delete an existing), several nodes might become unbalanced.
 But all of these nodes are ancestors of the added (or deleted) node.
 So in the worst case we have to rebalance all nodes that we passed when searching for the insertion point.
 That is, all nodes on the path from the root node to the added node.
 
 Since an AVL tree is balanced, there are never more than $O(\log(n))$ ancestors to any node.
 So, in the worst case we will rebalance at most $O(\log(n))$ nodes after one insertion (or deletion).
-
-Rebalancing one single node is constant time.
-It involves one or two rotations, and a rotation is constant time.
-Therefore, rebalancing a tree after insertion or deletion is logarithmic, $O(\log(n))$.
-In fact, rebalancing after addition is constant time, because the tree will always be balanced after the first rebalancing.
-But this doesn't change the complexity of addition, because it is logarithmic to find the insertion point.
+And notice than rebalancing one single node is constant time --
+it involves one or two rotations, and a rotation is constant time.
+Therefore, rebalancing a tree after insertion or deletion is logarithmic, $O(\log(n))$, in the size of the tree.
+<!-- In fact, rebalancing after addition is constant time, because the tree will always be balanced after the first rebalancing.
+But this doesn't change the complexity of addition, because it is logarithmic to find the insertion point. -->
 
 In summary, we have come up with our first *efficient* general-purpose data structure for sets and maps.
 This is also one of the most common ones in practice, and very easy to implement.
 
 :::: {.example #ex:avl-sort}
-#### Example: Yet another sorting algorithm
+#### Example: A sorting algorithm using AVL trees
 
 Using AVL trees we can define a very simple but efficient sorting algorithm.
 First we build an AVL tree from all elements, and then we do an *inorder traversal*
-(see @sec:trees:bintree-traversal) to get the elements in sorted order:
+(see @sec:trees:bintree-traversal`\commapageref{}`{=latex}) to get the elements in sorted order:
 
-    avlTreeSort(list):
-        tree = new ampty AVL tree
-        for each x in list:
-            add x to tree
+    function AVLSort(list):
+        tree = new empty AVL tree
+        for each key in list:
+            add key to tree
         return inorder(tree)
 
 What is the complexity of this algorithm?
@@ -195,7 +191,7 @@ The final complexity of the loop is $O(n \log(n))$, and since inorder traversal 
 the complexity of sorting via an AVL tree is $O(n \log(n))$.
 
 This has the same complexity as Mergesort, which is as good as the best sorting algorithms.
-So why do not anyone use it?
+So why does not anyone use it?
 It is because the hidden constants are bigger than for Mergesort:
 it takes longer time and also uses more extra memory.
 
