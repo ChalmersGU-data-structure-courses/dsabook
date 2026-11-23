@@ -11,7 +11,7 @@ but we have not discussed how to build the result, or even how we want the resul
 
 Of course, this depends heavily on what we want to use the result for.
 If we want to know which vertices are reachable from a given vertex, we can simply return the set of visited vertices.
-If we want to know how expensive it is to to go to a vertex, we can return the total cost when we visit the goal vertex.
+If we want to know how expensive it is to go to a vertex, we can return the total cost when we visit the goal vertex.
 But in most cases we want more information than that --
 not only we want to know where we can go to or how much it costs, but also how to get there.
 

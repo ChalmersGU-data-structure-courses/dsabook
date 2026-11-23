@@ -144,7 +144,7 @@ Note that the `result` is not included in this code.
 Going one step further, we can observe that there should never be two edges to the same vertex in the agenda.
 When we find a better option for reaching a vertex, we should *replace* the old entry in the agenda with the improved one.
 This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex.
-To to do this we need to have a priority queue where we can update the priorities of existing elements.
+To do this we need to have a priority queue where we can update the priorities of existing elements.
 We briefly discussed *updateable priority queues* in @sec:heaps:change-priority,
 and leave as an exercise for the reader to implement Dijkstra's algorithm using this idea.
 

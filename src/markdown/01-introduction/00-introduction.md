@@ -9,7 +9,7 @@
 How many cities with more than 100,000 people lie within 200 kilometres of Paris?
 How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
 How much CO~2~ can will be saved if I travel by train from Gothenburg to Berlin, compared to if I fly by plane?
-How can I see if a text contains plagiarism, that is, if it copied some parts from another existing text?
+How can I see if a text contains plagiarism, that is, if it contains sections copied from another existing text?
 
 Gathering the necessary information is not sufficient to answer questions like these,
 the information must be organised to allow efficient access,
@@ -66,12 +66,12 @@ Then anyone who knows the alphabet can quickly find a song or an artist using a 
 
 The railroad is expanding to the new cities!
 Engineers want to build as little total rail length as possible, but still connect all cities.
-After the railway is constructed, travellers wants to find the fastest way of getting from
+After the railway is constructed, travellers want to find the fastest way of getting from
 city A to city B.
 
 Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
 are connected by edges (potential railroad tracks or train departures).
-Specifically, finding the smallest rail network is a *minimal spanning tree* problem (see @sec:graphs:MSTs)
+Specifically, finding the smallest rail network is a *minimum spanning tree* problem (see @sec:graphs:MSTs)
 and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
 
 #### Example: Simulating particles

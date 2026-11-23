@@ -14,11 +14,11 @@ A classic example of an ADT is the *stack*, which supports the following operati
 
 As discussed in [Chapter @sec:sequences], a stack can be implemented using either a dynamic array or a linked list.
 Using the terminology from object-oriented programming,
-dynamic arrays and linked lists are two separate *classes* that implements the stack interface.
+dynamic arrays and linked lists are two separate *classes* that implement the stack interface.
 
 Often we can distinguish between *core* and *auxiliary* operations of an ADT.
 The core operations are the ones that define the "essence" of the data type,
-while the auxilary operations might simplify some use cases, but are not essential.
+while the auxiliary operations might simplify some use cases, but are not essential.
 For the example of stacks, here are some common auxiliary operations:
 
     interface Stack of T:

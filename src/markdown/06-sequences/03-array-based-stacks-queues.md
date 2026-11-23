@@ -162,7 +162,7 @@ Array queue -- drifting.
 Note that both positions will only increase, they will never decrease.
 This causes the queue to *drift* within the array, and at some point `back` will hit the end of the array.
 We might get into a situation where the queue itself only occupies a few array cells, but the back is still at the very end.
-Consider, for example, what happens if we we run `enqueue` directly followed by a `dequeue`, and we do this 20 times.
+Consider, for example, what happens if we run `enqueue` directly followed by a `dequeue`, and we do this 20 times.
 The queue itself will never contain more than one element,
 but `back` is anyway pointing to the end of the array.
 The next time we enqueue an element the program will crash,

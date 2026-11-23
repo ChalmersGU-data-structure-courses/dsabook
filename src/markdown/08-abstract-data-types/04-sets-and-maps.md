@@ -233,7 +233,7 @@ and we will discuss that in the next section.
 
 ### Implementing sets and maps using lists {#ADTs:sets-maps-using-linked-lists}
 
-Just as with priority queues, the data structures we have seen so far does not allow for
+Just as with priority queues, the data structures we have seen so far do not allow for
 an efficient enough set or map implementation.
 Using an unsorted dynamic array or linked list gives $O(n)$ time for both `contains` (using linear search)
 and `add` on a set.

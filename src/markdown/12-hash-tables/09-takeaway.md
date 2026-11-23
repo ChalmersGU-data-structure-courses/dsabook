@@ -31,7 +31,7 @@ For a separate chaining hash table with $k$ cells has this simple invariant:
 This is an excellent example of how choosing the invariant is often the main work of
 difficulty a data structure. With this invariant decided, the only sensible way to
 implement an `add(x)` operation is to find the linked list where `x` should be, and add `x` to it
-(assuming x is not already there). The only difficult part is deciding when and how to resize the table.
+(assuming `x` is not already there). The only difficult part is deciding when and how to resize the table.
 
 
 

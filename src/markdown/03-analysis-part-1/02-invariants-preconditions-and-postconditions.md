@@ -84,8 +84,8 @@ an already sorted segment. The invariant is that when inserting the element at i
 all the elements before $i$ are sorted.
 
 * *Selection sort* has a slightly stronger invariant: When the loop is at index $i$,
-all elements before $i$ sorted, and all elements after $i$ are greater than the
-greatest element before $i$.
+all elements before $i$ are sorted, and all elements from $i$ and onward are greater than or equal
+to the greatest element before $i$.
 
 Both algorithms also have an implicit invariant that the array remains a permutation
 of the original array (it has all the same elements in a different order).

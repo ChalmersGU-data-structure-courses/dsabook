@@ -112,7 +112,7 @@ the leaf $X$ is on level 6 and this is the largest level for any tree of size 7.
 The two trees in the middle are unbalanced and balanced, but not completely so.
 The rightmost tree is as balanced as possible, because every level is filled completely,
 and therefore all leaves are at the same level.
-This is is called a *perfect* tree.
+This is called a *perfect* tree.
 Try to answer the question: what is the size of a perfect tree of level $k$?
 
 What is the height of an unbalanced or a balanced tree of size $n$?

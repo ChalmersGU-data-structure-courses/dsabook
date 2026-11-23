@@ -21,7 +21,7 @@ As a data structure, arrays have two important limitations:
 * All elements must have the same size in memory (for objects like strings, the elements are pointers)
 * The size of an array cannot be extended after creation
 
-The first limitations stems from wanting efficient *indexing*, to find
+The first limitation stems from wanting efficient *indexing*, to find
 the element at position $i$, we compute its memory address
 offset from the start of the array. The second limitation is because of how
 computer memory is allocated, the memory immediately around the array may be occupied
@@ -39,6 +39,6 @@ the sorted array. Any operation that modifies the array must ensure it remains s
 but it also allows operations to assume the array is sorted initially.
 
 The other fundamental building block of data structures in this book are
-objects as those in object oriented programming. Combinations of arrays
+objects, as seen in object oriented programming. Combinations of arrays
 and objects with various invariants form the data representation of every
 data structure taught in this book.

@@ -243,7 +243,7 @@ starting from the lowest level and moving upwards.
 In each iteration we restore the heap property for that node,
 and this is done by "bubbling it down" the subtree.
 
-There are $n$ nodes and and bubbling down a node is logarithmic in the worst case,
+There are $n$ nodes and bubbling down a node is logarithmic in the worst case,
 so we get the same complexity as before, $O(n\log(n))$.
 However, if we analyse the behaviour in more detail we can see that
 the heapify algorithm is similar to [](#ex:linear-nested-loop) in @sec:analysis-2:advanced-upper-bound,
@@ -260,12 +260,11 @@ we can use a priority queue (for example a binary heap) to implement a very simp
 first (1) insert all elements from the unsorted array into a min-heap,
 then (2) remove each element in turn from the heap, putting it in its correct position in the original array.
 This sorting algorithm has the same time complexity as Mergesort, $O(n\log(n))$,
-but in practice it is much slower so it is not used.
-
-However, there is another sorting algorithm which is both competetive and also in-place.
+but the algorithm presented here is a bit too slow for practical use.
+However, there is another sorting algorithm which is both competitive and also in-place.
 It is called *heapsort*:
 
-1. Heapify the array into a *max*-heap.
+1. Heapify the array in-place into a *max*-heap.
 2. Repeat until the heap is exhausted:
     - Swap the first and last elements in the heap,
       decrease the heap size and bubble down the new first element.

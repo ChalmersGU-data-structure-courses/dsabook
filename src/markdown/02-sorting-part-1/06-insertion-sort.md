@@ -38,7 +38,7 @@ they are not necessarily in their final positions.
 Insertion sort moves each element $e$ backwards so long as it is smaller than the preceding element.
 When the preceding element is less than or equal to $e$,
 it is done with $e$ because all elements earlier in the array must be smaller.
-Insertion sort is described concicely in [](#alg:insertion-sort).
+Insertion sort is described concisely in [](#alg:insertion-sort).
 
 ::: {.algorithm #alg:insertion-sort}
 #### Algorithm: Insertion sort

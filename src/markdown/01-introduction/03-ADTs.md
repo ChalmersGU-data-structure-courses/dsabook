@@ -6,7 +6,7 @@
 :::
 
 An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
-This is done by specifying what operations that can be performed on it, and how these operations should behave.
+This is done by specifying what operations can be performed on it, and how these operations should behave.
 Note that an ADT does not dictate *how* the operations should be implemented, and multiple implementations are often possible.
 By hiding the implementation details from the user, it is possible to change the underlying representation
 without changing the API of the abstract data type.
@@ -28,10 +28,10 @@ relate to an operation in an ADT in three different ways:
 Consider these three operations for collections of values:
 
 `get(c,i)`
-:   returns the value on position $i$ of the collection $c$.
+:   returns the value at position $i$ of the collection $c$.
 
 `set(c,i,x)`
-:   sets the value of position $i$ to $x$, overwriting the previous value.
+:   sets the value at position $i$ to $x$, overwriting the previous value.
 
 `contains(c,x)`
 :   answers true if and only if $c$ contains $x$.
@@ -49,7 +49,7 @@ and how efficient can they be made?
 :   A general array can implement `set`, but the operation does not make sense for a sorted array.
     Calling `set(a,0,4)` on the sorted array $a=[1,2,3]$ cannot give $[4,2,3]$,
     since that breaks the ordering invariant.
-    If `set` shuffles things around around to $[2,3,4]$, it does not comply with the description of `set` and `get`.
+    If `set` shuffles things around to $[2,3,4]$, it does not comply with the description of `set` and `get`.
     After running `set(a,0,4)` we would expect `get(a,0)` to give $4$, not $2$.
 
 `contains`
@@ -59,7 +59,7 @@ and how efficient can they be made?
 
 #### The core abstract data types
 
-Most of abstract data types are some sort of *collections*, that is, structures that store elements.
+Most abstract data types are some sort of *collections*, that is, structures that store elements.
 The ADTs we discuss in this book can be categorised in the following groups.
 
 Sequences
@@ -85,7 +85,7 @@ Maps
 
 Graphs
 :   Graphs are used to model relationships between elements,
-    where the elements are called *vertices* and and the relations are represented by *edges*.
+    where the elements are called *vertices* and the relations are represented by *edges*.
     Graphs and their core algorithms are introduced in [Chapter @sec:graphs].
 
 We will discuss abstract data types in more detail in [Chapter @sec:ADTs].

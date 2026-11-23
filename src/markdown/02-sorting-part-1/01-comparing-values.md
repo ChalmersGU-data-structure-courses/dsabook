@@ -23,10 +23,10 @@ The comparison function needs to distinguish three cases, for two values $a$ and
 The notation for equality is slightly dubious:
 the meaning is that the values are not necessarily equal, they are just ordered the same way.
 For example, if we want to sort strings case-insensitively
-we want the strings "*Alice*" and "*alice*" to be compare equal.
+we want the strings "*Alice*" and "*alice*" to compare as equal.
 But if we want to differentiate them, then we have to decide which one should be smaller.
 Another example, if we are sorting numbers by their digit sums,
-then $13=22$ (becase both have a digit sum of $1+3=2+2=4$).
+then $13=22$ (because both have a digit sum of $1+3=2+2=4$).
 Also, $a<b$ may not correspond intuitively to the mathematical operator:
 To sort a list of numbers in decreasing order,
 we would use a comparison function that paradoxically considers smaller numbers to be greater and vice versa.
@@ -41,7 +41,7 @@ and the concept of sorting becomes hard to even define
 
 #### Natural and Key-based comparison
 
-Most comparison operators fall into on of three categories:
+Most comparison operators fall into one of three categories:
 
 -   *Natural order*:
     Simple types like numbers have a *natural order*, in most programming
@@ -69,7 +69,7 @@ Some languages (like Python) have a mechanism to generalise this to more complex
 types, so you can write $a<b$ even for text strings and other objects,
 and it uses a default comparison function defined for the type.
 
-Some languages (like Java) instead use a *three-way comparison* operator,
+Some languages (like Java) instead use a *three-way comparison* operation,
 so that `compare(a,b)` gives one of three values, representing $a<b$, $a=b$ and $a>b$.
 In Java and many other languages, the comparison returns an integer value $k$:
 if $k<0$ then $a<b$, if $k>0$ then $a>b$, and if $k=0$ then $a=b$.

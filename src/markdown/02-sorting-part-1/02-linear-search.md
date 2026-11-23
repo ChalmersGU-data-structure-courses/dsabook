@@ -29,7 +29,7 @@ Here is a simple implementation in pseudocode, where the bookshelf is represente
 
 Now imagine that the bookshelf is actually a whole library
 (the British Library has more than 200 million catalogued items).
-How long time will that take -- do I have to leave the computer running until tomorrow?
+How long will that take -- do I have to leave the computer running until tomorrow?
 
 More interesting than the time it takes to search a particular bookshelf on a particular
 computer, is the question of how the time scales when the bookshelf is expanded,
@@ -45,7 +45,7 @@ of the bookshelf and the search time. We say Linear search is a *linear time* al
 
 ::: {.example #ex:find-smallest}
 #### Example: Finding the smallest element
-Linear search is more of concept than a single algorithm:
+Linear search is more of a concept than a single algorithm:
 we do not have to compare for equality only, and we do not have to search the whole array.
 For example, if we want to find the *smallest* element in some *array interval*,
 we can iterate through every array index in the interval,

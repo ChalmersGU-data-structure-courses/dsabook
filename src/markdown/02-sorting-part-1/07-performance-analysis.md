@@ -17,7 +17,7 @@ algorithms shown earlier, the number of comparisons performed is a good proxy fo
 runtime -- a sorting algorithm that does many comparisons is going to be slower.
 So our task is determining the worst case number of comparisons required for a given input size.
 
-We saw earlier that in Linear search, the number of comparisons scale linearly with the
+We saw earlier that in Linear search, the number of comparisons scales linearly with the
 input size. We say that Linear search is a *linear time* algorithm, and that Binary search
 is *logarithmic time*. In this chapter we show that both Selection sort and Insertion sort
 are *quadratic time*, the number of comparisons required for $n$ elements is proportional to $n^2$.
@@ -39,7 +39,7 @@ $$
 (n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \tfrac{1}{2} n (n-1)
 $$
 
-The fact that this is a quadratic formula indicates that the runtime of Insertion sort
+The fact that this is a quadratic formula indicates that the runtime of Selection sort
 grows quadratically with the size of the array being sorted. Just as Binary search is logarithmic time,
 and Linear search is linear time, Selection sort is *quadratic time*.
 

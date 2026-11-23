@@ -215,7 +215,7 @@ the table will be visited by the probe function.
 ### Double hashing
 
 Both pseudo-random probing and quadratic probing eliminate primary
-clustering, which is the name given to the the situation when keys share
+clustering, which is the name given to the situation when keys share
 substantial segments of a probe sequence. If two keys hash to the same
 home position, however, then they will always follow the same probe
 sequence for every collision resolution method that we have seen so far.

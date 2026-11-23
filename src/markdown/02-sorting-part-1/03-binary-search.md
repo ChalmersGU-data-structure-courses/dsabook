@@ -24,18 +24,18 @@ For the example of a book shelf sorted alphabetically from left to right, Binary
 
 We will end in one of two cases:
 Either we find the book we are looking for, or we end up searching an empty part of the bookshelf.
-In the latter case the book cannot be not in the shelf.
+In the latter case the book cannot be in the shelf.
 
 To make the description of this algorithm more precise, we introduce the concept of a *search interval*.
 Initially our search interval is the entire bookshelf,
 and with each comparison we reduce the search interval to just the left or right side of the middle element.
 This means that in each iteration we reduce the size of the problem by half:
-if we want to search among 100 books, they are reduced to 50 after one comparison,
+if we want to search among 100 books, it is reduced to 50 after one comparison,
 and to 25 after just one more comparison, and then to 12 and to 6, and so on.
-Ultimately in the end, we either find the book we are looking for, or we search among no books at all.
+Ultimately, we either find the book we are looking for, or we search among no books at all.
 And in both cases we have the answer we were looking for.
 This process of reducing a problem to a smaller instance of the same problem is a key concept in algorithm design,
-which we will se over and over again throughout this book.
+which we will see over and over again throughout this book.
 
 The *book case* is of course just a metaphor for an ordered array of elements,
 and to turn this algorithm into actual code, we need to decide how to represent the search interval.
@@ -107,7 +107,7 @@ the important thing is to represent the interval as a pair of array indices, (*s
 
 An important technical detail here is that we must use *integer division* when calculating the middle index.
 Therefore, the midpoint of the interval $(6,11)$ is $(6+11)/2=8$ (and not $8.5$).
-This leads to some corner cases you have make sure they are handled correctly,
+This leads to some corner cases you have to make sure they are handled correctly,
 for instance when the interval contains a single element (that is, when $\mathit{start}=\mathit{end}$).
 Or when it has two elements -- does it calculate *mid* correctly in these cases?
 
@@ -117,7 +117,7 @@ In this particular implementation we use *inclusive* indices,
 because both *start* and *end* are inside the interval.
 Another common option is to have *start* be inclusive, and *end* exclusive --
 in that case we have to start with the interval $(0,\mathit{arr.size})$.
-Yet another option is to have store the interval using the start index and the size of the interval.
+Yet another option is to store the interval using the start index and the size of the interval.
 For each variation you must do slightly different calculations,
 but the fundamental procedure is the same:
 Find the middle element, and exclude the upper or lower half of the interval.
@@ -167,7 +167,7 @@ can reduce runtime by a factor of millions, reducing runtime from years to secon
 
 Apart from introducing our first two algorithms (Linear search and Binary search),
 this section introduces a data structure: The ordered array.
-This data structure differs from from general arrays in what operations it supports,
+This data structure differs from general arrays in what operations it supports,
 more than just the ability to search quickly.
 
 Returning to the analogy of the bookshelf: If we have an unordered bookshelf,

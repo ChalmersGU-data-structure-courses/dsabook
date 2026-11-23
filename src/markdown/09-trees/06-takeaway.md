@@ -7,7 +7,7 @@ representing them as data structures.
 Trees are very versatile, and there are many kinds of tree structures.
 The binary tree is a special case of trees where every node has two children
 (and there is a special empty node).
-In a manner of speaking, inked lists (@sec:sequences:linked-lists) are
+In a manner of speaking, linked lists (@sec:sequences:linked-lists) are
 "unary trees" -- trees where every node has a single child.
 
 Much like you have seen with arrays, we will be using trees with various invariants to

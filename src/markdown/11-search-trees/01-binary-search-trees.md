@@ -20,7 +20,7 @@ For every node with key $k$:
 The only thing that differentiates a BST from a normal binary tree is this invariant.
 As explained in @sec:analysis-1:invariants,
 an invariant is a condition that the BST *always* must satisfy.
-This means that binary heaps are *not* BSTs, such as the the example tree in @fig:HeapTreeExample `\parpageref{}`{=latex}.
+This means that binary heaps are *not* BSTs, such as the example tree in @fig:HeapTreeExample `\parpageref{}`{=latex}.
 And conversely, a BST cannot be a binary heap, because the BST and the heap invariants are incompatible.
 Instead, @fig:BST-example shows four correct BSTs.
 Note that all these trees represent the same set of keys,

@@ -8,7 +8,7 @@
 Graphs are a very flexible family of data structures used in a wide range of applications.
 Like trees, there is no single data structure that can cover all kinds of graphs,
 but rather a family of similar data structures.
-In any case a graph always consists of a set of *vertices* (also called *nodes*), that are connected via *edges*.
+In any case a graph always consists of a set of *vertices* (also called *nodes*), that are connected via *edges*,
 where each edge connects two vertices.
 @Fig:GraphExamples shows visual representations of two small graphs.
 

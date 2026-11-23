@@ -17,7 +17,7 @@ cost of the $n$ operations is $O(1)$ or $O(\log(n))$, respectively.
 Note that the average here is very different from the average case of
 algorithms like QuickSort (@sec:sorting-2:quicksort).
 There is no randomness involved, and no assumptions about
-the input distribution. Average just means the the total cost of
+the input distribution. Average just means the total cost of
 all $n$ operations divided by $n$.
 
 It is called *amortised* because of the idea that an expensive operation

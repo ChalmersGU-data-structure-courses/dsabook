@@ -33,7 +33,7 @@ Algorithms
 Analysis
 :   The main purpose of analysing data structures and algorithms is to know how *efficient* they are.
     We focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
-    where we mathematically can derive how an algorithm behaves when the size of the input grows.
+    where we can mathematically derive how an algorithm behaves when the size of the input grows.
 
 Throughout the book we show how to describe algorithms and data structures
 using well-established technical terms, illustrations, and pseudocode.

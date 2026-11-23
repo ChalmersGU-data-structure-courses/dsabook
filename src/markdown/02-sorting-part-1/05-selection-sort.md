@@ -27,10 +27,10 @@ There are two main issues with this analogy:
 Luckily solving the first problem also solves the second.
 After we find the smallest element in the array, we move it to the first position.
 Since there is already another element in the first position, we place that in the gap created by
-moving the the smallest element, *swapping* the two books.
+moving the smallest element, *swapping* the two books.
 Finding the second smallest book is now easy, just find the smallest element starting from the second position!
 
-The result is an an invisible separator between sorted elements (at the start of the array) and still-unsorted elements.
+The result is an invisible separator between sorted elements (at the start of the array) and still-unsorted elements.
 We repeatedly select the minimal element from the unsorted books and *swap* its position with the first unsorted book.
 For example, here we are sorting an array with 15 elements, and have already done four iterations.
 Now *minIndex* points to the smallest of the unsorted elements and we swap it with the next cell in the sorted part:

@@ -9,7 +9,7 @@ Searching and sorting are two extensively studied problems.
 A sorting algorithm rearranges values in a collection, such as an array, from
 least to greatest. We call such a collection *ordered*.
 This is tremendously useful not just for the obvious things
-that are visible to software users, such as sorting a table by given column,
+that are visible to software users, such as sorting a table by a given column,
 but also as part of more complex algorithms. Because sorting is so useful,
 sorting algorithms have been studied extensively, and are frequently used
 as first examples of algorithms.
@@ -17,7 +17,7 @@ as first examples of algorithms.
 Search problems include a wide variety of queries on collections of values.
 Unlike sorting, searching does not modify a data structure, but
 determines some property of its content. The most fundamental search problem
-is determining if a collection contain a specific value, but there are several
+is determining if a collection contains a specific value, but there are several
 similar searching problems, here are a few examples:
 
 - What is the first position of the collection in which a value occurs?

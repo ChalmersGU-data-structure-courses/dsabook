@@ -123,7 +123,7 @@ To lookup a key $k$ in a hash table of size $M$:
 #### Note: Hash tables are not ordered
 One of the main qualities of a good hash function is that it is unpredictable,
 for example by displacing the internal order between keys.
-Therefore we never not be able to use a hash table to implement a *sorted map*,
+Therefore we will not be able to use a hash table to implement a *sorted map*,
 as described in @sec:ADTs:sorted-sets-and-maps.
 If we need to ask *range queries*, or know which key is the smallest or largest,
 then we have to use something else,

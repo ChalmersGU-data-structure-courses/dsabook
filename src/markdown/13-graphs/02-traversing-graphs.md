@@ -94,7 +94,7 @@ If we use a *stack* for the agenda we will get a depth-first traversal, DFS.
 
 ![
     Steps of a depth-first traversal, starting in $A$,
-    using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
+    using a queue and assuming `outgoingEdges` are given in alphabetical order of destination vertex.
     The algorithm can be described as:
     select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex.
 ](images/13.2-DFS-traversal.svg){#fig:GraphTraversal2}
