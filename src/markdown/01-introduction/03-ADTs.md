@@ -71,7 +71,7 @@ Priority queues
 :   A priority queue is also a kind of sequence, but it differs in that the order depends on the *priority* of an element.
     Priority queues often have different use cases than sequences,
     and they are implemented using special data structures, so we put them in a separate category.
-    Priority queues are discussed in more detail in [Chapter @sec:trees].
+    Priority queues are discussed in more detail in @sec:ADTs:priority-queues and in [Chapter @sec:heaps].
 
 Sets
 :   A set is an unordered collection of elements, where an element can only occur once.
