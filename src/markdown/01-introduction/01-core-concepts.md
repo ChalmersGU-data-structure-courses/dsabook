@@ -9,16 +9,17 @@ Data structures
 :   A data structure describes how we can *organise* our data so that it can be retrieved and updated efficiently.
     We explain the fundamental ideas of various data structures, and present the most common implementations.
     Examples of data structures that you may be familiar with are
-    *arrays*, *linked lists*, *search trees* and *hash tables*.
+    *arrays*, *linked lists*, *heaps*, *search trees* and *hash tables*.
 
 Abstract data types
 :   An abstract data type (ADT) describes the *capabilities* of a data structure.
     In other words, what operations can we use on a given data structure?
     Are there different data structures that have the same capabilities?
     We use ADTs to categorise the different use cases. Examples of ADTs include
-    *lists*, *queues*, *sets* and *maps*.
-    Slightly simplified using programming terms: An ADT is an interface, and
-    a data structure is the full implementation with all the technical details.
+    *lists*, *queues*, *priority queues*, *sets*, *maps*, and *graphs*.
+    There is a simplified analogy with object-oriented programming terminology:
+    An ADT is similar to an interface or an abstract class, and
+    a data structure is then a class implementation with all the technical details.
 
 Algorithms
 :   An algorithm is a procedure for solving a specific problem,
