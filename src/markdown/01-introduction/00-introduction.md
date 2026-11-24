@@ -53,8 +53,8 @@ Suppose you want to organise your music library so that you can search it by art
 and you want to be able to add and remove music from the library.
 If you store the songs in a list, both searching and modifiyng the library will be slow.
 Instead, you can create two separate indexes grouped by artist and by title.
-If you implement the search indexes as *search trees* ([Chapter @sec:search-trees])
-or *hash tables* ([Chapter @sec:hash-tables])
+If you implement the search indexes as *search trees* (see [Chapter @sec:search-trees])
+or *hash tables* (see [Chapter @sec:hash-tables])
 you can both search, add and remove songs efficiently.
 :::
 
@@ -67,10 +67,10 @@ The railroad is expanding to the new cities!
 Engineers want to use as little material as possible when building the railroad, but still connect all cities.
 After the railway is constructed, travellers want to find the fastest way of getting from
 city A to city B.
-Both these problems can be modelled as graph problems ([Chapter @sec:graphs]), using a data structure where vertices (cities)
+Both these problems can be modelled as graph problems (see [Chapter @sec:graphs]), using a data structure where vertices (cities)
 are connected by edges (potential railroad tracks or train departures).
-Specifically, finding the smallest rail network is a *minimum spanning tree* problem (@sec:graphs:MSTs)
-and travel planning is a *shortest path* problem (@sec:graphs:shortest-path).
+Specifically, finding the smallest rail network is a *minimum spanning tree* problem (see @sec:graphs:MSTs)
+and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
 :::
 
 \vspace{-1ex}
@@ -82,7 +82,7 @@ Suppose we are modelling a system of particles that can collide with other parti
 with a physical boundary, causing a change of direction and speed, or perhaps
 randomly splitting the particle in two.
 For each particle we can calculate when its next collision will occur.
-To simulate the progression of this system, we can use a *priority queue* ([Chapter @sec:heaps])
+To simulate the progression of this system, we can use a *priority queue* (see [Chapter @sec:heaps])
 to store future collisions, and efficiently access them in the order they occur.
 When we calculate the outcome of a collision, we add new future collisions to the
 priority queue.
