@@ -1,10 +1,6 @@
 
 # Introduction {#intro}
 
-::: TODO
-- There are more TODOs below!
-:::
-
 How can a navigation app find the fastest route through a road network with millions of intersections, in less than a second?
 How does a word processor know, while you are still typing, that "algorithmn" is not a word?
 How can we see if a text contains plagiarism, that is, if it contains sections copied from another existing text?
@@ -40,10 +36,6 @@ The problem is 10,000 times larger, but that does not mean it takes 10,000 times
 With a simple algorithm such as Insertion sort, it takes about 100 million times longer: more than a day.
 With a smarter algorithm such as Mergesort, it takes about 20 seconds.
 This is the kind of question that can be answered by *algorithm analysis*.
-
-::: TODO
-- Prio 3: add a 4th example?
-:::
 
 ::: {.example #ex:organising-music-library}
 #### Example: Organising your music library

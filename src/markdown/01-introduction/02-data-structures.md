@@ -1,11 +1,6 @@
 
 ## Data structures {#intro:data-structures}
 
-::: TODO
-- Prio 1: start with a text talking about data structures
-- Prio 1: introduce two DS: array and "sorted array", mention *invariant* for the sorted array
-:::
-
 The term data structure is loosely defined as a way of organising a
 collection of data items in computer memory, along with operations for
 accessing and modifying that data. Generally speaking that includes two things:
