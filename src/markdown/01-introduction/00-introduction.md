@@ -39,12 +39,13 @@ Can you use the same algorithm to sort the 10 million people living in Sweden?
 The problem is 10,000 times larger, but that does not mean it takes 10,000 times longer -- it depends on the algorithm.
 With a simple algorithm such as Insertion sort, it takes about 100 million times longer: more than a day.
 With a smarter algorithm such as Mergesort, it takes about 20 seconds.
-This is the kind of question that algorithm analysis answers, and we return to it in @sec:sorting-1 and @sec:sorting-2.
+This is the kind of question that can be answered by *algorithm analysis*.
 
 ::: TODO
 - Prio 3: add a 4th example?
 :::
 
+::: {.example #ex:searching-with-an-index}
 #### Example: Searching using an index
 
 A key idea behind a *search index* is to organise the same collection in different ways depending on how we want to search it.
@@ -52,33 +53,39 @@ Suppose we have a collection of songs by different artists, and we want to searc
 If the collection is just a list, with new songs added at the end, both kinds of search will be slow.
 Grouping songs by artist could make artist searches faster, but it would not help us search by title.
 Instead, we can create two separate indexes: one in which all songs are ordered alphabetically by artist, and another in which they are ordered by title.
-Then anyone who knows the alphabet can quickly find a song or an artist using a variant of the binary search algorithm (see @sec:sorting-1:binary-search).
+Then anyone who knows the alphabet can quickly find a song or an artist using the *binary search* algorithm
+(see @sec:sorting-1:binary-search).
+:::
 
+\vspace{-1ex}
+
+::: {.example #ex:travel-by-train}
 #### Example: Travel by train
 
 The railroad is expanding to the new cities!
-Engineers want to build as little total rail length as possible, but still connect all cities.
+Engineers want to use as little material as possible when building the railroad, but still connect all cities.
 After the railway is constructed, travellers want to find the fastest way of getting from
 city A to city B.
-
 Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
 are connected by edges (potential railroad tracks or train departures).
 Specifically, finding the smallest rail network is a *minimum spanning tree* problem (see @sec:graphs:MSTs)
 and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
+:::
 
+\vspace{-1ex}
+
+::: {.example #ex:simulating-particles}
 #### Example: Simulating particles
 
 Suppose we are modelling a system of particles that can collide with other particles or
 with a physical boundary, causing a change of direction and speed, or perhaps
 randomly splitting the particle in two.
 For each particle we can calculate when its next collision will occur.
-
 To simulate the progression of this system, we can use a *priority queue* data structure
 (see @sec:ADTs:priority-queues) to store future collisions, and efficiently access them in
 the order they occur.
 When we calculate the outcome of a collision, we add new future collisions to the
 priority queue.
-
 This generalises into any system with timed events where there is a main loop that
-repeatedly finds the next event and executes it, possibly spawning new future events.
-
+repeatedly finds the next event and executes it, spawning new future events.
+:::
