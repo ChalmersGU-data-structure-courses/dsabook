@@ -45,16 +45,17 @@ This is the kind of question that can be answered by *algorithm analysis*.
 - Prio 3: add a 4th example?
 :::
 
-::: {.example #ex:searching-with-an-index}
-#### Example: Searching using an index
+::: {.example #ex:organising-music-library}
+#### Example: Organising your music library
 
 A key idea behind a *search index* is to organise the same collection in different ways depending on how we want to search it.
-Suppose we have a collection of songs by different artists, and we want to search either by artist or by song title.
-If the collection is just a list, with new songs added at the end, both kinds of search will be slow.
-Grouping songs by artist could make artist searches faster, but it would not help us search by title.
-Instead, we can create two separate indexes: one in which all songs are ordered alphabetically by artist, and another in which they are ordered by title.
-Then anyone who knows the alphabet can quickly find a song or an artist using the *binary search* algorithm
-(see @sec:sorting-1:binary-search).
+Suppose you want to organise your music library so that you can search it by artist or by song title,
+and you want to be able to add and remove music from the library.
+If you store the songs in a list, both searching and modifiyng the library will be slow.
+Instead, you can create two separate indexes grouped by artist and by title.
+If you implement the search indexes as *search trees* ([Chapter @sec:search-trees])
+or *hash tables* ([Chapter @sec:hash-tables])
+you can both search, add and remove songs efficiently.
 :::
 
 \vspace{-1ex}
@@ -66,10 +67,10 @@ The railroad is expanding to the new cities!
 Engineers want to use as little material as possible when building the railroad, but still connect all cities.
 After the railway is constructed, travellers want to find the fastest way of getting from
 city A to city B.
-Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
+Both these problems can be modelled as graph problems ([Chapter @sec:graphs]), using a data structure where vertices (cities)
 are connected by edges (potential railroad tracks or train departures).
-Specifically, finding the smallest rail network is a *minimum spanning tree* problem (see @sec:graphs:MSTs)
-and travel planning is a *shortest path* problem (see @sec:graphs:shortest-path).
+Specifically, finding the smallest rail network is a *minimum spanning tree* problem (@sec:graphs:MSTs)
+and travel planning is a *shortest path* problem (@sec:graphs:shortest-path).
 :::
 
 \vspace{-1ex}
@@ -81,11 +82,10 @@ Suppose we are modelling a system of particles that can collide with other parti
 with a physical boundary, causing a change of direction and speed, or perhaps
 randomly splitting the particle in two.
 For each particle we can calculate when its next collision will occur.
-To simulate the progression of this system, we can use a *priority queue* data structure
-(see @sec:ADTs:priority-queues) to store future collisions, and efficiently access them in
-the order they occur.
+To simulate the progression of this system, we can use a *priority queue* ([Chapter @sec:heaps])
+to store future collisions, and efficiently access them in the order they occur.
 When we calculate the outcome of a collision, we add new future collisions to the
 priority queue.
 This generalises into any system with timed events where there is a main loop that
-repeatedly finds the next event and executes it, spawning new future events.
+repeatedly finds the next event and executes it, possibly spawning new future events.
 :::
