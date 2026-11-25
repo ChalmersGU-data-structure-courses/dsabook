@@ -240,7 +240,8 @@ and `add` on a set.
 You may think that `add` could be done in $O(1)$, but since `add` needs to prevent duplicates it
 needs to perform a `contains` before adding anything to the list.
 
-The best we can do so far is a sorted array. Contains can be implemented using binary search ([](#alg:binary-search)), which is $O(log(n))$. Modifications will still be $O(n)$, since insertion
+The best we can do so far is a sorted array. Contains can be implemented using binary search
+([](#alg:binary-search)`\commapageref{}`{=latex}), which is $O(log(n))$. Modifications will still be $O(n)$, since insertion
 into a sorted dynamic array is linear time.
 
 There is a special case of sets and maps where a sorted array is perfectly fine: If the

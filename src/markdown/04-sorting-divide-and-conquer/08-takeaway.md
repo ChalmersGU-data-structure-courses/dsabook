@@ -19,7 +19,7 @@ $O(n \log(n))$ sorting algorithms, much of what we use computers for today would
 Determining the complexity of the algorithms is also required some new tools. Most importantly:
 
 * The recursive nature of divide-and-conquer algorithm makes a straightforward analysis of the source code difficult.
-In the simple sorting algorithms like Selection Sort ([](#alg:selection-sort)), the $O(n^2)$ is a simple consequence of
+In the simple sorting algorithms like Selection Sort ([](#alg:selection-sort)`\commapageref{}`{=latex}), the $O(n^2)$ is a simple consequence of
 nesting two loops that each have $O(n)$ iterations. There is no $O(\log(n))$ loop in either Merge Sort or Quicksort though,
 instead determining the $O(n \log(n))$ requires adding up the total cost of operations performed in different recursive calls with different problem sizes.
 * Quicksort introduces the concept of *average case complexity*. Depending on how the pivot value is selected, the worst case of
