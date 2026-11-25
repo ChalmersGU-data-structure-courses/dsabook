@@ -2,12 +2,6 @@
 ## Overview of sorting algorithms {#sorting-1:overview}
 
 ::: TODO
-- Prio 1: The definition of in-place is currently an "invariant", should it be a "definition"?
-- Prio 1: Should we remove this section, or reduce it a lot?
-    - Or reduce some parts of the following sections?
-    - Because now there are quite many repetitions.
-- Prio 1: Perhapas tone down the criticism of the bookshelf analogy?
-    - Now we spend almost more time on critisising it than using it.
 - Prio 2: Suitable forward references to subsequent sections
 :::
 
@@ -35,6 +29,12 @@ On the other hand, Insertion sort takes a book blindly which involves no extra w
 but instead it has to find the correct position to put it,
 and it also has to move some books to make space for the new book.
 
+Note that analogies are never perfect, and a bookshelf is not the same as an array in a computer.
+For example, a computer cannot actually *move* an array element in the sense of moving a book.
+Instead the array contains references to book objects,
+and instead of moving a book it *copies a reference* to the book.
+
+<!--
 This analogy is a good first step towards our first two sorting algorithms,
 but there is still plenty of work to be done.
 Consider what data structures are involved:
@@ -57,6 +57,7 @@ A bookshelf is not a perfect analogy for an array, for several reasons:
    is just as easy as finding the millionth book from the left.
    One way to think about this is that the books are all the same thickness, so we can
    use a measuring tape to find specific positions.
+-->
 
 ### In-place sorting {#sorting-1:in-place-sorting}
 
@@ -72,8 +73,8 @@ around in the original array.
 A sorting algorithm is *in-place* if it modifies the input array directly and does not build a new array for the sorted result.
 :::
 
-Usually one also requires that the algorithm does not allocate too much extra space while operating,
-where "not too much" can mean at most logarithmic extra memory in the size of the array.
+Usually one also requires that the algorithm does not allocate too much extra space while operating.
+<!-- where "not too much" can mean at most logarithmic extra memory in the size of the array. -->
 One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:mergesort), while most other algorithms are.
 
 Translating this to our bookshelf analogy: the books are already in the shelf, unsorted, and we want to rearrange them without using the floor or another bookshelf.
