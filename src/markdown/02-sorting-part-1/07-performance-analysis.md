@@ -9,7 +9,7 @@ Having seen a couple of algorithms for searching and sorting, we want answers
 to questions like:
 
 - Is either Selection sort or Insertion sort faster than the other?
-- Is it better to perform Linear search directly on an unordered array,
+- Is it better to perform Linear search directly on an unsorted array,
   or to first sort the array and then perform Binary search?
 - How does the running time scale with increasing input size?
 

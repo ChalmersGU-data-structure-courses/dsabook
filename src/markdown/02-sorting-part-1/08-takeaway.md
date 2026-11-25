@@ -21,7 +21,7 @@ Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort))
     - quadratic time (Selection sort and Insertion sort).
 - Our first and most fundamental data structure: The array, as well as the variant of an ordered array.
 - How different data structures can enable faster solutions to a problem, specifically
-  how an ordered array allows faster searches than a general array.
+  how a sorted array allows faster searches than a general array.
 
 
 :::::: latex

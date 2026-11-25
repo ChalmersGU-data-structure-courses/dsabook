@@ -37,14 +37,14 @@ And in both cases we have the answer we were looking for.
 This process of reducing a problem to a smaller instance of the same problem is a key concept in algorithm design,
 which we will see over and over again throughout this book.
 
-The *book case* is of course just a metaphor for an ordered array of elements,
+The *bookshelf* is of course just a metaphor for an sorted array of elements,
 and to turn this algorithm into actual code, we need to decide how to represent the search interval.
 The operation of reducing the interval needs to be fast, so we cannot make a *slice* of the array
 (a slice is a copy of the array containing only some elements).
 Creating a slice uses up additional memory and is too slow.
 Instead we define the interval by two variables, *start* and *end*,
 denoting the lower and upper indices of the interval.
-Assume that we want to search for the value 36 in an ordered array of length 15.
+Assume that we want to search for the value 36 in a sorted array of length 15.
 Initially the interval spans the whole array, so $\textit{start}=0$ and $\textit{end}=14$.
 First we look up the middle element in cell $(0+14)/2=7$, which is revealed to have value 64 --
 the rest of the array is still unknown to us, so we show these cells using question marks:
@@ -78,7 +78,7 @@ using both an abstract text description and more concrete pseudocode.
 ::: {.algorithm #alg:binary-search}
 #### Algorithm: Binary search
 
-To search for *key* in an ordered array,
+To search for *key* in a sorted array,
 start with an interval including the whole array.
 Then repeat until *key* has been found, or the interval is empty:
 
@@ -126,7 +126,7 @@ Find the middle element, and exclude the upper or lower half of the interval.
 There are many variations of Binary search.
 For example, if there are many books by the same author we can search for the first of these books, or the last.
 Then we will have to make some subtle changes to the implementation, but the basic idea remains the same.
-<!-- Consider what would happen if the array is not ordered properly,
+<!-- Consider what would happen if the array is not sorted properly,
 can you construct a small example where the algorithm would go wrong? -->
 Here is a slightly demanding exercise:
 can you use Binary search to determine if an array contains a prime number?
@@ -163,19 +163,19 @@ Switching programming language to C from Python might yield a similar speed-up.
 Both of those are nice, but switching from a linear time algorithm to a logarithmic one
 can reduce runtime by a factor of millions, reducing runtime from years to seconds.
 
-#### Ordered arrays as a data structure
+#### Sorted arrays as a data structure
 
 Apart from introducing our first two algorithms (Linear search and Binary search),
-this section introduces a data structure: The ordered array.
+this section introduces a data structure: The sorted array.
 This data structure differs from general arrays in what operations it supports,
 more than just the ability to search quickly.
 
-Returning to the analogy of the bookshelf: If we have an unordered bookshelf,
+Returning to the analogy of the bookshelf: If we have an unsorted bookshelf,
 where we only ever do Linear searches, we can add a new book by squeezing it in
 wherever there is room.
 We can also switch the order of two books if we please.
 
-If we have an ordered bookshelf, and want to keep using Binary search on it,
+If we have a sorted bookshelf, and want to keep using Binary search on it,
 adding a new book requires careful consideration.
 There is a single valid position for the new book to be placed,
 and we cannot swap existing books around.

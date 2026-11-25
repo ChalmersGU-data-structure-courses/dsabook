@@ -9,7 +9,7 @@ Imagine that we want to sort books in a bookshelf, what different strategies can
 Note that it doesn't matter what we want to sort the books by
 -- it could be by author, or title, or perhaps height.
 We only need a way to compare two books,
-where we say that the "smaller" book should come before the "larger" in the final ordered bookshelf.
+where we say that the "smaller" book should come before the "larger" in the final sorted bookshelf.
 
 First, let us imagine that the books are not in the shelf yet
 -- they are in an unordered pile on the floor.

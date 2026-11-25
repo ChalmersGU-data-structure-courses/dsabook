@@ -14,7 +14,7 @@ The procedure would be like this:
 First pick up the two topmost books in the pile and put them in order in the bookshelf.
 Then you take another book from the pile and put it in the bookshelf,
 in the correct position with respect to the first two, and so on.
-As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf ordered.
+As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf sorted.
 
 Just as for Selection sort, the description above is not in-place.
 But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm:

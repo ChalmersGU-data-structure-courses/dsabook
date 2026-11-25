@@ -3,7 +3,7 @@
 
 Searching and sorting are two extensively studied problems.
 A sorting algorithm rearranges values in a collection, such as an array, from
-least to greatest. We call such a collection *ordered*.
+least to greatest. We call such a collection *sorted*.
 This is tremendously useful not just for the obvious things
 that are visible to software users, such as sorting a table by a given column,
 but also as part of more complex algorithms. Because sorting is so useful,
@@ -22,9 +22,9 @@ similar searching problems, here are a few examples:
 
 Each of these, and many more, are useful in different applications.
 Different data structures allow for different algorithms.
-Notably, if we are searching in an ordered array, the problem of
+Notably, if we are searching in a sorted array, the problem of
 finding the least value is trivial: It is in position $0$ of the array.
-As we shall soon see, ordered arrays also allow better performance
+As we shall soon see, sorted arrays also allow better performance
 for finding a specific value.
 
 In this chapter we introduce two algorithms for searching in arrays:

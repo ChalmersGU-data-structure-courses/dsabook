@@ -38,7 +38,7 @@ Can all three operations be implemented, and how efficient can they be made?
 :   Both arrays and sorted arrays can implement this efficiently, it is simply array indexing.
 
 `set(seq,i,x)`
-:   An unordered array can implement setting a position, it is a normal assignment.
+:   A normal array can implement setting a position, it is a normal assignment.
     But the operation does not make sense for a sorted array:
     Assume that we call `set(seq,0,4)` on the sorted array $[1,2,3]$ -- what should the result be?
     Changing the first element into a $4$ will break the ordering invariant, because $4>2$.
