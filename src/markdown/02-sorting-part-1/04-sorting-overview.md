@@ -63,11 +63,11 @@ A bookshelf is not a perfect analogy for an array, for several reasons:
 One problem with both our strategies is that they use a lot of extra space -- the floor.
 For a computer this means that the input is one array (the floor), and the output is another (the bookshelf).
 Sometimes this is exactly what we want -- if we don't want to change the original array,
-but make an ordered copy.
+but make a sorted copy.
 But in most cases we want the algorithm to be *in-place*, meaning that we shuffle elements
 around in the original array.
 
-::: {.invariant #inv:in-place}
+::: {.definition #inv:in-place}
 #### In-place sorting algorithm
 A sorting algorithm is *in-place* if it modifies the input array directly and does not build a new array for the sorted result.
 :::
@@ -79,12 +79,12 @@ One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:m
 Translating this to our bookshelf analogy: the books are already in the shelf, unsorted, and we want to rearrange them without using the floor or another bookshelf.
 A fundamental operation on arrays is swapping the positions of two elements:
 
-    swap(arr: Array, i: Int, j: Int):
+    function swap(arr, i, j):
         temp = arr[i]; arr[i] = arr[j]; arr[j] = temp
 
 Because arrays have random access, swapping two elements in an array with a million elements
-does not take more time than in an array of ten elements. Swap is a *constant time*
-operation.
+does not take more time than in an array of ten elements.
+Swapping is a *constant time* operation.
 
 The key to making Selection sort and Insertion sort in-place, is deciding that the initial
 part of the array is sorted, and the rest is not. Instead of moving a book from the floor

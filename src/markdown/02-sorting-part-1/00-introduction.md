@@ -1,10 +1,6 @@
 
 # Searching and sorting {#sorting-1}
 
-::: TODO
-- Done?
-:::
-
 Searching and sorting are two extensively studied problems.
 A sorting algorithm rearranges values in a collection, such as an array, from
 least to greatest. We call such a collection *ordered*.

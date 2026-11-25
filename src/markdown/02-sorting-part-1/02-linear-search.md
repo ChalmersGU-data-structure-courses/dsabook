@@ -1,10 +1,6 @@
 
 ## Linear search {#sorting-1:linear-search}
 
-::: TODO
-- Prio 2: Also include a discussion about using a `key` function for testing
-:::
-
 One of the most fundamental tasks that we use computers for is *searching*.
 We want to find an object that matches some criteria, in a collection of objects.
 In fact, most of the data structures and algorithms that we will present in this book
@@ -19,7 +15,7 @@ look at each book and see if it is the one we are looking for.
 This algorithm is called *Linear search*, and is the most straightforward way to search a collection.
 Here is a simple implementation in pseudocode, where the bookshelf is represented as an array:
 
-    linearSearch(arr, key):
+    function linearSearch(arr, key):
         for i in 0 .. arr.size - 1:     // For each element in the array:
             if arr[i] == key:               // If we found the search key:
                 return i                        // return this position
@@ -36,7 +32,7 @@ computer, is the question of how the time scales when the bookshelf is expanded,
 regardless of how fast the computer is. How does the search time change if we double
 the size of the bookshelf? Particularly, we are interested in the *worst case* time.
 A supremely lucky person may always find their book in the first slot they check
-(in the `linearSearch` function that would be when `arr[0] == key`).
+(in the `linearSearch` function that would be when `arr[0]==key`).
 The *worst case* is that we are searching for a book that is not in the shelf at all.
 
 In the worst case, doubling the size of the bookshelf will double the search time.
@@ -51,7 +47,7 @@ For example, if we want to find the *smallest* element in some *array interval*,
 we can iterate through every array index in the interval,
 remembering which array cell contains the smallest value so far:
 
-    findSmallest(arr, start, end):
+    function findSmallest(arr, start, end):
         minIndex = start                // This is the smallest index so far
         for i in start+1 .. end:        // For each element in the rest of the interval:
             if arr[i] < arr[minIndex]:      // If we found a smaller element:

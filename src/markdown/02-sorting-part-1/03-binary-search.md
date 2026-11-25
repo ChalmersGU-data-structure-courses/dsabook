@@ -91,17 +91,17 @@ Then repeat until *key* has been found, or the interval is empty:
 
 If the interval ends up empty, the key is not in the array.
 When implementing the algorithm as pseudocode,
-the important thing is to represent the interval as a pair of array indices, (*start*,*end*):
+the important thing is to represent the interval as a pair of array indices, `start` and `end`:
 
 ```pseudo
-    binarySearch(arr, key):
-        (start, end) = (0, arr.size - 1)     // The initial interval is the whole array
-        while start <= end:                  // Continue until the interval is empty:
-            mid = (start + end) / 2              // The index of the middle value
-            if key < arr[mid]: end = mid - 1     // The key may be in the lower half
-            if key > arr[mid]: start = mid + 1   // The key may be in the upper half
-            if key = arr[mid]: return mid        // We found the key!
-        return null                          // The key is not in the array
+    function binarySearch(arr, key):
+        start = 0; end = arr.size-1      // The initial interval is the whole array
+        while start <= end:                // Continue until the interval is empty:
+            mid = (start + end) / 2           // The index of the middle value
+            if key < arr[mid]: end = mid-1    // The key may be in the lower half
+            if key > arr[mid]: start = mid+1  // The key may be in the upper half
+            if key = arr[mid]: return mid     // We found the key!
+        return null                        // The key is not in the array
 ```
 :::
 
