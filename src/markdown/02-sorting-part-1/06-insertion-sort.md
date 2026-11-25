@@ -1,11 +1,6 @@
 
 ## Insertion sort {#sorting-1:insertion-sort}
 
-::: TODO
-- Prio 1: The intro is a repetition of section 2.4, reduce?
-- Prio 3: Use the optimized IS that doesn't do swaps?
-:::
-
 Our second sorting algorithm is Insertion sort and it was described like this in @sec:sorting-1:overview:
 
 > Take any book from the floor, and insert it in its correct position among the books already in the shelf.

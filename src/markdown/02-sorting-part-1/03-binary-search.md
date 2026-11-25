@@ -1,10 +1,6 @@
 
 ## Binary search {#sorting-1:binary-search}
 
-::: TODO
-- Prio 1: If we introduce ordered arrays in 1.2, then we can remove the subsubsection here?
-:::
-
 No library keeps books in random order, because Linear search is too slow.
 Instead, books are sorted in the shelves, for example alphabetically by author name and title.
 Most people can intuitively use this order to search a bookshelf

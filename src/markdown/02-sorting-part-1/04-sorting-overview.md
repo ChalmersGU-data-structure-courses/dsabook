@@ -1,10 +1,6 @@
 
 ## Overview of sorting algorithms {#sorting-1:overview}
 
-::: TODO
-- Prio 2: Suitable forward references to subsequent sections
-:::
-
 Imagine that we want to sort books in a bookshelf, what different strategies can we use to do that?
 Note that it doesn't matter what we want to sort the books by
 -- it could be by author, or title, or perhaps height.
