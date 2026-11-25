@@ -1,10 +1,7 @@
 
 ## Selection sort {#sorting-1:selection-sort}
 
-::: TODO
-- Prio 1: The intro is a repetitoin of the last section, reduce?
-:::
-
+<!--
 Suppose again we are sorting a large pile of books into a bookshelf,
 in alphabetical order by the author's family name.
 One way is to look through the pile until we find the book that should be first
@@ -13,25 +10,35 @@ Then we look through the remaining pile until we find the second book
 (by *Beskow*), and add that behind *Alakoski*.
 The third book (by *Carlberg*), goes behind *Beskow*.
 We proceed through the shrinking pile of books until we are done.
+-->
 
-This is the inspiration for our first sorting algorithm, called [Selection sort]{.term}.
+Recall the description of Selection sort from the previous section:
+
+> Select the smallest book on the floor, and put it next to the sorted books in the shelf.
+
 The bookshelf is of course an array, and selecting the first book in alphabetical order
 corresponds to finding the minimal element using some comparison function.
-There are two main issues with this analogy:
+There are two main issues with this description:
 
-- We want sorting to be in-place, instead of moving books from a pile to a shelf, we want
-  to rearrange books inside a shelf.
-- Finding the smallest book in an array is easy using a linear search, but how do we
-  find the third or one thousandth smallest book?
+- We want sorting to be in-place; instead of moving books from a pile to a shelf,
+  we want to rearrange books inside the shelf.
+- Finding the smallest book in an array is easy using a linear search,
+  but how do we find the third or one thousandth smallest book?
 
 Luckily solving the first problem also solves the second.
-After we find the smallest element in the array, we move it to the first position.
-Since there is already another element in the first position, we place that in the gap created by
-moving the smallest element, *swapping* the two books.
-Finding the second smallest book is now easy, just find the smallest element starting from the second position!
+The basic idea with turning Selection sort in-place is to imagine that the bookshelf has an invisible separator:
+To the left of the separator are the smallest books, in sorted order,
+and to the right are the books that have not been sorted yet.
+Each step in the algorithm will find the smallest book in the right, unsorted, part,
+and move it at the end of the left, sorted, part.
+But, the position at the end of the left part is already occupied -- by the first of the unsorted books.
+This book has to be moved out of the way, and the fastest way of doing that is to *swap* the two books.
+The sorted part of the array now includes the swapped book, so it has grown by one book and the unsorted part has shrunk.
+Finding the next smallest book is now easy; we can again find the smallest element in the right, unsorted part.
 
-The result is an invisible separator between sorted elements (at the start of the array) and still-unsorted elements.
-We repeatedly select the minimal element from the unsorted books and *swap* its position with the first unsorted book.
+At the start of the algorithm, the invisible separator is at the start of the array and the sorted part is empty.
+We repeatedly select the minimal element from the unsorted books and *swap* its position with the first unsorted book,
+thereby moving the separator one step to the right.
 For example, here we are sorting an array with 15 elements, and have already done four iterations.
 Now *minIndex* points to the smallest of the unsorted elements and we swap it with the next cell in the sorted part:
 
@@ -58,7 +65,8 @@ where the sorted part is to the left and initially empty.
 Then repeat until the unsorted part is empty:
 
 1. Find the smallest unsorted element, $e$.
-2. Swap $e$ with the leftmost of the unsorted elements. Now $e$ belongs to the sorted part.
+2. Swap $e$ with the leftmost of the unsorted elements.
+3. Now $e$ belongs to the sorted part.
 
 Each repetition of these steps reduces the unsorted part by one element,
 so by the end of the procedure all elements are sorted.
@@ -68,7 +76,7 @@ where the counter $i$ represents the size of the sorted part
 Note that the inner loop is hidden inside the `findSmallest` function, described in [](#ex:find-smallest).
 
 ```pseudo
-    selectionSort(arr):
+    function selectionSort(arr):
         n = arr.size
         for i in 0 .. n-1:       // Find the i'th smallest element:
             minIndex = findSmallest(arr, i, n-1)
@@ -87,26 +95,27 @@ After iteration $i$, the first $i$ elements of the array are sorted,
 and they are all smaller than the elements in the rest of the array.
 :::
 
-Another observation is that the $i$'th iteration of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$. This guarantees that the element is in the correct position.
+Another observation is that the $i$th iteration of Selection sort "selects" the $i$th smallest element in the array,
+placing it at position $i$. This guarantees that the element is in the correct position.
 These observations lead to an alternative *inductive* description of Selection sort:
 
-- To sort the array interval $(i,n)$ in-place:
+- To sort the array interval $[i,n]$ in-place:
     1. Swap the smallest element in the interval with position $i$.
-    2. Sort the remaining interval $(i{+}1,n)$ in-place.
+    2. Sort the remaining interval $[i{+}1,n]$ in-place.
 
 An interesting aspect of this description is that step two does not require us to
 use Selection sort for the remaining interval, any in-place sorting algorithm would work.
-
 The description highlights how we reduce the problem of sorting a number of elements into a smaller problem of the same kind.
-This is similar to Binary search ([](#alg:binary-search)), but the reduction is less significant -- reducing the
-size of the problem by one instead of cutting it in half. We also perform more work to achieve
+This is similar to Binary search ([](#alg:binary-search)`\commapageref{}`{=latex}), but the reduction is less significant --
+reducing the size of the problem by one instead of cutting it in half.
+<!-- We also perform more work to achieve
 the reduction: where Binary search required a single comparison, Selection sort has to find the smallest
-of $n$ elements.
+of $n$ elements. -->
 
-The alternative description is also great for convincing someone that the algorithm works,
+<!-- The alternative description is also great for convincing someone that the algorithm works,
 in fact it is very similar to a mathematical proof by induction: The algorithm is trivially
 correct when sorting $1$ or $0$ elements, and if we assume it works for $n$ elements we can
-easily prove that it works for $n+1$ elements.
+easily prove that it works for $n+1$ elements. -->
 
 :::::::: online
 #### Selection sort visualisation

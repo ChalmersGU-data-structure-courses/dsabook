@@ -6,12 +6,15 @@
 - Prio 3: Use the optimized IS that doesn't do swaps?
 :::
 
-Consider again the problem of sorting a pile of books.
-Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.
+Our second sorting algorithm is Insertion sort and it was described like this in @sec:sorting-1:overview:
+
+> Take any book from the floor, and insert it in its correct position among the books already in the shelf.
+
+The procedure would be like this:
+First pick up the two topmost books in the pile and put them in order in the bookshelf.
 Then you take another book from the pile and put it in the bookshelf,
 in the correct position with respect to the first two, and so on.
 As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf ordered.
-This simple approach is the inspiration for our second sorting algorithm, called [Insertion sort]{.term}.
 
 Just as for Selection sort, the description above is not in-place.
 But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm:
@@ -54,12 +57,12 @@ After these steps $e$ is in the sorted part, and the unsorted part is reduced by
 Here is the corresponding pseudocode implementation:
 
 ```pseudo
-    insertionSort(arr):
+    function insertionSort(arr):
         n = arr.size
-        for i in 1 .. n-1:                    // i is the start of the unsorted area
-            j = i                             // arr[j] is the element to be inserted
-            while j>0 and arr[j] < arr[j-1]:  // while arr[j] is not in the right position
-                swap(arr, j, j-1)             // move arr[j] backwards one step
+        for i in 1 .. n-1:                   // i is the start of the unsorted area
+            j = i                            // arr[j] is the element to be inserted
+            while j>0 and arr[j] < arr[j-1]: // while it is not in the right position
+                swap(arr, j, j-1)            // move it backwards one step
                 j -= 1
 ```
 

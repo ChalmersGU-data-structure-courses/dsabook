@@ -9,22 +9,23 @@ Having seen a couple of algorithms for searching and sorting, we want answers
 to questions like:
 
 - Is either Selection sort or Insertion sort faster than the other?
-- Is it better to perform Linear search directly on an unordered array, or sorting the array and then perform Binary search?
-- How does the running time of these algorithms scale with increasing input size?
+- Is it better to perform Linear search directly on an unordered array,
+  or to first sort the array and then perform Binary search?
+- How does the running time scale with increasing input size?
 
 The exact runtime of sorting depends on a myriad of factors. Just as with the search
 algorithms shown earlier, the number of comparisons performed is a good proxy for
 runtime -- a sorting algorithm that does many comparisons is going to be slower.
 So our task is determining the worst case number of comparisons required for a given input size.
 
-We saw earlier that in Linear search, the number of comparisons scales linearly with the
-input size. We say that Linear search is a *linear time* algorithm, and that Binary search
-is *logarithmic time*. In this chapter we show that both Selection sort and Insertion sort
-are *quadratic time*, the number of comparisons required for $n$ elements is proportional to $n^2$.
+We saw earlier that in Linear search, the number of comparisons scales linearly with the input size.
+We say that Linear search is a *linear time* algorithm, and that Binary search is *logarithmic time*.
+In this section we show that both Selection sort and Insertion sort are *quadratic time* --
+the number of comparisons required for an $n$-element array is proportional to $n^2$.
 
 #### Selection sort analysis
 
-One way to describe Selection sort:
+One way to describe Selection sort is:
 For every position $i$ from $0$ to $n-1$, search through the remaining $n-i-1$ values
 for the minimal value.
 In our implementation (see [](#alg:selection-sort)), we have a nested loop, where the
