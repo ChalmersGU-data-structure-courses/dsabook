@@ -1,23 +1,19 @@
 
 ## Main takeaways and outlook {#analysis-1:takeaway}
 
-The most important concept introduced in this chapter is complexity using $O$-notation.
-This extends our previous notion of complexity classes like linear and logarithmic time
-into a mathematically precise definitions ($O(n)$ and $O(\log(n))$).
+In this chapter we have introduced the tools we use to reason about algorithms: what it means for an algorithm to be correct, and how to describe its efficiency independently of hardware and implementation details.
+The most important concept is complexity using big-$O$ notation, which turns informal notions like "linear time" and "logarithmic time" into complexity classes such as $O(n)$ and $O(\log(n))$.
 
-Time complexity lets us estimate the scalability of an algorithm, and it lets us compare
-different algorithms that solve the same problem. An $O(n^2 \log(n))$ time algorithm is in a
-different (slower) complexity class than $O(n^2)$, whereas $O(2n^2 \log(n^2))$ is the same
-as $O(n^2 \log(n))$. Ultimately, algorithms in a faster complexity class scale better.
-There are hidden constant factors, and for small input sizes or certain technical
-settings the outcome is unpredictable  -- but for large enough values of $n$,
-better time complexity means a faster algorithm.
+- A *problem* specifies what should be computed, an *algorithm* is a method for solving it, and a *program* implements an algorithm.
+- *Invariants*, *preconditions* and *postconditions* let us reason about if an algorithm or a data structure is correct.
+- Empirical measurements are unreliable for comparing algorithms; instead we analyse how the runtime *grows* with the input size.
+- Big-$O$ is an upper bound that ignores constant factors and lower-order terms:
+  $O(2n^2\log(n^2))$ is the same as $O(n^2\log(n))$, but $O(n^2\log(n))$ is a slower class than $O(n^2)$.
+- For large enough inputs, an algorithm in a faster complexity class is always faster, whatever the constant factors.
+- The complexity of code can usually be found with a few rules of thumb: sequences add, loops multiply, and only the dominant term matters.
 
-A different aspect of algorithm analysis is correctness. An algorithm is only useful if we
-are certain it always solves a problem correctly. This is closely tied to *invariants* of data structures,
-properties that must always hold for the data representation, such as an array always being sorted.
-Often, deciding the data structure of a data structure makes defining the operations trivial, and the
-correctness of them obvious.
+In [Chapter @sec:sorting-2] we apply these tools to faster sorting algorithms, where the recursive structure requires new analysis techniques.
+The formal definition of big-$O$, together with lower and tight bounds, follows in [Chapter @sec:analysis-2].
 
 :::::: latex
 \wrapQRlink[4mm]{20mm}{-4mm}{\thesectionURL}{Chapter \thechapter{} online}
