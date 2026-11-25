@@ -87,7 +87,7 @@ Then repeat until *key* has been found, or the interval is empty:
 
 If the interval ends up empty, the key is not in the array.
 When implementing the algorithm as pseudocode,
-the important thing is to represent the interval as a pair of array indices, `start` and `end`:
+the important thing is to represent the interval as two array indices, `start` and `end`:
 
 ```pseudo
     function binarySearch(arr, key):
@@ -102,7 +102,7 @@ the important thing is to represent the interval as a pair of array indices, `st
 :::
 
 An important technical detail here is that we must use *integer division* when calculating the middle index.
-Therefore, the midpoint of the interval $(6,11)$ is $(6+11)/2=8$ (and not $8.5$).
+Therefore, the midpoint of the interval $[6,11]$ is $(6+11)/2=8$ (and not $8.5$).
 This leads to some corner cases you have to make sure they are handled correctly,
 for instance when the interval contains a single element (that is, when $\mathit{start}=\mathit{end}$).
 Or when it has two elements -- does it calculate *mid* correctly in these cases?
