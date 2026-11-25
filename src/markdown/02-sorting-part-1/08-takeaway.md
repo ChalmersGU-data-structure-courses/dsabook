@@ -1,12 +1,12 @@
 
 ## Main takeaways and outlook {#sorting-1:takeaway}
 
-::: TODO
-- Prio 1: the first data structures (array + sorted array) should come already in sec 1.2!
-:::
-
-In addition to learning the details of the four algorithms Linear search,
-Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort)), and Insertion sort ([](#alg:insertion-sort)), here is a checklist for what you have seen in this chapter:
+In addition to learning the details of the four algorithms
+Linear search ([](#ex:linear-search)),
+Binary search ([](#alg:binary-search)),
+Selection sort ([](#alg:selection-sort)),
+and Insertion sort ([](#alg:insertion-sort)),
+here is a checklist for what you have seen in this chapter:
 
 - How algorithms can be described using text, pseudocode and illustrations.
 - The pattern of solving a problem by reducing it to a smaller problem of the same type.
@@ -19,7 +19,6 @@ Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort))
     - logarithmic time (Binary search),
     - linear time (Linear search),
     - quadratic time (Selection sort and Insertion sort).
-- Our first and most fundamental data structure: The array, as well as the variant of an ordered array.
 - How different data structures can enable faster solutions to a problem, specifically
   how a sorted array allows faster searches than a general array.
 

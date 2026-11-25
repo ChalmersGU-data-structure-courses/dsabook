@@ -163,6 +163,7 @@ Switching programming language to C from Python might yield a similar speed-up.
 Both of those are nice, but switching from a linear time algorithm to a logarithmic one
 can reduce runtime by a factor of millions, reducing runtime from years to seconds.
 
+<!--
 #### Sorted arrays as a data structure
 
 Apart from introducing our first two algorithms (Linear search and Binary search),
@@ -183,6 +184,7 @@ and we cannot swap existing books around.
 This touches on the subject of *invariants*, properties that must always hold on a data structure.
 Having an ordering invariant on an array affords us the luxury of efficient search, at the cost
 of having to *maintain* that invariant when performing modifications.
+-->
 
 <!--
 #### Variations
