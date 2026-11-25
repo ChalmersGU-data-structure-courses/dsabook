@@ -1,17 +1,6 @@
 
 ## Selection sort {#sorting-1:selection-sort}
 
-<!--
-Suppose again we are sorting a large pile of books into a bookshelf,
-in alphabetical order by the author's family name.
-One way is to look through the pile until we find the book that should be first
-(say, by an author named *Alakoski*), and put that first in the bookshelf.
-Then we look through the remaining pile until we find the second book
-(by *Beskow*), and add that behind *Alakoski*.
-The third book (by *Carlberg*), goes behind *Beskow*.
-We proceed through the shrinking pile of books until we are done.
--->
-
 Recall the description of Selection sort from the previous section:
 
 > Select the smallest book on the floor, and put it next to the sorted books in the shelf.
@@ -25,36 +14,34 @@ There are two main issues with this description:
 - Finding the smallest book in an array is easy using a linear search,
   but how do we find the third or one thousandth smallest book?
 
-Luckily solving the first problem also solves the second.
-The basic idea with turning Selection sort in-place is to imagine that the bookshelf has an invisible separator:
-To the left of the separator are the smallest books, in sorted order,
-and to the right are the books that have not been sorted yet.
-Each step in the algorithm will find the smallest book in the right, unsorted, part,
-and move it at the end of the left, sorted, part.
-But, the position at the end of the left part is already occupied -- by the first of the unsorted books.
-This book has to be moved out of the way, and the fastest way of doing that is to *swap* the two books.
-The sorted part of the array now includes the swapped book, so it has grown by one book and the unsorted part has shrunk.
-Finding the next smallest book is now easy; we can again find the smallest element in the right, unsorted part.
+To solve both these issues, we imagine the bookshelf divided into two parts:
+The left part has the smallest books in the shelf, in sorted order, and the right
+part has books that have not yet been sorted.
+To gradually extend the sorted part, we *select* the smallest
+book from the unsorted part, and move it to its correct position at the end of the sorted part.
+The move is performed by swapping the positions of the smallest unsorted book and the leftmost unsorted book.
 
-At the start of the algorithm, the invisible separator is at the start of the array and the sorted part is empty.
-We repeatedly select the minimal element from the unsorted books and *swap* its position with the first unsorted book,
-thereby moving the separator one step to the right.
-For example, here we are sorting an array with 15 elements, and have already done four iterations.
-Now *minIndex* points to the smallest of the unsorted elements and we swap it with the next cell in the sorted part:
+In the illustration below, we are sorting an array with 15 elements, and have done four steps of the algorithm.
+That means the first four positions have the four smallest elements in ascending order.
+The index *i* points to the first unsorted element (34) and *minIndex* to the smallest of the unsorted elements (19).
+Swapping them lets us extend the sorted part of the array:
 
 `\noindent`{=latex}
 ![](images/2.5-two-steps-selection-sort-1.svg)
 
 `\noindent`{=latex}
-In the next iteration, the sorted part has increased by one,
-and the smallest of the remaining unsorted elements can be swapped into place:
+In the swap, 34 is moved to the position 19 occupied, not because
+we want 34 there specifically, but because 34 has to remain somewhere in the unsorted part.
+Importantly, 19 is now in its correct position -- we never have to move 19 again.
+Eventually, 34 and all other elements will also be moved to their correct positions,
+but since 21 is the smallest of the remaining unsorted elements, this illustrates the next step:
 
 `\noindent`{=latex}
 ![](images/2.5-two-steps-selection-sort-2.svg)
 
 `\noindent`{=latex}
 Selection sort is described in more detail in [](#alg:selection-sort),
-both in plain text and in pseudocode.
+along with a pseudocode implementation.
 
 
 ::: {.algorithm #alg:selection-sort}
