@@ -7,7 +7,7 @@
 
 The sorting algorithms in [Chapter @sec:sorting-2] are all asymptotically much better than
 the algorithms from [Chapter @sec:sorting-1].
-Byt *why* is that -- or rather, why are Selection and Insertion sort so much slower?
+But *why* is that -- or rather, why are Selection and Insertion sort so much slower?
 The crucial bottleneck is that only *adjacent* records are compared or swapped.
 To analyse this we first need to define the concept of *inversion*.
 
