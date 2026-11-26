@@ -2,7 +2,7 @@
 ## Main takeaways and outlook {#sorting-1:takeaway}
 
 In this chapter we have studied searching and sorting through four algorithms:
-Linear search, Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort)) and Insertion sort ([](#alg:insertion-sort)).
+Linear search ([](#ex:linear-search)), Binary search ([](#alg:binary-search)), Selection sort ([](#alg:selection-sort)) and Insertion sort ([](#alg:insertion-sort)).
 The algorithms themselves are simple, but they introduce ideas that we use throughout the book:
 
 - Algorithms can be described using text, pseudocode and illustrations.
