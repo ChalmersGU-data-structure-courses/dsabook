@@ -13,20 +13,20 @@ it only requires a single comparison.
 
 So far, we have only studied the worst-case complexity of algorithms.
 When we say that Linear search is $O(n)$, we only consider the slowest possible
-input of size $n$. We can also analyse the *best-case*, and *average-case* complexity of an algorithm.
+input of size $n$. We can also analyse the best- or average-case complexity of an algorithm:
 
-- Worst case is the default, if nothing else is specified.
-- Best case has very limited value, but if two algorithms have the same worst case complexity,
+- The *worst case* is the default, if nothing else is specified.
+- The *best case* has very limited value, but if two algorithms have the same worst case complexity,
   a better best-case for either algorithm is worth noting.
-- The average case can be difficult to determine -- since it requires assumptions on the distribution of input values.
+- The *average case* can be difficult to determine -- since it requires assumptions on the distribution of input values.
 
 For many algorithms, the worst- and best-case complexity are one and the same.
-Consider for example Selection sort (@sec:sorting-1:selection-sort):
+Consider for example Selection sort ([](#alg:selection-sort)`\commapageref{}`{=latex}):
 the total number of times the body of the inner loop will be executed is $n+\cdots+2+1=n(n+1)/2$.
 So the running time only depends on the size $n$, regardless of the content of the array.
 The best case of Selection sort is $O(n^2)$, same as the worst case.
 
-For Insertion sort (@sec:sorting-1:insertion-sort), the situation is different.
+For Insertion sort ([](#alg:insertion-sort)`\commapageref{}`{=latex}), the situation is different.
 The outer `for`-loop always iterates the same number of times,
 but the inner `while`-loop only runs until it finds the correct position of the inserted element.
 This means that the execution time of insertion sort can differ widely.
@@ -57,7 +57,7 @@ a best case input for any size, for instance 100. The input size of
 `linearSearch(arr,x)` is the length of the array `arr`.
 Clearly the best case for size 100 cannot be that `arr` is empty, because there are
 no empty arrays of length 100.
-Instead, the best case of `linearSearch(arr,x)` is an array where `arr[0]==x`,
+Instead, the best case of `linearSearch(arr,x)` is an array where `arr[0]` = `x`,
 and this is easy to construct for any size.
 
 When we say the worst case of linear search is $O(n)$, we mean that for every size $n$
