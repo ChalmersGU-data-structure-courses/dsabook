@@ -1,7 +1,9 @@
 
 ## Main takeaways and outlook {#analysis-2:takeaway}
 
-In this chapter we have given a more formal treatment of asymptotic complexity, and introduced the distinction between upper, lower and tight bounds. Here is a checklist of the main concepts:
+In this chapter we have given a more formal treatment of asymptotic complexity.
+The formal definition of big-$O$ justifies the simplification rules from [Chapter @sec:analysis-1],
+and it shows that big-$O$ is only one of several ways of bounding the growth of a function.
 
 * We have given a formal definition of big-O, and shown how it to justifies the simplification rules previously introduced (in [Chapter @sec:analysis-1]).
 * How big-O notation describes an upper bound, not necessarily a tight bound.
