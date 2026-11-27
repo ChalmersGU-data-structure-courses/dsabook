@@ -1,5 +1,5 @@
 
-## Case study: Inversions and quadratic sorting algorithms {#analysis-2:inversions}
+## Case study: Inversions and quadratic sorting {#analysis-2:inversions}
 
 ::: TODO
 - Prio 1: is the argument about Selection sort ok?
