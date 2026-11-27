@@ -5,12 +5,14 @@ In this chapter we have given a more formal treatment of asymptotic complexity.
 The formal definition of big-$O$ justifies the simplification rules from [Chapter @sec:analysis-1],
 and it shows that big-$O$ is only one of several ways of bounding the growth of a function.
 
-* We have given a formal definition of big-O, and shown how it to justifies the simplification rules previously introduced (in [Chapter @sec:analysis-1]).
-* How big-O notation describes an upper bound, not necessarily a tight bound.
-* Upper, lower and tight bounds are described by the notations $O$, $\Omega$ and $\Theta$, respectively. They should not be confused with worst-, best- and average-case analysis.
-* Sometimes, we can set a lower bound on a problem itself. In this chapter we showed that no sorting algorithm based on comparing or swapping adjacent elements can be faster than $O(n^2)$.
+- Big-$O$ is an *upper bound*, $\Omega$ is a *lower bound*, and $\Theta$ is a *tight bound*.
+- The formal definition explains why constant factors, lower-order terms and even the base of a logarithm can be ignored.
+- Upper, lower and tight bounds should not be confused with worst-, best- and average-case analysis: we can give an upper bound on the best case, or a lower bound on the worst case.
+- We can also analyse a *problem* instead of an algorithm. A lower bound on a problem holds for every possible algorithm, even those that have not been invented yet.
+  For example, any sorting algorithm that only compares or swaps adjacent elements needs $\Omega(n^2)$ time.
 
-In [Chapter @sec:analysis-3] we will continue our study of algorithm analysis, introducing amortised analysis and methods for analysing recursive algorithms using recurrence relations.
+In [Chapter @sec:analysis-3] we continue our study of algorithm analysis, introducing amortised analysis
+and recurrence relations for analysing recursive algorithms.
 
 :::::: latex
 \wrapQRlink[4mm]{20mm}{-4mm}{\thesectionURL}{Chapter \thechapter{} online}
