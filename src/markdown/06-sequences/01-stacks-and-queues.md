@@ -51,7 +51,7 @@ and *enqueue* and *dequeue* for queues, respectively.
 Interestingly, stacks and queues can implemented by different data structures.
 In the following sections we will see how to implement them
 either as *linked lists* (@sec:sequences:linked-lists) or
-*dynamic arrays* ([@sec:sequences:array-sequences;@sec:sequences:dynamic-arrays]).
+*dynamic arrays* (Sections [@sec:sequences:array-sequences] and [-@sec:sequences:dynamic-arrays]).
 
 
 ::: online

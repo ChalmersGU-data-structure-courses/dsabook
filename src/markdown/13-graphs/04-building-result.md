@@ -26,7 +26,7 @@ The reason for this is that we never visit any vertex more than once,
 and therefore there will never be more than one *incoming* edge into every vertex.
 In fact, the edges in the result form a *spanning tree* of all paths reachable from the starting vertex.
 You can see the resulting spanning tree in the lower right of
-[Figures @fig:GraphTraversal1;@fig:GraphTraversal2;@fig:GraphTraversal3]:
+[Figures @fig:GraphTraversal1], [-@fig:GraphTraversal2] and [-@fig:GraphTraversal3]:
 the selected, solid, edges form a tree with $A$ as the root.
 
 

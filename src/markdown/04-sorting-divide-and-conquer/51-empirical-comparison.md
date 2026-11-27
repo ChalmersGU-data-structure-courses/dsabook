@@ -39,7 +39,7 @@ Quick (cutoff 20)     0.001     0.007      0.06      0.57       8.0           0.
 : Runtime in seconds for Java implementations, using OpenJDK version 22.0
   (note that the arrays are 4 times larger than for the Python tests) {#tbl:empirical-sorting-java}
 
-[@Tbl:empirical-sorting-python;@tbl:empirical-sorting-java] above show timing
+[Tables @Tbl:empirical-sorting-python] and [-@tbl:empirical-sorting-java] above show timing
 results for actual implementations of the sorting algorithms presented
 in this chapter. The algorithms compared include
 Insertion sort (@sec:sorting-1:insertion-sort),

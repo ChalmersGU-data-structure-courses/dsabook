@@ -74,7 +74,7 @@ Priority queues
 Sets
 :   A set is an unordered collection of elements, where an element can only occur once.
     Sets have no inherent order, but instead they are tailor-made for adding, removing and finding elements fast.
-    Implementations for sets and maps are discussed in [Chapters @sec:search-trees] [and @sec:hash-tables].
+    Implementations for sets and maps are discussed in [Chapters @sec:search-trees] and [-@sec:hash-tables].
 
 Maps
 :   A map (also called a *dictionary*) is often implemented using the same data structures as sets,

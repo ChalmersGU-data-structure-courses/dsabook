@@ -217,7 +217,7 @@ As a result, when searching for a specific element, we cannot determine which su
 In the worst case, we must traverse the entire tree, which takes $O(n)$ time.
 To avoid this costly search, we have to maintain an additional data structure that keeps track of each element's position in the heap.
 For example, we can use a map (see @sec:ADTs:maps), that associates each element with its index in the array.
-We will discuss efficient implementations of maps later, in [Chapter @sec:search-trees;@sec:hash-tables].
+We will discuss efficient implementations of maps later, in [Chapters @sec:search-trees] and [-@sec:hash-tables].
 
 Once the element has been found, updating or removing it is straightforward.
 To update the priority of an element, we restore the heap property by bubbling it up if its priority has increased, or down if its priority has decreased.
