@@ -3,7 +3,7 @@
 
 Our second sorting algorithm is Insertion sort and it was described like this in @sec:sorting-1:overview:
 
-> Take any book from the floor, and insert it in its correct position among the books already in the shelf.
+> *Take any book from the floor, and insert it in its correct position among the books already in the shelf.*
 
 The procedure would be like this:
 First pick up the two topmost books in the pile and put them in order in the bookshelf.
@@ -26,6 +26,7 @@ At this point the element at index $4$ will be swapped into place, so $34$ moves
 The sorted part now consists of four elements, and we put element at index $5$ into place.
 This cell has value $17$, which is smaller than everything we have seen so far,
 so it will move all the way to the left:
+`\vspace{1ex}`{=latex}
 
 `\noindent`{=latex}
 ![](images/2.6-two-steps-insertion-sort-2.svg)

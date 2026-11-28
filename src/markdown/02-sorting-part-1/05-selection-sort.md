@@ -3,7 +3,7 @@
 
 Recall the description of Selection sort from the previous section:
 
-> Select the smallest book on the floor, and put it next to the sorted books in the shelf.
+> *Select the smallest book on the floor, and put it next to the sorted books in the shelf.*
 
 The bookshelf is of course an array, and selecting the first book in alphabetical order
 corresponds to finding the minimal element using some comparison function.

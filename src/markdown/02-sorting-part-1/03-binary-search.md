@@ -44,6 +44,7 @@ Assume that we want to search for the value 36 in a sorted array of length 15.
 Initially the interval spans the whole array, so $\textit{start}=0$ and $\textit{end}=14$.
 First we look up the middle element in cell $(0+14)/2=7$, which is revealed to have value 64 --
 the rest of the array is still unknown to us, so we show these cells using question marks:
+`\vspace{1ex}`{=latex}
 
 `\noindent`{=latex}
 ![](images/2.3-steps-of-binary-search-1.svg)
@@ -52,6 +53,7 @@ the rest of the array is still unknown to us, so we show these cells using quest
 `\noindent`{=latex}
 Since $36<64$ we take the left half of the interval, so we change the interval *end* to $\textit{mid}-1 = 6$.
 The new middle position is $(0+6)/2=3$, and its value is 22:
+`\vspace{1ex}`{=latex}
 
 `\noindent`{=latex}
 ![](images/2.3-steps-of-binary-search-2.svg)
@@ -61,6 +63,7 @@ The new middle position is $(0+6)/2=3$, and its value is 22:
 This time $36>22$ so we take the right half:
 the interval *start* becomes $\textit{mid}+1 = 4$, and the new middle is $(4+6)/2=5$.
 This time the middle cell contains 36 which is exactly what we search for, and we can stop:
+`\vspace{1ex}`{=latex}
 
 `\noindent`{=latex}
 ![](images/2.3-steps-of-binary-search-3.svg)
@@ -112,7 +115,7 @@ Or when it has two elements -- does it calculate *mid* correctly in these cases?
 In this particular implementation we use *inclusive* indices,
 because both *start* and *end* are inside the interval.
 Another common option is to have *start* be inclusive, and *end* exclusive --
-in that case we have to start with the interval $(0,\mathit{arr.size})$.
+in that case we have to start with the interval $[0,\mathit{arr.size})$.
 Yet another option is to store the interval using the start index and the size of the interval.
 For each variation you must do slightly different calculations,
 but the fundamental procedure is the same:

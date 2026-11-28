@@ -30,14 +30,14 @@ How long will that take -- do I have to leave the computer running until tomorro
 More interesting than the time it takes to search a particular bookshelf on a particular
 computer, is the question of how the time scales when the bookshelf is expanded,
 regardless of how fast the computer is. How does the search time change if we double
-the size of the bookshelf? Particularly, we are interested in the *worst case* time.
+the number of books? Particularly, we are interested in the *worst case* time.
 A supremely lucky person may always find their book in the first slot they check
-(in the `linearSearch` function that would be when `arr[0]==key`).
+(in the `linearSearch` function that would be when `arr[0]` = `key`).
 The *worst case* is that we are searching for a book that is not in the shelf at all.
 
-In the worst case, doubling the size of the bookshelf will double the search time.
-Thus, in Linear search there is (suitably) a linear relationship between the size
-of the bookshelf and the search time. We say Linear search is a *linear time* algorithm.
+In the worst case, doubling the number of books will double the search time.
+Thus, in Linear search there is (suitably) a linear relationship between
+the number of books and the search time. We say Linear search is a *linear time* algorithm.
 
 ::: {.example #ex:find-smallest}
 #### Example: Finding the smallest element
