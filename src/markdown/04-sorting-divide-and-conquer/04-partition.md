@@ -1,20 +1,14 @@
 
-## Partitioning {#sorting-2:partitioning}
+## Quicksort partitioning and pivot selection {#sorting-2:partitioning}
 
 ::: TODO
-- Prio 1: is the title "Partitioning" ok?
-- Prio 1: this is just a part of old 4.3, the part about partition - check that the text is still ok!
-- Prio 1: include pseudocode in #alg:partition
+- Prio 1: update figures to reflect variable names (lower, upper)
 - Prio 1: merge subsection (Implementing) with the running text here - no subsubsection heading
 - Prio 1: change back to the more common nested-while-loop version of partition - then we need to update the complexity analysis a little
 :::
 
-The biggest advantage of Quicksort over Mergesort is that partitioning can be done in-place, which merging cannot.
-And the main reason why we can partition in-place is because we can swap elements with each other.
-
-To partition an array interval, we first select a *pivot* element from the interval.
-This is the value that decides which will elements go in the lower and upper parts.
-Now we create two pointers that start at the interval ends and then move towards each other.
+The usual way to partition an array for Quicksort is to create two pointers that
+start at the interval ends and then move towards each other.
 Whenever they encounter two elements that are in the wrong partition, they swap places.
 Or in other words: when the *lower* element is larger than the pivot,
 and the *upper* element is smaller than the pivot, the two elements swap places.
@@ -28,7 +22,7 @@ but the problem is that we don't know exactly how big the partitions will be
 The standard solution is to first move the pivot out of the way
 -- then partition the rest of the array, and afterwards put it back in.
 One good place to put it is at the beginning,
-so the first we do is to swap it there and then we partition the rest of the array.
+so the first thing we do is to swap it there before partitioning the rest of the array.
 After the partitioning is finished and the pointers have passed each other,
 the upper pointer will point to the last element in the lower part.
 This is the final position of the pivot, so we can swap it into place.
@@ -36,23 +30,40 @@ This is the final position of the pivot, so we can swap it into place.
 ::: {.algorithm #alg:partition}
 #### Algorithm: Quicksort partition
 
-To partition an array interval:
+To partition an array segment ([start, end]) around a pivot with initial position $p$:
 
-1.  First, select some pivot element from the interval.
+1.  Swap the $p$ and start, placing the pivot in the first element (just to keep it out of the way).
+    Initialise the lower and upper pointers to $start+1$ and $end$ respectively.
 
-2.  Swap the pivot with the first element in the interval,
-    and initialise the lower and upper pointers to the second and last elements of the interval, respectively.
-
-3.  Repeat the following until the pointers have passed each other:
+2.  Repeat the following until the pointers have passed each other:
 
     (a) Increase the lower pointer if its element is smaller than the pivot.
     (b) Decrease the upper pointer if its element is larger than the pivot.
     (c) Otherwise, swap the lower and upper elements, and move the pointers towards each other.
 
-4.  Swap the upper element with the pivot (which is now the first element in the interval).
+3.  Swap the upper element with the pivot (which is now the first element in the interval).
 
-5.  Finally, Quicksort needs to know the final position of the pivot
-    to be able to sort the two partitions recursively, so we have to return the upper pointer.
+4.  Finally, Quicksort needs to know the final position of the pivot
+    to be able to sort the two partitions recursively, so we return the upper pointer.
+
+Pseudocode:
+
+    partition(arr, start, end, p) -> Int:
+        swap(arr, start, p)          // Swap the pivot with the first element in the interval.
+        pivot = arr[start]           // Remember the pivot value, and
+        low = start + 1; high = end  // initialise the lower and upper pointers.
+        repeat:
+            while low <= high and arr[low] < pivot:
+                low += 1             // Increase lower as long as it's smaller than the pivot.
+            while low <= high and arr[high] > pivot:
+                high -= 1            // Increase upper as long as it's larger than the pivot.
+            if low > high:
+                break                // End the loop when the pointers have passed each other.
+            swap(arr, low, high)     // Otherwise, swap the elements, and
+            low += 1                 // move both pointers towards each other.
+            high -= 1
+        swap(arr, start, high)       // Finally, swap the pivot into place, and
+        return high                  // return the new position of the pivot.
 
 :::
 
@@ -96,7 +107,6 @@ Here is a step-by-step example of partitioning.
 
 Note that the partitioning is done completely in-place.
 This is different from Mergesort where we need to allocate space for a temporary array.
-
 After the partitioning is finished we know the following:
 
 -   The pivot is in its final position in the sorted array, so it will never have to be touched again.
@@ -119,36 +129,6 @@ We assume that we select the middle element as the pivot.
 ```{.jsav-embedded src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"}
 ```
 :::
-
-
-#### Implementing partitioning
-
-The informal algorithm in @sec:sorting-2:partitioning can be implemented as pseudocode like this:
-
-    partition(arr, start, end, p) -> Int:
-        swap(arr, start, p)          // Swap the pivot with the first element in the interval.
-        pivot = arr[start]           // Remember the pivot value, and
-        low = start + 1; high = end  // initialise the lower and upper pointers.
-        repeat:
-            while low <= high and arr[low] < pivot:
-                low += 1             // Increase lower pointer as long as it's smaller than the pivot.
-            while low <= high and arr[high] > pivot:
-                high -= 1            // Increase upper pointer as long as it's larger than the pivot.
-            if low > high:
-                break                // Break out of loop when the pointers have passed each other.
-            swap(arr, low, high)     // Otherwise, swap the elements, and
-            low += 1                 // move both pointers towards each other.
-            high -= 1
-        swap(arr, start, high)       // Finally, swap the pivot into place, and
-        return high                  // return the new position of the pivot.
-
-You might wonder why we swap the pivot with the value at the *upper* pointer,
-why not swapping with the lower pointer?
-This is because we started by putting the pivot at the start of the interval.
-An equally good alternative partitioning algorithm would be to
-first swap the pivot with the end of the interval
---  but in that case we would have to do the final swap with the pivot with the *lower* pointer.
-
 
 ::: dsvis
 Here is a visualisation for the entire Quicksort algorithm.

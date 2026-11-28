@@ -2,72 +2,76 @@
 ## Quicksort {#sorting-2:quicksort}
 
 ::: TODO
-- Prio 1: some part has moved out, into new section 4.4 Partition - check that the text is still ok!
-- Prio 1: include pseudocode in #alg:quicksort
-- Prio 1: merge subsection (Implementing quicksort) with the running text here - no subsubsection heading
-- Prio 1: rewrite the OpenDSA paragraph in the end
 - Prio 2: invariants?
 :::
 
-Mergesort uses a very simple approach for splitting the array, but spends almost all its time in the merging step.
-But there is also another problem with merging: it is difficult to efficiently implement in-place,
-so Mergesort has to use an additional array which will use some memory.
-So is there a different divide-and-conquer strategy that is easier to make in-place?
+Mergesort splits the array in the simplest possible way, and instead spends almost all its
+time in the merging step. *Quicksort* is in this aspect the polar opposite of Mergesort: It does
+all the work when splitting the array, and the merging step is trivial.
 
-*Quicksort* uses another approach: it spends more of the time in splitting the array in parts,
-which then makes the merging step completely trivial.
-The overall algorithm is deceivingly similar to Mergesort:
+The splitting step in Quicksort is called *partition*. We partition the elements of the
+array into two parts: Everything in the first part is smaller than everything in the second part.
+Then Quicksort runs recursively on the two parts (just as Mergesort does), so they are both sorted.
+The final step of combining the two sorted parts is no effort at all: As long as the part with the small elements
+is before the part with the large elements, we are already done.
+A major advantage of Quicksort over Mergesort is that it is in-place -- there is no need to
+allocate a lot of extra memory, elements are just shuffled around inside the original array.
+
+So a highly simplified summary of Quicksort is: Put all small elements in the front of the array,
+and all large elements in the back, then sort the small and large elements separately.
+The obvious issue is deciding which elements are considered small.
+Keep in mind that we can sort any comparable objects, such as text strings, not just
+numbers -- so we cannot do arithmetic on our elements to compute an average.
+There is no way of knowing if an element is in the smaller or larger half of elements
+just by looking at the element itself.
+
+In Quicksort, this is solved by selecting a *pivot element*. The idea is to somehow
+select an element, and use that to partition the array: Everything smaller than the
+pivot goes in the first part, and everything greater goes in the second.
+Elements that are equal to the array can go in either half. There are a few things to note here:
+
+* Neither the first or the second part are sorted after a partitioning, we have only made
+  the array "more sorted", by putting small elements first and large elements last.
+  The elements inside each part may still need to be moved.
+* The pivot itself is placed between the smaller and larger elements. This means that
+  the pivot is in its correct final position, and never needs to be moved again.
+  This is an important property for correctness: Each partitioning
+  is guaranteed to put one element in its final position, so the array will be sorted after
+  at most $n$ total partitioning operations.
+* Unlike Mergesort, there is no general guarantee that the two parts are the same size.
+  The sizes of the two parts depend entirely on how we select the pivot element.
+  The only situation where the parts are equally large is if the pivot is the median element.
+
+In the next section, we look an algorithm for
+partitioning after the pivot has been selected, and after that on at a few ways to select the pivot.
+However, we can already formulate an implementation of Quicksort that abstracts
+these details away ([](#alg:quicksort)).
 
 ::: {.algorithm #alg:quicksort}
 #### Algorithm: Quicksort
 
-To sort an array using Quicksort:
+To sort a segment of an array using Quicksort:
 
-1. Partition the array into two smaller parts,
-2. then recursively sort each part,
-3. finally concatenate the two parts into the final sorted array.
+1. If the segment has zero or one elements, it is already sorted.
+2. Select a pivot element.
+3. Partition the segment in-place so all elements smaller than the pivot come first, then the pivot itself, then all elements larger than the pivot (elements equal to the pivot can go on either side).
+4. Recursively sort the part before the pivot and the part after it.
 
-:::
+Pseudocode with the methods for deciding a pivot and partitioning excluded.
+Note how the final position of the pivot (`p`) is not in either recursive call:
 
-The main difference to Mergesort is in the splitting step, called *partition*.
-The idea is that we divide the array into two parts,
-where everything in the first part is smaller than everything in the second part.
-Then Quicksort calls itself with the two subarrays (just as Mergesort does), so that they are both sorted.
-Now we have to combine them, but this is much easier than in Mergesort,
-because we already know that everything in the first part is smaller than everything in the second part
--- so we can just put them after each other.
-
-#### Implementing Quicksort
-
-Now we're almost ready to implement Quicksort, but one small but important thing remains.
-We cannot know how big the left and right partitions will be, not until we have done the partitioning.
-So the partition function has to inform Quicksort how the partitions ended up
--- and we do this is to return the final position of the pivot.
-So here is the final algorithm sketch for sorting the interval $\mathit{start}\ldots\mathit{end}$ of a given array:
-
-1.  Select an initial index $p_0$ of the pivot, from the interval $\mathit{start}\ldots\mathit{end}$.
-2.  Partition the interval using the pivot.
-    Assume that the pivot has afterwards moved to position $p$.
-3.  Sort the interval $\mathit{start}\ldots p{-}1$ and the interval $p{+}1\ldots\mathit{end}$.
-
-Note that we do not include the pivot itself in the intervals of the recursive calls.
-This is because we know that after partitioning the pivot is in its final correct position, $p$.
-Now it should be straightforward to give the pseudocode for the main Quicksort function:
-
-    // Sort the array interval start...end
+    // Sort the array segment start...end
     quickSort(arr, start, end):
         if start >= end:                       // Base case: Interval length is ≤ 1.
             return
         p0 = findPivot(arr, start, end)        // Pick an initial pivot index.
-        p = partition(arr, start, end, p0)     // Partition the interval and update the pivot index.
+        p = partition(arr, start, end, p0)     // Partition, and update the pivot index.
         quickSort(arr, start, p-1)             // Quicksort the lower partition.
         quickSort(arr, p+1, end)               // Quicksort the upper partition.
 
-<!-- OPENDSA: START -->
-The partitioning will return the final position of the pivot,
-which is the correct position of the pivot in the final, sorted array.
-By doing so, we guarantee that at least one value (the pivot) will not be included in the recursive calls.
-So even if a bad pivot is selected, yielding a completely empty partition to one side of the pivot,
-the larger partition will still contain one less element than the input array.
-<!-- OPENDSA: END -->
+The requirement on the functions `findPivot` and `partition` is that after performing
+both, the index `p` contains an element (the pivot) such that all elements before `p` are less
+than or equal to `arr[p]`, and all elements after `p` are greater or equal.
+If this condition is satisfied in every call, the function will correctly sort the array.
+:::
 
