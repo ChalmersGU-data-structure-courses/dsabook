@@ -28,11 +28,20 @@ just by looking at the element itself.
 In Quicksort, this is solved by selecting a *pivot element*. The idea is to somehow
 select an element, and use that to partition the array: Everything smaller than the
 pivot goes in the first part, and everything greater goes in the second.
-Elements that are equal to the array can go in either half. There are a few things to note here:
+Elements that are equal to the array can go in either half.
+This illustration shows an array segment, and an example of how it can look
+after partitioning using the pivot element $4$:
 
-* Neither the first or the second part are sorted after a partitioning, we have only made
-  the array "more sorted", by putting small elements first and large elements last.
-  The elements inside each part may still need to be moved.
+![](images/4.3-partition-overview.svg)
+
+`\noindent`{=latex}
+Note how after partitioning, if we sort the smaller and larger elements separately,
+the whole array segment ends up sorted. A few observations:
+
+* Neither part is sorted after partitioning, we have only made
+  the array "more sorted" by putting small elements first and large elements last.
+  The exact order inside the two parts may vary depending on technicalities of
+  the partitioning.
 * The pivot itself is placed between the smaller and larger elements. This means that
   the pivot is in its correct final position, and never needs to be moved again.
   This is an important property for correctness: Each partitioning
@@ -42,11 +51,6 @@ Elements that are equal to the array can go in either half. There are a few thin
   The sizes of the two parts depend entirely on how we select the pivot element.
   The only situation where the parts are equally large is if the pivot is the median element.
 
-In the next section, we look an algorithm for
-partitioning after the pivot has been selected, and after that on at a few ways to select the pivot.
-However, we can already formulate an implementation of Quicksort that abstracts
-these details away ([](#alg:quicksort)).
-
 ::: {.algorithm #alg:quicksort}
 #### Algorithm: Quicksort
 
@@ -54,8 +58,8 @@ To sort a segment of an array using Quicksort:
 
 1. If the segment has zero or one elements, it is already sorted.
 2. Select a pivot element.
-3. Partition the segment in-place so all elements smaller than the pivot come first, then the pivot itself, then all elements larger than the pivot (elements equal to the pivot can go on either side).
-4. Recursively sort the part before the pivot and the part after it.
+3. Partition the segment in-place so all elements smaller than the pivot are before the pivot, and all larger elements after.
+4. Recursively sort the small and large elements separately.
 
 Pseudocode with the methods for deciding a pivot and partitioning excluded.
 Note how the final position of the pivot (`p`) is not in either recursive call:
@@ -72,6 +76,10 @@ Note how the final position of the pivot (`p`) is not in either recursive call:
 The requirement on the functions `findPivot` and `partition` is that after performing
 both, the index `p` contains an element (the pivot) such that all elements before `p` are less
 than or equal to `arr[p]`, and all elements after `p` are greater or equal.
-If this condition is satisfied in every call, the function will correctly sort the array.
+If this condition is satisfied in every call, the function will correctly sort the array segment.
 :::
 
+In the next section, we look an algorithm for
+partitioning, and a few ways of selecting a good pivot.
+However, we can already formulate an implementation of Quicksort that abstracts
+these details away ([](#alg:quicksort)).
